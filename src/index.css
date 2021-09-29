@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  overflow-y: scroll;
+}
+
+#root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+:root {
+  --max-img-width: 900px;
+  --primary: #35353F;
+  --success: red;
+  --info:red;
+  --secondary:rgb(180, 17, 255);
+  --danger: #ffffff;
+  --warning:#E63A31;
+  --warning-transparent: #E63A31dd;
+  --light: #ffffff;
+  --dark: #ffffff;
+  --transparence-dark: #ffffff11;
+  /* --background: linear-gradient(45deg, var(--secondary), var(--danger), var(--warning)); */
+  --background: var(--primary);
+  --dark-beautful: #42424C;
+  --dark-beautful-1: #42424Cdd;
+
+}
+
+
+/* Formulario */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  width: 100%;
+  max-width: 400px;
+  background: transparent;
+}
+
+.form h1 {
+  color: var(--ligth);
+}
+
+.form .groupInput {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.form .groupInputSelet {
+  width: 100%;
+}
+
+.form .groupInputSelet label {
+width: 100%;
+display: block;
+}
+
+.form .groupInputSelet select {
+  width: 100%;
+  padding: 5px;
+  border: 2px solid var(--transparence-dark);
+  color: var(--light);
+  background-color: var(--primary);
+  outline: none;
+}
+
+
+form .groupInputSelet select::selection {
+  font-size: 100px;
+}
+
+.form p {
+  word-wrap: break-word;
+  color: var(--dark);
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+.form label {
+  color: var(--dark);
+  padding: 5px 10px;
+}
+
+.form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+  background-color: transparent;
+  border: 2px solid var(--transparence-dark);
+  color: var(--light);
+}
+
+.form button {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: var(--light);
+  font-size: 1rem;
+  background: var(--warning-transparent);
+  transition: 0.2s ease-in-out;
+}
+
+.form button:hover {
+  background: var(--warning);
+}
+
+.form a {
+  font-size: 1rem;
+  color: var(--dark);
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: 0.2s ease-in-out;
+}
+
+.form a:hover {
+  color: var(--warning);
+}
+
+
+/*Form upload*/
+.customFileUpload {
+  display: block;
+  cursor: pointer;
+}
+
+.customFileUpload  input[type="file"] {
+  display: none;
+}
+
+.customFileUpload i {
+  display: block;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.customFileUpload img {
+  width: 700px;
+}
+
+/*Container e estrura básica*/
+.container {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background);
+  flex-direction: column;
+  padding: 100px 10%;
+}
+
+.container h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  color: var(--dark);
+}
+
+.container > div {
+  padding: 80px 0;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Container Grid Item*/
+
+.container .gridItem {
+  max-width: 300px;
+  width: 100%;
+  text-decoration: none;
+  transition: 0.2s ease-out;
+}
+
+.container .gridItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.2s ease-out;
+  border-radius: 5px;
+}
+
+.container .gridItem p {
+  text-decoration: none;
+  color: var(--danger);
+  text-align: center;
+}
+
+.container .gridItem:hover {
+  transform: scale(1.1);
+}
+
+.container .gridItem:hover img {
+  box-shadow: 0 0 20px 1px var(--transparence-dark);
+}
