@@ -3,10 +3,11 @@ import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/admin/navbar/navbar'
 import api from '../../../services/api'
-import '../../../style.post.css'
+//import '../../../style.post.css'
 import { Navbar } from '../../../components/NavbarTop/NavbarTop'
-
+import { agents, maps, agentInterface } from '../../../data/data-valorant'
 import * as uuid from 'uuid';
+
 type actionType = "top" | "bottom"
 interface imgInterface {
   title: string,
@@ -128,7 +129,24 @@ export const CreatePostScreen = () => {
     setDescriptionImg('')
     setLinkImg('')
   }
+  function renderAgent() {
+    return agents().map(agent => {
+      return <option value={agent.name} key={agent.id} >{agent.name}</option>
+    })
+  }
 
+  function renderMaps() {
+    return maps().map(map => {
+      return <option value={map.name} key={map.id} >{map.name}</option>
+    })
+  }
+
+  function renderHabilits() {
+    let filterAbilities: agentInterface = agents().filter(agent => agent.name === formTagAgent)?.[0]
+    return filterAbilities?.habilits.map(ability => {
+      return <option value={ability.name} key={ability.name}>{ability.keyboard} - {ability.name}</option>
+    })
+  }
 
   return (
     <div className="container">
@@ -157,8 +175,7 @@ export const CreatePostScreen = () => {
                    setFormTagAgent(e.target.value)}
                    >
                    <option value=""></option>
-                   <option value="Sova">Sova</option>
-                   <option value="Vyper">Vyper</option>
+                   {renderAgent()}
                 </select>
              </div>
              <div className="groupInputSelet">
@@ -169,8 +186,7 @@ export const CreatePostScreen = () => {
                    setFormTagMap(e.target.value)}
                    >
                    <option value=""></option>
-                   <option value="Ascent">Ascent</option>
-                   <option value="Split">Split</option>
+                   {renderMaps()}
                 </select>
              </div>
              <div className="groupInputSelet">
@@ -181,8 +197,7 @@ export const CreatePostScreen = () => {
                    setFormTagAbility(e.target.value)}
                    >
                    <option value=""></option>
-                   <option value="Spot">Spot</option>
-                   <option value="BarreiraDeOrbe">BarreiraDeOrbe</option>
+                   {renderHabilits()}
                 </select>
              </div>
           </div>
@@ -194,7 +209,7 @@ export const CreatePostScreen = () => {
                    onChange={(e) =>
                    setFormTagMapPosition(e.target.value)}
                    >
-                   <option value=""></option>
+                    <option value="Qualquer">Qualquer</option>
                    <option value="Meio">Meio</option>
                    <option value="A">A</option>
                    <option value="B">B</option>

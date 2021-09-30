@@ -90,7 +90,6 @@ function App() {
             <NotFound />
           </Route>
 
-
       </Switch>
     </BrowserRouter>
   )

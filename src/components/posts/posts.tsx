@@ -25,7 +25,7 @@ export const PostComponent = ( { props }: any) => {
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
-          <img src={props.imgs[idImage].img} alt={props.imgs[idImage].title} />
+          <img src={props.imgs?.[idImage]?.img} alt={props.imgs?.[idImage]?.title} />
 
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
@@ -39,7 +39,7 @@ export const PostComponent = ( { props }: any) => {
             </div>
           ) : null }
 
-          <p>{idImage + 1} - {props.imgs[idImage].title}</p>
+          <p>{idImage + 1} - {props.imgs?.[idImage]?.title}</p>
         </div>
       </div>
     </div>

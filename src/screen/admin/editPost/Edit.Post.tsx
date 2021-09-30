@@ -1,14 +1,14 @@
-
+import React, { useEffect, useState } from 'react'
 import queryString from 'query-string'
 import { useLocation } from 'react-router';
-import React, { useEffect, useState } from 'react'
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/admin/navbar/navbar'
 import api from '../../../services/api'
 import { Navbar } from '../../../components/NavbarTop/NavbarTop'
-import '../../../style.post.css'
+//import '../../../style.post.css'
 import * as uuid from 'uuid'
+import { agents, maps, agentInterface } from '../../../data/data-valorant'
 
 type actionType = "top" | "bottom"
 
@@ -97,10 +97,8 @@ export const EditPostScreen = () => {
   }
 
   function putPosition(_id: string, action: actionType) {
-    console.log(_id, action)
     // Obter a posição do item que será trocado
     let positionPut = imgAdded.findIndex(item => item._id === _id)
-    console.log(positionPut)
 
     // Copia o item que será trocado
     let copyListDelete = imgAdded[positionPut]
@@ -155,6 +153,26 @@ export const EditPostScreen = () => {
     setLinkImg('')
   }
 
+  function renderAgent() {
+    return agents().map(agent => {
+      return <option value={agent.name} key={agent.id} >{agent.name}</option>
+    })
+  }
+
+
+  function renderMaps() {
+    return maps().map(map => {
+      return <option value={map.name} key={map.id} >{map.name}</option>
+    })
+  }
+
+  function renderHabilits() {
+    let filterAbilities: agentInterface = agents().filter(agent => agent.name === formTagAgent)?.[0]
+    return filterAbilities?.habilits.map(ability => {
+      return <option value={ability.name} key={ability.name}>{ability.keyboard} - {ability.name}</option>
+    })
+  }
+
   return (
     <div className="container">
       <Navbar />
@@ -182,8 +200,7 @@ export const EditPostScreen = () => {
                     setFormTagAgent(e.target.value)}
                     >
                     <option value=""></option>
-                    <option value="Sova">Sova</option>
-                    <option value="Vyper">Vyper</option>
+                    {renderAgent()}
                 </select>
               </div>
               <div className="groupInputSelet">
@@ -194,8 +211,7 @@ export const EditPostScreen = () => {
                     setFormTagMap(e.target.value)}
                     >
                     <option value=""></option>
-                    <option value="Ascent">Ascent</option>
-                    <option value="Split">Split</option>
+                    {renderMaps()}
                 </select>
               </div>
               <div className="groupInputSelet">
@@ -206,8 +222,7 @@ export const EditPostScreen = () => {
                     setFormTagAbility(e.target.value)}
                     >
                     <option value=""></option>
-                    <option value="Spot">Spot</option>
-                    <option value="BarreiraDeOrbe">BarreiraDeOrbe</option>
+                    {renderHabilits()}
                 </select>
               </div>
           </div>
@@ -219,7 +234,7 @@ export const EditPostScreen = () => {
                     onChange={(e) =>
                     setFormTagMapPosition(e.target.value)}
                     >
-                    <option value=""></option>
+                    <option value="Qualquer">Qualquer</option>
                     <option value="Meio">Meio</option>
                     <option value="A">A</option>
                     <option value="B">B</option>

@@ -13,17 +13,19 @@ export const HomeScreen = () => {
           <img src="/images/tips/agentsAndMap.jpg" alt="Mapas e Agentes" />
           <p>Pixeis e Spots</p>
         </Link>
-
-        <Link to="/Home" className="gridItem">
-          <img src="/images/tips/agents.jpg" alt="Uso de Agentes" />
-          <p>Dicas de Agentes</p>
-        </Link>
-
-        <Link to="/Home" className="gridItem">
-          <img src="/images/tips/moviment.jpg" alt="Tipo e Movimentação" />
-          <p>Tiro e movimentação</p>
-        </Link>
       </div>
     </div>
   )
 }
+
+/*
+        <Link to="/" className="gridItem">
+          <img src="/images/tips/agents.jpg" alt="Uso de Agentes" />
+          <p>Dicas de Agentes</p>
+        </Link>
+
+        <Link to="/" className="gridItem">
+          <img src="/images/tips/moviment.jpg" alt="Tipo e Movimentação" />
+          <p>Tiro e movimentação</p>
+        </Link>
+*/
