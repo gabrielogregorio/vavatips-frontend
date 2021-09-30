@@ -1,12 +1,10 @@
+
 .nav {
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: #27272E;
+  padding: 40px 0;
 }
 
 .nav ul {
@@ -16,10 +14,17 @@
 .nav ul a {
   text-decoration: none;
   padding: 10px 10px;
-  color: var(--light);
+  color: var(--primary);
   transition: 0.2s ease-in-out;
 }
 
+.nav a {
+  border-bottom: 2px solid transparent;
+ }
+
+.nav .navActive {
+ border-bottom: 2px solid var(--primary);
+}
+
 .nav ul a:hover {
-  background-color: var(--transparence-dark);
 }

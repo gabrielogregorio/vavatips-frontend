@@ -1,20 +1,20 @@
 import { BrowserRouter, Route, Switch, Redirect, Link  } from 'react-router-dom';
+import { useState } from 'react';
 
-import { AgentChoiceComponent } from './screen/Choice/Agent';
-import { MapChoiceComponent } from './screen/Choice/Map'
+import { AgentChoiceScreen } from './screen/Choice/Agent';
+import { MapChoiceScreen } from './screen/Choice/Map'
 import { PostScreen } from './screen/posts/Post';
 import { RegisterScreen } from './screen/register/register';
 import { LoginScreen } from './screen/login/Login';
 import { CreatePostScreen } from './screen/admin/createPost/Create.Post';
 import { EditPostScreen } from './screen/admin/editPost/Edit.Post';
 import { MyProfileScreen } from './screen/admin/myProfile/My.Profile';
-import { ViewPosts } from './screen/admin/viewPosts/View.Posts';
-import { HomeScreen } from './screen/home/Home';
+import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts';
 
 import { isAutenticate } from "./services/auth";
 import { UserContext, userInterface } from './context/user';
-import { useState } from 'react';
 import { NotFound } from './screen/NotFound/NotFound';
+
 
 const PrivateRoute = ({ children, ...rest }: any) => {
   return (
@@ -33,31 +33,27 @@ const PrivateRoute = ({ children, ...rest }: any) => {
 }
 
 
-
 function App() {
   const [user, setUser] = useState<userInterface>({username: '', id: ''})
 
   return (
     <BrowserRouter>
       <Switch>
-
         <Route exact path="/">
-          <HomeScreen />
+          <MapChoiceScreen />
         </Route>
 
-
         <Route path="/Maps">
-          <MapChoiceComponent />
+          <MapChoiceScreen />
         </Route>
 
         <Route path="/Agents">
-          <AgentChoiceComponent />
+          <AgentChoiceScreen />
         </Route>
 
         <Route path="/Posts">
           <PostScreen />
         </Route>
-
 
         <UserContext.Provider value={{user, setUser}}>
           <Route path="/Login">
@@ -69,7 +65,7 @@ function App() {
           </Route>
 
           <PrivateRoute path="/ViewPosts">
-              <ViewPosts />
+            <ViewPostsScreen />
           </PrivateRoute>
 
           <PrivateRoute path="/PostCreate">
@@ -83,13 +79,11 @@ function App() {
           <PrivateRoute path="/Profile">
             <MyProfileScreen />
           </PrivateRoute>
-          </UserContext.Provider>
+        </UserContext.Provider>
 
-
-          <Route path="*">
-            <NotFound />
-          </Route>
-
+        <Route path="*">
+          <NotFound />
+        </Route>
       </Switch>
     </BrowserRouter>
   )

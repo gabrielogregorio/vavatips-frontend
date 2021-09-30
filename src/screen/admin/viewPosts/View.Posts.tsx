@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react'
 import { postsProps } from '../../posts/props'
 import { Link } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/admin/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import { useState } from 'react'
 import { getId } from '../../../services/auth'
 import styles from './view.module.css'
-import { Navbar } from '../../../components/NavbarTop/NavbarTop'
 import '../style.css'
 
-export const ViewPosts = () => {
+export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
 
   useEffect(() => {
@@ -49,7 +48,6 @@ export const ViewPosts = () => {
 
   return (
     <div className="container">
-      <Navbar />
      <div className="post-local-container">
 
        <NavbarComponent selected={navbarEnum.ViewPosts} />

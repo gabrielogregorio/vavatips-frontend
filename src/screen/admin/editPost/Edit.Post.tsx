@@ -3,10 +3,8 @@ import queryString from 'query-string'
 import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/admin/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
-import { Navbar } from '../../../components/NavbarTop/NavbarTop'
-//import '../../../style.post.css'
 import * as uuid from 'uuid'
 import { agents, maps, agentInterface } from '../../../data/data-valorant'
 
@@ -122,7 +120,6 @@ export const EditPostScreen = () => {
 
     // Inserir o item na posição anterior
     copyImgAdded.splice(positionPut + increment, 0, copyListDelete)
-    console.log(copyImgAdded)
 
     // Atualiza no state
     setImgAdded(copyImgAdded)
@@ -174,9 +171,8 @@ export const EditPostScreen = () => {
   }
 
   return (
-    <div className="container">
-      <Navbar />
-    <div className="post-local-container">
+    <div className="containerAdmin">
+      <div>
         {redirect ?  <Redirect to="/ViewPosts" /> : null }
         <NavbarComponent selected={navbarEnum.EditScreen} />
         <h1>Criar um post</h1>

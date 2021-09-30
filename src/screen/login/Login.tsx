@@ -2,9 +2,9 @@ import React from "react"
 import { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import api from "../../services/api"
-import './login.module.css'
 import { login, getToken } from '../../services/auth'
 import { useUser } from "../../context/user"
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 
 export const LoginScreen = () => {
   const [username, setUsername] = useState<string>('')
@@ -19,9 +19,7 @@ export const LoginScreen = () => {
     }
   }, [])
 
-  async function handleSubmit(event: any) {
-    event.preventDefault()
-
+  async function handleSubmit() {
     if(!username || !password) {
       setErroMsg('Usuário ou senha não preenchido')
     } else {
@@ -43,22 +41,35 @@ export const LoginScreen = () => {
   }
 
   return (
-    <div className="container">
+    <div className="containerAdmin">
       <div>
-        <form onSubmit={handleSubmit}>
-          {redirect ? <Redirect to="/Profile" /> : null }
+        <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+        <h1>Realizar Login</h1>
 
-          <h1>Realizar Login</h1>
+        <div className="form">
+          {redirect ? <Redirect to="/Profile" /> : null }
+          <p>Salve Ademir, bora fazer Login nessa bagaça? Responsabilidade ai em Ademir</p>
           <p>{errorMsg}</p>
 
-          <label htmlFor="">Usuário:</label>
-          <input type="text" placeholder="Usuário" onChange={e => setUsername(e.target.value)} />
+          <div className="groupInput">
+            <div className="groupInputItem">
+              <label htmlFor="">Usuário:</label>
+              <input type="text" placeholder="Usuário" onChange={e => setUsername(e.target.value)} />
+            </div>
+          </div>
 
-          <label htmlFor="">Senha:</label>
-          <input type="password" placeholder="******"  onChange={e => setPassword(e.target.value)}/>
+          <div className="groupInput">
+            <div className="groupInputItem">
+              <label htmlFor="">Senha:</label>
+              <input type="password" placeholder="******"  onChange={e => setPassword(e.target.value)}/>
+            </div>
+          </div>
+
           <Link to="Register">Fazer Cadastro</Link>
-          <button type="submit">Login</button>
-        </form>
+
+          <button onClick={() => handleSubmit()}>Login</button>
+
+        </div>
       </div>
     </div>
   )

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import api from '../../../services/api'
-import { NavbarComponent, navbarEnum } from '../../../components/admin/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import { getId } from '../../../services/auth'
-import { Navbar } from '../../../components/NavbarTop/NavbarTop'
 import '../style.css'
 import './style.css'
 
@@ -49,7 +48,6 @@ export const MyProfileScreen = () => {
 
   return (
     <div className="container">
-      <Navbar />
      <div className="post-local-container">
        <NavbarComponent selected={navbarEnum.Profile} />
 

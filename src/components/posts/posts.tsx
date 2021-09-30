@@ -13,36 +13,49 @@ export const PostComponent = ( { props }: any) => {
     }
   }
 
-
   return (
     <div className={styles.posts}>
-      <h3 className={styles.titlePost}>{props.title}</h3>
-      <p className={styles.description}>{props.description}</p>
-      <p className={styles.tags}>
-        <span> #{props.tags.map}</span> <span> #{props.tags.agent}</span> <span> #{props.tags.ability}</span> <br/>
-        <span> #{props.tags.moment}</span> <span> #{props.tags.difficult}</span> <span> #{props.tags.side}</span> <span> #{props.tags.mapPosition}</span>
-      </p>
+      <div className={styles.profile}>
+        <img
+          src={ props.user.img ?? '/images/users/profile.png'}
+          alt="Foto de perfil do Autor da postagem" />
+        <p>{props.user.username ?? 'Ademir Maluco'}</p>
+        <button>Reportar Problema</button>
+      </div>
+
+      <h3>{props.title}</h3>
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
           <img src={props.imgs?.[idImage]?.img} alt={props.imgs?.[idImage]?.title} />
-
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
               <i className="fas fa-angle-left"></i>
             </div>
           ) : null }
-
           { idImage < props.imgs.length -1 ? (
             <div className={styles.next} onClick={() => nextImage('next', props.imgs.length)}>
               <i className="fas fa-angle-right"></i>
             </div>
           ) : null }
-
-          <p>{idImage + 1} - {props.imgs?.[idImage]?.title}</p>
+          <div className={styles.descriptionImage}>
+            <p>{idImage + 1} - {props.imgs?.[idImage]?.title}</p>
+          </div>
         </div>
+      </div>
+
+      <div className={styles.descriptionAndTags}>
+        <p className={styles.description}>{props.description}</p>
+        <p className={styles.tags}>
+          <span> #{props.tags.map}</span> <span> #{props.tags.agent}</span> <span> #{props.tags.ability}</span> <span> #{props.tags.moment}</span> <span> #{props.tags.difficult}</span> <span> #{props.tags.side}</span> <span> #{props.tags.mapPosition}</span>
+        </p>
+      </div>
+
+      <div className={styles.actions}>
+        <button>Curtir</button>
+        <button>Salvar</button>
+        <button>Fazer Sugestão</button>
       </div>
     </div>
   )
-
 }
