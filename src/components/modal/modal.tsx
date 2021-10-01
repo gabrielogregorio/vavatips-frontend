@@ -5,11 +5,9 @@ import styles from './modal.module.css'
 
 interface ModalProps {
   title: string,
-
   _id: string,
   description: string
   image: string,
-
   closeModal: () => void,
   saveModal: (_id: string, title: string, image: string) => void
 }

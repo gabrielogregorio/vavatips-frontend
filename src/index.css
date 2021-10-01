@@ -129,7 +129,7 @@ html, body {
   margin-top: 20px;
 }
 
-.containerAdmin .form {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,25 +137,25 @@ html, body {
   width: 100%;
 }
 
-.containerAdmin .form .instructionTop {
+ .form .instructionTop {
   display: flex;
   align-items: center;
   max-width: 400px;
   cursor: pointer;
 }
 
-.containerAdmin .form .instructionTop p {
+.form .instructionTop p {
   flex: 1;
   font-size: 14px;
   word-wrap: break-word;
 }
 
-.containerAdmin .form .info {
+.form .info {
   font-size: 14px;
   max-width: 400px;
 }
 
-.containerAdmin .form .instructionTop button {
+.form .instructionTop button {
   background: transparent;
   outline: none;
   padding: 5px;
@@ -164,18 +164,18 @@ html, body {
   margin-left: 5px;
 }
 
-.containerAdmin .form .instructionTop button i {
+.form .instructionTop button i {
   color: var(--primary);
 }
 
-.containerAdmin .form .instructionImage {
+.form .instructionImage {
   position: relative;
   max-width: 400px;
   width: 100%;
   border-radius: 10px;
 }
 
-.containerAdmin .form .instructionImage img {
+.form .instructionImage img {
   border-radius: 10px;
   width: 100%;
   height: 100%;
@@ -183,7 +183,7 @@ html, body {
   cursor: pointer;
 }
 
-.containerAdmin .form .instructionImage button {
+.form .instructionImage button {
   position: absolute;
   background: transparent;
   border: 0;
@@ -192,17 +192,17 @@ html, body {
   cursor: pointer;
 }
 
-.containerAdmin .form .instructionImage button i {
+.form .instructionImage button i {
   font-size: 2.5rem;
   color: var(--background-secundary);
 }
 
-.containerAdmin .form .instructionImage .btn-bottom {
+.form .instructionImage .btn-bottom {
   top: 0;
   left: 50%;
 }
 
-.containerAdmin .form .instructionImage .btn-top {
+.form .instructionImage .btn-top {
   bottom: 0;
   left: 50%;
 }
@@ -215,38 +215,38 @@ hr {
   background-color: var(--text-color-bold-transparent);
 }
 
-.containerAdmin .form .groupInput {
+.form .groupInput {
   display: flex;
   justify-content: space-between;
   max-width: 400px;
   width: 100%;
 }
 
-.containerAdmin .form .groupInputSelet {
+.form .groupInputSelet {
   width: 100%;
   margin: 7px 10px;
 }
 
-.containerAdmin .form .groupInputSelet button {
+.form .groupInputSelet button {
   width: 100%;
   padding: 5px;
   cursor: pointer;
   border-radius: 10px;
 }
 
-.containerAdmin .form .groupInputSelet .btn-new-step {
+.form .groupInputSelet .btn-new-step {
   border: 2px solid var(--secundary);
   background-color: transparent;
   color: var(--secundary);
 }
 
-.containerAdmin .form .groupInputSelet .btn-save {
+.form .groupInputSelet .btn-save {
   border: 2px solid var(--primary);
   background-color: var(--primary);
   color: var(--background-secundary);
 }
 
-.containerAdmin .form .groupInputSelet select {
+.form .groupInputSelet select {
   width: 100%;
   padding: 5px;
   border: 2px solid var(--secundary);
@@ -256,21 +256,25 @@ hr {
   border-radius: 10px;
 }
 
-.containerAdmin .form p {
+.form p {
 }
 
-.containerAdmin .form label {
+.form label {
 }
 
-.containerAdmin .form label {
+.form label {
   width: 100%;
   display: block;
   color: var(--text-color-bold);
 }
 
+.form input:disabled {
+  background: var(--background-primary);
+  color: var();
+}
 
-.containerAdmin .form input,
-.containerAdmin .form textarea
+.form input,
+.form textarea
 {
   width: 100%;
   padding: 5px;
@@ -283,17 +287,17 @@ hr {
 }
 
 
-.containerAdmin .form button {
+.form button {
 }
 
-.containerAdmin .form button:hover {
+.form button:hover {
 
 }
 
-.containerAdmin .form a {
+.form a {
 }
 
-.containerAdmin .form a:hover {
+.form a:hover {
 }
 
 .containerAdmin .customFileUpload {

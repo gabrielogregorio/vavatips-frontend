@@ -5,14 +5,18 @@ import styles from './navbar.module.css'
 export enum navbarEnumPublic {
   Inicio = '/Inicio',
   Posts = '/Posts',
-  Save = '/Save'
+  Save = '/Save',
+  Tested = '/Tested'
 }
 
 interface NavbarProps {
-  selected: navbarEnumPublic
+  selected: navbarEnumPublic,
+  agent?: string,
+  map?: string
 }
 
 export const NavbarComponentPublic = (props:NavbarProps) => {
+
   return (
     <nav className={styles.nav}>
       <ul>
@@ -22,11 +26,16 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
 
         <Link
           className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
-          to="/Posts">posts</Link>
+          to={`/Posts?agent=${props.agent}&map=${props.map}`}>posts</Link>
 
         <Link
           className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
-          to="/Save">salvos</Link>
+          to={`/Posts?type=Save&agent=${props.agent}&map=${props.map}`}>salvos</Link>
+
+      <Link
+          className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
+          to={`/Posts?type=Tested&agent=${props.agent}&map=${props.map}`}>Testado</Link>
+
 
       </ul>
     </nav>

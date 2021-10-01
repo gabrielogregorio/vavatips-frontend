@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import { useState } from 'react'
-import { getId } from '../../../services/auth'
 import styles from './view.module.css'
 import '../style.css'
 

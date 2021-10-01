@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import api from "../../services/api"
 import { login, getToken } from '../../services/auth'
-import { useUser } from "../../context/user"
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 
 export const LoginScreen = () => {
@@ -11,7 +10,6 @@ export const LoginScreen = () => {
   const [password, setPassword] = useState<string>('')
   const [redirect, setRedirect] = useState<boolean>(false)
   const [errorMsg, setErroMsg] = useState<string>('')
-  const { setUser} = useUser()
 
   useEffect(() => {
     if(getToken()) {
@@ -26,7 +24,6 @@ export const LoginScreen = () => {
       try {
         let token = await api.post('/auth', {username, password})
         login(token.data.token, token.data.id)
-        setUser({id: token.data.id, username})
         setRedirect(true)
 
       } catch(error: any) {

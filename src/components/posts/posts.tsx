@@ -2,7 +2,40 @@ import React, { useState } from "react";
 import styles from './post.module.css'
 type typeType = 'next' | 'prev'
 
-export const PostComponent = ( { props }: any) => {
+interface postActionsInterface {
+  save: [ {_id: string} ],
+  tested: [{_id: string} ]
+}
+
+
+export interface PropsPostInterface {
+  _id: string,
+  user: { _id: string, username: string, image: string }
+  description: string
+  title: string
+
+  imgs: [{ _id: string, image: string, description: string } ]
+  tags: {
+    map: string[],
+    agent: string[],
+    ability: string[],
+    moment: string[],
+    difficult: string[],
+    side: string[],
+    mapPosition: string[]
+  },
+  postActions: {
+    save: [{_id: string}],
+    tested: [{_id: string}]
+  },
+  toggleSave: (_id: string) => void
+  toggleTested: (_id: string) => void
+  showModalReport: (_id: string, titlePost: string) => void
+  showModalSugestaoFunction: (_id: string, titlePost: string) => void
+
+}
+
+export const PostComponent = (props: PropsPostInterface) => {
   const [ idImage, setIdImage ] = useState<number>(0)
 
   function nextImage(type: typeType, length: number) {
@@ -13,6 +46,8 @@ export const PostComponent = ( { props }: any) => {
     }
   }
 
+
+
   return (
     <div className={styles.posts}>
       <div className={styles.profile}>
@@ -20,7 +55,7 @@ export const PostComponent = ( { props }: any) => {
           src={ props.user.image ?? '/images/users/profile.png'}
           alt="Foto de perfil do Autor da postagem" />
         <p>{props.user.username ?? 'Ademir Maluco'}</p>
-        <button>Reportar Problema</button>
+        <button onClick={() => props.showModalReport(props._id, props.title)}>Reportar Problema</button>
       </div>
 
       <h3>{props.title}</h3>
@@ -52,9 +87,19 @@ export const PostComponent = ( { props }: any) => {
       </div>
 
       <div className={styles.actions}>
-        <button>Curtir</button>
-        <button>Salvar</button>
-        <button>Fazer Sugestão</button>
+        {
+          props.postActions.tested.filter(post => post._id === props._id).length === 0
+          ? <button onClick={() => props.toggleTested(props._id)} > A testar</button>
+          : <button className={styles.actionsActive} onClick={() => props.toggleTested(props._id)} > Testado</button>
+        }
+
+        {
+          props.postActions.save.filter(post => post._id === props._id).length === 0
+          ? <button onClick={() => props.toggleSave(props._id)} >Salvar</button>
+          : <button className={styles.actionsActive} onClick={() => props.toggleSave(props._id)}> Salvo</button>
+        }
+
+        <button onClick={() => props.showModalSugestaoFunction(props._id, props.title)}>Fazer Sugestão</button>
       </div>
     </div>
   )

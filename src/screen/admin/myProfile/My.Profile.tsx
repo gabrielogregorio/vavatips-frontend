@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
 import api from '../../../services/api'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
-import { getId } from '../../../services/auth'
 import '../style.css'
 import './style.css'
 

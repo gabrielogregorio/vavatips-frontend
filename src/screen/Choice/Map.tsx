@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ModalReportComponent } from "../../components/modalReport/modalReport";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import { maps } from '../../data/data-valorant'
+
 
 export const MapChoiceScreen = () => {
   function renderMap() {

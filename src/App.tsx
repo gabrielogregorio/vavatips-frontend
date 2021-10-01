@@ -12,7 +12,6 @@ import { MyProfileScreen } from './screen/admin/myProfile/My.Profile';
 import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts';
 
 import { isAutenticate } from "./services/auth";
-import { UserContext, userInterface } from './context/user';
 import { NotFound } from './screen/NotFound/NotFound';
 
 
@@ -34,7 +33,6 @@ const PrivateRoute = ({ children, ...rest }: any) => {
 
 
 function App() {
-  const [user, setUser] = useState<userInterface>({username: '', id: ''})
 
   return (
     <BrowserRouter>
@@ -51,11 +49,10 @@ function App() {
           <AgentChoiceScreen />
         </Route>
 
-        <Route path="/Posts">
-          <PostScreen />
-        </Route>
+          <Route path="/Posts">
+            <PostScreen />
+          </Route>
 
-        <UserContext.Provider value={{user, setUser}}>
           <Route path="/Login">
             <LoginScreen />
           </Route>
@@ -79,7 +76,7 @@ function App() {
           <PrivateRoute path="/Profile">
             <MyProfileScreen />
           </PrivateRoute>
-        </UserContext.Provider>
+
 
         <Route path="*">
           <NotFound />
