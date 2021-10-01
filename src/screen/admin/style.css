@@ -1,11 +1,12 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   background: var(--background);
   flex-direction: column;
   padding: 0 10%;
+  margin: 20px 0;
 }
 
 .container h1 {

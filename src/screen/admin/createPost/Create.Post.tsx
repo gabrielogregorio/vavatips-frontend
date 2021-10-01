@@ -1,28 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import queryString from 'query-string'
+import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
+import * as uuid from 'uuid'
 import { agents, maps, agentInterface } from '../../../data/data-valorant'
-import * as uuid from 'uuid';
-import { InputValue } from '../../../components/inputValue'
-import { inputSelectedComponent } from '../../../components/inputSelected'
-
+import { InputValue } from '../../../components/inputValue';
+import { ModalComponent } from '../../../components/modal/modal';
 
 type actionType = "top" | "bottom"
+
 interface imgInterface {
-  title: string,
-  img: string,
+  description: string,
+  image: string,
   _id: string
+}
+
+interface propsModalInterface {
+  _id: string,
+  description: string,
+  image: string
 }
 
 export const CreatePostScreen = () => {
   const [ redirect, setRedirect ] = useState<boolean>(false)
 
-  const [ imgAdded, setImgAdded ] = useState<imgInterface[]>([])
+  const { search } = useLocation();
+  const id = queryString.parse(search)?.id
 
-  const [ descriptionImg, setDescriptionImg ] = useState<string>("")
-  const [ linkImg, setLinkImg ] = useState<string>("")
+  const [ imgAdded, setImgAdded ] = useState<imgInterface[]>([])
 
   const [ formTitle, setFormTitle ] = useState<string>("")
   const [ formDescription, setFormDescription ] = useState<string>("")
@@ -34,6 +42,8 @@ export const CreatePostScreen = () => {
   const [ formTagMapPosition, setFormTagMapPosition ] = useState<string>("")
   const [ formTagAgent, setFormTagAgent ] = useState<string>("")
 
+  const [ visibleModal, setVisibleModal ] = useState<boolean>(false)
+  const [ propsModal, setPropsModal ] = useState<propsModalInterface>({_id: "", description: "", image: ""})
 
   async function handleSubmit() {
     let request = {
@@ -53,33 +63,21 @@ export const CreatePostScreen = () => {
     }
 
     try {
-      await api.post('/post', {...request})
+      await api.post(`/post`, {...request})
       setRedirect(true)
     } catch(error) {
       console.log(error)
     }
   }
 
-  function loadImage(event:any) {
-    let formData = new FormData();
-    formData.append("image", event.target.files[0]);
-
-    // Envia a imagem para o backend e coleta o retorno
-    api.post(`/postLoadFile`, formData).then((res) => {
-      let urlImg = `${process.env.REACT_APP_API_HOST}/images/posts/${res.data.filename}`
-      setLinkImg(urlImg)
-    })
-  }
   function deleteStep(_id: string) {
+    console.log(_id)
     setImgAdded(imgAdded.filter(item => item._id !== _id))
   }
 
-
   function putPosition(_id: string, action: actionType) {
-    console.log(_id, action)
     // Obter a posição do item que será trocado
     let positionPut = imgAdded.findIndex(item => item._id === _id)
-    console.log(positionPut)
 
     // Copia o item que será trocado
     let copyListDelete = imgAdded[positionPut]
@@ -108,28 +106,32 @@ export const CreatePostScreen = () => {
     setImgAdded(copyImgAdded)
   }
 
+
   function renderSteps() {
-    return imgAdded.map(instruction => (
+    return imgAdded.map((instruction, key) => (
       <div key={instruction._id}>
-        <hr /><br />
-        <hr /><br />
-        <button onClick={() => putPosition(instruction._id, 'bottom')} >Subir</button>
+        <div className="instructionTop" >
+          <p onClick={() => showModalWithItem(instruction._id)}>{key + 1} - {instruction.description}</p>
+          <button onClick={() => deleteStep(instruction._id)}>
+            <i className="fas fa-times"></i>
+          </button>
+        </div>
 
-        <img src={instruction.img} alt={instruction.title} style={{width: '100%'}} /> <br />
-        <p>{instruction.title}</p>
-        <button onClick={() => deleteStep(instruction._id)}>Delete</button>
+        <div className="instructionImage">
+          <img src={instruction.image} alt={instruction.description} style={{width: '100%'}} /> <br />
+          <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
+            <i className="fas fa-chevron-up"></i>
+          </button>
 
-        <button onClick={() => putPosition(instruction._id, 'top')} >Descer</button>
+          <button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
+            <i className="fas fa-chevron-down"></i>
+          </button>
+        </div>
         <hr />
-     </div>
+      </div>
     ))
   }
 
-  function addItem() {
-    setImgAdded([...imgAdded, {title: descriptionImg, img: linkImg, _id: uuid.v4()}])
-    setDescriptionImg('')
-    setLinkImg('')
-  }
   function renderAgent() {
     return agents().map(agent => {
       return <option value={agent.name} key={agent.id} >{agent.name}</option>
@@ -149,18 +151,63 @@ export const CreatePostScreen = () => {
     })
   }
 
+
+  function showModalWithItem(id: string) {
+    let item = imgAdded.filter(item => item._id === id)[0]
+    setPropsModal(item)
+    setVisibleModal(true)
+  }
+
+  function showModal() {
+    setPropsModal({_id: "", description: "", image: ""})
+    setVisibleModal(true)
+  }
+
+  function closeModal() {
+    setPropsModal({_id: "", description: "", image: ""})
+    setVisibleModal(false)
+  }
+
+  function saveModal(_id: string, description: string, image: string) {
+    if(_id) {
+      let copyImgAdded: imgInterface[] = JSON.parse(JSON.stringify(imgAdded))
+      copyImgAdded.forEach(copy => {
+        if(copy._id === _id) {
+          copy.description = description
+          copy.image = image
+        }
+      })
+      setImgAdded(copyImgAdded)
+      return setVisibleModal(false)
+    }
+    setImgAdded([...imgAdded, {description, image, _id: uuid.v4().toString()}])
+    setVisibleModal(false)
+  }
+
   return (
     <div className="containerAdmin">
       <div>
         {redirect ? <Redirect to="/ViewPosts" /> : null }
         <NavbarComponent selected={navbarEnum.PostCreate} />
 
+        {visibleModal ?
+          (<ModalComponent
+              title="Adicionar Post"
+              _id={propsModal._id}
+              description={propsModal.description}
+              image={propsModal.image}
+              closeModal={closeModal}
+              saveModal={saveModal}/>)
+          : ( null)}
+
         <h1>Criar um post</h1>
 
         <div className="form">
 
-        <InputValue text="Titulo" value={formTitle} setValue={setFormTitle}/>
-        <InputValue text="Descrição" value={formDescription} setValue={setFormDescription}/>
+          <InputValue text="Titulo" value={formTitle} setValue={setFormTitle}/>
+          <InputValue text="Descrição" value={formDescription} setValue={setFormDescription}/>
+
+          <hr />
 
           <div className="groupInput">
             <div className="groupInputSelet">
@@ -231,25 +278,22 @@ export const CreatePostScreen = () => {
             </div>
           </div>
 
-          {renderSteps()}
-
-          <hr /><br />
-
-          a fazer
-          <div className="groupInput">
-            <div className="groupInputSelet">
-              <button className="btn-new-step">Novo Passo</button> <br />
-            </div>
-          </div>
-
+          <hr />
+          <p className="info">Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.<br/><br/> Clique nos titulos para EDITAR os itens</p>
           <hr />
 
+          {renderSteps()}
+
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button className="btn-save">Publicar Dica</button>
+              <button className="btn-new-step" onClick={() => showModal()} >Novo Passo</button> <br />
             </div>
           </div>
-
+          <div className="groupInput">
+            <div className="groupInputSelet">
+              <button onClick={() => handleSubmit()} className="btn-save">Publicar Dica</button>
+            </div>
+          </div>
 
         </div>
       </div>

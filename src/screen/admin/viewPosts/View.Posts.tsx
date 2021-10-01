@@ -10,12 +10,13 @@ import '../style.css'
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
+  let [ updatePosts, setUpdatePosts] = useState<boolean>(false)
 
   useEffect(() => {
     loadPosts().then((res: any) => {
       setPosts(res.data)
     })
-  }, [])
+  }, [updatePosts])
 
   async function loadPosts(): Promise<postsProps[]> {
     let postsList: postsProps[] = await api.get('/posts')
@@ -23,12 +24,9 @@ export const ViewPostsScreen = () => {
   }
 
   async function deletePost(id: string) {
-    console.log('aaaaaaaaaaaaaaa', id)
-    let res = await api.delete(`/post/${id}`)
-    console.log(res, '.....')
-    loadPosts().then((res: any) => {
-      setPosts(res.data)
-    })
+    console.log(`/post/${id}`)
+    await api.delete(`/post/${id}`)
+    setUpdatePosts(!updatePosts)
   }
 
   function renderPosts() {
@@ -37,7 +35,7 @@ export const ViewPostsScreen = () => {
         <h2>{post.title}</h2>
         <p>{post.description}</p>
         <div className={styles.firstImgPost}>
-          <img src={post.imgs[0]?.img} alt={post.imgs[0]?.title} />
+          <img src={post.imgs[0]?.image} alt={post.imgs[0]?.title} />
         </div>
 
         <button onClick={() => deletePost(post._id)} >Excluir</button>
@@ -52,7 +50,7 @@ export const ViewPostsScreen = () => {
 
        <NavbarComponent selected={navbarEnum.ViewPosts} />
 
-       <div className={styles.posts}>
+       <div className={styles.posts} style={{display: 'flex', flexDirection: 'column'}}>
          <h1>Posts do Blog</h1>
          {renderPosts()}
        </div>

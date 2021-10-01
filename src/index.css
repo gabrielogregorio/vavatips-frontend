@@ -42,6 +42,7 @@ html, body {
   flex-direction: column;
   padding: 2%;
   width: 100%;
+  margin: 20px 0;
 }
 
 .container > div {
@@ -136,6 +137,84 @@ html, body {
   width: 100%;
 }
 
+.containerAdmin .form .instructionTop {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  cursor: pointer;
+}
+
+.containerAdmin .form .instructionTop p {
+  flex: 1;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.containerAdmin .form .info {
+  font-size: 14px;
+  max-width: 400px;
+}
+
+.containerAdmin .form .instructionTop button {
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.containerAdmin .form .instructionTop button i {
+  color: var(--primary);
+}
+
+.containerAdmin .form .instructionImage {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.containerAdmin .form .instructionImage img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.containerAdmin .form .instructionImage button {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.containerAdmin .form .instructionImage button i {
+  font-size: 2.5rem;
+  color: var(--background-secundary);
+}
+
+.containerAdmin .form .instructionImage .btn-bottom {
+  top: 0;
+  left: 50%;
+}
+
+.containerAdmin .form .instructionImage .btn-top {
+  bottom: 0;
+  left: 50%;
+}
+
+hr {
+  margin: 20px 0;
+  padding: 0;
+  max-width: 400px;
+  width: 100%;
+  background-color: var(--text-color-bold-transparent);
+}
+
 .containerAdmin .form .groupInput {
   display: flex;
   justify-content: space-between;
@@ -190,7 +269,9 @@ html, body {
 }
 
 
-.containerAdmin .form input {
+.containerAdmin .form input,
+.containerAdmin .form textarea
+{
   width: 100%;
   padding: 5px;
   border: 2px solid var(--secundary);
@@ -198,7 +279,9 @@ html, body {
   background-color: var(--background-secundary);
   outline: none;
   border-radius: 10px;
+  resize: none;
 }
+
 
 .containerAdmin .form button {
 }

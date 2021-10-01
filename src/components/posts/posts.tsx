@@ -17,7 +17,7 @@ export const PostComponent = ( { props }: any) => {
     <div className={styles.posts}>
       <div className={styles.profile}>
         <img
-          src={ props.user.img ?? '/images/users/profile.png'}
+          src={ props.user.image ?? '/images/users/profile.png'}
           alt="Foto de perfil do Autor da postagem" />
         <p>{props.user.username ?? 'Ademir Maluco'}</p>
         <button>Reportar Problema</button>
@@ -27,7 +27,7 @@ export const PostComponent = ( { props }: any) => {
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
-          <img src={props.imgs?.[idImage]?.img} alt={props.imgs?.[idImage]?.title} />
+          <img src={props.imgs?.[idImage]?.image} alt={props.imgs?.[idImage]?.description} />
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
               <i className="fas fa-angle-left"></i>
@@ -39,7 +39,7 @@ export const PostComponent = ( { props }: any) => {
             </div>
           ) : null }
           <div className={styles.descriptionImage}>
-            <p>{idImage + 1} - {props.imgs?.[idImage]?.title}</p>
+            <p>{idImage + 1} - {props.imgs?.[idImage]?.description}</p>
           </div>
         </div>
       </div>

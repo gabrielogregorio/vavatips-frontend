@@ -57,8 +57,7 @@ export const agents = (): agentInterface[] => {
       id: 5,
       name: 'Cypher',
       img: '/images/agents/Cypher.png',
-      habilits: [
-      ]
+      habilits: []
     },
     {
       id: 6,
