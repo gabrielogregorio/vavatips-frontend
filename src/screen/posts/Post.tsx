@@ -16,13 +16,13 @@ export interface PropsPostInterface {
 
   imgs: [{ _id: string, image: string, description: string } ]
   tags: {
-    map: string[],
-    agent: string[],
-    ability: string[],
-    moment: string[],
-    difficult: string[],
-    side: string[],
-    mapPosition: string[]
+    map: string,
+    agent: string,
+    ability: string,
+    moment: string,
+    difficult: string,
+    side: string,
+    mapPosition: string
   },
   postActions: {
     save: [{_id: string}],
@@ -115,11 +115,11 @@ export const PostScreen = () => {
     api.get('/posts').then(res => {
       let postsAgent = res.data
       if (filtersUrl.agent) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.agent?.includes(filtersUrl.agent))
+        postsAgent = postsAgent.filter((post:any) => post.tags.agent === filtersUrl.agent)
       }
 
       if (filtersUrl.map) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.map?.includes(filtersUrl.map))
+        postsAgent = postsAgent.filter((post:any) => post.tags.map === filtersUrl.map)
       }
 
       if(filtersUrl.type === 'Save') {
@@ -136,15 +136,12 @@ export const PostScreen = () => {
         postsAgent = postsAgent.filter((post: any) => {
           // Obter todas as chaves das tags
           let localTagOnePost = Object.keys(post.tags)
-          // Obter todos as tags dentro das tags [[tag1, tag2], [tag3, tag4], [tag5, tag7]]
+          // Obter todos as tags dentro das tags [tag1, tag2, tag3, tag4, tag5, tag7]
           let localListTagsInTag = localTagOnePost.map(arry => post.tags[arry])
 
-          // Mesclar os arrays para obter somente uma array [tag1, tag2, tag3, tag4]
-          let listAllTagsOnePost = mergeArrays(localListTagsInTag)
-
           let notIncludeFilter = undefined
-          for(let i = 0; i < listAllTagsOnePost.length; i++) {
-            if(activeFilters.includes(listAllTagsOnePost[i])) {
+          for(let i = 0; i < localListTagsInTag.length; i++) {
+            if(activeFilters.includes(localListTagsInTag[i])) {
               notIncludeFilter = true
             }
           }
@@ -162,32 +159,14 @@ export const PostScreen = () => {
   }, [useLocaltionItem, activeFilters])
 
 
-  /* Recebe um aray de arrays e retorna um array com todos os valores unicos
-    Entrada [ ['a', 'b'], ['c', 'a'] ]
-    Saída ['a', 'b', 'c' ]
-  */
-  function mergeArrays(array: any) {
-    console.log(array)
-    let finalArray: string[] = []
-    for(let i = 0; i < array.length; i++) {
-      for(let x = 0; x < array[i].length; x++) {
-        if(!finalArray.includes(array[i][x])) {
-          finalArray.push(array[i][x])
-        }
-      }
-    }
-    return finalArray
-  }
-
   function getAllTags(allPosts: any[]){
     let listTags: string[] = []
     allPosts.map(post => {
       Object.keys(post.tags).map(keyTags => {
-        post.tags[keyTags].map((tag: string) => {
-          if(!listTags.includes(tag) && tag !== filtersUrl.agent && tag !== filtersUrl.map) {
-            listTags.push(tag)
-          }
-        })
+        let tag = post.tags[keyTags]
+        if(!listTags.includes(tag) && tag !== filtersUrl.agent && tag !== filtersUrl.map) {
+          listTags.push(tag)
+        }
       })
     })
     setAllTags(listTags)
@@ -213,6 +192,7 @@ export const PostScreen = () => {
       setActiveFilters(activeFilters.filter(tagActive => tagActive !== tag))
     } else {
       setActiveFilters([...activeFilters, tag])
+      console.log([...activeFilters, tag])
     }
   }
 

@@ -129,7 +129,7 @@ export const EditPostScreen = () => {
 
   function renderSteps() {
     return imgAdded.map((instruction, key) => (
-      <div key={instruction._id}>
+      <div key={instruction._id} style={{width: '100%', maxWidth: '400px'}}>
         <div className="instructionTop" >
           <p onClick={() => showModalWithItem(instruction._id)}>{key + 1} - {instruction.description}</p>
           <button onClick={() => deleteStep(instruction._id)}>
@@ -138,7 +138,7 @@ export const EditPostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img src={instruction.image} alt={instruction.description} style={{width: '100%'}} /> <br />
+          <img src={`${process.env.REACT_APP_API_HOST}${instruction.image}`} alt={instruction.description} style={{width: '100%'}} /> <br />
           <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </button>

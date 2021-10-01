@@ -34,7 +34,7 @@ export const ViewPostsScreen = () => {
         <h2>{post.title}</h2>
         <p>{post.description}</p>
         <div className={styles.firstImgPost}>
-          <img src={post.imgs[0]?.image} alt={post.imgs[0]?.title} />
+          <img src={`${process.env.REACT_APP_API_HOST}${post.imgs[0]?.image}` } alt={post.imgs[0]?.title} />
         </div>
 
         <button onClick={() => deletePost(post._id)} >Excluir</button>

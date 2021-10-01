@@ -16,13 +16,13 @@ export interface PropsPostInterface {
 
   imgs: [{ _id: string, image: string, description: string } ]
   tags: {
-    map: string[],
-    agent: string[],
-    ability: string[],
-    moment: string[],
-    difficult: string[],
-    side: string[],
-    mapPosition: string[]
+    map: string,
+    agent: string,
+    ability: string,
+    moment: string,
+    difficult: string,
+    side: string,
+    mapPosition: string
   },
   postActions: {
     save: [{_id: string}],
@@ -46,14 +46,19 @@ export const PostComponent = (props: PropsPostInterface) => {
     }
   }
 
-
-
   return (
     <div className={styles.posts}>
       <div className={styles.profile}>
-        <img
-          src={ props.user.image ?? '/images/users/profile.png'}
-          alt="Foto de perfil do Autor da postagem" />
+
+        { props.user.image ?
+          (
+            <img src={`${process.env.REACT_APP_API_HOST}${props.user.image}`} alt="Foto de perfil do Autor da postagem" />
+          )
+          :(
+            <img src={'/images/users/profile.png'} alt="Foto de perfil do Autor da postagem" />
+           )
+        }
+
         <p>{props.user.username ?? 'Ademir Maluco'}</p>
         <button onClick={() => props.showModalReport(props._id, props.title)}>Reportar Problema</button>
       </div>
@@ -62,7 +67,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
-          <img src={props.imgs?.[idImage]?.image} alt={props.imgs?.[idImage]?.description} />
+          <img src={`${process.env.REACT_APP_API_HOST}${props.imgs?.[idImage]?.image}`} alt={props.imgs?.[idImage]?.description} />
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
               <i className="fas fa-angle-left"></i>
