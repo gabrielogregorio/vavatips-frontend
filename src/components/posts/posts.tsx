@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import styles from './post.module.css'
 type typeType = 'next' | 'prev'
 
-interface postActionsInterface {
-  save: [ {_id: string} ],
-  tested: [{_id: string} ]
-}
-
 
 export interface PropsPostInterface {
   _id: string,

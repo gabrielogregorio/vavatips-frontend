@@ -93,8 +93,6 @@ export const PostScreen = () => {
     closeModalSugestao()
   }
 
-
-
   useEffect(() => {
     let agent: string = `${query.parse(useLocaltionItem?.search).agent}`
     let map: string = `${query.parse(useLocaltionItem?.search).map}`
@@ -103,7 +101,7 @@ export const PostScreen = () => {
     let data: filterUrlInterface = {agent, map, type}
 
     setFiltersUrl(data)
-  }, [])
+  }, [useLocaltionItem])
 
   useEffect(() => {
     let varNome = 'posts-data'
@@ -151,26 +149,25 @@ export const PostScreen = () => {
       }
 
 
-      getAllTags(postsAgent)
+      let listTags: string[] = []
+      postsAgent.map((post: any) => {
+        return Object.keys(post.tags).map(keyTags => {
+          let tag = post.tags[keyTags]
+          if(!listTags.includes(tag) && tag !== filtersUrl.agent && tag !== filtersUrl.map) {
+            listTags.push(tag)
+          }
+          return true
+        })
+      })
+      setAllTags(listTags)
       setPosts(postsAgent)
     })
 
 
-  }, [useLocaltionItem, activeFilters])
+  }, [useLocaltionItem, activeFilters, filtersUrl])
 
 
-  function getAllTags(allPosts: any[]){
-    let listTags: string[] = []
-    allPosts.map(post => {
-      Object.keys(post.tags).map(keyTags => {
-        let tag = post.tags[keyTags]
-        if(!listTags.includes(tag) && tag !== filtersUrl.agent && tag !== filtersUrl.map) {
-          listTags.push(tag)
-        }
-      })
-    })
-    setAllTags(listTags)
-  }
+
 
   function renderPost() {
     let postsAgent: any[] = JSON.parse(JSON.stringify(posts))
@@ -192,7 +189,6 @@ export const PostScreen = () => {
       setActiveFilters(activeFilters.filter(tagActive => tagActive !== tag))
     } else {
       setActiveFilters([...activeFilters, tag])
-      console.log([...activeFilters, tag])
     }
   }
 

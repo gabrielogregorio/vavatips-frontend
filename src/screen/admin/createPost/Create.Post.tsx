@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import queryString from 'query-string'
-import { useLocation } from 'react-router';
+import React, { useState } from 'react'
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
@@ -26,10 +24,6 @@ interface propsModalInterface {
 
 export const CreatePostScreen = () => {
   const [ redirect, setRedirect ] = useState<boolean>(false)
-
-  const { search } = useLocation();
-  const id = queryString.parse(search)?.id
-
   const [ imgAdded, setImgAdded ] = useState<imgInterface[]>([])
 
   const [ formTitle, setFormTitle ] = useState<string>("")

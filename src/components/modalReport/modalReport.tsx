@@ -29,7 +29,7 @@ export const ModalReportComponent = (props: ModalProps) => {
     if(props.email) { setEmail(props.email) }
     if(props.description) { setDescription(props.description) }
     if(props.idPost) { setIdPost(props.idPost) }
-  }, [])
+  }, [props])
 
   return (
     <div className={styles.modal}>

@@ -51,7 +51,6 @@ export const EditPostScreen = () => {
   useEffect(() => {
     api.get(`/post/${id}`).then(res => {
       let userApi = res.data
-      console.log(userApi)
       setFormTitle(userApi.title)
       setFormDescription(userApi.description)
       setFormTagMoment(userApi.tags.moment)
@@ -63,7 +62,7 @@ export const EditPostScreen = () => {
       setFormTagAgent(userApi.tags.agent)
       setImgAdded(userApi.imgs)
     })
-  }, [])
+  }, [id])
 
   async function handleSubmit() {
     let request = {

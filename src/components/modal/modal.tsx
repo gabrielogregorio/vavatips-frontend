@@ -30,7 +30,7 @@ export const ModalComponent = (props: ModalProps) => {
       setLinkImg(props.image)
     }
 
-  }, [])
+  }, [props])
 
   function loadImage(event:any) {
     let formData = new FormData();

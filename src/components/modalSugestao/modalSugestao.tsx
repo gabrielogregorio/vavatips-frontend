@@ -25,7 +25,7 @@ export const ModalSugestaoComponent = (props: ModalProps) => {
     if(props.email) { setEmail(props.email) }
     if(props.postTitle) { setPostTitle(props.postTitle) }
     if(props.idPost) { setIdPost(props.idPost) }
-  }, [])
+  }, [props])
 
   return (
     <div className={styles.modal}>

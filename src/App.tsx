@@ -1,6 +1,4 @@
-import { BrowserRouter, Route, Switch, Redirect, Link  } from 'react-router-dom';
-import { useState } from 'react';
-
+import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom';
 import { AgentChoiceScreen } from './screen/Choice/Agent';
 import { MapChoiceScreen } from './screen/Choice/Map'
 import { PostScreen } from './screen/posts/Post';
