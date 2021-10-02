@@ -6,6 +6,7 @@ export enum navbarEnum {
   Profile = '/Profile',
   PostCreate = '/PostCreate',
   ViewPosts = '/ViewPosts',
+  Config = '/Config',
   EditScreen = '#'
 }
 
@@ -34,6 +35,11 @@ export const NavbarComponent = (props:NavbarProps) => {
             className={props.selected === navbarEnum.EditScreen ? styles.navActive : ""}
             to="/#">Editar posts</Link>
         ) : null}
+
+        <Link
+          className={props.selected === navbarEnum.Config ? styles.navActive : ""}
+          to="/Config">Configurações</Link>
+
       </ul>
     </nav>
   )

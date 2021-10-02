@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import { InputValue } from '../../../components/inputValue'
+import { logout } from '../../../services/auth'
 
 export const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>("")
@@ -32,13 +33,13 @@ export const MyProfileScreen = () => {
     }
   }
 
-  async function getUser(): Promise<any> {
-    return await api.get(`/user`)
-  }
-
   useEffect(() => {
-    getUser().then(res => {
+    api.get(`/user`).then(res => {
       setUsername(res.data.username)
+    }).catch(error => {
+      if(error?.response?.data?.msg === 'jwt expired') {
+        logout()
+      }
     })
   }, [])
 
@@ -54,6 +55,12 @@ export const MyProfileScreen = () => {
           <InputValue text="Trocar nome de usuário" value={username} setValue={setUsername}/>
           <InputValue text="Digite uma nova senha" value={password} setValue={setPassword}/>
           <InputValue text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
+
+          <div className="groupInput">
+            <div className="groupInputSelet">
+              <button onClick={() => logout()} className="btn-color-primary">logoff</button>
+            </div>
+          </div>
 
           <div className="groupInput">
             <div className="groupInputSelet">

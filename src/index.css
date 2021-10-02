@@ -111,6 +111,15 @@ html, body {
    width: 100%;
 }
 
+.form .errorMsg {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--primary);
+}
+
 .form .instructionTop p {
   flex: 1;
   font-size: 14px;
@@ -199,6 +208,20 @@ hr {
   padding: 5px;
   cursor: pointer;
   border-radius: 10px;
+}
+
+.form .groupInputSelet .btn-color-primary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--primary);
+}
+
+.form .groupInputSelet .btn-color-secundary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--secundary);
 }
 
 .form .groupInputSelet .btn-outline-secundary {

@@ -1,16 +1,16 @@
-import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom'
 
-import { AgentScreen } from './screen/Choice/Agent';
+import { AgentScreen } from './screen/Choice/Agent'
 import { MapScreen } from './screen/Choice/Map'
-import { PostScreen } from './screen/posts/Post';
-import { RegisterScreen } from './screen/register/register';
-import { LoginScreen } from './screen/login/Login';
-import { CreatePostScreen } from './screen/admin/createPost/Create.Post';
-import { EditPostScreen } from './screen/admin/editPost/Edit.Post';
-import { MyProfileScreen } from './screen/admin/myProfile/My.Profile';
-import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts';
-import { NotFoundScreen } from './screen/NotFound/NotFound';
-import { isAuthenticated } from "./services/auth";
+import { PostScreen } from './screen/posts/Post'
+import { AcessScreen } from './screen/admin/access/access'
+import { CreatePostScreen } from './screen/admin/createPost/Create.Post'
+import { EditPostScreen } from './screen/admin/editPost/Edit.Post'
+import { MyProfileScreen } from './screen/admin/myProfile/My.Profile'
+import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts'
+import { NotFoundScreen } from './screen/NotFound/NotFound'
+import { isAuthenticated } from "./services/auth"
+import { ConfigScreen } from './screen/admin/config/config'
 
 
 const PrivateRoute = ({ children, ...rest }: any) => {
@@ -52,11 +52,7 @@ function App() {
         </Route>
 
         <Route path="/Login">
-          <LoginScreen />
-        </Route>
-
-        <Route path="/Register">
-          <RegisterScreen />
+          <AcessScreen />
         </Route>
 
         <PrivateRoute path="/ViewPosts">
@@ -73,6 +69,10 @@ function App() {
 
         <PrivateRoute path="/Profile">
           <MyProfileScreen />
+        </PrivateRoute>
+
+        <PrivateRoute path="/Config">
+          <ConfigScreen />
         </PrivateRoute>
 
         <Route path="*">
