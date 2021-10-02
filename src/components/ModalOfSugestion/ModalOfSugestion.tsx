@@ -14,11 +14,12 @@ interface ModalProps {
   saveModal: (idPost: string, postTitle: string, email: string, description: string) => void
 }
 
-export const ModalSugestaoComponent = (props: ModalProps) => {
+export const ModalOfSugestion = (props: ModalProps) => {
   const [ email, setEmail ] = useState<string>('')
   const [ description, setDescription ] = useState<string>('')
   const [ idPost, setIdPost ] = useState<string>('')
   const [ postTitle, setPostTitle ] = useState<string>('')
+  const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
     if(props.description) { setDescription(props.description) }
@@ -26,6 +27,16 @@ export const ModalSugestaoComponent = (props: ModalProps) => {
     if(props.postTitle) { setPostTitle(props.postTitle) }
     if(props.idPost) { setIdPost(props.idPost) }
   }, [props])
+
+  function saveModal(idPost: string, postTitle: string, email: string, description: string) {
+    if(description === '' || description.trim() === '') {
+      setErrorMsg('Você precisa preencher o campo Descrição com as informações')
+    } else if(description.trim().length < 10) {
+      setErrorMsg('Você precisa de uma descrição mais detalhada')
+    } else {
+      props.saveModal(idPost, postTitle, email, description)
+    }
+  }
 
   return (
     <div className={styles.modal}>
@@ -40,6 +51,7 @@ export const ModalSugestaoComponent = (props: ModalProps) => {
         <hr />
 
         <div className="form">
+        <p style={{color: 'var(--primary)', textAlign: 'center'}}>{errorMsg}</p>
 
         <div className="groupInput">
             <div className="groupInputSelet">
@@ -64,7 +76,7 @@ export const ModalSugestaoComponent = (props: ModalProps) => {
 
           <div className={styles.modalActions}>
             <button onClick={() => props.closeModal()}>Cancelar</button>
-            <button onClick={() => props.saveModal(idPost, postTitle, email, description)}>Adicionar</button>
+            <button onClick={() => saveModal(idPost, postTitle, email, description)}>Adicionar</button>
           </div>
         </div>
       </div>

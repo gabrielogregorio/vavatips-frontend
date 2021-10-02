@@ -1,6 +1,6 @@
+import 'dotenv/config'
 import axios from "axios";
 import { getToken } from "./auth";
-import 'dotenv/config'
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_HOST

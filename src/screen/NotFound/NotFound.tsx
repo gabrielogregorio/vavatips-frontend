@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NotFound = () => {
+export const NotFoundScreen = () => {
   return (
     <div>
       <h1>Not Found</h1>

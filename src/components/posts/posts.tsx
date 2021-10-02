@@ -26,7 +26,7 @@ export interface PropsPostInterface {
   toggleSave: (_id: string) => void
   toggleTested: (_id: string) => void
   showModalReport: (_id: string, titlePost: string) => void
-  showModalSugestaoFunction: (_id: string, titlePost: string) => void
+  showModalSuggestion: (_id: string, titlePost: string) => void
 
 }
 
@@ -99,7 +99,7 @@ export const PostComponent = (props: PropsPostInterface) => {
           : <button className={styles.actionsActive} onClick={() => props.toggleSave(props._id)}> Salvo</button>
         }
 
-        <button onClick={() => props.showModalSugestaoFunction(props._id, props.title)}>Fazer Sugestão</button>
+        <button onClick={() => props.showModalSuggestion(props._id, props.title)}>Fazer Sugestão</button>
       </div>
     </div>
   )

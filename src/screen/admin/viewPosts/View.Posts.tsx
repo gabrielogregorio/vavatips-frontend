@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { postsProps } from '../../posts/props'
 import { Link } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'

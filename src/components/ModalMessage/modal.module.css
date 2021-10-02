@@ -1,0 +1,62 @@
+.modalItem {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  padding: 20px 10px;
+  bottom: 10px;
+  left: calc(50% - 200px);
+  z-index: 10;
+  border-radius: 5px;
+  width: 400px;
+  box-shadow: 1px 5px 15px 1px var(--text-color-bold);
+  /*animation-name: hiddenModal;
+  animation-duration: 7s;
+  opacity: 0;*/
+}
+
+@keyframes hiddenModal {
+  0% {
+    opacity: 1;
+  }
+
+  92% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.modalItem .notfyIcon {
+  padding-right: 10px;
+  border-right: 1px solid var(--background-secundary);
+}
+
+.modalItem .notfyIcon i {
+  color: var(--background-secundary);
+  font-size: 2.5rem;
+}
+
+.modalItem p {
+  width: 100%;
+  text-align: left;
+  flex: 1;
+  font-size: 14px;
+  color: var(--background-secundary);
+  margin: 0;
+  padding-left: 10px;
+}
+
+.modalItem button {
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modalItem button i {
+  color: var(--background-secundary);
+  font-size: 16px;
+}

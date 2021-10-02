@@ -58,13 +58,13 @@ html, body {
   color: var(--text-color-normal);
 }
 
-.container > div > div {
+.container > div > .gridFull {
   display: grid;
   grid-column-gap: 30px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.container > div > div > .grid {
+.container > div > .gridFull > .grid {
   max-width: 150px;
   height: 300px;
   text-decoration: none;
@@ -72,7 +72,7 @@ html, body {
   margin-bottom: 50px;
 }
 
-.container > div > div > .grid img {
+.container > div > .gridFull > .grid img {
   max-width: 250px;
   width: 100%;
   height: 100%;
@@ -81,54 +81,20 @@ html, body {
   transition: 0.2s ease-out;
 }
 
-.container > div > div > .grid p {
+.container > div > .gridFull > .grid p {
   text-decoration: none;
   color: var(--text-color-bold);
   text-align: center;
 }
 
-.container > div > div > .grid:hover {
+.container > div > .gridFull > .grid:hover {
   transform: scale(1.05);
 }
 
-.container > div > div > .grid:hover img {
+.container > div > .gridFull > .grid:hover img {
   box-shadow: 0 0 20px 1px var(--text-color-bold-transparent);
 }
 /*Container e estrura básica*/
-
-
-
-/*Container ADMIN */
-/*containerAdmin e estrura básica*/
-
-.containerAdmin {
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  background: var(--background-primary);
-  flex-direction: column;
-  padding: 0 2%;
-  width: 100%;
-}
-
-.containerAdmin > div {
-  max-width: var(--max-width);
-  width: 100%;
-  background: var(--background-secundary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.containerAdmin > div > h1 {
-  font-size: 1.5rem;
-  text-align: center;
-  color: var(--text-color-normal);
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -138,11 +104,20 @@ html, body {
 }
 
  .form .instructionTop {
-  display: flex;
-  align-items: center;
+   display: flex;
+   align-items: center;
+   max-width: 400px;
+   cursor: pointer;
+   width: 100%;
+}
+
+.form .errorMsg {
+  padding: 0;
+  margin: 0;
   max-width: 400px;
-  cursor: pointer;
   width: 100%;
+  text-align: center;
+  color: var(--primary);
 }
 
 .form .instructionTop p {
@@ -235,13 +210,27 @@ hr {
   border-radius: 10px;
 }
 
-.form .groupInputSelet .btn-new-step {
+.form .groupInputSelet .btn-color-primary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--primary);
+}
+
+.form .groupInputSelet .btn-color-secundary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--secundary);
+}
+
+.form .groupInputSelet .btn-outline-secundary {
   border: 2px solid var(--secundary);
   background-color: transparent;
   color: var(--secundary);
 }
 
-.form .groupInputSelet .btn-save {
+.form .groupInputSelet .btn-primary {
   border: 2px solid var(--primary);
   background-color: var(--primary);
   color: var(--background-secundary);
@@ -301,22 +290,22 @@ hr {
 .form a:hover {
 }
 
-.containerAdmin .customFileUpload {
+.customFileUpload {
   display: block;
   cursor: pointer;
 }
 
-.containerAdmin .customFileUpload  input[type="file"] {
+.customFileUpload  input[type="file"] {
   display: none;
 }
 
-.containerAdmin .customFileUpload i {
+.customFileUpload i {
   display: block;
   cursor: pointer;
   font-size: 1.3rem;
 }
 
-.containerAdmin .customFileUpload img {
+.customFileUpload img {
   width: 700px;
 }
 /* Fim do formulario */
