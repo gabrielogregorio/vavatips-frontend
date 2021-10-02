@@ -8,36 +8,6 @@ import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
 import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
 import './post.css'
 
-
-export interface PropsPostInterface {
-  _id: string,
-  user: { _id: string, username: string, image: string }
-  description: string
-  title: string
-
-  imgs: [{ _id: string, image: string, description: string } ]
-  tags: {
-    map: string,
-    agent: string,
-    ability: string,
-    moment: string,
-    difficult: string,
-    side: string,
-    mapPosition: string
-  },
-  postActions: {
-    save: [{_id: string}],
-    tested: [{_id: string}]
-  },
-  toggleSave: (_id: string) => void
-  toggleTested: (_id: string) => void
-}
-
-interface postActionsInterface {
-  save: [ {_id: string} ],
-  tested: [{_id: string} ]
-}
-
 interface filterUrlInterface {
   agent: string,
   map: string,
@@ -45,16 +15,105 @@ interface filterUrlInterface {
 }
 
 export const PostScreen = () => {
-  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: ''})
+  const location = useLocation()
+  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>(loadUrlQuery())
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
+  const [ originalPosts, setOriginalPosts ] = useState<PropsPostInterface[]>([])
   const [ allTags, setAllTags ] = useState<string[]>([])
   const [ activeFilters, setActiveFilters ] = useState<string[]>([])
   const [ postActions, setPostActions ] = useState<postActionsInterface>({save:[{_id: ''}], tested:[{_id: ''}]})
-  const [ useLocaltionItem ] = useState<any>(useLocation())
   const [ modalPostTitle, setModalPostTitle ] = useState<string>('')
   const [ modalPostId, setModalPostId ] = useState<string>('')
   const [ showModalReport, setShowModalReport ] = useState<boolean>(false)
   const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
+
+
+
+  // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
+  useEffect(() => {
+    setQueryUrl(loadUrlQuery())
+  }, [location])
+
+  // Carrega os testes e posts salvos do localstorage
+  useEffect(() => {
+    let item: postActionsInterface = JSON.parse(`${localStorage.getItem('posts-data')}`)
+    if(item) { setPostActions(item) }
+  }, [])
+
+  // monitora o QueryUrl para atualizar os dados em cada mudança
+  useEffect(() => {
+    let {agent, map} = queryUrl
+    if(agent === undefined) { agent = '' }
+    if(map === undefined) { map = '' }
+
+    // Busca no banco de dados os posts gerais ou relacionados a um agente
+    // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
+    api.get(`/posts?agent=${agent}&map=${map}`).then(res => {
+      let postsAgent = res.data
+
+      // Usuário está na URL de posts salvos => filtro por posts salvos
+      if(queryUrl.type === 'Save') {
+        let filterSave = postActions.save?.map(item => item._id)
+        postsAgent = postsAgent.filter((post: any) => filterSave?.includes(post._id)  )
+      }
+
+      // Usuário está na URL de posts testados => filtro por posts testados
+      if(queryUrl.type === 'Tested') {
+        let filterTested = postActions.tested?.map(item => item._id)
+        postsAgent = postsAgent.filter((post: any) => filterTested?.includes(post._id)  )
+      }
+
+      let listTags: string[] = []
+      postsAgent.map((post: any) => {
+        return Object.keys(post.tags).map(keyTags => {
+          let tag = post.tags[keyTags]
+          if(!listTags.includes(tag) && tag !== queryUrl.agent && tag !== queryUrl.map) {
+            listTags.push(tag)
+          }
+          return true
+        })
+      })
+      setAllTags(listTags)
+      setPosts(postsAgent)
+      setOriginalPosts(postsAgent)
+    })
+  }, [queryUrl])
+
+
+  // Atualiza sempre que uma tag for adicionada ao filtro
+  useEffect(() => {
+    let postsAgent = originalPosts
+    // Se tem filtros ativos => filtros por tags
+    if(activeFilters.length !== 0) {
+      // percorre todos os posts
+      postsAgent = postsAgent.filter((post: any) => {
+
+        // Obter todas as chaves das tags ['agent', 'map', 'side', 'momment']
+        let keyTagsThisPost = Object.keys(post.tags)
+
+        // Obter todos as tags dentro das chaves ['Sova', 'Ascent', 'atacante']
+        let allFiltersThisPost = keyTagsThisPost.map(arry => post.tags[arry])
+
+        let qtdFiltersSelected: number = activeFilters.length
+        let qtdFiltersThisPost: number = 0
+
+        for(let i = 0; i < allFiltersThisPost.length; i++) {
+          if(activeFilters.includes(allFiltersThisPost[i])) {
+            qtdFiltersThisPost = qtdFiltersThisPost + 1
+          }
+        }
+
+        // Todos os filtros fora atendidos
+        if (qtdFiltersThisPost === qtdFiltersSelected) {
+          return true
+        }
+        return false
+      })
+    }
+
+    setPosts(postsAgent)
+  }, [activeFilters])
+
 
   function showModalReportFunction(idPost: string, titlePost: string) {
     setModalPostTitle(titlePost)
@@ -90,93 +149,20 @@ export const PostScreen = () => {
     closeModalSuggestion()
   }
 
-  useEffect(() => {
-    let agent: string = `${query.parse(useLocaltionItem?.search).agent}`
-    let map: string = `${query.parse(useLocaltionItem?.search).map}`
-    let type: string = `${query.parse(useLocaltionItem?.search).type}`
+  // Obtém os dados do hooke useLocation e gera um objeto para atualizar
+  // o useState de UrlQuery
+  function loadUrlQuery() {
+    let agent: string = `${query.parse(location?.search).agent}`
+    let map: string = `${query.parse(location?.search).map}`
+    let type: string = `${query.parse(location?.search).type}`
+
+    if(agent === 'undefined') { agent = '' }
+    if(map === 'undefined') { map = '' }
+    if(type === 'undefined') { type = '' }
 
     let data: filterUrlInterface = {agent, map, type}
 
-    setQueryUrl(data)
-  }, [useLocaltionItem])
-
-  useEffect(() => {
-    let varNome = 'posts-data'
-    let item: postActionsInterface = JSON.parse(`${localStorage.getItem(varNome)}`)
-    if(item) {
-      setPostActions(item)
-    }
-
-    api.get('/posts').then(res => {
-      let postsAgent = res.data
-      if (queryUrl.agent) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.agent === queryUrl.agent)
-      }
-
-      if (queryUrl.map) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.map === queryUrl.map)
-      }
-
-      if(queryUrl.type === 'Save') {
-        let filterSave = item.save?.map(item => item._id)
-        postsAgent = postsAgent.filter((post: any) => filterSave?.includes(post._id)  )
-      }
-
-      if(queryUrl.type === 'Tested') {
-        let filterTested = item.tested?.map(item => item._id)
-        postsAgent = postsAgent.filter((post: any) => filterTested?.includes(post._id)  )
-      }
-
-      if(activeFilters.length !== 0) {
-        postsAgent = postsAgent.filter((post: any) => {
-          // Obter todas as chaves das tags
-          let localTagOnePost = Object.keys(post.tags)
-
-          // Obter todos as tags dentro das tags [tag1, tag2, tag3, tag4, tag5, tag7]
-          let localListTagsInTag = localTagOnePost.map(arry => post.tags[arry])
-
-          let notIncludeFilter = undefined
-          for(let i = 0; i < localListTagsInTag.length; i++) {
-            if(activeFilters.includes(localListTagsInTag[i])) {
-              notIncludeFilter = true
-            }
-          }
-
-          return notIncludeFilter
-        })
-      }
-
-
-      let listTags: string[] = []
-      postsAgent.map((post: any) => {
-        return Object.keys(post.tags).map(keyTags => {
-          let tag = post.tags[keyTags]
-          if(!listTags.includes(tag) && tag !== queryUrl.agent && tag !== queryUrl.map) {
-            listTags.push(tag)
-          }
-          return true
-        })
-      })
-      setAllTags(listTags)
-      setPosts(postsAgent)
-    })
-
-
-  }, [useLocaltionItem, activeFilters, queryUrl])
-
-  function renderPost() {
-    let postsAgent: any[] = JSON.parse(JSON.stringify(posts))
-
-    return postsAgent.map((post: PropsPostInterface) => {
-      post.postActions = postActions
-      post.toggleSave = toggleSave
-      post.toggleTested = toggleTested
-      return (
-        <div key={post._id} style={{width: '100%'}}>
-         <PostComponent {...post} showModalReport={showModalReportFunction} showModalSuggestion={showModalSuggestionFunction}/>
-        </div>
-      )
-    })
+    return data
   }
 
   function toggleTag(tag: string) {
@@ -214,6 +200,21 @@ export const PostScreen = () => {
       setPostActions(copyActions)
     }
     localStorage.setItem('posts-data', JSON.stringify(copyActions))
+  }
+
+  function renderPost() {
+    let postsAgent: any[] = JSON.parse(JSON.stringify(posts))
+
+    return postsAgent.map((post: PropsPostInterface) => {
+      post.postActions = postActions
+      post.toggleSave = toggleSave
+      post.toggleTested = toggleTested
+      return (
+        <div key={post._id} style={{width: '100%'}}>
+         <PostComponent {...post} showModalReport={showModalReportFunction} showModalSuggestion={showModalSuggestionFunction}/>
+        </div>
+      )
+    })
   }
 
   function renderEditableFilters() {

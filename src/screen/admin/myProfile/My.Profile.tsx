@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
-import '../style.css'
-import './style.css'
-
+import { InputValue } from '../../../components/inputValue'
 
 export const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>("")
@@ -46,36 +44,24 @@ export const MyProfileScreen = () => {
 
   return (
     <div className="container">
-     <div className="post-local-container">
+     <div style={{ display: 'flex', 'flexDirection': 'column'}}>
        <NavbarComponent selected={navbarEnum.Profile} />
 
-        <form className="form" onSubmit={handleSubmit}>
+        <div className="form" onSubmit={handleSubmit}>
           <h1>Seu perfil</h1>
           <p>{errorMsg}</p>
 
-          <label htmlFor="">Trocar nome de usuário</label>
-          <input
-            type="text"
-            placeholder="Digite um novo nome"
-            value={username}
-            onChange={e => setUsername(e.target.value)} />
+          <InputValue text="Trocar nome de usuário" value={username} setValue={setUsername}/>
+          <InputValue text="Digite uma nova senha" value={password} setValue={setPassword}/>
+          <InputValue text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
 
-          <label htmlFor="">Digite uma nova senha</label>
-          <input
-            type="password"
-            placeholder=""
-            value={password}
-            onChange={e => setPassword(e.target.value)} />
+          <div className="groupInput">
+            <div className="groupInputSelet">
+              <button className="btn-primary">Atualizar dados</button>
+            </div>
+          </div>
 
-          <label htmlFor="">Confirme a nova senha</label>
-          <input
-            type="password"
-            placeholder=""
-            value={password2}
-            onChange={e => setPassword2(e.target.value)} />
-
-          <button>Atualizar dados</button>
-        </form>
+        </div>
       </div>
     </div>
   )

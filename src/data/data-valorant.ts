@@ -1,22 +1,3 @@
-interface habilitsInterface {
-  name: string,
-  keyboard: string
-}
-
-export interface agentInterface {
-  id: number,
-  name: string,
-  img: string,
-  habilits: habilitsInterface[]
-}
-
-
-interface mapInterface {
-  id: number,
-  name: string,
-  img: string
-}
-
 export const agents = (): agentInterface[] => {
   return [
     {

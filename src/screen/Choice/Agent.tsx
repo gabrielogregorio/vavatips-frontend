@@ -25,7 +25,7 @@ export const AgentScreen = () => {
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
 
         <h1>Escolha um Agente</h1>
-        <div>
+        <div className="gridFull">
           {renderAgent()}
         </div>
       </div>

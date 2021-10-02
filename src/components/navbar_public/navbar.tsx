@@ -26,17 +26,15 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
 
         <Link
           className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
-          to={`/Posts?agent=${props.agent}&map=${props.map}`}>posts</Link>
+          to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link>
 
         <Link
           className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
-          to={`/Posts?type=Save&agent=${props.agent}&map=${props.map}`}>salvos</Link>
+          to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link>
 
       <Link
           className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
-          to={`/Posts?type=Tested&agent=${props.agent}&map=${props.map}`}>Testado</Link>
-
-
+          to={`/Posts?type=Tested&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>Testado</Link>
       </ul>
     </nav>
   )

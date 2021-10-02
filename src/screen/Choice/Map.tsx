@@ -19,7 +19,7 @@ export const MapScreen = () => {
       <div>
         <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
         <h1>Escolha um mapa</h1>
-        <div>
+        <div className="gridFull">
           {renderMap()}
         </div>
         </div>
