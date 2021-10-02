@@ -23,6 +23,7 @@ export const ModalOfReport = (props: ModalProps) => {
   const [ larguraTela, setLarguraTela ] = useState<number>(window.screen.availWidth)
   const [ alturaTela, setAlturaTela ] = useState<number>(window.screen.availHeight)
   const [ idPost, setIdPost ] = useState<string>('')
+  const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
     if(props.postTitle) { setPostTitle(props.postTitle) }
@@ -30,6 +31,16 @@ export const ModalOfReport = (props: ModalProps) => {
     if(props.description) { setDescription(props.description) }
     if(props.idPost) { setIdPost(props.idPost) }
   }, [props])
+
+  function saveModal(idPost: string, postTitle: string, email: string, description: string, larguraTela: number, alturaTela: number) {
+    if(description === '' || description.trim() === '') {
+      setErrorMsg('Você precisa preencher o campo Descrição com as informações')
+    } else if(description.trim().length < 10) {
+      setErrorMsg('Você precisa de uma descrição mais detalhada')
+    } else {
+      props.saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)
+    }
+  }
 
   return (
     <div className={styles.modal}>
@@ -44,6 +55,7 @@ export const ModalOfReport = (props: ModalProps) => {
         <hr />
 
         <div className="form">
+        <p style={{color: 'var(--primary)', textAlign: 'center'}}>{errorMsg}</p>
 
          <div className="groupInput">
             <div className="groupInputSelet">
@@ -82,7 +94,7 @@ export const ModalOfReport = (props: ModalProps) => {
 
           <div className={styles.modalActions}>
             <button onClick={() => props.closeModal()}>Cancelar</button>
-            <button onClick={() => props.saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)}>Adicionar</button>
+            <button onClick={() => saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)}>Adicionar</button>
           </div>
 
         </div>

@@ -7,6 +7,7 @@ import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar
 import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
 import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
 import './post.css'
+import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
 
 interface filterUrlInterface {
   agent: string,
@@ -27,6 +28,9 @@ export const PostScreen = () => {
   const [ showModalReport, setShowModalReport ] = useState<boolean>(false)
   const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
 
+  const [ showModalMessage, setShowModalMessage ] = useState<boolean>(false)
+  const [ modalTextMessage, setModalTextMessage ] = useState<string>('')
+  const [ modalTypeMessage, setModalTypeMessage ] = useState<modalType>('success')
 
 
   // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
@@ -127,9 +131,19 @@ export const PostScreen = () => {
     setModalPostId('')
   }
 
-  function saveModalReport(idPost:string, postTitle: string, email: string, description:string, larguraTela: number, alturaTela: number) {
-    console.log(idPost, postTitle, email, description, larguraTela, alturaTela)
+  async function saveModalReport(idPost:string, postTitle: string, email: string, description:string, screenWidth: number, screenHeight: number) {
     closeModalReport()
+    try {
+      await api.post('/report', { idPost, email, description, screenWidth, screenHeight })
+      setModalTextMessage('Report enviado com sucesso, muito obrigado!')
+      setModalTypeMessage('success')
+
+    } catch(error) {
+      console.log(error)
+      setModalTextMessage('Erro ao enviar o Report. Você poderia reportar o problema aos desenvolvedores')
+      setModalTypeMessage('error')
+    }
+    setShowModalMessage(true)
   }
 
   function showModalSuggestionFunction(idPost: string, titlePost: string) {
@@ -144,10 +158,26 @@ export const PostScreen = () => {
     setModalPostId('')
   }
 
-  function saveModalSuggestion(idPost:string, postTitle: string, email: string, description:string) {
-    console.log(idPost, postTitle, email, description)
-    closeModalSuggestion()
+  function closeModalMessage() {
+    setShowModalMessage(false)
+    setModalTextMessage('')
   }
+
+  async function saveModalSuggestion(idPost:string, postTitle: string, email: string, description:string) {
+    closeModalSuggestion()
+    try {
+      await api.post('/suggestion', { idPost, email, description })
+
+      setModalTextMessage('Sugestão enviado com sucesso, muito obrigado!')
+      setModalTypeMessage('success')
+    } catch(error) {
+      console.log(error)
+      setModalTextMessage('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores')
+      setModalTypeMessage('error')
+    }
+    setShowModalMessage(true)
+  }
+
 
   // Obtém os dados do hooke useLocation e gera um objeto para atualizar
   // o useState de UrlQuery
@@ -253,6 +283,11 @@ export const PostScreen = () => {
             <ModalOfSugestion idPost={modalPostId} title="fazer sugestão" postTitle={modalPostTitle} closeModal={closeModalSuggestion} saveModal={saveModalSuggestion}/>
           ) : null}
 
+          { showModalMessage ? (
+            <ModalMessage type={modalTypeMessage} text={modalTextMessage} closeModal={closeModalMessage} />
+          ) : (
+            null
+          )}
 
             <div className="btn-base">
               { queryUrl.agent ? (<button>#{queryUrl.agent}</button> ) : null }
