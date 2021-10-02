@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { useState } from 'react'
 import api from "../../services/api";
 import { login } from "../../services/auth";
-import styles from './register.module.css'
 
 
 export const RegisterScreen = () => {
@@ -32,8 +31,6 @@ export const RegisterScreen = () => {
           // Realiza o login salvando os dados no localstorage
           login(token.data.token, token.data.id)
 
-          // Saval os dados no context
-          setUser({id: token.data.id, username})
           setRedirect(true)
         }  catch(error: any) {
           if(error.response?.status === 409) {
@@ -47,7 +44,7 @@ export const RegisterScreen = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className="container">
       <div>
         <form onSubmit={handleSubmit}>
           {redirect ? <Redirect to="/Profile" /> : null }
@@ -75,7 +72,3 @@ export const RegisterScreen = () => {
    </div>
   )
 }
-function setUser(arg0: { id: any; username: string; }) {
-  throw new Error("Function not implemented.");
-}
-

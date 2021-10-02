@@ -14,7 +14,7 @@ interface ModalProps {
   saveModal: (idPost: string, postTitle: string, email: string, description: string) => void
 }
 
-export const ModalSugestaoComponent = (props: ModalProps) => {
+export const ModalOfSugestion = (props: ModalProps) => {
   const [ email, setEmail ] = useState<string>('')
   const [ description, setDescription ] = useState<string>('')
   const [ idPost, setIdPost ] = useState<string>('')

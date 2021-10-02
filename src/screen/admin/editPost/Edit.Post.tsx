@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
-import { agents, maps, agentInterface } from '../../../data/data-valorant'
+import { agents, maps } from '../../../data/data-valorant'
 import { InputValue } from '../../../components/inputValue';
 import { ModalComponent } from '../../../components/modal/modal';
 
@@ -204,10 +204,10 @@ export const EditPostScreen = () => {
   }
 
   return (
-    <div className="containerAdmin">
-      <div>
+    <div className="container">
+      <div style={{ display: 'flex', 'flexDirection': 'column'}}>
         {redirect ? <Redirect to="/ViewPosts" /> : null }
-        <NavbarComponent selected={navbarEnum.PostCreate} />
+        <NavbarComponent selected={navbarEnum.EditScreen} />
 
         {visibleModal ?
           (<ModalComponent
@@ -219,9 +219,10 @@ export const EditPostScreen = () => {
               saveModal={saveModal}/>)
           : ( null)}
 
-        <h1>Editar um post</h1>
 
         <div className="form">
+
+        <h1>Editar um post</h1>
 
           <InputValue text="Titulo" value={formTitle} setValue={setFormTitle}/>
           <InputValue text="Descrição" value={formDescription} setValue={setFormDescription}/>
@@ -305,12 +306,12 @@ export const EditPostScreen = () => {
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button className="btn-new-step" onClick={() => showModal()} >Novo Passo</button> <br />
+              <button className="btn-outline-secundary" onClick={() => showModal()} >Novo Passo</button> <br />
             </div>
           </div>
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button onClick={() => handleSubmit()} className="btn-save">Publicar Dica</button>
+              <button onClick={() => handleSubmit()} className="btn-primary">Publicar Dica</button>
             </div>
           </div>
 

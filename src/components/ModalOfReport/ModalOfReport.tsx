@@ -16,7 +16,7 @@ interface ModalProps {
   saveModal: (idPost: string, postTitle: string, email: string, description: string,  larguraTela: number, alturaTela: number) => void
 }
 
-export const ModalReportComponent = (props: ModalProps) => {
+export const ModalOfReport = (props: ModalProps) => {
   const [ postTitle, setPostTitle ] = useState<string>('')
   const [ email, setEmail ] = useState<string>('')
   const [ description, setDescription ] = useState<string>('')
