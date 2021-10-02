@@ -12,18 +12,17 @@ interface imgsInterface {
 }
 
 export interface tagProps {
-    moment: momentType[],
-    difficult: difficultType[],
-    ability: abilityType[],
-    side: sideType[],
-    map: mapType[],
-    mapPosition: mapPositionType[],
-    agent: agentType[],
+  moment: momentType[],
+  difficult: difficultType[],
+  ability: abilityType[],
+  side: sideType[],
+  map: mapType[],
+  mapPosition: mapPositionType[],
+  agent: agentType[],
 }
 
 export interface postsProps {
-  id: string, // ?????????????????????????
-  _id?: string,
+  _id: string,
   title: string,
   description: string,
   imgs: imgsInterface[] ,

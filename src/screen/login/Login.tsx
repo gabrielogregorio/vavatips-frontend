@@ -1,9 +1,10 @@
 import React from "react"
 import { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import api from "../../services/api"
 import { login, getToken } from '../../services/auth'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
+import api from "../../services/api"
+
 
 export const LoginScreen = () => {
   const [username, setUsername] = useState<string>('')

@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom';
-import { AgentChoiceScreen } from './screen/Choice/Agent';
-import { MapChoiceScreen } from './screen/Choice/Map'
+
+import { AgentScreen } from './screen/Choice/Agent';
+import { MapScreen } from './screen/Choice/Map'
 import { PostScreen } from './screen/posts/Post';
 import { RegisterScreen } from './screen/register/register';
 import { LoginScreen } from './screen/login/Login';
@@ -8,9 +9,8 @@ import { CreatePostScreen } from './screen/admin/createPost/Create.Post';
 import { EditPostScreen } from './screen/admin/editPost/Edit.Post';
 import { MyProfileScreen } from './screen/admin/myProfile/My.Profile';
 import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts';
-
-import { isAutenticate } from "./services/auth";
-import { NotFound } from './screen/NotFound/NotFound';
+import { NotFoundScreen } from './screen/NotFound/NotFound';
+import { isAuthenticated } from "./services/auth";
 
 
 const PrivateRoute = ({ children, ...rest }: any) => {
@@ -19,7 +19,7 @@ const PrivateRoute = ({ children, ...rest }: any) => {
       {...rest}
       render={
         ({ location }) => (
-          isAutenticate() ? (
+          isAuthenticated() ? (
             children
           ) : (
             <Redirect to='/Login' />
@@ -36,48 +36,47 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MapChoiceScreen />
+          <MapScreen />
         </Route>
 
         <Route path="/Maps">
-          <MapChoiceScreen />
+          <MapScreen />
         </Route>
 
         <Route path="/Agents">
-          <AgentChoiceScreen />
+          <AgentScreen />
         </Route>
 
-          <Route path="/Posts">
-            <PostScreen />
-          </Route>
+        <Route path="/Posts">
+          <PostScreen />
+        </Route>
 
-          <Route path="/Login">
-            <LoginScreen />
-          </Route>
+        <Route path="/Login">
+          <LoginScreen />
+        </Route>
 
-          <Route path="/Register">
-            <RegisterScreen />
-          </Route>
+        <Route path="/Register">
+          <RegisterScreen />
+        </Route>
 
-          <PrivateRoute path="/ViewPosts">
-            <ViewPostsScreen />
-          </PrivateRoute>
+        <PrivateRoute path="/ViewPosts">
+          <ViewPostsScreen />
+        </PrivateRoute>
 
-          <PrivateRoute path="/PostCreate">
-            <CreatePostScreen />
-          </PrivateRoute>
+        <PrivateRoute path="/PostCreate">
+          <CreatePostScreen />
+        </PrivateRoute>
 
-          <PrivateRoute path="/PostEdit">
-            <EditPostScreen />
-          </PrivateRoute>
+        <PrivateRoute path="/PostEdit">
+          <EditPostScreen />
+        </PrivateRoute>
 
-          <PrivateRoute path="/Profile">
-            <MyProfileScreen />
-          </PrivateRoute>
-
+        <PrivateRoute path="/Profile">
+          <MyProfileScreen />
+        </PrivateRoute>
 
         <Route path="*">
-          <NotFound />
+          <NotFoundScreen />
         </Route>
       </Switch>
     </BrowserRouter>

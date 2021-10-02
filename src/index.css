@@ -96,11 +96,7 @@ html, body {
 }
 /*Container e estrura básica*/
 
-
-
 /*Container ADMIN */
-/*containerAdmin e estrura básica*/
-
 .containerAdmin {
   display: flex;
   min-height: 100vh;
@@ -138,11 +134,11 @@ html, body {
 }
 
  .form .instructionTop {
-  display: flex;
-  align-items: center;
-  max-width: 400px;
-  cursor: pointer;
-  width: 100%;
+   display: flex;
+   align-items: center;
+   max-width: 400px;
+   cursor: pointer;
+   width: 100%;
 }
 
 .form .instructionTop p {

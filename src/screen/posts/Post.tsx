@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import query from 'query-string'
-import './post.css'
 import api from '../../services/api'
 import { PostComponent } from '../../components/posts/posts'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
-import { ModalReportComponent } from '../../components/modalReport/modalReport'
-import { ModalSugestaoComponent } from '../../components/modalSugestao/modalSugestao'
+import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
+import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
+import './post.css'
+
 
 export interface PropsPostInterface {
   _id: string,
@@ -32,13 +33,11 @@ export interface PropsPostInterface {
   toggleTested: (_id: string) => void
 }
 
-
-
-// Primeiro exibe o resultado...
 interface postActionsInterface {
   save: [ {_id: string} ],
   tested: [{_id: string} ]
 }
+
 interface filterUrlInterface {
   agent: string,
   map: string,
@@ -46,29 +45,27 @@ interface filterUrlInterface {
 }
 
 export const PostScreen = () => {
-  const [ filtersUrl, setFiltersUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: ''})
-  const [ posts, setPosts ] = useState<any[]>([])
+  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: ''})
+  const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
   const [ allTags, setAllTags ] = useState<string[]>([])
   const [ activeFilters, setActiveFilters ] = useState<string[]>([])
   const [ postActions, setPostActions ] = useState<postActionsInterface>({save:[{_id: ''}], tested:[{_id: ''}]})
   const [ useLocaltionItem ] = useState<any>(useLocation())
-
-
-  const [ postTitleModal, setPostTitleModal ] = useState<string>('')
-  const [ postIdModal, setPostIdModal ] = useState<string>('')
+  const [ modalPostTitle, setModalPostTitle ] = useState<string>('')
+  const [ modalPostId, setModalPostId ] = useState<string>('')
   const [ showModalReport, setShowModalReport ] = useState<boolean>(false)
-  const [ showModalSugestao, setShowModalSugestao ] = useState<boolean>(false)
+  const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
 
   function showModalReportFunction(idPost: string, titlePost: string) {
-    setPostTitleModal(titlePost)
-    setPostIdModal(idPost)
+    setModalPostTitle(titlePost)
+    setModalPostId(idPost)
     setShowModalReport(true)
   }
 
   function closeModalReport() {
     setShowModalReport(false)
-    setPostTitleModal('')
-    setPostIdModal('')
+    setModalPostTitle('')
+    setModalPostId('')
   }
 
   function saveModalReport(idPost:string, postTitle: string, email: string, description:string, larguraTela: number, alturaTela: number) {
@@ -76,21 +73,21 @@ export const PostScreen = () => {
     closeModalReport()
   }
 
-  function showModalSugestaoFunction(idPost: string, titlePost: string) {
-    setPostTitleModal(titlePost)
-    setPostIdModal(idPost)
-    setShowModalSugestao(true)
+  function showModalSuggestionFunction(idPost: string, titlePost: string) {
+    setModalPostTitle(titlePost)
+    setModalPostId(idPost)
+    setShowModalSuggestion(true)
   }
 
-  function closeModalSugestao() {
-    setShowModalSugestao(false)
-    setPostTitleModal('')
-    setPostIdModal('')
+  function closeModalSuggestion() {
+    setShowModalSuggestion(false)
+    setModalPostTitle('')
+    setModalPostId('')
   }
 
-  function saveModaSugestao(idPost:string, postTitle: string, email: string, description:string) {
+  function saveModalSuggestion(idPost:string, postTitle: string, email: string, description:string) {
     console.log(idPost, postTitle, email, description)
-    closeModalSugestao()
+    closeModalSuggestion()
   }
 
   useEffect(() => {
@@ -100,7 +97,7 @@ export const PostScreen = () => {
 
     let data: filterUrlInterface = {agent, map, type}
 
-    setFiltersUrl(data)
+    setQueryUrl(data)
   }, [useLocaltionItem])
 
   useEffect(() => {
@@ -112,20 +109,20 @@ export const PostScreen = () => {
 
     api.get('/posts').then(res => {
       let postsAgent = res.data
-      if (filtersUrl.agent) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.agent === filtersUrl.agent)
+      if (queryUrl.agent) {
+        postsAgent = postsAgent.filter((post:any) => post.tags.agent === queryUrl.agent)
       }
 
-      if (filtersUrl.map) {
-        postsAgent = postsAgent.filter((post:any) => post.tags.map === filtersUrl.map)
+      if (queryUrl.map) {
+        postsAgent = postsAgent.filter((post:any) => post.tags.map === queryUrl.map)
       }
 
-      if(filtersUrl.type === 'Save') {
+      if(queryUrl.type === 'Save') {
         let filterSave = item.save?.map(item => item._id)
         postsAgent = postsAgent.filter((post: any) => filterSave?.includes(post._id)  )
       }
 
-      if(filtersUrl.type === 'Tested') {
+      if(queryUrl.type === 'Tested') {
         let filterTested = item.tested?.map(item => item._id)
         postsAgent = postsAgent.filter((post: any) => filterTested?.includes(post._id)  )
       }
@@ -134,6 +131,7 @@ export const PostScreen = () => {
         postsAgent = postsAgent.filter((post: any) => {
           // Obter todas as chaves das tags
           let localTagOnePost = Object.keys(post.tags)
+
           // Obter todos as tags dentro das tags [tag1, tag2, tag3, tag4, tag5, tag7]
           let localListTagsInTag = localTagOnePost.map(arry => post.tags[arry])
 
@@ -153,7 +151,7 @@ export const PostScreen = () => {
       postsAgent.map((post: any) => {
         return Object.keys(post.tags).map(keyTags => {
           let tag = post.tags[keyTags]
-          if(!listTags.includes(tag) && tag !== filtersUrl.agent && tag !== filtersUrl.map) {
+          if(!listTags.includes(tag) && tag !== queryUrl.agent && tag !== queryUrl.map) {
             listTags.push(tag)
           }
           return true
@@ -164,10 +162,7 @@ export const PostScreen = () => {
     })
 
 
-  }, [useLocaltionItem, activeFilters, filtersUrl])
-
-
-
+  }, [useLocaltionItem, activeFilters, queryUrl])
 
   function renderPost() {
     let postsAgent: any[] = JSON.parse(JSON.stringify(posts))
@@ -178,7 +173,7 @@ export const PostScreen = () => {
       post.toggleTested = toggleTested
       return (
         <div key={post._id} style={{width: '100%'}}>
-         <PostComponent {...post} showModalReport={showModalReportFunction} showModalSugestaoFunction={showModalSugestaoFunction}/>
+         <PostComponent {...post} showModalReport={showModalReportFunction} showModalSuggestion={showModalSuggestionFunction}/>
         </div>
       )
     })
@@ -191,8 +186,6 @@ export const PostScreen = () => {
       setActiveFilters([...activeFilters, tag])
     }
   }
-
-
 
   function toggleSave(_id: string) {
     let copyActions: postActionsInterface = JSON.parse(JSON.stringify(postActions))
@@ -235,17 +228,16 @@ export const PostScreen = () => {
     ))
   }
 
-
   return (
     <div className="container">
       <div>
         {
-          filtersUrl.type === 'Save' ? (
-            <NavbarComponentPublic selected={navbarEnumPublic.Save} agent={filtersUrl.agent} map={filtersUrl.map}/>
-          ) :  filtersUrl.type === 'Tested' ? (
-            <NavbarComponentPublic selected={navbarEnumPublic.Tested} agent={filtersUrl.agent} map={filtersUrl.map}/>
+          queryUrl.type === 'Save' ? (
+            <NavbarComponentPublic selected={navbarEnumPublic.Save} agent={queryUrl.agent} map={queryUrl.map}/>
+          ) :  queryUrl.type === 'Tested' ? (
+            <NavbarComponentPublic selected={navbarEnumPublic.Tested} agent={queryUrl.agent} map={queryUrl.map}/>
           ) : (
-            <NavbarComponentPublic selected={navbarEnumPublic.Posts} agent={filtersUrl.agent} map={filtersUrl.map}/>
+            <NavbarComponentPublic selected={navbarEnumPublic.Posts} agent={queryUrl.agent} map={queryUrl.map}/>
           )
         }
         <h1>As melhores dicas de Valorant</h1>
@@ -253,20 +245,20 @@ export const PostScreen = () => {
         <div style={{'display': 'flex', 'flexDirection': 'column'}} className="containerPost">
           <div style={{display: 'flex', margin: '10px 0'}}>
           { showModalReport ? (
-            <ModalReportComponent idPost={postIdModal} title="fazer Reporte" postTitle={postTitleModal} closeModal={closeModalReport} saveModal={saveModalReport}/>
+            <ModalOfReport idPost={modalPostId} title="fazer Reporte" postTitle={modalPostTitle} closeModal={closeModalReport} saveModal={saveModalReport}/>
           ) : null}
 
-          { showModalSugestao ? (
-            <ModalSugestaoComponent idPost={postIdModal} title="fazer sugestão" postTitle={postTitleModal} closeModal={closeModalSugestao} saveModal={saveModaSugestao}/>
+          { showModalSuggestion ? (
+            <ModalOfSugestion idPost={modalPostId} title="fazer sugestão" postTitle={modalPostTitle} closeModal={closeModalSuggestion} saveModal={saveModalSuggestion}/>
           ) : null}
 
 
             <div className="btn-base">
-              { filtersUrl.agent ? (<button>#{filtersUrl.agent}</button> ) : null }
+              { queryUrl.agent ? (<button>#{queryUrl.agent}</button> ) : null }
             </div>
 
             <div className="btn-base">
-             { filtersUrl.map ? (<button>#{filtersUrl.map}</button> ) : null }
+             { queryUrl.map ? (<button>#{queryUrl.map}</button> ) : null }
             </div>
           </div>
 
@@ -277,9 +269,7 @@ export const PostScreen = () => {
           <div style={{width: '100%'}}>
             {renderPost()}
           </div>
-
         </div>
-
       </div>
     </div>
   )

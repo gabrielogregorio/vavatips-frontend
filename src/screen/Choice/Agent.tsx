@@ -6,7 +6,7 @@ import { agents } from '../../data/data-valorant'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 
 
-export const AgentChoiceScreen = () => {
+export const AgentScreen = () => {
   let item = useLocation()
   let mapSelected = query.parse(item?.search)
 

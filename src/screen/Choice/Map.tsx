@@ -4,7 +4,7 @@ import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar
 import { maps } from '../../data/data-valorant'
 
 
-export const MapChoiceScreen = () => {
+export const MapScreen = () => {
   function renderMap() {
     return maps().map(map => (
       <Link to={`/Agents?map=${map.name}`} className="grid" key={map.id}>
