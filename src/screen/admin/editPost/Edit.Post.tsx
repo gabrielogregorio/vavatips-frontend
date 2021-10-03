@@ -137,7 +137,7 @@ export const EditPostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img src={`${process.env.REACT_APP_API_HOST}${instruction.image}`} alt={instruction.description} style={{width: '100%'}} /> <br />
+          <img src={`${instruction.image}`} alt={instruction.description} style={{width: '100%'}} /> <br />
           <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </button>

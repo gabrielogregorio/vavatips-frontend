@@ -47,7 +47,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
         { props.user.image ?
           (
-            <img src={`${process.env.REACT_APP_API_HOST}${props.user.image}`} alt="Foto de perfil do Autor da postagem" />
+            <img src={`${props.user.image}`} alt="Foto de perfil do Autor da postagem" />
           )
           :(
             <img src={'/images/users/profile.png'} alt="Foto de perfil do Autor da postagem" />
@@ -62,7 +62,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
-          <img src={`${process.env.REACT_APP_API_HOST}${props.imgs?.[idImage]?.image}`} alt={props.imgs?.[idImage]?.description} />
+          <img src={`${props.imgs?.[idImage]?.image}`} alt={props.imgs?.[idImage]?.description} />
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
               <i className="fas fa-angle-left"></i>

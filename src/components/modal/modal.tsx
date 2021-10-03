@@ -38,7 +38,7 @@ export const ModalComponent = (props: ModalProps) => {
 
     // Envia a imagem para o backend e coleta o retorno
     api.post(`/postLoadFile`, formData).then((res) => {
-      let urlImg = `/images/posts/${res.data.filename}`
+      let urlImg = `${res.data.filename}`
       setLinkImg(urlImg)
     })
   }
@@ -73,7 +73,7 @@ export const ModalComponent = (props: ModalProps) => {
           </div>
 
           <div className="instructionImage">
-            { LinkImg ? (<img src={`${process.env.REACT_APP_API_HOST}${LinkImg}`} alt="" /> ) : null }
+            { LinkImg ? (<img src={`${LinkImg}`} alt="" /> ) : null }
           </div>
 
           <div className={styles.modalActions}>
