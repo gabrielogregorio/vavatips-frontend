@@ -18,7 +18,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -33,26 +33,32 @@ html, body {
   min-height: 100vh;
 }
 
-/*Container e estrura básica*/
-.container {
+ /*Container e estrura básica*/
+ .container {
   display: flex;
-  justify-content: center;
+  align-items: center;
   min-height: 100vh;
   background: var(--background-primary);
   flex-direction: column;
-  padding: 2%;
+  padding: 0;
   width: 100%;
-  margin: 20px 0;
+  margin: 0;
 }
 
 .container > div {
+  display: flex;
+  flex-direction: column;
   max-width: var(--max-width);
   align-items: center;
   width: 100%;
+  height: 100%;
   background: var(--background-secundary);
+  padding: 0 2%;
+  margin: 0;
 }
 
 .container > div > h1 {
+  padding: 30px 0;
   font-size: 1.5rem;
   text-align: center;
   color: var(--text-color-normal);
@@ -61,15 +67,16 @@ html, body {
 .container > div > .gridFull {
   display: grid;
   grid-column-gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .container > div > .gridFull > .grid {
-  max-width: 150px;
-  height: 300px;
+  max-height: 200px;
+  width: 100%;
   text-decoration: none;
   transition: 0.2s ease-out;
   margin-bottom: 50px;
+  text-align: center;
 }
 
 .container > div > .gridFull > .grid img {
@@ -103,12 +110,11 @@ html, body {
   width: 100%;
 }
 
- .form .instructionTop {
-   display: flex;
-   align-items: center;
-   max-width: 400px;
-   cursor: pointer;
-   width: 100%;
+.form h1 {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.5rem 0;
 }
 
 .form .errorMsg {
@@ -123,12 +129,18 @@ html, body {
 .form .instructionTop p {
   flex: 1;
   font-size: 14px;
-  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .form .info {
   font-size: 14px;
   max-width: 400px;
+}
+
+.form .stepsPost > div {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 2%;
 }
 
 .form .instructionTop button {
@@ -142,6 +154,14 @@ html, body {
 
 .form .instructionTop button i {
   color: var(--primary);
+}
+
+.form .stepsPost > div .instructionTop {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  cursor: pointer;
+  width: 100%;
 }
 
 .form .instructionImage {
@@ -246,12 +266,6 @@ hr {
   border-radius: 10px;
 }
 
-.form p {
-}
-
-.form label {
-}
-
 .form label {
   width: 100%;
   display: block;
@@ -276,20 +290,6 @@ hr {
   resize: none;
 }
 
-
-.form button {
-}
-
-.form button:hover {
-
-}
-
-.form a {
-}
-
-.form a:hover {
-}
-
 .customFileUpload {
   display: block;
   cursor: pointer;
@@ -309,3 +309,176 @@ hr {
   width: 700px;
 }
 /* Fim do formulario */
+
+/* Inicio do post */
+.btn button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--secundary);
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 20px;
+  color: var(--secundary);
+  margin: 5px;
+}
+
+.btn .btnActive {
+  background-color: var(--secundary);
+  color: var(--background-primary);
+}
+
+.btn-base button {
+  cursor: pointer;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 20px;
+  color: var(--background-primary);
+}
+
+.containerPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--dark-beautful);
+  padding: 0;
+}
+
+.containerPost > div {
+  display: flex;
+  margin: 10px 0;
+}
+
+.containerPost > .postItems {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.containerPost .tags {
+  display: flex;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  padding: 0 2%;
+  justify-content: center;
+  width: 100%;
+}
+
+.containerPost > h3 {
+  color: var(--light);
+}
+
+.containerPost > h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 100px;
+  color: var(--dark);
+}
+
+.containerPost > p {
+  color: var(--light);
+}
+/* Inicio do post */
+
+
+/* Modais Básicos */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #000000aa;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalItem {
+  background-color: var(--background-secundary);
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+}
+
+.modalTitle h1 {
+  flex: 1;
+  font-size: 24px;
+  color: var(--text-color-normal);
+}
+
+.modalTitle button {
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modalTitle button i {
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.modalActions button {
+  background: transparent;
+  border: 0;
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 20px;
+  color: var(--background-secundary);
+  cursor: pointer;
+}
+
+.modalActions button:nth-child(1) {
+  background: #969696;
+}
+
+.modalActions button:nth-child(2) {
+  background: var(--primary);
+  margin-left: 10px;
+}
+
+/* Fim Básicos */
+
+@media screen and (min-width: 600px) {
+  .container > div > .gridFull {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .modalItem {
+    max-width: 400px;
+  }
+
+}
+
+@media screen and (min-width: 1000px) {
+  .container > div > .gridFull {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  .container > div > .gridFull {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}

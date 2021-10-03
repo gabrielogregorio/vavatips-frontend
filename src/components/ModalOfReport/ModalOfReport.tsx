@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styles from './modal.module.css'
-
 
 interface ModalProps {
   title: string,
@@ -43,10 +41,10 @@ export const ModalOfReport = (props: ModalProps) => {
   }
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalItem}>
+    <div className="modal">
+      <div className="modalItem">
 
-        <div className={styles.modalTitle}>
+        <div className="modalTitle">
           <h1>{props.title}</h1>
           <button onClick={() => props.closeModal()}>
             <i className="fas fa-times"></i>
@@ -55,7 +53,7 @@ export const ModalOfReport = (props: ModalProps) => {
         <hr />
 
         <div className="form">
-        <p style={{color: 'var(--primary)', textAlign: 'center'}}>{errorMsg}</p>
+        <p className="errorMsg">{errorMsg}</p>
 
          <div className="groupInput">
             <div className="groupInputSelet">
@@ -92,7 +90,7 @@ export const ModalOfReport = (props: ModalProps) => {
             </div>
           </div>
 
-          <div className={styles.modalActions}>
+          <div className="modalActions">
             <button onClick={() => props.closeModal()}>Cancelar</button>
             <button onClick={() => saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)}>Adicionar</button>
           </div>

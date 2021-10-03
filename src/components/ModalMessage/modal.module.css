@@ -2,30 +2,14 @@
   position: fixed;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 20px 10px;
   bottom: 10px;
-  left: calc(50% - 200px);
   z-index: 10;
   border-radius: 5px;
-  width: 400px;
   box-shadow: 1px 5px 15px 1px var(--text-color-bold);
-  /*animation-name: hiddenModal;
-  animation-duration: 7s;
-  opacity: 0;*/
-}
-
-@keyframes hiddenModal {
-  0% {
-    opacity: 1;
-  }
-
-  92% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
+  left: 5vw;
+  width: 90vw;
 }
 
 .modalItem .notfyIcon {
@@ -44,8 +28,8 @@
   flex: 1;
   font-size: 14px;
   color: var(--background-secundary);
-  margin: 0;
   padding-left: 10px;
+  word-wrap: break-all;
 }
 
 .modalItem button {
@@ -59,4 +43,12 @@
 .modalItem button i {
   color: var(--background-secundary);
   font-size: 16px;
+}
+
+
+@media screen and (min-width: 500px) {
+  .modalItem {
+  left: calc(50% - 200px);
+  width: 400px;
+  }
 }

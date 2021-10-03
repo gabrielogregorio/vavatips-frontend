@@ -128,7 +128,7 @@ export const EditPostScreen = () => {
 
   function renderSteps() {
     return imgAdded.map((instruction, key) => (
-      <div key={instruction._id} style={{width: '100%', maxWidth: '400px'}}>
+      <div key={instruction._id}>
         <div className="instructionTop" >
           <p onClick={() => showModalWithItem(instruction._id)}>{key + 1} - {instruction.description}</p>
           <button onClick={() => deleteStep(instruction._id)}>
@@ -137,7 +137,7 @@ export const EditPostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img src={`${instruction.image}`} alt={instruction.description} style={{width: '100%'}} /> <br />
+          <img src={`${instruction.image}`} alt={instruction.description}/> <br />
           <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </button>
@@ -205,7 +205,7 @@ export const EditPostScreen = () => {
 
   return (
     <div className="container">
-      <div style={{ display: 'flex', 'flexDirection': 'column'}}>
+      <div>
         {redirect ? <Redirect to="/ViewPosts" /> : null }
         <NavbarComponent selected={navbarEnum.EditScreen} />
 
@@ -224,8 +224,8 @@ export const EditPostScreen = () => {
 
         <h1>Editar um post</h1>
 
-          <InputValue text="Titulo" value={formTitle} setValue={setFormTitle}/>
-          <InputValue text="Descrição" value={formDescription} setValue={setFormDescription}/>
+          <InputValue type="text" text="Titulo" value={formTitle} setValue={setFormTitle}/>
+          <InputValue type="text" text="Descrição" value={formDescription} setValue={setFormDescription}/>
 
           <hr />
 
@@ -301,8 +301,9 @@ export const EditPostScreen = () => {
           <hr />
           <p className="info">Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.<br/><br/> Clique nos titulos para EDITAR os itens</p>
           <hr />
-
-          {renderSteps()}
+          <div className="stepsPost">
+            {renderSteps()}
+          </div>
 
           <div className="groupInput">
             <div className="groupInputSelet">

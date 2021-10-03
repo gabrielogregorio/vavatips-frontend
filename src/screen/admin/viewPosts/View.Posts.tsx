@@ -4,7 +4,6 @@ import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import { useState } from 'react'
 import styles from './view.module.css'
-import '../style.css'
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
@@ -48,7 +47,7 @@ export const ViewPostsScreen = () => {
 
        <NavbarComponent selected={navbarEnum.ViewPosts} />
 
-       <div className={styles.posts} style={{display: 'flex', flexDirection: 'column'}}>
+       <div className={styles.posts}>
          <h1>Posts do Blog</h1>
          {renderPosts()}
        </div>

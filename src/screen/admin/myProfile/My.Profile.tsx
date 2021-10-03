@@ -45,16 +45,16 @@ export const MyProfileScreen = () => {
 
   return (
     <div className="container">
-     <div style={{ display: 'flex', 'flexDirection': 'column'}}>
+     <div>
        <NavbarComponent selected={navbarEnum.Profile} />
 
         <div className="form" onSubmit={handleSubmit}>
           <h1>Seu perfil</h1>
           <p>{errorMsg}</p>
 
-          <InputValue text="Trocar nome de usuário" value={username} setValue={setUsername}/>
-          <InputValue text="Digite uma nova senha" value={password} setValue={setPassword}/>
-          <InputValue text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
+          <InputValue type="text" text="Trocar nome de usuário" value={username} setValue={setUsername}/>
+          <InputValue type="password" text="Digite uma nova senha" value={password} setValue={setPassword}/>
+          <InputValue type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
 
           <div className="groupInput">
             <div className="groupInputSelet">

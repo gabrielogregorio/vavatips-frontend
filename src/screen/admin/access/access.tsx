@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useState } from 'react'
 import api from "../../../services/api";
 import { login } from "../../../services/auth";
@@ -69,7 +69,7 @@ export const AcessScreen = () => {
 
   return (
     <div className="container">
-      <div style={{ display: 'flex', 'flexDirection': 'column'}}>
+      <div>
         <NavbarComponentPublic selected={navbarEnumPublic.Admin} />
 
         <div className="form">
@@ -79,14 +79,14 @@ export const AcessScreen = () => {
           <p className="errorMsg">{errorMsg}</p>
 
           { typeAccess === 'register' ? (
-            <InputValue text="Código de cadastro" value={code} setValue={setCode}/>
+            <InputValue type="password" text="Código de cadastro" value={code} setValue={setCode}/>
           ) : null}
 
-          <InputValue text="Usuário" value={username} setValue={setUsername}/>
-          <InputValue text="Senha" value={password} setValue={setPassword}/>
+          <InputValue type="text" text="Usuário" value={username} setValue={setUsername}/>
+          <InputValue type="password" text="Senha" value={password} setValue={setPassword}/>
 
           { typeAccess === 'register' ? (
-            <InputValue text="Confirme uma senha" value={password2} setValue={setPassword2}/>
+            <InputValue type="password" text="Confirme uma senha" value={password2} setValue={setPassword2}/>
           ) : null}
 
           <div className="groupInput">

@@ -6,7 +6,6 @@ import { PostComponent } from '../../components/posts/posts'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
 import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
-import './post.css'
 import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
 
 interface filterUrlInterface {
@@ -240,7 +239,7 @@ export const PostScreen = () => {
       post.toggleSave = toggleSave
       post.toggleTested = toggleTested
       return (
-        <div key={post._id} style={{width: '100%'}}>
+        <div key={post._id}>
          <PostComponent {...post} showModalReport={showModalReportFunction} showModalSuggestion={showModalSuggestionFunction}/>
         </div>
       )
@@ -273,8 +272,8 @@ export const PostScreen = () => {
         }
         <h1>As melhores dicas de Valorant</h1>
 
-        <div style={{'display': 'flex', 'flexDirection': 'column'}} className="containerPost">
-          <div style={{display: 'flex', margin: '10px 0'}}>
+        <div className="containerPost">
+          <div>
           { showModalReport ? (
             <ModalOfReport idPost={modalPostId} title="fazer Reporte" postTitle={modalPostTitle} closeModal={closeModalReport} saveModal={saveModalReport}/>
           ) : null}
@@ -298,11 +297,11 @@ export const PostScreen = () => {
             </div>
           </div>
 
-          <div style={{display: 'flex', margin: '10px 0', flexWrap: 'wrap', padding: '0 2%', justifyContent: 'center', width: '100%'}}>
+          <div className="tags">
             {renderEditableFilters()}
           </div><br />
 
-          <div style={{width: '100%'}}>
+          <div className="postItems">
             {renderPost()}
           </div>
         </div>

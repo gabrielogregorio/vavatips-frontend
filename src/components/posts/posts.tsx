@@ -55,7 +55,7 @@ export const PostComponent = (props: PropsPostInterface) => {
         }
 
         <p>{props.user.username ?? 'Ademir Maluco'}</p>
-        <button onClick={() => props.showModalReport(props._id, props.title)}>Reportar Problema</button>
+        <button onClick={() => props.showModalReport(props._id, props.title)}>Reportar</button>
       </div>
 
       <h3>{props.title}</h3>
@@ -89,8 +89,8 @@ export const PostComponent = (props: PropsPostInterface) => {
       <div className={styles.actions}>
         {
           props.postActions.tested.filter(post => post._id === props._id).length === 0
-          ? <button onClick={() => props.toggleTested(props._id)} > A testar</button>
-          : <button className={styles.actionsActive} onClick={() => props.toggleTested(props._id)} > Testado</button>
+          ? <button onClick={() => props.toggleTested(props._id)} >A testar</button>
+          : <button className={styles.actionsActive} onClick={() => props.toggleTested(props._id)}>A testar</button>
         }
 
         {
@@ -99,7 +99,7 @@ export const PostComponent = (props: PropsPostInterface) => {
           : <button className={styles.actionsActive} onClick={() => props.toggleSave(props._id)}> Salvo</button>
         }
 
-        <button onClick={() => props.showModalSuggestion(props._id, props.title)}>Fazer Sugestão</button>
+        <button onClick={() => props.showModalSuggestion(props._id, props.title)}>Sugerir</button>
       </div>
     </div>
   )
