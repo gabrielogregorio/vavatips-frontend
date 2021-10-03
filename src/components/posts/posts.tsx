@@ -50,7 +50,7 @@ export const PostComponent = (props: PropsPostInterface) => {
             <img src={`${props.user.image}`} alt="Foto de perfil do Autor da postagem" />
           )
           :(
-            <img src={'/images/users/profile.png'} alt="Foto de perfil do Autor da postagem" />
+            <img src={'/images/users/profile.webp'} alt="Foto de perfil do Autor da postagem" />
            )
         }
 

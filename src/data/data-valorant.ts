@@ -2,30 +2,30 @@ export const agents = (): agentInterface[] => {
   return [
     {
       id: 1,
-      name: 'Phoenix',
-      img: '/images/agents/Phoenix.png',
+      name: 'Cypher',
+      img: '/images/agents/Cypher.webp',
       habilits: [
-        { keyboard: 'Q', name: 'BolaCurva'},
-        { keyboard: 'E', name: 'MãosQuentes'},
-        { keyboard: 'C', name: 'Labareda'},
-        { keyboard: 'X', name: 'Renascimento'},
+        { keyboard: 'Q', name: 'JaulaCibernética'},
+        { keyboard: 'E', name: 'CâmeraDeVigilância'},
+        { keyboard: 'C', name: 'FioArmadilha'},
+        { keyboard: 'X', name: 'AssaltoNeural'},
       ]
     },
     {
       id: 2,
-      name: 'Sage',
-      img: '/images/agents/Sage.png',
+      name: 'Killjoy',
+      img: '/images/agents/Killjoy.webp',
       habilits: [
-        { keyboard: 'Q', name: 'OrdeDeLentidão'},
-        { keyboard: 'E', name: 'OrbeCurativo'},
-        { keyboard: 'C', name: 'OrbeDeBarreira'},
-        { keyboard: 'X', name: 'Ressureição'},
+        { keyboard: 'Q', name: 'RobôDeAlarme'},
+        { keyboard: 'E', name: 'Torreta'},
+        { keyboard: 'C', name: 'Nanoenxame'},
+        { keyboard: 'X', name: 'Confinamento'},
       ]
     },
     {
       id: 3,
       name: 'Sova',
-      img: '/images/agents/Sova.png',
+      img: '/images/agents/Sova.webp',
       habilits: [
         { keyboard: 'Q', name: 'FlechaDeChoque'},
         { keyboard: 'E', name: 'FlechaRastreadora'},
@@ -36,7 +36,7 @@ export const agents = (): agentInterface[] => {
     {
       id: 4,
       name: 'Viper',
-      img: '/images/agents/Viper.png',
+      img: '/images/agents/Viper.webp',
       habilits: [
         { keyboard: 'Q', name: 'NuvemVenenosa'},
         { keyboard: 'E', name: 'CortinaTóxica'},
@@ -46,41 +46,30 @@ export const agents = (): agentInterface[] => {
     },
     {
       id: 5,
-      name: 'Cypher',
-      img: '/images/agents/Cypher.png',
+      name: 'Sage',
+      img: '/images/agents/Sage.webp',
       habilits: [
-        { keyboard: 'Q', name: 'JaulaCibernética'},
-        { keyboard: 'E', name: 'CâmeraDeVigilância'},
-        { keyboard: 'C', name: 'FioArmadilha'},
-        { keyboard: 'X', name: 'AssaltoNeural'},
+        { keyboard: 'Q', name: 'OrdeDeLentidão'},
+        { keyboard: 'E', name: 'OrbeCurativo'},
+        { keyboard: 'C', name: 'OrbeDeBarreira'},
+        { keyboard: 'X', name: 'Ressureição'},
       ]
     },
     {
       id: 6,
-      name: 'Reyna',
-      img: '/images/agents/Reyna.png',
+      name: 'Astra',
+      img: '/images/agents/Astra.webp',
       habilits: [
-        { keyboard: 'Q', name: 'Devorar'},
-        { keyboard: 'E', name: 'Dispensar'},
-        { keyboard: 'C', name: 'OlharVoraz'},
-        { keyboard: 'X', name: 'Imperatriz'},
+        { keyboard: 'Q', name: 'PulsoNova'},
+        { keyboard: 'E', name: 'Nebulosa'},
+        { keyboard: 'C', name: 'PoçoGravitacional'},
+        { keyboard: 'X', name: 'DivisaCósmica'},
       ]
     },
     {
       id: 7,
-      name: 'Killjoy',
-      img: '/images/agents/Killjoy.png',
-      habilits: [
-        { keyboard: 'Q', name: 'RobôDeAlarme'},
-        { keyboard: 'E', name: 'Torreta'},
-        { keyboard: 'C', name: 'Nanoenxame'},
-        { keyboard: 'X', name: 'Confinamento'},
-      ]
-    },
-    {
-      id: 8,
       name: 'Skye',
-      img: '/images/agents/Skye.png',
+      img: '/images/agents/Skye.webp',
       habilits: [
         { keyboard: 'Q', name: 'PredadorExplosivo'},
         { keyboard: 'E', name: 'LuzDesbravadora'},
@@ -89,9 +78,20 @@ export const agents = (): agentInterface[] => {
       ]
     },
     {
+      id: 8,
+      name: 'Reyna',
+      img: '/images/agents/Reyna.webp',
+      habilits: [
+        { keyboard: 'Q', name: 'Devorar'},
+        { keyboard: 'E', name: 'Dispensar'},
+        { keyboard: 'C', name: 'OlharVoraz'},
+        { keyboard: 'X', name: 'Imperatriz'},
+      ]
+    },
+    {
       id: 9,
       name: 'Yoru',
-      img: '/images/agents/Yoru.png',
+      img: '/images/agents/Yoru.webp',
       habilits: [
         { keyboard: 'Q', name: 'PontoCego'},
         { keyboard: 'E', name: 'PassagemDimensional'},
@@ -101,30 +101,8 @@ export const agents = (): agentInterface[] => {
     },
     {
       id: 10,
-      name: 'Astra',
-      img: '/images/agents/Astra.png',
-      habilits: [
-        { keyboard: 'Q', name: 'PulsoNova'},
-        { keyboard: 'E', name: 'Nebulosa'},
-        { keyboard: 'C', name: 'PoçoGravitacional'},
-        { keyboard: 'X', name: 'DivisaCósmica'},
-      ]
-    },
-    {
-      id: 11,
-      name: 'Kay/0',
-      img: '/images/agents/Kay0.png',
-      habilits: [
-        { keyboard: 'Q', name: 'Clarão'},
-        { keyboard: 'E', name: 'PontoZeroSpot'},
-        { keyboard: 'C', name: 'Fragmento'},
-        { keyboard: 'X', name: 'Anular'},
-      ]
-    },
-    {
-      id: 12,
       name: 'Jett',
-      img: '/images/agents/Jett.png',
+      img: '/images/agents/Jett.webp',
       habilits: [
         { keyboard: 'Q', name: 'CorrenteAscendente'},
         { keyboard: 'E', name: 'BrisaDeImpulso'},
@@ -133,9 +111,9 @@ export const agents = (): agentInterface[] => {
       ]
     },
     {
-      id: 13,
+      id: 11,
       name: 'Raze',
-      img: '/images/agents/Raze.png',
+      img: '/images/agents/Raze.webp',
       habilits: [
         { keyboard: 'Q', name: 'CargaDeExplosivos'},
         { keyboard: 'E', name: 'CartuchosDeTintaGranada'},
@@ -144,9 +122,31 @@ export const agents = (): agentInterface[] => {
       ]
     },
     {
+      id: 12,
+      name: 'Phoenix',
+      img: '/images/agents/Phoenix.webp',
+      habilits: [
+        { keyboard: 'Q', name: 'BolaCurva'},
+        { keyboard: 'E', name: 'MãosQuentes'},
+        { keyboard: 'C', name: 'Labareda'},
+        { keyboard: 'X', name: 'Renascimento'},
+      ]
+    },
+    {
+      id: 13,
+      name: 'Kay/0',
+      img: '/images/agents/Kay0.webp',
+      habilits: [
+        { keyboard: 'Q', name: 'Clarão'},
+        { keyboard: 'E', name: 'PontoZeroSpot'},
+        { keyboard: 'C', name: 'Fragmento'},
+        { keyboard: 'X', name: 'Anular'},
+      ]
+    },
+    {
       id: 14,
       name: 'Breach',
-      img: '/images/agents/Breach.png',
+      img: '/images/agents/Breach.webp',
       habilits: [
         { keyboard: 'Q', name: 'EstopimBang'},
         { keyboard: 'E', name: 'FalhaTectônica'},
@@ -157,7 +157,7 @@ export const agents = (): agentInterface[] => {
     {
       id: 15,
       name: 'Omen',
-      img: '/images/agents/Omen.png',
+      img: '/images/agents/Omen.webp',
       habilits: [
         { keyboard: 'Q', name: 'Paranoia'},
         { keyboard: 'E', name: 'MantoSombrio'},
@@ -168,7 +168,7 @@ export const agents = (): agentInterface[] => {
     {
       id: 16,
       name: 'Brimstone',
-      img: '/images/agents/Brimstone.png',
+      img: '/images/agents/Brimstone.webp',
       habilits: [
         { keyboard: 'Q', name: 'Incendiário'},
         { keyboard: 'E', name: 'FumaçaCeleste'},
@@ -184,43 +184,43 @@ export const maps = (): mapInterface[] => {
     {
       id: 1,
       name: 'Ascent',
-      img: '/images/maps/Ascent.png',
+      img: '/images/maps/Ascent.webp',
       mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 2,
       name: 'Bind',
-      img: '/images/maps/Bind.png',
+      img: '/images/maps/Bind.webp',
       mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 3,
-      name: 'Breeze',
-      img: '/images/maps/Breeze.jpg',
-      mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
+      name: 'Haven',
+      img: '/images/maps/Haven.webp',
+      mapPosition: [ 'A', 'B', 'C', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 4,
-      name: 'Fracture',
-      img: '/images/maps/Fracture.jpg',
+      name: 'Split',
+      img: '/images/maps/Split.webp',
       mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 5,
-      name: 'Haven',
-      img: '/images/maps/Haven.png',
-      mapPosition: [ 'A', 'B', 'C', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
+      name: 'Breeze',
+      img: '/images/maps/Breeze.webp',
+      mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 6,
-      name: 'Icebox',
-      img: '/images/maps/Icebox.png',
+      name: 'Fracture',
+      img: '/images/maps/Fracture.webp',
       mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
     {
       id: 7,
-      name: 'Split',
-      img: '/images/maps/Split.jpg',
+      name: 'Icebox',
+      img: '/images/maps/Icebox.webp',
       mapPosition: [ 'A', 'B', 'BaseAtacante', 'BaseDefensora', 'Meio', 'Outra' ]
     },
   ]
