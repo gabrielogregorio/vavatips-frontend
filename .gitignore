@@ -3,17 +3,12 @@
 /node_modules
 /.pnp
 .pnp.js
+build/
 
 # testing
 /coverage
 
 .env
-# file added
-pixels
-maps
-background
-assets
-agents
 
 # misc
 .DS_Store
