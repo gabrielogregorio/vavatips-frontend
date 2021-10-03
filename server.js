@@ -1,5 +1,5 @@
 const express = require('express')
-const  { resolve } = require('path')
+const  { resolve, path } = require('path')
 const app = express()
 
 
@@ -9,6 +9,10 @@ app.use('/', express.static(
     './build'
   )
 ))
+
+app.route('/*').get(function(req, res) {
+  res.sendFile(resolve(__dirname + '/build/index.html'))
+})
 
 app.listen(process.env.PORT || 3000, (err) => {
   if(err) {

@@ -26,7 +26,7 @@ export const ConfigScreen = () => {
 
   return (
     <div className="container">
-      <div style={{ display: 'flex', 'flexDirection': 'column'}}>
+      <div>
         <NavbarComponent selected={navbarEnum.Config} />
 
         <div className="form">
@@ -35,7 +35,7 @@ export const ConfigScreen = () => {
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
 
-          <InputValue text="Chave Secreta" value={keyAccess} setValue={setKeyAccess}/>
+          <InputValue type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess}/>
 
           <div className="groupInput">
             <div className="groupInputSelet">

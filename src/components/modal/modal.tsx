@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api';
-import styles from './modal.module.css'
-
 
 interface ModalProps {
   title: string,
@@ -44,15 +42,16 @@ export const ModalComponent = (props: ModalProps) => {
   }
 
   return (
-    <div className={styles.modal}>
-      <div className={styles.modalItem}>
+    <div className="modal">
+      <div className="modalItem">
 
-        <div className={styles.modalTitle}>
+        <div className="modalTitle">
           <h1>{props.title}</h1>
           <button onClick={() => props.closeModal()}>
             <i className="fas fa-times"></i>
           </button>
         </div>
+
         <hr />
 
         <div className="form">
@@ -76,7 +75,7 @@ export const ModalComponent = (props: ModalProps) => {
             { LinkImg ? (<img src={`${LinkImg}`} alt="" /> ) : null }
           </div>
 
-          <div className={styles.modalActions}>
+          <div className="modalActions">
             <button onClick={() => props.closeModal()}>Cancelar</button>
             <button onClick={() => props.saveModal(_id, description, LinkImg)}>Adicionar</button>
           </div>

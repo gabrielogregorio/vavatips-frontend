@@ -20,25 +20,21 @@ export const NavbarComponent = (props:NavbarProps) => {
       <ul>
         <Link
           className={props.selected === navbarEnum.Profile ? styles.navActive : ""}
-          to="/Profile">Perfil</Link>
+          to="/Profile">perfil</Link>
 
         <Link
           className={props.selected === navbarEnum.PostCreate ? styles.navActive : ""}
-          to="/PostCreate">Criar posts</Link>
+          to="/PostCreate">criar posts</Link>
 
         <Link
           className={props.selected === navbarEnum.ViewPosts ? styles.navActive : ""}
-          to="/ViewPosts">Visualizar posts</Link>
+          to="/ViewPosts">posts</Link>
 
         { props.selected === navbarEnum.EditScreen ? (
           <Link
             className={props.selected === navbarEnum.EditScreen ? styles.navActive : ""}
-            to="/#">Editar posts</Link>
+            to="/#">editar</Link>
         ) : null}
-
-        <Link
-          className={props.selected === navbarEnum.Config ? styles.navActive : ""}
-          to="/Config">Configurações</Link>
 
       </ul>
     </nav>
