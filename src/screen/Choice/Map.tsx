@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { LoaderComponent } from "../../components/loader/loader";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
 
 export const MapScreen = () => {
   const [ mapsApi, setMapsApi ] = useState<string[]>([])
+  const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
 
   useEffect(() => {
     api.get(`/maps`).then(res => {
       setMapsApi(res.data.maps)
+      setActiveLoader(false)
     })
   }, [])
 
@@ -35,9 +38,10 @@ export const MapScreen = () => {
       <div>
         <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
         <h1>Escolha um mapa</h1>
-        <div className="gridFull">
-          {renderMap()}
-        </div>
+          <LoaderComponent active={activeLoader} />
+          <div className="gridFull">
+            {renderMap()}
+          </div>
         </div>
     </div>
   )

@@ -1,0 +1,29 @@
+
+.loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.loader > div {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--primary);
+  border-top: 0;
+  border-left: 0;
+  border-radius: 50%;
+  animation: loader 1.5s linear infinite;
+
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+
+}

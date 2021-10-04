@@ -5,6 +5,7 @@ import api from "../../../services/api";
 import { login } from "../../../services/auth";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public/navbar";
 import { InputValue } from "../../../components/inputValue";
+import { LoaderComponent } from "../../../components/loader/loader";
 
 type accessType = "login" | "register"
 export const AcessScreen = () => {
@@ -15,6 +16,7 @@ export const AcessScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
   const [ redirect, setRedirect ] = useState<boolean>(false)
   const [ typeAccess, setTypeAccess] = useState<accessType>('login')
+  const [ activeLoader, setActiveLoader ] = useState<boolean>(false)
 
   function toggleAccess() {
     if(typeAccess === 'login') {
@@ -25,12 +27,15 @@ export const AcessScreen = () => {
   }
 
   async function handleSubmit() {
+    setActiveLoader(true)
 
     if(!username || !password || ( !password2 && typeAccess === 'register')) {
+      setActiveLoader(false)
       return setErrorMsg('Você precisa preencher todos os campos')
     }
 
     if(password !== password2 && typeAccess === 'register') {
+      setActiveLoader(false)
       return setErrorMsg("As senhas não combinam!")
     }
 
@@ -46,25 +51,32 @@ export const AcessScreen = () => {
       // Realiza o login salvando os dados no localstorage
       login(token.data.token, token.data.id)
 
+      setActiveLoader(false)
       setRedirect(true)
     } catch(error: any) {
       if(error.response?.status === 409) {
+        setActiveLoader(false)
         setErrorMsg("Esse e-mail já está cadastrado")
 
       } else if (error.response?.status === 404) {
+        setActiveLoader(false)
         setErrorMsg('Usuário não cadastrado!')
 
       } else if (error.response?.status === 403) {
         if (error.response?.data?.msg === 'invalid code') {
+          setActiveLoader(false)
           setErrorMsg('Código de cadastro inválido')
         } else {
+          setActiveLoader(false)
           setErrorMsg('Senha inválida!')
         }
       } else {
         console.log(error.response)
+        setActiveLoader(false)
         setErrorMsg(`Erro Desconhecido ${error}`)
       }
     }
+    setActiveLoader(false)
   }
 
   return (
@@ -76,6 +88,7 @@ export const AcessScreen = () => {
           {redirect ? <Redirect to="/Profile" /> : null }
 
           <h1>{ typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </h1>
+          <LoaderComponent active={activeLoader} />
           <p className="errorMsg">{errorMsg}</p>
 
           { typeAccess === 'register' ? (
