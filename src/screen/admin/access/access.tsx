@@ -6,6 +6,7 @@ import { login } from "../../../services/auth";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public/navbar";
 import { InputValue } from "../../../components/inputValue";
 import { LoaderComponent } from "../../../components/loader/loader";
+import { FooterComponent } from "../../../components/Footer/footer";
 
 type accessType = "login" | "register"
 export const AcessScreen = () => {
@@ -115,6 +116,7 @@ export const AcessScreen = () => {
           </div>
         </div>
       </div>
+      <FooterComponent />
    </div>
   )
 }

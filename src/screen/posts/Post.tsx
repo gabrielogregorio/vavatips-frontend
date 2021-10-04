@@ -8,6 +8,7 @@ import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
 import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
 import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
 import { LoaderComponent } from '../../components/loader/loader'
+import { FooterComponent } from '../../components/Footer/footer'
 
 interface filterUrlInterface {
   agent: string,
@@ -311,6 +312,7 @@ export const PostScreen = () => {
           </div>
         </div>
       </div>
+      <FooterComponent />
     </div>
   )
 }

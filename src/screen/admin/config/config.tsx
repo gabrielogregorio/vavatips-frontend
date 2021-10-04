@@ -3,6 +3,7 @@ import { useState } from 'react'
 import api from "../../../services/api";
 import { NavbarComponent, navbarEnum } from "../../../components/navbar/navbar";
 import { InputValue } from "../../../components/inputValue";
+import { FooterComponent } from "../../../components/Footer/footer";
 
 export const ConfigScreen = () => {
   const [ keyAccess, setKeyAccess ] = useState<string>('')
@@ -45,6 +46,7 @@ export const ConfigScreen = () => {
           <p>{codeMsg}</p>
         </div>
       </div>
+      <FooterComponent />
    </div>
   )
 }

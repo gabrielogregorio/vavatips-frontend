@@ -5,6 +5,7 @@ import api from '../../../services/api'
 import { useState } from 'react'
 import styles from './view.module.css'
 import { formatImage } from '../../../services/formatEnvieroment'
+import { FooterComponent } from '../../../components/Footer/footer'
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
@@ -54,6 +55,7 @@ export const ViewPostsScreen = () => {
        </div>
 
       </div>
+      <FooterComponent />
     </div>
   )
 }

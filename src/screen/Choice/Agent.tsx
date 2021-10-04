@@ -6,6 +6,7 @@ import { agents } from '../../data/data-valorant'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import api from "../../services/api";
 import { LoaderComponent } from "../../components/loader/loader";
+import { FooterComponent } from "../../components/Footer/footer";
 
 export const AgentScreen = () => {
   let item = useLocation()
@@ -48,6 +49,7 @@ export const AgentScreen = () => {
           {renderAgent()}
         </div>
       </div>
+      <FooterComponent />
     </div>
   )
 }

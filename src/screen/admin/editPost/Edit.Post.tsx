@@ -10,6 +10,7 @@ import { agents, maps } from '../../../data/data-valorant'
 import { InputValue } from '../../../components/inputValue';
 import { ModalComponent } from '../../../components/modal/modal';
 import { formatImage } from '../../../services/formatEnvieroment';
+import { FooterComponent } from '../../../components/Footer/footer';
 
 
 type actionType = "top" | "bottom"
@@ -319,6 +320,7 @@ export const EditPostScreen = () => {
 
         </div>
       </div>
+      <FooterComponent />
     </div>
   )
 }

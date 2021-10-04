@@ -4,6 +4,7 @@ import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import { InputValue } from '../../../components/inputValue'
 import { logout } from '../../../services/auth'
 import { LoaderComponent } from '../../../components/loader/loader'
+import { FooterComponent } from '../../../components/Footer/footer'
 
 export const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>("")
@@ -79,6 +80,7 @@ export const MyProfileScreen = () => {
 
         </div>
       </div>
+      <FooterComponent />
     </div>
   )
 }
