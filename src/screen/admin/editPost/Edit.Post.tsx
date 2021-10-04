@@ -9,6 +9,7 @@ import * as uuid from 'uuid'
 import { agents, maps } from '../../../data/data-valorant'
 import { InputValue } from '../../../components/inputValue';
 import { ModalComponent } from '../../../components/modal/modal';
+import { formatImage } from '../../../services/formatEnvieroment';
 
 
 type actionType = "top" | "bottom"
@@ -137,7 +138,7 @@ export const EditPostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img src={`${instruction.image}`} alt={instruction.description}/> <br />
+          <img src={formatImage(instruction.image)} alt={instruction.description}/> <br />
           <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </button>

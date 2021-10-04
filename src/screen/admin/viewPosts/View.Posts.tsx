@@ -4,6 +4,7 @@ import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import { useState } from 'react'
 import styles from './view.module.css'
+import { formatImage } from '../../../services/formatEnvieroment'
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
@@ -32,7 +33,7 @@ export const ViewPostsScreen = () => {
         <h2>{post.title}</h2>
         <p>{post.description}</p>
         <div className={styles.firstImgPost}>
-          <img src={`${post.imgs[0]?.image}` } alt={post.imgs[0]?.title} />
+          <img src={formatImage(post.imgs[0]?.image)} alt={post.imgs[0]?.title} />
         </div>
 
         <button onClick={() => deletePost(post._id)} >Excluir</button>
