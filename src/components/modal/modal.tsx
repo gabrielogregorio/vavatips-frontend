@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api';
+import { formatImage } from '../../services/formatEnvieroment';
 
 interface ModalProps {
   title: string,
@@ -72,7 +73,7 @@ export const ModalComponent = (props: ModalProps) => {
           </div>
 
           <div className="instructionImage">
-            { LinkImg ? (<img src={`${LinkImg}`} alt="" /> ) : null }
+            { LinkImg ? (<img src={formatImage(LinkImg)} alt="" /> ) : null }
           </div>
 
           <div className="modalActions">

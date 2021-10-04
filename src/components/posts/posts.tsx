@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { formatImage } from "../../services/formatEnvieroment";
 import styles from './post.module.css'
 type typeType = 'next' | 'prev'
 
@@ -47,7 +48,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
         { props.user.image ?
           (
-            <img src={`${props.user.image}`} alt="Foto de perfil do Autor da postagem" />
+            <img src={formatImage(props.user.image)} alt="Foto de perfil do Autor da postagem" />
           )
           :(
             <img src={'/images/users/profile.webp'} alt="Foto de perfil do Autor da postagem" />
@@ -62,7 +63,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
-          <img src={`${props.imgs?.[idImage]?.image}`} alt={props.imgs?.[idImage]?.description} />
+          <img src={formatImage(props.imgs?.[idImage]?.image)} alt={props.imgs?.[idImage]?.description} />
           { idImage > 0 ? (
             <div className={styles.previus} onClick={() => nextImage('prev', props.imgs.length)}>
               <i className="fas fa-angle-left"></i>
