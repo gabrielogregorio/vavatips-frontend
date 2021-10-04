@@ -5,17 +5,19 @@ import query from "query-string";
 import { agents } from '../../data/data-valorant'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import api from "../../services/api";
-
+import { LoaderComponent } from "../../components/loader/loader";
 
 export const AgentScreen = () => {
   let item = useLocation()
   let mapSelected = query.parse(item?.search)
   const [ agentsApi, setAgentsApi ] = useState<string[]>([])
+  const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
 
 
   useEffect(() => {
     api.get(`/agents/${mapSelected.map}`).then(res => {
       setAgentsApi(res.data.agents)
+      setActiveLoader(false)
     })
   }, [])
 
@@ -41,6 +43,7 @@ export const AgentScreen = () => {
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
 
         <h1>Escolha um Agente</h1>
+        <LoaderComponent active={activeLoader} />
         <div className="gridFull">
           {renderAgent()}
         </div>

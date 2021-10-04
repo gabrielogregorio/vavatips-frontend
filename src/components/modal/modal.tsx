@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api';
 import { formatImage } from '../../services/formatEnvieroment';
+import { LoaderComponent } from '../loader/loader';
 
 interface ModalProps {
   title: string,
@@ -12,9 +13,10 @@ interface ModalProps {
 }
 
 export const ModalComponent = (props: ModalProps) => {
-  const [_id, set_id] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
-  const [LinkImg, setLinkImg] = useState<string>('')
+  const [ _id, set_id ] = useState<string>('')
+  const [ description, setDescription ] = useState<string>('')
+  const [ LinkImg, setLinkImg ] = useState<string>('')
+  const [ activeLoader, setActiveLoader ] = useState<boolean>(false)
 
   useEffect(() => {
     if(props._id) {
@@ -32,6 +34,8 @@ export const ModalComponent = (props: ModalProps) => {
   }, [props])
 
   function loadImage(event:any) {
+    setActiveLoader(true)
+    console.log('inicio')
     let formData = new FormData();
     formData.append("image", event.target.files[0]);
 
@@ -39,8 +43,11 @@ export const ModalComponent = (props: ModalProps) => {
     api.post(`/postLoadFile`, formData).then((res) => {
       let urlImg = `${res.data.filename}`
       setLinkImg(urlImg)
+      console.log('fim')
+      setActiveLoader(false)
     })
   }
+
 
   return (
     <div className="modal">
@@ -71,8 +78,9 @@ export const ModalComponent = (props: ModalProps) => {
               </label>
             </div>
           </div>
-
+          <LoaderComponent active={activeLoader} />
           <div className="instructionImage">
+
             { LinkImg ? (<img src={formatImage(LinkImg)} alt="" /> ) : null }
           </div>
 

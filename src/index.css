@@ -22,9 +22,12 @@
   font-weight: 400;
 }
 
+body {
+  overflow-y: scroll;
+}
+
 html, body {
   min-height: 100vh;
-  overflow-y: scroll;
   background: var(--background-primary);
 }
 
@@ -468,7 +471,6 @@ hr {
   .modalItem {
     max-width: 400px;
   }
-
 }
 
 @media screen and (min-width: 1000px) {

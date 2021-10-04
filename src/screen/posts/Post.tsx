@@ -7,6 +7,7 @@ import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar
 import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
 import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSugestion'
 import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
+import { LoaderComponent } from '../../components/loader/loader'
 
 interface filterUrlInterface {
   agent: string,
@@ -31,6 +32,7 @@ export const PostScreen = () => {
   const [ modalTextMessage, setModalTextMessage ] = useState<string>('')
   const [ modalTypeMessage, setModalTypeMessage ] = useState<modalType>('success')
 
+  const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
 
   // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
   useEffect(() => {
@@ -45,6 +47,7 @@ export const PostScreen = () => {
 
   // monitora o QueryUrl para atualizar os dados em cada mudança
   useEffect(() => {
+    setActiveLoader(true)
     let {agent, map} = queryUrl
     if(agent === undefined) { agent = '' }
     if(map === undefined) { map = '' }
@@ -79,6 +82,7 @@ export const PostScreen = () => {
       setAllTags(listTags)
       setPosts(postsAgent)
       setOriginalPosts(postsAgent)
+      setActiveLoader(false)
     })
   }, [queryUrl])
 
@@ -271,6 +275,7 @@ export const PostScreen = () => {
           )
         }
         <h1>As melhores dicas de Valorant</h1>
+        <LoaderComponent active={activeLoader} />
 
         <div className="containerPost">
           <div>
