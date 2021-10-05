@@ -29,9 +29,9 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
           className={props.selected === navbarEnumPublic.Inicio ? styles.navActive : ""}
           to="/">inicio</Link>
 
-        <Link
+        {/* <Link
           className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
-          to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link>
+          to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link> */}
 
         <Link
           className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}

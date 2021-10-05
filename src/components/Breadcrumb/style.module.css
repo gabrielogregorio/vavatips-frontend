@@ -1,0 +1,29 @@
+.breadcrumb {
+  width: 100%;
+  background-color: var(--background-secundary);
+}
+
+.breadcrumbItem {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.5rem;
+  height: 100%;
+}
+.breadcrumbItem div {
+  display: inline;
+}
+
+.breadcrumb .breadcrumbItem a {
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.breadcrumb .breadcrumbItem p {
+  font-size: 1rem;
+  color: var(--text-color-normal);
+  display: inline;
+}
+
+.breadcrumb .breadcrumbItem span {
+  padding: 0 0.5rem;
+}

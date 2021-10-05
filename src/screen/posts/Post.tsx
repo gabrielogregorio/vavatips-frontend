@@ -9,6 +9,7 @@ import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSuges
 import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
 import { LoaderComponent } from '../../components/loader/loader'
 import { FooterComponent } from '../../components/Footer/footer'
+import { BreadcrumbComponent } from '../../components/Breadcrumb/Breadcrumb'
 
 interface filterUrlInterface {
   agent: string,
@@ -16,9 +17,17 @@ interface filterUrlInterface {
   type: string
 }
 
+let breadcrumbs = [
+  { url: '/', text: 'inicio'},
+  { url: '/Maps', text: 'mapas'},
+  { url: '/Maps', text: 'agentes'},
+  { url: '/Posts', text: 'dicas'},
+]
+
+
 export const PostScreen = () => {
   const location = useLocation()
-  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>(loadUrlQuery())
+  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: ''})
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
   const [ originalPosts, setOriginalPosts ] = useState<PropsPostInterface[]>([])
   const [ allTags, setAllTags ] = useState<string[]>([])
@@ -38,7 +47,17 @@ export const PostScreen = () => {
 
   // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
   useEffect(() => {
-    setQueryUrl(loadUrlQuery())
+    let agent: string = `${query.parse(location?.search).agent}`
+    let map: string = `${query.parse(location?.search).map}`
+    let type: string = `${query.parse(location?.search).type}`
+
+    if(agent === 'undefined') { agent = '' }
+    if(map === 'undefined') { map = '' }
+    if(type === 'undefined') { type = '' }
+
+    let data: filterUrlInterface = {agent, map, type}
+
+    setQueryUrl(data)
   }, [location])
 
   // Carrega os testes e posts salvos do localstorage
@@ -130,7 +149,7 @@ export const PostScreen = () => {
     }
 
     setPosts(postsAgent)
-  }, [activeFilters])
+  }, [activeFilters, originalPosts])
 
 
   function showModalReportFunction(idPost: string, titlePost: string) {
@@ -195,19 +214,6 @@ export const PostScreen = () => {
 
   // Obtém os dados do hooke useLocation e gera um objeto para atualizar
   // o useState de UrlQuery
-  function loadUrlQuery() {
-    let agent: string = `${query.parse(location?.search).agent}`
-    let map: string = `${query.parse(location?.search).map}`
-    let type: string = `${query.parse(location?.search).type}`
-
-    if(agent === 'undefined') { agent = '' }
-    if(map === 'undefined') { map = '' }
-    if(type === 'undefined') { type = '' }
-
-    let data: filterUrlInterface = {agent, map, type}
-
-    return data
-  }
 
   function toggleTag(tag: string) {
     if(activeFilters.includes(tag)) {
@@ -284,6 +290,7 @@ export const PostScreen = () => {
             <NavbarComponentPublic selected={navbarEnumPublic.Posts} agent={queryUrl.agent} map={queryUrl.map}/>
           )
         }
+      <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
       <div className="subcontainer">
         <h1>As melhores dicas de Valorant</h1>

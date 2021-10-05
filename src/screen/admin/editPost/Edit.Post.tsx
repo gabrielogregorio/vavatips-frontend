@@ -12,7 +12,13 @@ import { ModalComponent } from '../../../components/modal/modal';
 import { formatImage } from '../../../services/formatEnvieroment';
 import { FooterComponent } from '../../../components/Footer/footer';
 import { Selected } from '../../../components/Selected';
+import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
 
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/Profile', text: 'editar'}
+]
 
 type actionType = "top" | "bottom"
 
@@ -223,6 +229,7 @@ export const EditPostScreen = () => {
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.EditScreen} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
         {redirect ? <Redirect to="/ViewPosts" /> : null }

@@ -6,6 +6,12 @@ import { useState } from 'react'
 import styles from './view.module.css'
 import { formatImage } from '../../../services/formatEnvieroment'
 import { FooterComponent } from '../../../components/Footer/footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/ViewPosts', text: 'posts'}
+]
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
@@ -46,6 +52,8 @@ export const ViewPostsScreen = () => {
   return (
     <div className="container">
      <NavbarComponent selected={navbarEnum.ViewPosts} />
+     <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+
      <div className="subcontainer">
 
        <div className={styles.posts}>

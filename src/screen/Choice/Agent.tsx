@@ -7,6 +7,14 @@ import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar
 import api from "../../services/api";
 import { LoaderComponent } from "../../components/loader/loader";
 import { FooterComponent } from "../../components/Footer/footer";
+import { BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
+
+let breadcrumbs = [
+  { url: '/', text: 'inicio'},
+  { url: '/Maps', text: 'mapas'},
+  { url: '/Maps', text: 'agentes'},
+]
+
 
 export const AgentScreen = () => {
   let item = useLocation()
@@ -28,7 +36,7 @@ export const AgentScreen = () => {
       }
       setActiveLoader(false)
     })
-  }, [])
+  }, [mapSelected.map])
 
 
   function renderAgent() {
@@ -49,6 +57,7 @@ export const AgentScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+      <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
       <div className="subcontainer">
         <h1>Escolha um Agente</h1>
