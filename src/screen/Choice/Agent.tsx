@@ -6,6 +6,7 @@ import { agents } from '../../data/data-valorant'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import api from "../../services/api";
 import { LoaderComponent } from "../../components/loader/loader";
+import { FooterComponent } from "../../components/Footer/footer";
 
 export const AgentScreen = () => {
   let item = useLocation()
@@ -39,15 +40,16 @@ export const AgentScreen = () => {
 
   return (
     <div className="container">
-      <div>
-      <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
 
+      <div className="subcontainer">
         <h1>Escolha um Agente</h1>
         <LoaderComponent active={activeLoader} />
         <div className="gridFull">
           {renderAgent()}
         </div>
       </div>
+      <FooterComponent color="primary" />
     </div>
   )
 }

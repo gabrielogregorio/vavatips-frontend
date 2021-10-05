@@ -6,6 +6,7 @@ import { login } from "../../../services/auth";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public/navbar";
 import { InputValue } from "../../../components/inputValue";
 import { LoaderComponent } from "../../../components/loader/loader";
+import { FooterComponent } from "../../../components/Footer/footer";
 
 type accessType = "login" | "register"
 export const AcessScreen = () => {
@@ -81,8 +82,9 @@ export const AcessScreen = () => {
 
   return (
     <div className="container">
-      <div>
-        <NavbarComponentPublic selected={navbarEnumPublic.Admin} />
+      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+
+      <div className="subcontainer">
 
         <div className="form">
           {redirect ? <Redirect to="/Profile" /> : null }
@@ -115,6 +117,7 @@ export const AcessScreen = () => {
           </div>
         </div>
       </div>
+      <FooterComponent color="primary" />
    </div>
   )
 }

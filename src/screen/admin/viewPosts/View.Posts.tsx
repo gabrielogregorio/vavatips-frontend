@@ -5,6 +5,7 @@ import api from '../../../services/api'
 import { useState } from 'react'
 import styles from './view.module.css'
 import { formatImage } from '../../../services/formatEnvieroment'
+import { FooterComponent } from '../../../components/Footer/footer'
 
 export const ViewPostsScreen = () => {
   let [ posts, setPosts ] = useState<postsProps[]>([])
@@ -44,9 +45,8 @@ export const ViewPostsScreen = () => {
 
   return (
     <div className="container">
-     <div className="post-local-container">
-
-       <NavbarComponent selected={navbarEnum.ViewPosts} />
+     <NavbarComponent selected={navbarEnum.ViewPosts} />
+     <div className="subcontainer">
 
        <div className={styles.posts}>
          <h1>Posts do Blog</h1>
@@ -54,6 +54,7 @@ export const ViewPostsScreen = () => {
        </div>
 
       </div>
+      <FooterComponent color="secundary" />
     </div>
   )
 }
