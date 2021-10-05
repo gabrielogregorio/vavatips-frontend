@@ -1,13 +1,18 @@
 /// <reference types="react-scripts" />
 
-type momentType = 'InicioPartida'| 'DuranteRush' | 'QualquerMomento' | 'DuranteOPlant' | 'DepoisDoPlant'
+type momentType = 'InicioPartida'| 'DuranteRush' | 'QualquerMomento' | 'AntesDoPlant' | 'DuranteOPlant' | 'DepoisDoPlant'
 type difficultType = 'Facil' | 'Medio' | 'Díficil'
-type abilityType = 'Spot' | 'BarreiraDeOrbe'
+//type abilityType = 'Spot' | 'BarreiraDeOrbe'
 type sideType = 'Defensores' | 'Atacantes'
-type mapType = 'Ascent' | 'Split' | 'Ascent'
+type mapType = 'Ascent' | 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind'
 type mapPositionType = 'Meio' | 'B' | 'A' | 'C'
-type agentType  = 'Sova' | 'Vyper'
+//type agentType  = 'Sova' | 'Vyper'
 type positionMapType = 'A' | 'B'| 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra'
+
+interface PositionMapInterface {
+  id: string,
+  name: positionMapType
+}
 
 interface PropsPostInterface {
   _id: string,
@@ -17,13 +22,13 @@ interface PropsPostInterface {
 
   imgs: [{ _id: string, image: string, description: string } ]
   tags: {
-    map: string, // Pode ser qualquer mapa
+    map: mapType, // Pode ser qualquer mapa
     agent: string, // Pode ser qualque agente
     ability: string, // Depende do agente
     moment: momentType,
     difficult: difficultType,
     side: sideType,
-    mapPosition: positionMapType
+    mapPosition: string
   },
   postActions: {
     save: [{_id: string}],
@@ -38,9 +43,31 @@ interface postActionsInterface {
   tested: [{_id: string} ]
 }
 
+
+
+
+
+
+
 interface habilitsInterface {
+  id: string,
   name: string,
   keyboard: string
+}
+
+interface sideInterface {
+  id: string,
+  name: sideType
+}
+
+interface mommentInterface {
+  id: string,
+  name: momentType
+}
+
+interface difficultInterface {
+  id: string,
+  name: difficultType
 }
 
 interface agentInterface {
@@ -52,9 +79,9 @@ interface agentInterface {
 
 interface mapInterface {
   id: number,
-  name: string,
+  name: mapType,
   img: string,
-  mapPosition: positionMapType[]
+  mapPosition: PositionMapInterface[]
 }
 
 interface imgsInterface {
@@ -62,15 +89,15 @@ interface imgsInterface {
   img: string
 }
 
-interface tagProps {
-  moment: momentType[],
-  difficult: difficultType[],
-  ability: abilityType[],
-  side: sideType[],
-  map: mapType[],
-  mapPosition: positionMapType[],
-  agent: agentType[],
-}
+// interface tagProps {
+//   moment: momentType[],
+//   difficult: difficultType[],
+//   ability: abilityType[],
+//   side: sideType[],
+//   map: mapType[],
+//   mapPosition: positionMapType[],
+//   agent: agentType[],
+// }
 
 interface postsProps {
   _id: string,

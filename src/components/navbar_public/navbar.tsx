@@ -7,7 +7,6 @@ export enum navbarEnumPublic {
   Posts = '/Posts',
   Save = '/Save',
   Tested = '/Tested',
-  Admin = '/',
   Mistic = '#'
 }
 
@@ -22,35 +21,25 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
   return (
     <nav className={styles.nav}>
       <ul>
-      { props.selected !== navbarEnumPublic.Admin ? (
-        <>
+        <Link
+          className={styles.logo}
+          to="/">VAVATIPS</Link>
 
-          <Link
-            className={styles.logo}
-            to="/">VAVATIPS</Link>
+        <Link
+          className={props.selected === navbarEnumPublic.Inicio ? styles.navActive : ""}
+          to="/">inicio</Link>
 
-          <Link
-            className={props.selected === navbarEnumPublic.Inicio ? styles.navActive : ""}
-            to="/">inicio</Link>
+        <Link
+          className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
+          to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link>
 
-          <Link
-            className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
-            to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link>
+        <Link
+          className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
+          to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link>
 
-          <Link
-            className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
-            to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link>
-
-          <Link
-            className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
-            to={`/Posts?type=Tested&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>testado</Link>
-        </>
-      ) : (
-          <Link
-            className={props.selected === navbarEnumPublic.Admin ? styles.navActive : ""}
-            to={`/`}>Tela do Ademir</Link>
-        )}
-
+        <Link
+          className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
+          to={`/Posts?type=Tested&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>testado</Link>
       </ul>
     </nav>
   )
