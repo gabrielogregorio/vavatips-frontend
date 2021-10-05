@@ -34,6 +34,7 @@ export const PostScreen = () => {
   const [ modalTypeMessage, setModalTypeMessage ] = useState<modalType>('success')
 
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
+  const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
   useEffect(() => {
@@ -52,6 +53,8 @@ export const PostScreen = () => {
     let {agent, map} = queryUrl
     if(agent === undefined) { agent = '' }
     if(map === undefined) { map = '' }
+
+    setErrorMsg('')
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
@@ -83,6 +86,13 @@ export const PostScreen = () => {
       setAllTags(listTags)
       setPosts(postsAgent)
       setOriginalPosts(postsAgent)
+      setActiveLoader(false)
+    }).catch(error => {
+      if(error.message === 'Network Error') {
+        setErrorMsg('Erro de conexão com o servidor')
+      } else {
+        setErrorMsg('Erro desconhecido no servidor')
+      }
       setActiveLoader(false)
     })
   }, [queryUrl])
@@ -278,6 +288,7 @@ export const PostScreen = () => {
       <div className="subcontainer">
         <h1>As melhores dicas de Valorant</h1>
         <LoaderComponent active={activeLoader} />
+        <p className="errorMsg">{errorMsg}</p>
 
         <div className="containerPost">
           <div>
