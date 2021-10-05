@@ -10,10 +10,19 @@ import api from "../../services/api";
 export const MapScreen = () => {
   const [ mapsApi, setMapsApi ] = useState<string[]>([])
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
+  const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
     api.get(`/maps`).then(res => {
       setMapsApi(res.data.maps)
+      setActiveLoader(false)
+
+    }).catch(error => {
+      if(error.message === 'Network Error') {
+        setErrorMsg('Erro de conexão com o servidor')
+      } else {
+        setErrorMsg('Erro desconhecido no servidor')
+      }
       setActiveLoader(false)
     })
   }, [])
@@ -36,17 +45,15 @@ export const MapScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+
       <div className="subcontainer">
-        <h1>Iai Parça!</h1>
+        <h1>Escolhe um mapa ai parça</h1>
+        <p style={{textAlign: 'center'}} >Aqui você escolhe um mapa, um agente, e terá as melhores dicas para fazer durante sua gameplay!</p><br />
+        <p className="errorMsg">{errorMsg}</p><br />
         <LoaderComponent active={activeLoader} />
-        <p>Esse é um projeto feito por fãns do Valorant, com intenção de aumentar a qualidade das gameplays do nosso cenário. Aqui você poderá escolher um mapa, um agente e terá diversas dicas a respeito dele.</p>
-      </div>
 
-      <div className="subcontainer">
-          <h1>Escolhe um mapa ai parça</h1>
-
-          <div className="gridFull">
-            {renderMap()}
+        <div className="gridFull">
+          {renderMap()}
           </div>
         </div>
         <FooterComponent color="primary" />

@@ -6,11 +6,12 @@ import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
-import { agents, maps } from '../../../data/data-valorant'
+import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
 import { InputValue } from '../../../components/inputValue';
 import { ModalComponent } from '../../../components/modal/modal';
 import { formatImage } from '../../../services/formatEnvieroment';
 import { FooterComponent } from '../../../components/Footer/footer';
+import { Selected } from '../../../components/Selected';
 
 
 type actionType = "top" | "bottom"
@@ -153,23 +154,36 @@ export const EditPostScreen = () => {
     ))
   }
 
+
   function renderAgent() {
-    return agents().map(agent => {
-      return <option value={agent.name} key={agent.id} >{agent.name}</option>
-    })
+    return agents()
+  }
+
+  function renderSide() {
+    return side()
   }
 
   function renderMaps() {
-    return maps().map(map => {
-      return <option value={map.name} key={map.id} >{map.name}</option>
-    })
+    return maps()
+  }
+
+  function renderDifficult() {
+    return difficult()
+  }
+
+  function renderMomment() {
+    return momment()
   }
 
   function renderHabilits() {
     let filterAbilities: agentInterface = agents().filter(agent => agent.name === formTagAgent)?.[0]
-    return filterAbilities?.habilits.map(ability => {
-      return <option value={ability.name} key={ability.name}>{ability.keyboard} - {ability.name}</option>
-    })
+    return filterAbilities?.habilits ?? []
+  }
+
+  function renderPositionsMap() {
+    let filterMapPositions: mapInterface = maps().filter(map => map.name === formTagMap)?.[0]
+    console.log(filterMapPositions?.mapPosition)
+    return filterMapPositions?.mapPosition ?? []
   }
 
 
@@ -234,72 +248,19 @@ export const EditPostScreen = () => {
           <hr />
 
           <div className="groupInput">
-            <div className="groupInputSelet">
-              <label>Agente</label>
-              <select value={formTagAgent} onChange={(e) => setFormTagAgent(e.target.value)} >
-              <option value=""></option>
-                {renderAgent()}
-              </select>
-            </div>
-
-            <div className="groupInputSelet">
-              <label>Mapa</label>
-              <select value={formTagMap} onChange={(e) => setFormTagMap(e.target.value)} >
-                <option value=""></option>
-                {renderMaps()}
-              </select>
-            </div>
-
-            <div className="groupInputSelet">
-              <label>Habilidade</label>
-              <select value={formTagAbility} onChange={(e) => setFormTagAbility(e.target.value)}>
-                <option value=""></option>
-                {renderHabilits()}
-              </select>
-            </div>
+            <Selected text="Agente" value={formTagAgent} setValue={setFormTagAgent} render={renderAgent} />
+            <Selected text="Mapa" value={formTagMap} setValue={setFormTagMap} render={renderMaps} />
+            <Selected text="Habilidade" value={formTagAbility} setValue={setFormTagAbility} render={renderHabilits} />
           </div>
 
           <div className="groupInput">
-            <div className="groupInputSelet">
-              <label>Posição</label>
-              <select value={formTagMapPosition} onChange={(e) => setFormTagMapPosition(e.target.value)}>
-                <option value="Qualquer">Qualquer</option>
-                <option value="Meio">Meio</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
-            </div>
-
-            <div className="groupInputSelet">
-              <label>Momento</label>
-              <select value={formTagMoment} onChange={(e) => setFormTagMoment(e.target.value)}>
-                <option value=""></option>
-                <option value="QualquerMomento">QualquerMomento</option>
-                <option value="DepoisDoPlant">DepoisDoPlant</option>
-              </select>
-            </div>
-
-            <div className="groupInputSelet">
-              <label>Dificuldade</label>
-              <select value={formTagDifficult} onChange={(e) => setFormTagDifficult(e.target.value)} >
-                <option value=""></option>
-                <option value="Facil">Facil</option>
-                <option value="medio">medio</option>
-                <option value="hardcore">hardcore</option>
-              </select>
-            </div>
+            <Selected text="Posição" value={formTagMapPosition} setValue={setFormTagMapPosition} render={renderPositionsMap} />
+            <Selected text="Momento" value={formTagMoment} setValue={setFormTagMoment} render={renderMomment} />
+            <Selected text="Dificuldade" value={formTagDifficult} setValue={setFormTagDifficult} render={renderDifficult} />
           </div>
 
           <div className="groupInput">
-            <div className="groupInputSelet">
-              <label>Lado</label>
-              <select value={formTagSide} onChange={(e) => setFormTagSide(e.target.value)} >
-                <option value=""></option>
-                <option value="Defensores">Defensores</option>
-                <option value="Atacantes">Atacantes</option>
-              </select>
-            </div>
+            <Selected text="Lado" value={formTagSide} setValue={setFormTagSide} render={renderSide} />
           </div>
 
           <hr />
@@ -319,7 +280,6 @@ export const EditPostScreen = () => {
               <button onClick={() => handleSubmit()} className="btn-secundary">Publicar Dica</button>
             </div>
           </div>
-
         </div>
       </div>
       <FooterComponent color="secundary" />

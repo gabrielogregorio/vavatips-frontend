@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from './styles.module.css'
 
 interface footerProps {
@@ -11,17 +11,23 @@ export const FooterComponent = (props: footerProps) => {
     <>
       <div className="elastic"></div>
 
-      <div className={styles.containerFooter} style={{
-        background: props.color === 'primary' ? 'var(--primary)' : 'var(--secundary)'
-        }}>
+      <div
+        className={styles.containerFooter}
+        style={{ background: props.color === 'primary' ? 'var(--primary)' : 'var(--secundary)' }}>
 
         <div className={styles.footer}>
 
           <div className={styles.footerLinks}>
             <h3>Contribua</h3>
-            <a target="_blank" href="https://gabrielogregorio.com/">Entre em contato</a>
-            <a target="_blank" href="https://github.com/gabrielogregorio/vavatips-backend">Backend em Node.js github</a>
-            <a target="_blank" href="https://github.com/gabrielogregorio/vavatips-frontend">Frontend com React.Js github</a>
+            <a
+              target="_blank"
+              href="https://gabrielogregorio.com/">Entre em contato</a>
+            <a
+              target="_blank"
+              href="https://github.com/gabrielogregorio/vavatips-backend">Backend em Node.js github</a>
+            <a
+              target="_blank"
+              href="https://github.com/gabrielogregorio/vavatips-frontend">Frontend com React.Js github</a>
           </div>
 
           <div className={styles.about}>

@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom'
-
 import { AgentScreen } from './screen/Choice/Agent'
 import { MapScreen } from './screen/Choice/Map'
 import { PostScreen } from './screen/posts/Post'
@@ -31,7 +30,6 @@ const PrivateRoute = ({ children, ...rest }: any) => {
 
 
 function App() {
-
   return (
     <BrowserRouter>
       <Switch>

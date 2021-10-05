@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { InputValue } from '../inputValue'
+import { Textarea } from '../Textarea'
 
 interface ModalProps {
   title: string,
@@ -62,19 +64,11 @@ export const ModalOfReport = (props: ModalProps) => {
             </div>
           </div>
 
-          <div className="groupInput">
-            <div className="groupInputSelet">
-              <label htmlFor="">Email para contato (Opcional)</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-            </div>
-          </div>
 
-          <div className="groupInput">
-            <div className="groupInputSelet">
-              <label htmlFor="">Descrição</label>
-              <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-            </div>
-          </div>
+          <InputValue type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
+
+          <Textarea text="Descrição" value={description} setValue={setDescription} />
+
 
           <p>Resolução de tela</p>
 
