@@ -182,9 +182,9 @@ export const CreatePostScreen = () => {
 
   return (
     <div className="container">
-      <div>
+      <NavbarComponent selected={navbarEnum.PostCreate} />
+      <div className="subcontainer">
         {redirect ? <Redirect to="/ViewPosts" /> : null }
-        <NavbarComponent selected={navbarEnum.PostCreate} />
 
         {visibleModal ?
           (<ModalComponent
@@ -286,13 +286,13 @@ export const CreatePostScreen = () => {
           </div>
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button onClick={() => handleSubmit()} className="btn-primary">Publicar Dica</button>
+              <button onClick={() => handleSubmit()} className="btn-secundary">Publicar Dica</button>
             </div>
           </div>
 
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="secundary" />
     </div>
   )
 }

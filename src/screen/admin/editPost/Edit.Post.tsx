@@ -205,11 +205,13 @@ export const EditPostScreen = () => {
     setVisibleModal(false)
   }
 
+
   return (
     <div className="container">
-      <div>
+      <NavbarComponent selected={navbarEnum.EditScreen} />
+
+      <div className="subcontainer">
         {redirect ? <Redirect to="/ViewPosts" /> : null }
-        <NavbarComponent selected={navbarEnum.EditScreen} />
 
         {visibleModal ?
           (<ModalComponent
@@ -314,13 +316,13 @@ export const EditPostScreen = () => {
           </div>
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button onClick={() => handleSubmit()} className="btn-primary">Publicar Dica</button>
+              <button onClick={() => handleSubmit()} className="btn-secundary">Publicar Dica</button>
             </div>
           </div>
 
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="secundary" />
     </div>
   )
 }

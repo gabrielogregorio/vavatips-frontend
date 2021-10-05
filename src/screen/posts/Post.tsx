@@ -265,7 +265,6 @@ export const PostScreen = () => {
 
   return (
     <div className="container">
-      <div>
         {
           queryUrl.type === 'Save' ? (
             <NavbarComponentPublic selected={navbarEnumPublic.Save} agent={queryUrl.agent} map={queryUrl.map}/>
@@ -275,6 +274,8 @@ export const PostScreen = () => {
             <NavbarComponentPublic selected={navbarEnumPublic.Posts} agent={queryUrl.agent} map={queryUrl.map}/>
           )
         }
+
+      <div className="subcontainer">
         <h1>As melhores dicas de Valorant</h1>
         <LoaderComponent active={activeLoader} />
 
@@ -312,7 +313,7 @@ export const PostScreen = () => {
           </div>
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="primary" />
     </div>
   )
 }

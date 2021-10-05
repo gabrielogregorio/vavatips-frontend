@@ -82,8 +82,9 @@ export const AcessScreen = () => {
 
   return (
     <div className="container">
-      <div>
-        <NavbarComponentPublic selected={navbarEnumPublic.Admin} />
+      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+
+      <div className="subcontainer">
 
         <div className="form">
           {redirect ? <Redirect to="/Profile" /> : null }
@@ -116,7 +117,7 @@ export const AcessScreen = () => {
           </div>
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="primary" />
    </div>
   )
 }

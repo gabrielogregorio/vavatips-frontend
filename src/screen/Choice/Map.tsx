@@ -35,19 +35,21 @@ export const MapScreen = () => {
 
   return (
     <div className="container">
-      <div>
-        <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
-          <h1>Iai Parça!</h1>
-          <LoaderComponent active={activeLoader} />
-          <p>Esse é um projeto feito por fãns do Valorant, com intenção de aumentar a qualidade das gameplays do nosso cenário. Aqui você poderá escolher um mapa, um agente e terá diversas dicas a respeito dele. Se você é um dev, talvez goste <a href="https://github.com/gabrielogregorio/vavatips-frontend">disso</a> ou <a href="https://github.com/gabrielogregorio/vavatips-frontend">disso.</a></p>
+      <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+      <div className="subcontainer">
+        <h1>Iai Parça!</h1>
+        <LoaderComponent active={activeLoader} />
+        <p>Esse é um projeto feito por fãns do Valorant, com intenção de aumentar a qualidade das gameplays do nosso cenário. Aqui você poderá escolher um mapa, um agente e terá diversas dicas a respeito dele.</p>
+      </div>
 
+      <div className="subcontainer">
           <h1>Escolhe um mapa ai parça</h1>
 
           <div className="gridFull">
             {renderMap()}
           </div>
         </div>
-        <FooterComponent />
+        <FooterComponent color="primary" />
     </div>
   )
 }

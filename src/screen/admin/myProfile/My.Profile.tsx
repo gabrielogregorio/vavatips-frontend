@@ -50,8 +50,9 @@ export const MyProfileScreen = () => {
 
   return (
     <div className="container">
-     <div>
        <NavbarComponent selected={navbarEnum.Profile} />
+
+     <div className="subcontainer">
 
         <div className="form" onSubmit={handleSubmit}>
           <h1>Seu perfil</h1>
@@ -66,13 +67,13 @@ export const MyProfileScreen = () => {
 
               <div className="groupInput">
                 <div className="groupInputSelet">
-                  <button onClick={() => logout()} className="btn-color-primary">logoff</button>
+                  <button onClick={() => logout()} className="btn-color-secundary">logoff</button>
                 </div>
               </div>
 
             <div className="groupInput">
               <div className="groupInputSelet">
-                <button className="btn-primary">Atualizar dados</button>
+                <button className="btn-secundary">Atualizar dados</button>
               </div>
             </div>
             </>
@@ -80,7 +81,7 @@ export const MyProfileScreen = () => {
 
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="secundary" />
     </div>
   )
 }

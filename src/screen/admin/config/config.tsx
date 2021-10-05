@@ -46,7 +46,7 @@ export const ConfigScreen = () => {
           <p>{codeMsg}</p>
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="secundary" />
    </div>
   )
 }

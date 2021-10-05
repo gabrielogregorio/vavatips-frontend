@@ -7,7 +7,8 @@ export enum navbarEnumPublic {
   Posts = '/Posts',
   Save = '/Save',
   Tested = '/Tested',
-  Admin = '/'
+  Admin = '/',
+  Mistic = '#'
 }
 
 interface NavbarProps {
@@ -23,6 +24,11 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
       <ul>
       { props.selected !== navbarEnumPublic.Admin ? (
         <>
+
+          <Link
+            className={styles.logo}
+            to="/">VAVATIPS</Link>
+
           <Link
             className={props.selected === navbarEnumPublic.Inicio ? styles.navActive : ""}
             to="/">inicio</Link>

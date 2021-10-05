@@ -7,7 +7,7 @@ export const NotFoundScreen = () => {
       <div>
         <h1>Not Found</h1>
       </div>
-      <FooterComponent />
+      <FooterComponent color="primary" />
     </div>
   )
 }

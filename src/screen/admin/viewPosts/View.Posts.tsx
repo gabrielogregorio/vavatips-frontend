@@ -45,9 +45,8 @@ export const ViewPostsScreen = () => {
 
   return (
     <div className="container">
-     <div className="post-local-container">
-
-       <NavbarComponent selected={navbarEnum.ViewPosts} />
+     <NavbarComponent selected={navbarEnum.ViewPosts} />
+     <div className="subcontainer">
 
        <div className={styles.posts}>
          <h1>Posts do Blog</h1>
@@ -55,7 +54,7 @@ export const ViewPostsScreen = () => {
        </div>
 
       </div>
-      <FooterComponent />
+      <FooterComponent color="secundary" />
     </div>
   )
 }

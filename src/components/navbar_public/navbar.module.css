@@ -7,13 +7,28 @@
 }
 
 .nav ul {
+  width: 100%;
   padding: 10px 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-content: space-between;
+  background: var(--primary);
+  padding: 1rem 1rem;
+}
+
+.nav ul .logo {
+  flex: 1;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--background-secundary);
+  padding: 0 2%;
 }
 
 .nav ul a {
   text-decoration: none;
   padding: 10px 10px;
-  color: var(--secundary);
+  color: var(--background-secundary);
   transition: 0.2s ease-in-out;
 }
 
@@ -22,8 +37,15 @@
  }
 
 .nav .navActive {
- border-bottom: 2px solid var(--secundary);
+ border-bottom: 2px solid var(--background-secundary);
 }
 
 .nav ul a:hover {
+}
+
+
+@media screen and (min-width: 600px) {
+  .nav ul {
+    flex-direction: row;
+  }
 }

@@ -40,16 +40,16 @@ export const AgentScreen = () => {
 
   return (
     <div className="container">
-      <div>
-      <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
 
+      <div className="subcontainer">
         <h1>Escolha um Agente</h1>
         <LoaderComponent active={activeLoader} />
         <div className="gridFull">
           {renderAgent()}
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="primary" />
     </div>
   )
 }

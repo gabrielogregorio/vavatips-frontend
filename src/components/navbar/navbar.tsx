@@ -18,6 +18,12 @@ export const NavbarComponent = (props:NavbarProps) => {
   return (
     <nav className={styles.nav}>
       <ul>
+
+        <Link
+          className={styles.logo}
+          to="/Profile">VAVATIPS</Link>
+
+
         <Link
           className={props.selected === navbarEnum.Profile ? styles.navActive : ""}
           to="/Profile">perfil</Link>
