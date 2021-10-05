@@ -13,11 +13,19 @@ export const AgentScreen = () => {
   let mapSelected = query.parse(item?.search)
   const [ agentsApi, setAgentsApi ] = useState<string[]>([])
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
+  const [ errorMsg, setErrorMsg ] = useState<string>('')
 
 
   useEffect(() => {
     api.get(`/agents/${mapSelected.map}`).then(res => {
       setAgentsApi(res.data.agents)
+      setActiveLoader(false)
+    }).catch(error => {
+      if(error.message === 'Network Error') {
+        setErrorMsg('Erro de conexão com o servidor')
+      } else {
+        setErrorMsg('Erro desconhecido no servidor')
+      }
       setActiveLoader(false)
     })
   }, [])
@@ -45,6 +53,7 @@ export const AgentScreen = () => {
       <div className="subcontainer">
         <h1>Escolha um Agente</h1>
         <LoaderComponent active={activeLoader} />
+        <p className="errorMsg">{errorMsg}</p>
         <div className="gridFull">
           {renderAgent()}
         </div>

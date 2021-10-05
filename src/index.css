@@ -61,6 +61,17 @@ html, body {
   background: var(--background-secundary);
   margin: 2rem 0;
   padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
+  transition: 2s;
+}
+
+.container .subcontainer .errorMsg {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--primary);
 }
 
 .container > .subcontainer > h1 {
@@ -122,6 +133,7 @@ html, body {
 .container > .subcontainer > .gridFull > .grid:hover img {
   box-shadow: 0 0 20px 1px var(--text-color-bold-transparent);
 }
+
 /*Container e estrura básica*/
 .form {
   display: flex;
@@ -136,15 +148,6 @@ html, body {
   font-size: 1.5rem;
   text-align: center;
   padding: 0.5rem 0;
-}
-
-.form .errorMsg {
-  padding: 0;
-  margin: 0;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  color: var(--primary);
 }
 
 .form .instructionTop p {
@@ -303,6 +306,15 @@ hr {
 .form input:disabled {
   background: var(--background-primary);
   color: var();
+}
+
+.form .errorMsg {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--primary);
 }
 
 .form input,
