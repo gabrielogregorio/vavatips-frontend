@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
 import { FooterComponent } from "../../components/Footer/footer";
 import { LoaderComponent } from "../../components/loader/loader";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
+
+let breadcrumbs = [
+  { url: '/', text: 'inicio'},
+  { url: '/Maps', text: 'mapas'}
+]
+
 
 
 export const MapScreen = () => {
@@ -45,6 +52,7 @@ export const MapScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+      <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
       <div className="subcontainer">
         <h1>Escolhe um mapa ai parça</h1>

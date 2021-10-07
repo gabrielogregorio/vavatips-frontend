@@ -100,12 +100,27 @@ interface imgsInterface {
 // }
 
 interface postsProps {
-  _id: string,
-  title: string,
-  description: string,
-  imgs: imgsInterface[] ,
-  tags: tagProps,
+    _id: string,
+    user: { _id: string, username: string, image: string }
+    description: string
+    title: string
+
+    imgs: [{ _id: string, image: string, description: string } ]
+    tags: {
+      map: string,
+      agent: string,
+      ability: string,
+      moment: string,
+      difficult: string,
+      side: string,
+      mapPosition: string
+  },
 }
 
 // Tipos de modal de mensagem
 type modalType = 'success' | 'error'
+
+interface modalMessage {
+  msg: string,
+  type: modalType
+}

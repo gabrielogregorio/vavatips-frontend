@@ -9,57 +9,93 @@ import { ModalOfSugestion } from '../../components/ModalOfSugestion/ModalOfSuges
 import { ModalMessage } from '../../components/ModalMessage/ModalMessage'
 import { LoaderComponent } from '../../components/loader/loader'
 import { FooterComponent } from '../../components/Footer/footer'
+import { BreadcrumbComponent } from '../../components/Breadcrumb/Breadcrumb'
+import { PaginationComponent } from '../../components/Pagination/Pagination'
+
 
 interface filterUrlInterface {
   agent: string,
   map: string,
-  type: string
+  type: string,
+  page: string
 }
+
+let breadcrumbs = [
+  { url: '/', text: 'inicio'},
+  { url: '/Maps', text: 'mapas'},
+  { url: '/Maps', text: 'agentes'},
+  { url: '/Posts', text: 'dicas'},
+]
+
+let mockPost: postsProps = {
+  _id: '',
+  user: { _id: '', username: '', image: '' },
+  description: '',
+  title: '',
+  imgs: [{ _id: '', image: '', description: '' } ],
+  tags: {
+    map: '',
+    agent: '',
+    ability: '',
+    moment: '',
+    difficult: '',
+    side: '',
+    mapPosition: ''
+  }
+}
+
 
 export const PostScreen = () => {
   const location = useLocation()
-  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>(loadUrlQuery())
+  const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
-  const [ originalPosts, setOriginalPosts ] = useState<PropsPostInterface[]>([])
-  const [ allTags, setAllTags ] = useState<string[]>([])
   const [ activeFilters, setActiveFilters ] = useState<string[]>([])
   const [ postActions, setPostActions ] = useState<postActionsInterface>({save:[{_id: ''}], tested:[{_id: ''}]})
-  const [ modalPostTitle, setModalPostTitle ] = useState<string>('')
-  const [ modalPostId, setModalPostId ] = useState<string>('')
+
+  // Modal show
   const [ showModalReport, setShowModalReport ] = useState<boolean>(false)
   const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
-
   const [ showModalMessage, setShowModalMessage ] = useState<boolean>(false)
-  const [ modalTextMessage, setModalTextMessage ] = useState<string>('')
-  const [ modalTypeMessage, setModalTypeMessage ] = useState<modalType>('success')
+
+  // Modal load data
+  const [ modalPost, setModalPost ] = useState<postsProps>(mockPost)
+  const [ modalMessage, setModalMessage ] = useState<modalMessage>({type: 'success', msg: '' })
 
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
   const [ errorMsg, setErrorMsg ] = useState<string>('')
+  const [ finishPage, setFinishPage ] = useState<number>(1)
+
 
   // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
   useEffect(() => {
-    setQueryUrl(loadUrlQuery())
-  }, [location])
+    let agent: string = `${query.parse(location?.search).agent}`
+    let map: string = `${query.parse(location?.search).map}`
+    let type: string = `${query.parse(location?.search).type}`
+    let page: string = `${query.parse(location?.search).page}`
 
-  // Carrega os testes e posts salvos do localstorage
-  useEffect(() => {
-    let item: postActionsInterface = JSON.parse(`${localStorage.getItem('posts-data')}`)
-    if(item) { setPostActions(item) }
-  }, [])
+
+    if(agent === 'undefined') { agent = ''}
+    if(map === 'undefined') { map = ''}
+    if(type === 'undefined') { type = ''}
+    if(page === 'undefined') { page = '1'}
+
+    let data: filterUrlInterface = {agent, map, type, page}
+    setQueryUrl(data)
+  }, [location.search])
+
 
   // monitora o QueryUrl para atualizar os dados em cada mudança
   useEffect(() => {
     setActiveLoader(true)
-    let {agent, map} = queryUrl
-    if(agent === undefined) { agent = '' }
-    if(map === undefined) { map = '' }
+    let {agent, map, page} = queryUrl
 
     setErrorMsg('')
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(`/posts?agent=${agent}&map=${map}`).then(res => {
-      let postsAgent = res.data
+    api.get(`/Posts?agent=${agent}&map=${map}&page=${page}`).then(res => {
+      let postsAgent = res.data.posts
+      setFinishPage(res.data.count)
 
       // Usuário está na URL de posts salvos => filtro por posts salvos
       if(queryUrl.type === 'Save') {
@@ -72,143 +108,40 @@ export const PostScreen = () => {
         let filterTested = postActions.tested?.map(item => item._id)
         postsAgent = postsAgent.filter((post: any) => filterTested?.includes(post._id)  )
       }
-
-      let listTags: string[] = []
-      postsAgent.map((post: any) => {
-        return Object.keys(post.tags).map(keyTags => {
-          let tag = post.tags[keyTags]
-          if(!listTags.includes(tag) && tag !== queryUrl.agent && tag !== queryUrl.map) {
-            listTags.push(tag)
-          }
-          return true
-        })
-      })
-      setAllTags(listTags)
       setPosts(postsAgent)
-      setOriginalPosts(postsAgent)
       setActiveLoader(false)
     }).catch(error => {
-      if(error.message === 'Network Error') {
-        setErrorMsg('Erro de conexão com o servidor')
-      } else {
-        setErrorMsg('Erro desconhecido no servidor')
-      }
+      setErrorMsg(error.message)
       setActiveLoader(false)
     })
   }, [queryUrl])
 
 
-  // Atualiza sempre que uma tag for adicionada ao filtro
-  useEffect(() => {
-    let postsAgent = originalPosts
-    // Se tem filtros ativos => filtros por tags
-    if(activeFilters.length !== 0) {
-      // percorre todos os posts
-      postsAgent = postsAgent.filter((post: any) => {
-
-        // Obter todas as chaves das tags ['agent', 'map', 'side', 'momment']
-        let keyTagsThisPost = Object.keys(post.tags)
-
-        // Obter todos as tags dentro das chaves ['Sova', 'Ascent', 'atacante']
-        let allFiltersThisPost = keyTagsThisPost.map(arry => post.tags[arry])
-
-        let qtdFiltersSelected: number = activeFilters.length
-        let qtdFiltersThisPost: number = 0
-
-        for(let i = 0; i < allFiltersThisPost.length; i++) {
-          if(activeFilters.includes(allFiltersThisPost[i])) {
-            qtdFiltersThisPost = qtdFiltersThisPost + 1
-          }
-        }
-
-        // Todos os filtros fora atendidos
-        if (qtdFiltersThisPost === qtdFiltersSelected) {
-          return true
-        }
-        return false
-      })
-    }
-
-    setPosts(postsAgent)
-  }, [activeFilters])
-
-
-  function showModalReportFunction(idPost: string, titlePost: string) {
-    setModalPostTitle(titlePost)
-    setModalPostId(idPost)
+  function showModalReportFunction(post: postsProps) {
+    setModalPost(post)
     setShowModalReport(true)
   }
 
-  function closeModalReport() {
+  async function saveModalReport(type: modalType, msg: string) {
     setShowModalReport(false)
-    setModalPostTitle('')
-    setModalPostId('')
-  }
-
-  async function saveModalReport(idPost:string, postTitle: string, email: string, description:string, screenWidth: number, screenHeight: number) {
-    closeModalReport()
-    try {
-      await api.post('/report', { idPost, email, description, screenWidth, screenHeight })
-      setModalTextMessage('Report enviado com sucesso, muito obrigado!')
-      setModalTypeMessage('success')
-
-    } catch(error) {
-      console.log(error)
-      setModalTextMessage('Erro ao enviar o Report. Você poderia reportar o problema aos desenvolvedores')
-      setModalTypeMessage('error')
-    }
+    setModalMessage({type, msg})
     setShowModalMessage(true)
   }
 
-  function showModalSuggestionFunction(idPost: string, titlePost: string) {
-    setModalPostTitle(titlePost)
-    setModalPostId(idPost)
+  function showModalSuggestionFunction(post: postsProps) {
+    setModalPost(post)
     setShowModalSuggestion(true)
   }
 
-  function closeModalSuggestion() {
+  async function saveModalSuggestion(type: modalType, msg:string) {
+    setModalMessage({type, msg})
     setShowModalSuggestion(false)
-    setModalPostTitle('')
-    setModalPostId('')
-  }
-
-  function closeModalMessage() {
-    setShowModalMessage(false)
-    setModalTextMessage('')
-  }
-
-  async function saveModalSuggestion(idPost:string, postTitle: string, email: string, description:string) {
-    closeModalSuggestion()
-    try {
-      await api.post('/suggestion', { idPost, email, description })
-
-      setModalTextMessage('Sugestão enviado com sucesso, muito obrigado!')
-      setModalTypeMessage('success')
-    } catch(error) {
-      console.log(error)
-      setModalTextMessage('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores')
-      setModalTypeMessage('error')
-    }
     setShowModalMessage(true)
   }
 
 
   // Obtém os dados do hooke useLocation e gera um objeto para atualizar
   // o useState de UrlQuery
-  function loadUrlQuery() {
-    let agent: string = `${query.parse(location?.search).agent}`
-    let map: string = `${query.parse(location?.search).map}`
-    let type: string = `${query.parse(location?.search).type}`
-
-    if(agent === 'undefined') { agent = '' }
-    if(map === 'undefined') { map = '' }
-    if(type === 'undefined') { type = '' }
-
-    let data: filterUrlInterface = {agent, map, type}
-
-    return data
-  }
-
   function toggleTag(tag: string) {
     if(activeFilters.includes(tag)) {
       setActiveFilters(activeFilters.filter(tagActive => tagActive !== tag))
@@ -239,6 +172,7 @@ export const PostScreen = () => {
       let index = copyActions.tested.findIndex(copy => copy._id === _id)
       copyActions.tested.splice(index, 1)
       setPostActions(copyActions)
+
     } else {
       copyActions.tested.push({_id})
       setPostActions(copyActions)
@@ -250,19 +184,22 @@ export const PostScreen = () => {
     let postsAgent: any[] = JSON.parse(JSON.stringify(posts))
 
     return postsAgent.map((post: PropsPostInterface) => {
-      post.postActions = postActions
-      post.toggleSave = toggleSave
-      post.toggleTested = toggleTested
       return (
         <div key={post._id}>
-         <PostComponent {...post} showModalReport={showModalReportFunction} showModalSuggestion={showModalSuggestionFunction}/>
+         <PostComponent
+           post={post}
+           postActions={postActions}
+           toggleSave={toggleSave}
+           toggleTested={toggleTested}
+           showModalReport={showModalReportFunction}
+           showModalSuggestion={showModalSuggestionFunction}/>
         </div>
       )
     })
   }
 
   function renderEditableFilters() {
-    return allTags.map(tag => (
+    return [].map(tag => (
       <div key={tag} className="btn">
         { activeFilters.includes(tag) ? (
           <button className="btnActive" onClick={() => toggleTag(tag)}>#{tag}</button>
@@ -275,15 +212,12 @@ export const PostScreen = () => {
 
   return (
     <div className="container">
-        {
-          queryUrl.type === 'Save' ? (
-            <NavbarComponentPublic selected={navbarEnumPublic.Save} agent={queryUrl.agent} map={queryUrl.map}/>
-          ) :  queryUrl.type === 'Tested' ? (
-            <NavbarComponentPublic selected={navbarEnumPublic.Tested} agent={queryUrl.agent} map={queryUrl.map}/>
-          ) : (
-            <NavbarComponentPublic selected={navbarEnumPublic.Posts} agent={queryUrl.agent} map={queryUrl.map}/>
-          )
-        }
+      <NavbarComponentPublic
+        selected={navbarEnumPublic.Posts}
+        agent={queryUrl.agent}
+        map={queryUrl.map}/>
+
+      <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
       <div className="subcontainer">
         <h1>As melhores dicas de Valorant</h1>
@@ -293,15 +227,15 @@ export const PostScreen = () => {
         <div className="containerPost">
           <div>
           { showModalReport ? (
-            <ModalOfReport idPost={modalPostId} title="fazer Reporte" postTitle={modalPostTitle} closeModal={closeModalReport} saveModal={saveModalReport}/>
+            <ModalOfReport post={modalPost} title="fazer Reporte" closeModal={setShowModalReport} saveModal={saveModalReport}/>
           ) : null}
 
           { showModalSuggestion ? (
-            <ModalOfSugestion idPost={modalPostId} title="fazer sugestão" postTitle={modalPostTitle} closeModal={closeModalSuggestion} saveModal={saveModalSuggestion}/>
+            <ModalOfSugestion post={modalPost} title="fazer sugestão" closeModal={setShowModalSuggestion} saveModal={saveModalSuggestion}/>
           ) : null}
 
           { showModalMessage ? (
-            <ModalMessage type={modalTypeMessage} text={modalTextMessage} closeModal={closeModalMessage} />
+            <ModalMessage data={modalMessage} closeModal={setShowModalMessage} />
           ) : (
             null
           )}
@@ -323,6 +257,15 @@ export const PostScreen = () => {
             {renderPost()}
           </div>
         </div>
+
+        <PaginationComponent
+          urlBase='Posts'
+          initial={1}
+          finish={finishPage}
+          selected={parseInt(queryUrl.page)}
+          agent={queryUrl.agent}
+          map={queryUrl.map}/>
+
       </div>
       <FooterComponent color="primary" />
     </div>

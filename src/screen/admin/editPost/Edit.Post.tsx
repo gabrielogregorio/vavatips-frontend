@@ -12,7 +12,13 @@ import { ModalComponent } from '../../../components/modal/modal';
 import { formatImage } from '../../../services/formatEnvieroment';
 import { FooterComponent } from '../../../components/Footer/footer';
 import { Selected } from '../../../components/Selected';
+import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
 
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/Profile', text: 'editar'}
+]
 
 type actionType = "top" | "bottom"
 
@@ -32,7 +38,7 @@ export const EditPostScreen = () => {
   const [ redirect, setRedirect ] = useState<boolean>(false)
 
   const { search } = useLocation();
-  const id = queryString.parse(search)?.id
+  const id = `${queryString.parse(search)?.id}`
 
   const [ imgAdded, setImgAdded ] = useState<imgInterface[]>([])
 
@@ -219,10 +225,15 @@ export const EditPostScreen = () => {
     setVisibleModal(false)
   }
 
+  async function deletePost(id: string) {
+    await api.delete(`/post/${id}`)
+    setRedirect(true)
+  }
 
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.EditScreen} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
         {redirect ? <Redirect to="/ViewPosts" /> : null }
@@ -241,6 +252,7 @@ export const EditPostScreen = () => {
         <div className="form">
 
         <h1>Editar um post</h1>
+          <button className="btn-color-primary" onClick={() => deletePost(id)} >Excluir</button>
 
           <InputValue type="text" text="Titulo" value={formTitle} setValue={setFormTitle}/>
           <InputValue type="text" text="Descrição" value={formDescription} setValue={setFormDescription}/>

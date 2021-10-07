@@ -36,12 +36,6 @@ export const NavbarComponent = (props:NavbarProps) => {
           className={props.selected === navbarEnum.ViewPosts ? styles.navActive : ""}
           to="/ViewPosts">posts</Link>
 
-        { props.selected === navbarEnum.EditScreen ? (
-          <Link
-            className={props.selected === navbarEnum.EditScreen ? styles.navActive : ""}
-            to="/#">editar</Link>
-        ) : null}
-
       </ul>
     </nav>
   )

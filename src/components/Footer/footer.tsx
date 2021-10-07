@@ -21,12 +21,15 @@ export const FooterComponent = (props: footerProps) => {
             <h3>Contribua</h3>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://gabrielogregorio.com/">Entre em contato</a>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/gabrielogregorio/vavatips-backend">Backend em Node.js github</a>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/gabrielogregorio/vavatips-frontend">Frontend com React.Js github</a>
           </div>
 
@@ -38,7 +41,7 @@ export const FooterComponent = (props: footerProps) => {
           <div className={styles.about}>
             <h3>Sobre</h3>
             <p className={styles.boilerplate}> <span>Vavatips</span> foi criado seguindo a política do
-            <a target="_blank" href="https://www.riotgames.com/pt-br/juridico"> “Lenga-Lenga Jurídico”</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.riotgames.com/pt-br/juridico"> “Lenga-Lenga Jurídico”</a>
             da Riot Games com recursos pertencentes à Riot Games. A Riot Games não endossa ou patrocina este projeto.
             </p>
           </div>

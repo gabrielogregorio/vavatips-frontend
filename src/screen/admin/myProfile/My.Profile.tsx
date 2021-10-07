@@ -5,6 +5,13 @@ import { InputValue } from '../../../components/inputValue'
 import { logout } from '../../../services/auth'
 import { LoaderComponent } from '../../../components/loader/loader'
 import { FooterComponent } from '../../../components/Footer/footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/Profile', text: 'perfil'}
+]
+
 
 export const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>("")
@@ -51,6 +58,7 @@ export const MyProfileScreen = () => {
   return (
     <div className="container">
        <NavbarComponent selected={navbarEnum.Profile} />
+       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
      <div className="subcontainer">
 

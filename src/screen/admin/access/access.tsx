@@ -7,8 +7,15 @@ import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/nav
 import { InputValue } from "../../../components/inputValue";
 import { LoaderComponent } from "../../../components/loader/loader";
 import { FooterComponent } from "../../../components/Footer/footer";
+import { BreadcrumbComponent } from "../../../components/Breadcrumb/Breadcrumb";
 
 type accessType = "login" | "register"
+
+let breadcrumbs = [
+  { url: '/', text: 'inicio'},
+  { url: '/Login', text: 'Login'}
+]
+
 export const AcessScreen = () => {
   const [ code, setCode ] = useState<string>('')
   const [ username, setUsername ] = useState<string>('')
@@ -16,7 +23,7 @@ export const AcessScreen = () => {
   const [ password2, setPassword2 ] = useState<string>('')
   const [ errorMsg, setErrorMsg ] = useState<string>('')
   const [ redirect, setRedirect ] = useState<boolean>(false)
-  const [ typeAccess, setTypeAccess] = useState<accessType>('login')
+  const [ typeAccess, setTypeAccess ] = useState<accessType>('login')
   const [ activeLoader, setActiveLoader ] = useState<boolean>(false)
 
   function toggleAccess() {
@@ -83,9 +90,9 @@ export const AcessScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-
         <div className="form">
           {redirect ? <Redirect to="/Profile" /> : null }
 

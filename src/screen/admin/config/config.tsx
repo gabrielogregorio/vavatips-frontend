@@ -4,6 +4,12 @@ import api from "../../../services/api";
 import { NavbarComponent, navbarEnum } from "../../../components/navbar/navbar";
 import { InputValue } from "../../../components/inputValue";
 import { FooterComponent } from "../../../components/Footer/footer";
+import { BreadcrumbComponent } from "../../../components/Breadcrumb/Breadcrumb";
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/Config', text: 'Configs'}
+]
 
 export const ConfigScreen = () => {
   const [ keyAccess, setKeyAccess ] = useState<string>('')
@@ -27,11 +33,12 @@ export const ConfigScreen = () => {
 
   return (
     <div className="container">
-      <div>
-        <NavbarComponent selected={navbarEnum.Config} />
+      <NavbarComponent selected={navbarEnum.Config} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+
+      <div className="subcontainer">
 
         <div className="form">
-
           <h1>Gerar Convite</h1>
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
@@ -40,7 +47,7 @@ export const ConfigScreen = () => {
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button className="btn-primary" onClick={handleSubmit}>Gerar</button>
+              <button className="btn-secundary" onClick={handleSubmit}>Gerar</button>
             </div>
           </div>
           <p>{codeMsg}</p>

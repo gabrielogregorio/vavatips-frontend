@@ -10,8 +10,14 @@ import { ModalComponent } from '../../../components/modal/modal';
 import { formatImage } from '../../../services/formatEnvieroment'
 import { FooterComponent } from '../../../components/Footer/footer'
 import { Selected } from '../../../components/Selected'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
 
 type actionType = "top" | "bottom"
+
+let breadcrumbs = [
+  { url: '/Profile', text: 'administrativo'},
+  { url: '/PostCreate', text: 'criar'}
+]
 
 interface imgInterface {
   description: string,
@@ -196,6 +202,8 @@ export const CreatePostScreen = () => {
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.PostCreate} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+
       <div className="subcontainer">
         {redirect ? <Redirect to="/ViewPosts" /> : null }
 
