@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import api from '../../services/api'
 import { InputValue } from '../inputValue'
 import { Textarea } from '../Textarea'
 
 interface ModalProps {
   title: string,
-
-  idPost: string,
-  postTitle: string,
+  post: postsProps,
   email?: string,
   description?: string,
 
-  closeModal: () => void,
-  saveModal: (idPost: string, postTitle: string, email: string, description: string) => void
+  closeModal: (setShowModal: boolean) => void,
+  saveModal: (type: modalType, msg: string) => void
 }
 
 export const ModalOfSugestion = (props: ModalProps) => {
@@ -24,17 +23,31 @@ export const ModalOfSugestion = (props: ModalProps) => {
   useEffect(() => {
     if(props.description) { setDescription(props.description) }
     if(props.email) { setEmail(props.email) }
-    if(props.postTitle) { setPostTitle(props.postTitle) }
-    if(props.idPost) { setIdPost(props.idPost) }
+    if(props.post.title) { setPostTitle(props.post.title) }
+    if(props.post._id) { setIdPost(props.post._id) }
   }, [props])
 
-  function saveModal(idPost: string, postTitle: string, email: string, description: string) {
+  async function saveModal(idPost: string, postTitle: string, email: string, description: string) {
     if(description === '' || description.trim() === '') {
       setErrorMsg('Você precisa preencher o campo Descrição com as informações')
     } else if(description.trim().length < 10) {
       setErrorMsg('Você precisa de uma descrição mais detalhada')
     } else {
-      props.saveModal(idPost, postTitle, email, description)
+      let type: modalType = 'error'
+      let msg: string = ''
+
+      try {
+        await api.post('/suggestion', { idPost, email, description })
+
+      msg = 'Sugestão enviado com sucesso, muito obrigado!'
+      type = 'success'
+      } catch(error) {
+        console.log(error)
+        msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'
+        type = 'error'
+      }
+
+      props.saveModal(type, msg)
     }
   }
 
@@ -44,7 +57,7 @@ export const ModalOfSugestion = (props: ModalProps) => {
 
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <button onClick={() => props.closeModal()}>
+          <button onClick={() => props.closeModal(false)}>
             <i className="fas fa-times"></i>
           </button>
         </div>
@@ -60,7 +73,7 @@ export const ModalOfSugestion = (props: ModalProps) => {
           <Textarea text="Descrição" value={description} setValue={setDescription} />
 
           <div className="modalActions">
-            <button onClick={() => props.closeModal()}>Cancelar</button>
+            <button onClick={() => props.closeModal(false)}>Cancelar</button>
             <button onClick={() => saveModal(idPost, postTitle, email, description)}>Adicionar</button>
           </div>
         </div>

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
+import api from '../../services/api'
 import { InputValue } from '../inputValue'
 import { Textarea } from '../Textarea'
 
 interface ModalProps {
   title: string,
-
-  postTitle: string,
-  idPost: string,
+  post: postsProps,
   email?: string,
   description?: string,
   larguraTela?: number,
   alturaTela?: number
 
-  closeModal: () => void,
-  saveModal: (idPost: string, postTitle: string, email: string, description: string,  larguraTela: number, alturaTela: number) => void
+  closeModal: (setShowVisibility: boolean) => void,
+  saveModal: (type: modalType, msg: string) => void
 }
 
 export const ModalOfReport = (props: ModalProps) => {
@@ -26,19 +25,34 @@ export const ModalOfReport = (props: ModalProps) => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
-    if(props.postTitle) { setPostTitle(props.postTitle) }
+    if(props.post.title) { setPostTitle(props.post.title) }
     if(props.email) { setEmail(props.email) }
     if(props.description) { setDescription(props.description) }
-    if(props.idPost) { setIdPost(props.idPost) }
+    if(props.post._id) { setIdPost(props.post._id) }
   }, [props])
 
-  function saveModal(idPost: string, postTitle: string, email: string, description: string, larguraTela: number, alturaTela: number) {
+  async function saveModal(idPost: string, postTitle: string, email: string, description: string, larguraTela: number, alturaTela: number) {
     if(description === '' || description.trim() === '') {
       setErrorMsg('Você precisa preencher o campo Descrição com as informações')
     } else if(description.trim().length < 10) {
       setErrorMsg('Você precisa de uma descrição mais detalhada')
     } else {
-      props.saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)
+
+      let msg: string = ''
+      let type: modalType = 'error'
+
+      try {
+        await api.post('/report', { idPost, email, description, screenWidth: larguraTela, screenHeight:alturaTela })
+        msg = 'Report enviado com sucesso, muito obrigado!'
+        type = 'success'
+
+      } catch(error) {
+        console.log(error)
+        msg = 'Erro ao enviar o Report. Você poderia reportar o problema aos desenvolvedores'
+        type = 'error'
+      }
+
+      props.saveModal(type, msg)
     }
   }
 
@@ -48,7 +62,7 @@ export const ModalOfReport = (props: ModalProps) => {
 
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <button onClick={() => props.closeModal()}>
+          <button onClick={() => props.closeModal(false)}>
             <i className="fas fa-times"></i>
           </button>
         </div>
@@ -85,7 +99,7 @@ export const ModalOfReport = (props: ModalProps) => {
           </div>
 
           <div className="modalActions">
-            <button onClick={() => props.closeModal()}>Cancelar</button>
+            <button onClick={() => props.closeModal(false)}>Cancelar</button>
             <button onClick={() => saveModal(idPost, postTitle, email, description, larguraTela, alturaTela)}>Adicionar</button>
           </div>
 
