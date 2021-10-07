@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import query from 'query-string'
 import api from '../../services/api'
+
 import { PostComponent } from '../../components/posts/posts'
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
 import { ModalOfReport } from '../../components/ModalOfReport/ModalOfReport'
@@ -49,7 +50,6 @@ export const PostScreen = () => {
   const location = useLocation()
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
-  const [ activeFilters, setActiveFilters ] = useState<string[]>([])
   const [ postActions, setPostActions ] = useState<postActionsInterface>({save:[{_id: ''}], tested:[{_id: ''}]})
 
   // Modal show
@@ -66,13 +66,16 @@ export const PostScreen = () => {
   const [ finishPage, setFinishPage ] = useState<number>(1)
 
 
-  // Monitora o hook useLocation, para atualizar em quaquer mudança de URL
+
+  // monitora o QueryUrl para atualizar os dados em cada mudança
   useEffect(() => {
+    setActiveLoader(true)
+    setErrorMsg('')
+
     let agent: string = `${query.parse(location?.search).agent}`
     let map: string = `${query.parse(location?.search).map}`
     let type: string = `${query.parse(location?.search).type}`
     let page: string = `${query.parse(location?.search).page}`
-
 
     if(agent === 'undefined') { agent = ''}
     if(map === 'undefined') { map = ''}
@@ -81,15 +84,6 @@ export const PostScreen = () => {
 
     let data: filterUrlInterface = {agent, map, type, page}
     setQueryUrl(data)
-  }, [location.search])
-
-
-  // monitora o QueryUrl para atualizar os dados em cada mudança
-  useEffect(() => {
-    setActiveLoader(true)
-    let {agent, map, page} = queryUrl
-
-    setErrorMsg('')
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
@@ -114,7 +108,7 @@ export const PostScreen = () => {
       setErrorMsg(error.message)
       setActiveLoader(false)
     })
-  }, [queryUrl])
+  }, [location.search])
 
 
   function showModalReportFunction(post: postsProps) {
@@ -137,17 +131,6 @@ export const PostScreen = () => {
     setModalMessage({type, msg})
     setShowModalSuggestion(false)
     setShowModalMessage(true)
-  }
-
-
-  // Obtém os dados do hooke useLocation e gera um objeto para atualizar
-  // o useState de UrlQuery
-  function toggleTag(tag: string) {
-    if(activeFilters.includes(tag)) {
-      setActiveFilters(activeFilters.filter(tagActive => tagActive !== tag))
-    } else {
-      setActiveFilters([...activeFilters, tag])
-    }
   }
 
   function toggleSave(_id: string) {
@@ -198,22 +181,10 @@ export const PostScreen = () => {
     })
   }
 
-  function renderEditableFilters() {
-    return [].map(tag => (
-      <div key={tag} className="btn">
-        { activeFilters.includes(tag) ? (
-          <button className="btnActive" onClick={() => toggleTag(tag)}>#{tag}</button>
-        ): (
-          <button onClick={() => toggleTag(tag)}>#{tag}</button>
-        )}
-      </div>
-    ))
-  }
-
   return (
     <div className="container">
       <NavbarComponentPublic
-        selected={navbarEnumPublic.Posts}
+        selected={queryUrl.type === 'Save' ? navbarEnumPublic.Save : navbarEnumPublic.Posts}
         agent={queryUrl.agent}
         map={queryUrl.map}/>
 
@@ -250,7 +221,6 @@ export const PostScreen = () => {
           </div>
 
           <div className="tags">
-            {renderEditableFilters()}
           </div><br />
 
           <div className="postItems">

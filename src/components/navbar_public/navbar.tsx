@@ -29,17 +29,22 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
           className={props.selected === navbarEnumPublic.Inicio ? styles.navActive : ""}
           to="/">inicio</Link>
 
-        {/* <Link
+        <Link
           className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
-          to={`/Posts?agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>posts</Link> */}
+          to={`/Posts`}>posts</Link>
 
-        <Link
+        {/* <Link
           className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
-          to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link>
+          to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link> */}
 
-        <Link
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://discord.gg/HXWASJXQ">Discord</a>
+
+        {/* <Link
           className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
-          to={`/Posts?type=Tested&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>testado</Link>
+          to={`/Posts?type=Tested&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>testado</Link> */}
       </ul>
     </nav>
   )
