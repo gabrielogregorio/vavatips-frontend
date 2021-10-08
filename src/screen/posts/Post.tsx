@@ -12,7 +12,7 @@ import { LoaderComponent } from '../../components/loader/loader'
 import { FooterComponent } from '../../components/Footer/footer'
 import { BreadcrumbComponent } from '../../components/Breadcrumb/Breadcrumb'
 import { PaginationComponent } from '../../components/Pagination/Pagination'
-
+import resolveQuery from '../../services/resolveQuery'
 
 interface filterUrlInterface {
   agent: string,
@@ -49,7 +49,6 @@ let mockPost: postsProps = {
 export const PostScreen = () => {
   const location = useLocation()
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
-  const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
   const [ postActions, setPostActions ] = useState<postActionsInterface>({save:[{_id: ''}], tested:[{_id: ''}]})
 
   // Modal show
@@ -63,8 +62,12 @@ export const PostScreen = () => {
 
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
   const [ errorMsg, setErrorMsg ] = useState<string>('')
-  const [ finishPage, setFinishPage ] = useState<number>(1)
 
+  // Posts
+  const [ finishPage, setFinishPage ] = useState<number>(1)
+  const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
+  const [ tags, setTags ] = useState<string[]>([])
+  const [ activeFilters, setActiveFilters ] = useState<string[]>([])
 
 
   // monitora o QueryUrl para atualizar os dados em cada mudança
@@ -87,9 +90,10 @@ export const PostScreen = () => {
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(`/Posts?agent=${agent}&map=${map}&page=${page}`).then(res => {
+    api.get(resolveQuery('/Posts', {agent, map, page, filters: activeFilters.toString()})).then(res => {
       let postsAgent = res.data.posts
       setFinishPage(res.data.count)
+      setTags(res.data.tags)
 
       // Usuário está na URL de posts salvos => filtro por posts salvos
       if(queryUrl.type === 'Save') {
@@ -108,7 +112,7 @@ export const PostScreen = () => {
       setErrorMsg(error.message)
       setActiveLoader(false)
     })
-  }, [location.search])
+  }, [location.search, activeFilters])
 
 
   function showModalReportFunction(post: postsProps) {
@@ -171,6 +175,7 @@ export const PostScreen = () => {
         <div key={post._id}>
          <PostComponent
            post={post}
+           toggleTag={toggleTag}
            postActions={postActions}
            toggleSave={toggleSave}
            toggleTested={toggleTested}
@@ -179,6 +184,27 @@ export const PostScreen = () => {
         </div>
       )
     })
+  }
+
+  function toggleTag(tag: string) {
+    if(activeFilters.includes(tag)) {
+      setActiveFilters(activeFilters.filter(filter => filter !== tag))
+    } else {
+      setActiveFilters([...activeFilters, tag])
+    }
+  }
+
+  function renderTags() {
+    return tags.map((tag, index) => (
+      <div className="btn" key={index} onClick={() => toggleTag(tag)}>
+        { activeFilters.includes(tag) ? (
+          <button className="btnActive">{tag}</button>
+        ) : (
+          <button>{tag}</button>
+        )}
+      </div>
+    )
+)
   }
 
   return (
@@ -192,7 +218,6 @@ export const PostScreen = () => {
 
       <div className="subcontainer">
         <h1>As melhores dicas de Valorant</h1>
-        <LoaderComponent active={activeLoader} />
         <p className="errorMsg">{errorMsg}</p>
 
         <div className="containerPost">
@@ -221,8 +246,10 @@ export const PostScreen = () => {
           </div>
 
           <div className="tags">
+            {renderTags()}
           </div><br />
 
+          <LoaderComponent active={activeLoader} />
           <div className="postItems">
             {renderPost()}
           </div>

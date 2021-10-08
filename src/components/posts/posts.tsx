@@ -11,6 +11,7 @@ interface PropsPostInterface {
     save: [{_id: string}],
     tested: [{_id: string}]
   },
+  toggleTag: (tag: string) => void
   toggleSave: (_id: string) => void
   toggleTested: (_id: string) => void
   showModalReport: (post: postsProps) => void
@@ -77,7 +78,6 @@ export const PostComponent = (props: PropsPostInterface) => {
             <i className="fas fa-angle-right"></i>
           </div>
 
-
           <div className={styles.descriptionImage}>
             <p>{idImage + 1} - {props.post.imgs?.[idImage]?.description}</p>
           </div>
@@ -87,10 +87,15 @@ export const PostComponent = (props: PropsPostInterface) => {
       <div className={styles.descriptionAndTags}>
         <p className={styles.description}>{props.post.description}</p>
         <p className={styles.tags}>
-          <span> #{props.post.tags.map}</span> <span> #{props.post.tags.agent}</span> <span> #{props.post.tags.ability}</span> <span> #{props.post.tags.moment}</span> <span> #{props.post.tags.difficult}</span> <span> #{props.post.tags.side}</span> <span> #{props.post.tags.mapPosition}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.map)} > #{props.post.tags.map}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.agent)} > #{props.post.tags.agent}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.ability)} > #{props.post.tags.ability}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.moment)} > #{props.post.tags.moment}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.difficult)} > #{props.post.tags.difficult}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.side)} > #{props.post.tags.side}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.mapPosition)} > #{props.post.tags.mapPosition}</span>
         </p>
       </div>
-
 
 
       { !props.viewAdmin ? (
@@ -109,7 +114,6 @@ export const PostComponent = (props: PropsPostInterface) => {
 
         <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>
       </div>
-
       ) : null }
 
     </div>
