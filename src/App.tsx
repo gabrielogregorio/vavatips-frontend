@@ -12,6 +12,7 @@ import { isAuthenticated } from "./services/auth"
 import { ConfigScreen } from './screen/admin/config/config'
 import { ReportScreen } from './screen/admin/reports/Reports'
 import { SuggestionScreen } from './screen/admin/suggestions/Suggestion'
+import { DashboardScreen } from './screen/admin/dashboard/dashboard'
 
 
 const PrivateRoute = ({ children, ...rest }: any) => {
@@ -77,6 +78,10 @@ function App() {
 
         <PrivateRoute path="/Suggestions">
           <SuggestionScreen />
+        </PrivateRoute>
+
+        <PrivateRoute path="/Dashboard">
+          <DashboardScreen />
         </PrivateRoute>
 
 
