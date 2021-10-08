@@ -7,7 +7,9 @@ export enum navbarEnum {
   PostCreate = '/PostCreate',
   ViewPosts = '/ViewPosts',
   Config = '/Config',
-  EditScreen = '#'
+  EditScreen = '#',
+  ReportScreen = '/Reports',
+  SuggestionScreen = '/Suggestions'
 }
 
 interface NavbarProps {
@@ -35,6 +37,14 @@ export const NavbarComponent = (props:NavbarProps) => {
         <Link
           className={props.selected === navbarEnum.ViewPosts ? styles.navActive : ""}
           to="/ViewPosts">posts</Link>
+
+        <Link
+          className={props.selected === navbarEnum.ReportScreen ? styles.navActive : ""}
+          to="/Reports">reports</Link>
+
+        <Link
+          className={props.selected === navbarEnum.SuggestionScreen ? styles.navActive : ""}
+          to="/Suggestions">sugestões</Link>
 
       </ul>
     </nav>

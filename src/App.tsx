@@ -10,6 +10,8 @@ import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts'
 import { NotFoundScreen } from './screen/NotFound/NotFound'
 import { isAuthenticated } from "./services/auth"
 import { ConfigScreen } from './screen/admin/config/config'
+import { ReportScreen } from './screen/admin/reports/Reports'
+import { SuggestionScreen } from './screen/admin/suggestions/Suggestion'
 
 
 const PrivateRoute = ({ children, ...rest }: any) => {
@@ -68,6 +70,15 @@ function App() {
         <PrivateRoute path="/Profile">
           <MyProfileScreen />
         </PrivateRoute>
+
+        <PrivateRoute path="/Reports">
+          <ReportScreen />
+        </PrivateRoute>
+
+        <PrivateRoute path="/Suggestions">
+          <SuggestionScreen />
+        </PrivateRoute>
+
 
         <PrivateRoute path="/Config">
           <ConfigScreen />
