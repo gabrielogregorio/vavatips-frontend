@@ -55,6 +55,7 @@ export const ViewPostsScreen = () => {
              postActions={{save: [{_id: ''}], tested: [{_id: ''}]}}
              toggleSave={() => {}}
              toggleTested={() => {}}
+             toggleTag={() => {}}
              showModalReport={() => {}}
              showModalSuggestion={() => {}}/>
         </div>

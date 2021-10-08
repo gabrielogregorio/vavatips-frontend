@@ -11,6 +11,7 @@ interface PropsPostInterface {
     save: [{_id: string}],
     tested: [{_id: string}]
   },
+  toggleTag: (tag: string) => void
   toggleSave: (_id: string) => void
   toggleTested: (_id: string) => void
   showModalReport: (post: postsProps) => void
@@ -23,10 +24,18 @@ export const PostComponent = (props: PropsPostInterface) => {
   const [ idImage, setIdImage ] = useState<number>(0)
 
   function nextImage(type: typeType, length: number) {
-    if (type === 'next' && idImage < length -1 ) {
-      setIdImage(idImage + 1)
-    } else if (type === 'prev' && idImage > 0 ) {
-      setIdImage(idImage - 1)
+    if (type === 'next' ) {
+      if (idImage < length -1) {
+        setIdImage(idImage + 1)
+      } else {
+        setIdImage(0)
+      }
+    } else if (type === 'prev' ) {
+      if(idImage > 0) {
+        setIdImage(idImage - 1)
+      } else {
+        setIdImage(length - 1)
+      }
     }
   }
 
@@ -60,16 +69,15 @@ export const PostComponent = (props: PropsPostInterface) => {
       <div className={styles.imgAndDescription}>
         <div className={styles.imgPost}>
           <img src={formatImage(props.post.imgs?.[idImage]?.image)} alt={props.post.imgs?.[idImage]?.description} />
-          { idImage > 0 ? (
-            <div className={styles.previus} onClick={() => nextImage('prev', props.post.imgs.length)}>
-              <i className="fas fa-angle-left"></i>
-            </div>
-          ) : null }
-          { idImage < props.post.imgs.length -1 ? (
-            <div className={styles.next} onClick={() => nextImage('next', props.post.imgs.length)}>
-              <i className="fas fa-angle-right"></i>
-            </div>
-          ) : null }
+
+          <div className={styles.previus} onClick={() => nextImage('prev', props.post.imgs.length)}>
+            <i className="fas fa-angle-left"></i>
+          </div>
+
+          <div className={styles.next} onClick={() => nextImage('next', props.post.imgs.length)}>
+            <i className="fas fa-angle-right"></i>
+          </div>
+
           <div className={styles.descriptionImage}>
             <p>{idImage + 1} - {props.post.imgs?.[idImage]?.description}</p>
           </div>
@@ -79,10 +87,15 @@ export const PostComponent = (props: PropsPostInterface) => {
       <div className={styles.descriptionAndTags}>
         <p className={styles.description}>{props.post.description}</p>
         <p className={styles.tags}>
-          <span> #{props.post.tags.map}</span> <span> #{props.post.tags.agent}</span> <span> #{props.post.tags.ability}</span> <span> #{props.post.tags.moment}</span> <span> #{props.post.tags.difficult}</span> <span> #{props.post.tags.side}</span> <span> #{props.post.tags.mapPosition}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.map)} > #{props.post.tags.map}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.agent)} > #{props.post.tags.agent}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.ability)} > #{props.post.tags.ability}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.moment)} > #{props.post.tags.moment}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.difficult)} > #{props.post.tags.difficult}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.side)} > #{props.post.tags.side}</span>
+          <span onClick={() => props.toggleTag(props.post.tags.mapPosition)} > #{props.post.tags.mapPosition}</span>
         </p>
       </div>
-
 
 
       { !props.viewAdmin ? (
@@ -101,7 +114,6 @@ export const PostComponent = (props: PropsPostInterface) => {
 
         <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>
       </div>
-
       ) : null }
 
     </div>
