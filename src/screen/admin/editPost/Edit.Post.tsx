@@ -16,8 +16,8 @@ import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
 
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
-  { url: '/Profile', text: 'editar'}
+  { url: '/Dashboard', text: 'administrativo'},
+  { url: '/Dashboard', text: 'editar'}
 ]
 
 type actionType = "top" | "bottom"

@@ -8,8 +8,8 @@ import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
 
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
-  { url: '/Profile', text: 'sugestões'}
+  { url: '/Dashboard', text: 'administrativo'},
+  { url: '/Dashboard', text: 'sugestões'}
 ]
 
 export const SuggestionScreen = () => {
@@ -23,13 +23,12 @@ export const SuggestionScreen = () => {
 
   function renderSuggestions() {
     return suggestions.map(report => (
-        <tr>
+        <tr key={report._id}>
           <td>{report.post_id}</td>
           <td>{report.email}</td>
           <td>{report.description}</td>
-          <td>{report.screenHeight}x{report.screenWidth}</td>
           <td>{report.status ?? 'Não atendido'}</td>
-         </tr>
+        </tr>
     ))
   }
 
@@ -40,14 +39,18 @@ export const SuggestionScreen = () => {
 
       <div className="subcontainer">
       <table>
+        <thead>
           <tr>
             <th>Post</th>
             <th>Email</th>
             <th>Descrição</th>
-            <th>Tela</th>
             <th>Status</th>
           </tr>
+        </thead>
+
+        <tbody>
           {renderSuggestions()}
+        </tbody>
         </table>
 
       </div>

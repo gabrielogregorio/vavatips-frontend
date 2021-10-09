@@ -8,8 +8,8 @@ import { FooterComponent } from '../../../components/Footer/footer'
 import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
-  { url: '/Profile', text: 'perfil'}
+  { url: '/Dashboard', text: 'administrativo'},
+  { url: '/Dashboard', text: 'perfil'}
 ]
 
 

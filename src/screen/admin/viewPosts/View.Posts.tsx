@@ -10,7 +10,7 @@ import { PostComponent } from '../../../components/posts/posts'
 import { PaginationComponent } from '../../../components/Pagination/Pagination'
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
+  { url: '/Dashboard', text: 'administrativo'},
   { url: '/ViewPosts', text: 'posts'}
 ]
 

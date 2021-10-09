@@ -7,8 +7,8 @@ import { FooterComponent } from '../../../components/Footer/footer'
 import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
-  { url: '/Profile', text: 'dashboard'}
+  { url: '/Dashboard', text: 'administrativo'},
+  { url: '/Dashboard', text: 'dashboard'}
 ]
 
 export const DashboardScreen = () => {
@@ -38,7 +38,7 @@ export const DashboardScreen = () => {
 
   return (
     <div className="container">
-       <NavbarComponent selected={navbarEnum.Profile} />
+       <NavbarComponent selected={navbarEnum.Dashboard} />
        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
        <div className="subcontainer">

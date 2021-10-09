@@ -8,8 +8,8 @@ import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
 
 
 let breadcrumbs = [
-  { url: '/Profile', text: 'administrativo'},
-  { url: '/Profile', text: 'reports'}
+  { url: '/Dashboard', text: 'administrativo'},
+  { url: '/Dashboard', text: 'reports'}
 ]
 
 export const ReportScreen = () => {
@@ -23,7 +23,7 @@ export const ReportScreen = () => {
 
   function renderReports() {
     return reports.map(report => (
-        <tr>
+        <tr key={report._id}>
           <td>{report.post_id}</td>
           <td>{report.email}</td>
           <td>{report.description}</td>
@@ -40,6 +40,7 @@ export const ReportScreen = () => {
 
       <div className="subcontainer">
       <table>
+        <thead>
           <tr>
             <th>Post</th>
             <th>Email</th>
@@ -47,7 +48,11 @@ export const ReportScreen = () => {
             <th>Tela</th>
             <th>Status</th>
           </tr>
+        </thead>
+
+        <tbody>
           {renderReports()}
+        </tbody>
         </table>
 
       </div>

@@ -9,7 +9,8 @@ export enum navbarEnum {
   Config = '/Config',
   EditScreen = '#',
   ReportScreen = '/Reports',
-  SuggestionScreen = '/Suggestions'
+  SuggestionScreen = '/Suggestions',
+  Dashboard = '/Dashboard'
 }
 
 interface NavbarProps {
@@ -25,10 +26,9 @@ export const NavbarComponent = (props:NavbarProps) => {
           className={styles.logo}
           to="/Profile">VAVATIPS</Link>
 
-
         <Link
-          className={props.selected === navbarEnum.Profile ? styles.navActive : ""}
-          to="/Profile">perfil</Link>
+          className={props.selected === navbarEnum.Dashboard ? styles.navActive : ""}
+          to="/Dashboard">dashboard</Link>
 
         <Link
           className={props.selected === navbarEnum.PostCreate ? styles.navActive : ""}
@@ -45,6 +45,11 @@ export const NavbarComponent = (props:NavbarProps) => {
         <Link
           className={props.selected === navbarEnum.SuggestionScreen ? styles.navActive : ""}
           to="/Suggestions">sugestões</Link>
+
+        <Link
+          className={props.selected === navbarEnum.Profile ? styles.navActive : ""}
+          to="/Profile">perfil</Link>
+
 
       </ul>
     </nav>
