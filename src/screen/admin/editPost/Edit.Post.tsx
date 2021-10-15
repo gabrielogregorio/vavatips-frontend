@@ -58,20 +58,32 @@ export const EditPostScreen = () => {
 
 
   useEffect(() => {
-    api.get(`/post/${id}`).then(res => {
-      let userApi = res.data
-      setFormTitle(userApi.title)
-      setFormDescription(userApi.description)
-      setFormTagMoment(userApi.tags.moment)
-      setFormTagDifficult(userApi.tags.difficult)
-      setFormTagAbility(userApi.tags.ability)
-      setFormTagSide(userApi.tags.side)
-      setFormTagMap(userApi.tags.map)
-      setFormTagMapPosition(userApi.tags.mapPosition)
-      setFormTagAgent(userApi.tags.agent)
-      setImgAdded(userApi.imgs)
-    })
+    loadEditPost()
   }, [id])
+
+  async function loadEditPost() {
+    console.log('load post to edit')
+    const postResponse =  api.get(`/post/${id}`)
+
+    try {
+      const [ post ] = await Promise.all([ postResponse ])
+      const postJson = post.data
+
+      setFormTitle(postJson.title)
+      setFormDescription(postJson.description)
+      setFormTagMoment(postJson.tags.moment)
+      setFormTagDifficult(postJson.tags.difficult)
+      setFormTagAbility(postJson.tags.ability)
+      setFormTagSide(postJson.tags.side)
+      setFormTagMap(postJson.tags.map)
+      setFormTagMapPosition(postJson.tags.mapPosition)
+      setFormTagAgent(postJson.tags.agent)
+      setImgAdded(postJson.imgs)
+
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   async function handleSubmit() {
     let request = {
@@ -99,7 +111,6 @@ export const EditPostScreen = () => {
   }
 
   function deleteStep(_id: string) {
-    console.log(_id)
     setImgAdded(imgAdded.filter(item => item._id !== _id))
   }
 
@@ -188,7 +199,6 @@ export const EditPostScreen = () => {
 
   function renderPositionsMap() {
     let filterMapPositions: mapInterface = maps().filter(map => map.name === formTagMap)?.[0]
-    console.log(filterMapPositions?.mapPosition)
     return filterMapPositions?.mapPosition ?? []
   }
 

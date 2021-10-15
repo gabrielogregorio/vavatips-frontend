@@ -20,19 +20,24 @@ export const MapScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
-    api.get(`/maps`).then(res => {
-      setMapsApi(res.data.maps)
-      setActiveLoader(false)
-
-    }).catch(error => {
-      if(error.message === 'Network Error') {
-        setErrorMsg('Erro de conexão com o servidor')
-      } else {
-        setErrorMsg('Erro desconhecido no servidor')
-      }
-      setActiveLoader(false)
-    })
+    loadMaps()
   }, [])
+
+  async function loadMaps() {
+    console.log('request to map')
+    const mapResponse = api.get(`/maps`)
+
+    try {
+      const [ maps ] = await Promise.all([ mapResponse ])
+      const mapsJson = maps.data.maps
+
+      setMapsApi(mapsJson)
+      setActiveLoader(false)
+    } catch(error) {
+      setErrorMsg('Erro desconhecido no servidor')
+      setActiveLoader(false)
+    }
+  }
 
   function renderMap() {
     if (mapsApi.length === 0) {

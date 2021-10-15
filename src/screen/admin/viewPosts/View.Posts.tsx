@@ -35,15 +35,23 @@ export const ViewPostsScreen = () => {
 
 
   useEffect(() => {
-    api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`).then((res: any) => {
-      setFinishPage(res.data.count)
-      setPosts(res.data.posts)
-    }).catch(error => {
-      console.log(error)
-    })
+    loadPosts()
   }, [queryParseUrl])
 
+  async function loadPosts() {
+    console.log('load posts -> faz duas requisições, é preciso otimizar')
+    const postResponse = api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`)
 
+    try {
+      const [ posts ] = await Promise.all([ postResponse ])
+      const postsJson = posts.data
+
+      setFinishPage(postsJson.count)
+      setPosts(postsJson.posts)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   function renderPosts() {
     return posts.map((post:any) => {

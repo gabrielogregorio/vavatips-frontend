@@ -23,21 +23,24 @@ export const AgentScreen = () => {
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
-
   useEffect(() => {
-    api.get(`/agents/${mapSelected.map}`).then(res => {
-      setAgentsApi(res.data.agents)
-      setActiveLoader(false)
-    }).catch(error => {
-      if(error.message === 'Network Error') {
-        setErrorMsg('Erro de conexão com o servidor')
-      } else {
-        setErrorMsg('Erro desconhecido no servidor')
-      }
-      setActiveLoader(false)
-    })
+    loadAgents()
   }, [mapSelected.map])
 
+  async function loadAgents() {
+    console.log('request to agent')
+    const agentsResponse = api.get(`/agents/${mapSelected.map}`)
+
+    try {
+      const [ agents ] = await Promise.all([ agentsResponse ])
+      const agentsJson = agents.data.agents
+      setAgentsApi(agentsJson)
+      setActiveLoader(false)
+    } catch(error) {
+      setErrorMsg('Erro desconhecido no servidor')
+      setActiveLoader(false)
+    }
+  }
 
   function renderAgent() {
     if (agentsApi.length === 0) {

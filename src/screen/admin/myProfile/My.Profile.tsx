@@ -44,16 +44,24 @@ export const MyProfileScreen = () => {
   }
 
   useEffect(() => {
-    api.get(`/user`).then(res => {
-      setUsername(res.data.username)
-      setActiveLoader(false)
-    }).catch(error => {
-      if(error?.response?.data?.msg === 'jwt expired') {
-        logout()
-        setActiveLoader(false)
-      }
-    })
+    loadProfile()
   }, [])
+
+  async function loadProfile() {
+    console.log('load profile')
+    const profileResponse = api.get(`/user`)
+
+    try {
+      const [ profile ] = await Promise.all([ profileResponse ])
+      const profileJson = profile.data.username
+      setUsername(profileJson)
+      setActiveLoader(false)
+
+    } catch(error) {
+      logout()
+      setActiveLoader(false)
+    }
+  }
 
   return (
     <div className="container">

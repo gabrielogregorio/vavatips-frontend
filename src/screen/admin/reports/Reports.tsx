@@ -16,10 +16,21 @@ export const ReportScreen = () => {
   const [ reports, setReports ] = useState<any[]>([])
 
   useEffect(() => {
-    api.get(`/reports`).then(res => {
-      setReports(res.data)
-    })
+    loadReports()
   }, [])
+
+  async function loadReports() {
+    console.log('report suggestion')
+    const reportResponse = api.get(`/reports`)
+
+    try {
+      const [ report ] = await Promise.all([ reportResponse ])
+      const reportJson = report.data
+      setReports(reportJson)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   function renderReports() {
     return reports.map(report => (
