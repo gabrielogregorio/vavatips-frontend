@@ -29,24 +29,8 @@ interface PropsPostInterface {
     difficult: difficultType,
     side: sideType,
     mapPosition: string
-  },
-  postActions: {
-    save: [{_id: string}],
-    tested: [{_id: string}]
-  },
-  toggleSave: (_id: string) => void
-  toggleTested: (_id: string) => void
+  }
 }
-
-interface postActionsInterface {
-  save: [ {_id: string} ],
-  tested: [{_id: string} ]
-}
-
-
-
-
-
 
 
 interface habilitsInterface {
@@ -89,15 +73,6 @@ interface imgsInterface {
   img: string
 }
 
-// interface tagProps {
-//   moment: momentType[],
-//   difficult: difficultType[],
-//   ability: abilityType[],
-//   side: sideType[],
-//   map: mapType[],
-//   mapPosition: positionMapType[],
-//   agent: agentType[],
-// }
 
 interface postsProps {
     _id: string,

@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from 'react'
 import api from "../../../services/api";
-import { NavbarComponent, navbarEnum } from "../../../components/navbar/navbar";
+import { NavbarComponent, navbarEnum } from "../../../components/navbar";
 import { InputValue } from "../../../components/inputValue";
-import { FooterComponent } from "../../../components/Footer/footer";
-import { BreadcrumbComponent } from "../../../components/Breadcrumb/Breadcrumb";
+import { FooterComponent } from "../../../components/Footer";
+import { BreadcrumbComponent } from "../../../components/Breadcrumb";
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},

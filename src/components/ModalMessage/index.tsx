@@ -3,12 +3,13 @@ import styles from './modal.module.css'
 
 interface ModalProps {
   data: modalMessage,
+  show: boolean,
   closeModal: (setCloseModal: boolean) => void,
 }
 
 export const ModalMessage = (props: ModalProps) => {
 
-  return (
+  return props.show ? (
     <div className={styles.modalItem} style={{background: props.data.type === 'error' ? 'var(--primary)' : 'var(--secundary)'}}>
       <div className={styles.notfyIcon}>
         {props.data.type === 'success' ? ( <i className="far fa-check-circle"></i> ) : null }
@@ -20,5 +21,5 @@ export const ModalMessage = (props: ModalProps) => {
         <i className="fas fa-times"></i>
       </button>
     </div>
-  )
+  ) : null
 }

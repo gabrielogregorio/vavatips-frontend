@@ -3,11 +3,11 @@ import { Redirect } from "react-router-dom";
 import { useState } from 'react'
 import api from "../../../services/api";
 import { login } from "../../../services/auth";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public/navbar";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public";
 import { InputValue } from "../../../components/inputValue";
-import { LoaderComponent } from "../../../components/loader/loader";
-import { FooterComponent } from "../../../components/Footer/footer";
-import { BreadcrumbComponent } from "../../../components/Breadcrumb/Breadcrumb";
+import { LoaderComponent } from "../../../components/loader";
+import { FooterComponent } from "../../../components/Footer";
+import { BreadcrumbComponent } from "../../../components/Breadcrumb";
 
 type accessType = "login" | "register"
 
@@ -16,7 +16,7 @@ let breadcrumbs = [
   { url: '/Login', text: 'Login'}
 ]
 
-export const AcessScreen = () => {
+export const AccessScreen = () => {
   const [ code, setCode ] = useState<string>('')
   const [ username, setUsername ] = useState<string>('')
   const [ password, setPassword ] = useState<string>('')

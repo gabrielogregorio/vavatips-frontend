@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
-import { FooterComponent } from "../../components/Footer/footer";
-import { LoaderComponent } from "../../components/loader/loader";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
+import { BreadcrumbComponent } from "../../components/Breadcrumb";
+import { FooterComponent } from "../../components/Footer";
+import { LoaderComponent } from "../../components/loader";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
 
@@ -11,8 +11,6 @@ let breadcrumbs = [
   { url: '/', text: 'inicio'},
   { url: '/Maps', text: 'mapas'}
 ]
-
-
 
 export const MapScreen = () => {
   const [ mapsApi, setMapsApi ] = useState<string[]>([])
@@ -24,7 +22,6 @@ export const MapScreen = () => {
   }, [])
 
   async function loadMaps() {
-    console.log('request to map')
     const mapResponse = api.get(`/maps`)
 
     try {

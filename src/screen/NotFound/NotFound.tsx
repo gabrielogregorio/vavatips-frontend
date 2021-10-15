@@ -1,13 +1,13 @@
 import React from "react";
-import { FooterComponent } from "../../components/Footer/footer";
+import { Container } from "../../components/Container";
+import { FooterComponent } from "../../components/Footer";
+import { H1 } from "../../components/H1";
 
 export const NotFoundScreen = () => {
   return (
-    <div className="container">
-      <div>
-        <h1>Not Found</h1>
-      </div>
+    <Container>
+      <H1 title="Not Found" />
       <FooterComponent color="primary" />
-    </div>
+    </Container>
   )
 }

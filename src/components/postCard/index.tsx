@@ -1,26 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { formatImage } from "../../services/formatEnvieroment";
+import { formatImage } from "../../services/formatEnvironment";
 import styles from './post.module.css'
 type typeType = 'next' | 'prev'
 
 // Componente post
 interface PropsPostInterface {
   post: postsProps,
-  postActions: {
-    save: [{_id: string}],
-    tested: [{_id: string}]
-  },
   toggleTag: (tag: string) => void
-  toggleSave: (_id: string) => void
-  toggleTested: (_id: string) => void
-  showModalReport: (post: postsProps) => void
   showModalSuggestion: (post: postsProps) => void
   viewAdmin?: boolean
 }
 
 
-export const PostComponent = (props: PropsPostInterface) => {
+export const PostCard = (props: PropsPostInterface) => {
   const [ idImage, setIdImage ] = useState<number>(0)
 
   function nextImage(type: typeType, length: number) {
@@ -40,6 +33,7 @@ export const PostComponent = (props: PropsPostInterface) => {
   }
 
   return (
+    <div className="postItems">
     <div className={styles.posts}>
       <div className={styles.profile}>
 
@@ -54,9 +48,7 @@ export const PostComponent = (props: PropsPostInterface) => {
 
         <p>{props.post.user.username ?? 'Ademir Maluco'}</p>
 
-        { !props.viewAdmin ? (
-          <button onClick={() => props.showModalReport(props.post)}>Reportar</button>
-        ): null }
+        <button>reportar</button>
 
         { props.viewAdmin ? (
           <Link to={`PostEdit?id=${props.post._id}`}>Editar Post</Link>
@@ -97,25 +89,15 @@ export const PostComponent = (props: PropsPostInterface) => {
         </p>
       </div>
 
-
       { !props.viewAdmin ? (
         <div className={styles.actions}>
-        {
-          props.postActions.tested.filter(post => post._id === props.post._id).length === 0
-          ? <button onClick={() => props.toggleTested(props.post._id)} >A testar</button>
-          : <button className={styles.actionsActive} onClick={() => props.toggleTested(props.post._id)}>A testar</button>
-        }
-
-        {
-          props.postActions.save.filter(post => post._id === props.post._id).length === 0
-          ? <button onClick={() => props.toggleSave(props.post._id)} >Salvar</button>
-          : <button className={styles.actionsActive} onClick={() => props.toggleSave(props.post._id)}> Salvo</button>
-        }
-
+        <button>A testar</button>
+        <button> Salvo</button>
         <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>
       </div>
       ) : null }
 
+    </div>
     </div>
   )
 }

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { InputValue } from '../inputValue'
-import { Textarea } from '../Textarea'
+import { TextArea } from '../TextArea'
 
 interface ModalProps {
   title: string,
   post: postsProps,
   email?: string,
   description?: string,
-
+  show: boolean,
   closeModal: (setShowModal: boolean) => void,
   saveModal: (type: modalType, msg: string) => void
 }
 
-export const ModalOfSugestion = (props: ModalProps) => {
+export const ModalOfSuggestion = (props: ModalProps) => {
   const [ email, setEmail ] = useState<string>('')
   const [ description, setDescription ] = useState<string>('')
   const [ idPost, setIdPost ] = useState<string>('')
@@ -51,8 +51,8 @@ export const ModalOfSugestion = (props: ModalProps) => {
     }
   }
 
-  return (
-    <div className="modal">
+  return props.show ? (
+      <div className="modal">
       <div className="modalItem">
 
         <div className="modalTitle">
@@ -70,7 +70,7 @@ export const ModalOfSugestion = (props: ModalProps) => {
 
           <InputValue type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
 
-          <Textarea text="Descrição" value={description} setValue={setDescription} />
+          <TextArea title="Descrição" value={description} setValue={setDescription} />
 
           <div className="modalActions">
             <button onClick={() => props.closeModal(false)}>Cancelar</button>
@@ -79,5 +79,5 @@ export const ModalOfSugestion = (props: ModalProps) => {
         </div>
       </div>
     </div>
-  )
+    ): null
 }

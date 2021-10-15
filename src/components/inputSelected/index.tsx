@@ -7,12 +7,6 @@ interface propsInterface {
   setValue: (e: any) => void
 }
 
-  // function renderList() {
-  //   return props.list.map(item => {
-  //     return <option value={item.name} key={item.id} >{item.name}</option>
-  //   })
-  // }
-
 export const inputSelectedComponent = (props: propsInterface) => {
 
   return (
