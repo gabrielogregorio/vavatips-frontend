@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom'
 import { AgentScreen } from './screen/Choice/Agent'
 import { MapScreen } from './screen/Choice/Map'
-import { PostScreen } from './screen/posts/Post'
-import { AcessScreen } from './screen/admin/access/access'
+import { HomeScreen } from './screen/home'
+import { AccessScreen } from './screen/admin/access/access'
 import { CreatePostScreen } from './screen/admin/createPost/Create.Post'
 import { EditPostScreen } from './screen/admin/editPost/Edit.Post'
 import { MyProfileScreen } from './screen/admin/myProfile/My.Profile'
@@ -10,10 +10,8 @@ import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts'
 import { NotFoundScreen } from './screen/NotFound/NotFound'
 import { isAuthenticated } from "./services/auth"
 import { ConfigScreen } from './screen/admin/config/config'
-import { ReportScreen } from './screen/admin/reports/Reports'
 import { SuggestionScreen } from './screen/admin/suggestions/Suggestion'
 import { DashboardScreen } from './screen/admin/dashboard/dashboard'
-
 
 const PrivateRoute = ({ children, ...rest }: any) => {
   return (
@@ -49,11 +47,11 @@ function App() {
         </Route>
 
         <Route path="/Posts">
-          <PostScreen />
+          <HomeScreen />
         </Route>
 
         <Route path="/Login">
-          <AcessScreen />
+          <AccessScreen />
         </Route>
 
         <PrivateRoute path="/ViewPosts">
@@ -70,10 +68,6 @@ function App() {
 
         <PrivateRoute path="/Profile">
           <MyProfileScreen />
-        </PrivateRoute>
-
-        <PrivateRoute path="/Reports">
-          <ReportScreen />
         </PrivateRoute>
 
         <PrivateRoute path="/Suggestions">

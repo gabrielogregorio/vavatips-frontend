@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import 'dotenv/config'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
-import { FooterComponent } from '../../../components/Footer/footer';
+import { FooterComponent } from '../../../components/Footer';
 
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
+import { BreadcrumbComponent } from '../../../components/Breadcrumb';
 
 
 let breadcrumbs = [

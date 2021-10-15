@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import { logout } from '../../../services/auth'
-import { LoaderComponent } from '../../../components/loader/loader'
-import { FooterComponent } from '../../../components/Footer/footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
+import { LoaderComponent } from '../../../components/loader'
+import { FooterComponent } from '../../../components/Footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},

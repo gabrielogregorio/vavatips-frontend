@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
 import query from 'query-string'
 import { useState } from 'react'
-import { FooterComponent } from '../../../components/Footer/footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
-import { PostComponent } from '../../../components/posts/posts'
-import { PaginationComponent } from '../../../components/Pagination/Pagination'
+import { FooterComponent } from '../../../components/Footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb'
+import { PaginationComponent } from '../../../components/Pagination'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
@@ -53,24 +52,20 @@ export const ViewPostsScreen = () => {
     }
   }
 
-  function renderPosts() {
-    return posts.map((post:any) => {
-      return (
-        <div key={post._id}>
-          <PostComponent
-            viewAdmin
-             post={post}
-             postActions={{save: [{_id: ''}], tested: [{_id: ''}]}}
-             toggleSave={() => {}}
-             toggleTested={() => {}}
-             toggleTag={() => {}}
-             showModalReport={() => {}}
-             showModalSuggestion={() => {}}/>
-        </div>
+  // function renderPosts() {
+  //   return posts.map((post:any) => {
+  //     return (
+  //       <div key={post._id}>
+  //         <PostComponent
+  //           viewAdmin
+  //            post={post}
+  //            toggleTag={() => {}}
+  //            showModalSuggestion={() => {}}/>
+  //       </div>
 
-      )
-    })
-  }
+  //     )
+  //   })
+  // }
 
   return (
     <div className="container">
@@ -78,9 +73,9 @@ export const ViewPostsScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        <div className="postItems">
+        {/* <div className="postItems">
           {renderPosts()}
-        </div>
+        </div> */}
 
         <PaginationComponent
           urlBase='ViewPosts'
