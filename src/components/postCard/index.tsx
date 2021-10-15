@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { formatImage } from "../../services/formatEnvironment";
+import { Img } from "../Img";
 import styles from './post.module.css'
 type typeType = 'next' | 'prev'
 
@@ -39,10 +40,16 @@ export const PostCard = (props: PropsPostInterface) => {
 
         { props.post.user.image ?
           (
-            <img src={formatImage(props.post.user.image)} alt="Foto de perfil do Autor da postagem" />
+            <Img
+              src={formatImage(props.post.user.image)}
+              alt="Foto de perfil do Autor da postagem"
+              />
           )
           :(
-            <img src={'/images/users/profile.webp'} alt="Foto de perfil do Autor da postagem" />
+            <Img
+              src={'/images/users/profile.webp'}
+              alt={"Foto de perfil do Autor da postagem"}
+              />
            )
         }
 
@@ -90,7 +97,7 @@ export const PostCard = (props: PropsPostInterface) => {
       </div>
 
       { !props.viewAdmin ? (
-        <div className={styles.actions}>
+      <div className={styles.actions}>
         <button>A testar</button>
         <button> Salvo</button>
         <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>

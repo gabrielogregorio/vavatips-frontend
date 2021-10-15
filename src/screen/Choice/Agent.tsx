@@ -8,6 +8,11 @@ import api from "../../services/api";
 import { LoaderComponent } from "../../components/loader";
 import { FooterComponent } from "../../components/Footer";
 import { BreadcrumbComponent } from "../../components/Breadcrumb";
+import { Container } from '../../components/Container'
+import { Subcontainer } from '../../components/Subcontainer'
+import { H1 } from "../../components/H1";
+import { ErrorMsg } from "../../components/ErrorMsg";
+import { Img } from "../../components/Img";
 
 let breadcrumbs = [
   { url: '/', text: 'inicio'},
@@ -50,7 +55,7 @@ export const AgentScreen = () => {
     return agents().map(agent => {
       return agentsApi.includes(agent.name) ? (
         <Link to={`/Posts?map=${mapSelected.map}&agent=${agent.name}`} className="grid" key={agent.id}>
-          <img src={agent.img} alt={agent.name} />
+          <Img src={agent.img} alt={agent.name} />
           <p>{agent.name}</p>
         </Link>
       ) : null
@@ -58,19 +63,19 @@ export const AgentScreen = () => {
   }
 
   return (
-    <div className="container">
+    <Container>
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
       <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
-      <div className="subcontainer">
-        <h1>Escolha um Agente</h1>
+      <Subcontainer>
+        <H1 title="Escolha um Agente" />
         <LoaderComponent active={activeLoader} />
-        <p className="errorMsg">{errorMsg}</p>
+        <ErrorMsg msg={errorMsg} />
         <div className="gridFull">
           {renderAgent()}
         </div>
-      </div>
+      </Subcontainer>
       <FooterComponent color="primary" />
-    </div>
+    </Container>
   )
 }
