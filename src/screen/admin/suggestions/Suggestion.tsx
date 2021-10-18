@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import 'dotenv/config'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import { FooterComponent } from '../../../components/Footer';
 

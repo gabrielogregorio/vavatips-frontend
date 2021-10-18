@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api';
 import { formatImage } from '../../services/formatEnvironment';
-import { LoaderComponent } from '../loader';
+import { LoaderComponent } from '../Loader';
 
 interface ModalProps {
   title: string,

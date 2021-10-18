@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar'
-import { InputValue } from '../../../components/inputValue'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
+import { InputValue } from '../../../components/InputValue'
 import { logout } from '../../../services/auth'
-import { LoaderComponent } from '../../../components/loader'
+import { LoaderComponent } from '../../../components/Loader'
 import { FooterComponent } from '../../../components/Footer'
 import { BreadcrumbComponent } from '../../../components/Breadcrumb'
 

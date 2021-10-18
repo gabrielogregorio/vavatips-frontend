@@ -16,7 +16,7 @@ export const InputValue = (props: propsInterface) => {
     <div className="groupInput">
       <div className="groupInputSelet">
         <label htmlFor="">{props.text}</label>
-        <input disabled={disabled} type={props.type} value={props.value}  onChange={(e) => props.setValue(e.target.value)} />
+        <input disabled={disabled} type={props.type} value={props.value} placeholder={props.text} onChange={(e) => props.setValue(e.target.value)} />
       </div>
     </div>
   )

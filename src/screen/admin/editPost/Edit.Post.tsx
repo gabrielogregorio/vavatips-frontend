@@ -3,12 +3,12 @@ import queryString from 'query-string'
 import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
 import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
-import { InputValue } from '../../../components/inputValue';
-import { ModalComponent } from '../../../components/modal';
+import { InputValue } from '../../../components/InputValue';
+import { ModalComponent } from '../../../components/Modal';
 import { formatImage } from '../../../services/formatEnvironment';
 import { FooterComponent } from '../../../components/Footer';
 import { Selected } from '../../../components/Selected';

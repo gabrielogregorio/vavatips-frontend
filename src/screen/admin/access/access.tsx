@@ -3,9 +3,9 @@ import { Redirect } from "react-router-dom";
 import { useState } from 'react'
 import api from "../../../services/api";
 import { login } from "../../../services/auth";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/navbar_public";
-import { InputValue } from "../../../components/inputValue";
-import { LoaderComponent } from "../../../components/loader";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/Navbar_public";
+import { InputValue } from "../../../components/InputValue";
+import { LoaderComponent } from "../../../components/Loader";
 import { FooterComponent } from "../../../components/Footer";
 import { BreadcrumbComponent } from "../../../components/Breadcrumb";
 

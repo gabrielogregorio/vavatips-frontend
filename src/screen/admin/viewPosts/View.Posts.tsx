@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import query from 'query-string'
 import { useState } from 'react'
@@ -52,31 +52,12 @@ export const ViewPostsScreen = () => {
     }
   }
 
-  // function renderPosts() {
-  //   return posts.map((post:any) => {
-  //     return (
-  //       <div key={post._id}>
-  //         <PostComponent
-  //           viewAdmin
-  //            post={post}
-  //            toggleTag={() => {}}
-  //            showModalSuggestion={() => {}}/>
-  //       </div>
-
-  //     )
-  //   })
-  // }
-
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.ViewPosts} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        {/* <div className="postItems">
-          {renderPosts()}
-        </div> */}
-
         <PaginationComponent
           urlBase='ViewPosts'
           initial={1}

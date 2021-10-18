@@ -1,5 +1,4 @@
 import React from "react";
-import { LoaderComponent } from "../loader";
 import { Posts } from "../Posts";
 import { PostTags } from "../Tags";
 import { TagsFixFilters } from "../TagsFixFilters";

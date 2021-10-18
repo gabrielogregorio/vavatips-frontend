@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import query from 'query-string'
 import api from '../../services/api'
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
 import { ModalOfSuggestion } from '../../components/ModalOfSuggestion'
 import { ModalMessage } from '../../components/ModalMessage'
-import { LoaderComponent } from '../../components/loader'
+import { LoaderComponent } from '../../components/Loader'
 import { FooterComponent } from '../../components/Footer'
 import { BreadcrumbComponent } from '../../components/Breadcrumb'
 import { PaginationComponent } from '../../components/Pagination'

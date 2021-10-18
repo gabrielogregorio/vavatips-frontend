@@ -6,8 +6,8 @@ import { ErrorMsg } from "../../components/ErrorMsg";
 import { FooterComponent } from "../../components/Footer";
 import { H1 } from "../../components/H1";
 import { Img } from "../../components/Img";
-import { LoaderComponent } from "../../components/loader";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
+import { LoaderComponent } from "../../components/Loader";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
 import { Subcontainer } from "../../components/Subcontainer";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
