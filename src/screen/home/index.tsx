@@ -10,10 +10,7 @@ import { FooterComponent } from '../../components/Footer'
 import { BreadcrumbComponent } from '../../components/Breadcrumb'
 import { PaginationComponent } from '../../components/Pagination'
 import resolveQuery from '../../services/resolveQuery'
-import { H1 } from '../../components/H1';
 import { ErrorMsg } from '../../components/ErrorMsg'
-import { Container } from '../../components/Container';
-import { Subcontainer } from '../../components/Subcontainer';
 import { ContainerPosts } from '../../components/ContainerPosts';
 
 interface filterUrlInterface {
@@ -123,7 +120,7 @@ export const HomeScreen = () => {
   }
 
   return (
-    <Container>
+    <div className="container">
       <NavbarComponentPublic
         selected={navbarEnumPublic.Posts}
         agent={queryUrl.agent}
@@ -131,7 +128,7 @@ export const HomeScreen = () => {
 
       <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
-      <Subcontainer>
+      <div className="subcontainer">
 
       <ModalOfSuggestion
         show={showModalSuggestion}
@@ -145,7 +142,7 @@ export const HomeScreen = () => {
         data={modalMessage}
         closeModal={setShowModalMessage} />
 
-      <H1 title="As melhores dicas de Valorant" />
+      <h1>As melhores dicas de Valorant</h1>
       <ErrorMsg msg={errorMsg} />
 
       <LoaderComponent active={activeLoader} />
@@ -167,9 +164,9 @@ export const HomeScreen = () => {
         agent={queryUrl.agent}
         map={queryUrl.map}/>
 
-        </Subcontainer>
+        </div>
       <FooterComponent color="primary" />
-    </Container>
+    </div>
 
   )
 }

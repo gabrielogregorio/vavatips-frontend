@@ -55,20 +55,9 @@ export const EditPostScreen = () => {
   const [ visibleModal, setVisibleModal ] = useState<boolean>(false)
   const [ propsModal, setPropsModal ] = useState<propsModalInterface>({_id: "", description: "", image: ""})
 
-
-
   useEffect(() => {
-    loadEditPost()
-  }, [id])
-
-  async function loadEditPost() {
-    console.log('load post to edit')
-    const postResponse =  api.get(`/post/${id}`)
-
-    try {
-      const [ post ] = await Promise.all([ postResponse ])
-      const postJson = post.data
-
+    api.get(`/post/${id}`).then(res => {
+      const postJson = res.data
       setFormTitle(postJson.title)
       setFormDescription(postJson.description)
       setFormTagMoment(postJson.tags.moment)
@@ -79,11 +68,10 @@ export const EditPostScreen = () => {
       setFormTagMapPosition(postJson.tags.mapPosition)
       setFormTagAgent(postJson.tags.agent)
       setImgAdded(postJson.imgs)
-
-    } catch(error) {
+    }).catch(error => {
       console.log(error)
-    }
-  }
+    })
+  }, [id])
 
   async function handleSubmit() {
     let request = {

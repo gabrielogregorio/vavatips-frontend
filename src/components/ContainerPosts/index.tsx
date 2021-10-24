@@ -24,7 +24,7 @@ export const ContainerPosts = ( {
     <div className="containerPost">
         <TagsFixFilters queryUrl={queryUrl} />
 
-       <PostTags toggleTag={toggleTag} tags={tags} activeFilters={activeFilters} />
+        <PostTags toggleTag={toggleTag} tags={tags} activeFilters={activeFilters} />
 
         <Posts
           posts={posts}

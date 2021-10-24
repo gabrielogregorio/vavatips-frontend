@@ -6,14 +6,15 @@ interface footerProps {
 }
 
 export const FooterComponent = (props: footerProps) => {
-
+  const background = props.color === 'primary' ? 'var(--primary)' : 'var(--secundary)'
   return (
     <>
       <div className="elastic"></div>
 
       <div
+        data-testid='footerBackground'
         className={styles.containerFooter}
-        style={{ background: props.color === 'primary' ? 'var(--primary)' : 'var(--secundary)' }}>
+        style={{ background }}>
 
         <div className={styles.footer}>
 

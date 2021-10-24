@@ -8,9 +8,6 @@ import api from "../../services/api";
 import { LoaderComponent } from "../../components/Loader";
 import { FooterComponent } from "../../components/Footer";
 import { BreadcrumbComponent } from "../../components/Breadcrumb";
-import { Container } from '../../components/Container'
-import { Subcontainer } from '../../components/Subcontainer'
-import { H1 } from "../../components/H1";
 import { ErrorMsg } from "../../components/ErrorMsg";
 import { Img } from "../../components/Img";
 
@@ -63,19 +60,19 @@ export const AgentScreen = () => {
   }
 
   return (
-    <Container>
+    <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
       <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
-      <Subcontainer>
-        <H1 title="Escolha um Agente" />
+      <div className="subcontainer">
+        <h1>Escolha um Agente</h1>
         <LoaderComponent active={activeLoader} />
         <ErrorMsg msg={errorMsg} />
         <div className="gridFull">
           {renderAgent()}
         </div>
-      </Subcontainer>
+      </div>
       <FooterComponent color="primary" />
-    </Container>
+    </div>
   )
 }

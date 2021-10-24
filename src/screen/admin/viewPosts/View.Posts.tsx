@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { FooterComponent } from '../../../components/Footer'
 import { BreadcrumbComponent } from '../../../components/Breadcrumb'
 import { PaginationComponent } from '../../../components/Pagination'
+import { ContainerPosts } from '../../../components/ContainerPosts'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
@@ -34,23 +35,13 @@ export const ViewPostsScreen = () => {
 
 
   useEffect(() => {
-    loadPosts()
-  }, [queryParseUrl])
-
-  async function loadPosts() {
-    console.log('load posts -> faz duas requisições, é preciso otimizar')
-    const postResponse = api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`)
-
-    try {
-      const [ posts ] = await Promise.all([ postResponse ])
-      const postsJson = posts.data
-
-      setFinishPage(postsJson.count)
-      setPosts(postsJson.posts)
-    } catch(error) {
+    api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`).then(postsJson => {
+      setFinishPage(postsJson.data.count)
+      setPosts(postsJson.data.posts)
+    }).catch(error => {
       console.log(error)
-    }
-  }
+    })
+  }, [queryParseUrl])
 
   return (
     <div className="container">
@@ -58,6 +49,14 @@ export const ViewPostsScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
+        <ContainerPosts
+          queryUrl={queryParseUrl}
+          toggleTag={() => {}}
+          tags={['']}
+          activeFilters={['']}
+          posts={posts}
+          showModalSuggestionFunction={() => {}}
+        />
         <PaginationComponent
           urlBase='ViewPosts'
           initial={1}

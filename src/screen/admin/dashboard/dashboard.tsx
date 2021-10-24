@@ -13,7 +13,7 @@ let breadcrumbs = [
 
 export const DashboardScreen = () => {
   const [username, setUsername] = useState<string>("")
-  const [errorMsg, setErrorMsg] = useState<string>("")
+  const [ errorMsg ] = useState<string>("")
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
 
   const [ countViewsIps, setCountViewsIps] = useState<number>(0)

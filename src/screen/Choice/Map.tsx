@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BreadcrumbComponent } from "../../components/Breadcrumb";
-import { Container } from "../../components/Container";
 import { ErrorMsg } from "../../components/ErrorMsg";
 import { FooterComponent } from "../../components/Footer";
-import { H1 } from "../../components/H1";
 import { Img } from "../../components/Img";
 import { LoaderComponent } from "../../components/Loader";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
-import { Subcontainer } from "../../components/Subcontainer";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
 
@@ -57,20 +54,20 @@ export const MapScreen = () => {
   }
 
   return (
-    <Container>
+    <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
       <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
-      <Subcontainer>
-        <H1 title="Escolha um mapa ai parça" />
+      <div className="subcontainer">
+        <h1>Escolha um mapa ai parça </h1>
          <ErrorMsg msg={errorMsg} />
         <LoaderComponent active={activeLoader} />
 
          <div className="gridFull">
           {renderMap()}
           </div>
-          </Subcontainer>
+          </div>
          <FooterComponent color="primary" />
-        </Container>
+        </div>
   )
 }

@@ -86,6 +86,8 @@ export const PaginationComponent = (props: propsInterface) => {
           </div>
         )
       }
+
+      return null
     })
   }
 
