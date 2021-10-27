@@ -93,9 +93,9 @@ interface postsProps {
 }
 
 // Tipos de modal de mensagem
-type modalType = 'success' | 'error'
+type modalType = 'success' | 'error' | ''
 
-interface modalMessage {
+interface modalMessageInterface {
   msg: string,
   type: modalType
 }

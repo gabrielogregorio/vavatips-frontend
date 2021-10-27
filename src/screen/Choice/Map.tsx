@@ -8,11 +8,10 @@ import { LoaderComponent } from "../../components/Loader";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
+import { LINKS } from '../../data/links'
 
-let breadcrumbs = [
-  { url: '/', text: 'inicio'},
-  { url: '/Maps', text: 'mapas'}
-]
+
+let breadcrumbs = [ LINKS.Home, LINKS.Maps]
 
 export const MapScreen = () => {
   const [ mapsApi, setMapsApi ] = useState<string[]>([])

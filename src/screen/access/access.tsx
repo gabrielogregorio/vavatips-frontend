@@ -1,20 +1,18 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { useState } from 'react'
-import api from "../../../services/api";
-import { login } from "../../../services/auth";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../../components/Navbar_public";
-import { InputValue } from "../../../components/InputValue";
-import { LoaderComponent } from "../../../components/Loader";
-import { FooterComponent } from "../../../components/Footer";
-import { BreadcrumbComponent } from "../../../components/Breadcrumb";
-
+import api from "../../services/api";
+import { login } from "../../services/auth";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
+import { InputValue } from "../../components/InputValue";
+import { LoaderComponent } from "../../components/Loader";
+import { FooterComponent } from "../../components/Footer";
+import { BreadcrumbComponent } from "../../components/Breadcrumb";
+import { LINKS } from '../../data/links'
 type accessType = "login" | "register"
 
-let breadcrumbs = [
-  { url: '/', text: 'inicio'},
-  { url: '/Login', text: 'Login'}
-]
+let breadcrumbs = [ LINKS.Home, LINKS.Login]
+
 
 export const AccessScreen = () => {
   const [ code, setCode ] = useState<string>('')

@@ -12,7 +12,6 @@ export const FooterComponent = (props: footerProps) => {
       <div className="elastic"></div>
 
       <div
-        data-testid='footerBackground'
         className={styles.containerFooter}
         style={{ background }}>
 

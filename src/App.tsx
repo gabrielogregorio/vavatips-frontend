@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch, Redirect  } from 'react-router-dom'
 import { AgentScreen } from './screen/Choice/Agent'
 import { MapScreen } from './screen/Choice/Map'
 import { HomeScreen } from './screen/home'
-import { AccessScreen } from './screen/admin/access/access'
+import { AccessScreen } from './screen/access/access'
 import { CreatePostScreen } from './screen/admin/createPost/Create.Post'
 import { EditPostScreen } from './screen/admin/editPost/Edit.Post'
 import { MyProfileScreen } from './screen/admin/myProfile/My.Profile'
@@ -77,7 +77,6 @@ function App() {
         <PrivateRoute path="/Dashboard">
           <DashboardScreen />
         </PrivateRoute>
-
 
         <PrivateRoute path="/Config">
           <ConfigScreen />

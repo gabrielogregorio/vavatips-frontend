@@ -10,13 +10,9 @@ import { FooterComponent } from "../../components/Footer";
 import { BreadcrumbComponent } from "../../components/Breadcrumb";
 import { ErrorMsg } from "../../components/ErrorMsg";
 import { Img } from "../../components/Img";
+import { LINKS } from '../../data/links'
 
-let breadcrumbs = [
-  { url: '/', text: 'inicio'},
-  { url: '/Maps', text: 'mapas'},
-  { url: '/Maps', text: 'agentes'},
-]
-
+let breadcrumbs = [ LINKS.Home, LINKS.Maps, LINKS.Agents]
 
 export const AgentScreen = () => {
   let item = useLocation()
@@ -26,23 +22,15 @@ export const AgentScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
-    loadAgents()
-  }, [mapSelected.map])
-
-  async function loadAgents() {
-    console.log('request to agent')
-    const agentsResponse = api.get(`/agents/${mapSelected.map}`)
-
-    try {
-      const [ agents ] = await Promise.all([ agentsResponse ])
+    api.get(`/agents/${mapSelected.map}`).then(agents => {
       const agentsJson = agents.data.agents
       setAgentsApi(agentsJson)
       setActiveLoader(false)
-    } catch(error) {
+    }).catch(() => {
       setErrorMsg('Erro desconhecido no servidor')
       setActiveLoader(false)
-    }
-  }
+    })
+  }, [mapSelected.map])
 
   function renderAgent() {
     if (agentsApi.length === 0) {

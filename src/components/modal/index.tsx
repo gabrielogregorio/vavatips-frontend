@@ -50,7 +50,7 @@ export const ModalComponent = (props: ModalProps) => {
 
 
   return (
-    <div className="modal">
+    <div className="modal" data-testid="modal">
       <div className="modalItem">
 
         <div className="modalTitle">

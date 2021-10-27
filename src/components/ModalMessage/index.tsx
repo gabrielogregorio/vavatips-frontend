@@ -2,7 +2,7 @@ import styles from './modal.module.css'
 
 
 interface ModalProps {
-  data: modalMessage,
+  data: modalMessageInterface,
   show: boolean,
   closeModal: (setCloseModal: boolean) => void,
 }

@@ -8,7 +8,7 @@ interface loaderProps {
 export const LoaderComponent = (props: loaderProps) => {
   function renderActive() {
     return props.active ? (
-      <div className={styles.loader}>
+      <div data-testid="loader" className={styles.loader}>
         <div />
       </div>
     ) : null

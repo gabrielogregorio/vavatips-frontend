@@ -12,6 +12,8 @@ import { PaginationComponent } from '../../components/Pagination'
 import resolveQuery from '../../services/resolveQuery'
 import { ErrorMsg } from '../../components/ErrorMsg'
 import { ContainerPosts } from '../../components/ContainerPosts';
+import { mockPost } from '../../mock/posts'
+import { LINKS } from '../../data/links'
 
 interface filterUrlInterface {
   agent: string,
@@ -20,47 +22,18 @@ interface filterUrlInterface {
   page: string
 }
 
-let breadcrumbs = [
-  { url: '/', text: 'inicio'},
-  { url: '/Maps', text: 'mapas'},
-  { url: '/Maps', text: 'agentes'},
-  { url: '/Posts', text: 'dicas'},
-]
-
-let mockPost: postsProps = {
-  _id: '',
-  user: { _id: '', username: '', image: '' },
-  description: '',
-  title: '',
-  imgs: [{ _id: '', image: '', description: '' } ],
-  tags: {
-    map: '',
-    agent: '',
-    ability: '',
-    moment: '',
-    difficult: '',
-    side: '',
-    mapPosition: ''
-  }
-}
+let breadcrumbs = [ LINKS.Home, LINKS.Maps, LINKS.Agents, LINKS.Posts]
 
 export const HomeScreen = () => {
   const location = useLocation()
 
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
-
-  // Modal show
   const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
   const [ showModalMessage, setShowModalMessage ] = useState<boolean>(false)
-
-  // Modal load data
   const [ modalPost, setModalPost ] = useState<postsProps>(mockPost)
-  const [ modalMessage, setModalMessage ] = useState<modalMessage>({type: 'success', msg: '' })
-
+  const [ modalMessage, setModalMessage ] = useState<modalMessageInterface>({type: '', msg: '' })
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
   const [ errorMsg, setErrorMsg ] = useState<string>('')
-
-  // Posts
   const [ finishPage, setFinishPage ] = useState<number>(1)
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
   const [ tags, setTags ] = useState<string[]>([])
