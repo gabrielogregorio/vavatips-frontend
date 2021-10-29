@@ -1,0 +1,215 @@
+.posts {
+  padding: 0.5rem 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid var(--text-color-bold-transparent);
+}
+
+/* Parte superior com perfil e nome */
+
+.posts .profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.posts .profile img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.posts .profile p {
+  flex: 1;
+  color: var(--text-color-normal);
+  margin-left: 10px;
+}
+
+.posts .profile button {
+  display: block;
+  color: var(--primary);
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size:0.9rem;
+  transition: 0.2s ease-in;
+  border-radius: 20px;
+}
+
+.posts .profile a {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.posts .profile button:hover {
+  color: var(--secundary);
+}
+/* Parte superior com perfil e nome */
+
+
+/* Título do post */
+.posts h3 {
+  font-size: 1rem;
+  color: var(--text-color-bold);
+  margin-bottom: 10px;
+  width: 100%;
+}
+/* Título do post */
+
+
+/* Imagens com Descrição */
+.posts > .imgAndDescription {
+  width: 100%;
+  height: 500px;
+}
+
+.posts > .imgAndDescription > .imgPost {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+
+.posts > .imgAndDescription > .imgPost > img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.posts > .imgAndDescription > .imgPost div {
+  color: var(--background-secundary);
+  background-color: transparent;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.posts > .imgAndDescription > .imgPost .previus > i,
+.posts > .imgAndDescription > .imgPost .next > i
+ {
+  font-size: 3rem;
+}
+
+.posts > .imgAndDescription > .imgPost .previus:hover,
+.posts > .imgAndDescription > .imgPost .next:hover
+ {
+  background-color: var(--text-color-bold-transparent);
+}
+
+.posts > .imgAndDescription > .imgPost .next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.posts > .imgAndDescription > .imgPost .previus {
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.posts > .imgAndDescription > .imgPost > .descriptionImage {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  background: var(--text-color-bold);
+}
+
+.posts > .imgAndDescription > .imgPost > .descriptionImage > p {
+  color: var(--background-secundary);
+  font-size: 1rem;
+}
+/* Imagens com Descrição */
+
+/* Tags and Description post */
+.posts > .descriptionAndTags .description {
+  color: var(--text-color-bold);
+  font-size: 1rem;
+  padding: 5px 0;
+}
+
+.posts > .descriptionAndTags >.tags {
+  color: var(--primary);
+  font-size: 1rem;
+  background-color:transparent;
+}
+
+.posts > .descriptionAndTags >.tags span {
+  padding: 2px;
+}
+/* Tags and Description post */
+
+/* Actions */
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.actions button {
+  display: block;
+  width: 100%;
+  margin: 0 5px;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 5px 0;
+  outline: none;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.actions button:nth-child(1) {
+  border: 2px solid var(--secundary);
+  color: var(--secundary);
+}
+
+.actions button:nth-child(1):hover {
+  /* color: var(--background-secundary);
+  background: var(--secundary-small); */
+}
+
+.actions button:nth-child(1).actionsActive {
+  color: var(--background-secundary);
+  background: var(--secundary);
+}
+
+
+.actions button:nth-child(2) {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.actions button:nth-child(2):hover {
+  /* color: var(--background-secundary);
+  background: var(--primary-small); */
+}
+
+.actions button:nth-child(2).actionsActive {
+  color: var(--background-secundary);
+  background: var(--primary);
+}
+
+.actions button:nth-child(3) {
+  border: 2px solid var(--purple);
+  color: var(--purple);
+}
+
+.actions button:nth-child(3):hover {
+  /* color: var(--background-secundary);
+  background: var(--purple-small); */
+}
+
+.actions button:nth-child(3).actionsActive{
+  color: var(--background-secundary);
+  background: var(--purple);
+}

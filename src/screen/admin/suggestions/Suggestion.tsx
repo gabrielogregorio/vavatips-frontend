@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import 'dotenv/config'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
-import { FooterComponent } from '../../../components/Footer/footer';
+import { FooterComponent } from '../../../components/Footer';
 
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
+import { BreadcrumbComponent } from '../../../components/Breadcrumb';
 
 
 let breadcrumbs = [
@@ -16,10 +16,22 @@ export const SuggestionScreen = () => {
   const [ suggestions, setSuggestions ] = useState<any[]>([])
 
   useEffect(() => {
-    api.get(`/suggestions`).then(res => {
-      setSuggestions(res.data)
-    })
+    loadSuggestion()
   }, [])
+
+  async function loadSuggestion() {
+    console.log('load suggestion')
+    const suggestionResponse = api.get(`/suggestions`)
+
+    try {
+      const [ suggestion ] = await Promise.all([ suggestionResponse ])
+      const suggestionJson = suggestion.data
+      setSuggestions(suggestionJson)
+
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   function renderSuggestions() {
     return suggestions.map(report => (

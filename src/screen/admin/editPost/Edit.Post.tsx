@@ -3,16 +3,16 @@ import queryString from 'query-string'
 import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
 import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
-import { InputValue } from '../../../components/inputValue';
-import { ModalComponent } from '../../../components/modal/modal';
-import { formatImage } from '../../../services/formatEnvieroment';
-import { FooterComponent } from '../../../components/Footer/footer';
+import { InputValue } from '../../../components/InputValue';
+import { ModalComponent } from '../../../components/Modal';
+import { formatImage } from '../../../services/formatEnvironment';
+import { FooterComponent } from '../../../components/Footer';
 import { Selected } from '../../../components/Selected';
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb';
+import { BreadcrumbComponent } from '../../../components/Breadcrumb';
 
 
 let breadcrumbs = [
@@ -55,21 +55,21 @@ export const EditPostScreen = () => {
   const [ visibleModal, setVisibleModal ] = useState<boolean>(false)
   const [ propsModal, setPropsModal ] = useState<propsModalInterface>({_id: "", description: "", image: ""})
 
-
-
   useEffect(() => {
     api.get(`/post/${id}`).then(res => {
-      let userApi = res.data
-      setFormTitle(userApi.title)
-      setFormDescription(userApi.description)
-      setFormTagMoment(userApi.tags.moment)
-      setFormTagDifficult(userApi.tags.difficult)
-      setFormTagAbility(userApi.tags.ability)
-      setFormTagSide(userApi.tags.side)
-      setFormTagMap(userApi.tags.map)
-      setFormTagMapPosition(userApi.tags.mapPosition)
-      setFormTagAgent(userApi.tags.agent)
-      setImgAdded(userApi.imgs)
+      const postJson = res.data
+      setFormTitle(postJson.title)
+      setFormDescription(postJson.description)
+      setFormTagMoment(postJson.tags.moment)
+      setFormTagDifficult(postJson.tags.difficult)
+      setFormTagAbility(postJson.tags.ability)
+      setFormTagSide(postJson.tags.side)
+      setFormTagMap(postJson.tags.map)
+      setFormTagMapPosition(postJson.tags.mapPosition)
+      setFormTagAgent(postJson.tags.agent)
+      setImgAdded(postJson.imgs)
+    }).catch(error => {
+      console.log(error)
     })
   }, [id])
 
@@ -99,7 +99,6 @@ export const EditPostScreen = () => {
   }
 
   function deleteStep(_id: string) {
-    console.log(_id)
     setImgAdded(imgAdded.filter(item => item._id !== _id))
   }
 
@@ -188,7 +187,6 @@ export const EditPostScreen = () => {
 
   function renderPositionsMap() {
     let filterMapPositions: mapInterface = maps().filter(map => map.name === formTagMap)?.[0]
-    console.log(filterMapPositions?.mapPosition)
     return filterMapPositions?.mapPosition ?? []
   }
 
@@ -226,8 +224,10 @@ export const EditPostScreen = () => {
   }
 
   async function deletePost(id: string) {
-    await api.delete(`/post/${id}`)
-    setRedirect(true)
+    if(window.confirm('Deseja excluir permanentemente este post?')) {
+      await api.delete(`/post/${id}`)
+      setRedirect(true)
+    }
   }
 
   return (

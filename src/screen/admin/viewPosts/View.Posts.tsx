@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import query from 'query-string'
 import { useState } from 'react'
-import { FooterComponent } from '../../../components/Footer/footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
-import { PostComponent } from '../../../components/posts/posts'
-import { PaginationComponent } from '../../../components/Pagination/Pagination'
+import { FooterComponent } from '../../../components/Footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb'
+import { PaginationComponent } from '../../../components/Pagination'
+import { ContainerPosts } from '../../../components/ContainerPosts'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
@@ -35,34 +35,13 @@ export const ViewPostsScreen = () => {
 
 
   useEffect(() => {
-    api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`).then((res: any) => {
-      setFinishPage(res.data.count)
-      setPosts(res.data.posts)
+    api.get(`/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`).then(postsJson => {
+      setFinishPage(postsJson.data.count)
+      setPosts(postsJson.data.posts)
     }).catch(error => {
       console.log(error)
     })
   }, [queryParseUrl])
-
-
-
-  function renderPosts() {
-    return posts.map((post:any) => {
-      return (
-        <div key={post._id}>
-          <PostComponent
-            viewAdmin
-             post={post}
-             postActions={{save: [{_id: ''}], tested: [{_id: ''}]}}
-             toggleSave={() => {}}
-             toggleTested={() => {}}
-             toggleTag={() => {}}
-             showModalReport={() => {}}
-             showModalSuggestion={() => {}}/>
-        </div>
-
-      )
-    })
-  }
 
   return (
     <div className="container">
@@ -70,10 +49,15 @@ export const ViewPostsScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        <div className="postItems">
-          {renderPosts()}
-        </div>
-
+        <ContainerPosts
+          activeLoader={false}
+          queryUrl={queryParseUrl}
+          toggleTag={() => {}}
+          tags={[]}
+          activeFilters={[]}
+          posts={posts}
+          showModalSuggestionFunction={() => {}}
+        />
         <PaginationComponent
           urlBase='ViewPosts'
           initial={1}

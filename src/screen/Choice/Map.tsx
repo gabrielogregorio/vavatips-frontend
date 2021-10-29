@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BreadcrumbComponent } from "../../components/Breadcrumb/Breadcrumb";
-import { FooterComponent } from "../../components/Footer/footer";
-import { LoaderComponent } from "../../components/loader/loader";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public/navbar";
+import { BreadcrumbComponent } from "../../components/Breadcrumb";
+import { ErrorMsg } from "../../components/ErrorMsg";
+import { FooterComponent } from "../../components/Footer";
+import { Img } from "../../components/Img";
+import { LoaderComponent } from "../../components/Loader";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
-
-let breadcrumbs = [
-  { url: '/', text: 'inicio'},
-  { url: '/Maps', text: 'mapas'}
-]
+import { LINKS } from '../../data/links'
 
 
+let breadcrumbs = [ LINKS.Home, LINKS.Maps]
 
 export const MapScreen = () => {
   const [ mapsApi, setMapsApi ] = useState<string[]>([])
@@ -20,19 +19,23 @@ export const MapScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
-    api.get(`/maps`).then(res => {
-      setMapsApi(res.data.maps)
-      setActiveLoader(false)
-
-    }).catch(error => {
-      if(error.message === 'Network Error') {
-        setErrorMsg('Erro de conexão com o servidor')
-      } else {
-        setErrorMsg('Erro desconhecido no servidor')
-      }
-      setActiveLoader(false)
-    })
+    loadMaps()
   }, [])
+
+  async function loadMaps() {
+    const mapResponse = api.get(`/maps`)
+
+    try {
+      const [ maps ] = await Promise.all([ mapResponse ])
+      const mapsJson = maps.data.maps
+
+      setMapsApi(mapsJson)
+      setActiveLoader(false)
+    } catch(error) {
+      setErrorMsg('Erro desconhecido no servidor')
+      setActiveLoader(false)
+    }
+  }
 
   function renderMap() {
     if (mapsApi.length === 0) {
@@ -42,7 +45,7 @@ export const MapScreen = () => {
     return maps().map(map => {
       return mapsApi.includes(map.name) ? (
         <Link to={`/Agents?map=${map.name}`} className="grid" key={map.id}>
-          <img src={map.img} alt={map.name} />
+          <Img src={map.img} alt={map.name} />
           <p>{map.name}</p>
         </Link>
       ) : null
@@ -55,16 +58,15 @@ export const MapScreen = () => {
       <BreadcrumbComponent breadcrumbs={breadcrumbs}/>
 
       <div className="subcontainer">
-        <h1>Escolhe um mapa ai parça</h1>
-        <p style={{textAlign: 'center'}} >Aqui você escolhe um mapa, um agente, e terá as melhores dicas para fazer durante sua gameplay!</p><br />
-        <p className="errorMsg">{errorMsg}</p><br />
+        <h1>Escolha um mapa ai parça </h1>
+         <ErrorMsg msg={errorMsg} />
         <LoaderComponent active={activeLoader} />
 
-        <div className="gridFull">
+         <div className="gridFull">
           {renderMap()}
           </div>
+          </div>
+         <FooterComponent color="primary" />
         </div>
-        <FooterComponent color="primary" />
-    </div>
   )
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import { logout } from '../../../services/auth'
-import { LoaderComponent } from '../../../components/loader/loader'
-import { FooterComponent } from '../../../components/Footer/footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
+import { LoaderComponent } from '../../../components/Loader'
+import { FooterComponent } from '../../../components/Footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
@@ -13,16 +13,27 @@ let breadcrumbs = [
 
 export const DashboardScreen = () => {
   const [username, setUsername] = useState<string>("")
-  const [errorMsg, setErrorMsg] = useState<string>("")
+  const [ errorMsg ] = useState<string>("")
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
 
   const [ countViewsIps, setCountViewsIps] = useState<number>(0)
   const [ countViewsAll, setCountViewsAll] = useState<number>(0)
+  const [ countAlAgents, setCountAlAgents ] = useState<number>(0)
+  const [ countAlMaps, setCountAlMaps ] = useState<number>(0)
+  const [ countAllPosts, setCountAllPosts ] = useState<number>(0)
+  const [ countAllSuggestions, setCountAllSuggestions ] = useState<number>(0)
+  const [ countAllUsers, setCountAllUsers ] = useState<number>(0)
 
   useEffect(() => {
-    api.get(`/views`).then(res => {
+    api.get(`/dashboard`).then(res => {
+      console.log(res)
       setCountViewsAll(res.data.countAll)
       setCountViewsIps(res.data.countIps)
+      setCountAlAgents(res.data.countAlAgents)
+      setCountAlMaps(res.data.countAlMaps)
+      setCountAllPosts(res.data.countAllPosts)
+      setCountAllSuggestions(res.data.countAllSuggestions)
+      setCountAllUsers(res.data.countAllUsers)
     })
 
     api.get(`/user`).then(res => {
@@ -50,6 +61,12 @@ export const DashboardScreen = () => {
 
         <p>Consultas: {countViewsAll}</p>
         <p>Usuários: {countViewsIps}</p>
+
+        <p>agentes: {countAlAgents}</p>
+        <p>mapas: {countAlMaps}</p>
+        <p>posts: {countAllPosts}</p>
+        <p>sugestões: {countAllSuggestions}</p>
+        <p>administradores: {countAllUsers}</p>
 
       </div>
       <FooterComponent color="secundary" />

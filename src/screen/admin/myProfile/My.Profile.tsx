@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
-import { NavbarComponent, navbarEnum } from '../../../components/navbar/navbar'
-import { InputValue } from '../../../components/inputValue'
+import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
+import { InputValue } from '../../../components/InputValue'
 import { logout } from '../../../services/auth'
-import { LoaderComponent } from '../../../components/loader/loader'
-import { FooterComponent } from '../../../components/Footer/footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb/Breadcrumb'
+import { LoaderComponent } from '../../../components/Loader'
+import { FooterComponent } from '../../../components/Footer'
+import { BreadcrumbComponent } from '../../../components/Breadcrumb'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
@@ -44,16 +44,24 @@ export const MyProfileScreen = () => {
   }
 
   useEffect(() => {
-    api.get(`/user`).then(res => {
-      setUsername(res.data.username)
-      setActiveLoader(false)
-    }).catch(error => {
-      if(error?.response?.data?.msg === 'jwt expired') {
-        logout()
-        setActiveLoader(false)
-      }
-    })
+    loadProfile()
   }, [])
+
+  async function loadProfile() {
+    console.log('load profile')
+    const profileResponse = api.get(`/user`)
+
+    try {
+      const [ profile ] = await Promise.all([ profileResponse ])
+      const profileJson = profile.data.username
+      setUsername(profileJson)
+      setActiveLoader(false)
+
+    } catch(error) {
+      logout()
+      setActiveLoader(false)
+    }
+  }
 
   return (
     <div className="container">
