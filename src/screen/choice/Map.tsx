@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BreadcrumbComponent } from "../../components/breadcrumb";
-import { ErrorMsg } from "../../components/ErrorMsg";
-import { FooterComponent } from "../../components/Footer";
+import { ErrorMsg } from "../../components/errorMsg";
+import { FooterComponent } from "../../components/footer";
 import { Img } from "../../components/img";
 import { LoaderComponent } from "../../components/loader";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
 import { maps } from '../../data/data-valorant'
 import api from "../../services/api";
 import { LINKS } from '../../data/links'

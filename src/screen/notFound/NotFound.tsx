@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterComponent } from "../../components/Footer";
+import { FooterComponent } from "../../components/footer";
 
 export const NotFoundScreen = () => {
   return (

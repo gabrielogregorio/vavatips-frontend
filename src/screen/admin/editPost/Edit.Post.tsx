@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import queryString from 'query-string'
+import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar'
@@ -7,17 +9,18 @@ import * as uuid from 'uuid'
 import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
 import { Input } from '../../../components/input';
 import { ModalComponent } from '../../../components/modal';
-import { formatImage } from '../../../services/formatEnvironment'
-import { FooterComponent } from '../../../components/Footer'
-import { Selected } from '../../../components/selected'
-import { BreadcrumbComponent } from '../../../components/breadcrumb'
+import { formatImage } from '../../../services/formatEnvironment';
+import { FooterComponent } from '../../../components/footer';
+import { Selected } from '../../../components/selected';
+import { BreadcrumbComponent } from '../../../components/breadcrumb';
 
-type actionType = "top" | "bottom"
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},
-  { url: '/PostCreate', text: 'criar'}
+  { url: '/Dashboard', text: 'editar'}
 ]
+
+type actionType = "top" | "bottom"
 
 interface imgInterface {
   description: string,
@@ -31,8 +34,12 @@ interface propsModalInterface {
   image: string
 }
 
-export const CreatePostScreen = () => {
+export const EditPostScreen = () => {
   const [ redirect, setRedirect ] = useState<boolean>(false)
+
+  const { search } = useLocation();
+  const id = `${queryString.parse(search)?.id}`
+
   const [ imgAdded, setImgAdded ] = useState<imgInterface[]>([])
 
   const [ formTitle, setFormTitle ] = useState<string>("")
@@ -48,8 +55,26 @@ export const CreatePostScreen = () => {
   const [ visibleModal, setVisibleModal ] = useState<boolean>(false)
   const [ propsModal, setPropsModal ] = useState<propsModalInterface>({_id: "", description: "", image: ""})
 
+  useEffect(() => {
+    api.get(`/post/${id}`).then(res => {
+      const postJson = res.data
+      setFormTitle(postJson.title)
+      setFormDescription(postJson.description)
+      setFormTagMoment(postJson.tags.moment)
+      setFormTagDifficult(postJson.tags.difficult)
+      setFormTagAbility(postJson.tags.ability)
+      setFormTagSide(postJson.tags.side)
+      setFormTagMap(postJson.tags.map)
+      setFormTagMapPosition(postJson.tags.mapPosition)
+      setFormTagAgent(postJson.tags.agent)
+      setImgAdded(postJson.imgs)
+    }).catch(error => {
+      console.log(error)
+    })
+  }, [id])
+
   async function handleSubmit() {
-    let request = await {
+    let request = {
       title: formTitle,
       description: formDescription,
       user: '',
@@ -66,7 +91,7 @@ export const CreatePostScreen = () => {
     }
 
     try {
-      await api.post(`/post`, {...request})
+      await api.put(`/post/${id}`, {...request})
       setRedirect(true)
     } catch(error) {
       console.log(error)
@@ -74,7 +99,6 @@ export const CreatePostScreen = () => {
   }
 
   function deleteStep(_id: string) {
-    console.log(_id)
     setImgAdded(imgAdded.filter(item => item._id !== _id))
   }
 
@@ -121,7 +145,7 @@ export const CreatePostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
+          <img src={formatImage(instruction.image)} alt={instruction.description}/> <br />
           <button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </button>
@@ -134,6 +158,7 @@ export const CreatePostScreen = () => {
       </div>
     ))
   }
+
 
   function renderAgent() {
     return agents()
@@ -162,7 +187,6 @@ export const CreatePostScreen = () => {
 
   function renderPositionsMap() {
     let filterMapPositions: mapInterface = maps().filter(map => map.name === formTagMap)?.[0]
-    console.log(filterMapPositions?.mapPosition)
     return filterMapPositions?.mapPosition ?? []
   }
 
@@ -199,13 +223,20 @@ export const CreatePostScreen = () => {
     setVisibleModal(false)
   }
 
+  async function deletePost(id: string) {
+    if(window.confirm('Deseja excluir permanentemente este post?')) {
+      await api.delete(`/post/${id}`)
+      setRedirect(true)
+    }
+  }
+
   return (
     <div className="container">
-      <NavbarComponent selected={navbarEnum.PostCreate} />
+      <NavbarComponent selected={navbarEnum.EditScreen} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        {redirect ? <Redirect to="/Dashboard" /> : null }
+        {redirect ? <Redirect to="/ViewPosts" /> : null }
 
         {visibleModal ?
           (<ModalComponent
@@ -214,10 +245,14 @@ export const CreatePostScreen = () => {
               description={propsModal.description}
               image={propsModal.image}
               closeModal={closeModal}
-              saveModal={saveModal}/>) : ( null)}
+              saveModal={saveModal}/>)
+          : ( null)}
+
 
         <div className="form">
-          <h1>Criar um post</h1>
+
+        <h1>Editar um post</h1>
+          <button className="btn-color-primary" onClick={() => deletePost(id)} >Excluir</button>
 
           <Input type="text" text="Titulo" value={formTitle} setValue={setFormTitle}/>
           <Input type="text" text="Descrição" value={formDescription} setValue={setFormDescription}/>
@@ -257,11 +292,9 @@ export const CreatePostScreen = () => {
               <button onClick={() => handleSubmit()} className="btn-secundary">Publicar Dica</button>
             </div>
           </div>
-
         </div>
       </div>
       <FooterComponent color="secundary" />
     </div>
-
   )
 }

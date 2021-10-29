@@ -4,7 +4,7 @@ import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import { Input } from '../../../components/input'
 import { logout } from '../../../services/auth'
 import { LoaderComponent } from '../../../components/loader'
-import { FooterComponent } from '../../../components/Footer'
+import { FooterComponent } from '../../../components/footer'
 import { BreadcrumbComponent } from '../../../components/breadcrumb'
 
 let breadcrumbs = [

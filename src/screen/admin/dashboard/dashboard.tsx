@@ -3,7 +3,7 @@ import api from '../../../services/api'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import { logout } from '../../../services/auth'
 import { LoaderComponent } from '../../../components/loader'
-import { FooterComponent } from '../../../components/Footer'
+import { FooterComponent } from '../../../components/footer'
 import { BreadcrumbComponent } from '../../../components/breadcrumb'
 
 let breadcrumbs = [

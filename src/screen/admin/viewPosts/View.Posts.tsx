@@ -4,10 +4,10 @@ import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
 import query from 'query-string'
 import { useState } from 'react'
-import { FooterComponent } from '../../../components/Footer'
+import { FooterComponent } from '../../../components/footer'
 import { BreadcrumbComponent } from '../../../components/breadcrumb'
-import { PaginationComponent } from '../../../components/Pagination'
-import { ContainerPosts } from '../../../components/ContainerPosts'
+import { PaginationComponent } from '../../../components/pagination'
+import { ContainerPosts } from '../../../components/containerPosts'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},

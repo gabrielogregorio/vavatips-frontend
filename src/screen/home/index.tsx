@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import query from 'query-string'
 import api from '../../services/api'
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
-import { ModalOfSuggestion } from '../../components/ModalOfSuggestion'
-import { ModalMessage } from '../../components/ModalMessage'
-import { FooterComponent } from '../../components/Footer'
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
+import { ModalOfSuggestion } from '../../components/modalOfSuggestion'
+import { ModalMessage } from '../../components/modalMessage'
+import { FooterComponent } from '../../components/footer'
 import { BreadcrumbComponent } from '../../components/breadcrumb'
-import { PaginationComponent } from '../../components/Pagination'
+import { PaginationComponent } from '../../components/pagination'
 import resolveQuery from '../../services/resolveQuery'
-import { ErrorMsg } from '../../components/ErrorMsg'
-import { ContainerPosts } from '../../components/ContainerPosts';
+import { ErrorMsg } from '../../components/errorMsg'
+import { ContainerPosts } from '../../components/containerPosts';
 import { mockPost } from '../../mock/posts'
 import { LINKS } from '../../data/links'
-import { getPostsSave } from '../../services/handlePosts'
 
 interface filterUrlInterface {
   agent: string,
@@ -22,9 +21,9 @@ interface filterUrlInterface {
   page: string
 }
 
-let breadcrumbs = [ LINKS.Home, LINKS.Save]
+let breadcrumbs = [ LINKS.Home, LINKS.Maps, LINKS.Agents, LINKS.Posts]
 
-export const SaveScreen = () => {
+export const HomeScreen = () => {
   const location = useLocation()
 
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
@@ -45,18 +44,22 @@ export const SaveScreen = () => {
     setActiveLoader(true)
     setErrorMsg('')
 
+    let agent: string = `${query.parse(location?.search).agent}`
+    let map: string = `${query.parse(location?.search).map}`
     let type: string = `${query.parse(location?.search).type}`
     let page: string = `${query.parse(location?.search).page}`
 
+    if(agent === 'undefined') { agent = ''}
+    if(map === 'undefined') { map = ''}
     if(type === 'undefined') { type = ''}
     if(page === 'undefined') { page = '1'}
 
-    let data: filterUrlInterface = {agent: '', map:'', type, page}
+    let data: filterUrlInterface = {agent, map, type, page}
     setQueryUrl(data)
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(resolveQuery('/Posts', {idPosts: getPostsSave(), page, filters: activeFilters.toString()})).then(res => {
+    api.get(resolveQuery('/Posts', {agent, map, page, filters: activeFilters.toString()})).then(res => {
       let postsFiltered = res.data.posts
       setFinishPage(res.data.count)
       setTags(res.data.tags)
@@ -90,7 +93,7 @@ export const SaveScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic
-        selected={navbarEnumPublic.Save}
+        selected={navbarEnumPublic.Posts}
         agent={queryUrl.agent}
         map={queryUrl.map}/>
 
@@ -110,7 +113,7 @@ export const SaveScreen = () => {
         data={modalMessage}
         closeModal={setShowModalMessage} />
 
-      <h1>Posts Salvos</h1>
+      <h1>As melhores dicas de Valorant</h1>
       <ErrorMsg msg={errorMsg} />
 
       <ContainerPosts
@@ -134,5 +137,6 @@ export const SaveScreen = () => {
         </div>
       <FooterComponent color="primary" />
     </div>
+
   )
 }

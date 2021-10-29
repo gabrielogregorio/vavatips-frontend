@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import 'dotenv/config'
 import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
-import { FooterComponent } from '../../../components/Footer';
+import { FooterComponent } from '../../../components/footer';
 
 import { BreadcrumbComponent } from '../../../components/breadcrumb';
 

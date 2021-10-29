@@ -3,10 +3,10 @@ import { Redirect } from "react-router-dom";
 import { useState } from 'react'
 import api from "../../services/api";
 import { login } from "../../services/auth";
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
 import { Input } from "../../components/input";
 import { LoaderComponent } from "../../components/loader";
-import { FooterComponent } from "../../components/Footer";
+import { FooterComponent } from "../../components/footer";
 import { BreadcrumbComponent } from "../../components/breadcrumb";
 import { LINKS } from '../../data/links'
 type accessType = "login" | "register"
