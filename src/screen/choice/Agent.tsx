@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
 import query from "query-string";
 import { agents } from '../../data/data-valorant'
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
 import api from "../../services/api";
-import { LoaderComponent } from "../../components/Loader";
-import { FooterComponent } from "../../components/Footer";
-import { BreadcrumbComponent } from "../../components/Breadcrumb";
-import { ErrorMsg } from "../../components/ErrorMsg";
-import { Img } from "../../components/Img";
+import { LoaderComponent } from "../../components/loader";
+import { FooterComponent } from "../../components/footer";
+import { BreadcrumbComponent } from "../../components/breadcrumb";
+import { ErrorMsg } from "../../components/errorMsg";
+import { Img } from "../../components/img";
 import { LINKS } from '../../data/links'
 
 let breadcrumbs = [ LINKS.Home, LINKS.Maps, LINKS.Agents]

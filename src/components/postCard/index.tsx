@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatImage } from "../../services/formatEnvironment";
-import { Img } from "../Img";
+import { Img } from "../img";
 import styles from './post.module.css'
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../services/handlePosts'
 

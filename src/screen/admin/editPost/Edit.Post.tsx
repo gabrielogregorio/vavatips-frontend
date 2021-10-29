@@ -3,16 +3,16 @@ import queryString from 'query-string'
 import { useLocation } from 'react-router';
 import 'dotenv/config'
 import { Redirect } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
 import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
-import { Input } from '../../../components/Input';
+import { Input } from '../../../components/input';
 import { ModalComponent } from '../../../components/modal';
 import { formatImage } from '../../../services/formatEnvironment';
-import { FooterComponent } from '../../../components/Footer';
-import { Selected } from '../../../components/Selected';
-import { BreadcrumbComponent } from '../../../components/Breadcrumb';
+import { FooterComponent } from '../../../components/footer';
+import { Selected } from '../../../components/selected';
+import { BreadcrumbComponent } from '../../../components/breadcrumb';
 
 
 let breadcrumbs = [

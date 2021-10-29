@@ -7,13 +7,13 @@ import { CreatePostScreen } from './screen/admin/createPost/Create.Post'
 import { EditPostScreen } from './screen/admin/editPost/Edit.Post'
 import { MyProfileScreen } from './screen/admin/myProfile/My.Profile'
 import { ViewPostsScreen } from './screen/admin/viewPosts/View.Posts'
-import { NotFoundScreen } from './screen/NotFound/NotFound'
+import { NotFoundScreen } from './screen/notFound/NotFound'
 import { isAuthenticated } from "./services/auth"
 import { ConfigScreen } from './screen/admin/config/config'
 import { SuggestionScreen } from './screen/admin/suggestions/Suggestion'
 import { DashboardScreen } from './screen/admin/dashboard/dashboard'
-import { SaveScreen } from './screen/Save'
-import { TestScreen } from './screen/Tested'
+import { SaveScreen } from './screen/save'
+import { TestScreen } from './screen/tested'
 
 const PrivateRoute = ({ children, ...rest }: any) => {
   return (

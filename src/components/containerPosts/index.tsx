@@ -1,8 +1,8 @@
 import React from "react";
-import { LoaderComponent } from "../Loader";
-import { Posts } from "../PostsItem";
-import { PostTags } from "../Tags";
-import { TagsFixFilters } from "../TagsFixFilters";
+import { LoaderComponent } from "../loader";
+import { Posts } from "../postsItem";
+import { PostTags } from "../tags";
+import { TagsFixFilters } from "../tagsFixFilters";
 
 interface propsInterface {
   queryUrl: any,

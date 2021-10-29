@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
+import { NavbarComponent, navbarEnum } from '../../../components/navbar'
 import api from '../../../services/api'
 import query from 'query-string'
 import { useState } from 'react'
-import { FooterComponent } from '../../../components/Footer'
-import { BreadcrumbComponent } from '../../../components/Breadcrumb'
-import { PaginationComponent } from '../../../components/Pagination'
-import { ContainerPosts } from '../../../components/ContainerPosts'
+import { FooterComponent } from '../../../components/footer'
+import { BreadcrumbComponent } from '../../../components/breadcrumb'
+import { PaginationComponent } from '../../../components/pagination'
+import { ContainerPosts } from '../../../components/containerPosts'
 
 let breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo'},

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
-import { Input } from '../Input'
-import { TextArea } from '../TextArea'
+import { Input } from '../input'
+import { TextArea } from '../textArea'
 
 interface ModalProps {
   title: string,

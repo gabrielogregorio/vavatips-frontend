@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import query from 'query-string'
 import api from '../../services/api'
-import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
-import { ModalOfSuggestion } from '../../components/ModalOfSuggestion'
-import { ModalMessage } from '../../components/ModalMessage'
-import { FooterComponent } from '../../components/Footer'
-import { BreadcrumbComponent } from '../../components/Breadcrumb'
-import { PaginationComponent } from '../../components/Pagination'
+import { NavbarComponentPublic, navbarEnumPublic } from "../../components/navbar_public";
+import { ModalOfSuggestion } from '../../components/modalOfSuggestion'
+import { ModalMessage } from '../../components/modalMessage'
+import { FooterComponent } from '../../components/footer'
+import { BreadcrumbComponent } from '../../components/breadcrumb'
+import { PaginationComponent } from '../../components/pagination'
 import resolveQuery from '../../services/resolveQuery'
-import { ErrorMsg } from '../../components/ErrorMsg'
-import { ContainerPosts } from '../../components/ContainerPosts';
+import { ErrorMsg } from '../../components/errorMsg'
+import { ContainerPosts } from '../../components/containerPosts';
 import { mockPost } from '../../mock/posts'
 import { LINKS } from '../../data/links'
 
