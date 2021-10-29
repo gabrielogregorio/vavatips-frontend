@@ -205,7 +205,7 @@ export const CreatePostScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        {redirect ? <Redirect to="/ViewPosts" /> : null }
+        {redirect ? <Redirect to="/Dashboard" /> : null }
 
         {visibleModal ?
           (<ModalComponent

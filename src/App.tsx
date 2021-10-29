@@ -12,6 +12,8 @@ import { isAuthenticated } from "./services/auth"
 import { ConfigScreen } from './screen/admin/config/config'
 import { SuggestionScreen } from './screen/admin/suggestions/Suggestion'
 import { DashboardScreen } from './screen/admin/dashboard/dashboard'
+import { SaveScreen } from './screen/Save'
+import { TestScreen } from './screen/Tested'
 
 const PrivateRoute = ({ children, ...rest }: any) => {
   return (
@@ -48,6 +50,14 @@ function App() {
 
         <Route path="/Posts">
           <HomeScreen />
+        </Route>
+
+        <Route path="/Save">
+          <SaveScreen />
+        </Route>
+
+        <Route path="/Tested">
+          <TestScreen />
         </Route>
 
         <Route path="/Login">

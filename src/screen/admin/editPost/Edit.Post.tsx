@@ -224,8 +224,10 @@ export const EditPostScreen = () => {
   }
 
   async function deletePost(id: string) {
-    await api.delete(`/post/${id}`)
-    setRedirect(true)
+    if(window.confirm('Deseja excluir permanentemente este post?')) {
+      await api.delete(`/post/${id}`)
+      setRedirect(true)
+    }
   }
 
   return (

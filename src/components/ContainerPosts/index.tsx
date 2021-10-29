@@ -1,10 +1,12 @@
 import React from "react";
+import { LoaderComponent } from "../Loader";
 import { Posts } from "../Posts";
 import { PostTags } from "../Tags";
 import { TagsFixFilters } from "../TagsFixFilters";
 
 interface propsInterface {
   queryUrl: any,
+  activeLoader: boolean,
   activeFilters: string[]
   posts: postsProps[],
   tags: string[],
@@ -17,6 +19,7 @@ export const ContainerPosts = ( {
     toggleTag,
     tags,
     activeFilters,
+    activeLoader,
     posts,
     showModalSuggestionFunction
 }: propsInterface) => {
@@ -25,6 +28,8 @@ export const ContainerPosts = ( {
         <TagsFixFilters queryUrl={queryUrl} />
 
         <PostTags toggleTag={toggleTag} tags={tags} activeFilters={activeFilters} />
+
+        <LoaderComponent active={activeLoader} />
 
         <Posts
           posts={posts}

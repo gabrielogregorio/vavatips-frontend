@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { formatImage } from "../../services/formatEnvironment";
 import { Img } from "../Img";
 import styles from './post.module.css'
+import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../services/handlePosts'
+
+import { isAuthenticated } from '../../services/auth'
 type typeType = 'next' | 'prev'
 
 // Componente post
@@ -16,6 +19,27 @@ interface PropsPostInterface {
 
 export const PostCard = (props: PropsPostInterface) => {
   const [ idImage, setIdImage ] = useState<number>(0)
+  const [ postTested, setPostTested ] = useState<boolean>(false)
+  const [ postSave, setPostSave ] = useState<boolean>(false)
+
+  function handleAddTest() {
+    if(postTested) { removePost(props.post._id, 'test')
+    } else { addNewPost(props.post._id, 'test') }
+    setPostTested(getPostsTested()?.includes(props.post._id) ?? false)
+  }
+
+  function handleAddSave() {
+    if(postSave) { removePost(props.post._id, 'save')
+    } else { addNewPost(props.post._id, 'save') }
+    setPostSave(getPostsSave()?.includes(props.post._id) ?? false)
+  }
+
+  useEffect(() => {
+    // Este post está incluso nos posts testados!
+    setPostTested(getPostsTested()?.includes(props.post._id) ?? false)
+    setPostSave(getPostsSave()?.includes(props.post._id) ?? false)
+  }, [props.post._id])
+
 
   function nextImage(type: typeType, length: number) {
     if (type === 'next' ) {
@@ -53,14 +77,13 @@ export const PostCard = (props: PropsPostInterface) => {
            )
         }
 
-        <p>{props.post.user.username ?? 'Ademir Maluco'}</p>
+        <p>{props.post.user.username ?? 'Ademir'}</p>
 
-        <button>reportar</button>
-
-        { props.viewAdmin ? (
-          <Link to={`PostEdit?id=${props.post._id}`}>Editar Post</Link>
-        ): null }
-
+        {isAuthenticated() === true ? (
+          <button>
+            <Link to={`PostEdit?id=${props.post._id}`}>Editar</Link>
+          </button>
+        ) : null }
       </div>
 
       <h3>{props.post.title}</h3>
@@ -78,7 +101,7 @@ export const PostCard = (props: PropsPostInterface) => {
           </div>
 
           <div className={styles.descriptionImage}>
-            <p>{idImage + 1} - {props.post.imgs?.[idImage]?.description}</p>
+            <p>{idImage + 1}/{props.post.imgs.length} - {props.post.imgs?.[idImage]?.description}</p>
           </div>
         </div>
       </div>
@@ -98,8 +121,9 @@ export const PostCard = (props: PropsPostInterface) => {
 
       { !props.viewAdmin ? (
       <div className={styles.actions}>
-        <button>A testar</button>
-        <button> Salvo</button>
+        <button className={postTested ? styles.actionsActive : ''} onClick={handleAddTest}>A testar</button>
+
+        <button className={postSave ? styles.actionsActive : ''} onClick={handleAddSave}> Salvo</button>
         <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>
       </div>
       ) : null }

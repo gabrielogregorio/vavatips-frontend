@@ -13,6 +13,10 @@
   --primary: #cb4343;
   --secundary: #438ACB;
   --purple: #CB43BD;
+
+  --primary-small: #d4a4a4;
+  --secundary-small: #a6b8ca;
+  --purple-small: #cc9ac7;
 }
 
 * {

@@ -24,7 +24,7 @@ export const NavbarComponent = (props:NavbarProps) => {
 
         <Link
           className={styles.logo}
-          to="/Profile">VAVATIPS</Link>
+          to="/">VAVATIPS</Link>
 
         <Link
           className={props.selected === navbarEnum.Dashboard ? styles.navActive : ""}
@@ -37,10 +37,10 @@ export const NavbarComponent = (props:NavbarProps) => {
         <Link
           className={props.selected === navbarEnum.ViewPosts ? styles.navActive : ""}
           to="/ViewPosts">posts</Link>
-
+{/*
         <Link
           className={props.selected === navbarEnum.ReportScreen ? styles.navActive : ""}
-          to="/Reports">reports</Link>
+          to="/Reports">reports</Link> */}
 
         <Link
           className={props.selected === navbarEnum.SuggestionScreen ? styles.navActive : ""}

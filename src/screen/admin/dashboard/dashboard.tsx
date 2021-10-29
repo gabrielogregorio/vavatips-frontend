@@ -18,11 +18,22 @@ export const DashboardScreen = () => {
 
   const [ countViewsIps, setCountViewsIps] = useState<number>(0)
   const [ countViewsAll, setCountViewsAll] = useState<number>(0)
+  const [ countAlAgents, setCountAlAgents ] = useState<number>(0)
+  const [ countAlMaps, setCountAlMaps ] = useState<number>(0)
+  const [ countAllPosts, setCountAllPosts ] = useState<number>(0)
+  const [ countAllSuggestions, setCountAllSuggestions ] = useState<number>(0)
+  const [ countAllUsers, setCountAllUsers ] = useState<number>(0)
 
   useEffect(() => {
-    api.get(`/views`).then(res => {
+    api.get(`/dashboard`).then(res => {
+      console.log(res)
       setCountViewsAll(res.data.countAll)
       setCountViewsIps(res.data.countIps)
+      setCountAlAgents(res.data.countAlAgents)
+      setCountAlMaps(res.data.countAlMaps)
+      setCountAllPosts(res.data.countAllPosts)
+      setCountAllSuggestions(res.data.countAllSuggestions)
+      setCountAllUsers(res.data.countAllUsers)
     })
 
     api.get(`/user`).then(res => {
@@ -50,6 +61,12 @@ export const DashboardScreen = () => {
 
         <p>Consultas: {countViewsAll}</p>
         <p>Usuários: {countViewsIps}</p>
+
+        <p>agentes: {countAlAgents}</p>
+        <p>mapas: {countAlMaps}</p>
+        <p>posts: {countAllPosts}</p>
+        <p>sugestões: {countAllSuggestions}</p>
+        <p>administradores: {countAllUsers}</p>
 
       </div>
       <FooterComponent color="secundary" />

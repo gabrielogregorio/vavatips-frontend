@@ -50,10 +50,11 @@ export const ViewPostsScreen = () => {
 
       <div className="subcontainer">
         <ContainerPosts
+          activeLoader={false}
           queryUrl={queryParseUrl}
           toggleTag={() => {}}
-          tags={['']}
-          activeFilters={['']}
+          tags={[]}
+          activeFilters={[]}
           posts={posts}
           showModalSuggestionFunction={() => {}}
         />

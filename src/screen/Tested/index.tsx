@@ -13,6 +13,7 @@ import { ErrorMsg } from '../../components/ErrorMsg'
 import { ContainerPosts } from '../../components/ContainerPosts';
 import { mockPost } from '../../mock/posts'
 import { LINKS } from '../../data/links'
+import { getPostsTested } from '../../services/handlePosts'
 
 interface filterUrlInterface {
   agent: string,
@@ -21,9 +22,9 @@ interface filterUrlInterface {
   page: string
 }
 
-let breadcrumbs = [ LINKS.Home, LINKS.Maps, LINKS.Agents, LINKS.Posts]
+let breadcrumbs = [ LINKS.Home, LINKS.Tested]
 
-export const HomeScreen = () => {
+export const TestScreen = () => {
   const location = useLocation()
 
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
@@ -44,22 +45,18 @@ export const HomeScreen = () => {
     setActiveLoader(true)
     setErrorMsg('')
 
-    let agent: string = `${query.parse(location?.search).agent}`
-    let map: string = `${query.parse(location?.search).map}`
     let type: string = `${query.parse(location?.search).type}`
     let page: string = `${query.parse(location?.search).page}`
 
-    if(agent === 'undefined') { agent = ''}
-    if(map === 'undefined') { map = ''}
     if(type === 'undefined') { type = ''}
     if(page === 'undefined') { page = '1'}
 
-    let data: filterUrlInterface = {agent, map, type, page}
+    let data: filterUrlInterface = {agent: '', map:'', type, page}
     setQueryUrl(data)
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(resolveQuery('/Posts', {agent, map, page, filters: activeFilters.toString()})).then(res => {
+    api.get(resolveQuery('/Posts', {idPosts: getPostsTested(), page, filters: activeFilters.toString()})).then(res => {
       let postsFiltered = res.data.posts
       setFinishPage(res.data.count)
       setTags(res.data.tags)
@@ -93,7 +90,7 @@ export const HomeScreen = () => {
   return (
     <div className="container">
       <NavbarComponentPublic
-        selected={navbarEnumPublic.Posts}
+        selected={navbarEnumPublic.Tested}
         agent={queryUrl.agent}
         map={queryUrl.map}/>
 
@@ -113,7 +110,7 @@ export const HomeScreen = () => {
         data={modalMessage}
         closeModal={setShowModalMessage} />
 
-      <h1>As melhores dicas de Valorant</h1>
+      <h1>Posts Testados</h1>
       <ErrorMsg msg={errorMsg} />
 
       <ContainerPosts
@@ -137,6 +134,5 @@ export const HomeScreen = () => {
         </div>
       <FooterComponent color="primary" />
     </div>
-
   )
 }

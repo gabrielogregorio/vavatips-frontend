@@ -33,9 +33,14 @@ export const NavbarComponentPublic = (props:NavbarProps) => {
           className={props.selected === navbarEnumPublic.Posts ? styles.navActive : ""}
           to={`/Posts`}>posts</Link>
 
-        {/* <Link
+        {<Link
           className={props.selected === navbarEnumPublic.Save ? styles.navActive : ""}
-          to={`/Posts?type=Save&agent=${props.agent ?? ''}&map=${props.map ?? ''}`}>salvos</Link> */}
+          to={`/Save`}>salvos</Link>}
+
+        {<Link
+          className={props.selected === navbarEnumPublic.Tested ? styles.navActive : ""}
+          to={`/Tested`}>testados</Link>}
+
 
         <a
           target="_blank"

@@ -92,7 +92,7 @@ export const AccessScreen = () => {
 
       <div className="subcontainer">
         <div className="form">
-          {redirect ? <Redirect to="/Profile" /> : null }
+          {redirect ? <Redirect to="/Dashboard" /> : null }
 
           <h1>{ typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </h1>
           <LoaderComponent active={activeLoader} />
