@@ -9,7 +9,7 @@ interface propsInterface {
   setValue: (e: any) => void
 }
 
-export const InputValue = (props: propsInterface) => {
+export const Input = (props: propsInterface) => {
   let disabled = props.disabled ?? false
 
   return (

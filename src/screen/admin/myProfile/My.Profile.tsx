@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../../services/api'
 import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
-import { InputValue } from '../../../components/InputValue'
+import { Input } from '../../../components/Input'
 import { logout } from '../../../services/auth'
 import { LoaderComponent } from '../../../components/Loader'
 import { FooterComponent } from '../../../components/Footer'
@@ -77,9 +77,9 @@ export const MyProfileScreen = () => {
 
           { activeLoader === false ? (
             <>
-              <InputValue type="text" text="Trocar nome de usuário" value={username} setValue={setUsername}/>
-              <InputValue type="password" text="Digite uma nova senha" value={password} setValue={setPassword}/>
-              <InputValue type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
+              <Input type="text" text="Trocar nome de usuário" value={username} setValue={setUsername}/>
+              <Input type="password" text="Digite uma nova senha" value={password} setValue={setPassword}/>
+              <Input type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2}/>
 
               <div className="groupInput">
                 <div className="groupInputSelet">

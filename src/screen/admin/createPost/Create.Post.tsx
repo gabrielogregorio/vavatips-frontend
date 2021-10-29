@@ -5,8 +5,8 @@ import { NavbarComponent, navbarEnum } from '../../../components/Navbar'
 import api from '../../../services/api'
 import * as uuid from 'uuid'
 import { agents, maps, difficult, momment, side } from '../../../data/data-valorant'
-import { InputValue } from '../../../components/InputValue';
-import { ModalComponent } from '../../../components/Modal';
+import { Input } from '../../../components/Input';
+import { ModalComponent } from '../../../components/modal';
 import { formatImage } from '../../../services/formatEnvironment'
 import { FooterComponent } from '../../../components/Footer'
 import { Selected } from '../../../components/Selected'
@@ -219,8 +219,8 @@ export const CreatePostScreen = () => {
         <div className="form">
           <h1>Criar um post</h1>
 
-          <InputValue type="text" text="Titulo" value={formTitle} setValue={setFormTitle}/>
-          <InputValue type="text" text="Descrição" value={formDescription} setValue={setFormDescription}/>
+          <Input type="text" text="Titulo" value={formTitle} setValue={setFormTitle}/>
+          <Input type="text" text="Descrição" value={formDescription} setValue={setFormDescription}/>
 
           <hr />
 

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from 'react'
 import api from "../../../services/api";
 import { NavbarComponent, navbarEnum } from "../../../components/Navbar";
-import { InputValue } from "../../../components/InputValue";
+import { Input } from "../../../components/Input";
 import { FooterComponent } from "../../../components/Footer";
 import { BreadcrumbComponent } from "../../../components/Breadcrumb";
 
@@ -43,7 +43,7 @@ export const ConfigScreen = () => {
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
 
-          <InputValue type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess}/>
+          <Input type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess}/>
 
           <div className="groupInput">
             <div className="groupInputSelet">

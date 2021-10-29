@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../services/api'
-import { InputValue } from '../InputValue'
+import { Input } from '../Input'
 import { TextArea } from '../TextArea'
 
 interface ModalProps {
@@ -66,9 +66,9 @@ export const ModalOfSuggestion = (props: ModalProps) => {
         <div className="form">
         <p className="errorMsg">{errorMsg}</p>
 
-          <InputValue disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
+          <Input disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
 
-          <InputValue type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
+          <Input type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
 
           <TextArea title="Descrição" value={description} setValue={setDescription} />
 

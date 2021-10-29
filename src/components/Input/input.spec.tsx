@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { InputValue } from '.'
+import { Input } from '.'
 
 describe('should test input component', () => {
   it('should render input', () => {
     const fn = jest.fn()
-    render(<InputValue
+    render(<Input
       text="Description from input"
       value=""
       type="text"
@@ -18,7 +18,7 @@ describe('should test input component', () => {
 
   it('should call handleChange function on each key pressed', () => {
     const fn = jest.fn()
-    render(<InputValue
+    render(<Input
       text="Description from input"
       value=""
       type="text"

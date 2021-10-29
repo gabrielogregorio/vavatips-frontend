@@ -4,7 +4,7 @@ import { useState } from 'react'
 import api from "../../services/api";
 import { login } from "../../services/auth";
 import { NavbarComponentPublic, navbarEnumPublic } from "../../components/Navbar_public";
-import { InputValue } from "../../components/InputValue";
+import { Input } from "../../components/Input";
 import { LoaderComponent } from "../../components/Loader";
 import { FooterComponent } from "../../components/Footer";
 import { BreadcrumbComponent } from "../../components/Breadcrumb";
@@ -99,14 +99,14 @@ export const AccessScreen = () => {
           <p className="errorMsg">{errorMsg}</p>
 
           { typeAccess === 'register' ? (
-            <InputValue type="password" text="Código de cadastro" value={code} setValue={setCode}/>
+            <Input type="password" text="Código de cadastro" value={code} setValue={setCode}/>
           ) : null}
 
-          <InputValue type="text" text="Usuário" value={username} setValue={setUsername}/>
-          <InputValue type="password" text="Senha" value={password} setValue={setPassword}/>
+          <Input type="text" text="Usuário" value={username} setValue={setUsername}/>
+          <Input type="password" text="Senha" value={password} setValue={setPassword}/>
 
           { typeAccess === 'register' ? (
-            <InputValue type="password" text="Confirme uma senha" value={password2} setValue={setPassword2}/>
+            <Input type="password" text="Confirme uma senha" value={password2} setValue={setPassword2}/>
           ) : null}
 
           <div className="groupInput">

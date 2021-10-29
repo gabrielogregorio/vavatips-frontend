@@ -1,6 +1,6 @@
 import React from "react";
 import { LoaderComponent } from "../Loader";
-import { Posts } from "../Posts";
+import { Posts } from "../PostsItem";
 import { PostTags } from "../Tags";
 import { TagsFixFilters } from "../TagsFixFilters";
 
