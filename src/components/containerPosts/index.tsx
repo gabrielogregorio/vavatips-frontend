@@ -7,31 +7,20 @@ import { TagsFixFilters } from "../tagsFixFilters";
 interface propsInterface {
   queryUrl: any,
   activeLoader: boolean,
-  activeFilters: string[]
   posts: postsProps[],
-  tags: string[],
-  toggleTag: (tag: string) => void
 }
 
 export const ContainerPosts = ( {
     queryUrl,
-    toggleTag,
-    tags,
-    activeFilters,
     activeLoader,
     posts
 }: propsInterface) => {
   return (
     <div className="containerPost">
         <TagsFixFilters queryUrl={queryUrl} />
-
-        <PostTags toggleTag={toggleTag} tags={tags} activeFilters={activeFilters} />
-
+        <PostTags/>
         <LoaderComponent active={activeLoader} />
-
-        <Posts
-          posts={posts}
-          toggleTag={toggleTag}/>
+        <Posts posts={posts}/>
       </div>
   )
 }

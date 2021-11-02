@@ -16,6 +16,7 @@ import { SaveScreen } from './screen/save'
 import { TestScreen } from './screen/tested'
 import { ContextModalSuggestion, modalContextType } from './contexts/modalSuggestion'
 import { ContextModalMessage, modalMessageType } from './contexts/modalMessage'
+import { ContextFilters } from './contexts/filters'
 import { useState } from 'react'
 
 const PrivateRoute = ({ children, ...rest }: any) => {
@@ -39,73 +40,77 @@ const PrivateRoute = ({ children, ...rest }: any) => {
 function App() {
   const [ modalSuggestion, setModalSuggestion ] = useState<modalContextType>({active: false})
   const [ modalMessage, setModalMessage ] = useState<modalMessageType>({message: {msg: '', type: 'success'}, active: false})
+  const [ tags, setTags ] = useState<string[]>([])
+  const [ filters, setFilters ] = useState<string[]>([])
 
   return (
     <ContextModalSuggestion.Provider value={{modalSuggestion, setModalSuggestion}}>
       <ContextModalMessage.Provider value={{modalMessage, setModalMessage}}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <MapScreen />
-            </Route>
+        <ContextFilters.Provider value={{tags, filters, setFilters, setTags}}>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/">
+                <MapScreen />
+              </Route>
 
-            <Route path="/Maps">
-              <MapScreen />
-            </Route>
+              <Route path="/Maps">
+                <MapScreen />
+              </Route>
 
-            <Route path="/Agents">
-              <AgentScreen />
-            </Route>
+              <Route path="/Agents">
+                <AgentScreen />
+              </Route>
 
-            <Route path="/Posts">
-              <HomeScreen />
-            </Route>
+              <Route path="/Posts">
+                <HomeScreen />
+              </Route>
 
-            <Route path="/Save">
-              <SaveScreen />
-            </Route>
+              <Route path="/Save">
+                <SaveScreen />
+              </Route>
 
-            <Route path="/Tested">
-              <TestScreen />
-            </Route>
+              <Route path="/Tested">
+                <TestScreen />
+              </Route>
 
-            <Route path="/Login">
-              <AccessScreen />
-            </Route>
+              <Route path="/Login">
+                <AccessScreen />
+              </Route>
 
-            <PrivateRoute path="/ViewPosts">
-              <ViewPostsScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/ViewPosts">
+                <ViewPostsScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/PostCreate">
-              <CreatePostScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/PostCreate">
+                <CreatePostScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/PostEdit">
-              <EditPostScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/PostEdit">
+                <EditPostScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/Profile">
-              <MyProfileScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/Profile">
+                <MyProfileScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/Suggestions">
-              <SuggestionScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/Suggestions">
+                <SuggestionScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/Dashboard">
-              <DashboardScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/Dashboard">
+                <DashboardScreen />
+              </PrivateRoute>
 
-            <PrivateRoute path="/Config">
-              <ConfigScreen />
-            </PrivateRoute>
+              <PrivateRoute path="/Config">
+                <ConfigScreen />
+              </PrivateRoute>
 
-            <Route path="*">
-              <NotFoundScreen />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+              <Route path="*">
+                <NotFoundScreen />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </ContextFilters.Provider>
       </ContextModalMessage.Provider>
     </ContextModalSuggestion.Provider>
   )

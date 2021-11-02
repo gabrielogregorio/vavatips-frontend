@@ -13,6 +13,7 @@ import { ErrorMsg } from '../../components/errorMsg'
 import { ContainerPosts } from '../../components/containerPosts';
 import { LINKS } from '../../data/links'
 import { getPostsSave } from '../../services/handlePosts'
+import { useFilters } from '../../contexts/filters';
 
 interface filterUrlInterface {
   agent: string,
@@ -31,8 +32,7 @@ export const SaveScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
   const [ finishPage, setFinishPage ] = useState<number>(1)
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
-  const [ tags, setTags ] = useState<string[]>([])
-  const [ activeFilters, setActiveFilters ] = useState<string[]>([])
+  const { setTags, filters } = useFilters()
 
 
   // monitora o QueryUrl para atualizar os dados em cada mudança
@@ -51,7 +51,7 @@ export const SaveScreen = () => {
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(resolveQuery('/Posts', {idPosts: getPostsSave(), page, filters: activeFilters.toString()})).then(res => {
+    api.get(resolveQuery('/Posts', {idPosts: getPostsSave(), page, filters: filters.toString()})).then(res => {
       let postsFiltered = res.data.posts
       setFinishPage(res.data.count)
       setTags(res.data.tags)
@@ -61,15 +61,7 @@ export const SaveScreen = () => {
       setErrorMsg(error.message)
       setActiveLoader(false)
     })
-  }, [location.search, activeFilters])
-
-  function toggleTag(tag: string) {
-    if(activeFilters.includes(tag)) {
-      setActiveFilters(activeFilters.filter(filter => filter !== tag))
-    } else {
-      setActiveFilters([...activeFilters, tag])
-    }
-  }
+  }, [location.search, filters, setTags])
 
   return (
     <div className="container">
@@ -92,9 +84,6 @@ export const SaveScreen = () => {
       <ContainerPosts
         activeLoader={activeLoader}
         queryUrl={queryUrl}
-        toggleTag={toggleTag}
-        tags={tags}
-        activeFilters={activeFilters}
         posts={posts}
       />
 

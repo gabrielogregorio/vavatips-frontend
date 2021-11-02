@@ -11,6 +11,7 @@ import resolveQuery from '../../services/resolveQuery'
 import { ErrorMsg } from '../../components/errorMsg'
 import { ContainerPosts } from '../../components/containerPosts';
 import { LINKS } from '../../data/links'
+import { useFilters } from '../../contexts/filters';
 
 interface filterUrlInterface {
   agent: string,
@@ -38,9 +39,15 @@ export const HomeScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
   const [ finishPage, setFinishPage ] = useState<number>(1)
   const [ posts, setPosts ] = useState<PropsPostInterface[]>([])
-  const [ tags, setTags ] = useState<string[]>([])
-  const [ activeFilters, setActiveFilters ] = useState<string[]>([])
+  const { filters, setTags, setFilters } = useFilters()
 
+  useEffect(() => {
+    // clean up
+    return () => {
+      setTags([])
+      setFilters([])
+    }
+  }, [setFilters, setTags])
 
   // monitora o QueryUrl para atualizar os dados em cada mudança
   useEffect(() => {
@@ -52,7 +59,7 @@ export const HomeScreen = () => {
 
     // Busca no banco de dados os posts gerais ou relacionados a um agente
     // e a um mapa. Ao passar parametros vazios, serão retornados todos os posts
-    api.get(resolveQuery('/Posts', {agent, map, page, filters: activeFilters.toString()})).then(res => {
+    api.get(resolveQuery('/Posts', {agent, map, page, filters })).then(res => {
       let postsFiltered = res.data.posts
       setFinishPage(res.data.count)
       setTags(res.data.tags)
@@ -62,15 +69,10 @@ export const HomeScreen = () => {
       setErrorMsg(error.message)
       setActiveLoader(false)
     })
-  }, [location.search, activeFilters])
 
-  function toggleTag(tag: string) {
-    if(activeFilters.includes(tag)) {
-      setActiveFilters(activeFilters.filter(filter => filter !== tag))
-    } else {
-      setActiveFilters([...activeFilters, tag])
-    }
-  }
+  }, [location.search, filters, setTags, setFilters])
+
+
 
   return (
     <div className="container">
@@ -94,9 +96,6 @@ export const HomeScreen = () => {
       <ContainerPosts
         activeLoader={activeLoader}
         queryUrl={queryUrl}
-        toggleTag={toggleTag}
-        tags={tags}
-        activeFilters={activeFilters}
         posts={posts}
       />
 

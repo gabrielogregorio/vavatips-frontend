@@ -11,7 +11,6 @@ type typeType = 'next' | 'prev'
 // Componente post
 interface PropsPostInterface {
   post: postsProps,
-  toggleTag: (tag: string) => void
   viewAdmin?: boolean
 }
 
@@ -113,13 +112,13 @@ export const PostCard = (props: PropsPostInterface) => {
       <div className={styles.descriptionAndTags}>
         <p className={styles.description}>{props.post.description}</p>
         <p className={styles.tags}>
-          <span onClick={() => props.toggleTag(props.post.tags.map)} > #{props.post.tags.map}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.agent)} > #{props.post.tags.agent}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.ability)} > #{props.post.tags.ability}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.moment)} > #{props.post.tags.moment}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.difficult)} > #{props.post.tags.difficult}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.side)} > #{props.post.tags.side}</span>
-          <span onClick={() => props.toggleTag(props.post.tags.mapPosition)} > #{props.post.tags.mapPosition}</span>
+          <span> #{props.post.tags.map}</span>
+          <span> #{props.post.tags.agent}</span>
+          <span> #{props.post.tags.ability}</span>
+          <span> #{props.post.tags.moment}</span>
+          <span> #{props.post.tags.difficult}</span>
+          <span> #{props.post.tags.side}</span>
+          <span> #{props.post.tags.mapPosition}</span>
         </p>
       </div>
 

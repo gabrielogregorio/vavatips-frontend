@@ -1,19 +1,15 @@
-import React from 'react'
 import { PostCard } from '../postCard'
 
 interface postPropsInterface {
-  posts: postsProps[],
-  toggleTag: (tag: string) => void,
+  posts: postsProps[]
 }
 
-export const Posts = ({ posts, toggleTag }: postPropsInterface) => {
+export const Posts = ({ posts }: postPropsInterface) => {
   function renderPost() {
     return posts.map((post) => {
       return (
         <div key={post._id}>
-         <PostCard
-           post={post}
-           toggleTag={toggleTag}/>
+         <PostCard post={post}/>
         </div>
       )
     })

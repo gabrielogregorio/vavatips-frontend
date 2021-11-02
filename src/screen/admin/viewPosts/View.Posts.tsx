@@ -52,9 +52,6 @@ export const ViewPostsScreen = () => {
         <ContainerPosts
           activeLoader={false}
           queryUrl={queryParseUrl}
-          toggleTag={() => {}}
-          tags={[]}
-          activeFilters={[]}
           posts={posts}
         />
         <PaginationComponent
