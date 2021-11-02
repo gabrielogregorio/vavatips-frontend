@@ -55,6 +55,7 @@ export const AgentScreen = () => {
       <div className="subcontainer">
         <h1>Escolha um Agente</h1>
         <LoaderComponent active={activeLoader} />
+        {activeLoader ? <p>Buscando Agentes...</p> : ''}
         <ErrorMsg msg={errorMsg} />
         <div className="gridFull">
           {renderAgent()}

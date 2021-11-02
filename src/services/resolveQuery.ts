@@ -1,6 +1,5 @@
 /** urlBase => /Posts */
 const resolveQuery = (urlBase: string, filters: any = []) => {
-  console.log(filters)
   if(filters.length === 0) {
     return urlBase
   }

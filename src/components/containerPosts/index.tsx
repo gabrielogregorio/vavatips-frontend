@@ -10,8 +10,7 @@ interface propsInterface {
   activeFilters: string[]
   posts: postsProps[],
   tags: string[],
-  toggleTag: (tag: string) => void,
-  showModalSuggestionFunction: (posts: postsProps) => void
+  toggleTag: (tag: string) => void
 }
 
 export const ContainerPosts = ( {
@@ -20,8 +19,7 @@ export const ContainerPosts = ( {
     tags,
     activeFilters,
     activeLoader,
-    posts,
-    showModalSuggestionFunction
+    posts
 }: propsInterface) => {
   return (
     <div className="containerPost">
@@ -33,8 +31,7 @@ export const ContainerPosts = ( {
 
         <Posts
           posts={posts}
-          toggleTag={toggleTag}
-          showModalSuggestionFunction={showModalSuggestionFunction} />
+          toggleTag={toggleTag}/>
       </div>
   )
 }

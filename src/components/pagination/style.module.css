@@ -12,6 +12,7 @@
   border-radius: 10px;
   display: flex;
   align-items: center;
+  list-style: none;
 }
 
 .paginationItems a {
