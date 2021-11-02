@@ -76,11 +76,11 @@ interface imgsInterface {
 
 interface postsProps {
     _id: string,
-    user: { _id: string, username: string, image: string }
+    user: { _id: string, username: string, image?: string }
     description: string
     title: string
 
-    imgs: [{ _id: string, image: string, description: string } ]
+    imgs: { _id: string, image: string, description: string }[]
     tags: {
       map: string,
       agent: string,

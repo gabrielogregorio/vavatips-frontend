@@ -19,23 +19,14 @@ export const MapScreen = () => {
   const [ errorMsg, setErrorMsg ] = useState<string>('')
 
   useEffect(() => {
-    loadMaps()
-  }, [])
-
-  async function loadMaps() {
-    const mapResponse = api.get(`/maps`)
-
-    try {
-      const [ maps ] = await Promise.all([ mapResponse ])
-      const mapsJson = maps.data.maps
-
-      setMapsApi(mapsJson)
+    api.get('/maps').then(maps => {
+      setMapsApi(maps.data.maps)
       setActiveLoader(false)
-    } catch(error) {
+    }).catch(() => {
       setErrorMsg('Erro desconhecido no servidor')
       setActiveLoader(false)
-    }
-  }
+    })
+  }, [])
 
   function renderMap() {
     if (mapsApi.length === 0) {
@@ -59,14 +50,14 @@ export const MapScreen = () => {
 
       <div className="subcontainer">
         <h1>Escolha um mapa ai parça </h1>
-         <ErrorMsg msg={errorMsg} />
+        <ErrorMsg msg={errorMsg} />
+        {activeLoader ? <p>Buscando Mapas...</p> : ''}
         <LoaderComponent active={activeLoader} />
-
-         <div className="gridFull">
+        <div className="gridFull">
           {renderMap()}
-          </div>
-          </div>
-         <FooterComponent color="primary" />
         </div>
+      </div>
+      <FooterComponent color="primary" />
+    </div>
   )
 }

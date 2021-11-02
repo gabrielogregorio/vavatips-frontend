@@ -11,7 +11,6 @@ import { PaginationComponent } from '../../components/pagination'
 import resolveQuery from '../../services/resolveQuery'
 import { ErrorMsg } from '../../components/errorMsg'
 import { ContainerPosts } from '../../components/containerPosts';
-import { mockPost } from '../../mock/posts'
 import { LINKS } from '../../data/links'
 import { getPostsSave } from '../../services/handlePosts'
 
@@ -28,10 +27,6 @@ export const SaveScreen = () => {
   const location = useLocation()
 
   const [ queryUrl, setQueryUrl ] = useState<filterUrlInterface>({agent: '', map: '', type: '', page: ''})
-  const [ showModalSuggestion, setShowModalSuggestion ] = useState<boolean>(false)
-  const [ showModalMessage, setShowModalMessage ] = useState<boolean>(false)
-  const [ modalPost, setModalPost ] = useState<postsProps>(mockPost)
-  const [ modalMessage, setModalMessage ] = useState<modalMessageInterface>({type: '', msg: '' })
   const [ activeLoader, setActiveLoader ] = useState<boolean>(true)
   const [ errorMsg, setErrorMsg ] = useState<string>('')
   const [ finishPage, setFinishPage ] = useState<number>(1)
@@ -68,17 +63,6 @@ export const SaveScreen = () => {
     })
   }, [location.search, activeFilters])
 
-  function showModalSuggestionFunction(post: postsProps) {
-    setModalPost(post)
-    setShowModalSuggestion(true)
-  }
-
-  async function saveModalSuggestion(type: modalType, msg:string) {
-    setModalMessage({type, msg})
-    setShowModalSuggestion(false)
-    setShowModalMessage(true)
-  }
-
   function toggleTag(tag: string) {
     if(activeFilters.includes(tag)) {
       setActiveFilters(activeFilters.filter(filter => filter !== tag))
@@ -98,17 +82,9 @@ export const SaveScreen = () => {
 
       <div className="subcontainer">
 
-      <ModalOfSuggestion
-        show={showModalSuggestion}
-        post={modalPost}
-        title="fazer sugestão"
-        closeModal={setShowModalSuggestion}
-        saveModal={saveModalSuggestion}/>
+      <ModalOfSuggestion title="fazer sugestão"/>
 
-      <ModalMessage
-        show={showModalMessage}
-        data={modalMessage}
-        closeModal={setShowModalMessage} />
+      <ModalMessage />
 
       <h1>Posts Salvos</h1>
       <ErrorMsg msg={errorMsg} />
@@ -120,7 +96,6 @@ export const SaveScreen = () => {
         tags={tags}
         activeFilters={activeFilters}
         posts={posts}
-        showModalSuggestionFunction={showModalSuggestionFunction}
       />
 
       <PaginationComponent

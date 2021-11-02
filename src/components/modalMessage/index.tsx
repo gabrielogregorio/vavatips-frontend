@@ -1,23 +1,18 @@
+import { useModalMessage, initializeModalMessage } from '../../contexts/modalMessage'
 import styles from './modal.module.css'
 
+export const ModalMessage = () => {
+  const { modalMessage, setModalMessage } = useModalMessage()
 
-interface ModalProps {
-  data: modalMessageInterface,
-  show: boolean,
-  closeModal: (setCloseModal: boolean) => void,
-}
-
-export const ModalMessage = (props: ModalProps) => {
-
-  return props.show ? (
-    <div className={styles.modalItem} style={{background: props.data.type === 'error' ? 'var(--primary)' : 'var(--secundary)'}}>
+  return modalMessage.active ? (
+    <div className={styles.modalItem} style={{background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secundary)'}}>
       <div className={styles.notfyIcon}>
-        {props.data.type === 'success' ? ( <i className="far fa-check-circle"></i> ) : null }
-        {props.data.type === 'error' ? ( <i className="fas fa-exclamation-circle"></i> ) : null }
+        {modalMessage.message.type === 'success' ? ( <i className="far fa-check-circle"></i> ) : null }
+        {modalMessage.message.type === 'error' ? ( <i className="fas fa-exclamation-circle"></i> ) : null }
       </div>
 
-      <p>{props.data.msg}</p>
-      <button onClick={() => props.closeModal(false)}>
+      <p>{modalMessage.message.msg}</p>
+      <button onClick={() => setModalMessage(initializeModalMessage)}>
         <i className="fas fa-times"></i>
       </button>
     </div>

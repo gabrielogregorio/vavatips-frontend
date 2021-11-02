@@ -56,7 +56,6 @@ export const ViewPostsScreen = () => {
           tags={[]}
           activeFilters={[]}
           posts={posts}
-          showModalSuggestionFunction={() => {}}
         />
         <PaginationComponent
           urlBase='ViewPosts'

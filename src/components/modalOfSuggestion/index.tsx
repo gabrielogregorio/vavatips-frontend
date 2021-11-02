@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react'
+import { useModalMessage } from '../../contexts/modalMessage'
+import { useModalContext, initializeModalSuggestion } from '../../contexts/modalSuggestion'
 import api from '../../services/api'
 import { Input } from '../input'
 import { TextArea } from '../textArea'
 
 interface ModalProps {
-  title: string,
-  post: postsProps,
-  email?: string,
-  description?: string,
-  show: boolean,
-  closeModal: (setShowModal: boolean) => void,
-  saveModal: (type: modalType, msg: string) => void
+  title: string
 }
 
 export const ModalOfSuggestion = (props: ModalProps) => {
   const [ email, setEmail ] = useState<string>('')
+
   const [ description, setDescription ] = useState<string>('')
-  const [ idPost, setIdPost ] = useState<string>('')
   const [ postTitle, setPostTitle ] = useState<string>('')
   const [ errorMsg, setErrorMsg ] = useState<string>('')
+  const [ loading, setLoading ] = useState<boolean>(false)
+  const { modalSuggestion, setModalSuggestion } = useModalContext()
+  const { setModalMessage } = useModalMessage()
 
   useEffect(() => {
-    if(props.description) { setDescription(props.description) }
-    if(props.email) { setEmail(props.email) }
-    if(props.post.title) { setPostTitle(props.post.title) }
-    if(props.post._id) { setIdPost(props.post._id) }
-  }, [props])
+    setPostTitle(modalSuggestion.post?.title ?? '')
+  }, [modalSuggestion])
 
-  async function saveModal(idPost: string, postTitle: string, email: string, description: string) {
+  async function saveModal() {
+    setLoading(true)
+    let idPost = modalSuggestion.post?._id ?? ''
+
     if(description === '' || description.trim() === '') {
       setErrorMsg('Você precisa preencher o campo Descrição com as informações')
     } else if(description.trim().length < 10) {
@@ -38,34 +37,34 @@ export const ModalOfSuggestion = (props: ModalProps) => {
 
       try {
         await api.post('/suggestion', { idPost, email, description })
-
-      msg = 'Sugestão enviado com sucesso, muito obrigado!'
-      type = 'success'
+        msg = 'Sugestão enviado com sucesso, muito obrigado!'
+        type = 'success'
       } catch(error) {
-        console.log(error)
-        msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'
-        type = 'error'
+          console.log(error)
+          msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'
+          type = 'error'
       }
-
-      props.saveModal(type, msg)
+      setModalSuggestion(initializeModalSuggestion)
+      setModalMessage({active: true, message: {type, msg}})
     }
+    setLoading(false)
   }
 
-  return props.show ? (
+  return modalSuggestion.active ? (
       <div className="modal">
       <div className="modalItem">
 
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <button onClick={() => props.closeModal(false)}>
+          <button onClick={() => setModalSuggestion(initializeModalSuggestion)}>
             <i className="fas fa-times"></i>
           </button>
         </div>
         <hr />
 
         <div className="form">
-        <p className="errorMsg">{errorMsg}</p>
-
+          <p className="errorMsg">{errorMsg}</p>
+          {loading ? <p>Carregando</p> : null}
           <Input disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
 
           <Input type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
@@ -73,8 +72,8 @@ export const ModalOfSuggestion = (props: ModalProps) => {
           <TextArea title="Descrição" value={description} setValue={setDescription} />
 
           <div className="modalActions">
-            <button onClick={() => props.closeModal(false)}>Cancelar</button>
-            <button onClick={() => saveModal(idPost, postTitle, email, description)}>Adicionar</button>
+            <button onClick={() =>  setModalSuggestion(initializeModalSuggestion)}>Cancelar</button>
+            <button onClick={() => saveModal()}>Adicionar</button>
           </div>
         </div>
       </div>

@@ -4,15 +4,14 @@ import { formatImage } from "../../services/formatEnvironment";
 import { Img } from "../img";
 import styles from './post.module.css'
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../services/handlePosts'
-
 import { isAuthenticated } from '../../services/auth'
+import { useModalContext } from "../../contexts/modalSuggestion";
 type typeType = 'next' | 'prev'
 
 // Componente post
 interface PropsPostInterface {
   post: postsProps,
   toggleTag: (tag: string) => void
-  showModalSuggestion: (post: postsProps) => void
   viewAdmin?: boolean
 }
 
@@ -21,6 +20,7 @@ export const PostCard = (props: PropsPostInterface) => {
   const [ idImage, setIdImage ] = useState<number>(0)
   const [ postTested, setPostTested ] = useState<boolean>(false)
   const [ postSave, setPostSave ] = useState<boolean>(false)
+  const { setModalSuggestion } = useModalContext()
 
   function handleAddTest() {
     if(postTested) { removePost(props.post._id, 'test')
@@ -55,6 +55,10 @@ export const PostCard = (props: PropsPostInterface) => {
         setIdImage(length - 1)
       }
     }
+  }
+
+  function handleModalAction() {
+    setModalSuggestion({active: true, post: props.post })
   }
 
   return (
@@ -92,16 +96,16 @@ export const PostCard = (props: PropsPostInterface) => {
         <div className={styles.imgPost}>
           <img src={formatImage(props.post.imgs?.[idImage]?.image)} alt={props.post.imgs?.[idImage]?.description} />
 
-          <div className={styles.previus} onClick={() => nextImage('prev', props.post.imgs.length)}>
-            <i className="fas fa-angle-left"></i>
-          </div>
+          <button aria-label="Item anterior" className={styles.previus} onClick={() => nextImage('prev', props.post.imgs.length)}>
+            <i aria-hidden className="fas fa-angle-left"></i>
+          </button>
 
-          <div className={styles.next} onClick={() => nextImage('next', props.post.imgs.length)}>
-            <i className="fas fa-angle-right"></i>
-          </div>
+          <button aria-label="Proximo item"  className={styles.next} onClick={() => nextImage('next', props.post.imgs.length)}>
+            <i aria-hidden className="fas fa-angle-right"></i>
+          </button>
 
           <div className={styles.descriptionImage}>
-            <p>{idImage + 1}/{props.post.imgs.length} - {props.post.imgs?.[idImage]?.description}</p>
+            <p aria-live='polite' >{idImage + 1} de {props.post.imgs.length} : {props.post.imgs?.[idImage]?.description}</p>
           </div>
         </div>
       </div>
@@ -124,7 +128,7 @@ export const PostCard = (props: PropsPostInterface) => {
         <button className={postTested ? styles.actionsActive : ''} onClick={handleAddTest}>A testar</button>
 
         <button className={postSave ? styles.actionsActive : ''} onClick={handleAddSave}> Salvo</button>
-        <button onClick={() => props.showModalSuggestion(props.post)}>Sugerir</button>
+        <button onClick={handleModalAction}>Sugerir</button>
       </div>
       ) : null }
 

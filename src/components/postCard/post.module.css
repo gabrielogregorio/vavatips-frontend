@@ -82,8 +82,9 @@
   border-radius: 10px;
 }
 
-.posts > .imgAndDescription > .imgPost div {
+.posts > .imgAndDescription > .imgPost button {
   color: var(--background-secundary);
+  border: none;
   background-color: transparent;
   font-size: 2rem;
   cursor: pointer;
