@@ -1,10 +1,9 @@
-
 export const mockPost: postsProps = {
   _id: '',
   user: { _id: '', username: '', image: '' },
   description: '',
   title: '',
-  imgs: [{ _id: '', image: '', description: '' } ],
+  imgs: [{ _id: '', image: '', description: '' }],
   tags: {
     map: '',
     agent: '',
@@ -12,6 +11,6 @@ export const mockPost: postsProps = {
     moment: '',
     difficult: '',
     side: '',
-    mapPosition: ''
-  }
-}
+    mapPosition: '',
+  },
+};
