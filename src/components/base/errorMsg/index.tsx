@@ -1,9 +1,7 @@
-import React from "react"
-
 interface propsInterface {
-  msg: string
+  msg: string;
 }
 
 export const ErrorMsg = ({ msg }: propsInterface) => {
-  return <p className="errorMsg">{msg}</p>
-}
+  return <p className="errorMsg">{msg}</p>;
+};

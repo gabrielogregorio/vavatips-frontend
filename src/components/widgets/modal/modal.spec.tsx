@@ -1,17 +1,20 @@
-import { render, screen } from '@testing-library/react'
-import { ModalComponent } from '.'
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { render, screen } from '@testing-library/react';
+import { ModalComponent } from '.';
 
 describe('<ModalComponent />', () => {
   it('should render ModalComponent', () => {
-    render(<ModalComponent
-      _id="id item"
-      title="title"
-      description="description"
-      image="image"
-      closeModal={() => {}}
-      saveModal={() => {}}
-       />)
+    render(
+      <ModalComponent
+        _id="id item"
+        title="title"
+        description="description"
+        image="image"
+        closeModal={() => {}}
+        saveModal={() => {}}
+      />,
+    );
 
-       expect(screen.getByTestId('modal')).toMatchSnapshot()
-  })
-})
+    expect(screen.getByTestId('modal')).toMatchSnapshot();
+  });
+});

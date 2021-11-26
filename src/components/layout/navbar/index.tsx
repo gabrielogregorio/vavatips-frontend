@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from 'react-router-dom'
-import styles from './navbar.module.css'
+import { Link } from 'react-router-dom';
+import styles from './navbar.module.css';
 
 export enum navbarEnum {
   Profile = '/Profile',
@@ -10,44 +9,63 @@ export enum navbarEnum {
   EditScreen = '#',
   ReportScreen = '/Reports',
   SuggestionScreen = '/Suggestions',
-  Dashboard = '/Dashboard'
+  Dashboard = '/Dashboard',
 }
 
 interface NavbarProps {
-  selected: navbarEnum
+  selected: navbarEnum;
 }
 
-export const NavbarComponent = (props:NavbarProps) => {
+export const NavbarComponent = (props: NavbarProps) => {
   return (
     <nav className={styles.nav}>
       <ul>
+        <Link className={styles.logo} to="/">
+          VAVATIPS
+        </Link>
 
         <Link
-          className={styles.logo}
-          to="/">VAVATIPS</Link>
+          className={
+            props.selected === navbarEnum.Dashboard ? styles.navActive : ''
+          }
+          to="/Dashboard">
+          dashboard
+        </Link>
 
         <Link
-          className={props.selected === navbarEnum.Dashboard ? styles.navActive : ""}
-          to="/Dashboard">dashboard</Link>
+          className={
+            props.selected === navbarEnum.PostCreate ? styles.navActive : ''
+          }
+          to="/PostCreate">
+          criar posts
+        </Link>
 
         <Link
-          className={props.selected === navbarEnum.PostCreate ? styles.navActive : ""}
-          to="/PostCreate">criar posts</Link>
+          className={
+            props.selected === navbarEnum.ViewPosts ? styles.navActive : ''
+          }
+          to="/ViewPosts">
+          posts
+        </Link>
 
         <Link
-          className={props.selected === navbarEnum.ViewPosts ? styles.navActive : ""}
-          to="/ViewPosts">posts</Link>
+          className={
+            props.selected === navbarEnum.SuggestionScreen
+              ? styles.navActive
+              : ''
+          }
+          to="/Suggestions">
+          sugestões
+        </Link>
 
         <Link
-          className={props.selected === navbarEnum.SuggestionScreen ? styles.navActive : ""}
-          to="/Suggestions">sugestões</Link>
-
-        <Link
-          className={props.selected === navbarEnum.Profile ? styles.navActive : ""}
-          to="/Profile">perfil</Link>
-
-
+          className={
+            props.selected === navbarEnum.Profile ? styles.navActive : ''
+          }
+          to="/Profile">
+          perfil
+        </Link>
       </ul>
     </nav>
-  )
-}
+  );
+};

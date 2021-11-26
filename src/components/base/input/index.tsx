@@ -1,22 +1,28 @@
-type typeInput = 'text' | 'password' | 'email'
+type typeInput = 'text' | 'password' | 'email';
 
 interface propsInterface {
-  text: string,
-  value: string,
-  type: typeInput,
-  disabled?:  boolean,
-  setValue: (e: any) => void
+  text: string;
+  value: string;
+  type: typeInput;
+  disabled?: boolean;
+  setValue: (e: any) => void;
 }
 
 export const Input = (props: propsInterface) => {
-  const disabled = props.disabled ?? false
+  const disabled = props.disabled ?? false;
 
   return (
     <div className="groupInput">
       <div className="groupInputSelet">
         <label htmlFor="">{props.text}</label>
-        <input disabled={disabled} type={props.type} value={props.value} placeholder={props.text} onChange={(e) => props.setValue(e.target.value)} />
+        <input
+          disabled={disabled}
+          type={props.type}
+          value={props.value}
+          placeholder={props.text}
+          onChange={(e) => props.setValue(e.target.value)}
+        />
       </div>
     </div>
-  )
-}
+  );
+};

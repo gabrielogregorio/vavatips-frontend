@@ -1,7 +1,7 @@
 interface propsInterface {
-  title: string,
-  value: string,
-  setValue: (e: any) => void
+  title: string;
+  value: string;
+  setValue: (e: any) => void;
 }
 
 export const TextArea = (props: propsInterface) => {
@@ -9,8 +9,10 @@ export const TextArea = (props: propsInterface) => {
     <div className="groupInput">
       <div className="groupInputSelet">
         <label htmlFor="">{props.title}</label>
-        <textarea value={props.value} onChange={(e) => props.setValue(e.target.value)}></textarea>
+        <textarea
+          value={props.value}
+          onChange={(e) => props.setValue(e.target.value)}></textarea>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -9,7 +9,6 @@
     "react",
     "@typescript-eslint"
   ],
-  // https://www.npmjs.com/package/@typescript-eslint/eslint-plugin
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
@@ -21,6 +20,7 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
   ]
 }

@@ -1,4 +1,4 @@
-import { FooterComponent } from "../../components/layout/footer";
+import { FooterComponent } from '../../components/layout/footer';
 
 export const NotFoundScreen = () => {
   return (
@@ -6,5 +6,5 @@ export const NotFoundScreen = () => {
       <h1>Not Found</h1>
       <FooterComponent color="primary" />
     </div>
-  )
-}
+  );
+};

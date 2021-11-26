@@ -1,7 +1,7 @@
-import styles from './style.module.css'
+import styles from './style.module.css';
 
 interface loaderProps {
-  active: boolean
+  active: boolean;
 }
 
 export const LoaderComponent = (props: loaderProps) => {
@@ -10,12 +10,8 @@ export const LoaderComponent = (props: loaderProps) => {
       <div data-testid="loader" className={styles.loader}>
         <div />
       </div>
-    ) : null
+    ) : null;
   }
 
-  return  (
-    <>
-      {renderActive()}
-    </>
-  )
-}
+  return <>{renderActive()}</>;
+};

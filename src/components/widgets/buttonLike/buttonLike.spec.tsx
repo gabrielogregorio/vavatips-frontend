@@ -1,31 +1,50 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { ButtonLike } from '.'
+/* eslint-disable @typescript-eslint/no-empty-function */
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { ButtonLike } from '.';
 
 describe('<ButtonLike />', () => {
   it('should render button like', () => {
-    const fn = jest.fn()
-    render(<ButtonLike active={true} title="Like" styleBtn="testBtn" onClick={fn} />)
-    expect(screen.getByRole('button', {name: /Like/i})).toBeInTheDocument()
-  })
+    const fn = jest.fn();
+    render(
+      <ButtonLike active={true} title="Like" styleBtn="testBtn" onClick={fn} />,
+    );
+    expect(screen.getByRole('button', { name: /Like/i })).toBeInTheDocument();
+  });
 
   it('should be disable when active is false', () => {
-    render(<ButtonLike active={false} title="Like" styleBtn="testBtn" onClick={() => {}} />)
-    expect(screen.getByRole('button')).not.toHaveClass('active')
-  })
+    render(
+      <ButtonLike
+        active={false}
+        title="Like"
+        styleBtn="testBtn"
+        onClick={() => {}}
+      />,
+    );
+    expect(screen.getByRole('button')).not.toHaveClass('active');
+  });
 
   it('should be active when active is true', () => {
-    render(<ButtonLike active={true} title="Like" styleBtn="testBtn" onClick={() => {}} />).debug()
-    expect(screen.getByRole('button')).toHaveClass('active')
-  })
+    render(
+      <ButtonLike
+        active={true}
+        title="Like"
+        styleBtn="testBtn"
+        onClick={() => {}}
+      />,
+    ).debug();
+    expect(screen.getByRole('button')).toHaveClass('active');
+  });
 
   it('should be click', () => {
-    const fn = jest.fn()
-    render(<ButtonLike active={true} title="Like" styleBtn="testBtn" onClick={fn} />)
-    const button = screen.getByRole('button')
-    expect(fn).toHaveBeenCalledTimes(0)
-    userEvent.click(button)
-    userEvent.click(button)
-    expect(fn).toHaveBeenCalledTimes(2)
-  })
-})
+    const fn = jest.fn();
+    render(
+      <ButtonLike active={true} title="Like" styleBtn="testBtn" onClick={fn} />,
+    );
+    const button = screen.getByRole('button');
+    expect(fn).toHaveBeenCalledTimes(0);
+    userEvent.click(button);
+    userEvent.click(button);
+    expect(fn).toHaveBeenCalledTimes(2);
+  });
+});

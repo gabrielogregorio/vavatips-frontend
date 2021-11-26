@@ -1,3 +1,3 @@
-import Routes from "./core/configs/App";
+import Routes from './core/configs/App';
 
-export default Routes
+export default Routes;
