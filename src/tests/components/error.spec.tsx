@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ErrorMsg } from '.';
+import { ErrorMsg } from '../../components/base/errorMsg';
 
 describe('<ErrorMsg />', () => {
   it('should render h1', () => {

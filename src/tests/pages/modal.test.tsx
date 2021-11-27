@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { NotFoundScreen } from './NotFound';
+import { NotFoundScreen } from '../../pages/NotFound';
 
 describe('<NotFoundScreen />', () => {
   it('should render NotFoundScreen', () => {

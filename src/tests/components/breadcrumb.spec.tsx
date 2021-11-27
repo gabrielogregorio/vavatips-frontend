@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BreadcrumbComponent } from '.';
+import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
 import { BrowserRouter } from 'react-router-dom';
 
 const breadcrumbs = [

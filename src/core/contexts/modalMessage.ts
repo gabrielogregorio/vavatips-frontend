@@ -20,7 +20,8 @@ export const initializeModalMessage: modalMessageType = {
 
 export const ContextModalMessage = createContext<contextModalMessageInterface>({
   modalMessage: initializeModalMessage,
-  setModalMessage: (data) => console.log('do you need use context', data),
+  setModalMessage: (data) =>
+    console.log('do you need use context Modal Message', data),
 });
 
 export const useModalMessage = () => useContext(ContextModalMessage);

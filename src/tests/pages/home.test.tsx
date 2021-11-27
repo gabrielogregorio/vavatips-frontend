@@ -1,12 +1,13 @@
 import 'dotenv/config';
 import { screen, render } from '@testing-library/react';
 import { waitForElementToBeRemoved, waitFor } from '@testing-library/react';
-import { HomeScreen } from '.';
+import { HomeScreen } from '../../pages/home';
 import { rest } from 'msw';
-import { mockPosts } from './mock';
+import { mockPosts } from '../mock/mockPosts';
 import { setupServer } from 'msw/node';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import MockApp from '../core/App.Mock';
 
 const baseURL = process.env.REACT_APP_API_HOST;
 
@@ -39,12 +40,14 @@ describe('<HomeScreen />', () => {
 
   it('should render home screen', async () => {
     render(
-      <MemoryRouter
-        initialEntries={[
-          { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
-        ]}>
-        <HomeScreen />
-      </MemoryRouter>,
+      <MockApp>
+        <MemoryRouter
+          initialEntries={[
+            { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
+          ]}>
+          <HomeScreen />
+        </MemoryRouter>
+      </MockApp>,
     );
 
     await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
@@ -126,12 +129,14 @@ describe('<HomeScreen />', () => {
 
   it('should change image on click in buttons of navigation', async () => {
     render(
-      <MemoryRouter
-        initialEntries={[
-          { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
-        ]}>
-        <HomeScreen />
-      </MemoryRouter>,
+      <MockApp>
+        <MemoryRouter
+          initialEntries={[
+            { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
+          ]}>
+          <HomeScreen />
+        </MemoryRouter>
+      </MockApp>,
     );
 
     await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {

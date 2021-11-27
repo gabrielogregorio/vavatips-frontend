@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { render, screen } from '@testing-library/react';
-import { ModalComponent } from '.';
+import { ModalComponent } from '../../components/widgets/modal';
 
 describe('<ModalComponent />', () => {
   it('should render ModalComponent', () => {

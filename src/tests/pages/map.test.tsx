@@ -4,10 +4,10 @@ import {
   render,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
-import { MapScreen } from './Map';
+import { MapScreen } from '../../pages/Map';
 import { BrowserRouter } from 'react-router-dom';
 import { rest } from 'msw';
-import { mockMaps } from './mock';
+import { mockMaps } from '../mock/mock';
 import { setupServer } from 'msw/node';
 
 const baseURL = process.env.REACT_APP_API_HOST;

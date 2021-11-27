@@ -10,8 +10,9 @@ interface contextTagsInterface {
 export const ContextFilters = createContext<contextTagsInterface>({
   tags: [],
   filters: [],
-  setFilters: (filters) => console.log('do you need use context', filters),
-  setTags: (tags) => console.log('do you need use context', tags),
+  setFilters: (filters) =>
+    console.log('do you need use context Filters', filters),
+  setTags: (tags) => console.log('do you need use context Filters', tags),
 });
 
 export const useFilters = () => useContext(ContextFilters);

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorMsg /> should match snapshot 1`] = `
+<p
+  class="errorMsg"
+>
+  Mensagem de erro de exemplo
+</p>
+`;
