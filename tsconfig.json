@@ -16,5 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "baseUrl": "src",
+  "paths": {
+    "@styles/*": ["styles/*"],
+    "@trigger/*": ["app/trigger/ts/*"]
+  },
   "include": ["src"]
 }

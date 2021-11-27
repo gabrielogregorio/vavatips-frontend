@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { AccessScreen } from '../../pages/access/access';
-import { ConfigScreen } from '../../pages/admin/config/config';
-import { CreatePostScreen } from '../../pages/admin/createPost/Create.Post';
-import { DashboardScreen } from '../../pages/admin/dashboard/dashboard';
-import { EditPostScreen } from '../../pages/admin/editPost/Edit.Post';
-import { MyProfileScreen } from '../../pages/admin/myProfile/My.Profile';
-import { SuggestionScreen } from '../../pages/admin/suggestions/Suggestion';
-import { ViewPostsScreen } from '../../pages/admin/viewPosts/View.Posts';
-import { AgentScreen } from '../../pages/choice/Agent';
-import { MapScreen } from '../../pages/choice/Map';
+import { TestScreen } from '../../pages/testScreen';
+import { ConfigScreen } from '../../pages/admin/config';
+import { CreatePostScreen } from '../../pages/admin/Create.Post';
+import { DashboardScreen } from '../../pages/admin/dashboard';
+import { EditPostScreen } from '../../pages/admin/Edit.Post';
+import { MyProfileScreen } from '../../pages/admin/My.Profile';
+import { SuggestionScreen } from '../../pages/admin/Suggestion';
+import { ViewPostsScreen } from '../../pages/admin/View.Posts';
+import { AgentScreen } from '../../pages/Agent';
 import { HomeScreen } from '../../pages/home';
-import { NotFoundScreen } from '../../pages/notFound/NotFound';
+import { AccessScreen } from '../../pages/login';
+import { MapScreen } from '../../pages/Map';
+import { NotFoundScreen } from '../../pages/NotFound';
 import { SaveScreen } from '../../pages/save';
-import { TestScreen } from '../../pages/tested';
 import { ContextFilters } from '../contexts/filters';
+
 import {
   ContextModalMessage,
   modalMessageType,
