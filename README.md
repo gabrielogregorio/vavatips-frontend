@@ -13,8 +13,8 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/gabrielogregorio/vavatips-frontend)
 ![GitHub language count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
 ![GitHub repo size](https://img.shields.io/github/repo-size/gabrielogregorio/vavatips-frontend)
-</div>
 
+</div>
 
 <h2 align="center">Valorant's tips</h2>
 
@@ -26,11 +26,12 @@
 </p>
 
 ## Introduction
+
 This project was developed using ReactJs, Typescript and React Testing Library. Backend is available at [vavatips-backend](https://github.com/gabrielogregorio/vavatips-backend)
 
-
 ## Run Project
-1. Fully start the backend, available in the [vavatips-backend]((https://github.com/gabrielogregorio/vavatips-backend)) repository.
+
+1. Fully start the backend, available in the [vavatips-backend](<(https://github.com/gabrielogregorio/vavatips-backend)>) repository.
 2. With the backend working, create an .env file, based on the .env.example file.
 
 ## Available scripts
@@ -56,6 +57,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `yarn start`
+
 Run in production mode, after run `yarn build`
 
 ### `yarn eject`
@@ -67,4 +69,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-

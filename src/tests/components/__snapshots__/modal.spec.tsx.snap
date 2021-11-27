@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModalComponent /> should render ModalComponent 1`] = `
+<div
+  class="modal"
+  data-testid="modal"
+>
+  <div
+    class="modalItem"
+  >
+    <div
+      class="modalTitle"
+    >
+      <h1>
+        title
+      </h1>
+      <button>
+        <i
+          class="fas fa-times"
+        />
+      </button>
+    </div>
+    <hr />
+    <div
+      class="form"
+    >
+      <div
+        class="groupInput"
+      >
+        <div
+          class="groupInputSelet"
+        >
+          <label
+            for=""
+          >
+            Descrição
+          </label>
+          <textarea>
+            description
+          </textarea>
+        </div>
+      </div>
+      <div
+        class="groupInput"
+      >
+        <div
+          class="groupInputSelet"
+        >
+          <label
+            class="customFileUpload"
+          >
+            <input
+              name="image"
+              type="file"
+            />
+            Adicionar Imagem
+          </label>
+        </div>
+      </div>
+      <div
+        class="instructionImage"
+      >
+        <img
+          alt=""
+          src="http://127.0.0.1:3333/images/image"
+        />
+      </div>
+      <div
+        class="modalActions"
+      >
+        <button>
+          Cancelar
+        </button>
+        <button>
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
