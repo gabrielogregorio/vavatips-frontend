@@ -1,92 +1,75 @@
-# Contributing
+# Contribuição
 
 Ao contribuir para este repositório, primeiro discuta a mudança que deseja fazer por meio de uma Issue,
 e-mail ou qualquer outro método com os proprietários deste repositório antes de fazer uma alteração.
 
-Observe que temos um código de conduta, siga-o em todas as suas interações com o projeto.
+Observe que temos um [código de conduta](CODE_OF_CONDUCT.md), siga-o em todas as suas interações com o projeto.
 
-## Pull Request Process
+# Processo de Pull Request
 
-1. Certifique-se de que todas as dependências de instalação ou construção sejam removidas antes do final da camada ao fazer um
-   construir.
-2. Atualize o README.md com detalhes das mudanças na interface, isso inclui um novo ambiente
-   variáveis, portas expostas, locais de arquivos úteis e parâmetros de contêiner.
-3. Aumente os números de versão em quaisquer arquivos de exemplo e o README.md para a nova versão que este
-   A solicitação de pull representaria. O esquema de controle de versão que usamos é [SemVer] (http://semver.org/).
-4. Você pode mesclar a solicitação de pull assim que tiver a aprovação de dois outros desenvolvedores ou se você
-   não tiver permissão para fazer isso, você pode solicitar ao segundo revisor que faça a fusão para você.
+1. Preencha por completo o template de PULL_REQUEST
 
-## Code of Conduct
+## Como contribuir na prática
 
-### Nosso Compromisso
+1. Faça um Fork do projeto.
+2. Clone o projeto na sua máquina
 
-No interesse de promover um ambiente aberto e acolhedor, nós, como
-contribuintes e mantenedores se comprometem a fazer a participação em nosso projeto e
-nossa comunidade uma experiência livre de assédio para todos, independentemente da idade, corpo
-tamanho, deficiência, etnia, identidade e expressão de gênero, nível de experiência,
-nacionalidade, aparência pessoal, raça, religião ou identidade sexual e
-orientação.
+```shell
+git clone <your-repository-forked>
+```
 
-### Nossos Padrões
+3. Acesse a Branch de desenvolvimento
 
-Exemplos de comportamento que contribui para a criação de um ambiente positivo
-incluir:
+```shell
+git checkout -b develop origin/develop
+```
 
-* Usando uma linguagem acolhedora e inclusiva
-* Respeitar os diferentes pontos de vista e experiências
-* Aceitando críticas construtivas com elegância
-* Foco no que é melhor para a comunidade
-* Mostrando empatia para com outros membros da comunidade
+4. Atualize a branch de desenvolvimento sempre
 
-Exemplos de comportamento inaceitável por parte dos participantes incluem:
+```shell
+git pull
+```
 
-* O uso de linguagem ou imagens sexualizadas e atenção sexual indesejada ou
-avanços
-* Trollagem, comentários insultuosos/depreciativos e ataques pessoais ou políticos
-* Assédio público ou privado
-* Publicação de informações privadas de terceiros, como um físico ou eletrônico
-  endereço, sem permissão explícita
-* Outra conduta que poderia ser razoavelmente considerada inadequada em um
-  ambiente profissional
+5. Crie uma nova branch baseada na develop, seguindo uma das opções abaixo:
 
-### Nossas responsabilidades
+```shell
+# Nova Branch de feature
+# Substitua o 'dark-theme-button' pelo nome da feature
+git checkout -b feature/dark-theme-button
 
-Os mantenedores do projeto são responsáveis por esclarecer os padrões de
-comportamento e devem tomar as medidas corretivas adequadas e justas em
-resposta a quaisquer instâncias de comportamento inaceitável.
+# Nova Branch de correção de bug
+# Substitua 'count-posts-pagination' pelo nome do bug
+git checkout -b bugfix/count-posts-pagination
 
-Os mantenedores do projeto têm o direito e a responsabilidade de remover, editar ou
-rejeitar comentários, confirmações, código, edições de wiki, problemas e outras contribuições
-que não estejam alinhados a este Código de Conduta, ou para banir temporariamente ou
-permanentemente qualquer contribuidor para outros comportamentos que considerem inadequados,
-ameaçador, ofensivo ou prejudicial.
+# Nova Branch de refatoração/adição de conteudo/ atualização de conteudo
+# Substitua 'update-folders' pelo nome da refatoração
+git checkout -b refactoring/update-folders
 
-### Alcance
+# Nova Branch Apenas de documentação
+# Substitua 'contributing' pelo nome da documentação
+git checkout -b doc/adjust-contributing
 
-Este Código de Conduta se aplica tanto aos espaços do projeto quanto aos espaços públicos
-quando um indivíduo está representando o projeto ou sua comunidade. Exemplos de
-representar um projeto ou comunidade inclui o uso de um e-mail oficial do projeto
-endereço, postando por meio de uma conta de mídia social oficial ou agindo como um nomeado
-representante em um evento online ou offline. A representação de um projeto pode ser
-posteriormente definido e esclarecido pelos mantenedores do projeto.
+# Branch apenas para contribuidores diretos
+git checkout -b hotfix/error-login
+```
 
-### Aplicação
+6. Crie as funcionalidades/correções
+7. Adicione os testes
+8. Adicione e faça um commit nos arquivos modificados, exemplo:
 
-Casos de comportamento abusivo, de assédio ou de outra forma inaceitável podem ser
-relatado ao entrar em contato com a equipe do projeto em gabriel.gregorio.1@outlook.com. Todas
-as reclamações serão analisadas e investigadas e resultarão em uma resposta que
-é considerada necessária e apropriada às circunstâncias. A equipe do projeto é
-obrigado a manter sigilo em relação ao relator de um incidente.
-Mais detalhes de políticas de aplicação específicas podem ser publicados separadamente.
+```shell
+git add ./src/components/navbar.tsx ./src/store/
 
-Os mantenedores do projeto que não seguem ou aplicam o Código de Conduta em boas condições
-a fé pode enfrentar repercussões temporárias ou permanentes, conforme determinado por outros
-membros da liderança do projeto.
+git commit -m "Adicionado um botão de troca de cores"
+```
 
-### Atribuição
+9. Faça um push, substituindo o 'feature/name-branch' pelo nome da branch que você criou
 
-Este Código de Conduta foi adaptado do [Pacto do Contribuidor] [homepage], versão 1.4,
-disponível em [http://contributor-covenant.org/version/1/4][version]
+```shell
+git push -u origin feature/name-branch
+```
 
-[homepage]: http://contributor-covenant.org
-[versão]: http://contributor-covenant.org/version/1/4/
+10. Abra o seu github e crie um pull request
+11. Aponte o pull request para mesclar na branch 'develop' deste projeto (gabrielogregorio/project)
+12. Crie o pull request
+13. Acompanhe a discussão, e tudo dando certo, sua contribuição será mesclada na branch develop do projeto
