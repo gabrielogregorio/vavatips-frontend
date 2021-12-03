@@ -1,75 +1,75 @@
-# Contribuição
+# Contribution
 
-Ao contribuir para este repositório, primeiro discuta a mudança que deseja fazer por meio de uma Issue,
-e-mail ou qualquer outro método com os proprietários deste repositório antes de fazer uma alteração.
+When contributing to this repository, first discuss the change you want to make via an Issue,
+email or any other method with the owners of this repository before making a change.
 
-Observe que temos um [código de conduta](CODE_OF_CONDUCT.md), siga-o em todas as suas interações com o projeto.
+Note that we have a [code of conduct](CODE_OF_CONDUCT.md), follow it in all your interactions with the project.
 
-# Processo de Pull Request
+# Pull Request Process
 
-1. Preencha por completo o template de PULL_REQUEST
+1. Complete the PULL_REQUEST template completely
 
-## Como contribuir na prática
+## How to contribute in practice
 
-1. Faça um Fork do projeto.
-2. Clone o projeto na sua máquina
+1. Fork the project.
+2. Clone the project on your machine
 
 ```shell
 git clone <your-repository-forked>
 ```
 
-3. Acesse a Branch de desenvolvimento
+3. Access the Development Branch
 
 ```shell
 git checkout -b develop origin/develop
 ```
 
-4. Atualize a branch de desenvolvimento sempre
+4. Update the development branch always
 
 ```shell
 git pull
 ```
 
-5. Crie uma nova branch baseada na develop, seguindo uma das opções abaixo:
+5. Create a new branch based on develop by following one of the options below:
 
 ```shell
-# Nova Branch de feature
-# Substitua o 'dark-theme-button' pelo nome da feature
+# New Feature Branch
+# Replace 'dark-theme-button' with the feature name
 git checkout -b feature/dark-theme-button
 
-# Nova Branch de correção de bug
-# Substitua 'count-posts-pagination' pelo nome do bug
+# New Bug Fix Branch
+# Replace 'count-posts-pagination' with the bug name
 git checkout -b bugfix/count-posts-pagination
 
-# Nova Branch de refatoração/adição de conteudo/ atualização de conteudo
-# Substitua 'update-folders' pelo nome da refatoração
+# New refactoring/content addition/content update branch
+# Replace 'update-folders' with the refactoring name
 git checkout -b refactoring/update-folders
 
-# Nova Branch Apenas de documentação
-# Substitua 'contributing' pelo nome da documentação
+# Nova Branch Documentation only
+# Replace 'contributing' with the name of the documentation
 git checkout -b doc/adjust-contributing
 
-# Branch apenas para contribuidores diretos
+# Branch for direct contributors only
 git checkout -b hotfix/error-login
 ```
 
-6. Crie as funcionalidades/correções
-7. Adicione os testes
-8. Adicione e faça um commit nos arquivos modificados, exemplo:
+6. Create the features/fixes
+7. Add tests
+8. Add and commit the modified files, example:
 
 ```shell
 git add ./src/components/navbar.tsx ./src/store/
 
-git commit -m "Adicionado um botão de troca de cores"
+git commit -m "Added a color swap button"
 ```
 
-9. Faça um push, substituindo o 'feature/name-branch' pelo nome da branch que você criou
+9. Do a push, replacing 'feature/name-branch' with the name of the branch you created
 
 ```shell
 git push -u origin feature/name-branch
 ```
 
-10. Abra o seu github e crie um pull request
-11. Aponte o pull request para mesclar na branch 'develop' deste projeto (gabrielogregorio/project)
-12. Crie o pull request
-13. Acompanhe a discussão, e tudo dando certo, sua contribuição será mesclada na branch develop do projeto
+10. Open your github and create a pull request
+11. Point the pull request to merge in the 'develop' branch of this project (gabrielogregorio/project)
+12. Create the pull request
+13. Follow the discussion, and everything works out, your contribution will be merged into the project's develop branch
