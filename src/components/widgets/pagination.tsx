@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../styles/components/pagination.style.module.css';
 
-type urlBase = 'ViewPosts' | 'Posts';
+type urlBase = 'ViewPosts' | 'Posts' | 'Save' | 'Tested';
 
 interface propsInterface {
   initial: number;
@@ -34,7 +34,6 @@ export const PaginationComponent = (props: propsInterface) => {
 
   function renderProps() {
     return pagination.map((pag) => {
-      // Se for o botão selecionado
       if (pag.id === props.selected) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
@@ -46,9 +45,6 @@ export const PaginationComponent = (props: propsInterface) => {
             </Link>
           </li>
         );
-
-        // se a posição em análise for >= a posição selecionada - 2
-        // ou se a posição em análise for <= a posição selecionada + 2
       } else if (pag.id >= props.selected - 2 && pag.id <= props.selected + 2) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
@@ -59,8 +55,6 @@ export const PaginationComponent = (props: propsInterface) => {
             </Link>
           </li>
         );
-
-        // Se chegou na ultima posição
       } else if (pag.id === props.finish) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
@@ -71,8 +65,6 @@ export const PaginationComponent = (props: propsInterface) => {
             </Link>
           </li>
         );
-
-        // Se a posição selecionada for maior que 3 e apenas isso => ...
       } else if (pag.id === props.selected + 3) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
@@ -81,8 +73,6 @@ export const PaginationComponent = (props: propsInterface) => {
             </Link>
           </li>
         );
-
-        // Se a posição em análise for 1
       } else if (pag.id === 1) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
@@ -93,8 +83,6 @@ export const PaginationComponent = (props: propsInterface) => {
             </Link>
           </li>
         );
-
-        // se a posição for menor que 3 => ...
       } else if (pag.id === props.selected - 3) {
         return (
           <li className={styles.selectedButton} key={pag.id}>
