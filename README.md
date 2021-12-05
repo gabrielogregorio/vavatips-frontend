@@ -29,6 +29,16 @@
 
 This project was developed using ReactJs, Typescript and React Testing Library. Backend is available at [vavatips-backend](https://github.com/gabrielogregorio/vavatips-backend)
 
+## Security flaws
+
+Unfortunately the React developers are not updating the development libraries, and in particular the react-scripts library which has some serious problems, so when running the "yarn audit" command we will see at least 13 security holes. To see which failures reach end users, we have to use the command below.
+
+```shell
+yarn audit --groups dependencies
+```
+
+We currently have no security holes in this requirement. Regarding React development packages, we don't have many options.
+
 ## Run Project
 
 1. Fully start the backend, available in the [vavatips-backend](<(https://github.com/gabrielogregorio/vavatips-backend)>) repository.
