@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from '../../styles/components/pagination.style.module.css';
+import {
+  PaginationButtons,
+  PaginationDotItems,
+} from '../base/paginationButtons';
 
 type urlBase = 'ViewPosts' | 'Posts' | 'Save' | 'Tested';
 
@@ -17,6 +20,8 @@ interface interfacePagination {
   id: number;
 }
 
+const maxValuePagination = 3;
+
 export const PaginationComponent = (props: propsInterface) => {
   const [pagination, setPagination] = useState<interfacePagination[]>([]);
 
@@ -28,69 +33,32 @@ export const PaginationComponent = (props: propsInterface) => {
     setPagination(paginationTemp);
   }, [props]);
 
-  function generateUrl(page: number): string {
-    return `/${props.urlBase}?map=${props.map}&agent=${props.agent}&page=${page}`;
-  }
+  function renderPaginationButtons() {
+    return pagination.map(({ id: numberOfPage }) => {
+      const isSelectedButton: boolean = numberOfPage === props.selected;
 
-  function renderProps() {
-    return pagination.map((pag) => {
-      if (pag.id === props.selected) {
+      const isFirstLastOrIntervalButton: boolean =
+        numberOfPage === 1 ||
+        numberOfPage === props.finish ||
+        isSelectedButton ||
+        (numberOfPage >= props.selected - 2 &&
+          numberOfPage <= props.selected + 2);
+
+      const isInsideLimitPagination =
+        numberOfPage === props.selected + maxValuePagination ||
+        numberOfPage === props.selected - maxValuePagination;
+
+      if (isFirstLastOrIntervalButton) {
         return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link
-              aria-label={`Navega para a página ${pag.id}`}
-              to={generateUrl(pag.id)}
-              className={styles.active}>
-              {pag.id}
-            </Link>
-          </li>
+          <PaginationButtons
+            numberOfPage={numberOfPage}
+            key={numberOfPage}
+            active={isSelectedButton}
+            props={props}
+          />
         );
-      } else if (pag.id >= props.selected - 2 && pag.id <= props.selected + 2) {
-        return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link
-              aria-label={`Navega para a página ${pag.id}`}
-              to={generateUrl(pag.id)}>
-              {pag.id}
-            </Link>
-          </li>
-        );
-      } else if (pag.id === props.finish) {
-        return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link
-              aria-label={`Navega para a página ${pag.id}`}
-              to={generateUrl(pag.id)}>
-              {pag.id}
-            </Link>
-          </li>
-        );
-      } else if (pag.id === props.selected + 3) {
-        return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link aria-hidden to="#">
-              ...
-            </Link>
-          </li>
-        );
-      } else if (pag.id === 1) {
-        return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link
-              aria-label={`Navega para a página ${pag.id}`}
-              to={generateUrl(pag.id)}>
-              {pag.id}
-            </Link>
-          </li>
-        );
-      } else if (pag.id === props.selected - 3) {
-        return (
-          <li className={styles.selectedButton} key={pag.id}>
-            <Link aria-hidden to="#">
-              ...
-            </Link>
-          </li>
-        );
+      } else if (isInsideLimitPagination) {
+        return <PaginationDotItems key={numberOfPage} />;
       }
 
       return null;
@@ -99,7 +67,7 @@ export const PaginationComponent = (props: propsInterface) => {
 
   return (
     <nav aria-label="Sistema de paginação" className={styles.pagination}>
-      <ul className={styles.paginationItems}>{renderProps()}</ul>
+      <ul className={styles.paginationItems}>{renderPaginationButtons()}</ul>
     </nav>
   );
 };
