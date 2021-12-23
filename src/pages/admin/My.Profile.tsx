@@ -6,6 +6,8 @@ import { logout } from '../../core/services/auth';
 import { LoaderComponent } from '../../components/base/loader';
 import { FooterComponent } from '../../components/layout/footer';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import { Title } from '../../components/base/title';
+import { Button } from '../../components/base/button';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -69,7 +71,7 @@ export const MyProfileScreen = () => {
 
       <div className="subcontainer">
         <div className="form" onSubmit={handleSubmit}>
-          <h1>Seu perfil</h1>
+          <Title>Seu perfil</Title>
           <LoaderComponent active={activeLoader} />
           <p>{errorMsg}</p>
 
@@ -96,17 +98,17 @@ export const MyProfileScreen = () => {
 
               <div className="groupInput">
                 <div className="groupInputSelet">
-                  <button
+                  <Button
                     onClick={() => logout()}
                     className="btn-color-secundary">
                     logoff
-                  </button>
+                  </Button>
                 </div>
               </div>
 
               <div className="groupInput">
                 <div className="groupInputSelet">
-                  <button className="btn-secundary">Atualizar dados</button>
+                  <Button className="btn-secundary">Atualizar dados</Button>
                 </div>
               </div>
             </>

@@ -1,9 +1,10 @@
+import { Title } from '../components/base/title';
 import { FooterComponent } from '../components/layout/footer';
 
 export const NotFoundScreen = () => {
   return (
     <div className="container">
-      <h1>Not Found</h1>
+      <Title>Not Found</Title>
       <FooterComponent color="primary" />
     </div>
   );

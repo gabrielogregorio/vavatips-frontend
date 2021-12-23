@@ -4,6 +4,7 @@ import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
 import { Input } from '../../components/base/input';
 import { FooterComponent } from '../../components/layout/footer';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import { Button } from '../../components/base/button';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -55,9 +56,9 @@ export const ConfigScreen = () => {
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button className="btn-secundary" onClick={handleSubmit}>
+              <Button className="btn-secundary" onClick={handleSubmit}>
                 Gerar
-              </button>
+              </Button>
             </div>
           </div>
           <p>{codeMsg}</p>
