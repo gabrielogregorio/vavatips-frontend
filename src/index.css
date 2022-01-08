@@ -80,20 +80,6 @@ html, body {
   color: var(--primary);
 }
 
-.container > .subcontainer > h1 {
-  padding: 30px 0;
-  font-size: 1.5rem;
-  text-align: center;
-  color: var(--text-color-normal);
-}
-
-.container > .subcontainer > h2 {
-  padding: 30px 0;
-  font-size: 1.2rem;
-  text-align: center;
-  color: var(--text-color-normal);
-}
-
 .container > .subcontainer > p {
   width: 100%;
   padding: 0 2rem;
@@ -418,13 +404,6 @@ hr {
   color: var(--light);
 }
 
-.containerPost > h1 {
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px;
-  margin-top: 100px;
-  color: var(--dark);
-}
 
 .containerPost > p {
   color: var(--light);
@@ -461,9 +440,7 @@ hr {
 }
 
 .modalTitle h1 {
-  flex: 1;
-  font-size: 24px;
-  color: var(--text-color-normal);
+
 }
 
 .modalTitle button {
@@ -504,22 +481,9 @@ hr {
   margin-left: 10px;
 }
 
-/* Fim Básicos */
-
 @media screen and (min-width: 600px) {
-
-  .container > div > .gridFull > .grid {
-  }
-
   .modalItem {
     max-width: 400px;
   }
-}
-
-@media screen and (min-width: 1000px) {
-}
-
-@media screen and (min-width: 2500px) {
-
 }
 

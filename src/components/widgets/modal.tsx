@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../core/services/api';
 import { formatImage } from '../../core/services/formatEnvironment';
+import { Button } from '../base/button';
 import { LoaderComponent } from '../base/loader';
+import { ButtonCloseModal } from '../base/modalCloseButton';
 
 interface ModalProps {
   title: string;
@@ -52,9 +54,7 @@ export const ModalComponent = (props: ModalProps) => {
       <div className="modalItem">
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <button onClick={() => props.closeModal()}>
-            <i className="fas fa-times"></i>
-          </button>
+          <ButtonCloseModal onClick={() => props.closeModal()} />
         </div>
 
         <hr />
@@ -83,10 +83,11 @@ export const ModalComponent = (props: ModalProps) => {
           </div>
 
           <div className="modalActions">
-            <button onClick={() => props.closeModal()}>Cancelar</button>
-            <button onClick={() => props.saveModal(_id, description, LinkImg)}>
+            <Button onClick={() => props.closeModal()}>Cancelar</Button>
+
+            <Button onClick={() => props.saveModal(_id, description, LinkImg)}>
               Adicionar
-            </button>
+            </Button>
           </div>
         </div>
       </div>

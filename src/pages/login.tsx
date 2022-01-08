@@ -11,6 +11,8 @@ import { LoaderComponent } from '../components/base/loader';
 import { FooterComponent } from '../components/layout/footer';
 import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
 import { LINKS } from '../core/data/links';
+import { Title } from '../components/base/title';
+import { Button } from '../components/base/button';
 type accessType = 'login' | 'register';
 
 const breadcrumbs = [LINKS.Home, LINKS.Login];
@@ -94,7 +96,9 @@ export const AccessScreen = () => {
         <div className="form">
           {redirect ? <Redirect to="/Dashboard" /> : null}
 
-          <h1>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </h1>
+          <Title>
+            {typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'}{' '}
+          </Title>
           <LoaderComponent active={activeLoader} />
           <p className="errorMsg">{errorMsg}</p>
 
@@ -131,19 +135,19 @@ export const AccessScreen = () => {
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button
+              <Button
                 className="btn-color-secundary"
                 onClick={() => toggleAccess()}>
                 {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
-              </button>
+              </Button>
             </div>
           </div>
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button className="btn-primary" onClick={handleSubmit}>
+              <Button className="btn-primary" onClick={handleSubmit}>
                 {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
-              </button>
+              </Button>
             </div>
           </div>
         </div>
