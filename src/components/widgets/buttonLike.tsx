@@ -1,3 +1,4 @@
+import { Button } from '../base/button';
 import './styles.module.css';
 
 type styleType = 'testBtn' | 'likeBtn' | 'suggestionBtn';
@@ -11,10 +12,10 @@ interface propsInterface {
 
 export const ButtonLike = (props: propsInterface) => {
   return (
-    <button
+    <Button
       className={`${props.styleBtn} ${props.active ? 'active' : ''}`}
       onClick={props.onClick}>
       {props.title}
-    </button>
+    </Button>
   );
 };

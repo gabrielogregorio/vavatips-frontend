@@ -12,6 +12,7 @@ import { ErrorMsg } from '../components/base/errorMsg';
 import { ContainerPosts } from '../components/widgets/containerPosts';
 import { LINKS } from '../core/data/links';
 import { usePosts } from '../core/hooks/usePosts';
+import { Title } from '../components/base/title';
 
 const breadcrumbs = [LINKS.Home, LINKS.Tested];
 
@@ -38,7 +39,7 @@ export const TestScreen = () => {
 
         <ModalMessage />
 
-        <h1>Posts Testados</h1>
+        <Title>Posts Testados</Title>
         <ErrorMsg msg={errorMsg} />
 
         <ContainerPosts

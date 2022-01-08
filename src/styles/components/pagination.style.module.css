@@ -44,11 +44,6 @@
   color: var(--text-color-normal);
 }
 
-.paginationItems .active {
-  color: var(--background-primary);
-  background-color: var(--primary);
-}
-
 .paginationItems p {
   padding: 0.2rem 0.4rem;
   display: inline;

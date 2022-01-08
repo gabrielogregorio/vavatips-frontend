@@ -5,7 +5,9 @@ import {
   initializeModalSuggestion,
 } from '../../core/contexts/modalSuggestion';
 import api from '../../core/services/api';
+import { Button } from '../base/button';
 import { Input } from '../base/input';
+import { ButtonCloseModal } from '../base/modalCloseButton';
 import { TextArea } from '../base/textArea';
 
 interface ModalProps {
@@ -61,9 +63,9 @@ export const ModalOfSuggestion = (props: ModalProps) => {
       <div className="modalItem">
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <button onClick={() => setModalSuggestion(initializeModalSuggestion)}>
-            <i className="fas fa-times"></i>
-          </button>
+          <ButtonCloseModal
+            onClick={() => setModalSuggestion(initializeModalSuggestion)}
+          />
         </div>
         <hr />
 
@@ -92,11 +94,11 @@ export const ModalOfSuggestion = (props: ModalProps) => {
           />
 
           <div className="modalActions">
-            <button
+            <Button
               onClick={() => setModalSuggestion(initializeModalSuggestion)}>
               Cancelar
-            </button>
-            <button onClick={() => saveModal()}>Adicionar</button>
+            </Button>
+            <Button onClick={() => saveModal()}>Adicionar</Button>
           </div>
         </div>
       </div>

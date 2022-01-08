@@ -3,6 +3,7 @@ import {
   initializeModalMessage,
 } from '../../core/contexts/modalMessage';
 import styles from '../../styles/components/modal.module.css';
+import { Button } from '../base/button';
 
 export const ModalMessage = () => {
   const { modalMessage, setModalMessage } = useModalMessage();
@@ -26,9 +27,9 @@ export const ModalMessage = () => {
       </div>
 
       <p>{modalMessage.message.msg}</p>
-      <button onClick={() => setModalMessage(initializeModalMessage)}>
+      <Button onClick={() => setModalMessage(initializeModalMessage)}>
         <i className="fas fa-times"></i>
-      </button>
+      </Button>
     </div>
   ) : null;
 };

@@ -19,6 +19,7 @@ import { formatImage } from '../../core/services/formatEnvironment';
 import { FooterComponent } from '../../components/layout/footer';
 import { Selected } from '../../components/base/selected';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import { Button } from '../../components/base/button';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -152,9 +153,9 @@ export const EditPostScreen = (): any => {
           <p onClick={() => showModalWithItem(instruction._id)}>
             {key + 1} - {instruction.description}
           </p>
-          <button onClick={() => deleteStep(instruction._id)}>
+          <Button onClick={() => deleteStep(instruction._id)}>
             <i className="fas fa-times"></i>
-          </button>
+          </Button>
         </div>
 
         <div className="instructionImage">
@@ -163,16 +164,16 @@ export const EditPostScreen = (): any => {
             alt={instruction.description}
           />{' '}
           <br />
-          <button
+          <Button
             className="btn-bottom"
             onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
-          </button>
-          <button
+          </Button>
+          <Button
             className="btn-top"
             onClick={() => putPosition(instruction._id, 'top')}>
             <i className="fas fa-chevron-down"></i>
-          </button>
+          </Button>
         </div>
         <hr />
       </div>
@@ -276,9 +277,9 @@ export const EditPostScreen = (): any => {
 
         <div className="form">
           <h1>Editar um post</h1>
-          <button className="btn-color-primary" onClick={() => deletePost(id)}>
+          <Button className="btn-color-primary" onClick={() => deletePost(id)}>
             Excluir
-          </button>
+          </Button>
 
           <Input
             type="text"
@@ -358,19 +359,19 @@ export const EditPostScreen = (): any => {
 
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button
+              <Button
                 className="btn-outline-secundary"
                 onClick={() => showModal()}>
                 Novo Passo
-              </button>{' '}
+              </Button>{' '}
               <br />
             </div>
           </div>
           <div className="groupInput">
             <div className="groupInputSelet">
-              <button onClick={() => handleSubmit()} className="btn-secundary">
+              <Button onClick={() => handleSubmit()} className="btn-secundary">
                 Publicar Dica
-              </button>
+              </Button>
             </div>
           </div>
         </div>

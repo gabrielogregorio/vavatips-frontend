@@ -1,4 +1,5 @@
 import { useFilters } from '../../core/contexts/filters';
+import { Button } from '../base/button';
 
 export const PostTags = () => {
   const { tags, filters, setFilters } = useFilters();
@@ -17,9 +18,9 @@ export const PostTags = () => {
   function renderTags() {
     return tags.map((tag, index) => (
       <div className="btn" key={index} onClick={() => toggleTag(tag)}>
-        <button className={filters.includes(tag) ? 'btnActive' : ''}>
+        <Button className={filters.includes(tag) ? 'btnActive' : ''}>
           {tag} a
-        </button>
+        </Button>
       </div>
     ));
   }

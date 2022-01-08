@@ -11,6 +11,7 @@ import {
 } from '../../core/services/handlePosts';
 import { isAuthenticated } from '../../core/services/auth';
 import { useModalContext } from '../../core/contexts/modalSuggestion';
+import { Button } from '../base/button';
 type typeType = 'next' | 'prev';
 
 // Componente post
@@ -88,9 +89,9 @@ export const PostCard = (props: PropsPostInterface) => {
           <p>{props.post.user.username ?? 'Ademir'}</p>
 
           {isAuthenticated() === true ? (
-            <button>
+            <Button>
               <Link to={`PostEdit?id=${props.post._id}`}>Editar</Link>
-            </button>
+            </Button>
           ) : null}
         </div>
 
@@ -103,19 +104,19 @@ export const PostCard = (props: PropsPostInterface) => {
               alt={props.post.imgs?.[idImage]?.description}
             />
 
-            <button
+            <Button
               aria-label="Item anterior"
               className={styles.previus}
               onClick={() => nextImage('prev', props.post.imgs.length)}>
               <i aria-hidden className="fas fa-angle-left"></i>
-            </button>
+            </Button>
 
-            <button
+            <Button
               aria-label="Proximo item"
               className={styles.next}
               onClick={() => nextImage('next', props.post.imgs.length)}>
               <i aria-hidden className="fas fa-angle-right"></i>
-            </button>
+            </Button>
 
             <div className={styles.descriptionImage}>
               <p aria-live="polite">
@@ -141,19 +142,19 @@ export const PostCard = (props: PropsPostInterface) => {
 
         {!props.viewAdmin ? (
           <div className={styles.actions}>
-            <button
+            <Button
               className={postTested ? styles.actionsActive : ''}
               onClick={handleAddTest}>
               A testar
-            </button>
+            </Button>
 
-            <button
+            <Button
               className={postSave ? styles.actionsActive : ''}
               onClick={handleAddSave}>
               {' '}
               Salvo
-            </button>
-            <button onClick={handleModalAction}>Sugerir</button>
+            </Button>
+            <Button onClick={handleModalAction}>Sugerir</Button>
           </div>
         ) : null}
       </div>

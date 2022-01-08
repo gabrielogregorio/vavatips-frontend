@@ -12,6 +12,7 @@ import { ErrorMsg } from '../components/base/errorMsg';
 import { ContainerPosts } from '../components/widgets/containerPosts';
 import { LINKS } from '../core/data/links';
 import { usePosts } from '../core/hooks/usePosts';
+import { Title } from '../components/base/title';
 
 const breadcrumbs = [LINKS.Home, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
@@ -37,7 +38,7 @@ export const HomeScreen = () => {
 
         <ModalMessage />
 
-        <h1>As melhores dicas de Valorant</h1>
+        <Title>As melhores dicas de Valorant</Title>
         <ErrorMsg msg={errorMsg} />
 
         <ContainerPosts
