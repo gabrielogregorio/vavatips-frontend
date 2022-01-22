@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { generateUrl } from '../../core/helpers/UrlMout';
 import styles from '../../styles/components/paginationButtons.style.module.css';
 
@@ -17,9 +17,8 @@ export const PaginationButtons = ({
     <li className={styles.selectedButton}>
       <Link
         aria-label={`Navega para a página ${numberOfPage}`}
-        to={generateUrl(numberOfPage, urlBase, map, agent)}
-        className={`${active ? styles.active : ''}`}>
-        {numberOfPage}
+        href={generateUrl(numberOfPage, urlBase, map, agent)}>
+        <a className={`${active ? styles.active : ''}`}>{numberOfPage}</a>
       </Link>
     </li>
   );
@@ -28,7 +27,7 @@ export const PaginationButtons = ({
 export const PaginationDotItems = () => {
   return (
     <li className={styles.selectedButton}>
-      <Link aria-hidden to="#">
+      <Link aria-hidden href="#">
         ...
       </Link>
     </li>

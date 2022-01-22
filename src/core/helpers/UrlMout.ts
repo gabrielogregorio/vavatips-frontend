@@ -1,5 +1,4 @@
-import { useLocation } from 'react-router-dom';
-import query from 'query-string';
+import { useRouter } from 'next/router';
 
 interface propsNewValueInterface {
   name: string;
@@ -7,8 +6,8 @@ interface propsNewValueInterface {
 }
 
 export function UrlMount(props: propsNewValueInterface): string {
-  const location = useLocation();
-  const queries = query.parse(location.search);
+  const location = useRouter();
+  const queries = location.query;
   let urlMounted = '';
   if (props.name !== '') {
     queries[props.name] = props.value;
@@ -23,11 +22,6 @@ export function UrlMount(props: propsNewValueInterface): string {
   return urlMounted;
 }
 
-export function generateUrl(
-  numberOfPage: number,
-  urlBase: any,
-  map: any,
-  agent: any,
-): string {
+export function generateUrl(numberOfPage: number, urlBase: any, map: any, agent: any): string {
   return `/${urlBase}?map=${map}&agent=${agent}&page=${numberOfPage}`;
 }

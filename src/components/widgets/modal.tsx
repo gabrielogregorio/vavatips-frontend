@@ -36,17 +36,17 @@ export const ModalComponent = (props: ModalProps) => {
 
   function loadImage(event: any) {
     setActiveLoader(true);
-    console.log('inicio');
     const formData = new FormData();
     formData.append('image', event.target.files[0]);
 
-    // Envia a imagem para o backend e coleta o retorno
-    api.post(`/postLoadFile`, formData).then((res) => {
-      const urlImg = `${res.data.filename}`;
-      setLinkImg(urlImg);
-      console.log('fim');
-      setActiveLoader(false);
-    });
+    function sendImageFromApi() {
+      api.post(`/postLoadFile`, formData).then((res) => {
+        const urlImg = `${res.data.filename}`;
+        setLinkImg(urlImg);
+        setActiveLoader(false);
+      });
+    }
+    sendImageFromApi();
   }
 
   return (
@@ -61,16 +61,14 @@ export const ModalComponent = (props: ModalProps) => {
 
         <div className="form">
           <div className="groupInput">
-            <div className="groupInputSelet">
+            <div className="groupInputSelect">
               <label htmlFor="">Descrição</label>
-              <textarea
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}></textarea>
+              <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
             </div>
           </div>
 
           <div className="groupInput">
-            <div className="groupInputSelet">
+            <div className="groupInputSelect">
               <label className="customFileUpload">
                 <input type="file" name="image" onChange={loadImage} />
                 Adicionar Imagem
@@ -78,16 +76,12 @@ export const ModalComponent = (props: ModalProps) => {
             </div>
           </div>
           <LoaderComponent active={activeLoader} />
-          <div className="instructionImage">
-            {LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}
-          </div>
+          <div className="instructionImage">{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
 
           <div className="modalActions">
             <Button onClick={() => props.closeModal()}>Cancelar</Button>
 
-            <Button onClick={() => props.saveModal(_id, description, LinkImg)}>
-              Adicionar
-            </Button>
+            <Button onClick={() => props.saveModal(_id, description, LinkImg)}>Adicionar</Button>
           </div>
         </div>
       </div>

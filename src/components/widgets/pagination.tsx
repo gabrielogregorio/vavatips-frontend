@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/components/pagination.style.module.css';
-import {
-  PaginationButtons,
-  PaginationDotItems,
-} from '../base/paginationButtons';
+import { PaginationButtons, PaginationDotItems } from '../base/paginationButtons';
 
-type urlBase = 'ViewPosts' | 'Posts' | 'Save' | 'Tested';
+type urlBase = 'ViewPosts' | 'Posts' | 'save' | 'tested';
 
 interface propsInterface {
   initial: number;
@@ -41,21 +38,14 @@ export const PaginationComponent = (props: propsInterface) => {
         numberOfPage === 1 ||
         numberOfPage === props.finish ||
         isSelectedButton ||
-        (numberOfPage >= props.selected - 2 &&
-          numberOfPage <= props.selected + 2);
+        (numberOfPage >= props.selected - 2 && numberOfPage <= props.selected + 2);
 
       const isInsideLimitPagination =
-        numberOfPage === props.selected + maxValuePagination ||
-        numberOfPage === props.selected - maxValuePagination;
+        numberOfPage === props.selected + maxValuePagination || numberOfPage === props.selected - maxValuePagination;
 
       if (isFirstLastOrIntervalButton) {
         return (
-          <PaginationButtons
-            numberOfPage={numberOfPage}
-            key={numberOfPage}
-            active={isSelectedButton}
-            props={props}
-          />
+          <PaginationButtons numberOfPage={numberOfPage} key={numberOfPage} active={isSelectedButton} props={props} />
         );
       } else if (isInsideLimitPagination) {
         return <PaginationDotItems key={numberOfPage} />;

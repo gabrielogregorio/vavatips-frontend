@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
-import 'dotenv/config';
-import { Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
 import api from '../../core/services/api';
 import * as uuid from 'uuid';
-import {
-  agents,
-  maps,
-  difficult,
-  momment,
-  side,
-} from '../../core/data/data-valorant';
+import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
 import { Input } from '../../components/base/input';
 import { ModalComponent } from '../../components/widgets/modal';
 import { formatImage } from '../../core/services/formatEnvironment';
@@ -19,6 +11,7 @@ import { Selected } from '../../components/base/selected';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
 import { Title } from '../../components/base/title';
 import { Button } from '../../components/base/button';
+import Router from 'next/router';
 
 type actionType = 'top' | 'bottom';
 
@@ -39,7 +32,7 @@ interface propsModalInterface {
   image: string;
 }
 
-export const CreatePostScreen = () => {
+export default function CreatePostScreen() {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [imgAdded, setImgAdded] = useState<imgInterface[]>([]);
 
@@ -86,7 +79,6 @@ export const CreatePostScreen = () => {
   }
 
   function deleteStep(_id: string) {
-    console.log(_id);
     setImgAdded(imgAdded.filter((item) => item._id !== _id));
   }
 
@@ -134,19 +126,11 @@ export const CreatePostScreen = () => {
         </div>
 
         <div className="instructionImage">
-          <img
-            src={formatImage(instruction.image)}
-            alt={instruction.description}
-          />{' '}
-          <br />
-          <Button
-            className="btn-bottom"
-            onClick={() => putPosition(instruction._id, 'bottom')}>
+          <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
+          <Button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
             <i className="fas fa-chevron-up"></i>
           </Button>
-          <Button
-            className="btn-top"
-            onClick={() => putPosition(instruction._id, 'top')}>
+          <Button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
             <i className="fas fa-chevron-down"></i>
           </Button>
         </div>
@@ -176,16 +160,12 @@ export const CreatePostScreen = () => {
   }
 
   function renderHabilits() {
-    const filterAbilities: agentInterface = agents().filter(
-      (agent) => agent.name === formTagAgent,
-    )?.[0];
+    const filterAbilities: agentInterface = agents().filter((agent) => agent.name === formTagAgent)?.[0];
     return filterAbilities?.habilits ?? [];
   }
 
   function renderPositionsMap() {
-    const filterMapPositions: mapInterface = maps().filter(
-      (map) => map.name === formTagMap,
-    )?.[0];
+    const filterMapPositions: mapInterface = maps().filter((map) => map.name === formTagMap)?.[0];
     console.log(filterMapPositions?.mapPosition);
     return filterMapPositions?.mapPosition ?? [];
   }
@@ -218,12 +198,15 @@ export const CreatePostScreen = () => {
       setImgAdded(copyImgAdded);
       return setVisibleModal(false);
     }
-    setImgAdded([
-      ...imgAdded,
-      { description, image, _id: uuid.v4().toString() },
-    ]);
+    setImgAdded([...imgAdded, { description, image, _id: uuid.v4().toString() }]);
     setVisibleModal(false);
   }
+
+  useEffect(() => {
+    if (redirect) {
+      Router.push('/admin/dashboard');
+    }
+  }, [redirect]);
 
   return (
     <div className="container">
@@ -231,8 +214,6 @@ export const CreatePostScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        {redirect ? <Redirect to="/Dashboard" /> : null}
-
         {visibleModal ? (
           <ModalComponent
             title="Adicionar Post"
@@ -247,40 +228,15 @@ export const CreatePostScreen = () => {
         <div className="form">
           <Title>Criar um post</Title>
 
-          <Input
-            type="text"
-            text="Titulo"
-            value={formTitle}
-            setValue={setFormTitle}
-          />
-          <Input
-            type="text"
-            text="Descrição"
-            value={formDescription}
-            setValue={setFormDescription}
-          />
+          <Input type="text" text="Titulo" value={formTitle} setValue={setFormTitle} />
+          <Input type="text" text="Descrição" value={formDescription} setValue={setFormDescription} />
 
           <hr />
 
           <div className="groupInput">
-            <Selected
-              text="Agente"
-              value={formTagAgent}
-              setValue={setFormTagAgent}
-              render={renderAgent}
-            />
-            <Selected
-              text="Mapa"
-              value={formTagMap}
-              setValue={setFormTagMap}
-              render={renderMaps}
-            />
-            <Selected
-              text="Habilidade"
-              value={formTagAbility}
-              setValue={setFormTagAbility}
-              render={renderHabilits}
-            />
+            <Selected text="Agente" value={formTagAgent} setValue={setFormTagAgent} render={renderAgent} />
+            <Selected text="Mapa" value={formTagMap} setValue={setFormTagMap} render={renderMaps} />
+            <Selected text="Habilidade" value={formTagAbility} setValue={setFormTagAbility} render={renderHabilits} />
           </div>
 
           <div className="groupInput">
@@ -290,12 +246,7 @@ export const CreatePostScreen = () => {
               setValue={setFormTagMapPosition}
               render={renderPositionsMap}
             />
-            <Selected
-              text="Momento"
-              value={formTagMoment}
-              setValue={setFormTagMoment}
-              render={renderMomment}
-            />
+            <Selected text="Momento" value={formTagMoment} setValue={setFormTagMoment} render={renderMomment} />
             <Selected
               text="Dificuldade"
               value={formTagDifficult}
@@ -305,18 +256,12 @@ export const CreatePostScreen = () => {
           </div>
 
           <div className="groupInput">
-            <Selected
-              text="Lado"
-              value={formTagSide}
-              setValue={setFormTagSide}
-              render={renderSide}
-            />
+            <Selected text="Lado" value={formTagSide} setValue={setFormTagSide} render={renderSide} />
           </div>
 
           <hr />
           <p className="info">
-            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações
-            claras, de forma que seja bem visível.
+            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.
             <br />
             <br /> Clique nos titulos para EDITAR os itens
           </p>
@@ -324,17 +269,15 @@ export const CreatePostScreen = () => {
           <div className="stepsPost">{renderSteps()}</div>
 
           <div className="groupInput">
-            <div className="groupInputSelet">
-              <Button
-                className="btn-outline-secundary"
-                onClick={() => showModal()}>
+            <div className="groupInputSelect">
+              <Button className="btn-outline-secundary" onClick={() => showModal()}>
                 Novo Passo
               </Button>{' '}
               <br />
             </div>
           </div>
           <div className="groupInput">
-            <div className="groupInputSelet">
+            <div className="groupInputSelect">
               <Button onClick={() => handleSubmit()} className="btn-secundary">
                 Publicar Dica
               </Button>
@@ -345,4 +288,4 @@ export const CreatePostScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}

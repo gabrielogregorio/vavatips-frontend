@@ -25,9 +25,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(
-    getUrl(location?.search),
-  );
+  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
 
   useEffect(() => {
     return () => {
@@ -40,7 +38,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
     setActiveLoader(true);
     setErrorMsg('');
 
-    const { agent, map, type, page } = getUrl(location.search);
+    const { agent, map, type, page } = getUrl(location?.query);
     setQueryUrl({ agent, map, type, page });
 
     const data1 =
@@ -52,12 +50,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
             filters: filters.toString(),
           }
         : {
-            idPosts:
-              typeRequest === 'save'
-                ? getPostsSave()
-                : typeRequest === 'tested'
-                ? getPostsTested()
-                : [],
+            idPosts: typeRequest === 'save' ? getPostsSave() : typeRequest === 'tested' ? getPostsTested() : [],
             agent,
             map,
             page,
@@ -65,7 +58,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
           };
 
     api
-      .get(resolveQuery('/Posts', data1))
+      .get(resolveQuery('/posts', data1))
       .then((res) => {
         const postsFiltered = res.data.posts;
         setFinishPage(res.data.count);
@@ -77,7 +70,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
         setErrorMsg(error.message);
         setActiveLoader(false);
       });
-  }, [location.search, filters, setTags, setFilters]);
+  }, [`${location?.query}`, filters, setTags, setFilters]);
 
   return { posts, activeLoader, errorMsg, finishPage, queryUrl };
 };

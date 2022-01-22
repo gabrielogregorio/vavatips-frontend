@@ -13,7 +13,7 @@ export const Input = (props: propsInterface) => {
 
   return (
     <div className="groupInput">
-      <div className="groupInputSelet">
+      <div className="groupInputSelect">
         <label htmlFor="">{props.text}</label>
         <input
           disabled={disabled}

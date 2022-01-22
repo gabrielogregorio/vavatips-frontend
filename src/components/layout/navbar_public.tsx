@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from '../../styles/components/navbar.public.module.css';
 
 export enum navbarEnumPublic {
   Inicio = '/Inicio',
-  Posts = '/Posts',
-  Save = '/Save',
-  Tested = '/Tested',
+  Posts = '/posts',
+  Save = '/save',
+  Tested = '/tested',
   Mistic = '#',
 }
 
@@ -19,43 +19,49 @@ export const NavbarComponentPublic = (props: NavbarProps) => {
   return (
     <nav className={styles.nav}>
       <ul>
-        <Link className={styles.logo} to="/">
-          VAVATIPS
+        <Link href="/">
+          <a className={styles.logo}>VAVATIPS</a>
         </Link>
 
-        <Link
-          className={
-            props.selected === navbarEnumPublic.Inicio ? styles.navActive : ''
-          }
-          to="/">
-          inicio
+        <Link href="/">
+          <a
+            className={
+              props.selected === navbarEnumPublic.Inicio ? styles.navActive : ''
+            }>
+            inicio
+          </a>
         </Link>
 
-        <Link
-          className={
-            props.selected === navbarEnumPublic.Posts ? styles.navActive : ''
-          }
-          to={`/Posts`}>
-          posts
+        <Link href={`/posts`}>
+          <a
+            className={
+              props.selected === navbarEnumPublic.Posts ? styles.navActive : ''
+            }>
+            posts
+          </a>
         </Link>
 
         {
-          <Link
-            className={
-              props.selected === navbarEnumPublic.Save ? styles.navActive : ''
-            }
-            to={`/Save`}>
-            salvos
+          <Link href={`/save`}>
+            <a
+              className={
+                props.selected === navbarEnumPublic.Save ? styles.navActive : ''
+              }>
+              salvos
+            </a>
           </Link>
         }
 
         {
-          <Link
-            className={
-              props.selected === navbarEnumPublic.Tested ? styles.navActive : ''
-            }
-            to={`/Tested`}>
-            testados
+          <Link href={`/tested`}>
+            <a
+              className={
+                props.selected === navbarEnumPublic.Tested
+                  ? styles.navActive
+                  : ''
+              }>
+              testados
+            </a>
           </Link>
         }
       </ul>

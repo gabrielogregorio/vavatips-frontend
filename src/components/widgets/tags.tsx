@@ -18,9 +18,7 @@ export const PostTags = () => {
   function renderTags() {
     return tags.map((tag, index) => (
       <div className="btn" key={index} onClick={() => toggleTag(tag)}>
-        <Button className={filters.includes(tag) ? 'btnActive' : ''}>
-          {tag} a
-        </Button>
+        <Button className={filters.includes(tag) ? 'btnActive' : ''}>{tag} a</Button>
       </div>
     ));
   }

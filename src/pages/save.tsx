@@ -1,8 +1,4 @@
-import { useLocation } from 'react-router-dom';
-import {
-  NavbarComponentPublic,
-  navbarEnumPublic,
-} from '../components/layout/navbar_public';
+import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
 import { ModalOfSuggestion } from '../components/widgets/modalOfSuggestion';
 import { ModalMessage } from '../components/widgets/modalMessage';
 import { FooterComponent } from '../components/layout/footer';
@@ -13,24 +9,18 @@ import { ContainerPosts } from '../components/widgets/containerPosts';
 import { LINKS } from '../core/data/links';
 import { usePosts } from '../core/hooks/usePosts';
 import { Title } from '../components/base/title';
+import { useRouter } from 'next/router';
 
-const breadcrumbs = [LINKS.Home, LINKS.Save];
+const breadcrumbs = [LINKS.inicio, LINKS.Save];
 
-export const SaveScreen = () => {
-  const location = useLocation();
+export default function SaveScreen() {
+  const location = useRouter();
 
-  const { queryUrl, activeLoader, errorMsg, finishPage, posts } = usePosts(
-    location,
-    'save',
-  );
+  const { queryUrl, activeLoader, errorMsg, finishPage, posts } = usePosts(location, 'save');
 
   return (
     <div className="container">
-      <NavbarComponentPublic
-        selected={navbarEnumPublic.Save}
-        agent={queryUrl.agent}
-        map={queryUrl.map}
-      />
+      <NavbarComponentPublic selected={navbarEnumPublic.Save} agent={queryUrl.agent} map={queryUrl.map} />
 
       <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
@@ -42,14 +32,10 @@ export const SaveScreen = () => {
         <Title>Posts Salvos</Title>
         <ErrorMsg msg={errorMsg} />
 
-        <ContainerPosts
-          activeLoader={activeLoader}
-          queryUrl={queryUrl}
-          posts={posts}
-        />
+        <ContainerPosts activeLoader={activeLoader} queryUrl={queryUrl} posts={posts} />
 
         <PaginationComponent
-          urlBase="Save"
+          urlBase="save"
           initial={1}
           finish={finishPage}
           selected={parseInt(queryUrl.page)}
@@ -60,4 +46,4 @@ export const SaveScreen = () => {
       <FooterComponent color="primary" />
     </div>
   );
-};
+}

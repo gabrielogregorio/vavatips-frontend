@@ -11,7 +11,7 @@ const breadcrumbs = [
   { url: '/Config', text: 'Configs' },
 ];
 
-export const ConfigScreen = () => {
+export default function ConfigScreen() {
   const [keyAccess, setKeyAccess] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [codeMsg, setCodeMsg] = useState<string>('');
@@ -27,9 +27,7 @@ export const ConfigScreen = () => {
       if (error.response.status === 404) {
         setErrorMsg('Essa não é uma chave válida!');
       } else if (error.response.status === 405) {
-        setErrorMsg(
-          'Por segurança o servidor bloqueou a geração de novos convites permanentemente!',
-        );
+        setErrorMsg('Por segurança o servidor bloqueou a geração de novos convites permanentemente!');
       } else {
         setErrorMsg('Erro desconhecido no servidor!');
       }
@@ -47,15 +45,10 @@ export const ConfigScreen = () => {
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
 
-          <Input
-            type="password"
-            text="Chave Secreta"
-            value={keyAccess}
-            setValue={setKeyAccess}
-          />
+          <Input type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess} />
 
           <div className="groupInput">
-            <div className="groupInputSelet">
+            <div className="groupInputSelect">
               <Button className="btn-secundary" onClick={handleSubmit}>
                 Gerar
               </Button>
@@ -67,4 +60,4 @@ export const ConfigScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}

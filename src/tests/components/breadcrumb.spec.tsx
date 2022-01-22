@@ -1,20 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { BrowserRouter } from 'react-router-dom';
 
 const breadcrumbs = [
   { url: '/', text: 'inicio' },
-  { url: '/Maps', text: 'mapas' },
-  { url: '/Maps', text: 'agentes' },
-  { url: '/Posts', text: 'dicas' },
+  { url: '/maps', text: 'mapas' },
+  { url: '/maps', text: 'agentes' },
+  { url: '/posts', text: 'dicas' },
 ];
 describe('<BreadcrumbComponent />', () => {
   it('should render breadcrumb', () => {
-    render(
-      <BrowserRouter>
-        <BreadcrumbComponent breadcrumbs={breadcrumbs} />
-      </BrowserRouter>,
-    );
+    render(<BreadcrumbComponent breadcrumbs={breadcrumbs} />);
     expect(screen.getByRole('link', { name: 'inicio' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'mapas' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'agentes' })).toBeInTheDocument();

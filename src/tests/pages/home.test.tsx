@@ -1,18 +1,24 @@
-import 'dotenv/config';
-import { screen, render } from '@testing-library/react';
-import { waitForElementToBeRemoved, waitFor } from '@testing-library/react';
-import { HomeScreen } from '../../pages/home';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import HomeScreen from '../../pages/posts';
 import { rest } from 'msw';
 import { mockPosts } from '../mock/mockPosts';
 import { setupServer } from 'msw/node';
-import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import MockApp from '../core/App.Mock';
 
-const baseURL = process.env.REACT_APP_API_HOST;
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '',
+      pathname: '',
+      query: { map: 'Ascent', agent: 'Sova' },
+      asPath: '',
+    };
+  },
+}));
 
 const handlers = [
-  rest.get(`${baseURL}/Posts`, async (req, res, ctx) => {
+  rest.get(`http://localhost/posts`, async (req, res, ctx) => {
     const query = req.url.searchParams;
     query.append('agent', 'Sova');
     query.append('map', 'Ascent');
@@ -41,12 +47,7 @@ describe('<HomeScreen />', () => {
   it('should render home screen', async () => {
     render(
       <MockApp>
-        <MemoryRouter
-          initialEntries={[
-            { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
-          ]}>
-          <HomeScreen />
-        </MemoryRouter>
+        <HomeScreen />
       </MockApp>,
     );
 
@@ -54,88 +55,37 @@ describe('<HomeScreen />', () => {
       timeout: 2000,
     });
 
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[0].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[1].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[2].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[3].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[4].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[5].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[6].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[7].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[8].title }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: mockPosts().posts[9].title }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[0].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[1].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[2].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[3].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[4].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[5].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[6].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[7].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[8].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: mockPosts().posts[9].title })).toBeInTheDocument();
 
-    expect(
-      screen.getByText(mockPosts().posts[0].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[1].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[2].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[3].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[4].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[5].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[6].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[7].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[8].description),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(mockPosts().posts[9].description),
-    ).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[0].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[1].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[2].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[3].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[4].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[5].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[6].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[7].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[8].description)).toBeInTheDocument();
+    expect(screen.getByText(mockPosts().posts[9].description)).toBeInTheDocument();
 
-    expect(screen.getAllByRole('button', { name: 'A testar' })).toHaveLength(
-      mockPosts().posts.length,
-    );
-    expect(screen.getAllByRole('button', { name: 'Salvo' })).toHaveLength(
-      mockPosts().posts.length,
-    );
-    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(
-      mockPosts().posts.length,
-    );
+    expect(screen.getAllByRole('button', { name: 'A testar' })).toHaveLength(mockPosts().posts.length);
+    expect(screen.getAllByRole('button', { name: 'Salvo' })).toHaveLength(mockPosts().posts.length);
+    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(mockPosts().posts.length);
   });
 
   it('should change image on click in buttons of navigation', async () => {
     render(
       <MockApp>
-        <MemoryRouter
-          initialEntries={[
-            { pathname: `/Posts`, search: '?map=Ascent&agent=Sova' },
-          ]}>
-          <HomeScreen />
-        </MemoryRouter>
+        <HomeScreen />
       </MockApp>,
     );
 
@@ -148,16 +98,12 @@ describe('<HomeScreen />', () => {
     const buttonNext = screen.getAllByLabelText('Proximo item')[0];
 
     // navigation in items the post
-    expect(
-      screen.getByAltText(mockPosts().posts[0].imgs[0].description),
-    ).toBeInTheDocument();
+    expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
     userEvent.click(buttonNext);
 
     await waitFor(
       () => {
-        expect(
-          screen.getByAltText(mockPosts().posts[0].imgs[1].description),
-        ).toBeInTheDocument();
+        expect(screen.getByAltText(mockPosts().posts[0].imgs[1].description)).toBeInTheDocument();
       },
       { timeout: 3000 },
     );
@@ -166,9 +112,7 @@ describe('<HomeScreen />', () => {
 
     await waitFor(
       () => {
-        expect(
-          screen.getByAltText(mockPosts().posts[0].imgs[0].description),
-        ).toBeInTheDocument();
+        expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
       },
       { timeout: 3000 },
     );
@@ -178,9 +122,7 @@ describe('<HomeScreen />', () => {
 
     await waitFor(
       () => {
-        expect(
-          screen.getByAltText(mockPosts().posts[0].imgs[2].description),
-        ).toBeInTheDocument();
+        expect(screen.getByAltText(mockPosts().posts[0].imgs[2].description)).toBeInTheDocument();
       },
       { timeout: 3000 },
     );
@@ -189,13 +131,9 @@ describe('<HomeScreen />', () => {
 
     await waitFor(
       () => {
-        expect(
-          screen.getByAltText(mockPosts().posts[0].imgs[0].description),
-        ).toBeInTheDocument();
+        expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
       },
       { timeout: 3000 },
     );
   });
-
-  it('should change page of click in pagination system', () => {});
 });

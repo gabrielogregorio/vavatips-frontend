@@ -1,21 +1,18 @@
-import { Link } from 'react-router-dom';
 import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
 import { ErrorMsg } from '../components/base/errorMsg';
 import { FooterComponent } from '../components/layout/footer';
 import { Img } from '../components/base/img';
 import { LoaderComponent } from '../components/base/loader';
-import {
-  NavbarComponentPublic,
-  navbarEnumPublic,
-} from '../components/layout/navbar_public';
+import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
 import { maps } from '../core/data/data-valorant';
 import { LINKS } from '../core/data/links';
 import { useMaps } from '../core/hooks/useMaps';
 import { Title } from '../components/base/title';
+import Link from 'next/link';
 
-const breadcrumbs = [LINKS.Home, LINKS.Maps];
+const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
-export const MapScreen = () => {
+export default function MapScreen() {
   const { mapsApi, activeLoader, errorMsg } = useMaps();
 
   function renderMap() {
@@ -25,9 +22,11 @@ export const MapScreen = () => {
 
     return maps().map((map) => {
       return mapsApi.includes(map.name) ? (
-        <Link to={`/Agents?map=${map.name}`} className="grid" key={map.id}>
-          <Img src={map.img} alt={map.name} />
-          <p>{map.name}</p>
+        <Link href={`/agents?map=${map.name}`} key={map.id}>
+          <a className="grid">
+            <img src={map.img} alt={map.name} />
+            <p>{map.name}</p>
+          </a>
         </Link>
       ) : null;
     });
@@ -48,4 +47,4 @@ export const MapScreen = () => {
       <FooterComponent color="primary" />
     </div>
   );
-};
+}
