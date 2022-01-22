@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
 import api from '../../core/services/api';
 import query from 'query-string';
@@ -8,14 +7,15 @@ import { FooterComponent } from '../../components/layout/footer';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
 import { PaginationComponent } from '../../components/widgets/pagination';
 import { ContainerPosts } from '../../components/widgets/containerPosts';
+import { useRouter } from 'next/router';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
   { url: '/ViewPosts', text: 'posts' },
 ];
 
-export const ViewPostsScreen = () => {
-  const location = useLocation();
+export default function ViewPostsScreen() {
+  const location = useRouter();
   const [posts, setPosts] = useState<postsProps[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
   const [queryParseUrl, setQueryParseUrl] = useState({
@@ -25,28 +25,16 @@ export const ViewPostsScreen = () => {
   });
 
   useEffect(() => {
-    let agent = `${query.parse(location?.search).agent}`;
-    let map = `${query.parse(location?.search).map}`;
-    let page = `${query.parse(location?.search).page}`;
-
-    if (agent === 'undefined') {
-      agent = '';
-    }
-    if (map === 'undefined') {
-      map = '';
-    }
-    if (page === 'undefined') {
-      page = '1';
-    }
+    let agent = `${location?.query?.agent || ''}`;
+    let map = `${location?.query?.map || ''}`;
+    let page = `${location?.query?.page || '1'}`;
 
     setQueryParseUrl({ agent, map, page });
-  }, [location.search]);
+  }, [`${location.query}`]);
 
   useEffect(() => {
     api
-      .get(
-        `/Posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`,
-      )
+      .get(`/posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`)
       .then((postsJson) => {
         setFinishPage(postsJson.data.count);
         setPosts(postsJson.data.posts);
@@ -62,11 +50,7 @@ export const ViewPostsScreen = () => {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <div className="subcontainer">
-        <ContainerPosts
-          activeLoader={false}
-          queryUrl={queryParseUrl}
-          posts={posts}
-        />
+        <ContainerPosts activeLoader={false} queryUrl={queryParseUrl} posts={posts} />
         <PaginationComponent
           urlBase="ViewPosts"
           initial={1}
@@ -79,4 +63,4 @@ export const ViewPostsScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}

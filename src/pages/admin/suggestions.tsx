@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import 'dotenv/config';
 import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
 import api from '../../core/services/api';
 import { FooterComponent } from '../../components/layout/footer';
@@ -10,7 +9,7 @@ const breadcrumbs = [
   { url: '/Dashboard', text: 'sugestões' },
 ];
 
-export const SuggestionScreen = () => {
+export default function SuggestionScreen() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -62,4 +61,4 @@ export const SuggestionScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}

@@ -1,19 +1,22 @@
-import 'dotenv/config';
-import {
-  screen,
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
-import { MapScreen } from '../../pages/Map';
-import { BrowserRouter } from 'react-router-dom';
+import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import MapScreen from '../../pages';
 import { rest } from 'msw';
 import { mockMaps } from '../mock/mock';
 import { setupServer } from 'msw/node';
 
-const baseURL = process.env.REACT_APP_API_HOST;
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '',
+      pathname: '',
+      query: {},
+      asPath: '',
+    };
+  },
+}));
 
 const handlers = [
-  rest.get(`${baseURL}/maps`, async (req, res, ctx) => {
+  rest.get(`http://localhost/maps`, async (req, res, ctx) => {
     return res(ctx.json(mockMaps()));
   }),
 ];
@@ -34,11 +37,7 @@ describe('<MapScreen />', () => {
   });
 
   it('should render maps screen', async () => {
-    render(
-      <BrowserRouter>
-        <MapScreen />
-      </BrowserRouter>,
-    );
+    render(<MapScreen />);
 
     await waitForElementToBeRemoved(screen.getByText(/Buscando Mapas/i), {
       timeout: 2000,

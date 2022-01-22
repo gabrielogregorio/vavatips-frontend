@@ -7,11 +7,11 @@ import { FooterComponent } from '../../components/layout/footer';
 import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
 
 const breadcrumbs = [
-  { url: '/Dashboard', text: 'administrativo' },
-  { url: '/Dashboard', text: 'dashboard' },
+  { url: '/Dashboard', text: 'admin' },
+  { url: '/Dashboard', text: 'admin/dashboard' },
 ];
 
-export const DashboardScreen = () => {
+export default function DashboardScreen() {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -26,7 +26,6 @@ export const DashboardScreen = () => {
 
   useEffect(() => {
     api.get(`/dashboard`).then((res) => {
-      console.log(res);
       setCountViewsAll(res.data.countAll);
       setCountViewsIps(res.data.countIps);
       setCountAlAgents(res.data.countAlAgents);
@@ -73,4 +72,4 @@ export const DashboardScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}

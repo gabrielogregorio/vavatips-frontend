@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useModalMessage } from '../../core/contexts/modalMessage';
-import {
-  useModalContext,
-  initializeModalSuggestion,
-} from '../../core/contexts/modalSuggestion';
+import { useModalContext, initializeModalSuggestion } from '../../core/contexts/modalSuggestion';
 import api from '../../core/services/api';
 import { Button } from '../base/button';
 import { Input } from '../base/input';
@@ -33,9 +30,7 @@ export const ModalOfSuggestion = (props: ModalProps) => {
     const idPost = modalSuggestion.post?._id ?? '';
 
     if (description === '' || description.trim() === '') {
-      setErrorMsg(
-        'Você precisa preencher o campo Descrição com as informações',
-      );
+      setErrorMsg('Você precisa preencher o campo Descrição com as informações');
     } else if (description.trim().length < 10) {
       setErrorMsg('Você precisa de uma descrição mais detalhada');
     } else {
@@ -48,8 +43,7 @@ export const ModalOfSuggestion = (props: ModalProps) => {
         type = 'success';
       } catch (error) {
         console.log(error);
-        msg =
-          'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores';
+        msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores';
         type = 'error';
       }
       setModalSuggestion(initializeModalSuggestion);
@@ -63,41 +57,21 @@ export const ModalOfSuggestion = (props: ModalProps) => {
       <div className="modalItem">
         <div className="modalTitle">
           <h1>{props.title}</h1>
-          <ButtonCloseModal
-            onClick={() => setModalSuggestion(initializeModalSuggestion)}
-          />
+          <ButtonCloseModal onClick={() => setModalSuggestion(initializeModalSuggestion)} />
         </div>
         <hr />
 
         <div className="form">
           <p className="errorMsg">{errorMsg}</p>
           {loading ? <p>Carregando</p> : null}
-          <Input
-            disabled
-            type="text"
-            text="Dica"
-            value={postTitle}
-            setValue={setPostTitle}
-          />
+          <Input disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
 
-          <Input
-            type="email"
-            text="Email para contato (Opcional)"
-            value={email}
-            setValue={setEmail}
-          />
+          <Input type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
 
-          <TextArea
-            title="Descrição"
-            value={description}
-            setValue={setDescription}
-          />
+          <TextArea title="Descrição" value={description} setValue={setDescription} />
 
           <div className="modalActions">
-            <Button
-              onClick={() => setModalSuggestion(initializeModalSuggestion)}>
-              Cancelar
-            </Button>
+            <Button onClick={() => setModalSuggestion(initializeModalSuggestion)}>Cancelar</Button>
             <Button onClick={() => saveModal()}>Adicionar</Button>
           </div>
         </div>

@@ -1,10 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { agents } from '../core/data/data-valorant';
-import {
-  NavbarComponentPublic,
-  navbarEnumPublic,
-} from '../components/layout/navbar_public';
+import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
 import { LoaderComponent } from '../components/base/loader';
 import { FooterComponent } from '../components/layout/footer';
 import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
@@ -13,11 +8,13 @@ import { Img } from '../components/base/img';
 import { LINKS } from '../core/data/links';
 import { useAgents } from '../core/hooks/useAgents';
 import { Title } from '../components/base/title';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
-const breadcrumbs = [LINKS.Home, LINKS.Maps, LINKS.Agents];
+const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
-export const AgentScreen = () => {
-  const item = useLocation();
+export default function AgentScreen() {
+  const item = useRouter();
 
   const { mapSelected, agentsApi, activeLoader, errorMsg } = useAgents(item);
 
@@ -27,12 +24,11 @@ export const AgentScreen = () => {
     }
     return agents().map((agent) => {
       return agentsApi.includes(agent.name) ? (
-        <Link
-          to={`/Posts?map=${mapSelected.map}&agent=${agent.name}`}
-          className="grid"
-          key={agent.id}>
-          <Img src={agent.img} alt={agent.name} />
-          <p>{agent.name}</p>
+        <Link href={`/posts?map=${mapSelected.map}&agent=${agent.name}`} key={agent.id}>
+          <a className="grid">
+            <img src={agent.img} alt={agent.name} />
+            <p>{agent.name}</p>
+          </a>
         </Link>
       ) : null;
     });
@@ -53,4 +49,4 @@ export const AgentScreen = () => {
       <FooterComponent color="primary" />
     </div>
   );
-};
+}

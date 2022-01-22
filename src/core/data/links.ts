@@ -1,9 +1,9 @@
 export const LINKS = {
-  Home: { url: '/', text: 'inicio' },
-  Maps: { url: '/Maps', text: 'mapas' },
-  Agents: { url: '/Maps', text: 'agentes' },
-  Posts: { url: '/Posts', text: 'dicas' },
-  Login: { url: '/Login', text: 'Login' },
-  Save: { url: '/Save', text: 'salvos' },
-  Tested: { url: '/Tested', text: 'testados' },
+  inicio: { url: '/', text: 'inicio' },
+  Maps: { url: '/maps', text: 'mapas' },
+  Agents: { url: '/maps', text: 'agentes' },
+  Posts: { url: '/posts', text: 'dicas' },
+  Login: { url: '/login', text: 'Login' },
+  Save: { url: '/save', text: 'salvos' },
+  Tested: { url: '/tested', text: 'testados' },
 };

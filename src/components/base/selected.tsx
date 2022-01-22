@@ -17,11 +17,9 @@ export const Selected = (props: propsInterface) => {
   }
 
   return (
-    <div className="groupInputSelet">
+    <div className="groupInputSelect">
       <label>{props.text}</label>
-      <select
-        value={props.value}
-        onChange={(e) => props.setValue(e.target.value)}>
+      <select value={props.value} onChange={(e) => props.setValue(e.target.value)}>
         <option value=""></option>
         {renderItems()}
       </select>

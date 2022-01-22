@@ -14,10 +14,7 @@ const verifyValidArray = (posts: any) => {
 };
 
 const savePosts = (action: actionTypes, updatePosts: string[]) => {
-  localStorage.setItem(
-    action === 'save' ? SAVE_POSTS : TESTED_POSTS,
-    JSON.stringify(updatePosts),
-  );
+  localStorage.setItem(action === 'save' ? SAVE_POSTS : TESTED_POSTS, JSON.stringify(updatePosts));
 };
 
 export const addNewPost = (postId: string, action: actionTypes) => {

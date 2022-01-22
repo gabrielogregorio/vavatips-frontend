@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import styles from '../../styles/components/breadcrumb.style.module.css';
 
 interface propsInterface {
@@ -17,12 +17,13 @@ export const BreadcrumbComponent = (props: propsInterface) => {
             <p>{breadcrumb.text}</p>
           ) : (
             <>
-              <Link
-                style={{
-                  color: props.admin ? 'var(--secundary)' : 'var(--primary)',
-                }}
-                to={breadcrumb.url}>
-                {breadcrumb.text}
+              <Link href={breadcrumb.url}>
+                <a
+                  style={{
+                    color: props.admin ? 'var(--secundary)' : 'var(--primary)',
+                  }}>
+                  {breadcrumb.text}
+                </a>
               </Link>
               <span
                 style={{

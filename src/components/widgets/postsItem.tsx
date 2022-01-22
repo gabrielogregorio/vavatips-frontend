@@ -1,7 +1,7 @@
-import { PostCard } from './postCard'
+import { PostCard } from './postCard';
 
 interface postPropsInterface {
-  posts: postsProps[]
+  posts: postsProps[];
 }
 
 export const Posts = ({ posts }: postPropsInterface) => {
@@ -9,15 +9,11 @@ export const Posts = ({ posts }: postPropsInterface) => {
     return posts.map((post) => {
       return (
         <div key={post._id}>
-         <PostCard post={post}/>
+          <PostCard post={post} />
         </div>
-      )
-    })
+      );
+    });
   }
 
-  return (
-    <div className="postItems">
-      {renderPost()}
-    </div>
-  )
-}
+  return <div className="postItems">{renderPost()}</div>;
+};

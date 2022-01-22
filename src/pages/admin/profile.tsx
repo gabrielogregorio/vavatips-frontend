@@ -14,7 +14,7 @@ const breadcrumbs = [
   { url: '/Dashboard', text: 'perfil' },
 ];
 
-export const MyProfileScreen = () => {
+export default function MyProfileScreen() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
@@ -32,7 +32,6 @@ export const MyProfileScreen = () => {
       } else {
         try {
           await api.put('/user', { username, password });
-          console.log('ok, dados alterados');
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           if (error.response?.status === 409) {
@@ -50,7 +49,6 @@ export const MyProfileScreen = () => {
   }, []);
 
   async function loadProfile() {
-    console.log('load profile');
     const profileResponse = api.get(`/user`);
 
     try {
@@ -77,37 +75,20 @@ export const MyProfileScreen = () => {
 
           {activeLoader === false ? (
             <>
-              <Input
-                type="text"
-                text="Trocar nome de usuário"
-                value={username}
-                setValue={setUsername}
-              />
-              <Input
-                type="password"
-                text="Digite uma nova senha"
-                value={password}
-                setValue={setPassword}
-              />
-              <Input
-                type="password"
-                text="Confirme a nova senha"
-                value={password2}
-                setValue={setPassword2}
-              />
+              <Input type="text" text="Trocar nome de usuário" value={username} setValue={setUsername} />
+              <Input type="password" text="Digite uma nova senha" value={password} setValue={setPassword} />
+              <Input type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2} />
 
               <div className="groupInput">
-                <div className="groupInputSelet">
-                  <Button
-                    onClick={() => logout()}
-                    className="btn-color-secundary">
+                <div className="groupInputSelect">
+                  <Button onClick={() => logout()} className="btn-color-secundary">
                     logoff
                   </Button>
                 </div>
               </div>
 
               <div className="groupInput">
-                <div className="groupInputSelet">
+                <div className="groupInputSelect">
                   <Button className="btn-secundary">Atualizar dados</Button>
                 </div>
               </div>
@@ -118,4 +99,4 @@ export const MyProfileScreen = () => {
       <FooterComponent color="secundary" />
     </div>
   );
-};
+}
