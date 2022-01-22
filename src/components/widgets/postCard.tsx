@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { formatImage } from '../../core/services/formatEnvironment';
-import { Img } from '../base/img';
 import styles from '../../styles/components/postCard.module.css';
-import {
-  addNewPost,
-  removePost,
-  getPostsTested,
-  getPostsSave,
-} from '../../core/services/handlePosts';
+import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../core/services/handlePosts';
 import { isAuthenticated } from '../../core/services/auth';
 import { useModalContext } from '../../core/contexts/modalSuggestion';
 import { Button } from '../base/button';
+import Link from 'next/link';
 type typeType = 'next' | 'prev';
 
 // Componente post
@@ -75,22 +69,16 @@ export const PostCard = (props: PropsPostInterface) => {
       <div className={styles.posts}>
         <div className={styles.profile}>
           {props.post.user.image ? (
-            <Img
-              src={formatImage(props.post.user.image)}
-              alt="Foto de perfil do Autor da postagem"
-            />
+            <img src={formatImage(props.post.user.image)} alt="Foto de perfil do Autor da postagem" />
           ) : (
-            <Img
-              src={'/images/users/profile.webp'}
-              alt={'Foto de perfil do Autor da postagem'}
-            />
+            <img src={'/images/users/profile.webp'} alt="Foto de perfil do Autor da postagem" />
           )}
 
           <p>{props.post.user.username ?? 'Ademir'}</p>
 
           {isAuthenticated() === true ? (
             <Button>
-              <Link to={`PostEdit?id=${props.post._id}`}>Editar</Link>
+              <Link href={`/admin/post-edit?id=${props.post._id}`}>Editar</Link>
             </Button>
           ) : null}
         </div>
@@ -99,10 +87,7 @@ export const PostCard = (props: PropsPostInterface) => {
 
         <div className={styles.imgAndDescription}>
           <div className={styles.imgPost}>
-            <img
-              src={formatImage(props.post.imgs?.[idImage]?.image)}
-              alt={props.post.imgs?.[idImage]?.description}
-            />
+            <img src={formatImage(props.post.imgs?.[idImage]?.image)} alt={props.post.imgs?.[idImage]?.description} />
 
             <Button
               aria-label="Item anterior"
@@ -120,8 +105,7 @@ export const PostCard = (props: PropsPostInterface) => {
 
             <div className={styles.descriptionImage}>
               <p aria-live="polite">
-                {idImage + 1} de {props.post.imgs.length} :{' '}
-                {props.post.imgs?.[idImage]?.description}
+                {idImage + 1} de {props.post.imgs.length} : {props.post.imgs?.[idImage]?.description}
               </p>
             </div>
           </div>
@@ -142,15 +126,11 @@ export const PostCard = (props: PropsPostInterface) => {
 
         {!props.viewAdmin ? (
           <div className={styles.actions}>
-            <Button
-              className={postTested ? styles.actionsActive : ''}
-              onClick={handleAddTest}>
+            <Button className={postTested ? styles.actionsActive : ''} onClick={handleAddTest}>
               A testar
             </Button>
 
-            <Button
-              className={postSave ? styles.actionsActive : ''}
-              onClick={handleAddSave}>
+            <Button className={postSave ? styles.actionsActive : ''} onClick={handleAddSave}>
               {' '}
               Salvo
             </Button>

@@ -14,8 +14,7 @@ interface modalSuggestionInterface {
 
 export const ContextModalSuggestion = createContext<modalSuggestionInterface>({
   modalSuggestion: initializeModalSuggestion,
-  setModalSuggestion: (state) =>
-    console.log('do you need use context Modal Suggestions', state),
+  setModalSuggestion: (state) => console.log('do you need use context Modal Suggestions', state),
 });
 
 export const useModalContext = () => useContext(ContextModalSuggestion);

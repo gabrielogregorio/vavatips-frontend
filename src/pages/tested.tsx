@@ -1,8 +1,4 @@
-import { useLocation } from 'react-router-dom';
-import {
-  NavbarComponentPublic,
-  navbarEnumPublic,
-} from '../components/layout/navbar_public';
+import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
 import { ModalOfSuggestion } from '../components/widgets/modalOfSuggestion';
 import { ModalMessage } from '../components/widgets/modalMessage';
 import { FooterComponent } from '../components/layout/footer';
@@ -13,23 +9,18 @@ import { ContainerPosts } from '../components/widgets/containerPosts';
 import { LINKS } from '../core/data/links';
 import { usePosts } from '../core/hooks/usePosts';
 import { Title } from '../components/base/title';
+import { useRouter } from 'next/router';
 
-const breadcrumbs = [LINKS.Home, LINKS.Maps, LINKS.Agents, LINKS.Posts];
+const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
-export const HomeScreen = () => {
-  const location = useLocation();
-  const { posts, activeLoader, errorMsg, finishPage, queryUrl } = usePosts(
-    location,
-    '',
-  );
+export default function TestScreen() {
+  const location = useRouter();
+
+  const { queryUrl, activeLoader, errorMsg, finishPage, posts } = usePosts(location, 'tested');
 
   return (
     <div className="container">
-      <NavbarComponentPublic
-        selected={navbarEnumPublic.Posts}
-        agent={queryUrl.agent}
-        map={queryUrl.map}
-      />
+      <NavbarComponentPublic selected={navbarEnumPublic.Tested} agent={queryUrl.agent} map={queryUrl.map} />
 
       <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
@@ -38,19 +29,13 @@ export const HomeScreen = () => {
 
         <ModalMessage />
 
-        <Title>As melhores dicas de Valorant</Title>
+        <Title>Posts Testados</Title>
         <ErrorMsg msg={errorMsg} />
 
-        <ContainerPosts
-          activeLoader={activeLoader}
-          queryUrl={queryUrl}
-          posts={posts}
-        />
-
-        {activeLoader ? <p>Carregando posts...</p> : null}
+        <ContainerPosts activeLoader={activeLoader} queryUrl={queryUrl} posts={posts} />
 
         <PaginationComponent
-          urlBase="Posts"
+          urlBase="tested"
           initial={1}
           finish={finishPage}
           selected={parseInt(queryUrl.page)}
@@ -61,4 +46,4 @@ export const HomeScreen = () => {
       <FooterComponent color="primary" />
     </div>
   );
-};
+}

@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
-import query from 'query-string';
 
 export const useAgents = (item: any) => {
-  const mapSelected = query.parse(item?.search);
+  const mapSelected = item?.query;
+
   const [agentsApi, setAgentsApi] = useState<string[]>([]);
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
 
   useEffect(() => {
     api
-      .get(`/agents/${mapSelected.map}`)
+      .get(`/agents/${mapSelected?.map}`)
       .then((agents) => {
         const agentsJson = agents.data.agents;
         setAgentsApi(agentsJson);
         setActiveLoader(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err, 'OPA, EAE');
         setErrorMsg('Erro desconhecido no servidor');
         setActiveLoader(false);
       });
-  }, [mapSelected.map]);
+  }, [mapSelected?.map]);
 
   return {
     mapSelected,

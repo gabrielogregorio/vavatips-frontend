@@ -1,19 +1,22 @@
-import 'dotenv/config';
-import {
-  screen,
-  render,
-  waitForElementToBeRemoved,
-} from '@testing-library/react';
-import { AgentScreen } from '../../pages/Agent';
-import { BrowserRouter } from 'react-router-dom';
+import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import AgentScreen from '../../pages/agents';
 import { rest } from 'msw';
 import { mockAgents } from '../mock/mock';
 import { setupServer } from 'msw/node';
 
-const baseURL = process.env.REACT_APP_API_HOST;
+jest.mock('next/router', () => ({
+  useRouter() {
+    return {
+      route: '/',
+      pathname: '',
+      query: { map: 'Ascent32' },
+      asPath: '',
+    };
+  },
+}));
 
 const handlers = [
-  rest.get(`${baseURL}/agents/undefined`, async (req, res, ctx) => {
+  rest.get(`http://localhost/agents/Ascent32`, async (req, res, ctx) => {
     return res(ctx.json(mockAgents()));
   }),
 ];
@@ -34,11 +37,7 @@ describe('<AgentScreen />', () => {
   });
 
   it('should render agent screen', async () => {
-    render(
-      <BrowserRouter>
-        <AgentScreen />
-      </BrowserRouter>,
-    );
+    render(<AgentScreen />);
 
     await waitForElementToBeRemoved(screen.getByText(/Buscando Agentes/i), {
       timeout: 2000,

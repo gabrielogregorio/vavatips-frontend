@@ -1,11 +1,7 @@
-import { Redirect } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import api from '../core/services/api';
 import { login } from '../core/services/auth';
-import {
-  NavbarComponentPublic,
-  navbarEnumPublic,
-} from '../components/layout/navbar_public';
+import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
 import { Input } from '../components/base/input';
 import { LoaderComponent } from '../components/base/loader';
 import { FooterComponent } from '../components/layout/footer';
@@ -13,11 +9,13 @@ import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
 import { LINKS } from '../core/data/links';
 import { Title } from '../components/base/title';
 import { Button } from '../components/base/button';
+import { NextResponse } from 'next/server';
+import Router from 'next/router';
 type accessType = 'login' | 'register';
 
-const breadcrumbs = [LINKS.Home, LINKS.Login];
+const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
-export const AccessScreen = () => {
+export default function Login() {
   const [code, setCode] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -87,6 +85,12 @@ export const AccessScreen = () => {
     setActiveLoader(false);
   }
 
+  useEffect(() => {
+    if (redirect) {
+      Router.push('/admin/dashboard');
+    }
+  }, [redirect]);
+
   return (
     <div className="container">
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
@@ -94,57 +98,32 @@ export const AccessScreen = () => {
 
       <div className="subcontainer">
         <div className="form">
-          {redirect ? <Redirect to="/Dashboard" /> : null}
+          <Title>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </Title>
 
-          <Title>
-            {typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'}{' '}
-          </Title>
           <LoaderComponent active={activeLoader} />
           <p className="errorMsg">{errorMsg}</p>
 
           {typeAccess === 'register' ? (
-            <Input
-              type="password"
-              text="Código de cadastro"
-              value={code}
-              setValue={setCode}
-            />
+            <Input type="password" text="Código de cadastro" value={code} setValue={setCode} />
           ) : null}
 
-          <Input
-            type="text"
-            text="Usuário"
-            value={username}
-            setValue={setUsername}
-          />
-          <Input
-            type="password"
-            text="Senha"
-            value={password}
-            setValue={setPassword}
-          />
+          <Input type="text" text="Usuário" value={username} setValue={setUsername} />
+          <Input type="password" text="Senha" value={password} setValue={setPassword} />
 
           {typeAccess === 'register' ? (
-            <Input
-              type="password"
-              text="Confirme uma senha"
-              value={password2}
-              setValue={setPassword2}
-            />
+            <Input type="password" text="Confirme uma senha" value={password2} setValue={setPassword2} />
           ) : null}
 
           <div className="groupInput">
-            <div className="groupInputSelet">
-              <Button
-                className="btn-color-secundary"
-                onClick={() => toggleAccess()}>
+            <div className="groupInputSelect">
+              <Button className="btn-color-secundary" onClick={() => toggleAccess()}>
                 {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
               </Button>
             </div>
           </div>
 
           <div className="groupInput">
-            <div className="groupInputSelet">
+            <div className="groupInputSelect">
               <Button className="btn-primary" onClick={handleSubmit}>
                 {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
               </Button>
@@ -152,7 +131,8 @@ export const AccessScreen = () => {
           </div>
         </div>
       </div>
+
       <FooterComponent color="primary" />
     </div>
   );
-};
+}

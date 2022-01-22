@@ -7,12 +7,8 @@ interface propsInterface {
 export const TagsFixFilters = ({ queryUrl }: propsInterface) => {
   return (
     <div>
-      <div className="btn-base">
-        {queryUrl.agent ? <Button>#{queryUrl.agent}</Button> : null}
-      </div>
-      <div className="btn-base">
-        {queryUrl.map ? <Button>#{queryUrl.map}</Button> : null}
-      </div>
+      <div className="btn-base">{queryUrl.agent ? <Button>#{queryUrl.agent}</Button> : null}</div>
+      <div className="btn-base">{queryUrl.map ? <Button>#{queryUrl.map}</Button> : null}</div>
     </div>
   );
 };
