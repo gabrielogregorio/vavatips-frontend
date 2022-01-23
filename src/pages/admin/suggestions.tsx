@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
+import NavbarComponent from '../../components/layout/navbar';
 import api from '../../core/services/api';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import FooterComponent from '../../components/layout/footer';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import { navbarEnum } from '../../interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -11,10 +12,6 @@ const breadcrumbs = [
 
 export default function SuggestionScreen() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
-
-  useEffect(() => {
-    loadSuggestion();
-  }, []);
 
   async function loadSuggestion() {
     const suggestionResponse = api.get(`/suggestions`);
@@ -27,6 +24,10 @@ export default function SuggestionScreen() {
       console.log(error);
     }
   }
+
+  useEffect(() => {
+    loadSuggestion();
+  }, []);
 
   function renderSuggestions() {
     return suggestions.map((report) => (

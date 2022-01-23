@@ -1,9 +1,13 @@
-import { Button } from './button';
+import Button from './button';
 
-export const ButtonCloseModal = ({ ...rest }: any) => {
+type buttonType = {
+  onClick: () => any;
+};
+
+export default function ButtonCloseModal({ onClick }: buttonType) {
   return (
-    <Button {...rest}>
-      <i className="fas fa-times"></i>
+    <Button onClick={onClick}>
+      <i className="fas fa-times" />
     </Button>
   );
-};
+}

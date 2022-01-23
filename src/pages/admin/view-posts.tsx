@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import api from '../../core/services/api';
-import query from 'query-string';
-import { useState } from 'react';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { PaginationComponent } from '../../components/widgets/pagination';
-import { ContainerPosts } from '../../components/widgets/containerPosts';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import NavbarComponent from '../../components/layout/navbar';
+import api from '../../core/services/api';
+import FooterComponent from '../../components/layout/footer';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import PaginationComponent from '../../components/widgets/pagination';
+import ContainerPosts from '../../components/widgets/containerPosts';
+import { navbarEnum } from '../../interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -25,12 +24,14 @@ export default function ViewPostsScreen() {
   });
 
   useEffect(() => {
-    let agent = `${location?.query?.agent || ''}`;
-    let map = `${location?.query?.map || ''}`;
-    let page = `${location?.query?.page || '1'}`;
+    const agent = `${location?.query?.agent || ''}`;
+    const map = `${location?.query?.map || ''}`;
+    const page = `${location?.query?.page || '1'}`;
 
     setQueryParseUrl({ agent, map, page });
   }, [`${location.query}`]);
+
+  const numberSelected = parseInt(queryParseUrl?.page || '1', 10);
 
   useEffect(() => {
     api
@@ -55,7 +56,7 @@ export default function ViewPostsScreen() {
           urlBase="ViewPosts"
           initial={1}
           finish={finishPage}
-          selected={parseInt(queryParseUrl.page)}
+          selected={numberSelected}
           agent={queryParseUrl.agent}
           map={queryParseUrl.map}
         />

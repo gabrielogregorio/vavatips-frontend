@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
-import queryString from 'query-string';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import api from '../../core/services/api';
 import * as uuid from 'uuid';
-import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
-import { Input } from '../../components/base/input';
-import { ModalComponent } from '../../components/widgets/modal';
-import { formatImage } from '../../core/services/formatEnvironment';
-import { FooterComponent } from '../../components/layout/footer';
-import { Selected } from '../../components/base/selected';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Button } from '../../components/base/button';
 import Router, { useRouter } from 'next/router';
+import NavbarComponent from '../../components/layout/navbar';
+import api from '../../core/services/api';
+import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
+import Input from '../../components/base/input';
+import ModalComponent from '../../components/widgets/modal';
+import formatImage from '../../core/services/formatEnvironment';
+import FooterComponent from '../../components/layout/footer';
+import Selected from '../../components/base/selected';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import Button from '../../components/base/button';
 
 const breadcrumbs = [
   { url: '/dashboard', text: 'administrativo' },
@@ -107,7 +106,7 @@ export default function EditPostScreen() {
     setImgAdded(imgAdded.filter((item) => item._id !== _id));
   }
 
-  function putPosition(_id: string, action: actionType) {
+  function putPosition(_id: string, action: actionType): boolean {
     // Obter a posição do item que será trocado
     const positionPut = imgAdded.findIndex((item) => item._id === _id);
 
@@ -136,6 +135,7 @@ export default function EditPostScreen() {
 
     // Atualiza no state
     setImgAdded(copyImgAdded);
+    return true;
   }
 
   function renderSteps() {
@@ -146,17 +146,17 @@ export default function EditPostScreen() {
             {key + 1} - {instruction.description}
           </p>
           <Button onClick={() => deleteStep(instruction._id)}>
-            <i className="fas fa-times"></i>
+            <i className="fas fa-times" />
           </Button>
         </div>
 
         <div className="instructionImage">
           <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
           <Button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
-            <i className="fas fa-chevron-up"></i>
+            <i className="fas fa-chevron-up" />
           </Button>
           <Button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
-            <i className="fas fa-chevron-down"></i>
+            <i className="fas fa-chevron-down" />
           </Button>
         </div>
         <hr />

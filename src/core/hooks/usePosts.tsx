@@ -19,7 +19,7 @@ function getUrl(location: any): filterUrlInterface {
   return { agent, map, type, page };
 }
 
-export const usePosts = (location: any, typeRequest: any = '') => {
+export default function usePosts(location: any, typeRequest: any = '') {
   const { filters, setTags, setFilters } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -27,12 +27,13 @@ export const usePosts = (location: any, typeRequest: any = '') => {
   const [finishPage, setFinishPage] = useState<number>(1);
   const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       setTags([]);
       setFilters([]);
-    };
-  }, [setFilters, setTags]);
+    },
+    [setFilters, setTags],
+  );
 
   useEffect(() => {
     setActiveLoader(true);
@@ -73,4 +74,4 @@ export const usePosts = (location: any, typeRequest: any = '') => {
   }, [`${location?.query}`, filters, setTags, setFilters]);
 
   return { posts, activeLoader, errorMsg, finishPage, queryUrl };
-};
+}

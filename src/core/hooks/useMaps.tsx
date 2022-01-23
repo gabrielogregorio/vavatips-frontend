@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 
-export const useMaps = () => {
+export default function useMaps() {
   const [mapsApi, setMapsApi] = useState<string[]>([]);
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string>('');
@@ -20,4 +20,4 @@ export const useMaps = () => {
   }, []);
 
   return { mapsApi, activeLoader, errorMsg };
-};
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
 
-export const useAgents = (item: any) => {
+export default function useAgents(item: any) {
   const mapSelected = item?.query;
 
   const [agentsApi, setAgentsApi] = useState<string[]>([]);
@@ -29,4 +29,4 @@ export const useAgents = (item: any) => {
     activeLoader,
     errorMsg,
   };
-};
+}

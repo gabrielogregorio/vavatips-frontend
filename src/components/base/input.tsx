@@ -5,24 +5,23 @@ interface propsInterface {
   value: string;
   type: typeInput;
   disabled?: boolean;
-  setValue: (e: any) => void;
+  setValue: (e: string) => any;
 }
 
-export const Input = (props: propsInterface) => {
-  const disabled = props.disabled ?? false;
-
+export default function Input({ disabled, type, value, text, setValue }: propsInterface) {
   return (
     <div className="groupInput">
       <div className="groupInputSelect">
-        <label htmlFor="">{props.text}</label>
+        <label htmlFor="input">{text}</label>
         <input
+          id="input"
           disabled={disabled}
-          type={props.type}
-          value={props.value}
-          placeholder={props.text}
-          onChange={(e) => props.setValue(e.target.value)}
+          type={type}
+          value={value}
+          placeholder={text}
+          onChange={(e) => setValue(e.target.value)}
         />
       </div>
     </div>
   );
-};
+}

@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
+import Router from 'next/router';
 import api from '../core/services/api';
 import { login } from '../core/services/auth';
-import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
-import { Input } from '../components/base/input';
-import { LoaderComponent } from '../components/base/loader';
-import { FooterComponent } from '../components/layout/footer';
-import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
+import NavbarComponentPublic from '../components/layout/navbar_public';
+import Input from '../components/base/input';
+import LoaderComponent from '../components/base/loader';
+import FooterComponent from '../components/layout/footer';
+import BreadcrumbComponent from '../components/widgets/breadcrumb';
 import { LINKS } from '../core/data/links';
-import { Title } from '../components/base/title';
-import { Button } from '../components/base/button';
-import { NextResponse } from 'next/server';
-import Router from 'next/router';
+import Title from '../components/base/title';
+import Button from '../components/base/button';
+import { navbarEnumPublic } from '../interfaces/navbar';
+
 type accessType = 'login' | 'register';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
@@ -25,64 +26,70 @@ export default function Login() {
   const [typeAccess, setTypeAccess] = useState<accessType>('login');
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
 
-  function toggleAccess() {
+  function toggleAccess(): boolean {
     if (typeAccess === 'login') {
       setTypeAccess('register');
     } else {
       setTypeAccess('login');
     }
+    return true;
   }
 
-  async function handleSubmit() {
+  function submitData(): boolean {
     setActiveLoader(true);
 
     if (!username || !password || (!password2 && typeAccess === 'register')) {
       setActiveLoader(false);
-      return setErrorMsg('Você precisa preencher todos os campos');
+      setErrorMsg('Você precisa preencher todos os campos');
+      return false;
     }
 
     if (password !== password2 && typeAccess === 'register') {
       setActiveLoader(false);
-      return setErrorMsg('As senhas não combinam!');
+      setErrorMsg('As senhas não combinam!');
+      return false;
     }
 
-    try {
-      // Cadastra o usuário
-      if (typeAccess === 'register') {
-        await api.post('/user', { username, password, code });
-      }
+    if (typeAccess === 'register') {
+      api
+        .post('/user', { username, password, code })
+        .then((res) => console.log(res))
+        .catch((error) => console.log(error));
+    }
 
-      // Realiza Login, obtendo o token
-      const token = await api.post('/auth', { username, password });
-
-      // Realiza o login salvando os dados no localstorage
-      login(token.data.token, token.data.id);
-
-      setActiveLoader(false);
-      setRedirect(true);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      if (error.response?.status === 409) {
+    api
+      .post('/auth', { username, password })
+      .then((token) => {
+        login(token.data.token, token.data.id);
         setActiveLoader(false);
-        setErrorMsg('Esse e-mail já está cadastrado');
-      } else if (error.response?.status === 404) {
-        setActiveLoader(false);
-        setErrorMsg('Usuário não cadastrado!');
-      } else if (error.response?.status === 403) {
-        if (error.response?.data?.msg === 'invalid code') {
+        setRedirect(true);
+      })
+      .catch((error) => {
+        if (error.response?.status === 409) {
           setActiveLoader(false);
-          setErrorMsg('Código de cadastro inválido');
+          setErrorMsg('Esse e-mail já está cadastrado');
+        } else if (error.response?.status === 404) {
+          setActiveLoader(false);
+          setErrorMsg('Usuário não cadastrado!');
+        } else if (error.response?.status === 403) {
+          if (error.response?.data?.msg === 'invalid code') {
+            setActiveLoader(false);
+            setErrorMsg('Código de cadastro inválido');
+          } else {
+            setActiveLoader(false);
+            setErrorMsg('Senha inválida!');
+          }
         } else {
+          console.log(error.response);
           setActiveLoader(false);
-          setErrorMsg('Senha inválida!');
+          setErrorMsg(`Erro Desconhecido ${error}`);
         }
-      } else {
-        console.log(error.response);
+      })
+      .finally(() => {
         setActiveLoader(false);
-        setErrorMsg(`Erro Desconhecido ${error}`);
-      }
-    }
-    setActiveLoader(false);
+        return true;
+      });
+    return true;
   }
 
   useEffect(() => {
@@ -124,7 +131,7 @@ export default function Login() {
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <Button className="btn-primary" onClick={handleSubmit}>
+              <Button className="btn-primary" onClick={() => submitData()}>
                 {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
               </Button>
             </div>

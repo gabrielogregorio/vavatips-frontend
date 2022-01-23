@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import api from '../../core/services/api';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import { Input } from '../../components/base/input';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Button } from '../../components/base/button';
+import NavbarComponent from '../../components/layout/navbar';
+import Input from '../../components/base/input';
+import FooterComponent from '../../components/layout/footer';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import Button from '../../components/base/button';
+import { navbarEnum } from '../../interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -22,7 +23,6 @@ export default function ConfigScreen() {
         GENERATOR_CODE: keyAccess,
       });
       setCodeMsg(code.data.code);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response.status === 404) {
         setErrorMsg('Essa não é uma chave válida!');

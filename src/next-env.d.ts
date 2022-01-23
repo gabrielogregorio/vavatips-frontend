@@ -12,28 +12,12 @@ type momentType =
   | 'DuranteOPlant'
   | 'DepoisDoPlant';
 type difficultType = 'Facil' | 'Medio' | 'Díficil';
-//type abilityType = 'Spot' | 'BarreiraDeOrbe'
+// type abilityType = 'Spot' | 'BarreiraDeOrbe'
 type sideType = 'Defensores' | 'Atacantes';
-type mapType =
-  | 'Ascent'
-  | 'Split'
-  | 'Ascent'
-  | 'Haven'
-  | 'Breeze'
-  | 'Icebox'
-  | 'Fracture'
-  | 'Bind';
+type mapType = 'Ascent' | 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind';
 type mapPositionType = 'Meio' | 'B' | 'A' | 'C';
-//type agentType  = 'Sova' | 'Vyper'
-type positionMapType =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'BaseAtacante'
-  | 'BaseDefensora'
-  | 'Meio'
-  | 'Outra';
+// type agentType  = 'Sova' | 'Vyper'
+type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
 
 interface PositionMapInterface {
   id: string;

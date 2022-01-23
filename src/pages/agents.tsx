@@ -1,15 +1,15 @@
-import { agents } from '../core/data/data-valorant';
-import { NavbarComponentPublic, navbarEnumPublic } from '../components/layout/navbar_public';
-import { LoaderComponent } from '../components/base/loader';
-import { FooterComponent } from '../components/layout/footer';
-import { BreadcrumbComponent } from '../components/widgets/breadcrumb';
-import { ErrorMsg } from '../components/base/errorMsg';
-import { Img } from '../components/base/img';
-import { LINKS } from '../core/data/links';
-import { useAgents } from '../core/hooks/useAgents';
-import { Title } from '../components/base/title';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { agents } from '../core/data/data-valorant';
+import NavbarComponentPublic from '../components/layout/navbar_public';
+import LoaderComponent from '../components/base/loader';
+import FooterComponent from '../components/layout/footer';
+import BreadcrumbComponent from '../components/widgets/breadcrumb';
+import ErrorMsg from '../components/base/errorMsg';
+import useAgents from '../core/hooks/useAgents';
+import Title from '../components/base/title';
+import { LINKS } from '../core/data/links';
+import { navbarEnumPublic } from '../interfaces/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
@@ -22,16 +22,16 @@ export default function AgentScreen() {
     if (agentsApi.length === 0) {
       return null;
     }
-    return agents().map((agent) => {
-      return agentsApi.includes(agent.name) ? (
+    return agents().map((agent) =>
+      agentsApi.includes(agent.name) ? (
         <Link href={`/posts?map=${mapSelected.map}&agent=${agent.name}`} key={agent.id}>
           <a className="grid">
             <img src={agent.img} alt={agent.name} />
             <p>{agent.name}</p>
           </a>
         </Link>
-      ) : null;
-    });
+      ) : null,
+    );
   }
 
   return (

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../core/services/api';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import { Input } from '../../components/base/input';
+import NavbarComponent from '../../components/layout/navbar';
+import Input from '../../components/base/input';
 import { logout } from '../../core/services/auth';
-import { LoaderComponent } from '../../components/base/loader';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Title } from '../../components/base/title';
-import { Button } from '../../components/base/button';
+import LoaderComponent from '../../components/base/loader';
+import FooterComponent from '../../components/layout/footer';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import Title from '../../components/base/title';
+import Button from '../../components/base/button';
+import { navbarEnum } from '../../interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -26,27 +27,21 @@ export default function MyProfileScreen() {
 
     if (!username) {
       setErrorMsg('Você precisa preencher todos os campos');
+    } else if (password !== password2) {
+      setErrorMsg('As senhas não combinam!');
     } else {
-      if (password !== password2) {
-        setErrorMsg('As senhas não combinam!');
-      } else {
-        try {
-          await api.put('/user', { username, password });
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-          if (error.response?.status === 409) {
-            setErrorMsg('Esse e-mail já está cadastrado');
-          } else {
-            console.log(error);
-          }
+      try {
+        await api.put('/user', { username, password });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.response?.status === 409) {
+          setErrorMsg('Esse e-mail já está cadastrado');
+        } else {
+          console.log(error);
         }
       }
     }
   }
-
-  useEffect(() => {
-    loadProfile();
-  }, []);
 
   async function loadProfile() {
     const profileResponse = api.get(`/user`);
@@ -61,7 +56,9 @@ export default function MyProfileScreen() {
       setActiveLoader(false);
     }
   }
-
+  useEffect(() => {
+    loadProfile();
+  }, []);
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.Profile} />

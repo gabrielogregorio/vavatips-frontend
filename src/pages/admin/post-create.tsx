@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import api from '../../core/services/api';
 import * as uuid from 'uuid';
-import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
-import { Input } from '../../components/base/input';
-import { ModalComponent } from '../../components/widgets/modal';
-import { formatImage } from '../../core/services/formatEnvironment';
-import { FooterComponent } from '../../components/layout/footer';
-import { Selected } from '../../components/base/selected';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Title } from '../../components/base/title';
-import { Button } from '../../components/base/button';
 import Router from 'next/router';
+import NavbarComponent from '../../components/layout/navbar';
+import api from '../../core/services/api';
+import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
+import Input from '../../components/base/input';
+import ModalComponent from '../../components/widgets/modal';
+import formatImage from '../../core/services/formatEnvironment';
+import FooterComponent from '../../components/layout/footer';
+import Selected from '../../components/base/selected';
+import BreadcrumbComponent from '../../components/widgets/breadcrumb';
+import Title from '../../components/base/title';
+import Button from '../../components/base/button';
+import { navbarEnum } from '../../interfaces/navbar';
 
 type actionType = 'top' | 'bottom';
 
@@ -121,17 +122,17 @@ export default function CreatePostScreen() {
             {key + 1} - {instruction.description}
           </p>
           <Button onClick={() => deleteStep(instruction._id)}>
-            <i className="fas fa-times"></i>
+            <i className="fas fa-times" />
           </Button>
         </div>
 
         <div className="instructionImage">
           <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
           <Button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
-            <i className="fas fa-chevron-up"></i>
+            <i className="fas fa-chevron-up" />
           </Button>
           <Button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
-            <i className="fas fa-chevron-down"></i>
+            <i className="fas fa-chevron-down" />
           </Button>
         </div>
         <hr />

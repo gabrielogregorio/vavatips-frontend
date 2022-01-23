@@ -4,13 +4,15 @@ interface propsInterface {
   setValue: (e: any) => void;
 }
 
-export const TextArea = (props: propsInterface) => {
+export default function TextArea({ title, setValue, value }: propsInterface) {
   return (
     <div className="groupInput">
       <div className="groupInputSelect">
-        <label htmlFor="">{props.title}</label>
-        <textarea value={props.value} onChange={(e) => props.setValue(e.target.value)}></textarea>
+        <label aria-label="Escolha uma descrição" htmlFor="textArea">
+          {title}
+        </label>
+        <textarea id="textArea" value={value} onChange={(e) => setValue(e.target.value)} />
       </div>
     </div>
   );
-};
+}

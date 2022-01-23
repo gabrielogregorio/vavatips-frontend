@@ -5,31 +5,25 @@ import styles from '../../styles/components/paginationButtons.style.module.css';
 interface PaginationButtonInterface {
   numberOfPage: any;
   active: boolean;
-  props: any;
+  map: string;
+  agent: string;
+  urlBase: string;
 }
 
-export const PaginationButtons = ({
-  numberOfPage,
-  active,
-  props: { urlBase, map, agent },
-}: PaginationButtonInterface) => {
+export default function PaginationButtons({ numberOfPage, active, urlBase, map, agent }: PaginationButtonInterface) {
   return (
     <li className={styles.selectedButton}>
-      <Link
-        aria-label={`Navega para a página ${numberOfPage}`}
-        href={generateUrl(numberOfPage, urlBase, map, agent)}>
+      <Link aria-label={`Navega para a página ${numberOfPage}`} href={generateUrl(numberOfPage, urlBase, map, agent)}>
         <a className={`${active ? styles.active : ''}`}>{numberOfPage}</a>
       </Link>
     </li>
   );
-};
+}
 
-export const PaginationDotItems = () => {
+export function PaginationDotItems() {
   return (
     <li className={styles.selectedButton}>
-      <Link aria-hidden href="#">
-        ...
-      </Link>
+      <a>...</a>
     </li>
   );
-};
+}

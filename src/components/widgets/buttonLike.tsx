@@ -1,5 +1,4 @@
-import { Button } from '../base/button';
-import './styles.module.css';
+import Button from '../base/button';
 
 type styleType = 'testBtn' | 'likeBtn' | 'suggestionBtn';
 
@@ -7,15 +6,13 @@ interface propsInterface {
   active: boolean;
   title: string;
   styleBtn: styleType;
-  onClick: (data: any) => void;
+  onClick: () => {};
 }
 
-export const ButtonLike = (props: propsInterface) => {
+export default function ButtonLike({ styleBtn, title, onClick, active }: propsInterface) {
   return (
-    <Button
-      className={`${props.styleBtn} ${props.active ? 'active' : ''}`}
-      onClick={props.onClick}>
-      {props.title}
+    <Button className={`${styleBtn} ${active ? 'active' : ''}`} onClick={onClick}>
+      {title}
     </Button>
   );
-};
+}

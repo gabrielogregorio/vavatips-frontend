@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/components/pagination.style.module.css';
-import { PaginationButtons, PaginationDotItems } from '../base/paginationButtons';
+import PaginationButtons, { PaginationDotItems } from '../base/paginationButtons';
 
 type urlBase = 'ViewPosts' | 'Posts' | 'save' | 'tested';
 
@@ -19,35 +19,43 @@ interface interfacePagination {
 
 const maxValuePagination = 3;
 
-export const PaginationComponent = (props: propsInterface) => {
+export default function PaginationComponent({ finish, selected, map, agent, initial, urlBase }: propsInterface) {
   const [pagination, setPagination] = useState<interfacePagination[]>([]);
 
   useEffect(() => {
     const paginationTemp: interfacePagination[] = [];
-    for (let i = 1; i <= props.finish; i++) {
+    for (let i = 1; i <= finish; i += 1) {
       paginationTemp.push({ id: i });
     }
     setPagination(paginationTemp);
-  }, [props]);
+  }, [finish, selected]);
 
   function renderPaginationButtons() {
     return pagination.map(({ id: numberOfPage }) => {
-      const isSelectedButton: boolean = numberOfPage === props.selected;
+      const isSelectedButton: boolean = numberOfPage === selected;
 
       const isFirstLastOrIntervalButton: boolean =
         numberOfPage === 1 ||
-        numberOfPage === props.finish ||
+        numberOfPage === finish ||
         isSelectedButton ||
-        (numberOfPage >= props.selected - 2 && numberOfPage <= props.selected + 2);
+        (numberOfPage >= selected - 2 && numberOfPage <= selected + 2);
 
       const isInsideLimitPagination =
-        numberOfPage === props.selected + maxValuePagination || numberOfPage === props.selected - maxValuePagination;
+        numberOfPage === selected + maxValuePagination || numberOfPage === selected - maxValuePagination;
 
       if (isFirstLastOrIntervalButton) {
         return (
-          <PaginationButtons numberOfPage={numberOfPage} key={numberOfPage} active={isSelectedButton} props={props} />
+          <PaginationButtons
+            numberOfPage={numberOfPage}
+            key={numberOfPage}
+            active={isSelectedButton}
+            urlBase={urlBase}
+            map={map}
+            agent={agent}
+          />
         );
-      } else if (isInsideLimitPagination) {
+      }
+      if (isInsideLimitPagination) {
         return <PaginationDotItems key={numberOfPage} />;
       }
 
@@ -60,4 +68,4 @@ export const PaginationComponent = (props: propsInterface) => {
       <ul className={styles.paginationItems}>{renderPaginationButtons()}</ul>
     </nav>
   );
-};
+}

@@ -1,7 +1,7 @@
 import { useFilters } from '../../core/contexts/filters';
-import { Button } from '../base/button';
+import Button from '../base/button';
 
-export const PostTags = () => {
+export default function PostTags() {
   const { tags, filters, setFilters } = useFilters();
 
   function toggleTag(tag: string) {
@@ -23,4 +23,4 @@ export const PostTags = () => {
     ));
   }
   return <div className="tags"> {renderTags()} </div>;
-};
+}

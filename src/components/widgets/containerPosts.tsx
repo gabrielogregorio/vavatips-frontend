@@ -1,7 +1,7 @@
-import { LoaderComponent } from '../base/loader';
-import { Posts } from './postsItem';
-import { PostTags } from './tags';
-import { TagsFixFilters } from './tagsFixFilters';
+import LoaderComponent from '../base/loader';
+import Posts from './postsItem';
+import PostTags from './tags';
+import TagsFixFilters from './tagsFixFilters';
 
 interface propsInterface {
   queryUrl: any;
@@ -9,11 +9,7 @@ interface propsInterface {
   posts: postsProps[];
 }
 
-export const ContainerPosts = ({
-  queryUrl,
-  activeLoader,
-  posts,
-}: propsInterface) => {
+export default function ContainerPosts({ queryUrl, activeLoader, posts }: propsInterface) {
   return (
     <div className="containerPost">
       <TagsFixFilters queryUrl={queryUrl} />
@@ -22,4 +18,4 @@ export const ContainerPosts = ({
       <Posts posts={posts} />
     </div>
   );
-};
+}

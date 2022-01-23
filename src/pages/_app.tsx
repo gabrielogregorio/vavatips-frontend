@@ -1,12 +1,17 @@
+/* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
 import '../styles/global.css';
+import { AppProps } from 'next/app';
+import Script from 'next/script';
+import Header from 'next/head';
 import { ContextModalSuggestion, modalContextType } from '../core/contexts/modalSuggestion';
 import { ContextFilters } from '../core/contexts/filters';
 import { ContextModalMessage, modalMessageType } from '../core/contexts/modalMessage';
-import Header from 'next/head';
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({
+    post: null,
     active: false,
   });
   const [modalMessage, setModalMessage] = useState<modalMessageType>({
@@ -19,10 +24,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Header>
-        {/* <!-- Fonte Awesome--> */}
-        <script src="https://kit.fontawesome.com/5136a1e457.js" crossOrigin="anonymous"></script>
-
-        {/* <!-- Fonte --> */}
+        <Script src="https://kit.fontawesome.com/5136a1e457.js" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link

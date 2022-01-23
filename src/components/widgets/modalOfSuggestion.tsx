@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useModalMessage } from '../../core/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '../../core/contexts/modalSuggestion';
 import api from '../../core/services/api';
-import { Button } from '../base/button';
-import { Input } from '../base/input';
-import { ButtonCloseModal } from '../base/modalCloseButton';
-import { TextArea } from '../base/textArea';
+import Button from '../base/button';
+import Input from '../base/input';
+import ButtonCloseModal from '../base/modalCloseButton';
+import TextArea from '../base/textArea';
 
 interface ModalProps {
   title: string;
 }
 
-export const ModalOfSuggestion = (props: ModalProps) => {
+export default function ModalOfSuggestion({ title }: ModalProps) {
   const [email, setEmail] = useState<string>('');
 
   const [description, setDescription] = useState<string>('');
@@ -56,7 +56,7 @@ export const ModalOfSuggestion = (props: ModalProps) => {
     <div className="modal">
       <div className="modalItem">
         <div className="modalTitle">
-          <h1>{props.title}</h1>
+          <h1>{title}</h1>
           <ButtonCloseModal onClick={() => setModalSuggestion(initializeModalSuggestion)} />
         </div>
         <hr />
@@ -78,4 +78,4 @@ export const ModalOfSuggestion = (props: ModalProps) => {
       </div>
     </div>
   ) : null;
-};
+}

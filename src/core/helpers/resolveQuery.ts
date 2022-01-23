@@ -3,7 +3,7 @@ const resolveQuery = (urlBase: string, filters: any = []) => {
   if (filters.length === 0) {
     return urlBase;
   }
-  urlBase = urlBase + '?';
+  urlBase += '?';
 
   const keys: string[] = Object.keys(filters);
   for (let x = 0; x < keys.length; x++) {
