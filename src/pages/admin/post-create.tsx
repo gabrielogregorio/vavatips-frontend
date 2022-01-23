@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router from 'next/router';
-import NavbarComponent from '../../components/layout/navbar';
-import api from '../../core/services/api';
-import { agents, maps, difficult, momment, side } from '../../core/data/data-valorant';
-import Input from '../../components/base/input';
-import ModalComponent from '../../components/widgets/modal';
-import formatImage from '../../core/services/formatEnvironment';
-import FooterComponent from '../../components/layout/footer';
-import Selected from '../../components/base/selected';
-import BreadcrumbComponent from '../../components/widgets/breadcrumb';
-import Title from '../../components/base/title';
-import Button from '../../components/base/button';
-import { navbarEnum } from '../../interfaces/navbar';
+import NavbarComponent from '@/layout/navbar';
+import api from '@/services/api';
+import { agents, maps, difficult, momment, side } from '@/data/data-valorant';
+import Input from '@/base/input';
+import ModalComponent from '@/widgets/modal';
+import formatImage from '@/services/formatEnvironment';
+import FooterComponent from '@/layout/footer';
+import Selected from '@/base/selected';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Title from '@/base/title';
+import Button from '@/base/button';
+import { navbarEnum } from '@/interfaces/navbar';
 
 type actionType = 'top' | 'bottom';
 

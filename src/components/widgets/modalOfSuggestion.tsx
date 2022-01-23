@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useModalMessage } from '../../core/contexts/modalMessage';
-import { useModalContext, initializeModalSuggestion } from '../../core/contexts/modalSuggestion';
-import api from '../../core/services/api';
-import Button from '../base/button';
-import Input from '../base/input';
-import ButtonCloseModal from '../base/modalCloseButton';
-import TextArea from '../base/textArea';
+import { useModalMessage } from '@/contexts/modalMessage';
+import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
+import api from '@/services/api';
+import Button from '@/base/button';
+import Input from '@/base/input';
+import ButtonCloseModal from '@/base/modalCloseButton';
+import TextArea from '@/base/textArea';
 
 interface ModalProps {
   title: string;

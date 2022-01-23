@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
 import styles from '../../styles/components/pagination.style.module.css';
-import PaginationButtons, { PaginationDotItems } from '../base/paginationButtons';
 
 type urlBase = 'ViewPosts' | 'Posts' | 'save' | 'tested';
 

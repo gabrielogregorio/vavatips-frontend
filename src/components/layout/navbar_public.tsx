@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { navbarEnumPublic } from '../../interfaces/navbar';
+import { navbarEnumPublic } from '@/interfaces/navbar';
 import styles from '../../styles/components/navbar.public.module.css';
 
 interface NavbarProps {

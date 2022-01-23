@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useFilters } from '../contexts/filters';
-import resolveQuery from '../helpers/resolveQuery';
-import api from '../services/api';
-import { getPostsSave, getPostsTested } from '../services/handlePosts';
+import api from '@/services/api';
+import { useFilters } from '@/contexts/filters';
+import resolveQuery from '@/helpers/resolveQuery';
+import { getPostsSave, getPostsTested } from '@/services/handlePosts';
 
 interface filterUrlInterface {
   agent: string;

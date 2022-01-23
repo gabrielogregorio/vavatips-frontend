@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import formatImage from '../../core/services/formatEnvironment';
+import { isAuthenticated } from '@/services/auth';
+import { useModalContext } from '@/contexts/modalSuggestion';
+import formatImage from '@/services/formatEnvironment';
+import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
+import Button from '@/base/button';
 import styles from '../../styles/components/postCard.module.css';
-import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../core/services/handlePosts';
-import { isAuthenticated } from '../../core/services/auth';
-import { useModalContext } from '../../core/contexts/modalSuggestion';
-import Button from '../base/button';
 
 type typeType = 'next' | 'prev';
 

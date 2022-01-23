@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NavbarComponent from '../../components/layout/navbar';
-import api from '../../core/services/api';
-import FooterComponent from '../../components/layout/footer';
-import BreadcrumbComponent from '../../components/widgets/breadcrumb';
-import { navbarEnum } from '../../interfaces/navbar';
+import NavbarComponent from '@/layout/navbar';
+import api from '@/services/api';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },

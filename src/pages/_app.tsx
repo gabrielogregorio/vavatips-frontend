@@ -5,9 +5,9 @@ import '../styles/global.css';
 import { AppProps } from 'next/app';
 import Script from 'next/script';
 import Header from 'next/head';
-import { ContextModalSuggestion, modalContextType } from '../core/contexts/modalSuggestion';
-import { ContextFilters } from '../core/contexts/filters';
-import { ContextModalMessage, modalMessageType } from '../core/contexts/modalMessage';
+import { ContextModalSuggestion, modalContextType } from '@/contexts/modalSuggestion';
+import { ContextFilters } from '@/contexts/filters';
+import { ContextModalMessage, modalMessageType } from '@/contexts/modalMessage';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({

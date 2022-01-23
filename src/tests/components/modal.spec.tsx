@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ModalComponent } from '../../components/widgets/modal';
+import { ModalComponent } from '@/widgets/modal';
 
 describe('<ModalComponent />', () => {
   it('should render ModalComponent', () => {
@@ -9,12 +9,8 @@ describe('<ModalComponent />', () => {
         title="title"
         description="description"
         image="image"
-        closeModal={() => {
-          return;
-        }}
-        saveModal={() => {
-          return;
-        }}
+        closeModal={() => {}}
+        saveModal={() => {}}
       />,
     );
 

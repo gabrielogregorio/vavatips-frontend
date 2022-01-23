@@ -1,6 +1,6 @@
-import { useModalMessage, initializeModalMessage } from '../../core/contexts/modalMessage';
+import Button from '@/base/button';
+import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage';
 import styles from '../../styles/components/modal.module.css';
-import Button from '../base/button';
 
 export default function ModalMessage() {
   const { modalMessage, setModalMessage } = useModalMessage();

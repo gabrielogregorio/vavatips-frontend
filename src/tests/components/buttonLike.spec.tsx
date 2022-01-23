@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ButtonLike } from '../../components/widgets/buttonLike';
+import { ButtonLike } from '@/widgets/buttonLike';
 
 describe('<ButtonLike />', () => {
   it('should render button like', () => {

@@ -1,13 +1,7 @@
 import { useState } from 'react';
-import { ContextFilters } from '../../core/contexts/filters';
-import {
-  ContextModalMessage,
-  modalMessageType,
-} from '../../core/contexts/modalMessage';
-import {
-  ContextModalSuggestion,
-  modalContextType,
-} from '../../core/contexts/modalSuggestion';
+import { ContextFilters } from '@/contexts/filters';
+import { ContextModalMessage, modalMessageType } from '@/contexts/modalMessage';
+import { ContextModalSuggestion, modalContextType } from '@/contexts/modalSuggestion';
 
 function MockApp({ children }: any) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({
@@ -21,12 +15,9 @@ function MockApp({ children }: any) {
   const [filters, setFilters] = useState<string[]>([]);
 
   return (
-    <ContextModalSuggestion.Provider
-      value={{ modalSuggestion, setModalSuggestion }}>
+    <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
       <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-        <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
-          {children}
-        </ContextFilters.Provider>
+        <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>{children}</ContextFilters.Provider>
       </ContextModalMessage.Provider>
     </ContextModalSuggestion.Provider>
   );

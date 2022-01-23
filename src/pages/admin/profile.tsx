@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../core/services/api';
-import NavbarComponent from '../../components/layout/navbar';
-import Input from '../../components/base/input';
-import { logout } from '../../core/services/auth';
-import LoaderComponent from '../../components/base/loader';
-import FooterComponent from '../../components/layout/footer';
-import BreadcrumbComponent from '../../components/widgets/breadcrumb';
-import Title from '../../components/base/title';
-import Button from '../../components/base/button';
-import { navbarEnum } from '../../interfaces/navbar';
+import NavbarComponent from '@/layout/navbar';
+import Input from '@/base/input';
+import LoaderComponent from '@/base/loader';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Title from '@/base/title';
+import Button from '@/base/button';
+import { logout } from '@/services/auth';
+import api from '@/services/api';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },

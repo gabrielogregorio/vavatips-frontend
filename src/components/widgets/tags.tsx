@@ -1,5 +1,5 @@
-import { useFilters } from '../../core/contexts/filters';
-import Button from '../base/button';
+import { useFilters } from '@/contexts/filters';
+import Button from '@/base/button';
 
 export default function PostTags() {
   const { tags, filters, setFilters } = useFilters();

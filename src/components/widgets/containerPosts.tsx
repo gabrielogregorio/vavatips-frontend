@@ -1,4 +1,4 @@
-import LoaderComponent from '../base/loader';
+import LoaderComponent from '@/base/loader';
 import Posts from './postsItem';
 import PostTags from './tags';
 import TagsFixFilters from './tagsFixFilters';

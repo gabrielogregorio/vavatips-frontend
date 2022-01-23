@@ -1,14 +1,14 @@
 import Link from 'next/link';
-import BreadcrumbComponent from '../components/widgets/breadcrumb';
-import ErrorMsg from '../components/base/errorMsg';
-import FooterComponent from '../components/layout/footer';
-import LoaderComponent from '../components/base/loader';
-import NavbarComponentPublic from '../components/layout/navbar_public';
-import { maps } from '../core/data/data-valorant';
-import { LINKS } from '../core/data/links';
-import useMaps from '../core/hooks/useMaps';
-import Title from '../components/base/title';
-import { navbarEnumPublic } from '../interfaces/navbar';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import ErrorMsg from '@/base/errorMsg';
+import FooterComponent from '@/layout/footer';
+import LoaderComponent from '@/base/loader';
+import NavbarComponentPublic from '@/layout/navbar_public';
+import { maps } from '@/data/data-valorant';
+import { LINKS } from '@/data/links';
+import useMaps from '@/hooks/useMaps';
+import Title from '@/base/title';
+import { navbarEnumPublic } from '@/interfaces/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 

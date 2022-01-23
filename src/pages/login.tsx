@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
-import api from '../core/services/api';
-import { login } from '../core/services/auth';
-import NavbarComponentPublic from '../components/layout/navbar_public';
-import Input from '../components/base/input';
-import LoaderComponent from '../components/base/loader';
-import FooterComponent from '../components/layout/footer';
-import BreadcrumbComponent from '../components/widgets/breadcrumb';
-import { LINKS } from '../core/data/links';
-import Title from '../components/base/title';
-import Button from '../components/base/button';
-import { navbarEnumPublic } from '../interfaces/navbar';
+import api from '@/services/api';
+import { login } from '@/services/auth';
+import NavbarComponentPublic from '@/layout/navbar_public';
+import Input from '@/base/input';
+import LoaderComponent from '@/base/loader';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import { LINKS } from '@/data/links';
+import Title from '@/base/title';
+import Button from '@/base/button';
+import { navbarEnumPublic } from '@/interfaces/navbar';
 
 type accessType = 'login' | 'register';
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../core/services/api';
-import { formatImage } from '../../core/services/formatEnvironment';
-import Button from '../base/button';
-import LoaderComponent from '../base/loader';
-import ButtonCloseModal from '../base/modalCloseButton';
+import api from '@/services/api';
+import formatImage from '@/services/formatEnvironment';
+import Button from '@/base/button';
+import LoaderComponent from '@/base/loader';
+import ButtonCloseModal from '@/base/modalCloseButton';
 
 interface ModalProps {
   title: string;

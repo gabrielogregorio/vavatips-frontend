@@ -1,4 +1,4 @@
-import Button from '../base/button';
+import Button from '@/base/button';
 
 interface propsInterface {
   queryUrl: any;

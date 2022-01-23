@@ -1,8 +1,8 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
-import AgentScreen from '../../pages/agents';
 import { rest } from 'msw';
-import { mockAgents } from '../mock/mock';
 import { setupServer } from 'msw/node';
+import AgentScreen from '../../pages/agents';
+import { mockAgents } from '../mock/mock';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -15,26 +15,16 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [
-  rest.get(`http://localhost/agents/Ascent32`, async (req, res, ctx) => {
-    return res(ctx.json(mockAgents()));
-  }),
-];
+const handlers = [rest.get(`http://localhost/agents/Ascent32`, async (req, res, ctx) => res(ctx.json(mockAgents())))];
 
 const server = setupServer(...handlers);
 
 describe('<AgentScreen />', () => {
-  beforeAll(() => {
-    return server.listen();
-  });
+  beforeAll(() => server.listen());
 
-  afterEach(() => {
-    return server.resetHandlers();
-  });
+  afterEach(() => server.resetHandlers());
 
-  afterAll(() => {
-    return server.close();
-  });
+  afterAll(() => server.close());
 
   it('should render agent screen', async () => {
     render(<AgentScreen />);

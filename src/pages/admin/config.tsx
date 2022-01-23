@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import api from '../../core/services/api';
-import NavbarComponent from '../../components/layout/navbar';
-import Input from '../../components/base/input';
-import FooterComponent from '../../components/layout/footer';
-import BreadcrumbComponent from '../../components/widgets/breadcrumb';
-import Button from '../../components/base/button';
-import { navbarEnum } from '../../interfaces/navbar';
+import api from '@/services/api';
+import NavbarComponent from '@/layout/navbar';
+import Input from '@/base/input';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Button from '@/base/button';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
