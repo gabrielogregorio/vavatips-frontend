@@ -1,5 +1,7 @@
 import Button from '@/base/button';
 import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage';
+import { FaTimes } from 'react-icons/fa';
+import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
 import styles from '../../styles/components/modal.module.css';
 
 export default function ModalMessage() {
@@ -12,13 +14,13 @@ export default function ModalMessage() {
         background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secundary)',
       }}>
       <div className={styles.notfyIcon}>
-        {modalMessage.message.type === 'success' ? <i className="far fa-check-circle" /> : null}
-        {modalMessage.message.type === 'error' ? <i className="fas fa-exclamation-circle" /> : null}
+        {modalMessage.message.type === 'success' ? <AiOutlineCheckCircle /> : null}
+        {modalMessage.message.type === 'error' ? <AiOutlineExclamationCircle /> : null}
       </div>
 
       <p>{modalMessage.message.msg}</p>
       <Button onClick={() => setModalMessage(initializeModalMessage)}>
-        <i className="fas fa-times" />
+        <FaTimes />
       </Button>
     </div>
   ) : null;

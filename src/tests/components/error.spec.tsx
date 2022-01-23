@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ErrorMsg } from '@/base/errorMsg';
+import ErrorMsg from '@/base/errorMsg';
 
 describe('<ErrorMsg />', () => {
   it('should render h1', () => {
@@ -8,7 +8,7 @@ describe('<ErrorMsg />', () => {
   });
 
   it('should match snapshot', () => {
-    const { container } = render(<ErrorMsg msg="Mensagem de erro de exemplo" />);
+    render(<ErrorMsg msg="Mensagem de erro de exemplo" />);
     // expect(container.firstChild).toMatchSnapshot();
   });
 });

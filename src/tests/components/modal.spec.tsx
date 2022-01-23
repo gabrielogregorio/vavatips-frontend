@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ModalComponent } from '@/widgets/modal';
+import ModalComponent from '@/widgets/modal';
 
 describe('<ModalComponent />', () => {
   it('should render ModalComponent', () => {

@@ -19,6 +19,8 @@
     --purple-small: #cc9ac7;
   }
   
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
   * {
     margin: 0;
     padding: 0;
@@ -215,6 +217,12 @@
   .form .instructionImage .btn-top {
     bottom: 0;
     left: 50%;
+  }
+  .form .instructionImage .btn-bottom svg,
+  .form .instructionImage .btn-top svg {
+    color: var(--background-secundary);
+    font-size: 1.5rem;
+    font-weight: 500;
   }
   
   hr {
@@ -436,11 +444,11 @@
   .modalTitle {
     display: flex;
     justify-content: center;
-    justify-content: center;
+    align-items: center;
   }
   
   .modalTitle h1 {
-  
+    flex: 1;
   }
   
   .modalTitle button {

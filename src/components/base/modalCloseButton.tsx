@@ -1,3 +1,4 @@
+import { FaTimes } from 'react-icons/fa';
 import Button from './button';
 
 type buttonType = {
@@ -7,7 +8,7 @@ type buttonType = {
 export default function ButtonCloseModal({ onClick }: buttonType) {
   return (
     <Button onClick={onClick}>
-      <i className="fas fa-times" />
+      <FaTimes />
     </Button>
   );
 }

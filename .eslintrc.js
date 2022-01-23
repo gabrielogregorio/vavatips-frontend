@@ -23,4 +23,12 @@ module.exports = {
     ],
   },
   extends: ['next/core-web-vitals', 'airbnb', 'prettier'],
+  overrides: [
+    {
+      files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };

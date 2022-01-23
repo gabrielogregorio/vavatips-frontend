@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
 import '../styles/global.css';
@@ -24,14 +23,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Header>
-        <Script src="https://kit.fontawesome.com/5136a1e457.js" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
         <title>Vavatips - Melhore sua gameplay</title>
         <noscript>You need to enable JavaScript to run this app.</noscript>
       </Header>

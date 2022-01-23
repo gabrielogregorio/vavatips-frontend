@@ -11,6 +11,9 @@ import FooterComponent from '@/layout/footer';
 import Selected from '@/base/selected';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Button from '@/base/button';
+import { FaTimes } from 'react-icons/fa';
+import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
+import { navbarEnum } from '../../interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/dashboard', text: 'administrativo' },
@@ -146,17 +149,17 @@ export default function EditPostScreen() {
             {key + 1} - {instruction.description}
           </p>
           <Button onClick={() => deleteStep(instruction._id)}>
-            <i className="fas fa-times" />
+            <FaTimes />
           </Button>
         </div>
 
         <div className="instructionImage">
           <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
           <Button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
-            <i className="fas fa-chevron-up" />
+            <BsChevronUp />
           </Button>
           <Button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
-            <i className="fas fa-chevron-down" />
+            <BsChevronDown />
           </Button>
         </div>
         <hr />

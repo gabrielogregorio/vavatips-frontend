@@ -15,6 +15,7 @@
 .modalItem .notfyIcon {
   padding-right: 10px;
   border-right: 1px solid var(--background-secundary);
+  color: var(--background-secundary);
 }
 
 .modalItem .notfyIcon i {
@@ -38,11 +39,14 @@
   outline: none;
   padding: 10px;
   cursor: pointer;
+  color: var(--background-secundary);
 }
 
 .modalItem button i {
   color: var(--background-secundary);
   font-size: 1rem;
+  
+  
 }
 
 

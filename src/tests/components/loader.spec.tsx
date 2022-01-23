@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { LoaderComponent } from '@/base/loader';
+import LoaderComponent from '@/base/loader';
 
 describe('<LoaderComponent />', () => {
   it('should render LoaderComponent', () => {

@@ -1,9 +1,9 @@
 import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
-import HomeScreen from '../../pages/posts';
 import { rest } from 'msw';
-import { mockPosts } from '../mock/mockPosts';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
+import { mockPosts } from '../mock/mockPosts';
+import HomeScreen from '../../pages/posts';
 import MockApp from '../core/App.Mock';
 
 jest.mock('next/router', () => ({
@@ -32,17 +32,11 @@ const handlers = [
 const server = setupServer(...handlers);
 
 describe('<HomeScreen />', () => {
-  beforeAll(() => {
-    return server.listen();
-  });
+  beforeAll(() => server.listen());
 
-  afterEach(() => {
-    return server.resetHandlers();
-  });
+  afterEach(() => server.resetHandlers());
 
-  afterAll(() => {
-    return server.close();
-  });
+  afterAll(() => server.close());
 
   it('should render home screen', async () => {
     render(

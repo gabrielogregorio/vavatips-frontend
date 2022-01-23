@@ -13,6 +13,8 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import { navbarEnum } from '@/interfaces/navbar';
+import { FaTimes } from 'react-icons/fa';
+import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 
 type actionType = 'top' | 'bottom';
 
@@ -122,17 +124,17 @@ export default function CreatePostScreen() {
             {key + 1} - {instruction.description}
           </p>
           <Button onClick={() => deleteStep(instruction._id)}>
-            <i className="fas fa-times" />
+            <FaTimes />
           </Button>
         </div>
 
         <div className="instructionImage">
           <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
           <Button className="btn-bottom" onClick={() => putPosition(instruction._id, 'bottom')}>
-            <i className="fas fa-chevron-up" />
+            <BsChevronUp />
           </Button>
           <Button className="btn-top" onClick={() => putPosition(instruction._id, 'top')}>
-            <i className="fas fa-chevron-down" />
+            <BsChevronDown />
           </Button>
         </div>
         <hr />
@@ -273,7 +275,7 @@ export default function CreatePostScreen() {
             <div className="groupInputSelect">
               <Button className="btn-outline-secundary" onClick={() => showModal()}>
                 Novo Passo
-              </Button>{' '}
+              </Button>
               <br />
             </div>
           </div>

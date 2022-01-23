@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { Img } from '@/base/img';
+import Img from '@/base/img';
 
 describe('<Img />', () => {
   it('should render image', () => {

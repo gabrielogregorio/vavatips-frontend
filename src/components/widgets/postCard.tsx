@@ -5,6 +5,7 @@ import { useModalContext } from '@/contexts/modalSuggestion';
 import formatImage from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
 import Button from '@/base/button';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import styles from '../../styles/components/postCard.module.css';
 
 type typeType = 'next' | 'prev';
@@ -91,17 +92,17 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
             <img src={formatImage(post.imgs?.[idImage]?.image)} alt={post.imgs?.[idImage]?.description} />
 
             <Button
-              aria-label="Item anterior"
+              ariaLabel="Item anterior"
               className={styles.previus}
               onClick={() => nextImage('prev', post.imgs.length)}>
-              <i aria-hidden className="fas fa-angle-left" />
+              <MdArrowBackIosNew />
             </Button>
 
             <Button
-              aria-label="Proximo item"
+              ariaLabel="Proximo item"
               className={styles.next}
               onClick={() => nextImage('next', post.imgs.length)}>
-              <i aria-hidden className="fas fa-angle-right" />
+              <MdArrowForwardIos />
             </Button>
 
             <div className={styles.descriptionImage}>
