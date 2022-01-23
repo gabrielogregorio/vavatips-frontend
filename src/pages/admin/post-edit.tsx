@@ -109,6 +109,7 @@ export default function EditPostScreen() {
   }
 
   function putPosition(id: string, action: actionType): boolean {
+    console.log(imgAdded);
     // Obter a posição do item que será trocado
     const positionPut = imgAdded.findIndex((item) => item.id === id);
 
@@ -316,7 +317,7 @@ export default function EditPostScreen() {
             <div className="groupInputSelect">
               <Button className="btn-outline-secondary" onClick={() => showModal()}>
                 Novo Passo
-              </Button>{' '}
+              </Button>
               <br />
             </div>
           </div>

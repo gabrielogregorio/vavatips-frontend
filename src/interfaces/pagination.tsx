@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-type urlBase = 'ViewPosts' | 'Posts' | 'save' | 'tested';
+type urlBase = 'ViewPosts' | 'posts' | 'save' | 'tested';
 
 export interface propsInterfacePaginationComponent {
   initial: number;

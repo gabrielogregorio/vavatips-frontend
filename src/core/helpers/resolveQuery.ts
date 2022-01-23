@@ -1,4 +1,3 @@
-/** urlBase => /Posts */
 const resolveQuery = (urlBase: string, filters: any = []) => {
   let urlFinal = urlBase;
   if (filters.length === 0) {

@@ -79,7 +79,7 @@ export default function usePosts(location: any, typeRequest: any = '') {
         setErrorMsg(error.message);
         setActiveLoader(false);
       });
-  }, [`${location?.query}`, filters, setTags, setFilters]);
+  }, [location?.query?.map, location?.query?.page, location?.query?.agent, filters, setTags, setFilters]);
 
   return { posts, activeLoader, errorMsg, finishPage, queryUrl };
 }

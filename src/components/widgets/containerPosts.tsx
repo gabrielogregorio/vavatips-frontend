@@ -56,7 +56,7 @@ export default function ContainerPosts({ breadcrumbs, type, typeSelected, title,
         {activeLoader ? <p>Carregando posts...</p> : null}
 
         <PaginationComponent
-          urlBase={type === '' ? 'Posts' : type}
+          urlBase={type === '' ? 'posts' : type}
           initial={1}
           finish={finishPage}
           selected={numberSelected}
