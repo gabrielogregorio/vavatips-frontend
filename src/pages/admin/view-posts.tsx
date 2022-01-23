@@ -1,13 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import NavbarComponent from '@/layout/navbar';
-import api from '@/services/api';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
-import PaginationComponent from '@/widgets/pagination';
-import ContainerPosts from '@/widgets/containerPosts';
-import { navbarEnum } from '@/interfaces/navbar';
-import { postsProps } from '@/interfaces/posts';
+import { navbarEnum, navbarEnumPublic } from '@/interfaces/navbar';
+import ContainerPosts from '../../components/widgets/containerPosts';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -15,52 +7,13 @@ const breadcrumbs = [
 ];
 
 export default function ViewPostsScreen() {
-  const location = useRouter();
-  const [posts, setPosts] = useState<postsProps[]>([]);
-  const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryParseUrl, setQueryParseUrl] = useState({
-    agent: '',
-    map: '',
-    page: '',
-  });
-
-  useEffect(() => {
-    const agent = `${location?.query?.agent || ''}`;
-    const map = `${location?.query?.map || ''}`;
-    const page = `${location?.query?.page || '1'}`;
-
-    setQueryParseUrl({ agent, map, page });
-  }, [location?.query?.agent, location?.query?.map, location?.query?.page]);
-
-  const numberSelected = parseInt(queryParseUrl?.page || '1', 10);
-
-  useEffect(() => {
-    api
-      .get(`/posts?agent=${queryParseUrl.agent}&map=${queryParseUrl.map}&page=${queryParseUrl.page}`)
-      .then((postsJson) => {
-        setFinishPage(postsJson.data.count);
-        setPosts(postsJson.data.posts);
-      })
-      .catch(() => {});
-  }, [queryParseUrl]);
-
   return (
-    <div className="container">
-      <NavbarComponent selected={navbarEnum.ViewPosts} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
-
-      <div className="sub__container">
-        <ContainerPosts activeLoader={false} queryUrl={queryParseUrl} posts={posts} />
-        <PaginationComponent
-          urlBase="ViewPosts"
-          initial={1}
-          finish={finishPage}
-          selected={numberSelected}
-          agent={queryParseUrl.agent}
-          map={queryParseUrl.map}
-        />
-      </div>
-      <FooterComponent color="secondary" />
-    </div>
+    <ContainerPosts
+      breadcrumbs={breadcrumbs}
+      type=""
+      typeSelected={navbarEnumPublic.None}
+      typeSelectedAdmin={navbarEnum.ViewPosts}
+      title="Todos os Posts"
+    />
   );
 }

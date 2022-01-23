@@ -5,6 +5,7 @@ export enum navbarEnumPublic {
   Save = '/save',
   Tested = '/tested',
   Mistic = '#',
+  None = '',
 }
 
 export enum navbarEnum {
@@ -16,6 +17,7 @@ export enum navbarEnum {
   ReportScreen = '/Reports',
   SuggestionScreen = '/Suggestions',
   Dashboard = '/Dashboard',
+  None = '',
 }
 
 export interface NavbarPropsPublicComponent {
