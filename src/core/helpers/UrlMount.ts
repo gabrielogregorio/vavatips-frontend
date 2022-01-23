@@ -15,8 +15,8 @@ export function UrlMount(props: propsNewValueInterface): string {
 
   const objectQueries = Object.keys(queries);
 
-  for (let x = 0; x < objectQueries.length; x++) {
-    urlMounted += '&' + objectQueries[x] + '=' + queries[objectQueries[x]];
+  for (let x = 0; x < objectQueries.length; x += 1) {
+    urlMounted += `&${objectQueries[x]}=${queries[objectQueries[x]]}`;
   }
 
   return urlMounted;

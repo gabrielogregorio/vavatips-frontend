@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useFilters } from '../contexts/filters';
-import resolveQuery from '../helpers/resolveQuery';
-import api from '../services/api';
-import { getPostsSave, getPostsTested } from '../services/handlePosts';
+import api from '@/services/api';
+import { useFilters } from '@/contexts/filters';
+import resolveQuery from '@/helpers/resolveQuery';
+import { getPostsSave, getPostsTested } from '@/services/handlePosts';
+import { PropsPostInterface } from '../../interfaces/posts';
 
 interface filterUrlInterface {
   agent: string;
@@ -19,7 +20,7 @@ function getUrl(location: any): filterUrlInterface {
   return { agent, map, type, page };
 }
 
-export const usePosts = (location: any, typeRequest: any = '') => {
+export default function usePosts(location: any, typeRequest: any = '') {
   const { filters, setTags, setFilters } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -27,12 +28,13 @@ export const usePosts = (location: any, typeRequest: any = '') => {
   const [finishPage, setFinishPage] = useState<number>(1);
   const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       setTags([]);
       setFilters([]);
-    };
-  }, [setFilters, setTags]);
+    },
+    [setFilters, setTags],
+  );
 
   useEffect(() => {
     setActiveLoader(true);
@@ -40,6 +42,13 @@ export const usePosts = (location: any, typeRequest: any = '') => {
 
     const { agent, map, type, page } = getUrl(location?.query);
     setQueryUrl({ agent, map, type, page });
+
+    let idPosts = '[]';
+    if (typeRequest === 'save') {
+      idPosts = getPostsSave();
+    } else if (typeRequest === 'tested') {
+      idPosts = getPostsTested();
+    }
 
     const data1 =
       typeRequest === ''
@@ -50,7 +59,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
             filters: filters.toString(),
           }
         : {
-            idPosts: typeRequest === 'save' ? getPostsSave() : typeRequest === 'tested' ? getPostsTested() : [],
+            idPosts,
             agent,
             map,
             page,
@@ -70,7 +79,7 @@ export const usePosts = (location: any, typeRequest: any = '') => {
         setErrorMsg(error.message);
         setActiveLoader(false);
       });
-  }, [`${location?.query}`, filters, setTags, setFilters]);
+  }, [location?.query?.map, location?.query?.page, location?.query?.agent, filters, setTags, setFilters]);
 
   return { posts, activeLoader, errorMsg, finishPage, queryUrl };
-};
+}

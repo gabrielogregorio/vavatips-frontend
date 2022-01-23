@@ -6,36 +6,34 @@ interface propsInterface {
   admin?: boolean;
 }
 
-export const BreadcrumbComponent = (props: propsInterface) => {
+export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterface) {
   function renderBreadCrumb() {
-    const lastItem = props.breadcrumbs.length - 1;
+    const lastItem = breadcrumbs.length - 1;
 
-    return props.breadcrumbs.map((breadcrumb, index) => {
-      return (
-        <div key={index}>
-          {lastItem === index ? (
-            <p>{breadcrumb.text}</p>
-          ) : (
-            <>
-              <Link href={breadcrumb.url}>
-                <a
-                  style={{
-                    color: props.admin ? 'var(--secundary)' : 'var(--primary)',
-                  }}>
-                  {breadcrumb.text}
-                </a>
-              </Link>
-              <span
+    return breadcrumbs.map((breadcrumb, index) => (
+      <div key={`${breadcrumb.text}`}>
+        {lastItem === index ? (
+          <p>{breadcrumb.text}</p>
+        ) : (
+          <>
+            <Link href={breadcrumb.url}>
+              <a
                 style={{
-                  color: props.admin ? 'var(--secundary)' : 'var(--primary)',
+                  color: admin ? 'var(--secondary)' : 'var(--primary)',
                 }}>
-                &gt;
-              </span>
-            </>
-          )}
-        </div>
-      );
-    });
+                {breadcrumb.text}
+              </a>
+            </Link>
+            <span
+              style={{
+                color: admin ? 'var(--secondary)' : 'var(--primary)',
+              }}>
+              &gt;
+            </span>
+          </>
+        )}
+      </div>
+    ));
   }
 
   return (
@@ -43,4 +41,4 @@ export const BreadcrumbComponent = (props: propsInterface) => {
       <div className={styles.breadcrumbItem}>{renderBreadCrumb()}</div>
     </div>
   );
-};
+}

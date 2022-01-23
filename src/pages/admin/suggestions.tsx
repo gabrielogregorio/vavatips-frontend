@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import api from '../../core/services/api';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import NavbarComponent from '@/layout/navbar';
+import api from '@/services/api';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -12,10 +13,6 @@ const breadcrumbs = [
 export default function SuggestionScreen() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
 
-  useEffect(() => {
-    loadSuggestion();
-  }, []);
-
   async function loadSuggestion() {
     const suggestionResponse = api.get(`/suggestions`);
 
@@ -23,15 +20,18 @@ export default function SuggestionScreen() {
       const [suggestion] = await Promise.all([suggestionResponse]);
       const suggestionJson = suggestion.data;
       setSuggestions(suggestionJson);
-    } catch (error) {
-      console.log(error);
-    }
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
   }
+
+  useEffect(() => {
+    loadSuggestion();
+  }, []);
 
   function renderSuggestions() {
     return suggestions.map((report) => (
-      <tr key={report._id}>
-        <td>{report.post_id}</td>
+      <tr key={report.id}>
+        <td>{report.postId}</td>
         <td>{report.email}</td>
         <td>{report.description}</td>
         <td>{report.status ?? 'Não atendido'}</td>
@@ -44,7 +44,7 @@ export default function SuggestionScreen() {
       <NavbarComponent selected={navbarEnum.SuggestionScreen} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <table>
           <thead>
             <tr>
@@ -58,7 +58,7 @@ export default function SuggestionScreen() {
           <tbody>{renderSuggestions()}</tbody>
         </table>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

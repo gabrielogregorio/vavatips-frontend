@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../core/services/api';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import { Input } from '../../components/base/input';
-import { logout } from '../../core/services/auth';
-import { LoaderComponent } from '../../components/base/loader';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Title } from '../../components/base/title';
-import { Button } from '../../components/base/button';
+import NavbarComponent from '@/layout/navbar';
+import Input from '@/base/input';
+import LoaderComponent from '@/base/loader';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Title from '@/base/title';
+import Button from '@/base/button';
+import { logout } from '@/services/auth';
+import api from '@/services/api';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -26,27 +27,19 @@ export default function MyProfileScreen() {
 
     if (!username) {
       setErrorMsg('Você precisa preencher todos os campos');
+    } else if (password !== password2) {
+      setErrorMsg('As senhas não combinam!');
     } else {
-      if (password !== password2) {
-        setErrorMsg('As senhas não combinam!');
-      } else {
-        try {
-          await api.put('/user', { username, password });
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-          if (error.response?.status === 409) {
-            setErrorMsg('Esse e-mail já está cadastrado');
-          } else {
-            console.log(error);
-          }
+      try {
+        await api.put('/user', { username, password });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        if (error.response?.status === 409) {
+          setErrorMsg('Esse e-mail já está cadastrado');
         }
       }
     }
   }
-
-  useEffect(() => {
-    loadProfile();
-  }, []);
 
   async function loadProfile() {
     const profileResponse = api.get(`/user`);
@@ -61,13 +54,15 @@ export default function MyProfileScreen() {
       setActiveLoader(false);
     }
   }
-
+  useEffect(() => {
+    loadProfile();
+  }, []);
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.Profile} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <div className="form" onSubmit={handleSubmit}>
           <Title>Seu perfil</Title>
           <LoaderComponent active={activeLoader} />
@@ -75,13 +70,31 @@ export default function MyProfileScreen() {
 
           {activeLoader === false ? (
             <>
-              <Input type="text" text="Trocar nome de usuário" value={username} setValue={setUsername} />
-              <Input type="password" text="Digite uma nova senha" value={password} setValue={setPassword} />
-              <Input type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2} />
+              <Input
+                name="username"
+                type="text"
+                text="Trocar nome de usuário"
+                value={username}
+                setValue={setUsername}
+              />
+              <Input
+                name="password"
+                type="password"
+                text="Digite uma nova senha"
+                value={password}
+                setValue={setPassword}
+              />
+              <Input
+                name="confirmPassword"
+                type="password"
+                text="Confirme a nova senha"
+                value={password2}
+                setValue={setPassword2}
+              />
 
               <div className="groupInput">
                 <div className="groupInputSelect">
-                  <Button onClick={() => logout()} className="btn-color-secundary">
+                  <Button onClick={() => logout()} className="btn-color-secondary">
                     logoff
                   </Button>
                 </div>
@@ -89,14 +102,14 @@ export default function MyProfileScreen() {
 
               <div className="groupInput">
                 <div className="groupInputSelect">
-                  <Button className="btn-secundary">Atualizar dados</Button>
+                  <Button className="btn-secondary">Atualizar dados</Button>
                 </div>
               </div>
             </>
           ) : null}
         </div>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

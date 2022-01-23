@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { formatImage } from '../../core/services/formatEnvironment';
-import styles from '../../styles/components/postCard.module.css';
-import { addNewPost, removePost, getPostsTested, getPostsSave } from '../../core/services/handlePosts';
-import { isAuthenticated } from '../../core/services/auth';
-import { useModalContext } from '../../core/contexts/modalSuggestion';
-import { Button } from '../base/button';
 import Link from 'next/link';
+import { isAuthenticated } from '@/services/auth';
+import { useModalContext } from '@/contexts/modalSuggestion';
+import formatImage from '@/services/formatEnvironment';
+import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
+import Button from '@/base/button';
+import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import { postsProps } from '@/interfaces/posts';
+import styles from '../../styles/components/postCard.module.css';
+
 type typeType = 'next' | 'prev';
 
-// Componente post
 interface PropsPostInterface {
   post: postsProps;
   viewAdmin?: boolean;
 }
 
-export const PostCard = (props: PropsPostInterface) => {
+export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -22,27 +24,27 @@ export const PostCard = (props: PropsPostInterface) => {
 
   function handleAddTest() {
     if (postTested) {
-      removePost(props.post._id, 'test');
+      removePost(post.id, 'test');
     } else {
-      addNewPost(props.post._id, 'test');
+      addNewPost(post.id, 'test');
     }
-    setPostTested(getPostsTested()?.includes(props.post._id) ?? false);
+    setPostTested(getPostsTested()?.includes(post.id) ?? false);
   }
 
   function handleAddSave() {
     if (postSave) {
-      removePost(props.post._id, 'save');
+      removePost(post.id, 'save');
     } else {
-      addNewPost(props.post._id, 'save');
+      addNewPost(post.id, 'save');
     }
-    setPostSave(getPostsSave()?.includes(props.post._id) ?? false);
+    setPostSave(getPostsSave()?.includes(post.id) ?? false);
   }
 
   useEffect(() => {
     // Este post está incluso nos posts testados!
-    setPostTested(getPostsTested()?.includes(props.post._id) ?? false);
-    setPostSave(getPostsSave()?.includes(props.post._id) ?? false);
-  }, [props.post._id]);
+    setPostTested(getPostsTested()?.includes(post.id) ?? false);
+    setPostSave(getPostsSave()?.includes(post.id) ?? false);
+  }, [post.id]);
 
   function nextImage(type: typeType, length: number) {
     if (type === 'next') {
@@ -61,83 +63,82 @@ export const PostCard = (props: PropsPostInterface) => {
   }
 
   function handleModalAction() {
-    setModalSuggestion({ active: true, post: props.post });
+    setModalSuggestion({ active: true, post });
   }
 
   return (
     <div className="postItems">
       <div className={styles.posts}>
         <div className={styles.profile}>
-          {props.post.user.image ? (
-            <img src={formatImage(props.post.user.image)} alt="Foto de perfil do Autor da postagem" />
+          {post.user.image ? (
+            <img src={formatImage(post.user.image)} alt="Foto de perfil do Autor da postagem" />
           ) : (
-            <img src={'/images/users/profile.webp'} alt="Foto de perfil do Autor da postagem" />
+            <img src="/images/users/profile.webp" alt="Foto de perfil do Autor da postagem" />
           )}
 
-          <p>{props.post.user.username ?? 'Ademir'}</p>
+          <p>{post.user.username ?? 'Ademir'}</p>
 
           {isAuthenticated() === true ? (
             <Button>
-              <Link href={`/admin/post-edit?id=${props.post._id}`}>Editar</Link>
+              <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
             </Button>
           ) : null}
         </div>
 
-        <h3>{props.post.title}</h3>
+        <h3>{post.title}</h3>
 
         <div className={styles.imgAndDescription}>
           <div className={styles.imgPost}>
-            <img src={formatImage(props.post.imgs?.[idImage]?.image)} alt={props.post.imgs?.[idImage]?.description} />
+            <img src={formatImage(post.imgs?.[idImage]?.image)} alt={post.imgs?.[idImage]?.description} />
 
             <Button
-              aria-label="Item anterior"
+              ariaLabel="Item anterior"
               className={styles.previus}
-              onClick={() => nextImage('prev', props.post.imgs.length)}>
-              <i aria-hidden className="fas fa-angle-left"></i>
+              onClick={() => nextImage('prev', post.imgs.length)}>
+              <MdArrowBackIosNew />
             </Button>
 
             <Button
-              aria-label="Proximo item"
+              ariaLabel="Proximo item"
               className={styles.next}
-              onClick={() => nextImage('next', props.post.imgs.length)}>
-              <i aria-hidden className="fas fa-angle-right"></i>
+              onClick={() => nextImage('next', post.imgs.length)}>
+              <MdArrowForwardIos />
             </Button>
 
             <div className={styles.descriptionImage}>
               <p aria-live="polite">
-                {idImage + 1} de {props.post.imgs.length} : {props.post.imgs?.[idImage]?.description}
+                {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
               </p>
             </div>
           </div>
         </div>
 
         <div className={styles.descriptionAndTags}>
-          <p className={styles.description}>{props.post.description}</p>
+          <p className={styles.description}>{post.description}</p>
           <p className={styles.tags}>
-            <span> #{props.post.tags.map}</span>
-            <span> #{props.post.tags.agent}</span>
-            <span> #{props.post.tags.ability}</span>
-            <span> #{props.post.tags.moment}</span>
-            <span> #{props.post.tags.difficult}</span>
-            <span> #{props.post.tags.side}</span>
-            <span> #{props.post.tags.mapPosition}</span>
+            <span> #{post.tags.map}</span>
+            <span> #{post.tags.agent}</span>
+            <span> #{post.tags.ability}</span>
+            <span> #{post.tags.moment}</span>
+            <span> #{post.tags.difficult}</span>
+            <span> #{post.tags.side}</span>
+            <span> #{post.tags.mapPosition}</span>
           </p>
         </div>
 
-        {!props.viewAdmin ? (
+        {!viewAdmin ? (
           <div className={styles.actions}>
-            <Button className={postTested ? styles.actionsActive : ''} onClick={handleAddTest}>
+            <Button className={postTested ? styles.actionsActive : ''} onClick={() => handleAddTest()}>
               A testar
             </Button>
 
-            <Button className={postSave ? styles.actionsActive : ''} onClick={handleAddSave}>
-              {' '}
+            <Button className={postSave ? styles.actionsActive : ''} onClick={() => handleAddSave()}>
               Salvo
             </Button>
-            <Button onClick={handleModalAction}>Sugerir</Button>
+            <Button onClick={() => handleModalAction()}>Sugerir</Button>
           </div>
         ) : null}
       </div>
     </div>
   );
-};
+}

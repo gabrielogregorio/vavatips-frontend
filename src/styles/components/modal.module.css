@@ -14,11 +14,12 @@
 
 .modalItem .notfyIcon {
   padding-right: 10px;
-  border-right: 1px solid var(--background-secundary);
+  border-right: 1px solid var(--background-secondary);
+  color: var(--background-secondary);
 }
 
 .modalItem .notfyIcon i {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   font-size: 2.5rem;
 }
 
@@ -27,7 +28,7 @@
   text-align: left;
   flex: 1;
   font-size:0.9rem;
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   padding-left: 10px;
   word-wrap: break-all;
 }
@@ -38,11 +39,14 @@
   outline: none;
   padding: 10px;
   cursor: pointer;
+  color: var(--background-secondary);
 }
 
 .modalItem button i {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   font-size: 1rem;
+  
+  
 }
 
 

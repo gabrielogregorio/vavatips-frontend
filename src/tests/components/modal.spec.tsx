@@ -1,20 +1,17 @@
 import { render } from '@testing-library/react';
-import { ModalComponent } from '../../components/widgets/modal';
+import ModalComponent from '@/widgets/modal';
 
 describe('<ModalComponent />', () => {
   it('should render ModalComponent', () => {
+    const fn = jest.fn();
     render(
       <ModalComponent
-        _id="id item"
+        id="id item"
         title="title"
         description="description"
         image="image"
-        closeModal={() => {
-          return;
-        }}
-        saveModal={() => {
-          return;
-        }}
+        closeModal={() => {}}
+        saveModal={() => fn()}
       />,
     );
 

@@ -1,16 +1,7 @@
 import { createContext, useContext } from 'react';
+import { contextModalMessageInterface, modalMessageTypeContext } from '@/interfaces/modal';
 
-export type modalMessageType = {
-  message: modalMessageInterface;
-  active: boolean;
-};
-
-interface contextModalMessageInterface {
-  modalMessage: modalMessageType;
-  setModalMessage: (data: modalMessageType) => void;
-}
-
-export const initializeModalMessage: modalMessageType = {
+export const initializeModalMessage: modalMessageTypeContext = {
   message: {
     msg: '',
     type: 'success',
@@ -20,7 +11,7 @@ export const initializeModalMessage: modalMessageType = {
 
 export const ContextModalMessage = createContext<contextModalMessageInterface>({
   modalMessage: initializeModalMessage,
-  setModalMessage: (data) => console.log('do you need use context Modal Message', data),
+  setModalMessage: (data) => new Error(`do you need use context Modal Message ${data}`),
 });
 
 export const useModalMessage = () => useContext(ContextModalMessage);

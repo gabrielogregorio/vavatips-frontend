@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useModalMessage } from '../../core/contexts/modalMessage';
-import { useModalContext, initializeModalSuggestion } from '../../core/contexts/modalSuggestion';
-import api from '../../core/services/api';
-import { Button } from '../base/button';
-import { Input } from '../base/input';
-import { ButtonCloseModal } from '../base/modalCloseButton';
-import { TextArea } from '../base/textArea';
+import { useModalMessage } from '@/contexts/modalMessage';
+import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
+import api from '@/services/api';
+import Button from '@/base/button';
+import Input from '@/base/input';
+import ButtonCloseModal from '@/base/modalCloseButton';
+import TextArea from '@/base/textArea';
+import { modalType } from '../../interfaces/modal';
 
 interface ModalProps {
   title: string;
 }
 
-export const ModalOfSuggestion = (props: ModalProps) => {
+export default function ModalOfSuggestion({ title }: ModalProps) {
   const [email, setEmail] = useState<string>('');
 
   const [description, setDescription] = useState<string>('');
@@ -27,7 +28,7 @@ export const ModalOfSuggestion = (props: ModalProps) => {
 
   async function saveModal() {
     setLoading(true);
-    const idPost = modalSuggestion.post?._id ?? '';
+    const idPost = modalSuggestion.post?.id ?? '';
 
     if (description === '' || description.trim() === '') {
       setErrorMsg('Você precisa preencher o campo Descrição com as informações');
@@ -42,7 +43,6 @@ export const ModalOfSuggestion = (props: ModalProps) => {
         msg = 'Sugestão enviado com sucesso, muito obrigado!';
         type = 'success';
       } catch (error) {
-        console.log(error);
         msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores';
         type = 'error';
       }
@@ -56,7 +56,7 @@ export const ModalOfSuggestion = (props: ModalProps) => {
     <div className="modal">
       <div className="modalItem">
         <div className="modalTitle">
-          <h1>{props.title}</h1>
+          <h1>{title}</h1>
           <ButtonCloseModal onClick={() => setModalSuggestion(initializeModalSuggestion)} />
         </div>
         <hr />
@@ -64,11 +64,11 @@ export const ModalOfSuggestion = (props: ModalProps) => {
         <div className="form">
           <p className="errorMsg">{errorMsg}</p>
           {loading ? <p>Carregando</p> : null}
-          <Input disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
+          <Input name="tip" disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
 
-          <Input type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
+          <Input name="email" type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
 
-          <TextArea title="Descrição" value={description} setValue={setDescription} />
+          <TextArea name="description" title="Descrição" value={description} setValue={setDescription} />
 
           <div className="modalActions">
             <Button onClick={() => setModalSuggestion(initializeModalSuggestion)}>Cancelar</Button>
@@ -78,4 +78,4 @@ export const ModalOfSuggestion = (props: ModalProps) => {
       </div>
     </div>
   ) : null;
-};
+}

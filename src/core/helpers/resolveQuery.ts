@@ -1,22 +1,22 @@
-/** urlBase => /Posts */
 const resolveQuery = (urlBase: string, filters: any = []) => {
+  let urlFinal = urlBase;
   if (filters.length === 0) {
-    return urlBase;
+    return urlFinal;
   }
-  urlBase = urlBase + '?';
+  urlFinal += '?';
 
   const keys: string[] = Object.keys(filters);
-  for (let x = 0; x < keys.length; x++) {
+  for (let x = 0; x < keys.length; x += 1) {
     const key: string = keys[x];
     const value: string = filters[key];
 
     if (x === keys.length - 1) {
-      urlBase = `${urlBase}${key}=${value}`;
+      urlFinal = `${urlFinal}${key}=${value}`;
     } else {
-      urlBase = `${urlBase}${key}=${value}&`;
+      urlFinal = `${urlFinal}${key}=${value}&`;
     }
   }
 
-  return `${urlBase}`;
+  return `${urlFinal}`;
 };
 export default resolveQuery;

@@ -1,15 +1,20 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
+/* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
 import '../styles/global.css';
-import { ContextModalSuggestion, modalContextType } from '../core/contexts/modalSuggestion';
-import { ContextFilters } from '../core/contexts/filters';
-import { ContextModalMessage, modalMessageType } from '../core/contexts/modalMessage';
+import { AppProps } from 'next/app';
 import Header from 'next/head';
+import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
+import { ContextFilters } from '@/contexts/filters';
+import { ContextModalMessage } from '@/contexts/modalMessage';
+import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 
-export default function MyApp({ Component, pageProps }) {
-  const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
+    post: null,
     active: false,
   });
-  const [modalMessage, setModalMessage] = useState<modalMessageType>({
+  const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
     message: { msg: '', type: 'success' },
     active: false,
   });
@@ -19,17 +24,6 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Header>
-        {/* <!-- Fonte Awesome--> */}
-        <script src="https://kit.fontawesome.com/5136a1e457.js" crossOrigin="anonymous"></script>
-
-        {/* <!-- Fonte --> */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
         <title>Vavatips - Melhore sua gameplay</title>
         <noscript>You need to enable JavaScript to run this app.</noscript>
       </Header>

@@ -11,18 +11,18 @@ button {
 }
 
 .testBtn {
-  border: 2px solid var(--secundary);
-  color: var(--secundary);
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
 }
 
 .testBtn:hover {
-  color: var(--background-secundary);
-  background: var(--secundary);
+  color: var(--background-secondary);
+  background: var(--secondary);
 }
 
 .testBtn.active {
-  color: var(--background-secundary);
-  background: var(--secundary);
+  color: var(--background-secondary);
+  background: var(--secondary);
 }
 
 
@@ -33,12 +33,12 @@ button {
 }
 
 .likeBtn:hover {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--primary);
 }
 
 .likeBtn.active {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--primary);
 }
 
@@ -50,12 +50,12 @@ button {
 }
 
 .suggestionBtn:hover {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--purple);
 }
 
 .suggestionBtn.active{
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--purple);
 }
 

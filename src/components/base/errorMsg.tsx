@@ -2,6 +2,6 @@ interface propsInterface {
   msg: string;
 }
 
-export const ErrorMsg = ({ msg }: propsInterface) => {
+export default function ErrorMsg({ msg }: propsInterface) {
   return <p className="errorMsg">{msg}</p>;
-};
+}

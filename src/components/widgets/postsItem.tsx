@@ -1,19 +1,18 @@
-import { PostCard } from './postCard';
+import { postsProps } from '@/interfaces/posts';
+import PostCard from './postCard';
 
 interface postPropsInterface {
   posts: postsProps[];
 }
 
-export const Posts = ({ posts }: postPropsInterface) => {
+export default function Posts({ posts }: postPropsInterface) {
   function renderPost() {
-    return posts.map((post) => {
-      return (
-        <div key={post._id}>
-          <PostCard post={post} />
-        </div>
-      );
-    });
+    return posts.map((post) => (
+      <div key={post.id}>
+        <PostCard post={post} />
+      </div>
+    ));
   }
 
   return <div className="postItems">{renderPost()}</div>;
-};
+}

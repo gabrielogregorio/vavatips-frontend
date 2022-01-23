@@ -1,38 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../core/services/api';
-import { formatImage } from '../../core/services/formatEnvironment';
-import { Button } from '../base/button';
-import { LoaderComponent } from '../base/loader';
-import { ButtonCloseModal } from '../base/modalCloseButton';
+import api from '@/services/api';
+import formatImage from '@/services/formatEnvironment';
+import Button from '@/base/button';
+import LoaderComponent from '@/base/loader';
+import ButtonCloseModal from '@/base/modalCloseButton';
+import { ModalPropsBase } from '@/interfaces/modal';
 
-interface ModalProps {
-  title: string;
-  _id: string;
-  description: string;
-  image: string;
-  closeModal: () => void;
-  saveModal: (_id: string, title: string, image: string) => void;
-}
-
-export const ModalComponent = (props: ModalProps) => {
-  const [_id, set_id] = useState<string>('');
+export default function ModalComponent({
+  id: idModal,
+  description: descriptionModal,
+  image,
+  closeModal,
+  saveModal,
+  title,
+}: ModalPropsBase) {
+  const [id, setId] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [LinkImg, setLinkImg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
 
   useEffect(() => {
-    if (props._id) {
-      set_id(props._id);
+    if (idModal) {
+      setId(idModal);
     }
 
-    if (props.description) {
-      setDescription(props.description);
+    if (descriptionModal) {
+      setDescription(descriptionModal);
     }
 
-    if (props.image) {
-      setLinkImg(props.image);
+    if (image) {
+      setLinkImg(image);
     }
-  }, [props]);
+  }, [idModal, descriptionModal, image]);
 
   function loadImage(event: any) {
     setActiveLoader(true);
@@ -49,12 +48,16 @@ export const ModalComponent = (props: ModalProps) => {
     sendImageFromApi();
   }
 
+  function closeModalItem() {
+    closeModal(null);
+  }
+
   return (
     <div className="modal" data-testid="modal">
       <div className="modalItem">
         <div className="modalTitle">
-          <h1>{props.title}</h1>
-          <ButtonCloseModal onClick={() => props.closeModal()} />
+          <h1>{title}</h1>
+          <ButtonCloseModal onClick={() => closeModalItem()} />
         </div>
 
         <hr />
@@ -62,29 +65,29 @@ export const ModalComponent = (props: ModalProps) => {
         <div className="form">
           <div className="groupInput">
             <div className="groupInputSelect">
-              <label htmlFor="">Descrição</label>
-              <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+              <label htmlFor="description">Descrição</label>
+              <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
           </div>
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <label className="customFileUpload">
-                <input type="file" name="image" onChange={loadImage} />
+              <label htmlFor="customFileUpload" className="customFileUpload">
                 Adicionar Imagem
               </label>
+              <input id="customFileUpload" type="file" name="image" onChange={loadImage} />
             </div>
           </div>
           <LoaderComponent active={activeLoader} />
           <div className="instructionImage">{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
 
           <div className="modalActions">
-            <Button onClick={() => props.closeModal()}>Cancelar</Button>
+            <Button onClick={() => closeModalItem()}>Cancelar</Button>
 
-            <Button onClick={() => props.saveModal(_id, description, LinkImg)}>Adicionar</Button>
+            <Button onClick={() => saveModal(id, title, image)}>Adicionar</Button>
           </div>
         </div>
       </div>
     </div>
   );
-};
+}

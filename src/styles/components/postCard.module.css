@@ -48,7 +48,7 @@
 }
 
 .posts .profile button:hover {
-  color: var(--secundary);
+  color: var(--secondary);
 }
 /* Parte superior com perfil e nome */
 
@@ -83,18 +83,19 @@
 }
 
 .posts > .imgAndDescription > .imgPost button {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   border: none;
   background-color: transparent;
-  font-size: 2rem;
   cursor: pointer;
   padding: 10px 20px;
+  transition: .2s ease-in-out;
 }
 
-.posts > .imgAndDescription > .imgPost .previus > i,
-.posts > .imgAndDescription > .imgPost .next > i
+.posts > .imgAndDescription > .imgPost .previus > svg,
+.posts > .imgAndDescription > .imgPost .next > svg
  {
-  font-size: 3rem;
+  font-size: 2rem;
+  font-weight: 500px;
 }
 
 .posts > .imgAndDescription > .imgPost .previus:hover,
@@ -126,7 +127,7 @@
 }
 
 .posts > .imgAndDescription > .imgPost > .descriptionImage > p {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   font-size: 1rem;
 }
 /* Imagens com Descrição */
@@ -170,18 +171,18 @@
 }
 
 .actions button:nth-child(1) {
-  border: 2px solid var(--secundary);
-  color: var(--secundary);
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
 }
 
 .actions button:nth-child(1):hover {
-  /* color: var(--background-secundary);
-  background: var(--secundary-small); */
+  /* color: var(--background-secondary);
+  background: var(--secondary-small); */
 }
 
 .actions button:nth-child(1).actionsActive {
-  color: var(--background-secundary);
-  background: var(--secundary);
+  color: var(--background-secondary);
+  background: var(--secondary);
 }
 
 
@@ -191,12 +192,12 @@
 }
 
 .actions button:nth-child(2):hover {
-  /* color: var(--background-secundary);
+  /* color: var(--background-secondary);
   background: var(--primary-small); */
 }
 
 .actions button:nth-child(2).actionsActive {
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--primary);
 }
 
@@ -206,11 +207,11 @@
 }
 
 .actions button:nth-child(3):hover {
-  /* color: var(--background-secundary);
+  /* color: var(--background-secondary);
   background: var(--purple-small); */
 }
 
 .actions button:nth-child(3).actionsActive{
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   background: var(--purple);
 }

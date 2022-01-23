@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import { LoaderComponent } from '../../components/base/loader';
+import LoaderComponent from '@/base/loader';
 
 describe('<LoaderComponent />', () => {
   it('should render LoaderComponent', () => {
-    render(<LoaderComponent active={true} />);
+    render(<LoaderComponent active />);
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 

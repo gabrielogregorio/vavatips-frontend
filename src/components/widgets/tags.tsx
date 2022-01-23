@@ -1,7 +1,7 @@
-import { useFilters } from '../../core/contexts/filters';
-import { Button } from '../base/button';
+import { useFilters } from '@/contexts/filters';
+import Button from '@/base/button';
 
-export const PostTags = () => {
+export default function PostTags() {
   const { tags, filters, setFilters } = useFilters();
 
   function toggleTag(tag: string) {
@@ -16,11 +16,11 @@ export const PostTags = () => {
   }
 
   function renderTags() {
-    return tags.map((tag, index) => (
-      <div className="btn" key={index} onClick={() => toggleTag(tag)}>
-        <Button className={filters.includes(tag) ? 'btnActive' : ''}>{tag} a</Button>
+    return tags.map((tag) => (
+      <div className="btn" key={tag} onClick={() => toggleTag(tag)} role="presentation">
+        <Button className={filters.includes(tag) ? 'btnActive' : ''}>{tag}</Button>
       </div>
     ));
   }
   return <div className="tags"> {renderTags()} </div>;
-};
+}

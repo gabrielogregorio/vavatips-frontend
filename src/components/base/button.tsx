@@ -1,7 +1,20 @@
-export const Button = ({ children, ...rest }: any) => {
+import React from 'react';
+import { buttonTypeNormal } from '@/interfaces/button';
+
+function handleOnClick(): boolean {
+  return true;
+}
+
+export default function Button({
+  children,
+  className = '',
+  ariaLabel = '',
+  disabled = false,
+  onClick = handleOnClick,
+}: buttonTypeNormal) {
   return (
-    <button type="button" {...rest}>
+    <button onClick={onClick} className={className} disabled={disabled} aria-label={ariaLabel} type="button">
       {children}
     </button>
   );
-};
+}

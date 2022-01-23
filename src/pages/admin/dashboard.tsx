@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../core/services/api';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import { logout } from '../../core/services/auth';
-import { LoaderComponent } from '../../components/base/loader';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
+import NavbarComponent from '@/layout/navbar';
+import LoaderComponent from '@/base/loader';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import { logout } from '@/services/auth';
+import api from '@/services/api';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'admin' },
@@ -54,7 +55,7 @@ export default function DashboardScreen() {
       <NavbarComponent selected={navbarEnum.Dashboard} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <LoaderComponent active={activeLoader} />
         <p>{errorMsg}</p>
 
@@ -69,7 +70,7 @@ export default function DashboardScreen() {
         <p>sugestões: {countAllSuggestions}</p>
         <p>administradores: {countAllUsers}</p>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

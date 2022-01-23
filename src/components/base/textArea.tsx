@@ -1,16 +1,15 @@
-interface propsInterface {
-  title: string;
-  value: string;
-  setValue: (e: any) => void;
-}
+import React from 'react';
+import { propsInterfaceTextArea } from '@/interfaces/textArea';
 
-export const TextArea = (props: propsInterface) => {
+export default function TextArea({ title, setValue, value, name }: propsInterfaceTextArea) {
   return (
     <div className="groupInput">
       <div className="groupInputSelect">
-        <label htmlFor="">{props.title}</label>
-        <textarea value={props.value} onChange={(e) => props.setValue(e.target.value)}></textarea>
+        <label aria-label="Escolha uma descrição" htmlFor={name}>
+          {title}
+        </label>
+        <textarea id={name} value={value} onChange={(e) => setValue(e.target.value)} />
       </div>
     </div>
   );
-};
+}

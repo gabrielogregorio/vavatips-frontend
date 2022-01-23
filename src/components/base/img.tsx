@@ -3,6 +3,6 @@ interface propsInterface {
   alt: string;
 }
 
-export const Img = ({ src, alt }: propsInterface) => {
+export default function Img({ src, alt }: propsInterface) {
   return <img src={src} alt={alt} />;
-};
+}

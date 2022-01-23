@@ -1,17 +1,11 @@
 import { createContext, useContext } from 'react';
-
-interface contextTagsInterface {
-  tags: string[];
-  filters: string[];
-  setFilters: (filter: string[]) => void;
-  setTags: (tags: string[]) => void;
-}
+import { contextTagsInterface } from '@/interfaces/posts';
 
 export const ContextFilters = createContext<contextTagsInterface>({
   tags: [],
   filters: [],
-  setFilters: (filters) => console.log('do you need use context Filters', filters),
-  setTags: (tags) => console.log('do you need use context Filters', tags),
+  setFilters: (filters) => new Error(`do you need use context Filters ${filters}`),
+  setTags: (tags) => new Error(`do you need use context Filters ${tags}`),
 });
 
 export const useFilters = () => useContext(ContextFilters);

@@ -21,14 +21,14 @@
   flex: 1;
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   padding: 0 2%;
 }
 
 .nav ul a {
   text-decoration: none;
   padding: 10px 10px;
-  color: var(--background-secundary);
+  color: var(--background-secondary);
   transition: 0.2s ease-in-out;
 }
 
@@ -37,7 +37,7 @@
  }
 
 .nav .navActive {
- border-bottom: 2px solid var(--background-secundary);
+ border-bottom: 2px solid var(--background-secondary);
 }
 
 .nav ul a:hover {

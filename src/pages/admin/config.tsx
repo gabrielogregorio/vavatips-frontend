@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import api from '../../core/services/api';
-import { NavbarComponent, navbarEnum } from '../../components/layout/navbar';
-import { Input } from '../../components/base/input';
-import { FooterComponent } from '../../components/layout/footer';
-import { BreadcrumbComponent } from '../../components/widgets/breadcrumb';
-import { Button } from '../../components/base/button';
+import api from '@/services/api';
+import NavbarComponent from '@/layout/navbar';
+import Input from '@/base/input';
+import FooterComponent from '@/layout/footer';
+import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Button from '@/base/button';
+import { navbarEnum } from '@/interfaces/navbar';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -22,7 +23,6 @@ export default function ConfigScreen() {
         GENERATOR_CODE: keyAccess,
       });
       setCodeMsg(code.data.code);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.response.status === 404) {
         setErrorMsg('Essa não é uma chave válida!');
@@ -39,17 +39,17 @@ export default function ConfigScreen() {
       <NavbarComponent selected={navbarEnum.Config} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <div className="form">
           <h1>Gerar Convite</h1>
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
 
-          <Input type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess} />
+          <Input name="keySecret" type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess} />
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <Button className="btn-secundary" onClick={handleSubmit}>
+              <Button className="btn-secondary" onClick={() => handleSubmit()}>
                 Gerar
               </Button>
             </div>
@@ -57,7 +57,7 @@ export default function ConfigScreen() {
           <p>{codeMsg}</p>
         </div>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

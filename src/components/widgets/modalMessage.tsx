@@ -1,25 +1,27 @@
-import { useModalMessage, initializeModalMessage } from '../../core/contexts/modalMessage';
+import Button from '@/base/button';
+import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage';
+import { FaTimes } from 'react-icons/fa';
+import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
 import styles from '../../styles/components/modal.module.css';
-import { Button } from '../base/button';
 
-export const ModalMessage = () => {
+export default function ModalMessage() {
   const { modalMessage, setModalMessage } = useModalMessage();
 
   return modalMessage.active ? (
     <div
       className={styles.modalItem}
       style={{
-        background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secundary)',
+        background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secondary)',
       }}>
       <div className={styles.notfyIcon}>
-        {modalMessage.message.type === 'success' ? <i className="far fa-check-circle"></i> : null}
-        {modalMessage.message.type === 'error' ? <i className="fas fa-exclamation-circle"></i> : null}
+        {modalMessage.message.type === 'success' ? <AiOutlineCheckCircle /> : null}
+        {modalMessage.message.type === 'error' ? <AiOutlineExclamationCircle /> : null}
       </div>
 
       <p>{modalMessage.message.msg}</p>
       <Button onClick={() => setModalMessage(initializeModalMessage)}>
-        <i className="fas fa-times"></i>
+        <FaTimes />
       </Button>
     </div>
   ) : null;
-};
+}

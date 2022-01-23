@@ -1,6 +1,20 @@
 module.exports = {
   collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
   moduleNameMapper: {
+    '^@/src/(.*)$': '<rootDir>/src/$1',
+
+    '^@/base/(.*)$': '<rootDir>/src/components/base/$1',
+    '^@/layout/(.*)$': '<rootDir>/src/components/layout/$1',
+    '^@/widgets/(.*)$': '<rootDir>/src/components/widgets/$1',
+
+    '^@/contexts/(.*)$': '<rootDir>/src/core/contexts/$1',
+    '^@/data/(.*)$': '<rootDir>/src/core/data/$1',
+    '^@/helpers/(.*)$': '<rootDir>/src/core/helpers/$1',
+    '^@/hooks/(.*)$': '<rootDir>/src/core/hooks/$1',
+    '^@/services/(.*)$': '<rootDir>/src/core/services/$1',
+
+    '^@/interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
+
     /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',

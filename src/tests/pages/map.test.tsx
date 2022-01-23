@@ -1,8 +1,8 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
-import MapScreen from '../../pages';
 import { rest } from 'msw';
-import { mockMaps } from '../mock/mock';
 import { setupServer } from 'msw/node';
+import MapScreen from '../../pages';
+import { mockMaps } from '../mock/mock';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -15,26 +15,16 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [
-  rest.get(`http://localhost/maps`, async (req, res, ctx) => {
-    return res(ctx.json(mockMaps()));
-  }),
-];
+const handlers = [rest.get(`http://localhost/maps`, async (req, res, ctx) => res(ctx.json(mockMaps())))];
 
 const server = setupServer(...handlers);
 
 describe('<MapScreen />', () => {
-  beforeAll(() => {
-    return server.listen();
-  });
+  beforeAll(() => server.listen());
 
-  afterEach(() => {
-    return server.resetHandlers();
-  });
+  afterEach(() => server.resetHandlers());
 
-  afterAll(() => {
-    return server.close();
-  });
+  afterAll(() => server.close());
 
   it('should render maps screen', async () => {
     render(<MapScreen />);

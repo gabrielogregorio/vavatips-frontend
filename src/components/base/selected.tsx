@@ -1,28 +1,21 @@
-interface propsInterface {
-  text: string;
-  value: string;
-  setValue: (event: any) => void;
-  render: () => any[];
-}
+import { propsInterfaceSelectedBase } from '@/interfaces/select';
 
-export const Selected = (props: propsInterface) => {
+export default function Selected({ render, text, setValue, value }: propsInterfaceSelectedBase) {
   function renderItems() {
-    return props.render?.().map((item) => {
-      return (
-        <option value={item.name} key={item.id}>
-          {item.name}
-        </option>
-      );
-    });
+    return render.map((item) => (
+      <option value={item.name} key={item.id}>
+        {item.name}
+      </option>
+    ));
   }
 
   return (
     <div className="groupInputSelect">
-      <label>{props.text}</label>
-      <select value={props.value} onChange={(e) => props.setValue(e.target.value)}>
-        <option value=""></option>
+      <label htmlFor="select">{text}</label>
+      <select id="select" value={value} onChange={(e) => setValue(e.target.value)}>
+        <option value="" aria-label="Nenhum agente selecionado" />
         {renderItems()}
       </select>
     </div>
   );
-};
+}

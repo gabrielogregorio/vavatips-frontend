@@ -4,9 +4,9 @@ interface loaderProps {
   active: boolean;
 }
 
-export const LoaderComponent = (props: loaderProps) => {
+export default function LoaderComponent({ active }: loaderProps) {
   function renderActive() {
-    return props.active ? (
+    return active ? (
       <div data-testid="loader" className={styles.loader}>
         <div />
       </div>
@@ -14,4 +14,4 @@ export const LoaderComponent = (props: loaderProps) => {
   }
 
   return <>{renderActive()}</>;
-};
+}
