@@ -1,20 +1,11 @@
 import { createContext, useContext } from 'react';
+import { modalContextTypeSuggestion, modalSuggestionInterface } from '@/interfaces/modal';
 
-export type modalContextType = {
-  post?: postsProps;
-  active: boolean;
-};
-
-export const initializeModalSuggestion: modalContextType = { active: false };
-
-interface modalSuggestionInterface {
-  modalSuggestion: modalContextType;
-  setModalSuggestion: (data: modalContextType) => void;
-}
+export const initializeModalSuggestion: modalContextTypeSuggestion = { active: false };
 
 export const ContextModalSuggestion = createContext<modalSuggestionInterface>({
   modalSuggestion: initializeModalSuggestion,
-  setModalSuggestion: (state) => console.log('do you need use context Modal Suggestions', state),
+  setModalSuggestion: (state) => new Error(`do you need use context Modal Suggestions  ${state}`),
 });
 
 export const useModalContext = () => useContext(ContextModalSuggestion);

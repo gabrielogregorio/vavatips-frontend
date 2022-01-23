@@ -4,25 +4,17 @@ import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
 import LoaderComponent from '@/base/loader';
 import ButtonCloseModal from '@/base/modalCloseButton';
-
-interface ModalProps {
-  title: string;
-  _id: string;
-  description: string;
-  image: string;
-  closeModal: () => {};
-  saveModal: (_id: string, title: string, image: string) => {};
-}
+import { ModalPropsBase } from '@/interfaces/modal';
 
 export default function ModalComponent({
-  _id: idModal,
+  id: idModal,
   description: descriptionModal,
   image,
   closeModal,
   saveModal,
   title,
-}: ModalProps) {
-  const [_id, setId] = useState<string>('');
+}: ModalPropsBase) {
+  const [id, setId] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [LinkImg, setLinkImg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
@@ -39,7 +31,7 @@ export default function ModalComponent({
     if (image) {
       setLinkImg(image);
     }
-  }, [idModal, description, image]);
+  }, [idModal, descriptionModal, image]);
 
   function loadImage(event: any) {
     setActiveLoader(true);
@@ -56,12 +48,16 @@ export default function ModalComponent({
     sendImageFromApi();
   }
 
+  function closeModalItem() {
+    closeModal(null);
+  }
+
   return (
     <div className="modal" data-testid="modal">
       <div className="modalItem">
         <div className="modalTitle">
           <h1>{title}</h1>
-          <ButtonCloseModal onClick={() => closeModal()} />
+          <ButtonCloseModal onClick={() => closeModalItem()} />
         </div>
 
         <hr />
@@ -69,28 +65,26 @@ export default function ModalComponent({
         <div className="form">
           <div className="groupInput">
             <div className="groupInputSelect">
-              <label aria-label="Descreva a sugestão" htmlFor="description">
-                Descrição
-              </label>
+              <label htmlFor="description">Descrição</label>
               <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
           </div>
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <label className="customFileUpload">
-                <input type="file" name="image" onChange={loadImage} />
+              <label htmlFor="customFileUpload" className="customFileUpload">
                 Adicionar Imagem
               </label>
+              <input id="customFileUpload" type="file" name="image" onChange={loadImage} />
             </div>
           </div>
           <LoaderComponent active={activeLoader} />
           <div className="instructionImage">{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
 
           <div className="modalActions">
-            <Button onClick={() => closeModal()}>Cancelar</Button>
+            <Button onClick={() => closeModalItem()}>Cancelar</Button>
 
-            <Button onClick={() => saveModal(_id, description, LinkImg)}>Adicionar</Button>
+            <Button onClick={() => saveModal(id, title, image)}>Adicionar</Button>
           </div>
         </div>
       </div>

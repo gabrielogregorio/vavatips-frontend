@@ -1,10 +1,5 @@
 import Router from 'next/router';
 
-/*
-Gerencia o token JWT do Backend
-
-Precisa de verificar com o backend se o token é válido também
-*/
 export const TOKEN_JWT = 'app-token-valorant';
 export const TOKEN_ID = 'app-id-valorant';
 

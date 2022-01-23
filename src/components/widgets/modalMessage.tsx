@@ -11,7 +11,7 @@ export default function ModalMessage() {
     <div
       className={styles.modalItem}
       style={{
-        background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secundary)',
+        background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secondary)',
       }}>
       <div className={styles.notfyIcon}>
         {modalMessage.message.type === 'success' ? <AiOutlineCheckCircle /> : null}

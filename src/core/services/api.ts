@@ -5,11 +5,10 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_HOST,
 });
 
-// Sempre que uma requisição for feita ela será interceptada
-// Já com o token JWT
 api.interceptors.request.use(async (config) => {
   const token = getToken();
   if (token) {
+    // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;

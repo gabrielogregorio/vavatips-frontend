@@ -36,8 +36,6 @@ export default function MyProfileScreen() {
       } catch (error: any) {
         if (error.response?.status === 409) {
           setErrorMsg('Esse e-mail já está cadastrado');
-        } else {
-          console.log(error);
         }
       }
     }
@@ -64,7 +62,7 @@ export default function MyProfileScreen() {
       <NavbarComponent selected={navbarEnum.Profile} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <div className="form" onSubmit={handleSubmit}>
           <Title>Seu perfil</Title>
           <LoaderComponent active={activeLoader} />
@@ -72,13 +70,31 @@ export default function MyProfileScreen() {
 
           {activeLoader === false ? (
             <>
-              <Input type="text" text="Trocar nome de usuário" value={username} setValue={setUsername} />
-              <Input type="password" text="Digite uma nova senha" value={password} setValue={setPassword} />
-              <Input type="password" text="Confirme a nova senha" value={password2} setValue={setPassword2} />
+              <Input
+                name="username"
+                type="text"
+                text="Trocar nome de usuário"
+                value={username}
+                setValue={setUsername}
+              />
+              <Input
+                name="password"
+                type="password"
+                text="Digite uma nova senha"
+                value={password}
+                setValue={setPassword}
+              />
+              <Input
+                name="confirmPassword"
+                type="password"
+                text="Confirme a nova senha"
+                value={password2}
+                setValue={setPassword2}
+              />
 
               <div className="groupInput">
                 <div className="groupInputSelect">
-                  <Button onClick={() => logout()} className="btn-color-secundary">
+                  <Button onClick={() => logout()} className="btn-color-secondary">
                     logoff
                   </Button>
                 </div>
@@ -86,14 +102,14 @@ export default function MyProfileScreen() {
 
               <div className="groupInput">
                 <div className="groupInputSelect">
-                  <Button className="btn-secundary">Atualizar dados</Button>
+                  <Button className="btn-secondary">Atualizar dados</Button>
                 </div>
               </div>
             </>
           ) : null}
         </div>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

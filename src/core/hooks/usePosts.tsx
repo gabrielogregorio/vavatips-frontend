@@ -3,6 +3,7 @@ import api from '@/services/api';
 import { useFilters } from '@/contexts/filters';
 import resolveQuery from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
+import { PropsPostInterface } from '../../interfaces/posts';
 
 interface filterUrlInterface {
   agent: string;
@@ -42,6 +43,13 @@ export default function usePosts(location: any, typeRequest: any = '') {
     const { agent, map, type, page } = getUrl(location?.query);
     setQueryUrl({ agent, map, type, page });
 
+    let idPosts = '[]';
+    if (typeRequest === 'save') {
+      idPosts = getPostsSave();
+    } else if (typeRequest === 'tested') {
+      idPosts = getPostsTested();
+    }
+
     const data1 =
       typeRequest === ''
         ? {
@@ -51,7 +59,7 @@ export default function usePosts(location: any, typeRequest: any = '') {
             filters: filters.toString(),
           }
         : {
-            idPosts: typeRequest === 'save' ? getPostsSave() : typeRequest === 'tested' ? getPostsTested() : [],
+            idPosts,
             agent,
             map,
             page,

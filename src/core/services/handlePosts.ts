@@ -1,7 +1,7 @@
+import { actionTypesHandlePosts } from '@/interfaces/posts';
+
 const SAVE_POSTS = 'SAVE_POSTS';
 const TESTED_POSTS = 'TESTED_POSTS';
-
-type actionTypes = 'save' | 'test';
 
 export const getPostsSave = () => localStorage.getItem(SAVE_POSTS);
 export const getPostsTested = () => localStorage.getItem(TESTED_POSTS);
@@ -13,11 +13,11 @@ const verifyValidArray = (posts: any) => {
   return [];
 };
 
-const savePosts = (action: actionTypes, updatePosts: string[]) => {
+const savePosts = (action: actionTypesHandlePosts, updatePosts: string[]) => {
   localStorage.setItem(action === 'save' ? SAVE_POSTS : TESTED_POSTS, JSON.stringify(updatePosts));
 };
 
-export const addNewPost = (postId: string, action: actionTypes) => {
+export const addNewPost = (postId: string, action: actionTypesHandlePosts) => {
   const posts = action === 'save' ? getPostsSave() : getPostsTested();
   let updatePosts: string[] = [];
 
@@ -30,7 +30,7 @@ export const addNewPost = (postId: string, action: actionTypes) => {
   savePosts(action, updatePosts);
 };
 
-export const removePost = (postId: string, action: actionTypes) => {
+export const removePost = (postId: string, action: actionTypesHandlePosts) => {
   const posts = action === 'save' ? getPostsSave() : getPostsTested();
   let updatePosts: string[] = [];
 

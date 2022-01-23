@@ -11,8 +11,10 @@ module.exports = {
     'react/jsx-filename-extension': [0],
     'react/require-default-props': 'off',
     'import/extensions': 'off',
+    '@next/next/no-img-element': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['off'],
+    'jsx-a11y/label-has-associated-control': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

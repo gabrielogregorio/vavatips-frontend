@@ -1,20 +1,12 @@
-type typeInput = 'text' | 'password' | 'email';
+import { propsInterfaceInput } from '@/interfaces/input';
 
-interface propsInterface {
-  text: string;
-  value: string;
-  type: typeInput;
-  disabled?: boolean;
-  setValue: (e: string) => any;
-}
-
-export default function Input({ disabled, type, value, text, setValue }: propsInterface) {
+export default function Input({ disabled, type, value, text, setValue, name }: propsInterfaceInput) {
   return (
     <div className="groupInput">
       <div className="groupInputSelect">
-        <label htmlFor="input">{text}</label>
+        <label htmlFor={name}>{text}</label>
         <input
-          id="input"
+          id={name}
           disabled={disabled}
           type={type}
           value={value}

@@ -1,13 +1,15 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import { useState } from 'react';
 import { ContextFilters } from '@/contexts/filters';
-import { ContextModalMessage, modalMessageType } from '@/contexts/modalMessage';
-import { ContextModalSuggestion, modalContextType } from '@/contexts/modalSuggestion';
+import { ContextModalMessage } from '@/contexts/modalMessage';
+import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
+import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 
 function MockApp({ children }: any) {
-  const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({
+  const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     active: false,
   });
-  const [modalMessage, setModalMessage] = useState<modalMessageType>({
+  const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
     message: { msg: '', type: 'success' },
     active: false,
   });

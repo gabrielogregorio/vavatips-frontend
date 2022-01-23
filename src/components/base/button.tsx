@@ -1,10 +1,5 @@
-type buttonType = {
-  children: any;
-  disabled?: boolean;
-  className?: string;
-  onClick?: () => any;
-  ariaLabel?: string;
-};
+import React from 'react';
+import { buttonTypeNormal } from '@/interfaces/button';
 
 function handleOnClick(): boolean {
   return true;
@@ -16,7 +11,7 @@ export default function Button({
   ariaLabel = '',
   disabled = false,
   onClick = handleOnClick,
-}: buttonType) {
+}: buttonTypeNormal) {
   return (
     <button onClick={onClick} className={className} disabled={disabled} aria-label={ariaLabel} type="button">
       {children}

@@ -1,14 +1,7 @@
 import Link from 'next/link';
-import { generateUrl } from '@/helpers/UrlMout';
+import { generateUrl } from '@/helpers/UrlMount';
+import { PaginationButtonInterface } from '@/interfaces/pagination';
 import styles from '../../styles/components/paginationButtons.style.module.css';
-
-interface PaginationButtonInterface {
-  numberOfPage: any;
-  active: boolean;
-  map: string;
-  agent: string;
-  urlBase: string;
-}
 
 export default function PaginationButtons({ numberOfPage, active, urlBase, map, agent }: PaginationButtonInterface) {
   return (

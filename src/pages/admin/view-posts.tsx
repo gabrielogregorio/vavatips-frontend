@@ -7,6 +7,7 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import PaginationComponent from '@/widgets/pagination';
 import ContainerPosts from '@/widgets/containerPosts';
 import { navbarEnum } from '@/interfaces/navbar';
+import { postsProps } from '@/interfaces/posts';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -29,7 +30,7 @@ export default function ViewPostsScreen() {
     const page = `${location?.query?.page || '1'}`;
 
     setQueryParseUrl({ agent, map, page });
-  }, [`${location.query}`]);
+  }, [location?.query?.agent, location?.query?.map, location?.query?.page]);
 
   const numberSelected = parseInt(queryParseUrl?.page || '1', 10);
 
@@ -40,9 +41,7 @@ export default function ViewPostsScreen() {
         setFinishPage(postsJson.data.count);
         setPosts(postsJson.data.posts);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(() => {});
   }, [queryParseUrl]);
 
   return (
@@ -50,7 +49,7 @@ export default function ViewPostsScreen() {
       <NavbarComponent selected={navbarEnum.ViewPosts} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <ContainerPosts activeLoader={false} queryUrl={queryParseUrl} posts={posts} />
         <PaginationComponent
           urlBase="ViewPosts"
@@ -61,7 +60,7 @@ export default function ViewPostsScreen() {
           map={queryParseUrl.map}
         />
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

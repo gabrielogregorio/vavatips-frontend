@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export enum navbarEnumPublic {
   Inicio = '/Inicio',
   Posts = '/posts',
@@ -15,4 +16,12 @@ export enum navbarEnum {
   ReportScreen = '/Reports',
   SuggestionScreen = '/Suggestions',
   Dashboard = '/Dashboard',
+}
+
+export interface NavbarPropsPublicComponent {
+  selected: navbarEnumPublic;
+}
+
+export interface NavbarPropsNavbarBasic {
+  selected: navbarEnum;
 }

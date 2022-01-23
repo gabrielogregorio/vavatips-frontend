@@ -1,496 +1,489 @@
 :root {
-    --max-width: 800px;
-  
-    --background-primary: #efefef;
-    --background-secundary: #FFFFFF;
-  
-    --black-transparent: #000000aa;
-  
-    --text-color-bold: #000000;
-    --text-color-bold-transparent: #00000022;
-    --text-color-normal: #3E3E3E;
-  
-    --primary: #cb4343;
-    --secundary: #438ACB;
-    --purple: #CB43BD;
-  
-    --primary-small: #d4a4a4;
-    --secundary-small: #a6b8ca;
-    --purple-small: #cc9ac7;
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+  --max-width: 800px;
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-  }
-  
-  body {
-    overflow-y: scroll;
-  }
-  
-  html, body {
-    min-height: 100vh;
-    background: var(--background-primary);
-  }
-  
-  #root {
-    height: 100%;
-    min-height: 100vh;
-  }
-  
-   /*Container e estrura básica*/
-   .container {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-    padding: 0;
-    width: 100%;
-    margin: 0;
-  }
-  
-  .elastic {
-    flex: 1;
-  }
-  
-  .container > .subcontainer {
-    max-width: var(--max-width);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background: var(--background-secundary);
-    margin: 2rem 0;
-    padding: 2%;
-    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-    transition: 2s;
-  }
-  
-  .container .subcontainer .errorMsg {
-    padding: 0;
-    margin: 0;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    color: var(--primary);
-  }
-  
-  .container > .subcontainer > p {
-    width: 100%;
-    padding: 0 2rem;
-    font-size: 0.9rem;
-    text-align: left;
-    color: var(--text-color-normal);
-  }
-  
-  .container > .subcontainer > .gridFull {
-    display: grid;
-    column-gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-  
-  .container > .subcontainer > .gridFull > .grid {
-    width: 100%;
-    text-decoration: none;
-    transition: 0.2s ease-out;
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  
-  .container > .subcontainer > .gridFull > .grid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    text-decoration: none;
-    transition: 0.2s ease-out;
-  }
-  
-  .container > .subcontainer > .gridFull > .grid p {
-    text-decoration: none;
-    color: var(--text-color-bold);
-    text-align: center;
-  }
-  
-  .container > .subcontainer > .gridFull > .grid:hover {
-    transform: scale(1.05);
-  }
-  
-  .container > .subcontainer > .gridFull > .grid:hover img {
-    box-shadow: 0 0 20px 1px var(--text-color-bold-transparent);
-  }
-  
-  /*Container e estrura básica*/
-  .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .form h1 {
-    width: 100%;
-    font-size: 1.5rem;
-    text-align: center;
-    padding: 0.5rem 0;
-  }
-  
-  .form .instructionTop p {
-    flex: 1;
-    font-size:0.9rem;
-    word-break: break-all;
-  }
-  
-  .form .info {
-    font-size:0.9rem;
-    max-width: 400px;
-  }
-  
-  .form .stepsPost > div {
-    width: 100%;
-    max-width: 400px;
-    padding: 0 2%;
-  }
-  
-  .form .instructionTop button {
-    background: transparent;
-    outline: none;
-    padding: 5px;
-    border: none;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-  
-  .form .instructionTop button i {
-    color: var(--primary);
-  }
-  
-  .form .stepsPost > div .instructionTop {
-    display: flex;
-    align-items: center;
-    max-width: 400px;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .form .instructionImage {
-    position: relative;
-    max-width: 400px;
-    width: 100%;
-    border-radius: 10px;
-  }
-  
-  .form .instructionImage img {
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-  }
-  
-  .form .instructionImage button {
-    position: absolute;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    padding: 5px;
-    cursor: pointer;
-  }
-  
-  .form .instructionImage button i {
-    font-size: 2.5rem;
-    color: var(--background-secundary);
-  }
-  
-  .form .instructionImage .btn-bottom {
-    top: 0;
-    left: 50%;
-  }
-  
-  .form .instructionImage .btn-top {
-    bottom: 0;
-    left: 50%;
-  }
-  .form .instructionImage .btn-bottom svg,
-  .form .instructionImage .btn-top svg {
-    color: var(--background-secundary);
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-  
-  hr {
-    margin: 20px 0;
-    padding: 0;
-    max-width: 400px;
-    width: 100%;
-    background-color: var(--text-color-bold-transparent);
-  }
-  
-  .form .groupInput {
-    display: flex;
-    justify-content: space-between;
-    max-width: 400px;
-    width: 100%;
-  }
-  
-  .form .groupInputSelect {
-    width: 100%;
-    margin: 7px 10px;
-  }
-  
-  .form .groupInputSelect button {
-    width: 100%;
-    padding: 5px;
-    cursor: pointer;
-    border-radius: 10px;
-  }
-  
-  .form .btn-color-primary {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    color: var(--primary);
-  }
-  
-  .form .groupInputSelect .btn-color-secundary {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: var(--secundary);
-  }
-  
-  .form .groupInputSelect .btn-outline-secundary {
-    border: 2px solid var(--secundary);
-    background-color: transparent;
-    color: var(--secundary);
-  }
-  
-  .form .groupInputSelect .btn-primary {
-    border: 2px solid var(--primary);
-    background-color: var(--primary);
-    color: var(--background-secundary);
-  }
-  
-  .form .groupInputSelect .btn-secundary {
-    border: 2px solid var(--secundary);
-    background-color: var(--secundary);
-    color: var(--background-secundary);
-  }
-  
-  
-  .form .groupInputSelect select {
-    width: 100%;
-    padding: 5px;
-    border: 2px solid var(--secundary);
-    color: var(--text-color-bold);
-    background-color: var(--background-secundary);
-    outline: none;
-    border-radius: 10px;
-  }
-  
-  .form label {
-    width: 100%;
-    display: block;
-    color: var(--text-color-bold);
-  }
-  
-  .form input:disabled {
-    background: var(--background-primary);
-    color: var();
-  }
-  
-  .form .errorMsg {
-    padding: 0;
-    margin: 0;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-    color: var(--primary);
-  }
-  
-  .form input,
-  .form textarea
-  {
-    width: 100%;
-    padding: 5px;
-    border: 2px solid var(--secundary);
-    color: var(--text-color-bold);
-    background-color: var(--background-secundary);
-    outline: none;
-    border-radius: 10px;
-    resize: none;
-  }
-  
-  .customFileUpload {
-    display: block;
-    cursor: pointer;
-  }
-  
-  .customFileUpload  input[type="file"] {
-    display: none;
-  }
-  
-  .customFileUpload i {
-    display: block;
-    cursor: pointer;
-    font-size: 1.3rem;
-  }
-  
-  .customFileUpload img {
-    width: 700px;
-  }
-  /* Fim do formulario */
-  
-  /* Inicio do post */
-  .btn button {
-    cursor: pointer;
-    background: transparent;
-    border: 1px solid var(--secundary);
-    padding: 5px 10px;
-    margin: 0 5px;
-    border-radius: 20px;
-    color: var(--secundary);
-    margin: 5px;
-  }
-  
-  .btn .btnActive {
-    background-color: var(--secundary);
-    color: var(--background-primary);
-  }
-  
-  .btn-base button {
-    cursor: pointer;
-    background: var(--primary);
-    border: 1px solid var(--primary);
-    padding: 5px 10px;
-    margin: 0 5px;
-    border-radius: 20px;
-    color: var(--background-primary);
-  }
-  
-  .containerPost {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    min-height: 100vh;
-    background-color: var(--dark-beautful);
-    padding: 0;
-  }
-  
-  .containerPost > div {
-    display: flex;
-    margin: 10px 0;
-  }
-  
-  .containerPost > .postItems {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 5px;
-  }
-  
-  
-  .containerPost .tags {
-    display: flex;
-    margin: 10px 0;
-    flex-wrap: wrap;
-    padding: 0 2%;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .containerPost > h3 {
-    color: var(--light);
-  }
-  
-  
-  .containerPost > p {
-    color: var(--light);
-  }
-  /* Inicio do post */
-  
-  
-  /* Modais Básicos */
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: var(--black-transparent);
-    z-index: 5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  --background-primary: #efefef;
+  --background-secondary: #FFFFFF;
+
+  --black-transparent: #000000aa;
+
+  --text-color-bold: #000000;
+  --text-color-bold-transparent: #00000022;
+  --text-color-normal: #3E3E3E;
+
+  --primary: #cb4343;
+  --secondary: #438ACB;
+  --purple: #CB43BD;
+
+  --primary-small: #d4a4a4;
+  --secondary-small: #a6b8ca;
+  --purple-small: #cc9ac7;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--background-primary);
+}
+
+#root {
+  height: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.elastic {
+  flex: 1;
+}
+
+.container > .sub__container {
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--background-secondary);
+  margin: 2rem 0;
+  padding: 2%;
+  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
+  transition: 2s;
+}
+
+.container .sub__container .errorMsg {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--primary);
+}
+
+.container > .sub__container > p {
+  width: 100%;
+  padding: 0 2rem;
+  font-size: 0.9rem;
+  text-align: left;
+  color: var(--text-color-normal);
+}
+
+.container > .sub__container > .gridFull {
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.container > .sub__container > .gridFull > .grid {
+  width: 100%;
+  text-decoration: none;
+  transition: 0.2s ease-out;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.container > .sub__container > .gridFull > .grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  text-decoration: none;
+  transition: 0.2s ease-out;
+}
+
+.container > .sub__container > .gridFull > .grid p {
+  text-decoration: none;
+  color: var(--text-color-bold);
+  text-align: center;
+}
+
+.container > .sub__container > .gridFull > .grid:hover {
+  transform: scale(1.05);
+}
+
+.container > .sub__container > .gridFull > .grid:hover img {
+  box-shadow: 0 0 20px 1px var(--text-color-bold-transparent);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form h1 {
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.form .instructionTop p {
+  flex: 1;
+  font-size:0.9rem;
+  word-break: break-all;
+}
+
+.form .info {
+  font-size:0.9rem;
+  max-width: 400px;
+}
+
+.form .stepsPost > div {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 2%;
+}
+
+.form .instructionTop button {
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.form .instructionTop button i {
+  color: var(--primary);
+}
+
+.form .stepsPost > div .instructionTop {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form .instructionImage {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.form .instructionImage img {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.form .instructionImage button {
+  position: absolute;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.form .instructionImage button i {
+  font-size: 2.5rem;
+  color: var(--background-secondary);
+}
+
+.form .instructionImage .btn-bottom {
+  top: 0;
+  left: 50%;
+}
+
+.form .instructionImage .btn-top {
+  bottom: 0;
+  left: 50%;
+}
+.form .instructionImage .btn-bottom svg,
+.form .instructionImage .btn-top svg {
+  color: var(--background-secondary);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+hr {
+  margin: 20px 0;
+  padding: 0;
+  max-width: 400px;
+  width: 100%;
+  background-color: var(--text-color-bold-transparent);
+}
+
+.form .groupInput {
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form .groupInputSelect {
+  width: 100%;
+  margin: 7px 10px;
+}
+
+.form .groupInputSelect button {
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.form .btn-color-primary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--primary);
+}
+
+.form .groupInputSelect .btn-color-secondary {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--secondary);
+}
+
+.form .groupInputSelect .btn-outline-secondary {
+  border: 2px solid var(--secondary);
+  background-color: transparent;
+  color: var(--secondary);
+}
+
+.form .groupInputSelect .btn-primary {
+  border: 2px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--background-secondary);
+}
+
+.form .groupInputSelect .btn-secondary {
+  border: 2px solid var(--secondary);
+  background-color: var(--secondary);
+  color: var(--background-secondary);
+}
+
+
+.form .groupInputSelect select {
+  width: 100%;
+  padding: 5px;
+  border: 2px solid var(--secondary);
+  color: var(--text-color-bold);
+  background-color: var(--background-secondary);
+  outline: none;
+  border-radius: 10px;
+}
+
+.form label {
+  width: 100%;
+  display: block;
+  color: var(--text-color-bold);
+}
+
+.form input:disabled {
+  background: var(--background-primary);
+  color: var();
+}
+
+.form .errorMsg {
+  padding: 0;
+  margin: 0;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  color: var(--primary);
+}
+
+.form input,
+.form textarea
+{
+  width: 100%;
+  padding: 5px;
+  border: 2px solid var(--secondary);
+  color: var(--text-color-bold);
+  background-color: var(--background-secondary);
+  outline: none;
+  border-radius: 10px;
+  resize: none;
+}
+
+.customFileUpload {
+  display: block;
+  cursor: pointer;
+}
+
+.customFileUpload  input[type="file"] {
+  display: none;
+}
+
+.customFileUpload i {
+  display: block;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.customFileUpload img {
+  width: 700px;
+}
+
+.btn button {
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--secondary);
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 20px;
+  color: var(--secondary);
+  margin: 5px;
+}
+
+.btn .btnActive {
+  background-color: var(--secondary);
+  color: var(--background-primary);
+}
+
+.btn-base button {
+  cursor: pointer;
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 20px;
+  color: var(--background-primary);
+}
+
+.containerPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--dark-beautful);
+  padding: 0;
+}
+
+.containerPost > div {
+  display: flex;
+  margin: 10px 0;
+}
+
+.containerPost > .postItems {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5px;
+}
+
+
+.containerPost .tags {
+  display: flex;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  padding: 0 2%;
+  justify-content: center;
+  width: 100%;
+}
+
+.containerPost > h3 {
+  color: var(--light);
+}
+
+
+.containerPost > p {
+  color: var(--light);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: var(--black-transparent);
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalItem {
+  background-color: var(--background-secondary);
+  padding: 10px 20px;
+  border-radius: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalTitle h1 {
+  flex: 1;
+}
+
+.modalTitle button {
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.modalTitle button i {
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.modalActions button {
+  background: transparent;
+  border: 0;
+  padding: 8px 15px;
+  font-size:0.9rem;
+  border-radius: 20px;
+  color: var(--background-secondary);
+  cursor: pointer;
+}
+
+.modalActions button:nth-child(1) {
+  background: #969696;
+}
+
+.modalActions button:nth-child(2) {
+  background: var(--secondary);
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 600px) {
   .modalItem {
-    background-color: var(--background-secundary);
-    padding: 10px 20px;
-    border-radius: 20px;
-    width: 100%;
-    margin: 0 auto;
+    max-width: 400px;
   }
-  
-  .modalTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalTitle h1 {
-    flex: 1;
-  }
-  
-  .modalTitle button {
-    background: transparent;
-    border: 0;
-    outline: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .modalTitle button i {
-    color: var(--primary);
-    font-size: 1rem;
-  }
-  
-  .modalActions {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
-  
-  .modalActions button {
-    background: transparent;
-    border: 0;
-    padding: 8px 15px;
-    font-size:0.9rem;
-    border-radius: 20px;
-    color: var(--background-secundary);
-    cursor: pointer;
-  }
-  
-  .modalActions button:nth-child(1) {
-    background: #969696;
-  }
-  
-  .modalActions button:nth-child(2) {
-    background: var(--secundary);
-    margin-left: 10px;
-  }
-  
-  @media screen and (min-width: 600px) {
-    .modalItem {
-      max-width: 400px;
-    }
-  }
+}

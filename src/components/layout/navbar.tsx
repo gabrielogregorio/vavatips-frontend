@@ -1,12 +1,8 @@
 import Link from 'next/link';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum, NavbarPropsNavbarBasic } from '@/interfaces/navbar';
 import styles from '../../styles/components/navbar.module.css';
 
-interface NavbarProps {
-  selected: navbarEnum;
-}
-
-export default function NavbarComponent({ selected }: NavbarProps) {
+export default function NavbarComponent({ selected }: NavbarPropsNavbarBasic) {
   return (
     <nav className={styles.nav}>
       <ul>

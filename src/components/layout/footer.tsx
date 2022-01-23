@@ -1,11 +1,8 @@
+import { footerPropsComponent } from '@/interfaces/footer';
 import styles from '../../styles/components/footer.styles.module.css';
 
-interface footerProps {
-  color: 'primary' | 'secundary';
-}
-
-export default function FooterComponent({ color }: footerProps) {
-  const background = color === 'primary' ? 'var(--primary)' : 'var(--secundary)';
+export default function FooterComponent({ color }: footerPropsComponent) {
+  const background = color === 'primary' ? 'var(--primary)' : 'var(--secondary)';
   return (
     <>
       <div className="elastic" />
@@ -36,10 +33,8 @@ export default function FooterComponent({ color }: footerProps) {
           <div className={styles.about}>
             <h3>Sobre</h3>
             <p className={styles.boilerplate}>
-              {' '}
               <span>Vavatips</span> foi criado seguindo a política do
               <a target="_blank" rel="noopener noreferrer" href="https://www.riotgames.com/pt-br/juridico">
-                {' '}
                 “Lenga-Lenga Jurídico”
               </a>
               da Riot Games com recursos pertencentes à Riot Games. A Riot Games não endossa ou patrocina este projeto.

@@ -16,8 +16,8 @@ export default function PostTags() {
   }
 
   function renderTags() {
-    return tags.map((tag, index) => (
-      <div className="btn" key={index} onClick={() => toggleTag(tag)}>
+    return tags.map((tag) => (
+      <div className="btn" key={tag} onClick={() => toggleTag(tag)} role="presentation">
         <Button className={filters.includes(tag) ? 'btnActive' : ''}>{tag} a</Button>
       </div>
     ));

@@ -39,17 +39,17 @@ export default function ConfigScreen() {
       <NavbarComponent selected={navbarEnum.Config} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <div className="form">
           <h1>Gerar Convite</h1>
           <p>** !!! Somente para Devs !!! *</p>
           <p className="errorMsg">{errorMsg}</p>
 
-          <Input type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess} />
+          <Input name="keySecret" type="password" text="Chave Secreta" value={keyAccess} setValue={setKeyAccess} />
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <Button className="btn-secundary" onClick={handleSubmit}>
+              <Button className="btn-secondary" onClick={() => handleSubmit()}>
                 Gerar
               </Button>
             </div>
@@ -57,7 +57,7 @@ export default function ConfigScreen() {
           <p>{codeMsg}</p>
         </div>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

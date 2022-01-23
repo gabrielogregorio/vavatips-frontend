@@ -16,8 +16,7 @@ export default function useAgents(item: any) {
         setAgentsApi(agentsJson);
         setActiveLoader(false);
       })
-      .catch((err) => {
-        console.log(err, 'OPA, EAE');
+      .catch(() => {
         setErrorMsg('Erro desconhecido no servidor');
         setActiveLoader(false);
       });

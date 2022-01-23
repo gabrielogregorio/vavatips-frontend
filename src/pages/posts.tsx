@@ -7,7 +7,7 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import PaginationComponent from '@/widgets/pagination';
 import ErrorMsg from '@/base/errorMsg';
 import ContainerPosts from '@/widgets/containerPosts';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links';
 import usePosts from '@/hooks/usePosts';
 import Title from '@/base/title';
 import { navbarEnumPublic } from '@/interfaces/navbar';
@@ -25,7 +25,7 @@ export default function HomeScreen() {
       <NavbarComponentPublic selected={navbarEnumPublic.Posts} />
 
       <BreadcrumbComponent breadcrumbs={breadcrumbs} />
-      <div className="subcontainer">
+      <div className="sub__container">
         <ModalOfSuggestion title="fazer sugestão" />
 
         <ModalMessage />

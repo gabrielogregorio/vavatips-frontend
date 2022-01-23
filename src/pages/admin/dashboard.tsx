@@ -55,7 +55,7 @@ export default function DashboardScreen() {
       <NavbarComponent selected={navbarEnum.Dashboard} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <LoaderComponent active={activeLoader} />
         <p>{errorMsg}</p>
 
@@ -70,7 +70,7 @@ export default function DashboardScreen() {
         <p>sugestões: {countAllSuggestions}</p>
         <p>administradores: {countAllUsers}</p>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

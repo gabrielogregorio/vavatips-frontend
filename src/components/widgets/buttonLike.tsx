@@ -1,15 +1,7 @@
 import Button from '@/base/button';
+import { propsInterfaceButtonLike } from '@/interfaces/posts';
 
-type styleType = 'testBtn' | 'likeBtn' | 'suggestionBtn';
-
-interface propsInterface {
-  active: boolean;
-  title: string;
-  styleBtn: styleType;
-  onClick: () => {};
-}
-
-export default function ButtonLike({ styleBtn, title, onClick, active }: propsInterface) {
+export default function ButtonLike({ styleBtn, title, onClick, active }: propsInterfaceButtonLike) {
   return (
     <Button className={`${styleBtn} ${active ? 'active' : ''}`} onClick={onClick}>
       {title}

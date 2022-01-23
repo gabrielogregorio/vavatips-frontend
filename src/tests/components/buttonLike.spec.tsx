@@ -11,12 +11,14 @@ describe('<ButtonLike />', () => {
   });
 
   it('should be disable when active is false', () => {
-    render(<ButtonLike active={false} title="Like" styleBtn="testBtn" onClick={() => {}} />);
+    const fn = jest.fn();
+    render(<ButtonLike active={false} title="Like" styleBtn="testBtn" onClick={() => fn()} />);
     expect(screen.getByRole('button')).not.toHaveClass('active');
   });
 
   it('should be active when active is true', () => {
-    render(<ButtonLike active title="Like" styleBtn="testBtn" onClick={() => {}} />);
+    const fn = jest.fn();
+    render(<ButtonLike active title="Like" styleBtn="testBtn" onClick={() => fn()} />);
     expect(screen.getByRole('button')).toHaveClass('active');
   });
 

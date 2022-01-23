@@ -8,7 +8,7 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import ErrorMsg from '@/base/errorMsg';
 import useAgents from '@/hooks/useAgents';
 import Title from '@/base/title';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links';
 import { navbarEnumPublic } from '@/interfaces/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
@@ -39,7 +39,7 @@ export default function AgentScreen() {
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
       <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <Title>Escolha um Agente</Title>
         <LoaderComponent active={activeLoader} />
         {activeLoader ? <p>Buscando Agentes...</p> : ''}

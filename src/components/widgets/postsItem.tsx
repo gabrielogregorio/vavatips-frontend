@@ -1,3 +1,4 @@
+import { postsProps } from '@/interfaces/posts';
 import PostCard from './postCard';
 
 interface postPropsInterface {
@@ -7,7 +8,7 @@ interface postPropsInterface {
 export default function Posts({ posts }: postPropsInterface) {
   function renderPost() {
     return posts.map((post) => (
-      <div key={post._id}>
+      <div key={post.id}>
         <PostCard post={post} />
       </div>
     ));

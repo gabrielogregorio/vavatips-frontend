@@ -7,7 +7,7 @@ import Input from '@/base/input';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import { navbarEnumPublic } from '@/interfaces/navbar';
@@ -53,8 +53,8 @@ export default function Login() {
     if (typeAccess === 'register') {
       api
         .post('/user', { username, password, code })
-        .then((res) => console.log(res))
-        .catch((error) => console.log(error));
+        .then(() => {})
+        .catch(() => {});
     }
 
     api
@@ -80,7 +80,6 @@ export default function Login() {
             setErrorMsg('Senha inválida!');
           }
         } else {
-          console.log(error.response);
           setActiveLoader(false);
           setErrorMsg(`Erro Desconhecido ${error}`);
         }
@@ -103,7 +102,7 @@ export default function Login() {
       <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <div className="form">
           <Title>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </Title>
 
@@ -111,19 +110,25 @@ export default function Login() {
           <p className="errorMsg">{errorMsg}</p>
 
           {typeAccess === 'register' ? (
-            <Input type="password" text="Código de cadastro" value={code} setValue={setCode} />
+            <Input name="keyAccess" type="password" text="Código de cadastro" value={code} setValue={setCode} />
           ) : null}
 
-          <Input type="text" text="Usuário" value={username} setValue={setUsername} />
-          <Input type="password" text="Senha" value={password} setValue={setPassword} />
+          <Input name="username" type="text" text="Usuário" value={username} setValue={setUsername} />
+          <Input name="password" type="password" text="Senha" value={password} setValue={setPassword} />
 
           {typeAccess === 'register' ? (
-            <Input type="password" text="Confirme uma senha" value={password2} setValue={setPassword2} />
+            <Input
+              name="confirmPassword"
+              type="password"
+              text="Confirme uma senha"
+              value={password2}
+              setValue={setPassword2}
+            />
           ) : null}
 
           <div className="groupInput">
             <div className="groupInputSelect">
-              <Button className="btn-color-secundary" onClick={() => toggleAccess()}>
+              <Button className="btn-color-secondary" onClick={() => toggleAccess()}>
                 {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
               </Button>
             </div>

@@ -5,7 +5,7 @@ import FooterComponent from '@/layout/footer';
 import LoaderComponent from '@/base/loader';
 import NavbarComponentPublic from '@/layout/navbar_public';
 import { maps } from '@/data/data-valorant';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links';
 import useMaps from '@/hooks/useMaps';
 import Title from '@/base/title';
 import { navbarEnumPublic } from '@/interfaces/navbar';
@@ -37,7 +37,7 @@ export default function MapScreen() {
       <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
       <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <Title>Escolha um mapa ai parça </Title>
         <ErrorMsg msg={errorMsg} />
         {activeLoader ? <p>Buscando Mapas...</p> : ''}

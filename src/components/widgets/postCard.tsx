@@ -6,11 +6,11 @@ import formatImage from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import { postsProps } from '@/interfaces/posts';
 import styles from '../../styles/components/postCard.module.css';
 
 type typeType = 'next' | 'prev';
 
-// Componente post
 interface PropsPostInterface {
   post: postsProps;
   viewAdmin?: boolean;
@@ -24,27 +24,27 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
 
   function handleAddTest() {
     if (postTested) {
-      removePost(post._id, 'test');
+      removePost(post.id, 'test');
     } else {
-      addNewPost(post._id, 'test');
+      addNewPost(post.id, 'test');
     }
-    setPostTested(getPostsTested()?.includes(post._id) ?? false);
+    setPostTested(getPostsTested()?.includes(post.id) ?? false);
   }
 
   function handleAddSave() {
     if (postSave) {
-      removePost(post._id, 'save');
+      removePost(post.id, 'save');
     } else {
-      addNewPost(post._id, 'save');
+      addNewPost(post.id, 'save');
     }
-    setPostSave(getPostsSave()?.includes(post._id) ?? false);
+    setPostSave(getPostsSave()?.includes(post.id) ?? false);
   }
 
   useEffect(() => {
     // Este post está incluso nos posts testados!
-    setPostTested(getPostsTested()?.includes(post._id) ?? false);
-    setPostSave(getPostsSave()?.includes(post._id) ?? false);
-  }, [post._id]);
+    setPostTested(getPostsTested()?.includes(post.id) ?? false);
+    setPostSave(getPostsSave()?.includes(post.id) ?? false);
+  }, [post.id]);
 
   function nextImage(type: typeType, length: number) {
     if (type === 'next') {
@@ -80,7 +80,7 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
 
           {isAuthenticated() === true ? (
             <Button>
-              <Link href={`/admin/post-edit?id=${post._id}`}>Editar</Link>
+              <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
             </Button>
           ) : null}
         </div>
@@ -128,15 +128,14 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
 
         {!viewAdmin ? (
           <div className={styles.actions}>
-            <Button className={postTested ? styles.actionsActive : ''} onClick={handleAddTest}>
+            <Button className={postTested ? styles.actionsActive : ''} onClick={() => handleAddTest()}>
               A testar
             </Button>
 
-            <Button className={postSave ? styles.actionsActive : ''} onClick={handleAddSave}>
-              {' '}
+            <Button className={postSave ? styles.actionsActive : ''} onClick={() => handleAddSave()}>
               Salvo
             </Button>
-            <Button onClick={handleModalAction}>Sugerir</Button>
+            <Button onClick={() => handleModalAction()}>Sugerir</Button>
           </div>
         ) : null}
       </div>

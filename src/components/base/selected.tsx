@@ -1,13 +1,8 @@
-interface propsInterface {
-  text: string;
-  value: string;
-  setValue: (event: string) => any;
-  render: () => any[];
-}
+import { propsInterfaceSelectedBase } from '@/interfaces/select';
 
-export default function Selected({ render, text, setValue, value }: propsInterface) {
+export default function Selected({ render, text, setValue, value }: propsInterfaceSelectedBase) {
   function renderItems() {
-    return render?.().map((item) => (
+    return render.map((item) => (
       <option value={item.name} key={item.id}>
         {item.name}
       </option>

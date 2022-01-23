@@ -1,3 +1,5 @@
+import { agentInterface, difficultInterface, mapInterface, momentInterface, sideInterface } from '@/interfaces/posts';
+
 export const side = (): sideInterface[] => [
   {
     id: '1',
@@ -9,7 +11,7 @@ export const side = (): sideInterface[] => [
   },
 ];
 
-export const momment = (): mommentInterface[] => [
+export const moment = (): momentInterface[] => [
   {
     id: '1',
     name: 'QualquerMomento',

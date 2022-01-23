@@ -1,9 +1,11 @@
-export const mockPost: postsProps = {
-  _id: '',
-  user: { _id: '', username: '', image: '' },
+import { postsProps } from '@/interfaces/posts';
+
+const mockPost: postsProps = {
+  id: '',
+  user: { id: '', username: '', image: '' },
   description: '',
   title: '',
-  imgs: [{ _id: '', image: '', description: '' }],
+  imgs: [{ id: '', image: '', description: '' }],
   tags: {
     map: '',
     agent: '',
@@ -14,3 +16,5 @@ export const mockPost: postsProps = {
     mapPosition: '',
   },
 };
+
+export default mockPost;

@@ -19,14 +19,14 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
             <Link href={breadcrumb.url}>
               <a
                 style={{
-                  color: admin ? 'var(--secundary)' : 'var(--primary)',
+                  color: admin ? 'var(--secondary)' : 'var(--primary)',
                 }}>
                 {breadcrumb.text}
               </a>
             </Link>
             <span
               style={{
-                color: admin ? 'var(--secundary)' : 'var(--primary)',
+                color: admin ? 'var(--secondary)' : 'var(--primary)',
               }}>
               &gt;
             </span>

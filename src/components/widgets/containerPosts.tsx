@@ -1,15 +1,10 @@
 import LoaderComponent from '@/base/loader';
+import { propsInterfaceContaienrPosts } from '@/interfaces/posts';
 import Posts from './postsItem';
 import PostTags from './tags';
 import TagsFixFilters from './tagsFixFilters';
 
-interface propsInterface {
-  queryUrl: any;
-  activeLoader: boolean;
-  posts: postsProps[];
-}
-
-export default function ContainerPosts({ queryUrl, activeLoader, posts }: propsInterface) {
+export default function ContainerPosts({ queryUrl, activeLoader, posts }: propsInterfaceContaienrPosts) {
   return (
     <div className="containerPost">
       <TagsFixFilters queryUrl={queryUrl} />

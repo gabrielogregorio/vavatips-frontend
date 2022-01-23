@@ -20,9 +20,8 @@ export default function SuggestionScreen() {
       const [suggestion] = await Promise.all([suggestionResponse]);
       const suggestionJson = suggestion.data;
       setSuggestions(suggestionJson);
-    } catch (error) {
-      console.log(error);
-    }
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -31,8 +30,8 @@ export default function SuggestionScreen() {
 
   function renderSuggestions() {
     return suggestions.map((report) => (
-      <tr key={report._id}>
-        <td>{report.post_id}</td>
+      <tr key={report.id}>
+        <td>{report.postId}</td>
         <td>{report.email}</td>
         <td>{report.description}</td>
         <td>{report.status ?? 'Não atendido'}</td>
@@ -45,7 +44,7 @@ export default function SuggestionScreen() {
       <NavbarComponent selected={navbarEnum.SuggestionScreen} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="subcontainer">
+      <div className="sub__container">
         <table>
           <thead>
             <tr>
@@ -59,7 +58,7 @@ export default function SuggestionScreen() {
           <tbody>{renderSuggestions()}</tbody>
         </table>
       </div>
-      <FooterComponent color="secundary" />
+      <FooterComponent color="secondary" />
     </div>
   );
 }

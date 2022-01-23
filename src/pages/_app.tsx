@@ -1,19 +1,20 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
 import '../styles/global.css';
 import { AppProps } from 'next/app';
-import Script from 'next/script';
 import Header from 'next/head';
-import { ContextModalSuggestion, modalContextType } from '@/contexts/modalSuggestion';
+import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { ContextFilters } from '@/contexts/filters';
-import { ContextModalMessage, modalMessageType } from '@/contexts/modalMessage';
+import { ContextModalMessage } from '@/contexts/modalMessage';
+import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [modalSuggestion, setModalSuggestion] = useState<modalContextType>({
+  const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     post: null,
     active: false,
   });
-  const [modalMessage, setModalMessage] = useState<modalMessageType>({
+  const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
     message: { msg: '', type: 'success' },
     active: false,
   });

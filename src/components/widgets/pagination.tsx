@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
+import { propsInterfacePaginationComponent } from '@/interfaces/pagination';
 import styles from '../../styles/components/pagination.style.module.css';
-
-type urlBase = 'ViewPosts' | 'Posts' | 'save' | 'tested';
-
-interface propsInterface {
-  initial: number;
-  finish: number;
-  selected: number;
-  map: string;
-  agent: string;
-  urlBase: urlBase;
-}
-
-interface interfacePagination {
-  id: number;
-}
 
 const maxValuePagination = 3;
 
-export default function PaginationComponent({ finish, selected, map, agent, initial, urlBase }: propsInterface) {
-  const [pagination, setPagination] = useState<interfacePagination[]>([]);
+export default function PaginationComponent({
+  finish,
+  selected,
+  map,
+  agent,
+  urlBase,
+}: propsInterfacePaginationComponent) {
+  const [pagination, setPagination] = useState<{ id: number }[]>([]);
 
   useEffect(() => {
-    const paginationTemp: interfacePagination[] = [];
+    const paginationTemp: { id: number }[] = [];
     for (let i = 1; i <= finish; i += 1) {
       paginationTemp.push({ id: i });
     }
