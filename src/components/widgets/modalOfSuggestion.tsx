@@ -7,6 +7,7 @@ import Input from '@/base/input';
 import ButtonCloseModal from '@/base/modalCloseButton';
 import TextArea from '@/base/textArea';
 import { modalType } from '../../interfaces/modal';
+import LoaderComponent from '../base/loader';
 
 interface ModalProps {
   title: string;
@@ -38,16 +39,20 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
       let type: modalType = 'error';
       let msg = '';
 
-      try {
-        await api.post('/suggestion', { idPost, email, description });
-        msg = 'Sugestão enviado com sucesso, muito obrigado!';
-        type = 'success';
-      } catch (error) {
-        msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores';
-        type = 'error';
-      }
-      setModalSuggestion(initializeModalSuggestion);
-      setModalMessage({ active: true, message: { type, msg } });
+      api
+        .post('/suggestion', { idPost, email, description })
+        .then(() => {
+          msg = 'Sugestão enviado com sucesso, muito obrigado!';
+          type = 'success';
+        })
+        .catch(() => {
+          msg = 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores';
+          type = 'error';
+        })
+        .finally(() => {
+          setModalSuggestion(initializeModalSuggestion);
+          setModalMessage({ active: true, message: { type, msg } });
+        });
     }
     setLoading(false);
   }
@@ -63,7 +68,7 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
 
         <div className="form">
           <p className="errorMsg">{errorMsg}</p>
-          {loading ? <p>Carregando</p> : null}
+          <LoaderComponent active={loading} />
           <Input name="tip" disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
 
           <Input name="email" type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />

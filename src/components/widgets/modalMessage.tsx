@@ -19,7 +19,7 @@ export default function ModalMessage() {
       </div>
 
       <p>{modalMessage.message.msg}</p>
-      <Button onClick={() => setModalMessage(initializeModalMessage)}>
+      <Button ariaLabel="close" onClick={() => setModalMessage(initializeModalMessage)}>
         <FaTimes />
       </Button>
     </div>

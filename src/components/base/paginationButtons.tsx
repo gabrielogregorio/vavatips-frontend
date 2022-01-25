@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { generateUrl } from '@/helpers/UrlMount';
+import generateUrl from '@/helpers/UrlMount';
 import { PaginationButtonInterface } from '@/interfaces/pagination';
 import styles from '../../styles/components/paginationButtons.style.module.css';
 

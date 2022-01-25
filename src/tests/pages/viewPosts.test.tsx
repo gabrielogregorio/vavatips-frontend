@@ -1,10 +1,9 @@
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import userEvent from '@testing-library/user-event';
 import { mockPosts } from '../mock/mockPosts';
-import HomeScreen from '../../pages/posts';
 import MockApp from '../core/App.Mock';
+import ViewPostsScreen from '../../pages/admin/view-posts';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -47,7 +46,7 @@ describe('<HomeScreen />', () => {
   it('should render home screen', async () => {
     render(
       <MockApp>
-        <HomeScreen />
+        <ViewPostsScreen />
       </MockApp>,
     );
 
@@ -80,73 +79,5 @@ describe('<HomeScreen />', () => {
     expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(mockPosts().posts.length);
     expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(mockPosts().posts.length);
     expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(mockPosts().posts.length);
-  });
-
-  it('should change image on click in buttons of navigation', async () => {
-    render(
-      <MockApp>
-        <HomeScreen />
-      </MockApp>,
-    );
-
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
-
-    // buttons of first post
-    const buttonPrev = screen.getAllByLabelText('Item anterior')[0];
-    const buttonNext = screen.getAllByLabelText('Proximo item')[0];
-
-    // navigation in items the post
-    expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
-    userEvent.click(buttonNext);
-
-    await waitFor(
-      () => {
-        expect(screen.getByAltText(mockPosts().posts[0].imgs[1].description)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-
-    userEvent.click(buttonPrev);
-
-    await waitFor(
-      () => {
-        expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-
-    userEvent.click(buttonNext);
-    userEvent.click(buttonNext);
-
-    await waitFor(
-      () => {
-        expect(screen.getByAltText(mockPosts().posts[0].imgs[2].description)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-
-    userEvent.click(buttonNext);
-
-    await waitFor(
-      () => {
-        expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
-      },
-      { timeout: 3000 },
-    );
-  });
-
-  it('should render with error message', async () => {
-    render(
-      <MockApp>
-        <HomeScreen />
-      </MockApp>,
-    );
-
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
-    expect(screen.getByText('Request failed with status code 500')).toBeInTheDocument();
   });
 });

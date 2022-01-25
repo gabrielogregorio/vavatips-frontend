@@ -7,4 +7,5 @@ export type buttonTypeNormal = {
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   ariaLabel?: string;
+  dataTestid?: string;
 };

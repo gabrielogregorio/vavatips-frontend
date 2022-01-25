@@ -1,4 +1,5 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import AgentScreen from '../../pages/agents';
@@ -14,6 +15,14 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+
+jest.mock(
+  'next/link',
+  () =>
+    function LinkComponent({ children }: any) {
+      return children;
+    },
+);
 
 const handlers = [rest.get(`http://localhost/agents/Ascent32`, async (req, res, ctx) => res(ctx.json(mockAgents())))];
 
@@ -42,5 +51,7 @@ describe('<AgentScreen />', () => {
     expect(screen.getByRole('img', { name: 'Astra' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Raze' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Yoru' })).toBeInTheDocument();
+
+    userEvent.click(screen.getByText(/Yoru/i));
   });
 });

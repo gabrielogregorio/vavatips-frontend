@@ -93,6 +93,7 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
 
             <Button
               ariaLabel="Item anterior"
+              dataTestid="prev-btn"
               className={styles.previus}
               onClick={() => nextImage('prev', post.imgs.length)}>
               <MdArrowBackIosNew />
@@ -100,6 +101,7 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
 
             <Button
               ariaLabel="Proximo item"
+              dataTestid="next-btn"
               className={styles.next}
               onClick={() => nextImage('next', post.imgs.length)}>
               <MdArrowForwardIos />
@@ -129,11 +131,11 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
         {!viewAdmin ? (
           <div className={styles.actions}>
             <Button className={postTested ? styles.actionsActive : ''} onClick={() => handleAddTest()}>
-              A testar
+              Testar
             </Button>
 
             <Button className={postSave ? styles.actionsActive : ''} onClick={() => handleAddSave()}>
-              Salvo
+              Salvar
             </Button>
             <Button onClick={() => handleModalAction()}>Sugerir</Button>
           </div>
