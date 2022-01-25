@@ -17,7 +17,7 @@ import Posts from './postsItem';
 
 interface containerPosts {
   breadcrumbs: { url: string; text: string }[];
-  type: '' | 'save' | 'tested' | 'ViewPosts';
+  type: '' | 'save' | 'tested';
   typeSelected: navbarEnumPublic;
   typeSelectedAdmin: navbarEnum;
   title: string;

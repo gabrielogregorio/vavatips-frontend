@@ -1,5 +1,17 @@
 module.exports = {
-  collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
+  collectCoverageFrom: [
+    '**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/.next/**',
+    '!**/coverage/**',
+    '!**/jest.config.js**',
+    '!**/jest.setup.js**',
+    '!**/next.config.js**',
+    '!**/.eslintrc.js**',
+    '!**/.prettierrc.js**',
+  ],
+  coverageDirectory: '<rootDir>/coverage/',
   moduleNameMapper: {
     '^@/src/(.*)$': '<rootDir>/src/$1',
 

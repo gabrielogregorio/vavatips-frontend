@@ -15,7 +15,7 @@ export interface ModalPropsBase {
   description: string;
   image: string;
   closeModal: React.MouseEventHandler<HTMLButtonElement>;
-  saveModal: (id: string, title: string, image: string) => {};
+  saveModal: (id: string, title: string, image: string) => void;
 }
 
 export type modalMessageTypeContext = {

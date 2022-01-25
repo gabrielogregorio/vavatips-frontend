@@ -8,7 +8,10 @@ const resolveQuery = (urlBase: string, filters: any = []) => {
   const keys: string[] = Object.keys(filters);
   for (let x = 0; x < keys.length; x += 1) {
     const key: string = keys[x];
-    const value: string = filters[key];
+    let value: string = filters[key];
+    if (value === undefined || value === null) {
+      value = '';
+    }
 
     if (x === keys.length - 1) {
       urlFinal = `${urlFinal}${key}=${value}`;

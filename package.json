@@ -32,8 +32,8 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "test:watch": "jest --watchAll --maxWorkers=25%",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:watchAll": "jest --watch  --coverage"
   },
   "eslintConfig": {
     "extends": [

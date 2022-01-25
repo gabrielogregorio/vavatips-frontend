@@ -65,8 +65,8 @@ export default function ModalComponent({
         <div className="form">
           <div className="groupInput">
             <div className="groupInputSelect">
-              <label htmlFor="description">Descrição</label>
-              <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+              <label htmlFor="descriptionNewPost">Descrição post</label>
+              <textarea id="descriptionNewPost" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
           </div>
 
@@ -84,7 +84,7 @@ export default function ModalComponent({
           <div className="modalActions">
             <Button onClick={() => closeModalItem()}>Cancelar</Button>
 
-            <Button onClick={() => saveModal(id, title, image)}>Adicionar</Button>
+            <Button onClick={() => saveModal(id, description, LinkImg)}>Adicionar</Button>
           </div>
         </div>
       </div>

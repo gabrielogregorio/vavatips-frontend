@@ -13,14 +13,13 @@ interface filterUrlInterface {
 }
 
 function getUrl(location: any): filterUrlInterface {
-  const agent: string = new URLSearchParams(location || {}).get('agent') || '';
-  const map: string = new URLSearchParams(location || {}).get('map') || '';
-  const type: string = new URLSearchParams(location || {}).get('type') || '';
-  const page: string = new URLSearchParams(location || {}).get('page') || '1';
+  const { agent, map, type, page = '1' }: any = location;
   return { agent, map, type, page };
 }
 
-export default function usePosts(location: any, typeRequest: any = '') {
+type typeRequestType = '' | 'save' | 'tested';
+
+export default function usePosts(location: any, typeRequest: typeRequestType = '') {
   const { filters, setTags, setFilters } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -50,21 +49,16 @@ export default function usePosts(location: any, typeRequest: any = '') {
       idPosts = getPostsTested();
     }
 
-    const data1 =
-      typeRequest === ''
-        ? {
-            map,
-            page,
-            agent,
-            filters: filters.toString(),
-          }
-        : {
-            idPosts,
-            agent,
-            map,
-            page,
-            filters: filters.toString(),
-          };
+    const data1: any = {
+      map,
+      page,
+      agent,
+      filters: filters.toString(),
+    };
+
+    if (typeRequest !== '') {
+      data1.idPosts = idPosts;
+    }
 
     api
       .get(resolveQuery('/posts', data1))

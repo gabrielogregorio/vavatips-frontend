@@ -51,10 +51,7 @@ export default function Login() {
     }
 
     if (typeAccess === 'register') {
-      api
-        .post('/user', { username, password, code })
-        .then(() => {})
-        .catch(() => {});
+      api.post('/user', { username, password, code }).catch(() => {});
     }
 
     api
@@ -65,20 +62,15 @@ export default function Login() {
         setRedirect(true);
       })
       .catch((error) => {
-        if (error.response?.status === 409) {
+        if (error?.response?.status === 409) {
           setActiveLoader(false);
           setErrorMsg('Esse e-mail já está cadastrado');
-        } else if (error.response?.status === 404) {
+        } else if (error?.response?.status === 404) {
           setActiveLoader(false);
           setErrorMsg('Usuário não cadastrado!');
-        } else if (error.response?.status === 403) {
-          if (error.response?.data?.msg === 'invalid code') {
-            setActiveLoader(false);
-            setErrorMsg('Código de cadastro inválido');
-          } else {
-            setActiveLoader(false);
-            setErrorMsg('Senha inválida!');
-          }
+        } else if (error?.response?.status === 403) {
+          setActiveLoader(false);
+          setErrorMsg('Senha inválida!');
         } else {
           setActiveLoader(false);
           setErrorMsg(`Erro Desconhecido ${error}`);

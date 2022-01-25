@@ -4,6 +4,7 @@ import api from '@/services/api';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/interfaces/navbar';
+import LoaderComponent from '../../components/base/loader';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -12,8 +13,10 @@ const breadcrumbs = [
 
 export default function SuggestionScreen() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function loadSuggestion() {
+    setLoading(true);
     const suggestionResponse = api.get(`/suggestions`);
 
     try {
@@ -22,6 +25,7 @@ export default function SuggestionScreen() {
       setSuggestions(suggestionJson);
       // eslint-disable-next-line no-empty
     } catch (error) {}
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -43,6 +47,8 @@ export default function SuggestionScreen() {
     <div className="container">
       <NavbarComponent selected={navbarEnum.SuggestionScreen} />
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+
+      <LoaderComponent active={loading} />
 
       <div className="sub__container">
         <table>

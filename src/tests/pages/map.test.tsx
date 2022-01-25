@@ -1,19 +1,17 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import MapScreen from '../../pages';
 import { mockMaps } from '../mock/mock';
 
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: {},
-      asPath: '',
-    };
-  },
-}));
+jest.mock(
+  'next/link',
+  () =>
+    function LinkComponent({ children }: any) {
+      return children;
+    },
+);
 
 const handlers = [rest.get(`http://localhost/maps`, async (req, res, ctx) => res(ctx.json(mockMaps())))];
 
@@ -40,5 +38,7 @@ describe('<MapScreen />', () => {
     expect(screen.getByRole('img', { name: 'Split' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Ascent' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Icebox' })).toBeInTheDocument();
+
+    userEvent.click(screen.getByText(/Split/i));
   });
 });
