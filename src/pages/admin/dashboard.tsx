@@ -6,6 +6,7 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import { logout } from '@/services/auth';
 import api from '@/services/api';
 import { navbarEnum } from '@/interfaces/navbar';
+import Router from 'next/router';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'admin' },
@@ -46,6 +47,7 @@ export default function DashboardScreen() {
         if (error?.response?.data?.msg === 'jwt expired') {
           setActiveLoader(false);
           logout();
+          Router.push('/login');
         }
       });
   }, []);

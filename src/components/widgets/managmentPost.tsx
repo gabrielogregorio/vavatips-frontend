@@ -82,7 +82,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           setLoading(false);
         });
     }
-  }, [id]);
+  }, [id, mode]);
 
   async function handleSubmit() {
     setLoading(true);

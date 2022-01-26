@@ -4,9 +4,8 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import MyProfileScreen from '../../pages/admin/profile';
+import { login } from '../../core/services/auth';
 import MockApp from '../core/App.Mock';
-
-// FIXME: test JWT token
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -29,15 +28,18 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://localhost/user`, async (req, res, ctx) =>
-    res(
-      ctx.json({
-        id: 'idUsername',
-        username: 'usernameUsername',
-        image: 'imageUsername',
-      }),
-    ),
-  ),
+  rest.get(`http://localhost/user`, async (req, res, ctx) => {
+    if (req.headers.get('authorization') === 'Bearer VALUE_TOKEN_JWT') {
+      return res(
+        ctx.json({
+          id: 'idUsername',
+          username: 'usernameUsername',
+          image: 'imageUsername',
+        }),
+      );
+    }
+    return res(ctx.status(403));
+  }),
 ];
 
 const server = setupServer(...handlers);
@@ -50,7 +52,12 @@ describe('<MyProfileScreen />', () => {
   afterAll(() => server.close());
 
   it('should render profile screen', async () => {
-    render(<MyProfileScreen />);
+    render(
+      <MockApp>
+        <MyProfileScreen />
+      </MockApp>,
+    );
+    login('VALUE_TOKEN_JWT');
 
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,
@@ -66,7 +73,7 @@ describe('<MyProfileScreen />', () => {
         <MyProfileScreen />
       </MockApp>,
     );
-
+    login('VALUE_TOKEN_JWT');
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,
     });
@@ -83,7 +90,7 @@ describe('<MyProfileScreen />', () => {
         <MyProfileScreen />
       </MockApp>,
     );
-
+    login('VALUE_TOKEN_JWT');
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,
     });

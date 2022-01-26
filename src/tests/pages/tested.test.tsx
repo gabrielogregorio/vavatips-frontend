@@ -2,8 +2,8 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import MockApp from '../core/App.Mock';
-import SaveScreen from '../../pages/save';
 import { mockPosts } from '../mock/mockPosts';
+import TestScreen from '../../pages/tested';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -45,9 +45,9 @@ describe('<SaveScreen />', () => {
     render(
       <MockApp
         localstorage={{
-          SAVE_POSTS: '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
+          TESTED_POSTS: '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
         }}>
-        <SaveScreen />
+        <TestScreen />
       </MockApp>,
     );
 
