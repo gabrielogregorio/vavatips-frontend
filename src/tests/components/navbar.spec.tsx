@@ -5,7 +5,7 @@ import { navbarEnum } from '../../interfaces/navbar';
 
 describe('<NavbarComponent />', () => {
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.Config} />);
+    render(<NavbarComponent selected={navbarEnum.None} />);
 
     expect(screen.getByRole('link', { name: 'VAVATIPS' })).toBeInTheDocument();
 

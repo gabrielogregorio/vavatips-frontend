@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import MockApp from '../core/App.Mock';
 import Login from '../../pages/login';
+import { TOKEN_JWT } from '../../core/services/auth';
 
 const mock = {
   usernameValid: 'my username',
@@ -21,11 +22,13 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
 }));
 
-// FIXME: login screen has bugs in cadaster and login
 const handlers = [
   rest.post(`http://localhost/auth`, async (req, res, ctx) => {
     const { username, password }: any = req.body;
 
+    if (username === 'forceError500') {
+      return res(ctx.status(500));
+    }
     if (username !== mock.usernameValid) {
       return res(ctx.status(404));
     }
@@ -47,10 +50,13 @@ const handlers = [
     const validCode = 'codeCadasterValid';
     const { username, password, code }: any = req.body;
     const codIsInvalid = code !== validCode;
-    const userWithExists = 'userIfExist';
 
     if (username === 'forceError500') {
       return res(ctx.status(500));
+    }
+
+    if (username === 'userIfExists') {
+      return res(ctx.status(409), ctx.json({ error: 'Username já está cadastrado!' }));
     }
 
     if (codIsInvalid) {
@@ -66,10 +72,6 @@ const handlers = [
       password === ''
     ) {
       return res(ctx.status(400));
-    }
-
-    if (userWithExists === username) {
-      return res(ctx.status(409), ctx.json({ error: 'Username já está cadastrado!' }));
     }
 
     if (username === mock.usernameToCreated && password === 'passwordConfirm' && code === 'codCadaster') {
@@ -103,6 +105,8 @@ describe('<Login />', () => {
       </MockApp>,
     );
 
+    expect(localStorage.getItem(TOKEN_JWT)).toBeNull();
+
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameValid);
     userEvent.type(screen.getByLabelText('Senha'), mock.passwordValid);
 
@@ -112,10 +116,11 @@ describe('<Login />', () => {
       timeout: 2000,
     });
 
+    expect(localStorage.getItem(TOKEN_JWT)).toEqual('tokenJwtTest');
+
     expect(Router.push).toHaveBeenCalledWith('/admin/dashboard');
     Router.push('');
   });
-
   it('should block login by username wrong', async () => {
     render(
       <MockApp>
@@ -133,6 +138,25 @@ describe('<Login />', () => {
     });
 
     expect(screen.getByText('Usuário não cadastrado!')).toBeDefined();
+  });
+
+  it('should error 500, forced', async () => {
+    render(
+      <MockApp>
+        <Login />
+      </MockApp>,
+    );
+
+    userEvent.type(screen.getByLabelText('Usuário'), 'forceError500');
+    userEvent.type(screen.getByLabelText('Senha'), 'forceError500');
+
+    userEvent.click(screen.getByRole('button', { name: 'Login' }));
+
+    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
+      timeout: 2000,
+    });
+
+    expect(screen.getByText('Erro Desconhecido')).toBeDefined();
   });
 
   it('should block login by password wrong', async () => {
@@ -173,7 +197,6 @@ describe('<Login />', () => {
     );
 
     expect(Router.push).toHaveBeenCalledWith('');
-
     userEvent.click(screen.getByRole('button', { name: 'Fazer Cadastro' }));
 
     userEvent.type(screen.getByLabelText('Código de cadastro'), 'codeCadasterValid');
@@ -198,6 +221,7 @@ describe('<Login />', () => {
     });
 
     expect(Router.push).toHaveBeenCalledWith('/admin/dashboard');
+    Router.push('');
   });
 
   it('should try cadaster user and return 409, but user exists!', async () => {
@@ -221,7 +245,7 @@ describe('<Login />', () => {
     await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
       timeout: 2000,
     });
-    expect(screen.getByText('Usuário não cadastrado!')).toBeDefined();
+    expect(screen.getByText('Esse e-mail já está cadastrado')).toBeDefined();
   });
 
   it('should cadaster user and return 500', async () => {
@@ -245,7 +269,7 @@ describe('<Login />', () => {
     await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
       timeout: 2000,
     });
-    expect(screen.getByText(/Usuário não cadastrado!/i)).toBeDefined();
+    expect(screen.getByText(/Erro ao cadastrar usuário/i)).toBeDefined();
   });
 
   it('should render cadaster, try cadaster with invalid code', async () => {
@@ -268,30 +292,7 @@ describe('<Login />', () => {
       timeout: 2000,
     });
 
-    expect(screen.getByText('Usuário não cadastrado!')).toBeDefined();
-  });
-
-  it('should render cadaster, try cadaster, but with user invalid', async () => {
-    render(
-      <MockApp>
-        <Login />
-      </MockApp>,
-    );
-
-    userEvent.click(screen.getByRole('button', { name: 'Fazer Cadastro' }));
-
-    userEvent.type(screen.getByLabelText('Código de cadastro'), 'codeCadasterValid');
-    userEvent.type(screen.getByLabelText('Usuário'), mock.userNameToCreatedWithNotExists);
-    userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirm');
-
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
-
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
-
-    expect(screen.getByText('Usuário não cadastrado!')).toBeDefined();
+    expect(screen.getByText('Erro ao cadastrar usuário')).toBeDefined();
   });
 
   it('should render error if password dont match', async () => {

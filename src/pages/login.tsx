@@ -35,51 +35,54 @@ export default function Login() {
     return true;
   }
 
-  function submitData(): boolean {
+  async function submitData(): Promise<any> {
     setActiveLoader(true);
 
     if (!username || !password || (!password2 && typeAccess === 'register')) {
-      setActiveLoader(false);
       setErrorMsg('Você precisa preencher todos os campos');
+      setActiveLoader(false);
       return false;
     }
 
     if (password !== password2 && typeAccess === 'register') {
-      setActiveLoader(false);
       setErrorMsg('As senhas não combinam!');
+      setActiveLoader(false);
       return false;
     }
 
     if (typeAccess === 'register') {
-      api.post('/user', { username, password, code }).catch(() => {});
-    }
-
-    api
-      .post('/auth', { username, password })
-      .then((token) => {
-        login(token.data.token, token.data.id);
-        setActiveLoader(false);
-        setRedirect(true);
-      })
-      .catch((error) => {
+      try {
+        await api.post('/user', { username, password, code });
+      } catch (error) {
         if (error?.response?.status === 409) {
-          setActiveLoader(false);
           setErrorMsg('Esse e-mail já está cadastrado');
-        } else if (error?.response?.status === 404) {
           setActiveLoader(false);
-          setErrorMsg('Usuário não cadastrado!');
-        } else if (error?.response?.status === 403) {
-          setActiveLoader(false);
-          setErrorMsg('Senha inválida!');
-        } else {
-          setActiveLoader(false);
-          setErrorMsg(`Erro Desconhecido ${error}`);
+          return false;
         }
-      })
-      .finally(() => {
+        setErrorMsg('Erro ao cadastrar usuário');
         setActiveLoader(false);
         return true;
-      });
+      }
+    }
+
+    try {
+      const token = await api.post('/auth', { username, password });
+      login(token.data.token);
+      setActiveLoader(false);
+      setRedirect(true);
+    } catch (error) {
+      if (error?.response?.status === 404) {
+        setActiveLoader(false);
+        setErrorMsg('Usuário não cadastrado!');
+      } else if (error?.response?.status === 403) {
+        setActiveLoader(false);
+        setErrorMsg('Senha inválida!');
+      } else {
+        setActiveLoader(false);
+        setErrorMsg(`Erro Desconhecido`);
+      }
+    }
+
     return true;
   }
 

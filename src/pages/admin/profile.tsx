@@ -9,6 +9,7 @@ import Button from '@/base/button';
 import { logout } from '@/services/auth';
 import api from '@/services/api';
 import { navbarEnum } from '@/interfaces/navbar';
+import Router from 'next/router';
 
 const breadcrumbs = [
   { url: '/Dashboard', text: 'administrativo' },
@@ -35,6 +36,11 @@ export default function MyProfileScreen() {
   useEffect(() => {
     loadProfile();
   }, []);
+
+  function handleLogout() {
+    logout();
+    Router.push('/login');
+  }
   return (
     <div className="container">
       <NavbarComponent selected={navbarEnum.Profile} />
@@ -71,7 +77,7 @@ export default function MyProfileScreen() {
 
               <div className="groupInput">
                 <div className="groupInputSelect">
-                  <Button onClick={() => logout()} className="btn-color-secondary">
+                  <Button onClick={() => handleLogout()} className="btn-color-secondary">
                     logoff
                   </Button>
                 </div>

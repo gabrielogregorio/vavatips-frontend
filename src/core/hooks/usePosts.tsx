@@ -59,7 +59,6 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     if (typeRequest !== '') {
       data1.idPosts = idPosts;
     }
-
     api
       .get(resolveQuery('/posts', data1))
       .then((res) => {

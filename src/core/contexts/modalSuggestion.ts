@@ -5,7 +5,7 @@ export const initializeModalSuggestion: modalContextTypeSuggestion = { active: f
 
 export const ContextModalSuggestion = createContext<modalSuggestionInterface>({
   modalSuggestion: initializeModalSuggestion,
-  setModalSuggestion: (state) => new Error(`do you need use context Modal Suggestions  ${state}`),
+  setModalSuggestion: null,
 });
 
 export const useModalContext = () => useContext(ContextModalSuggestion);

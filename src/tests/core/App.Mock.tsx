@@ -4,8 +4,14 @@ import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
+import { LocalStorageMock } from '@react-mock/localstorage';
 
-function MockApp({ children }: any) {
+interface mockAppType {
+  children: any;
+  localstorage?: any;
+}
+
+function MockApp({ children, localstorage = {} }: mockAppType) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     active: false,
   });
@@ -17,11 +23,13 @@ function MockApp({ children }: any) {
   const [filters, setFilters] = useState<string[]>([]);
 
   return (
-    <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
-      <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-        <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>{children}</ContextFilters.Provider>
-      </ContextModalMessage.Provider>
-    </ContextModalSuggestion.Provider>
+    <LocalStorageMock items={localstorage}>
+      <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
+        <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
+          <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>{children}</ContextFilters.Provider>
+        </ContextModalMessage.Provider>
+      </ContextModalSuggestion.Provider>
+    </LocalStorageMock>
   );
 }
 
