@@ -24,7 +24,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.post(`http://localhost/postLoadFile`, async (req, res, ctx) =>
+  rest.post(`http://127.0.0.1:3333/postLoadFile`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json({ filename: 'https://gcloud.com/123abc' })),
   ),
 ];
@@ -127,7 +127,7 @@ describe('<ModalComponent />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'undefined/images/https://gcloud.com/123abc');
+    expect(screen.getByRole('img')).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://gcloud.com/123abc');
 
     expect(saveModal).toHaveBeenCalledWith('123', 'how test description', 'https://gcloud.com/123abc');
   });
@@ -148,7 +148,7 @@ describe('<ModalComponent />', () => {
     );
 
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição post');
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'undefined/images/https://uploads/file1');
+    expect(screen.getByRole('img')).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://uploads/file1');
     expect(inputDescription.value).toEqual('myDescription');
 
     userEvent.type(screen.getByLabelText('Descrição post'), ' how contatenate description');

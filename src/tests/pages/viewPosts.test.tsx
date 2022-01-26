@@ -19,7 +19,7 @@ jest.mock('next/router', () => ({
 let count = 0;
 
 const handlers = [
-  rest.get(`http://localhost/posts`, async (req, res, ctx) => {
+  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
     if (count === 2) {
       return res(ctx.status(500));
     }

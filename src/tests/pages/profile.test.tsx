@@ -28,7 +28,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://localhost/user`, async (req, res, ctx) => {
+  rest.get(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
     if (req.headers.get('authorization') === 'Bearer VALUE_TOKEN_JWT') {
       return res(
         ctx.json({

@@ -24,7 +24,7 @@ jest.mock(
 let count = 0;
 
 const server = setupServer(
-  rest.get('http://localhost/maps', (req, res, ctx) => {
+  rest.get('http://127.0.0.1:3333/maps', (req, res, ctx) => {
     if (count === 1) {
       return res(ctx.status(500));
     }

@@ -29,7 +29,7 @@ jest.mock(
 let tryNumbers = 0;
 
 const handlers = [
-  rest.get(`http://localhost/dashboard`, async (req, res, ctx) =>
+  rest.get(`http://127.0.0.1:3333/dashboard`, async (req, res, ctx) =>
     res(
       ctx.json({
         countAll: 134,
@@ -43,7 +43,7 @@ const handlers = [
     ),
   ),
 
-  rest.get(`http://localhost/user`, async (req, res, ctx) => {
+  rest.get(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
     if (tryNumbers === 1) {
       return res(ctx.status(403), ctx.json({ msg: 'jwt expired' }));
     }

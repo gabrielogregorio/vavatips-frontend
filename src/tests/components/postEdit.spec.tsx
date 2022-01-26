@@ -2,6 +2,7 @@ import { render, screen, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
+import Router from 'next/router';
 import MockApp from '../core/App.Mock';
 import EditPostScreen from '../../pages/admin/post-edit';
 
@@ -9,10 +10,17 @@ jest.mock('next/router', () => ({
   push: jest.fn(),
   useRouter() {
     return {
-      route: '',
-      pathname: '/posts',
-      query: { map: 'Ascent', agent: 'Sova' },
+      route: '/admin/post-edit',
+      pathname: '',
+      query: { id: '617d44c81bc4243f9b2d5a67' },
       asPath: '',
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
     };
   },
 }));
@@ -53,7 +61,40 @@ const postBase = {
   ],
 };
 
-const handlers = [rest.get(`http://localhost/post/`, async (req, res, ctx) => res(ctx.json(postBase)))];
+const handlers = [
+  rest.get(`http://127.0.0.1:3333/post/:postId`, async (req, res, ctx) => {
+    if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
+      return res(ctx.json(postBase));
+    }
+    return res(ctx.status(404));
+  }),
+
+  rest.put(`http://127.0.0.1:3333/post/:postId`, async (req, res, ctx) => {
+    const { title, description, tags, imgs }: any = req.body;
+    const postIsValid =
+      title === `${postBase.title} concatenate new title` &&
+      description === postBase.description &&
+      `${tags}` === `${postBase.tags}` &&
+      `${imgs}` === `${postBase.imgs}`;
+
+    if (req.params.postId !== '617d44c81bc4243f9b2d5a67') {
+      return res(ctx.status(404));
+    }
+
+    if (postIsValid) {
+      return res(ctx.status(200));
+    }
+
+    return res(ctx.status(500));
+  }),
+
+  rest.delete('http://127.0.0.1:3333/post/:postId', async (req, res, ctx) => {
+    if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
+      return res(ctx.status(200));
+    }
+    return res(ctx.status(404));
+  }),
+];
 
 const server = setupServer(...handlers);
 
@@ -89,14 +130,80 @@ describe('<EditPostScreen />', () => {
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'undefined/images/image_111');
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_111');
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/image_222');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_222');
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
-    expect(screen.getAllByRole('img')[2]).toHaveAttribute('src', 'undefined/images/image_333');
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_333');
+  });
+
+  it('should render edit post screen and update post', async () => {
+    render(
+      <MockApp>
+        <EditPostScreen />
+      </MockApp>,
+    );
+
+    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
+      timeout: 2000,
+    });
+
+    expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
+
+    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+
+    const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
+    const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
+
+    expect(inputTitle.value).toEqual('title managment post');
+    expect(inputDescription.value).toEqual('description1');
+
+    userEvent.type(inputTitle, ' concatenate new title');
+
+    expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_111');
+
+    expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_222');
+
+    expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_333');
+
+    userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
+
+    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
+      timeout: 2000,
+    });
+
+    expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
+    Router.push('');
+  });
+
+  it('should delete post', async () => {
+    render(
+      <MockApp>
+        <EditPostScreen />
+      </MockApp>,
+    );
+
+    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
+      timeout: 2000,
+    });
+
+    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
+
+    expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
+
+    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
+      timeout: 2000,
+    });
   });
 });
