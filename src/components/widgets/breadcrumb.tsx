@@ -11,7 +11,7 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
     const lastItem = breadcrumbs.length - 1;
 
     return breadcrumbs.map((breadcrumb, index) => (
-      <div key={`${breadcrumb.text}`}>
+      <div key={`${breadcrumb.text} `}>
         {lastItem === index ? (
           <p>{breadcrumb.text}</p>
         ) : (

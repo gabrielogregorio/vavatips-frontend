@@ -13,7 +13,7 @@ jest.mock(
     },
 );
 
-const handlers = [rest.get(`http://localhost/maps`, async (req, res, ctx) => res(ctx.json(mockMaps())))];
+const handlers = [rest.get(`http://127.0.0.1:3333/maps`, async (req, res, ctx) => res(ctx.json(mockMaps())))];
 
 const server = setupServer(...handlers);
 

@@ -28,7 +28,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.post(`http://localhost/suggestion`, async (req, res, ctx) => {
+  rest.post(`http://127.0.0.1:3333/suggestion`, async (req, res, ctx) => {
     const { idPost, email, description }: any = req.body;
 
     const requestIsCorrectly =

@@ -24,7 +24,9 @@ jest.mock(
     },
 );
 
-const handlers = [rest.get(`http://localhost/agents/Ascent32`, async (req, res, ctx) => res(ctx.json(mockAgents())))];
+const handlers = [
+  rest.get(`http://127.0.0.1:3333/agents/Ascent32`, async (req, res, ctx) => res(ctx.json(mockAgents()))),
+];
 
 const server = setupServer(...handlers);
 

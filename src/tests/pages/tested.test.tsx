@@ -17,7 +17,7 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  rest.get(`http://localhost/posts`, async (req, res, ctx) => {
+  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
     const idPosts = req.url.searchParams.get('idPosts');
     const idPostsList = JSON.parse(idPosts);
     const filteredPosts = mockPosts().posts.filter((post) => idPostsList.includes(post.id));

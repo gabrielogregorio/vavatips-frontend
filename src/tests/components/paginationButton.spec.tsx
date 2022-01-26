@@ -8,7 +8,7 @@ describe('PaginationButtons', () => {
     expect(screen.getByRole('link', { name: '7' })).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: '7' })).toHaveAttribute('class', 'active');
-    expect(screen.getByRole('link', { name: '7' })).toHaveAttribute('href', '/items?map=Ascent&agent=Jett&page=7');
+    expect(screen.getByRole('link', { name: '7' })).toHaveAttribute('href', '/items?page=7&map=Ascent&agent=Jett');
   });
 
   it('should render not active', () => {
@@ -17,7 +17,7 @@ describe('PaginationButtons', () => {
     expect(screen.getByRole('link', { name: '3' })).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: '3' })).not.toHaveAttribute('class', 'active');
-    expect(screen.getByRole('link', { name: '3' })).toHaveAttribute('href', '/posts?map=Bind&agent=Raze&page=3');
+    expect(screen.getByRole('link', { name: '3' })).toHaveAttribute('href', '/posts?page=3&map=Bind&agent=Raze');
   });
 
   it('should render empty button', () => {

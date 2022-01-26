@@ -23,7 +23,7 @@ jest.mock(
 );
 
 const server = setupServer(
-  rest.get('http://localhost/agents/mapSelectedWithSuccess', (req, res, ctx) =>
+  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithSuccess', (req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
@@ -36,7 +36,7 @@ const server = setupServer(
     ),
   ),
 
-  rest.get('http://localhost/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
+  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
 );
 
 function ComponentAgentTest({ typeMap }: any) {
