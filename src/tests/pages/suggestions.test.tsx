@@ -25,7 +25,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://localhost/suggestions`, async (req, res, ctx) =>
+  rest.get(`http://127.0.0.1:3333/suggestions`, async (req, res, ctx) =>
     res(
       ctx.json([
         {

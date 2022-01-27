@@ -1,13 +1,19 @@
 import Link from 'next/link';
-import generateUrl from '@/helpers/UrlMount';
 import { PaginationButtonInterface } from '@/interfaces/pagination';
 import styles from '../../styles/components/paginationButtons.style.module.css';
+import resolveQuery from '../../core/helpers/resolveQuery';
 
-export default function PaginationButtons({ numberOfPage, active, urlBase, map, agent }: PaginationButtonInterface) {
+export default function PaginationButtons({
+  numberOfPage: page = 1,
+  active,
+  urlBase,
+  map,
+  agent,
+}: PaginationButtonInterface) {
   return (
     <li className={styles.selectedButton}>
-      <Link aria-label={`Navega para a página ${numberOfPage}`} href={generateUrl(numberOfPage, urlBase, map, agent)}>
-        <a className={`${active ? styles.active : ''}`}>{numberOfPage}</a>
+      <Link aria-label={`Navega para a página ${page}`} href={resolveQuery(urlBase, { page, map, agent })}>
+        <a className={`${active ? styles.active : ''}`}>{page}</a>
       </Link>
     </li>
   );

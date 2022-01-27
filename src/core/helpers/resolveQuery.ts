@@ -19,7 +19,6 @@ const resolveQuery = (urlBase: string, filters: any = []) => {
       urlFinal = `${urlFinal}${key}=${value}&`;
     }
   }
-
   return `${urlFinal}`;
 };
 export default resolveQuery;

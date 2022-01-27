@@ -23,7 +23,7 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  rest.post(`http://localhost/auth`, async (req, res, ctx) => {
+  rest.post(`http://127.0.0.1:3333/auth`, async (req, res, ctx) => {
     const { username, password }: any = req.body;
 
     if (username === 'forceError500') {
@@ -46,7 +46,7 @@ const handlers = [
     );
   }),
 
-  rest.post(`http://localhost/user`, async (req, res, ctx) => {
+  rest.post(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
     const validCode = 'codeCadasterValid';
     const { username, password, code }: any = req.body;
     const codIsInvalid = code !== validCode;

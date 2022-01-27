@@ -46,7 +46,7 @@ const post = {
 };
 
 const handlers = [
-  rest.get(`http://localhost/posts`, async (req, res, ctx) => {
+  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
     if (count === 2) {
       return res(ctx.status(500));
     }
@@ -119,32 +119,32 @@ describe('<PostCard />', () => {
     );
 
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image111.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image111.png');
 
     userEvent.click(screen.getByTestId('prev-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image555.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image555.png');
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image222.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image222.png');
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image333.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image333.png');
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image444.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image444.png');
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image555.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image555.png');
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'undefined/images/https://image111.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image111.png');
   });
 
   it('should test view admin', async () => {
