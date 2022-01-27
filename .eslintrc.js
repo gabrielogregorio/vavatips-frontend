@@ -15,6 +15,7 @@ module.exports = {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['off'],
     'jsx-a11y/label-has-associated-control': 'off',
+    'react/jsx-no-bind': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
