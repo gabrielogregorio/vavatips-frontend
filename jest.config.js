@@ -47,5 +47,5 @@ module.exports = {
   },
   transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
 
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', 'dotenv/config'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js', '<rootDir>/.jest/setEnvVars.js'],
 };

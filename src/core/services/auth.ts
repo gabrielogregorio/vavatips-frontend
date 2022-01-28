@@ -4,7 +4,7 @@ export const isAuthenticated = () =>
   localStorage.getItem(TOKEN_JWT) !== null && localStorage.getItem(TOKEN_JWT) !== undefined;
 export const getToken = () => {
   if (typeof window !== 'undefined') {
-    localStorage.getItem(TOKEN_JWT);
+    return localStorage.getItem(TOKEN_JWT);
   }
   return '';
 };
