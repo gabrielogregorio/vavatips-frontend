@@ -6,7 +6,14 @@ describe('should test input component', () => {
   it('should render input', () => {
     const fn = jest.fn();
     render(
-      <Input name="description" text="Description from input" value="" type="text" disabled={false} setValue={fn} />,
+      <Input
+        name="description"
+        text="Description from input"
+        value=""
+        type="text"
+        disabled={false}
+        setValue={() => fn()}
+      />,
     );
 
     expect(screen.getByPlaceholderText(/Description from input/i)).toBeInTheDocument();
@@ -15,7 +22,14 @@ describe('should test input component', () => {
   it('should call handleChange function on each key pressed', () => {
     const fn = jest.fn();
     render(
-      <Input name="description" text="Description from input" value="" type="text" disabled={false} setValue={fn} />,
+      <Input
+        name="description"
+        text="Description from input"
+        value=""
+        type="text"
+        disabled={false}
+        setValue={() => fn()}
+      />,
     );
 
     const input: any = screen.getByPlaceholderText(/Description from input/i);
