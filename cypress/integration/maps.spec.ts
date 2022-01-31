@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+export {};
+
 describe('<Maps />', () => {
   beforeEach(() => {
     cy.intercept('/maps', (req) =>
@@ -28,22 +31,22 @@ describe('<Maps />', () => {
       }),
     );
 
-    cy.intercept('/images/1633276293553-6e67c4f0-b931-438b-856f-db6d4e7f5e8a', {
+    cy.intercept('GET', '**/images/1633276293553-6e67c4f0-b931-438b-856f-db6d4e7f5e8a', {
       fixture: '1633276293553-6e67c4f0-b931-438b-856f-db6d4e7f5e8a',
     });
-    cy.intercept('/images/1633276257045-227ae204-eace-4ecb-8a2c-41d891d9f358', {
+    cy.intercept('GET', '**/images/1633276257045-227ae204-eace-4ecb-8a2c-41d891d9f358', {
       fixture: '1633276257045-227ae204-eace-4ecb-8a2c-41d891d9f358',
     });
-    cy.intercept('/images/1633629560818-c444af87-6b6d-4965-b15e-f789e249a296', {
+    cy.intercept('GET', '**/images/1633629560818-c444af87-6b6d-4965-b15e-f789e249a296', {
       fixture: '1633629560818-c444af87-6b6d-4965-b15e-f789e249a296',
     });
-    cy.intercept('/images/1633629626605-5a1af8c8-53a8-465f-9e27-73d1081ba295', {
+    cy.intercept('GET', '**/images/1633629626605-5a1af8c8-53a8-465f-9e27-73d1081ba295', {
       fixture: '1633629626605-5a1af8c8-53a8-465f-9e27-73d1081ba295',
     });
-    cy.intercept('/images/1633629640926-253d1fbb-346b-4257-aa4f-cd7098901512', {
+    cy.intercept('GET', '**/images/1633629640926-253d1fbb-346b-4257-aa4f-cd7098901512', {
       fixture: '1633629640926-253d1fbb-346b-4257-aa4f-cd7098901512',
     });
-    cy.intercept('/images/1633629660300-b1f53bb9-6660-44f3-9f13-42226705db77', {
+    cy.intercept('GET', '**/images/1633629660300-b1f53bb9-6660-44f3-9f13-42226705db77', {
       fixture: '1633629660300-b1f53bb9-6660-44f3-9f13-42226705db77',
     });
     cy.intercept('/images/1633629710516-758b3624-000e-4110-88f6-0cf13775a45a', {
