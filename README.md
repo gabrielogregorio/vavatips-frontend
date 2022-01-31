@@ -35,20 +35,21 @@ This project was developed using NextJs, Typescript and React Testing Library. B
 2. With the backend working, create an .env file, based on the .env.example file.
 
 ## Contributing with project
+
 Read [Contributing.md](CONTRIBUTING.md)
 
 ## Available scripts
-
 
 ```bash
 yarn dev
 ```
 
-Runs the app in the development mode.\
+Runs the app in the development mode using react testing library.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ```bash
 yarn test
+yarn e2e
 ```
 
 Launches the test runner in the interactive watch mode.\
