@@ -7,7 +7,7 @@
 }
 
 .paginationItems {
-  border: 2px solid var(--primary);
+  border: 2px solid var(--btnActionsSave);
   padding: 0.5rem 1rem;
   border-radius: 10px;
   display: flex;
@@ -20,7 +20,7 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: var(--primary);
+  color: var(--btnActionsSave);
   border-radius: 0.2rem;
   font-size: 0.9rem;
   margin: 0 0.5rem;
@@ -30,8 +30,8 @@
 }
 
 .paginationItems a:hover {
-  background-color: var(--primary);
-  color: var(--background-primary);
+  background-color: var(--btnActionsSave);
+  color: var(--text-color-link);
 }
 
 .paginationItems a.navigationDisable {
@@ -49,5 +49,5 @@
   display: inline;
   font-size: 0.9rem;
   margin: 0 0.5rem;
-  color: var(--primary);
+  color: var(--btnActionsSave);
 }

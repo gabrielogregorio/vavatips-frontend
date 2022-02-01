@@ -3,7 +3,7 @@ import FooterComponent from '@/layout/footer';
 
 describe('<FooterComponent />', () => {
   it('should render footer with primary color', () => {
-    render(<FooterComponent color="primary" />);
+    render(<FooterComponent />);
     expect(screen.getByRole('heading', { name: 'Sobre' })).toBeInTheDocument();
   });
 });

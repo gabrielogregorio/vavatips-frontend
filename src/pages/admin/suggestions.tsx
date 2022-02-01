@@ -5,10 +5,11 @@ import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/interfaces/navbar';
 import LoaderComponent from '../../components/base/loader';
+import LayoutComponent from '../../components/layout/layout';
 
 const breadcrumbs = [
-  { url: '/Dashboard', text: 'administrativo' },
-  { url: '/Dashboard', text: 'sugestões' },
+  { url: navbarEnum.Dashboard, text: 'admin' },
+  { url: navbarEnum.Dashboard, text: 'sugestões' },
 ];
 
 export default function SuggestionScreen() {
@@ -44,27 +45,29 @@ export default function SuggestionScreen() {
   }
 
   return (
-    <div className="container">
-      <NavbarComponent selected={navbarEnum.SuggestionScreen} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <LayoutComponent>
+      <div className="container">
+        <NavbarComponent selected={navbarEnum.SuggestionScreen} />
+        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <LoaderComponent active={loading} />
+        <LoaderComponent active={loading} />
 
-      <div className="sub__container">
-        <table>
-          <thead>
-            <tr>
-              <th>Post</th>
-              <th>Email</th>
-              <th>Descrição</th>
-              <th>Status</th>
-            </tr>
-          </thead>
+        <div className="sub__container">
+          <table>
+            <thead>
+              <tr>
+                <th>Post</th>
+                <th>Email</th>
+                <th>Descrição</th>
+                <th>Status</th>
+              </tr>
+            </thead>
 
-          <tbody>{renderSuggestions()}</tbody>
-        </table>
+            <tbody>{renderSuggestions()}</tbody>
+          </table>
+        </div>
+        <FooterComponent />
       </div>
-      <FooterComponent color="secondary" />
-    </div>
+    </LayoutComponent>
   );
 }

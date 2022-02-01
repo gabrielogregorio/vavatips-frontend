@@ -9,6 +9,7 @@ import LINKS from '@/data/links';
 import useMaps from '@/hooks/useMaps';
 import Title from '@/base/title';
 import { navbarEnumPublic } from '@/interfaces/navbar';
+import LayoutComponent from '../components/layout/layout';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
@@ -33,18 +34,20 @@ export default function MapScreen() {
   }
 
   return (
-    <div className="container">
-      <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
-      <BreadcrumbComponent breadcrumbs={breadcrumbs} />
+    <LayoutComponent>
+      <div className="container">
+        <NavbarComponentPublic selected={navbarEnumPublic.Inicio} />
+        <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
-      <div className="sub__container">
-        <Title>Escolha um mapa ai parça </Title>
-        <ErrorMsg msg={errorMsg} />
-        {activeLoader ? <p>Buscando Mapas...</p> : ''}
-        <LoaderComponent active={activeLoader} />
-        <div className="gridFull">{renderMap()}</div>
+        <div className="sub__container">
+          <Title>Escolha um mapa ai parça </Title>
+          <ErrorMsg msg={errorMsg} />
+          {activeLoader ? <p>Buscando Mapas...</p> : ''}
+          <LoaderComponent active={activeLoader} />
+          <div className="gridFull">{renderMap()}</div>
+        </div>
+        <FooterComponent />
       </div>
-      <FooterComponent color="primary" />
-    </div>
+    </LayoutComponent>
   );
 }

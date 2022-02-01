@@ -1,5 +1,4 @@
 .selectedButton .active {
-    color: var(--background-primary);
+    color: var(--text-color-link);
     background-color: var(--primary);
   }
-  

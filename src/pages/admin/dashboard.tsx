@@ -7,10 +7,11 @@ import { logout } from '@/services/auth';
 import api from '@/services/api';
 import { navbarEnum } from '@/interfaces/navbar';
 import Router from 'next/router';
+import LayoutComponent from '../../components/layout/layout';
 
 const breadcrumbs = [
-  { url: '/Dashboard', text: 'admin' },
-  { url: '/Dashboard', text: 'admin/dashboard' },
+  { url: navbarEnum.Dashboard, text: 'admin' },
+  { url: navbarEnum.Dashboard, text: 'dashboard' },
 ];
 
 export default function DashboardScreen() {
@@ -53,26 +54,28 @@ export default function DashboardScreen() {
   }, []);
 
   return (
-    <div className="container">
-      <NavbarComponent selected={navbarEnum.Dashboard} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <LayoutComponent>
+      <div className="container">
+        <NavbarComponent selected={navbarEnum.Dashboard} />
+        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="sub__container">
-        <LoaderComponent active={activeLoader} />
-        <p>{errorMsg}</p>
+        <div className="sub__container">
+          <LoaderComponent active={activeLoader} />
+          <p>{errorMsg}</p>
 
-        <p>Bem vindo(a) {username}</p>
+          <p>Bem vindo(a) {username}</p>
 
-        <p>Consultas: {countViewsAll}</p>
-        <p>Usuários: {countViewsIps}</p>
+          <p>Consultas: {countViewsAll}</p>
+          <p>Usuários: {countViewsIps}</p>
 
-        <p>agentes: {countAlAgents}</p>
-        <p>mapas: {countAlMaps}</p>
-        <p>posts: {countAllPosts}</p>
-        <p>sugestões: {countAllSuggestions}</p>
-        <p>administradores: {countAllUsers}</p>
+          <p>agentes: {countAlAgents}</p>
+          <p>mapas: {countAlMaps}</p>
+          <p>posts: {countAllPosts}</p>
+          <p>sugestões: {countAllSuggestions}</p>
+          <p>administradores: {countAllUsers}</p>
+        </div>
+        <FooterComponent />
       </div>
-      <FooterComponent color="secondary" />
-    </div>
+    </LayoutComponent>
   );
 }

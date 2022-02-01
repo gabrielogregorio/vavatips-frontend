@@ -10,6 +10,8 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
+    const color = admin ? styles.breadcrumbs__secondary : styles.breadcrumbs__primary;
+
     return breadcrumbs.map((breadcrumb, index) => (
       <div key={`${breadcrumb.text} `}>
         {lastItem === index ? (
@@ -17,19 +19,9 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
         ) : (
           <>
             <Link href={breadcrumb.url}>
-              <a
-                style={{
-                  color: admin ? 'var(--secondary)' : 'var(--primary)',
-                }}>
-                {breadcrumb.text}
-              </a>
+              <a className={color}>{breadcrumb.text}</a>
             </Link>
-            <span
-              style={{
-                color: admin ? 'var(--secondary)' : 'var(--primary)',
-              }}>
-              &gt;
-            </span>
+            <span className={color}>&gt;</span>
           </>
         )}
       </div>

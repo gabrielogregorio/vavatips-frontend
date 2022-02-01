@@ -83,7 +83,7 @@
 }
 
 .posts > .imgAndDescription > .imgPost button {
-  color: var(--background-secondary);
+  color: var(--text-color);
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -123,11 +123,11 @@
   width: 100%;
   padding: 10px;
   border-radius: 0 0 10px 10px;
-  background: var(--text-color-bold);
+  background: var(--background-description);
 }
 
 .posts > .imgAndDescription > .imgPost > .descriptionImage > p {
-  color: var(--background-secondary);
+  color: var(--text-color);
   font-size: 1rem;
 }
 /* Imagens com Descrição */
@@ -171,47 +171,32 @@
 }
 
 .actions button:nth-child(1) {
-  border: 2px solid var(--secondary);
-  color: var(--secondary);
-}
-
-.actions button:nth-child(1):hover {
-  /* color: var(--background-secondary);
-  background: var(--secondary-small); */
+  border: 2px solid var(--btnActionsTested);
+  color: var(--btnActionsTested);
 }
 
 .actions button:nth-child(1).actionsActive {
-  color: var(--background-secondary);
-  background: var(--secondary);
+  color: var(--text-color);
+  background: var(--btnActionsTested);
 }
 
 
 .actions button:nth-child(2) {
-  border: 2px solid var(--primary);
-  color: var(--primary);
-}
-
-.actions button:nth-child(2):hover {
-  /* color: var(--background-secondary);
-  background: var(--primary-small); */
+  border: 2px solid var(--btnActionsSave);
+  color: var(--btnActionsSave);
 }
 
 .actions button:nth-child(2).actionsActive {
-  color: var(--background-secondary);
-  background: var(--primary);
+  color: var(--text-color);
+  background: var(--btnActionsSave);
 }
 
 .actions button:nth-child(3) {
-  border: 2px solid var(--purple);
-  color: var(--purple);
-}
-
-.actions button:nth-child(3):hover {
-  /* color: var(--background-secondary);
-  background: var(--purple-small); */
+  border: 2px solid var(--btnActionsSuggestion);
+  color: var(--btnActionsSuggestion);
 }
 
 .actions button:nth-child(3).actionsActive{
-  color: var(--background-secondary);
-  background: var(--purple);
+  color: var(--text-color);
+  background: var(--btnActionsSuggestion);
 }

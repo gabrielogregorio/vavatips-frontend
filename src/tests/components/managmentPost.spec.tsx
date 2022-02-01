@@ -70,7 +70,7 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: '/dashboard', text: 'administrativo' },
+            { url: '/dashboard', text: 'admin' },
             { url: '/dashboard', text: 'editar' },
           ]}
           mode="edit"
@@ -106,7 +106,7 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: '/dashboard', text: 'administrativo' },
+            { url: '/dashboard', text: 'admin' },
             { url: '/dashboard', text: 'editar' },
           ]}
           mode="edit"
@@ -166,7 +166,7 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: '/dashboard', text: 'administrativo' },
+            { url: '/dashboard', text: 'admin' },
             { url: '/dashboard', text: 'editar' },
           ]}
           mode="edit"

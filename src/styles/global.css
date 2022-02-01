@@ -1,23 +1,52 @@
+
 :root {
   --max-width: 800px;
-
-  --background-primary: #efefef;
-  --background-secondary: #FFFFFF;
-
+  --background-primary: #22272E;
+  --background-secondary: #2D333B;
+  --text-color-link: #dadada;
   --black-transparent: #000000aa;
-
-  --text-color-bold: #000000;
-  --text-color-bold-transparent: #00000022;
-  --text-color-normal: #3E3E3E;
-
-  --primary: #cb4343;
-  --secondary: #438ACB;
+  --text-color: #dedede;
+  --btnActionsTested: #5e9ad3;
+  --btnActionsSave: #d85f5f;
+  --btnActionsSuggestion: #a75fd1;
+  --background-description: #111111;
+  --text-color-bold: #ddd;
+  --text-color-bold-transparent: #ffffff22;
+  --text-color-normal: #dedede;
+  --primary: #2D333B;
+  --secondary: #5e9ad3;
+  --link-normal:#5e9ad3;
+  --link-active:#999999;
   --purple: #CB43BD;
-
   --primary-small: #d4a4a4;
   --secondary-small: #a6b8ca;
   --purple-small: #cc9ac7;
 }
+
+.light {
+  --max-width: 800px;
+  --background-primary: #efefef;
+  --background-secondary: #FFFFFF;
+  --text-color-link: #efefef;
+  --black-transparent: #000000aa;
+  --text-color: #FFFFFF;
+  --btnActionsTested: #438ACB;
+  --btnActionsSave: #cb4343;
+  --btnActionsSuggestion: #CB43BD;
+  --background-description: #000000;
+  --text-color-bold: #000000;
+  --text-color-bold-transparent: #00000022;
+  --text-color-normal: #3E3E3E;
+  --primary: #cb4343;
+  --secondary: #438ACB;
+  --link-normal:#438ACB;
+  --link-active:#cb4343;
+  --purple: #CB43BD;
+  --primary-small: #d4a4a4;
+  --secondary-small: #a6b8ca;
+  --purple-small: #cc9ac7;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -52,6 +81,7 @@ html, body {
   padding: 0;
   width: 100%;
   margin: 0;
+  background: var(--background-primary);
 }
 
 .elastic {
@@ -69,7 +99,6 @@ html, body {
   margin: 2rem 0;
   padding: 2%;
   box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-  transition: 2s;
 }
 
 .container .sub__container .errorMsg {
@@ -204,7 +233,7 @@ html, body {
 
 .form .instructionImage button i {
   font-size: 2.5rem;
-  color: var(--background-secondary);
+  color: var(--text-color);
 }
 
 .form .instructionImage .btn-bottom {
@@ -218,7 +247,7 @@ html, body {
 }
 .form .instructionImage .btn-bottom svg,
 .form .instructionImage .btn-top svg {
-  color: var(--background-secondary);
+  color: var(--text-color);
   font-size: 1.5rem;
   font-weight: 500;
 }
@@ -272,15 +301,15 @@ hr {
 }
 
 .form .groupInputSelect .btn-primary {
-  border: 2px solid var(--primary);
-  background-color: var(--primary);
-  color: var(--background-secondary);
+  border: 2px solid var(--btnActionsSave);
+  background-color: var(--btnActionsSave);
+  color: var(--text-color);
 }
 
 .form .groupInputSelect .btn-secondary {
   border: 2px solid var(--secondary);
   background-color: var(--secondary);
-  color: var(--background-secondary);
+  color: var(--text-color);
 }
 
 
@@ -359,7 +388,7 @@ hr {
 
 .btn .btnActive {
   background-color: var(--secondary);
-  color: var(--background-primary);
+  color: var(--text-color-link);
 }
 
 .btn-base button {
@@ -369,7 +398,7 @@ hr {
   padding: 5px 10px;
   margin: 0 5px;
   border-radius: 20px;
-  color: var(--background-primary);
+  color: var(--text-color-link);
 }
 
 .containerPost {
@@ -434,6 +463,14 @@ hr {
   margin: 0 auto;
 }
 
+.modalItem.primary {
+  background: var(--primary);
+}
+
+.modalItem.secondary {
+  background: var(--secondary)
+}
+
 .modalTitle {
   display: flex;
   justify-content: center;
@@ -469,7 +506,7 @@ hr {
   padding: 8px 15px;
   font-size:0.9rem;
   border-radius: 20px;
-  color: var(--background-secondary);
+  color: var(--text-color);
   cursor: pointer;
 }
 
