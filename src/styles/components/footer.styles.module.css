@@ -3,6 +3,14 @@
   padding: 2rem 1rem;
 }
 
+.containerFooter.primary {
+  background: var(--primary);
+}
+
+.containerFooter.secondary {
+  background: 'var(--secondary)'
+}
+
 .footer {
   margin: 0 auto;
   width: 100%;
@@ -13,7 +21,7 @@
 
 .footer .footerLinks > h3, .footer .about > h3 {
   font-size: 1.1rem;
-  color: var(--background-primary);
+  color: var(--text-color-link);
   font-weight: 700;
   padding-bottom: 1rem;
   text-align: center;
@@ -28,7 +36,7 @@
 }
 
 .footer .footerLinks  > a{
-  color: var(--background-primary);
+  color: var(--text-color-link);
   text-decoration: none;
 }
 
@@ -42,12 +50,12 @@
   text-align: left;
   font-size:0.9rem;
   font-weight: 400;
-  color: var(--background-secondary);
+  color: var(--text-color);
   text-align: center;
 }
 
 .footer .about .boilerplate span {
-  color: var(--background-secondary);
+  color: var(--text-color);
   font-weight: 400;
   font-size:0.9rem;
 }
@@ -55,7 +63,7 @@
 .footer .about .boilerplate a {
   font-size:0.9rem;
   font-weight: 600;
-  color: var(--background-primary);
+  color: var(--text-color-link);
   text-decoration: none;
 }
 

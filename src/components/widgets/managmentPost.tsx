@@ -369,7 +369,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           </div>
         </div>
       </div>
-      <FooterComponent color="secondary" />
+      <FooterComponent />
     </div>
   );
 }

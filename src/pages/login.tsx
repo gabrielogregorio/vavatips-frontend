@@ -11,6 +11,7 @@ import LINKS from '@/data/links';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import { navbarEnumPublic } from '@/interfaces/navbar';
+import LayoutComponent from '../components/layout/layout';
 
 type accessType = 'login' | 'register';
 
@@ -93,53 +94,55 @@ export default function Login() {
   }, [redirect]);
 
   return (
-    <div className="container">
-      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <LayoutComponent>
+      <div className="container">
+        <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-      <div className="sub__container">
-        <div className="form">
-          <Title>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </Title>
+        <div className="sub__container">
+          <div className="form">
+            <Title>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </Title>
 
-          <LoaderComponent active={activeLoader} />
-          <p className="errorMsg">{errorMsg}</p>
+            <LoaderComponent active={activeLoader} />
+            <p className="errorMsg">{errorMsg}</p>
 
-          {typeAccess === 'register' ? (
-            <Input name="keyAccess" type="password" text="Código de cadastro" value={code} setValue={setCode} />
-          ) : null}
+            {typeAccess === 'register' ? (
+              <Input name="keyAccess" type="password" text="Código de cadastro" value={code} setValue={setCode} />
+            ) : null}
 
-          <Input name="username" type="text" text="Usuário" value={username} setValue={setUsername} />
-          <Input name="password" type="password" text="Senha" value={password} setValue={setPassword} />
+            <Input name="username" type="text" text="Usuário" value={username} setValue={setUsername} />
+            <Input name="password" type="password" text="Senha" value={password} setValue={setPassword} />
 
-          {typeAccess === 'register' ? (
-            <Input
-              name="confirmPassword"
-              type="password"
-              text="Confirme uma senha"
-              value={password2}
-              setValue={setPassword2}
-            />
-          ) : null}
+            {typeAccess === 'register' ? (
+              <Input
+                name="confirmPassword"
+                type="password"
+                text="Confirme uma senha"
+                value={password2}
+                setValue={setPassword2}
+              />
+            ) : null}
 
-          <div className="groupInput">
-            <div className="groupInputSelect">
-              <Button className="btn-color-secondary" onClick={() => toggleAccess()}>
-                {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
-              </Button>
+            <div className="groupInput">
+              <div className="groupInputSelect">
+                <Button className="btn-color-secondary" onClick={() => toggleAccess()}>
+                  {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
+                </Button>
+              </div>
             </div>
-          </div>
 
-          <div className="groupInput">
-            <div className="groupInputSelect">
-              <Button className="btn-primary" onClick={() => submitData()}>
-                {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
-              </Button>
+            <div className="groupInput">
+              <div className="groupInputSelect">
+                <Button className="btn-primary" onClick={() => submitData()}>
+                  {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <FooterComponent color="primary" />
-    </div>
+        <FooterComponent />
+      </div>
+    </LayoutComponent>
   );
 }

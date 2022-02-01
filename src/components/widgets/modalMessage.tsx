@@ -7,12 +7,10 @@ import styles from '../../styles/components/modal.module.css';
 export default function ModalMessage() {
   const { modalMessage, setModalMessage } = useModalMessage();
 
+  const classNameError = modalMessage.message.type === 'error' ? styles.primary : styles.secondary;
+
   return modalMessage.active ? (
-    <div
-      className={styles.modalItem}
-      style={{
-        background: modalMessage.message.type === 'error' ? 'var(--primary)' : 'var(--secondary)',
-      }}>
+    <div className={`${styles.modalItem} ${classNameError}`}>
       <div className={styles.notfyIcon}>
         {modalMessage.message.type === 'success' ? <AiOutlineCheckCircle /> : null}
         {modalMessage.message.type === 'error' ? <AiOutlineExclamationCircle /> : null}

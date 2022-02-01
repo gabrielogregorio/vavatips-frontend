@@ -10,6 +10,7 @@ import useAgents from '@/hooks/useAgents';
 import Title from '@/base/title';
 import LINKS from '@/data/links';
 import { navbarEnumPublic } from '@/interfaces/navbar';
+import LayoutComponent from '../components/layout/layout';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
@@ -35,18 +36,20 @@ export default function AgentScreen() {
   }
 
   return (
-    <div className="container">
-      <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
-      <BreadcrumbComponent breadcrumbs={breadcrumbs} />
+    <LayoutComponent>
+      <div className="container">
+        <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
+        <BreadcrumbComponent breadcrumbs={breadcrumbs} />
 
-      <div className="sub__container">
-        <Title>Escolha um Agente</Title>
-        <LoaderComponent active={activeLoader} />
-        {activeLoader ? <p>Buscando Agentes...</p> : ''}
-        <ErrorMsg msg={errorMsg} />
-        <div className="gridFull">{renderAgent()}</div>
+        <div className="sub__container">
+          <Title>Escolha um Agente</Title>
+          <LoaderComponent active={activeLoader} />
+          {activeLoader ? <p>Buscando Agentes...</p> : ''}
+          <ErrorMsg msg={errorMsg} />
+          <div className="gridFull">{renderAgent()}</div>
+        </div>
+        <FooterComponent />
       </div>
-      <FooterComponent color="primary" />
-    </div>
+    </LayoutComponent>
   );
 }

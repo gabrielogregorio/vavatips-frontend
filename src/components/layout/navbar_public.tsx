@@ -1,8 +1,19 @@
 import Link from 'next/link';
 import { navbarEnumPublic, NavbarPropsPublicComponent } from '@/interfaces/navbar';
+import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
 import styles from '../../styles/components/navbar.public.module.css';
+import { useTheme } from '../../core/contexts/theme';
+import Button from '../base/button';
 
 export default function NavbarComponentPublic({ selected }: NavbarPropsPublicComponent) {
+  const { theme, setTheme } = useTheme();
+
+  const handleNavbar = () => {
+    setTheme(theme ? '' : 'light');
+  };
+
+  const iconTheme = theme === '' ? <MdOutlineLightMode /> : <MdOutlineNightlight />;
+
   return (
     <nav className={styles.nav}>
       <ul>
@@ -25,6 +36,10 @@ export default function NavbarComponentPublic({ selected }: NavbarPropsPublicCom
         <Link href="/tested">
           <a className={selected === navbarEnumPublic.Tested ? styles.navActive : ''}>testados</a>
         </Link>
+
+        <Button onClick={() => handleNavbar()} className={styles.theme}>
+          {iconTheme}
+        </Button>
       </ul>
     </nav>
   );

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { navbarEnum, NavbarPropsNavbarBasic } from '@/interfaces/navbar';
-import styles from '../../styles/components/navbar.module.css';
+import styles from '../../styles/components/navbar.public.module.css';
 
 export default function NavbarComponent({ selected }: NavbarPropsNavbarBasic) {
   return (

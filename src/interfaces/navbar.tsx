@@ -9,13 +9,12 @@ export enum navbarEnumPublic {
 }
 
 export enum navbarEnum {
-  Profile = '/Profile',
-  PostCreate = '/PostCreate',
-  ViewPosts = '/ViewPosts',
+  Profile = '/admin/profile',
+  PostCreate = '/admin/post-create',
+  ViewPosts = '/admin/view-posts',
   EditScreen = '#',
-  ReportScreen = '/Reports',
-  SuggestionScreen = '/Suggestions',
-  Dashboard = '/Dashboard',
+  SuggestionScreen = '/admin/suggestions',
+  Dashboard = '/admin/dashboard',
   None = '',
 }
 

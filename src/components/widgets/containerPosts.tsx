@@ -65,7 +65,7 @@ export default function ContainerPosts({ breadcrumbs, type, typeSelected, title,
         />
       </div>
 
-      <FooterComponent color="primary" />
+      <FooterComponent />
     </div>
   );
 }

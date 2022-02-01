@@ -1,13 +1,11 @@
-import { footerPropsComponent } from '@/interfaces/footer';
 import styles from '../../styles/components/footer.styles.module.css';
 
-export default function FooterComponent({ color }: footerPropsComponent) {
-  const background = color === 'primary' ? 'var(--primary)' : 'var(--secondary)';
+export default function FooterComponent() {
   return (
     <>
       <div className="elastic" />
 
-      <div className={styles.containerFooter} style={{ background }}>
+      <div className={`${styles.containerFooter} ${styles.primary}`}>
         <div className={styles.footer}>
           <div className={styles.footerLinks}>
             <h3>Contribua</h3>
