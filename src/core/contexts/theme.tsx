@@ -12,10 +12,11 @@ const ContextTheme = createContext<{ theme: string; setTheme: (event: any) => vo
 export const useTheme = () => useContext(ContextTheme);
 
 export default function ContextThemeProvider({ children }: any) {
-  const [theme, setTheme] = useState<string>(getTheme());
-
+  const [theme, setTheme] = useState<string>('dark');
   useEffect(() => {
-    changeTheme(theme);
+    if (theme) {
+      changeTheme(theme);
+    }
   }, [theme]);
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
