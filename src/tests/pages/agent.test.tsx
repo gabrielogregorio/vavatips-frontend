@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import AgentScreen from '../../pages/agents';
+import MockApp from '../core/App.Mock';
 import { mockAgents } from '../mock/mock';
 
 jest.mock('next/router', () => ({
@@ -38,7 +39,11 @@ describe('<AgentScreen />', () => {
   afterAll(() => server.close());
 
   it('should render agent screen', async () => {
-    render(<AgentScreen />);
+    render(
+      <MockApp>
+        <AgentScreen />
+      </MockApp>,
+    );
 
     await waitForElementToBeRemoved(screen.getByText(/Buscando Agentes/i), {
       timeout: 2000,

@@ -17,7 +17,7 @@ const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 export default function AgentScreen() {
   const item = useRouter();
 
-  const { mapSelected, agentsApi, activeLoader, errorMsg } = useAgents(item);
+  const { mapSelected, agentsApi, isLoading, error } = useAgents(item);
 
   function renderAgent() {
     if (agentsApi.length === 0) {
@@ -43,9 +43,9 @@ export default function AgentScreen() {
 
         <div className="sub__container">
           <Title>Escolha um Agente</Title>
-          <LoaderComponent active={activeLoader} />
-          {activeLoader ? <p>Buscando Agentes...</p> : ''}
-          <ErrorMsg msg={errorMsg} />
+          <LoaderComponent active={isLoading} />
+          {isLoading ? <p>Buscando Agentes...</p> : ''}
+          <ErrorMsg msg={error} />
           <div className="gridFull">{renderAgent()}</div>
         </div>
         <FooterComponent />

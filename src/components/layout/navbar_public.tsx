@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { navbarEnumPublic, NavbarPropsPublicComponent } from '@/interfaces/navbar';
 import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
 import styles from '../../styles/components/navbar.public.module.css';
-import { useTheme } from '../../core/contexts/theme';
 import Button from '../base/button';
+import { useTheme } from '../../core/contexts/theme';
 
 export default function NavbarComponentPublic({ selected }: NavbarPropsPublicComponent) {
   const { theme, setTheme } = useTheme();

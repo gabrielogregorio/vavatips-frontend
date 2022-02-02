@@ -8,7 +8,10 @@ import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import ContextThemeProvider from '../core/contexts/theme';
+
+const queryClient = new QueryClient();
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
@@ -29,15 +32,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <noscript>You need to enable JavaScript to run this app.</noscript>
       </Header>
 
-      <ContextThemeProvider>
-        <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
-          <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-            <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
-              <Component {...pageProps} />
-            </ContextFilters.Provider>
-          </ContextModalMessage.Provider>
-        </ContextModalSuggestion.Provider>
-      </ContextThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ContextThemeProvider>
+          <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
+            <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
+              <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
+                <Component {...pageProps} />
+              </ContextFilters.Provider>
+            </ContextModalMessage.Provider>
+          </ContextModalSuggestion.Provider>
+        </ContextThemeProvider>
+      </QueryClientProvider>
     </>
   );
 }

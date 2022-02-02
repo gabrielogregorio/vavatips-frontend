@@ -5,11 +5,22 @@ import { ContextModalMessage } from '@/contexts/modalMessage';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { LocalStorageMock } from '@react-mock/localstorage';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import ContextThemeProvider from '../../core/contexts/theme';
 
 interface mockAppType {
   children: any;
   localstorage?: any;
 }
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 function MockApp({ children, localstorage = {} }: mockAppType) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
@@ -23,13 +34,19 @@ function MockApp({ children, localstorage = {} }: mockAppType) {
   const [filters, setFilters] = useState<string[]>([]);
 
   return (
-    <LocalStorageMock items={localstorage}>
-      <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
-        <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-          <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>{children}</ContextFilters.Provider>
-        </ContextModalMessage.Provider>
-      </ContextModalSuggestion.Provider>
-    </LocalStorageMock>
+    <QueryClientProvider client={queryClient}>
+      <ContextThemeProvider>
+        <LocalStorageMock items={localstorage}>
+          <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
+            <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
+              <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
+                {children}
+              </ContextFilters.Provider>
+            </ContextModalMessage.Provider>
+          </ContextModalSuggestion.Provider>
+        </LocalStorageMock>
+      </ContextThemeProvider>
+    </QueryClientProvider>
   );
 }
 

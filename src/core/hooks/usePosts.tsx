@@ -3,6 +3,7 @@ import api from '@/services/api';
 import { useFilters } from '@/contexts/filters';
 import resolveQuery from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
+import { useQuery } from 'react-query';
 import { PropsPostInterface } from '../../interfaces/posts';
 
 interface filterUrlInterface {
@@ -22,10 +23,9 @@ type typeRequestType = '' | 'save' | 'tested';
 export default function usePosts(location: any, typeRequest: typeRequestType = '') {
   const { filters, setTags, setFilters } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
-  const [activeLoader, setActiveLoader] = useState<boolean>(true);
-  const [errorMsg, setErrorMsg] = useState<string>('');
   const [finishPage, setFinishPage] = useState<number>(1);
   const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
+  const [dataRequest, setDataRequest] = useState<any>({});
 
   useEffect(
     () => () => {
@@ -35,10 +35,20 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     [setFilters, setTags],
   );
 
-  useEffect(() => {
-    setActiveLoader(true);
-    setErrorMsg('');
+  const { isLoading, error, data } = useQuery(`/posts${JSON.stringify(dataRequest)}`, () =>
+    api.get(resolveQuery('/posts', dataRequest)).then((data) => data.data),
+  );
 
+  useEffect(() => {
+    if (data?.posts) {
+      const postsFiltered = data.posts;
+      setFinishPage(data.count);
+      setTags(data.tags);
+      setPosts(postsFiltered);
+    }
+  }, [data?.count, data?.posts, data?.tags, setTags]);
+
+  useEffect(() => {
     const { agent, map, type, page } = getUrl(location?.query);
     setQueryUrl({ agent, map, type, page });
 
@@ -59,20 +69,10 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     if (typeRequest !== '') {
       data1.idPosts = idPosts;
     }
-    api
-      .get(resolveQuery('/posts', data1))
-      .then((res) => {
-        const postsFiltered = res.data.posts;
-        setFinishPage(res.data.count);
-        setTags(res.data.tags);
-        setPosts(postsFiltered);
-        setActiveLoader(false);
-      })
-      .catch((error) => {
-        setErrorMsg(error.message);
-        setActiveLoader(false);
-      });
+
+    setDataRequest(data1);
   }, [location?.query?.map, location?.query?.page, location?.query?.agent, filters, setTags, setFilters]);
 
-  return { posts, activeLoader, errorMsg, finishPage, queryUrl };
+  // @ts-ignore
+  return { posts, activeLoader: isLoading, errorMsg: error?.message || '', finishPage, queryUrl };
 }
