@@ -2,6 +2,7 @@ import { screen, render, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import usePosts from '../../core/hooks/usePosts';
+import MockApp from './App.Mock';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -78,19 +79,35 @@ function ComponentPosts({ urlBase, typeRequest }: any) {
 }
 
 function ComponentPostsWithSuccess() {
-  return <ComponentPosts urlBase typeRequest="" />;
+  return (
+    <MockApp>
+      <ComponentPosts urlBase typeRequest="" />
+    </MockApp>
+  );
 }
 
 function ComponentPostsNoSendParamsUrlBase() {
-  return <ComponentPosts urlBase={false} />;
+  return (
+    <MockApp>
+      <ComponentPosts urlBase={false} />
+    </MockApp>
+  );
 }
 
 function ComponentPostsWithSave() {
-  return <ComponentPosts urlBase typeRequest="save" />;
+  return (
+    <MockApp>
+      <ComponentPosts urlBase typeRequest="save" />
+    </MockApp>
+  );
 }
 
 function ComponentPostsWithTested() {
-  return <ComponentPosts urlBase typeRequest="tested" />;
+  return (
+    <MockApp>
+      <ComponentPosts urlBase typeRequest="tested" />
+    </MockApp>
+  );
 }
 
 describe('<ComponentPosts />', () => {
@@ -195,12 +212,16 @@ describe('<ComponentPosts />', () => {
   });
 
   // it('should test error', async () => {
-  //   render(<ComponentPosts />);
+  //   render(
+  //     <MockApp>
+  //       <ComponentPosts />
+  //     </MockApp>,
+  //   );
 
   //   await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
   //     timeout: 2000,
   //   });
 
-  //   expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
+  //   expect(screen.queryByText(/Error/i)).toBeInTheDocument();
   // });
 });

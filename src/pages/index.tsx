@@ -14,7 +14,7 @@ import LayoutComponent from '../components/layout/layout';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
 export default function MapScreen() {
-  const { mapsApi, activeLoader, errorMsg } = useMaps();
+  const { mapsApi, isLoading, error } = useMaps();
 
   function renderMap() {
     if (mapsApi.length === 0) {
@@ -41,9 +41,9 @@ export default function MapScreen() {
 
         <div className="sub__container">
           <Title>Escolha um mapa ai parça </Title>
-          <ErrorMsg msg={errorMsg} />
-          {activeLoader ? <p>Buscando Mapas...</p> : ''}
-          <LoaderComponent active={activeLoader} />
+          <ErrorMsg msg={error} />
+          {isLoading ? <p>Buscando Mapas...</p> : ''}
+          <LoaderComponent active={isLoading} />
           <div className="gridFull">{renderMap()}</div>
         </div>
         <FooterComponent />

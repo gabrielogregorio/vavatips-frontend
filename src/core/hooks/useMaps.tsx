@@ -1,23 +1,14 @@
 import { useEffect, useState } from 'react';
 import api from '@/services/api';
+import { useQuery } from 'react-query';
 
 export default function useMaps() {
   const [mapsApi, setMapsApi] = useState<string[]>([]);
-  const [activeLoader, setActiveLoader] = useState<boolean>(true);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  const { isLoading, error, data } = useQuery('/maps', () => api.get('/maps').then((maps) => maps.data));
 
   useEffect(() => {
-    api
-      .get('/maps')
-      .then((maps) => {
-        setMapsApi(maps.data.maps);
-        setActiveLoader(false);
-      })
-      .catch(() => {
-        setErrorMsg('Erro desconhecido no servidor');
-        setActiveLoader(false);
-      });
-  }, []);
+    setMapsApi(data?.maps || []);
+  }, [`${data}`]);
 
-  return { mapsApi, activeLoader, errorMsg };
+  return { mapsApi, isLoading, error: error ? 'Erro desconhecido no servidor' : '' };
 }

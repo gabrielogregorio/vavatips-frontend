@@ -3,6 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import DashboardScreen from '../../pages/admin/dashboard';
+import MockApp from '../core/App.Mock';
 
 // FIXME: test JWT token
 
@@ -69,7 +70,11 @@ describe('<DashboardScreen />', () => {
   afterAll(() => server.close());
 
   it('should render dashboard', async () => {
-    render(<DashboardScreen />);
+    render(
+      <MockApp>
+        <DashboardScreen />
+      </MockApp>,
+    );
 
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,
@@ -86,7 +91,11 @@ describe('<DashboardScreen />', () => {
   });
 
   it('should force error jwt', async () => {
-    render(<DashboardScreen />);
+    render(
+      <MockApp>
+        <DashboardScreen />
+      </MockApp>,
+    );
 
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,

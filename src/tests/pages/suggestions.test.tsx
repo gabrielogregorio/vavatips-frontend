@@ -2,6 +2,7 @@ import { screen, render, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import SuggestionScreen from '../../pages/admin/suggestions';
+import MockApp from '../core/App.Mock';
 
 // FIXME: test JWT token
 
@@ -63,7 +64,11 @@ describe('<SuggestionScreen />', () => {
   afterAll(() => server.close());
 
   it('should render suggestion screen', async () => {
-    render(<SuggestionScreen />);
+    render(
+      <MockApp>
+        <SuggestionScreen />
+      </MockApp>,
+    );
 
     await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
       timeout: 2000,

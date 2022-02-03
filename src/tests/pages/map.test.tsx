@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import MapScreen from '../../pages';
+import MockApp from '../core/App.Mock';
 import { mockMaps } from '../mock/mock';
 
 jest.mock(
@@ -25,7 +26,11 @@ describe('<MapScreen />', () => {
   afterAll(() => server.close());
 
   it('should render maps screen', async () => {
-    render(<MapScreen />);
+    render(
+      <MockApp>
+        <MapScreen />
+      </MockApp>,
+    );
 
     await waitForElementToBeRemoved(screen.getByText(/Buscando Mapas/i), {
       timeout: 2000,
