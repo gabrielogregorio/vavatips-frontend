@@ -42,7 +42,7 @@ const server = setupServer(
 );
 
 function ComponentPosts({ urlBase, typeRequest }: any) {
-  const { posts, activeLoader, errorMsg, finishPage, queryUrl } = usePosts(
+  const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(
     {
       query: {
         agent: 'AgentItem',
@@ -65,7 +65,7 @@ function ComponentPosts({ urlBase, typeRequest }: any) {
 
   return (
     <div>
-      {activeLoader ? <h3>Loading...</h3> : null}
+      {isLoading ? <h3>Loading...</h3> : null}
       {errorMsg !== '' ? <h3>{errorMsg}</h3> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>

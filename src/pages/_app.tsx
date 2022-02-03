@@ -11,7 +11,13 @@ import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interface
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ContextThemeProvider from '../core/contexts/theme';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({

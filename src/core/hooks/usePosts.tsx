@@ -35,9 +35,17 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     [setFilters, setTags],
   );
 
-  const { isLoading, error, data } = useQuery(`/posts${JSON.stringify(dataRequest)}`, () =>
-    api.get(resolveQuery('/posts', dataRequest)).then((data) => data.data),
+  const { isLoading, error, data, refetch } = useQuery(
+    ['/posts', resolveQuery(dataRequest)],
+    () => api.get(resolveQuery('/posts', dataRequest)).then((data) => data.data),
+    { enabled: false }, // send with manual update
   );
+
+  useEffect(() => {
+    if (JSON.stringify(dataRequest) !== '{}') {
+      refetch();
+    }
+  }, [dataRequest]);
 
   useEffect(() => {
     if (data?.posts) {
@@ -49,30 +57,32 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
   }, [data?.count, data?.posts, data?.tags, setTags]);
 
   useEffect(() => {
-    const { agent, map, type, page } = getUrl(location?.query);
-    setQueryUrl({ agent, map, type, page });
+    if (location.isReady) {
+      const { agent, map, type, page } = getUrl(location?.query);
+      setQueryUrl({ agent, map, type, page });
 
-    let idPosts = '[]';
-    if (typeRequest === 'save') {
-      idPosts = getPostsSave();
-    } else if (typeRequest === 'tested') {
-      idPosts = getPostsTested();
+      let idPosts = '[]';
+      if (typeRequest === 'save') {
+        idPosts = getPostsSave();
+      } else if (typeRequest === 'tested') {
+        idPosts = getPostsTested();
+      }
+
+      const data1: any = {
+        map,
+        page,
+        agent,
+        filters: filters.toString(),
+      };
+
+      if (typeRequest !== '') {
+        data1.idPosts = idPosts;
+      }
+
+      setDataRequest(data1);
     }
-
-    const data1: any = {
-      map,
-      page,
-      agent,
-      filters: filters.toString(),
-    };
-
-    if (typeRequest !== '') {
-      data1.idPosts = idPosts;
-    }
-
-    setDataRequest(data1);
-  }, [location?.query?.map, location?.query?.page, location?.query?.agent, filters, setTags, setFilters]);
+  }, [location?.query, typeRequest, filters, setTags, setFilters]);
 
   // @ts-ignore
-  return { posts, activeLoader: isLoading, errorMsg: error?.message || '', finishPage, queryUrl };
+  return { posts, isLoading, errorMsg: error?.message || '', finishPage, queryUrl };
 }

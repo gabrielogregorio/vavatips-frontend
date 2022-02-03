@@ -6,7 +6,7 @@ export default function useAgents(item: any) {
   const mapSelected = item?.query;
   const [agentsApi, setAgentsApi] = useState<string[]>([]);
 
-  const { isLoading, error, data } = useQuery(`/agents/${mapSelected?.map}`, () =>
+  const { isLoading, error, data } = useQuery(['/agents/', mapSelected?.map], () =>
     api.get(`/agents/${mapSelected?.map}`).then((agents) => agents.data),
   );
 

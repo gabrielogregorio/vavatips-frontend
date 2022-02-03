@@ -26,7 +26,7 @@ interface containerPosts {
 export default function ContainerPosts({ breadcrumbs, type, typeSelected, title, typeSelectedAdmin }: containerPosts) {
   const location = useRouter();
 
-  const { posts, activeLoader, errorMsg, finishPage, queryUrl } = usePosts(location, type);
+  const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(location, type);
   const numberSelected = parseInt(queryUrl?.page || '1', 10);
 
   return (
@@ -49,11 +49,11 @@ export default function ContainerPosts({ breadcrumbs, type, typeSelected, title,
         <div className="containerPost">
           <TagsFixFilters queryUrl={queryUrl} />
           <PostTags />
-          <LoaderComponent active={activeLoader} />
+          <LoaderComponent active={isLoading} />
           <Posts posts={posts} />
         </div>
 
-        {activeLoader ? <p>Carregando posts...</p> : null}
+        {isLoading ? <p>Carregando posts...</p> : null}
 
         <PaginationComponent
           urlBase={type === '' ? 'posts' : type}
