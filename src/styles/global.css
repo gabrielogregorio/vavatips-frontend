@@ -14,8 +14,8 @@
   --text-color-bold-transparent: #ffffff22;
   --text-color-normal: #dedede;
   --primary: #2D333B;
-  --secondary: #5e9ad3;
-  --link-normal:#5e9ad3;
+  --secondary: #3386d3;
+  --link-normal:#237fd4;
   --link-active:#999999;
   --purple: #CB43BD;
   --primary-small: #d4a4a4;
@@ -57,6 +57,15 @@
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 400;
+}
+
+/* Remove highlight on click in buttons, inputs in mobile with cursor pointer*/
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 body {
@@ -191,7 +200,6 @@ html, body {
   outline: none;
   padding: 5px;
   border: none;
-  cursor: pointer;
   margin-left: 5px;
 }
 
@@ -228,7 +236,6 @@ html, body {
   border: 0;
   outline: 0;
   padding: 5px;
-  cursor: pointer;
 }
 
 .form .instructionImage button i {
@@ -275,7 +282,6 @@ hr {
 .form .groupInputSelect button {
   width: 100%;
   padding: 5px;
-  cursor: pointer;
   border-radius: 10px;
 }
 
@@ -283,7 +289,6 @@ hr {
   background-color: transparent;
   border: none;
   outline: none;
-  cursor: pointer;
   color: var(--primary);
 }
 
@@ -376,7 +381,6 @@ hr {
 }
 
 .btn button {
-  cursor: pointer;
   background: transparent;
   border: 1px solid var(--secondary);
   padding: 5px 10px;
@@ -384,6 +388,7 @@ hr {
   border-radius: 20px;
   color: var(--secondary);
   margin: 5px;
+  cursor: pointer;
 }
 
 .btn .btnActive {
@@ -392,7 +397,6 @@ hr {
 }
 
 .btn-base button {
-  cursor: pointer;
   background: var(--primary);
   border: 1px solid var(--primary);
   padding: 5px 10px;
@@ -431,6 +435,7 @@ hr {
   padding: 0 2%;
   justify-content: center;
   width: 100%;
+
 }
 
 .containerPost > h3 {
@@ -479,6 +484,7 @@ hr {
 
 .modalTitle h1 {
   flex: 1;
+  color: var(--text-color-bold);
 }
 
 .modalTitle button {
@@ -486,12 +492,15 @@ hr {
   border: 0;
   outline: none;
   padding: 10px;
-  cursor: pointer;
 }
 
 .modalTitle button i {
   color: var(--primary);
   font-size: 1rem;
+}
+
+.btn-close-modal {
+  color: var(--text-color-bold);
 }
 
 .modalActions {
@@ -507,11 +516,10 @@ hr {
   font-size:0.9rem;
   border-radius: 20px;
   color: var(--text-color);
-  cursor: pointer;
 }
 
 .modalActions button:nth-child(1) {
-  background: #969696;
+  background: var(--btnActionsSave)
 }
 
 .modalActions button:nth-child(2) {

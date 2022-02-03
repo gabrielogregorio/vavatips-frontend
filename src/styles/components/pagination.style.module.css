@@ -24,7 +24,6 @@
   border-radius: 0.2rem;
   font-size: 0.9rem;
   margin: 0 0.5rem;
-  cursor: pointer;
   transition: 0.2s;
   text-decoration: none;
 }
@@ -36,7 +35,6 @@
 
 .paginationItems a.navigationDisable {
   color: var(--text-color-normal);
-  cursor: inherit;
 }
 
 .paginationItems a.navigationDisable:hover {

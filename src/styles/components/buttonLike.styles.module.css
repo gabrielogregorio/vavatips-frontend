@@ -6,7 +6,6 @@ button {
   background-color: transparent;
   padding: 5px 0;
   outline: none;
-  cursor: pointer;
   transition: 0.1s ease-in;
 }
 
