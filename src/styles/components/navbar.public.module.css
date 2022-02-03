@@ -10,7 +10,6 @@
   background-color: transparent;
   color: white;
   border: 1px solid transparent;
-  cursor: pointer;
   padding: .5rem;
 }
 
@@ -38,6 +37,7 @@
   padding: 10px 10px;
   color: var(--text-color);
   transition: 0.2s ease-in-out;
+  font-size: 1.2rem;
 }
 
 .nav a {
@@ -53,4 +53,6 @@
   .nav ul {
     flex-direction: row;
   }
+
+
 }
