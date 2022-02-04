@@ -7,6 +7,7 @@ import ModalMessage from '../../components/widgets/modalMessage';
 import ModalOfSuggestion from '../../components/widgets/modalOfSuggestion';
 import { useModalContext } from '../../core/contexts/modalSuggestion';
 import MockApp from '../core/App.Mock';
+import { URL_POST_SUGGESTION } from '../mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -28,7 +29,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.post(`http://127.0.0.1:3333/suggestion`, async (req, res, ctx) => {
+  rest.post(URL_POST_SUGGESTION, async (req, res, ctx) => {
     const { idPost, email, description }: any = req.body;
 
     const requestIsCorrectly =

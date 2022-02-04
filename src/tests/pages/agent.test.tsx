@@ -5,6 +5,7 @@ import { setupServer } from 'msw/node';
 import AgentScreen from '../../pages/agents';
 import MockApp from '../core/App.Mock';
 import { mockAgents } from '../mock/mock';
+import { URL_GET_AGENTS_BY_MAP_ASCENT } from '../mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -25,9 +26,7 @@ jest.mock(
     },
 );
 
-const handlers = [
-  rest.get(`http://127.0.0.1:3333/agents/Ascent32`, async (req, res, ctx) => res(ctx.json(mockAgents()))),
-];
+const handlers = [rest.get(URL_GET_AGENTS_BY_MAP_ASCENT, async (req, res, ctx) => res(ctx.json(mockAgents())))];
 
 const server = setupServer(...handlers);
 

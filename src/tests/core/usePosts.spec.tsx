@@ -2,6 +2,8 @@ import { screen, render, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import usePosts from '../../core/hooks/usePosts';
+import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 import MockApp from './App.Mock';
 
 jest.mock('next/router', () => ({
@@ -24,7 +26,7 @@ jest.mock(
 );
 
 const server = setupServer(
-  rest.get('http://127.0.0.1:3333/posts', (req, res, ctx) =>
+  rest.get(URL_GET_ALL_POSTS, (req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
@@ -38,7 +40,7 @@ const server = setupServer(
     ),
   ),
 
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
 function ComponentPosts({ urlBase, typeRequest }: any) {
@@ -120,9 +122,7 @@ describe('<ComponentPosts />', () => {
   it('should return posts', async () => {
     render(<ComponentPostsWithSuccess />);
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
@@ -143,9 +143,7 @@ describe('<ComponentPosts />', () => {
   it('should return post tested, but, not send url base', async () => {
     render(<ComponentPostsNoSendParamsUrlBase />);
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
@@ -167,9 +165,7 @@ describe('<ComponentPosts />', () => {
     // FIXME: integration with localstorage
     render(<ComponentPostsWithSave />);
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
@@ -191,9 +187,7 @@ describe('<ComponentPosts />', () => {
     // FIXME: integration with localstorage
     render(<ComponentPostsWithTested />);
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
@@ -218,9 +212,7 @@ describe('<ComponentPosts />', () => {
   //     </MockApp>,
   //   );
 
-  //   await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-  //     timeout: 2000,
-  //   });
+  // await waitByLoading();
 
   //   expect(screen.queryByText(/Error/i)).toBeInTheDocument();
   // });

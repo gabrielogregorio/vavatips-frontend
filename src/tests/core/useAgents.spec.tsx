@@ -2,6 +2,10 @@ import { screen, render, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import useAgents from '../../core/hooks/useAgents';
+import {
+  URL_GET_AGENTS_AND_MAP_SELECTED_ERROR,
+  URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS,
+} from '../mock/ROUTES_API';
 import MockApp from './App.Mock';
 
 jest.mock('next/router', () => ({
@@ -24,7 +28,7 @@ jest.mock(
 );
 
 const server = setupServer(
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithSuccess', (req, res, ctx) =>
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS, (req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
@@ -37,7 +41,7 @@ const server = setupServer(
     ),
   ),
 
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
 function ComponentAgentTest({ typeMap }: any) {
@@ -67,11 +71,11 @@ function ComponentAgentTest({ typeMap }: any) {
 }
 
 function ComponentAgentTestSuccess() {
-  return <ComponentAgentTest typeMap="mapSelectedWithSuccess" />;
+  return <ComponentAgentTest typeMap="mapSuccess" />;
 }
 
 // function ComponentAgentTestError() {
-//   return <ComponentAgentTest typeMap="mapSelectedWithError" />;
+//   return <ComponentAgentTest typeMap="mapError" />;
 // }
 
 describe('<ComponentAgentTest />', () => {

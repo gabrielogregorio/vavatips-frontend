@@ -3,6 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import SuggestionScreen from '../../pages/admin/suggestions';
 import MockApp from '../core/App.Mock';
+import { URL_GET_ALL_SUGGESTIONS } from '../mock/ROUTES_API';
 
 // FIXME: test JWT token
 
@@ -26,7 +27,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/suggestions`, async (req, res, ctx) =>
+  rest.get(URL_GET_ALL_SUGGESTIONS, async (req, res, ctx) =>
     res(
       ctx.json([
         {

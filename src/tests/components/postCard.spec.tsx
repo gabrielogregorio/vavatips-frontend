@@ -6,6 +6,7 @@ import { mockPosts } from '../mock/mockPosts';
 import MockApp from '../core/App.Mock';
 import PostCard from '../../components/widgets/postCard';
 import ModalOfSuggestion from '../../components/widgets/modalOfSuggestion';
+import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
 
 // FIXME: need test localstorage
 
@@ -46,7 +47,7 @@ const post = {
 };
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
+  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     if (count === 2) {
       return res(ctx.status(500));
     }

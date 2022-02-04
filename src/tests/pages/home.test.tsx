@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { mockPosts } from '../mock/mockPosts';
 import HomeScreen from '../../pages/posts';
 import MockApp from '../core/App.Mock';
+import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -20,7 +21,7 @@ jest.mock('next/router', () => ({
 // let count = 0;
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
+  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     // if (count === 2) {
     //   return res(ctx.status(500));
     // }

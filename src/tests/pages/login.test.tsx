@@ -6,15 +6,14 @@ import Router from 'next/router';
 import MockApp from '../core/App.Mock';
 import Login from '../../pages/login';
 import { TOKEN_JWT } from '../../core/services/auth';
+import { URL_POST_AUTHENTICATED, URL_POST_CREATE_NEW_USER } from '../mock/ROUTES_API';
 
 const mock = {
   usernameValid: 'my username',
   passwordValid: 'my password',
-
   usernameToCreated: 'usernameTest',
   passwordToCreated: 'passwordConfirm',
   validCodeToCreated: 'codCadaster',
-
   userNameToCreatedWithNotExists: 'usernameTestIfNotExists',
 };
 
@@ -23,7 +22,7 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  rest.post(`http://127.0.0.1:3333/auth`, async (req, res, ctx) => {
+  rest.post(URL_POST_AUTHENTICATED, async (req, res, ctx) => {
     const { username, password }: any = req.body;
 
     if (username === 'forceError500') {
@@ -46,7 +45,7 @@ const handlers = [
     );
   }),
 
-  rest.post(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
+  rest.post(URL_POST_CREATE_NEW_USER, async (req, res, ctx) => {
     const validCode = 'codeCadasterValid';
     const { username, password, code }: any = req.body;
     const codIsInvalid = code !== validCode;

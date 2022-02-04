@@ -6,6 +6,7 @@ import Router from 'next/router';
 import MyProfileScreen from '../../pages/admin/profile';
 import { login } from '../../core/services/auth';
 import MockApp from '../core/App.Mock';
+import { URL_GET_YOUR_USER } from '../mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -28,7 +29,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
+  rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
     if (req.headers.get('authorization') === 'Bearer VALUE_TOKEN_JWT') {
       return res(
         ctx.json({

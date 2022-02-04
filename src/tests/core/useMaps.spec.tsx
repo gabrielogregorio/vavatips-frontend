@@ -2,6 +2,7 @@ import { screen, render, waitForElementToBeRemoved } from '@testing-library/reac
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import useMaps from '../../core/hooks/useMaps';
+import { URL_GET_ALL_MAPS } from '../mock/ROUTES_API';
 import MockApp from './App.Mock';
 
 jest.mock('next/router', () => ({
@@ -25,7 +26,7 @@ jest.mock(
 let count = 0;
 
 const server = setupServer(
-  rest.get('http://127.0.0.1:3333/maps', (req, res, ctx) => {
+  rest.get(URL_GET_ALL_MAPS, (req, res, ctx) => {
     if (count === 1) {
       return res(ctx.status(500));
     }

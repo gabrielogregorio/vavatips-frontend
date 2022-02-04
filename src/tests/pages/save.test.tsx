@@ -4,6 +4,7 @@ import { render, screen, waitForElementToBeRemoved } from '@testing-library/reac
 import MockApp from '../core/App.Mock';
 import SaveScreen from '../../pages/save';
 import { mockPosts } from '../mock/mockPosts';
+import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -17,7 +18,7 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
+  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     const idPosts = req.url.searchParams.get('idPosts');
     const idPostsList = JSON.parse(idPosts);
     const filteredPosts = mockPosts().posts.filter((post) => idPostsList.includes(post.id));
