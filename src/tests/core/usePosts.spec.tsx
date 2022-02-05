@@ -1,6 +1,7 @@
 import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import ErrorMsg from '../../components/base/errorMsg';
 import usePosts from '../../core/hooks/usePosts';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
 import waitByLoading from '../mock/waitByLoading';
@@ -68,7 +69,7 @@ function ComponentPosts({ urlBase, typeRequest }: any) {
   return (
     <div>
       {isLoading ? <h3>Loading...</h3> : null}
-      {errorMsg !== '' ? <h3>{errorMsg}</h3> : null}
+      {errorMsg !== '' ? <ErrorMsg msg={errorMsg} /> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>
       <h3>{`QUERY_MAP: ${queryUrl.map}`}</h3>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTheme } from '../../core/contexts/theme';
 
 export default function LayoutComponent({ children }: any) {
@@ -8,7 +8,13 @@ export default function LayoutComponent({ children }: any) {
     if (typeof localStorage !== 'undefined') {
       setTheme('dark');
     }
-  }, [typeof localStorage]);
+  }, [setTheme]);
 
-  return <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>{children}</div>;
+  return (
+    <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>
+      <div className="flex items-center min-h-screen flex-col p-0 w-full bg-skin-bgPrimary ">
+        {children}
+      </div>
+    </div>
+  );
 }

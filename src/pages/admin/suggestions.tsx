@@ -3,9 +3,11 @@ import NavbarComponent from '@/layout/navbar';
 import api from '@/services/api';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
-import { navbarEnum } from '@/interfaces/navbar';
-import LoaderComponent from '../../components/base/loader';
-import LayoutComponent from '../../components/layout/layout';
+import navbarEnum from '@/interfaces/navbar';
+import LoaderComponent from '@/base/loader';
+import LayoutComponent from '@/layout/layout';
+import SubContainer from '@/base/subContainer';
+import { modelNavbarAdmin } from '../../core/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -46,28 +48,26 @@ export default function SuggestionScreen() {
 
   return (
     <LayoutComponent>
-      <div className="container">
-        <NavbarComponent selected={navbarEnum.SuggestionScreen} />
-        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+      <NavbarComponent selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-        <LoaderComponent active={loading} />
+      <LoaderComponent active={loading} />
 
-        <div className="sub__container">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Email</th>
-                <th>Descrição</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+      <SubContainer>
+        <table>
+          <thead>
+            <tr>
+              <th>Post</th>
+              <th>Email</th>
+              <th>Descrição</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-            <tbody>{renderSuggestions()}</tbody>
-          </table>
-        </div>
-        <FooterComponent />
-      </div>
+          <tbody>{renderSuggestions()}</tbody>
+        </table>
+      </SubContainer>
+      <FooterComponent />
     </LayoutComponent>
   );
 }

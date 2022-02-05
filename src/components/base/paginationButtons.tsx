@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { PaginationButtonInterface } from '@/interfaces/pagination';
-import styles from '../../styles/components/paginationButtons.style.module.css';
-import resolveQuery from '../../core/helpers/resolveQuery';
+import resolveQuery from '@/helpers/resolveQuery';
 
 export default function PaginationButtons({
   numberOfPage: page = 1,
@@ -11,9 +10,14 @@ export default function PaginationButtons({
   agent,
 }: PaginationButtonInterface) {
   return (
-    <li className={styles.selectedButton}>
-      <Link aria-label={`Navega para a página ${page}`} href={resolveQuery(urlBase, { page, map, agent })}>
-        <a className={`${active ? styles.active : ''}`}>{page}</a>
+    <li className="bg-skin-bgPrimary">
+      <Link
+        passHref
+        aria-label={`Navega para a página ${page}`}
+        href={resolveQuery(urlBase, { page, map, agent })}>
+        <button type="button" className={`${active ? 'bg-red-400' : ''}`}>
+          {page}
+        </button>
       </Link>
     </li>
   );
@@ -21,8 +25,8 @@ export default function PaginationButtons({
 
 export function PaginationDotItems() {
   return (
-    <li className={styles.selectedButton}>
-      <a>...</a>
+    <li className="text-skin-textColorLink">
+      <button type="button">...</button>
     </li>
   );
 }

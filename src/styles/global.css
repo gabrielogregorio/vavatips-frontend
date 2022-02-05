@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .dark {
   --max-width: 800px;
+  --max-width-form: 500px;
   --background-primary: #22272E;
   --background-secondary: #2D333B;
   --text-color-link: #dadada;
@@ -25,6 +29,7 @@
 
 .light {
   --max-width: 800px;
+  --max-width-form: 500px;
   --background-primary: #efefef;
   --background-secondary: #FFFFFF;
   --text-color-link: #efefef;
@@ -82,94 +87,9 @@ html, body {
   min-height: 100vh;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  flex-direction: column;
-  padding: 0;
-  width: 100%;
-  margin: 0;
-  background: var(--background-primary);
-}
 
-.elastic {
-  flex: 1;
-}
 
-.container > .sub__container {
-  max-width: var(--max-width);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background: var(--background-secondary);
-  margin: 2rem 0;
-  padding: 2%;
-  box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px;
-}
 
-.container .sub__container .errorMsg {
-  padding: 0;
-  margin: 0;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  color: var(--primary);
-}
-
-.container > .sub__container > p {
-  width: 100%;
-  padding: 0 2rem;
-  font-size: 0.9rem;
-  text-align: left;
-  color: var(--text-color-normal);
-}
-
-.container > .sub__container > .gridFull {
-  display: grid;
-  column-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-
-.container > .sub__container > .gridFull > .grid {
-  width: 100%;
-  text-decoration: none;
-  transition: 0.2s ease-out;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-.container > .sub__container > .gridFull > .grid img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  text-decoration: none;
-  transition: 0.2s ease-out;
-}
-
-.container > .sub__container > .gridFull > .grid p {
-  text-decoration: none;
-  color: var(--text-color-bold);
-  text-align: center;
-}
-
-.container > .sub__container > .gridFull > .grid:hover {
-  transform: scale(1.05);
-}
-
-.container > .sub__container > .gridFull > .grid:hover img {
-  box-shadow: 0 0 20px 1px var(--text-color-bold-transparent);
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 500px;
-  width: 100%;
-}
 
 .form h1 {
   width: 100%;
@@ -259,31 +179,6 @@ html, body {
   font-weight: 500;
 }
 
-hr {
-  margin: 20px 0;
-  padding: 0;
-  max-width: 400px;
-  width: 100%;
-  background-color: var(--text-color-bold-transparent);
-}
-
-.form .groupInput {
-  display: flex;
-  justify-content: space-between;
-  max-width: 400px;
-  width: 100%;
-}
-
-.form .groupInputSelect {
-  width: 100%;
-  margin: 7px 10px;
-}
-
-.form .groupInputSelect button {
-  width: 100%;
-  padding: 5px;
-  border-radius: 10px;
-}
 
 .form .btn-color-primary {
   background-color: transparent;
@@ -291,43 +186,6 @@ hr {
   outline: none;
   color: var(--primary);
 }
-
-.form .groupInputSelect .btn-color-secondary {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  color: var(--secondary);
-}
-
-.form .groupInputSelect .btn-outline-secondary {
-  border: 2px solid var(--secondary);
-  background-color: transparent;
-  color: var(--secondary);
-}
-
-.form .groupInputSelect .btn-primary {
-  border: 2px solid var(--btnActionsSave);
-  background-color: var(--btnActionsSave);
-  color: var(--text-color);
-}
-
-.form .groupInputSelect .btn-secondary {
-  border: 2px solid var(--secondary);
-  background-color: var(--secondary);
-  color: var(--text-color);
-}
-
-
-.form .groupInputSelect select {
-  width: 100%;
-  padding: 5px;
-  border: 2px solid var(--secondary);
-  color: var(--text-color-bold);
-  background-color: var(--background-secondary);
-  outline: none;
-  border-radius: 10px;
-}
-
 .form label {
   width: 100%;
   display: block;
@@ -337,15 +195,6 @@ hr {
 .form input:disabled {
   background: var(--background-primary);
   color: var();
-}
-
-.form .errorMsg {
-  padding: 0;
-  margin: 0;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  color: var(--primary);
 }
 
 .form input,
@@ -380,128 +229,8 @@ hr {
   width: 700px;
 }
 
-.btn button {
-  background: transparent;
-  border: 1px solid var(--secondary);
-  padding: 5px 10px;
-  margin: 0 5px;
-  border-radius: 20px;
-  color: var(--secondary);
-  margin: 5px;
-  cursor: pointer;
-}
-
-.btn .btnActive {
-  background-color: var(--secondary);
-  color: var(--text-color-link);
-}
-
-.btn-base button {
-  background: var(--primary);
-  border: 1px solid var(--primary);
-  padding: 5px 10px;
-  margin: 0 5px;
-  border-radius: 20px;
-  color: var(--text-color-link);
-}
-
-.containerPost {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  background-color: var(--dark-beautful);
-  padding: 0;
-}
-
-.containerPost > div {
-  display: flex;
-  margin: 10px 0;
-}
-
-.containerPost > .postItems {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 5px;
-}
 
 
-.containerPost .tags {
-  display: flex;
-  margin: 10px 0;
-  flex-wrap: wrap;
-  padding: 0 2%;
-  justify-content: center;
-  width: 100%;
-
-}
-
-.containerPost > h3 {
-  color: var(--light);
-}
-
-
-.containerPost > p {
-  color: var(--light);
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: var(--black-transparent);
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modalItem {
-  background-color: var(--background-secondary);
-  padding: 10px 20px;
-  border-radius: 20px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.modalItem.primary {
-  background: var(--primary);
-}
-
-.modalItem.secondary {
-  background: var(--secondary)
-}
-
-.modalTitle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modalTitle h1 {
-  flex: 1;
-  color: var(--text-color-bold);
-}
-
-.modalTitle button {
-  background: transparent;
-  border: 0;
-  outline: none;
-  padding: 10px;
-}
-
-.modalTitle button i {
-  color: var(--primary);
-  font-size: 1rem;
-}
-
-.btn-close-modal {
-  color: var(--text-color-bold);
-}
 
 .modalActions {
   display: flex;

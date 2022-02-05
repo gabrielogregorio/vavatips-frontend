@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
 import { propsInterfacePaginationComponent } from '@/interfaces/pagination';
-import styles from '../../styles/components/pagination.style.module.css';
 
 const maxValuePagination = 3;
 
@@ -33,7 +32,8 @@ export default function PaginationComponent({
         (numberOfPage >= selected - 2 && numberOfPage <= selected + 2);
 
       const isInsideLimitPagination =
-        numberOfPage === selected + maxValuePagination || numberOfPage === selected - maxValuePagination;
+        numberOfPage === selected + maxValuePagination ||
+        numberOfPage === selected - maxValuePagination;
 
       if (isFirstLastOrIntervalButton) {
         return (
@@ -56,8 +56,8 @@ export default function PaginationComponent({
   }
 
   return (
-    <nav aria-label="Sistema de paginação" className={styles.pagination}>
-      <ul className={styles.paginationItems}>{renderPaginationButtons()}</ul>
+    <nav aria-label="Sistema de paginação" className="w-full flex items-center justify-center mt-2">
+      <ul className="b-2 p-1 flex items-center list-none">{renderPaginationButtons()}</ul>
     </nav>
   );
 }

@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { agents } from '@/data/data-valorant';
-import NavbarComponentPublic from '@/layout/navbar_public';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
@@ -9,8 +7,12 @@ import ErrorMsg from '@/base/errorMsg';
 import useAgents from '@/hooks/useAgents';
 import Title from '@/base/title';
 import LINKS from '@/data/links';
-import { navbarEnumPublic } from '@/interfaces/navbar';
 import LayoutComponent from '../components/layout/layout';
+import navbarEnum from '../interfaces/navbar';
+import { modelNavbarPublic } from '../core/schemas/navbar';
+import NavbarComponent from '../components/layout/navbar';
+import ImageCard from '../components/widgets/imageCard';
+import SubContainer from '../components/base/subContainer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
@@ -25,31 +27,29 @@ export default function AgentScreen() {
     }
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
-        <Link href={`/posts?map=${mapSelected.map}&agent=${agent.name}`} key={agent.id}>
-          <a className="grid">
-            <img src={agent.img} alt={agent.name} />
-            <p>{agent.name}</p>
-          </a>
-        </Link>
+        <ImageCard
+          href={`/posts?map=${mapSelected.map}&agent=${agent.name}`}
+          key={agent.id}
+          srcImage={agent.img}
+          titleImage={agent.name}
+        />
       ) : null,
     );
   }
 
   return (
     <LayoutComponent>
-      <div className="container">
-        <NavbarComponentPublic selected={navbarEnumPublic.Mistic} />
-        <BreadcrumbComponent breadcrumbs={breadcrumbs} />
+      <NavbarComponent selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
+      <BreadcrumbComponent breadcrumbs={breadcrumbs} admin={false} />
 
-        <div className="sub__container">
-          <Title>Escolha um Agente</Title>
-          <LoaderComponent active={isLoading} />
-          {isLoading ? <p>Buscando Agentes...</p> : ''}
-          <ErrorMsg msg={error} />
-          <div className="gridFull">{renderAgent()}</div>
-        </div>
-        <FooterComponent />
-      </div>
+      <SubContainer>
+        <Title>Escolha um Agente</Title>
+        <LoaderComponent active={isLoading} />
+        {isLoading ? <p>Buscando Agentes...</p> : ''}
+        <ErrorMsg msg={error} />
+        <div className="grid grid-cols-3 gap-6 p-10">{renderAgent()}</div>
+      </SubContainer>
+      <FooterComponent />
     </LayoutComponent>
   );
 }

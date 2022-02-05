@@ -15,8 +15,12 @@ import Button from '@/base/button';
 import { agentInterface, mapInterface } from '@/interfaces/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
-import { navbarEnum } from '@/interfaces/navbar';
-import LoaderComponent from '../base/loader';
+import navbarEnum from '@/interfaces/navbar';
+import LoaderComponent from '@/base/loader';
+import GroupInput from '@/base/groupInput';
+import { modelNavbarAdmin } from '../../core/schemas/navbar';
+import SubContainer from '../base/subContainer';
+import FormComponent from '../base/Form';
 
 type actionType = 'top' | 'bottom';
 
@@ -123,12 +127,12 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     }
   }
 
-  function deleteStep(id: string) {
-    setImgAdded(imgAdded.filter((item) => item.id !== id));
+  function deleteStep(idPost: string) {
+    setImgAdded(imgAdded.filter((item) => item.id !== idPost));
   }
 
-  function putPosition(id: string, action: actionType) {
-    const positionPut = imgAdded.findIndex((item) => item.id === id);
+  function putPosition(idPost: string, action: actionType) {
+    const positionPut = imgAdded.findIndex((item) => item.id === idPost);
     const copyListDelete = imgAdded[positionPut];
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
 
@@ -166,7 +170,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
   }
 
   function renderHabilits() {
-    const filterAbilities: agentInterface = agents().filter((agent) => agent.name === formTagAgent)?.[0];
+    const filterAbilities: agentInterface = agents().filter(
+      (agent) => agent.name === formTagAgent,
+    )?.[0];
     return filterAbilities?.habilits ?? [];
   }
 
@@ -175,8 +181,8 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     return filterMapPositions?.mapPosition ?? [];
   }
 
-  function showModalWithItem(id: string) {
-    const item = imgAdded.filter((item) => item.id === id)[0];
+  function showModalWithItem(idPost: string) {
+    const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[0];
     setPropsModal(item);
     setVisibleModal(true);
   }
@@ -198,13 +204,17 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           <p onClick={() => showModalWithItem(instruction.id)} role="presentation">
             {key + 1} - {instruction.description}
           </p>
-          <Button onClick={() => deleteStep(instruction.id)} dataTestid={`deleteStepButton-${key + 1}`}>
+          <Button
+            onClick={() => deleteStep(instruction.id)}
+            dataTestid={`deleteStepButton-${key + 1}`}>
             <FaTimes />
           </Button>
         </div>
 
         <div className="instructionImage">
-          <img src={formatImage(instruction.image)} alt={instruction.description} /> <br />
+          <img src={formatImage(instruction.image)} alt={instruction.description} />
+
+          <br />
           <Button
             className="btn-bottom"
             onClick={() => putPosition(instruction.id, 'bottom')}
@@ -223,11 +233,11 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     ));
   }
 
-  function saveModal(id: string, description: string, image: string) {
-    if (id) {
+  function saveModal(idPost: string, description: string, image: string) {
+    if (idPost) {
       const copyImgAdded: imgInterface[] = JSON.parse(JSON.stringify(imgAdded));
       for (let x = 0; x < copyImgAdded.length; x += 1) {
-        if (copyImgAdded[x].id === id) {
+        if (copyImgAdded[x].id === idPost) {
           copyImgAdded[x].description = description;
           copyImgAdded[x].image = image;
         }
@@ -240,9 +250,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     }
   }
 
-  async function deletePost(id: string) {
+  async function deletePost(idPost: string) {
     setLoading(true);
-    api.delete(`/post/${id}`).finally(() => {
+    api.delete(`/post/${idPost}`).finally(() => {
       setLoading(false);
       setRedirect(true);
     });
@@ -255,16 +265,16 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
   }, [redirect]);
 
   return (
-    <div className="container">
+    <>
       {mode === 'create' ? (
-        <NavbarComponent selected={navbarEnum.PostCreate} />
+        <NavbarComponent selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />
       ) : (
-        <NavbarComponent selected={navbarEnum.EditScreen} />
+        <NavbarComponent selected={navbarEnum.EditScreen} modelNavbar={modelNavbarAdmin} />
       )}
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
       <LoaderComponent active={loading} />
 
-      <div className="sub__container">
+      <SubContainer>
         {visibleModal ? (
           <ModalComponent
             title="Adicionar Post"
@@ -277,7 +287,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           />
         ) : null}
 
-        <div className="form">
+        <FormComponent>
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
@@ -297,7 +307,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
 
           <hr />
 
-          <div className="groupInput">
+          <GroupInput>
             <Selected
               name="Agente"
               text="Agente"
@@ -305,7 +315,13 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagAgent}
               render={renderAgent()}
             />
-            <Selected name="Mapa" text="Mapa" value={formTagMap} setValue={setFormTagMap} render={renderMaps()} />
+            <Selected
+              name="Mapa"
+              text="Mapa"
+              value={formTagMap}
+              setValue={setFormTagMap}
+              render={renderMaps()}
+            />
             <Selected
               name="Habilidade"
               text="Habilidade"
@@ -313,9 +329,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagAbility}
               render={renderHabilits()}
             />
-          </div>
+          </GroupInput>
 
-          <div className="groupInput">
+          <GroupInput>
             <Selected
               name="Posição"
               text="Posição"
@@ -337,39 +353,46 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagDifficult}
               render={renderDifficult()}
             />
-          </div>
+          </GroupInput>
 
-          <div className="groupInput">
-            <Selected name="Lado" text="Lado" value={formTagSide} setValue={setFormTagSide} render={renderSide()} />
-          </div>
+          <GroupInput>
+            <Selected
+              name="Lado"
+              text="Lado"
+              value={formTagSide}
+              setValue={setFormTagSide}
+              render={renderSide()}
+            />
+          </GroupInput>
 
           <hr />
           <p className="info">
-            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.
+            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
+            bem visível.
             <br />
             <br /> Clique nos titulos para EDITAR os itens
           </p>
           <hr />
           <div className="stepsPost">{renderSteps()}</div>
 
-          <div className="groupInput">
+          <GroupInput>
             <div className="groupInputSelect">
               <Button className="btn-outline-secondary" onClick={() => showModal()}>
                 Novo Passo
               </Button>
               <br />
             </div>
-          </div>
-          <div className="groupInput">
+          </GroupInput>
+          <GroupInput>
             <div className="groupInputSelect">
               <Button onClick={() => handleSubmit()} className="btn-secondary">
                 Publicar Dica
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
+          </GroupInput>
+        </FormComponent>
+      </SubContainer>
       <FooterComponent />
-    </div>
+    </>
   );
 }

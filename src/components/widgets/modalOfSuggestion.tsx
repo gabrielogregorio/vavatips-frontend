@@ -8,6 +8,8 @@ import ButtonCloseModal from '@/base/modalCloseButton';
 import TextArea from '@/base/textArea';
 import { modalType } from '../../interfaces/modal';
 import LoaderComponent from '../base/loader';
+import ErrorMsg from '../base/errorMsg';
+import FormComponent from '../base/Form';
 
 interface ModalProps {
   title: string;
@@ -58,28 +60,46 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
   }
 
   return modalSuggestion.active ? (
-    <div className="modal">
-      <div className="modalItem">
-        <div className="modalTitle">
-          <h1>{title}</h1>
+    <div className="fixed top-0 left-0 h-screen w-full z-40 flex justify-center items-center">
+      <div className="bg-skin-backgroundSecondary p-5 rounded-2xl w-full">
+        <div className="flex items-center justify-center">
+          <h1 className="flex-1 text-skin-textColorBold">{title}</h1>
           <ButtonCloseModal onClick={() => setModalSuggestion(initializeModalSuggestion)} />
         </div>
         <hr />
 
-        <div className="form">
-          <p className="errorMsg">{errorMsg}</p>
+        <FormComponent>
+          <ErrorMsg msg={errorMsg} />
           <LoaderComponent active={loading} />
-          <Input name="tip" disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
+          <Input
+            name="tip"
+            disabled
+            type="text"
+            text="Dica"
+            value={postTitle}
+            setValue={setPostTitle}
+          />
 
-          <Input name="email" type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
+          <Input
+            name="email"
+            type="email"
+            text="Email para contato (Opcional)"
+            value={email}
+            setValue={setEmail}
+          />
 
-          <TextArea name="description" title="Descrição" value={description} setValue={setDescription} />
+          <TextArea
+            name="description"
+            title="Descrição"
+            value={description}
+            setValue={setDescription}
+          />
 
           <div className="modalActions">
             <Button onClick={() => setModalSuggestion(initializeModalSuggestion)}>Cancelar</Button>
             <Button onClick={() => saveModal()}>Adicionar</Button>
           </div>
-        </div>
+        </FormComponent>
       </div>
     </div>
   ) : null;

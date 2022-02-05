@@ -5,9 +5,12 @@ import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import { logout } from '@/services/auth';
 import api from '@/services/api';
-import { navbarEnum } from '@/interfaces/navbar';
+import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
-import LayoutComponent from '../../components/layout/layout';
+import LayoutComponent from '@/layout/layout';
+import ErrorMsg from '@/base/errorMsg';
+import SubContainer from '@/base/subContainer';
+import { modelNavbarAdmin } from '../../core/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -18,7 +21,6 @@ export default function DashboardScreen() {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
-
   const [countViewsIps, setCountViewsIps] = useState<number>(0);
   const [countViewsAll, setCountViewsAll] = useState<number>(0);
   const [countAlAgents, setCountAlAgents] = useState<number>(0);
@@ -55,27 +57,25 @@ export default function DashboardScreen() {
 
   return (
     <LayoutComponent>
-      <div className="container">
-        <NavbarComponent selected={navbarEnum.Dashboard} />
-        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+      <NavbarComponent selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-        <div className="sub__container">
-          <LoaderComponent active={activeLoader} />
-          <p>{errorMsg}</p>
+      <SubContainer>
+        <LoaderComponent active={activeLoader} />
+        <ErrorMsg msg={errorMsg} />
 
-          <p>Bem vindo(a) {username}</p>
+        <p>Bem vindo(a) {username}</p>
 
-          <p>Consultas: {countViewsAll}</p>
-          <p>Usuários: {countViewsIps}</p>
+        <p>Consultas: {countViewsAll}</p>
+        <p>Usuários: {countViewsIps}</p>
 
-          <p>agentes: {countAlAgents}</p>
-          <p>mapas: {countAlMaps}</p>
-          <p>posts: {countAllPosts}</p>
-          <p>sugestões: {countAllSuggestions}</p>
-          <p>administradores: {countAllUsers}</p>
-        </div>
-        <FooterComponent />
-      </div>
+        <p>agentes: {countAlAgents}</p>
+        <p>mapas: {countAlMaps}</p>
+        <p>posts: {countAllPosts}</p>
+        <p>sugestões: {countAllSuggestions}</p>
+        <p>administradores: {countAllUsers}</p>
+      </SubContainer>
+      <FooterComponent />
     </LayoutComponent>
   );
 }

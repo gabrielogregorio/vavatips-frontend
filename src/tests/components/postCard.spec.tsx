@@ -74,7 +74,7 @@ describe('<PostCard />', () => {
   it('should render correctly post card, save post and test post', async () => {
     render(
       <MockApp>
-        <PostCard post={post} />
+        <PostCard post={post} viewAdmin={false} />
       </MockApp>,
     );
 
@@ -85,7 +85,10 @@ describe('<PostCard />', () => {
   it('should render correctly post card with undefined user', async () => {
     render(
       <MockApp>
-        <PostCard post={{ ...post, user: { ...post.user, username: undefined } }} />
+        <PostCard
+          post={{ ...post, user: { ...post.user, username: undefined } }}
+          viewAdmin={false}
+        />
       </MockApp>,
     );
 
@@ -101,7 +104,7 @@ describe('<PostCard />', () => {
     render(
       <MockApp>
         <ModalOfSuggestion title="fazer sugestão" />
-        <PostCard post={post} />
+        <PostCard post={post} viewAdmin={false} />
       </MockApp>,
     );
 
@@ -115,37 +118,58 @@ describe('<PostCard />', () => {
   it('should navigated correctly post card images', async () => {
     render(
       <MockApp>
-        <PostCard post={post} />
+        <PostCard post={post} viewAdmin={false} />
       </MockApp>,
     );
 
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image111.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image111.png',
+    );
 
     userEvent.click(screen.getByTestId('prev-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image555.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image555.png',
+    );
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image222.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image222.png',
+    );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image333.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image333.png',
+    );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image444.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image444.png',
+    );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image555.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image555.png',
+    );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://image111.png');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://image111.png',
+    );
   });
 
   it('should test view admin', async () => {

@@ -5,6 +5,8 @@ import Button from '@/base/button';
 import LoaderComponent from '@/base/loader';
 import ButtonCloseModal from '@/base/modalCloseButton';
 import { ModalPropsBase } from '@/interfaces/modal';
+import GroupInput from '@/base/groupInput';
+import FormComponent from '../base/Form';
 
 export default function ModalComponent({
   id: idModal,
@@ -62,31 +64,39 @@ export default function ModalComponent({
 
         <hr />
 
-        <div className="form">
-          <div className="groupInput">
+        <FormComponent>
+          <GroupInput>
             <div className="groupInputSelect">
-              <label htmlFor="descriptionNewPost">Descrição post</label>
-              <textarea id="descriptionNewPost" value={description} onChange={(e) => setDescription(e.target.value)} />
-            </div>
-          </div>
-
-          <div className="groupInput">
-            <div className="groupInputSelect">
-              <label htmlFor="customFileUpload" className="customFileUpload">
-                Adicionar Imagem
+              <label htmlFor="descriptionNewPost">
+                Descrição post
+                <textarea
+                  id="descriptionNewPost"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
               </label>
-              <input id="customFileUpload" type="file" name="image" onChange={loadImage} />
             </div>
-          </div>
+          </GroupInput>
+
+          <GroupInput>
+            <div className="groupInputSelect">
+              <label htmlFor="custom-file-upload" className="customFileUpload">
+                Adicionar Imagem
+                <input id="custom-file-upload" type="file" name="image" onChange={loadImage} />
+              </label>
+            </div>
+          </GroupInput>
           <LoaderComponent active={activeLoader} />
-          <div className="instructionImage">{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
+          <div className="instructionImage">
+            {LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}
+          </div>
 
           <div className="modalActions">
             <Button onClick={() => closeModalItem()}>Cancelar</Button>
 
             <Button onClick={() => saveModal(id, description, LinkImg)}>Adicionar</Button>
           </div>
-        </div>
+        </FormComponent>
       </div>
     </div>
   );

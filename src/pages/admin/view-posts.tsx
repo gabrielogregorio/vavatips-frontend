@@ -1,6 +1,6 @@
-import { navbarEnum, navbarEnumPublic } from '@/interfaces/navbar';
-import LayoutComponent from '../../components/layout/layout';
-import ContainerPosts from '../../components/widgets/containerPosts';
+import navbarEnum from '@/interfaces/navbar';
+import LayoutComponent from '@/layout/layout';
+import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -13,7 +13,7 @@ export default function ViewPostsScreen() {
       <ContainerPosts
         breadcrumbs={breadcrumbs}
         type=""
-        typeSelected={navbarEnumPublic.None}
+        typeSelected={navbarEnum.None}
         typeSelectedAdmin={navbarEnum.ViewPosts}
         title="Todos os Posts"
       />

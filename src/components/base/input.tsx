@@ -1,8 +1,16 @@
 import { propsInterfaceInput } from '@/interfaces/input';
+import GroupInput from './groupInput';
 
-export default function Input({ disabled, type, value, text, setValue, name }: propsInterfaceInput) {
+export default function Input({
+  disabled,
+  type,
+  value,
+  text,
+  setValue,
+  name,
+}: propsInterfaceInput) {
   return (
-    <div className="groupInput">
+    <GroupInput>
       <div className="groupInputSelect">
         <label htmlFor={name}>{text}</label>
         <input
@@ -14,6 +22,6 @@ export default function Input({ disabled, type, value, text, setValue, name }: p
           onChange={(e) => setValue(e.target.value)}
         />
       </div>
-    </div>
+    </GroupInput>
   );
 }
