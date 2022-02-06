@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { rest } from 'msw';
@@ -6,6 +6,7 @@ import { setupServer } from 'msw/node';
 import MockApp from '../core/App.Mock';
 import CreatePostScreen from '../../pages/admin/post-create';
 import { URL_POST_CREATE_POST } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -118,10 +119,7 @@ describe('<CreatePostScreen />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
-
+    await waitByLoading();
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
     Router.push('');
   });

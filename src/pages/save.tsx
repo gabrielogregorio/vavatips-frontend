@@ -11,8 +11,8 @@ export default function SaveScreen() {
       <ContainerPosts
         breadcrumbs={breadcrumbs}
         type="save"
+        mode="public"
         typeSelected={navbarEnum.Save}
-        typeSelectedAdmin={navbarEnum.None}
         title="Posts Salvos"
       />
     </LayoutComponent>

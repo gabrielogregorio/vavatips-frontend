@@ -5,16 +5,15 @@ import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
-import Button from '@/base/button';
 import { logout } from '@/services/auth';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
 import LayoutComponent from '@/layout/layout';
-import GroupInput from '@/base/groupInput';
 import SubContainer from '@/base/subContainer';
 import FormComponent from '@/base/Form';
-import { modelNavbarAdmin } from '../../core/schemas/navbar';
+import { modelNavbarAdmin } from '@/schemas/navbar';
+import ButtonForm from '@/base/buttonForm';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -80,19 +79,15 @@ export default function MyProfileScreen() {
                 setValue={setPassword2}
               />
 
-              <GroupInput>
-                <div className="groupInputSelect">
-                  <Button onClick={() => handleLogout()} className="btn-color-secondary">
-                    logoff
-                  </Button>
-                </div>
-              </GroupInput>
+              <ButtonForm
+                className="text-skin-btnActionsTested border-none mt-2"
+                onClick={() => handleLogout()}>
+                logoff
+              </ButtonForm>
 
-              <GroupInput>
-                <div className="groupInputSelect">
-                  <Button className="btn-secondary">Atualizar dados</Button>
-                </div>
-              </GroupInput>
+              <ButtonForm className="bg-skin-btnActionsTested text-skin-textColorINVERSE border-skin-btnActionsTested mt-2">
+                Atualizar dados
+              </ButtonForm>
             </>
           ) : null}
         </FormComponent>

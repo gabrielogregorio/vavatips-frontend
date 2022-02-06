@@ -1,9 +1,10 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import ModalComponent from '../../components/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -120,9 +121,7 @@ describe('<ModalComponent />', () => {
     const inputFIle: HTMLInputElement = screen.getByLabelText('Adicionar Imagem');
 
     userEvent.upload(inputFIle, file);
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(inputFIle.files[0]).toStrictEqual(file);
 

@@ -6,12 +6,12 @@ import { maps } from '@/data/data-valorant';
 import LINKS from '@/data/links';
 import useMaps from '@/hooks/useMaps';
 import Title from '@/base/title';
-import LayoutComponent from '../components/layout/layout';
-import NavbarComponent from '../components/layout/navbar';
-import navbarEnum from '../interfaces/navbar';
+import LayoutComponent from '@/layout/layout';
+import NavbarComponent from '@/layout/navbar';
+import navbarEnum from '@/interfaces/navbar';
+import ImageCard from '@/widgets/imageCard';
+import SubContainer from '@/base/subContainer';
 import { modelNavbarPublic } from '../core/schemas/navbar';
-import ImageCard from '../components/widgets/imageCard';
-import SubContainer from '../components/base/subContainer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
@@ -43,6 +43,7 @@ export default function MapScreen() {
         <LoaderComponent active={isLoading} />
         <div className="grid grid-cols-4 gap-6 pl-1 pr-1 mb-2 ">{renderMap()}</div>
       </SubContainer>
+
       <FooterComponent />
     </LayoutComponent>
   );

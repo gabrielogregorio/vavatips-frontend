@@ -7,12 +7,12 @@ import ErrorMsg from '@/base/errorMsg';
 import useAgents from '@/hooks/useAgents';
 import Title from '@/base/title';
 import LINKS from '@/data/links';
-import LayoutComponent from '../components/layout/layout';
-import navbarEnum from '../interfaces/navbar';
-import { modelNavbarPublic } from '../core/schemas/navbar';
-import NavbarComponent from '../components/layout/navbar';
-import ImageCard from '../components/widgets/imageCard';
-import SubContainer from '../components/base/subContainer';
+import LayoutComponent from '@/layout/layout';
+import navbarEnum from '@/interfaces/navbar';
+import { modelNavbarPublic } from '@/schemas/navbar';
+import NavbarComponent from '@/layout/navbar';
+import ImageCard from '@/widgets/imageCard';
+import SubContainer from '@/base/subContainer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
@@ -45,7 +45,6 @@ export default function AgentScreen() {
       <SubContainer>
         <Title>Escolha um Agente</Title>
         <LoaderComponent active={isLoading} />
-        {isLoading ? <p>Buscando Agentes...</p> : ''}
         <ErrorMsg msg={error} />
         <div className="grid grid-cols-3 gap-6 p-10">{renderAgent()}</div>
       </SubContainer>

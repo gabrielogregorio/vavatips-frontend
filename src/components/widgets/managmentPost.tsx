@@ -18,9 +18,12 @@ import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import navbarEnum from '@/interfaces/navbar';
 import LoaderComponent from '@/base/loader';
 import GroupInput from '@/base/groupInput';
-import { modelNavbarAdmin } from '../../core/schemas/navbar';
-import SubContainer from '../base/subContainer';
-import FormComponent from '../base/Form';
+import { modelNavbarAdmin } from '@/schemas/navbar';
+import SubContainer from '@/base/subContainer';
+import FormComponent from '@/base/Form';
+import GroupInputMultiple from '@/base/groupInputMultiple';
+import HrComponent from '@/base/hr';
+import ButtonForm from '@/base/buttonForm';
 
 type actionType = 'top' | 'bottom';
 
@@ -42,7 +45,7 @@ type modeManagment = {
 };
 
 export default function CreatePostManagement({ breadcrumbs, mode }: modeManagment) {
-  const { query } = useRouter();
+  const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
 
   const [redirect, setRedirect] = useState<boolean>(false);
@@ -65,7 +68,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
   });
 
   useEffect(() => {
-    if (mode === 'edit') {
+    if (mode === 'edit' && isReady) {
       setLoading(true);
       api
         .get(`/post/${id}`)
@@ -199,33 +202,41 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
 
   function renderSteps() {
     return imgAdded.map((instruction, key) => (
-      <div key={instruction.id}>
-        <div className="instructionTop">
-          <p onClick={() => showModalWithItem(instruction.id)} role="presentation">
+      <div key={`${instruction.id} ${instruction.image}`}>
+        <div className="flex">
+          <p
+            className="text-skin-textColor flex-1 text-base"
+            onClick={() => showModalWithItem(instruction.id)}
+            role="presentation">
             {key + 1} - {instruction.description}
           </p>
           <Button
+            className="text-skin-textColor text-base ml-2"
             onClick={() => deleteStep(instruction.id)}
             dataTestid={`deleteStepButton-${key + 1}`}>
             <FaTimes />
           </Button>
         </div>
 
-        <div className="instructionImage">
-          <img src={formatImage(instruction.image)} alt={instruction.description} />
+        <div className="relative w-full">
+          <img
+            className="object-cover h-full"
+            src={formatImage(instruction.image)}
+            alt={instruction.description}
+          />
 
           <br />
           <Button
-            className="btn-bottom"
+            className="top-0 left-2/4 absolute z-btnPost"
             onClick={() => putPosition(instruction.id, 'bottom')}
             dataTestid={`btn-top-${key + 1}`}>
-            <BsChevronUp />
+            <BsChevronUp className="text-3xl font-extrabold text-skin-textColor " />
           </Button>
           <Button
-            className="btn-top"
+            className="bottom-5 left-2/4 absolute z-btnPost"
             onClick={() => putPosition(instruction.id, 'top')}
             dataTestid={`btn-bottom-${key + 1}`}>
-            <BsChevronDown />
+            <BsChevronDown className="text-3xl font-extrabold text-skin-textColor" />
           </Button>
         </div>
         <hr />
@@ -291,7 +302,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
-            <Button className="btn-color-primary" onClick={() => deletePost(id)}>
+            <Button className="text-skin-btnActionsSave" onClick={() => deletePost(id)}>
               Excluir
             </Button>
           ) : null}
@@ -305,9 +316,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
             setValue={setFormDescription}
           />
 
-          <hr />
+          <HrComponent />
 
-          <GroupInput>
+          <GroupInputMultiple>
             <Selected
               name="Agente"
               text="Agente"
@@ -329,9 +340,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagAbility}
               render={renderHabilits()}
             />
-          </GroupInput>
+          </GroupInputMultiple>
 
-          <GroupInput>
+          <GroupInputMultiple>
             <Selected
               name="Posição"
               text="Posição"
@@ -353,9 +364,9 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagDifficult}
               render={renderDifficult()}
             />
-          </GroupInput>
+          </GroupInputMultiple>
 
-          <GroupInput>
+          <GroupInputMultiple>
             <Selected
               name="Lado"
               text="Lado"
@@ -363,33 +374,38 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               setValue={setFormTagSide}
               render={renderSide()}
             />
-          </GroupInput>
+          </GroupInputMultiple>
 
-          <hr />
-          <p className="info">
+          <HrComponent />
+
+          <p className="text-skin-textColor">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
             bem visível.
             <br />
             <br /> Clique nos titulos para EDITAR os itens
           </p>
-          <hr />
-          <div className="stepsPost">{renderSteps()}</div>
 
-          <GroupInput>
-            <div className="groupInputSelect">
-              <Button className="btn-outline-secondary" onClick={() => showModal()}>
+          <HrComponent />
+
+          {renderSteps()}
+
+          <div className="mt-5 w-full">
+            <GroupInput>
+              <ButtonForm
+                className="border-skin-btnActionsTested text-skin-secondary"
+                onClick={() => showModal()}>
                 Novo Passo
-              </Button>
-              <br />
-            </div>
-          </GroupInput>
-          <GroupInput>
-            <div className="groupInputSelect">
-              <Button onClick={() => handleSubmit()} className="btn-secondary">
+              </ButtonForm>
+            </GroupInput>
+
+            <GroupInput>
+              <ButtonForm
+                onClick={() => handleSubmit()}
+                className="border-skin-btnActionsTested text-skin-textColorINVERSE bg-skin-btnActionsTested">
                 Publicar Dica
-              </Button>
-            </div>
-          </GroupInput>
+              </ButtonForm>
+            </GroupInput>
+          </div>
         </FormComponent>
       </SubContainer>
       <FooterComponent />

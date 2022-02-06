@@ -7,7 +7,7 @@ import navbarEnum from '@/interfaces/navbar';
 import LoaderComponent from '@/base/loader';
 import LayoutComponent from '@/layout/layout';
 import SubContainer from '@/base/subContainer';
-import { modelNavbarAdmin } from '../../core/schemas/navbar';
+import { modelNavbarAdmin } from '@/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -37,11 +37,19 @@ export default function SuggestionScreen() {
 
   function renderSuggestions() {
     return suggestions.map((report) => (
-      <tr key={report.id}>
-        <td>{report.postId}</td>
-        <td>{report.email}</td>
-        <td>{report.description}</td>
-        <td>{report.status ?? 'Não atendido'}</td>
+      <tr key={report.id} className="border-b">
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.postId}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.email}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.description}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.status ?? 'Não atendido'}
+        </td>
       </tr>
     ));
   }
@@ -54,13 +62,13 @@ export default function SuggestionScreen() {
       <LoaderComponent active={loading} />
 
       <SubContainer>
-        <table>
-          <thead>
+        <table className="w-full max-w-maxWidthDefault">
+          <thead className="border-b">
             <tr>
-              <th>Post</th>
-              <th>Email</th>
-              <th>Descrição</th>
-              <th>Status</th>
+              <th className="text-base text-skin-textColor text-left">Post</th>
+              <th className="text-base text-skin-textColor text-left">Email</th>
+              <th className="text-base text-skin-textColor text-left">Descrição</th>
+              <th className="text-base text-skin-textColor text-left">Status</th>
             </tr>
           </thead>
 

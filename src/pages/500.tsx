@@ -1,4 +1,4 @@
-import LayoutComponent from '../components/layout/layout';
+import LayoutComponent from '@/layout/layout';
 
 export default function Error500() {
   return (

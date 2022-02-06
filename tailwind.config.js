@@ -2,9 +2,15 @@ module.exports = {
   content: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      zIndex: {
+        modal: 'var(--z-modal)',
+        modalMessage: 'var(--z-modal-message)',
+        btnPost: 'var(--z-btn-post)',
+      },
       maxWidth: {
         maxWidthDefault: 'var(--max-width)',
         maxWidthDefaultForm: 'var(--max-width-form)',
+        maxWidthModal: 'var(--max-width-modal)',
       },
       height: {
         maxHeightContent: '500px',
@@ -23,6 +29,7 @@ module.exports = {
           btnActionsSave: 'var(--btnActionsSave)',
           btnActionsTested: 'var(--btnActionsTested)',
           btnActionsSuggestion: 'var(--btnActionsSuggestion)',
+          textColorINVERSE: 'var(--text-color-INVERSE)',
         },
       },
       backgroundColor: {
@@ -35,6 +42,7 @@ module.exports = {
           btnActionsSave: 'var(--btnActionsSave)',
           btnActionsTested: 'var(--btnActionsTested)',
           btnActionsSuggestion: 'var(--btnActionsSuggestion)',
+          textColorINVERSE: 'var(--text-color-INVERSE)',
         },
       },
       borderColor: {

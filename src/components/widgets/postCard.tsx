@@ -7,6 +7,7 @@ import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
+import ButtonForm from '@/base/buttonForm';
 
 type typeType = 'next' | 'prev';
 
@@ -22,12 +23,10 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
   const { setModalSuggestion } = useModalContext();
 
   function handleAddTest() {
-    console.log('opa');
     if (postTested) {
       removePost(post.id, 'test');
     } else {
       addNewPost(post.id, 'test');
-      console.log('al');
     }
     setPostTested(getPostsTested()?.includes(post.id) ?? false);
   }
@@ -88,7 +87,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-primary ">
+          <Button className="block text-skin-btnActionsSave ">
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </Button>
         ) : null}
@@ -104,24 +103,28 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
             alt={post.imgs?.[idImage]?.description}
           />
 
-          <Button
-            ariaLabel="Item anterior"
-            dataTestid="prev-btn"
-            className="absolute text-skin-textColor border-none bg-transparent p-10 top-2/4 left-0"
-            onClick={() => nextImage('prev', post.imgs.length)}>
-            <MdArrowBackIosNew className="text-4xl font-bold" />
-          </Button>
+          <div className="absolute left-0 top-2/4">
+            <Button
+              ariaLabel="Item anterior"
+              dataTestid="prev-btn"
+              className="text-skin-textColor border-none bg-transparent"
+              onClick={() => nextImage('prev', post.imgs.length)}>
+              <MdArrowBackIosNew className="text-4xl font-bold" />
+            </Button>
+          </div>
 
-          <Button
-            ariaLabel="Proximo item"
-            dataTestid="next-btn"
-            className="absolute text-skin-textColor border-none bg-transparent p-10 top-2/4 right-0"
-            onClick={() => nextImage('next', post.imgs.length)}>
-            <MdArrowForwardIos className="text-4xl font-bold" />
-          </Button>
+          <div className="absolute right-0 top-2/4">
+            <Button
+              ariaLabel="Proximo item"
+              dataTestid="next-btn"
+              className="text-skin-textColor border-none bg-transparent"
+              onClick={() => nextImage('next', post.imgs.length)}>
+              <MdArrowForwardIos className="text-4xl font-bold" />
+            </Button>
+          </div>
 
           <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-backgroundDescription">
-            <p className="text-skin-textColor text-base" aria-live="polite">
+            <p className="text-skin-textColorINVERSE text-base" aria-live="polite">
               {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
           </div>
@@ -144,29 +147,31 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
 
       {!viewAdmin ? (
         <div className="w-full flex justify-around mt-5">
-          <Button
-            className={`w-full m-1 rounded-xl border-2 block border-skin-btnActionsTested ${
+          <ButtonForm
+            className={`m-1 border-skin-btnActionsTested ${
               postTested
-                ? 'text-skin-textColor bg-skin-btnActionsTested '
+                ? 'text-skin-textColorINVERSE bg-skin-btnActionsTested '
                 : 'text-skin-btnActionsTested '
             }`}
             onClick={() => handleAddTest()}>
             Testar
-          </Button>
+          </ButtonForm>
 
-          <Button
-            className={`w-full m-1 rounded-xl border-2  border-skin-btnActionsSave  ${
-              postSave ? 'text-skin-textColor bg-skin-btnActionsSave' : 'text-skin-btnActionsSave'
+          <ButtonForm
+            className={`m-1 border-skin-btnActionsSave  ${
+              postSave
+                ? 'text-skin-textColorINVERSE bg-skin-btnActionsSave'
+                : 'text-skin-btnActionsSave'
             }`}
             onClick={() => handleAddSave()}>
             Salvar
-          </Button>
+          </ButtonForm>
 
-          <Button
-            className="w-full m-1 rounded-xl border-2 text-skin-btnActionsSuggestion border-skin-btnActionsSuggestion "
+          <ButtonForm
+            className="m-1 text-skin-btnActionsSuggestion border-skin-btnActionsSuggestion"
             onClick={() => handleModalAction()}>
             Sugerir
-          </Button>
+          </ButtonForm>
         </div>
       ) : null}
     </div>

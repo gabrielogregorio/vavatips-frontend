@@ -57,7 +57,9 @@ export default function PaginationComponent({
 
   return (
     <nav aria-label="Sistema de paginação" className="w-full flex items-center justify-center mt-2">
-      <ul className="b-2 p-1 flex items-center list-none">{renderPaginationButtons()}</ul>
+      <ul className="b-2 p-1 flex items-center list-none border-2 rounded-xl border-skin-btnActionsSave">
+        {renderPaginationButtons()}
+      </ul>
     </nav>
   );
 }

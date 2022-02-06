@@ -13,10 +13,10 @@ import navbarEnum from '@/interfaces/navbar';
 import LayoutComponent from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import GroupInput from '@/base/groupInput';
-import SubContainer from '../components/base/subContainer';
-import NavbarComponent from '../components/layout/navbar';
-import { modelNavbarPublic } from '../core/schemas/navbar';
-import FormComponent from '../components/base/Form';
+import SubContainer from '@/base/subContainer';
+import NavbarComponent from '@/layout/navbar';
+import { modelNavbarPublic } from '@/schemas/navbar';
+import FormComponent from '@/base/Form';
 
 type accessType = 'login' | 'register';
 
@@ -146,13 +146,15 @@ export default function Login() {
           ) : null}
 
           <GroupInput>
-            <Button className="" onClick={() => toggleAccess()}>
+            <Button className="text-skin-textColor" onClick={() => toggleAccess()}>
               {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
             </Button>
           </GroupInput>
 
           <GroupInput>
-            <Button className="bg-red-400" onClick={() => submitData()}>
+            <Button
+              className="text-skin-textColor bg-skin-btnActionsSave rounded-xl"
+              onClick={() => submitData()}>
               {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
             </Button>
           </GroupInput>

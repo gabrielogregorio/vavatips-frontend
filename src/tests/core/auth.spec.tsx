@@ -1,4 +1,4 @@
-import { getToken, isAuthenticated, login, logout } from '../../core/services/auth';
+import { getToken, isAuthenticated, login, logout } from '@/services/auth';
 
 jest.mock('next/router', () => ({
   useRouter() {

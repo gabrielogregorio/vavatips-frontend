@@ -10,35 +10,34 @@ import Title from '@/base/title';
 import NavbarComponent from '@/layout/navbar';
 import LoaderComponent from '@/base/loader';
 import SubContainer from '@/base/subContainer';
+import navbarEnum from '@/interfaces/navbar';
 import TagsFixFilters from './tagsFixFilters';
 import PostTags from './tags';
 import Posts from './postsItem';
-import navbarEnum from '../../interfaces/navbar';
 import { modelNavbarAdmin, modelNavbarPublic } from '../../core/schemas/navbar';
 
 interface containerPosts {
   breadcrumbs: { url: string; text: string }[];
   type: '' | 'save' | 'tested';
   typeSelected: navbarEnum;
-  typeSelectedAdmin: navbarEnum;
+  mode: 'public' | 'admin';
   title: string;
 }
 
 export default function ContainerPosts({
   breadcrumbs,
   type,
+  mode,
   typeSelected,
   title,
-  typeSelectedAdmin,
 }: containerPosts) {
   const location = useRouter();
-
   const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(location, type);
   const numberSelected = parseInt(queryUrl?.page || '1', 10);
 
   return (
     <>
-      {typeSelectedAdmin !== navbarEnum.None ? (
+      {mode === 'admin' ? (
         <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarAdmin} />
       ) : (
         <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarPublic} />
@@ -53,14 +52,12 @@ export default function ContainerPosts({
         <Title>{title}</Title>
         <ErrorMsg msg={errorMsg} />
 
-        <div className="containerPost">
+        <div>
           <TagsFixFilters queryUrl={queryUrl} />
           <PostTags />
           <LoaderComponent active={isLoading} />
           <Posts posts={posts} />
         </div>
-
-        {isLoading ? <p>Carregando posts...</p> : null}
 
         <PaginationComponent
           urlBase={type === '' ? 'posts' : type}

@@ -10,7 +10,7 @@ import Router from 'next/router';
 import LayoutComponent from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import SubContainer from '@/base/subContainer';
-import { modelNavbarAdmin } from '../../core/schemas/navbar';
+import { modelNavbarAdmin } from '@/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -61,19 +61,18 @@ export default function DashboardScreen() {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <SubContainer>
-        <LoaderComponent active={activeLoader} />
-        <ErrorMsg msg={errorMsg} />
-
-        <p>Bem vindo(a) {username}</p>
-
-        <p>Consultas: {countViewsAll}</p>
-        <p>Usuários: {countViewsIps}</p>
-
-        <p>agentes: {countAlAgents}</p>
-        <p>mapas: {countAlMaps}</p>
-        <p>posts: {countAllPosts}</p>
-        <p>sugestões: {countAllSuggestions}</p>
-        <p>administradores: {countAllUsers}</p>
+        <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
+          <LoaderComponent active={activeLoader} />
+          <ErrorMsg msg={errorMsg} />
+          <p className="text-skin-textColor">Bem vindo(a) {username}</p>
+          <p className="text-skin-textColor">Consultas: {countViewsAll}</p>
+          <p className="text-skin-textColor">Usuários: {countViewsIps}</p>
+          <p className="text-skin-textColor">agentes: {countAlAgents}</p>
+          <p className="text-skin-textColor">mapas: {countAlMaps}</p>
+          <p className="text-skin-textColor">posts: {countAllPosts}</p>
+          <p className="text-skin-textColor">sugestões: {countAllSuggestions}</p>
+          <p className="text-skin-textColor">administradores: {countAllUsers}</p>
+        </div>
       </SubContainer>
       <FooterComponent />
     </LayoutComponent>

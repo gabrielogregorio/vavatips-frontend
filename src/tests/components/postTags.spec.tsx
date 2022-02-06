@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useFilters } from '@/contexts/filters';
 import { useEffect } from 'react';
 import userEvent from '@testing-library/user-event';
-import PostTags from '../../components/widgets/tags';
+import PostTags from '@/widgets/tags';
 import MockApp from '../core/App.Mock';
 
 function ComponentSetup() {
@@ -17,7 +17,7 @@ function ComponentSetup() {
 }
 
 describe('<PostTags />', () => {
-  it('should render input', () => {
+  it('should render component setup post tags', () => {
     render(
       <MockApp>
         <ComponentSetup />
@@ -29,10 +29,16 @@ describe('<PostTags />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'tag2' }));
 
-    expect(screen.getByRole('button', { name: 'tag2' })).toHaveAttribute('class', 'btnActive');
+    expect(screen.getByRole('button', { name: 'tag2' })).toHaveAttribute(
+      'class',
+      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorLink bg-skin-secondary',
+    );
 
     userEvent.click(screen.getByRole('button', { name: 'tag2' }));
 
-    expect(screen.getByRole('button', { name: 'tag2' })).not.toHaveAttribute('class', 'btnActive');
+    expect(screen.getByRole('button', { name: 'tag2' })).not.toHaveAttribute(
+      'class',
+      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorLink bg-skin-secondary',
+    );
   });
 });

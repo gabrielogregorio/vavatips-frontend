@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useTheme } from '../../core/contexts/theme';
+import { useTheme } from '@/contexts/theme';
 
 export default function LayoutComponent({ children }: any) {
   const { theme, setTheme } = useTheme();
@@ -12,7 +12,7 @@ export default function LayoutComponent({ children }: any) {
 
   return (
     <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>
-      <div className="flex items-center min-h-screen flex-col p-0 w-full bg-skin-bgPrimary ">
+      <div className="flex  items-center min-h-screen flex-col p-0 w-full bg-skin-bgPrimary ">
         {children}
       </div>
     </div>

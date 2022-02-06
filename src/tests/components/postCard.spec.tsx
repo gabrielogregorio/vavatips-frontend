@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
+import PostCard from '@/widgets/postCard';
+import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import { mockPosts } from '../mock/mockPosts';
 import MockApp from '../core/App.Mock';
-import PostCard from '../../components/widgets/postCard';
-import ModalOfSuggestion from '../../components/widgets/modalOfSuggestion';
 import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
 
 // FIXME: need test localstorage

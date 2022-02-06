@@ -11,8 +11,8 @@ export default function TestScreen() {
       <ContainerPosts
         breadcrumbs={breadcrumbs}
         type="tested"
+        mode="public"
         typeSelected={navbarEnum.Tested}
-        typeSelectedAdmin={navbarEnum.None}
         title="Posts para testar"
       />
     </LayoutComponent>

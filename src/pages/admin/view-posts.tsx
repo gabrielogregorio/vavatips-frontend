@@ -12,9 +12,9 @@ export default function ViewPostsScreen() {
     <LayoutComponent>
       <ContainerPosts
         breadcrumbs={breadcrumbs}
+        mode="admin"
         type=""
-        typeSelected={navbarEnum.None}
-        typeSelectedAdmin={navbarEnum.ViewPosts}
+        typeSelected={navbarEnum.ViewPosts}
         title="Todos os Posts"
       />
     </LayoutComponent>

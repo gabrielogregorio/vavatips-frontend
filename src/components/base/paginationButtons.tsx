@@ -10,14 +10,18 @@ export default function PaginationButtons({
   agent,
 }: PaginationButtonInterface) {
   return (
-    <li className="bg-skin-bgPrimary">
+    <li className="bg-transparent text-skin-btnActionsSave p-3 pb-1 pt-1 transition duration-150">
       <Link
         passHref
         aria-label={`Navega para a página ${page}`}
         href={resolveQuery(urlBase, { page, map, agent })}>
-        <button type="button" className={`${active ? 'bg-red-400' : ''}`}>
+        <a
+          href="#/"
+          className={`block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor ${
+            active ? 'bg-skin-btnActionsSave text-skin-textColorINVERSE' : ''
+          }`}>
           {page}
-        </button>
+        </a>
       </Link>
     </li>
   );
@@ -25,8 +29,10 @@ export default function PaginationButtons({
 
 export function PaginationDotItems() {
   return (
-    <li className="text-skin-textColorLink">
-      <button type="button">...</button>
+    <li className="bg-transparent text-skin-btnActionsSave p-3 pb-1 pt-1">
+      <a href="#/" type="button">
+        ...
+      </a>
     </li>
   );
 }

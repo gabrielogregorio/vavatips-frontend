@@ -1,4 +1,4 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -7,6 +7,7 @@ import MyProfileScreen from '../../pages/admin/profile';
 import { login } from '../../core/services/auth';
 import MockApp from '../core/App.Mock';
 import { URL_GET_YOUR_USER } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -60,9 +61,7 @@ describe('<MyProfileScreen />', () => {
     );
     login('VALUE_TOKEN_JWT');
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     const inputUsername: HTMLInputElement = screen.getByLabelText('Trocar nome de usuário');
     expect(inputUsername.value).toEqual('usernameUsername');
@@ -75,9 +74,7 @@ describe('<MyProfileScreen />', () => {
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     userEvent.click(screen.getByRole('button', { name: 'logoff' }));
 
@@ -92,9 +89,7 @@ describe('<MyProfileScreen />', () => {
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     userEvent.type(screen.getByLabelText('Trocar nome de usuário'), 'newUsername');
     userEvent.type(screen.getByLabelText('Digite uma nova senha'), 'newPassword');

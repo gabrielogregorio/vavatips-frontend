@@ -1,16 +1,7 @@
-import { propsInterfaceInput } from '@/interfaces/input';
 import GroupInput from './groupInput';
 import LabelComponent from './label';
 
-export default function Input({
-  disabled,
-  type,
-  value,
-  text,
-  setValue,
-  name,
-}: propsInterfaceInput) {
-  // remo
+export default function InputFile({ disabled, type, text, onChange, name }: any) {
   return (
     <GroupInput>
       <LabelComponent name={name} text={text} />
@@ -19,9 +10,8 @@ export default function Input({
         id={name}
         disabled={disabled}
         type={type}
-        value={value}
         placeholder={text}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={onChange}
       />
     </GroupInput>
   );

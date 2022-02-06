@@ -1,4 +1,4 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -6,6 +6,7 @@ import AgentScreen from '../../pages/agents';
 import MockApp from '../core/App.Mock';
 import { mockAgents } from '../mock/mock';
 import { URL_GET_AGENTS_BY_MAP_ASCENT } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -26,7 +27,9 @@ jest.mock(
     },
 );
 
-const handlers = [rest.get(URL_GET_AGENTS_BY_MAP_ASCENT, async (req, res, ctx) => res(ctx.json(mockAgents())))];
+const handlers = [
+  rest.get(URL_GET_AGENTS_BY_MAP_ASCENT, async (req, res, ctx) => res(ctx.json(mockAgents()))),
+];
 
 const server = setupServer(...handlers);
 
@@ -44,9 +47,7 @@ describe('<AgentScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Buscando Agentes/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText(/Sova/i)).toBeInTheDocument();
     expect(screen.getByText(/Astra/i)).toBeInTheDocument();

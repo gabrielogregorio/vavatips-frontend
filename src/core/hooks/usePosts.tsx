@@ -4,7 +4,7 @@ import { useFilters } from '@/contexts/filters';
 import resolveQuery from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
 import { useQuery } from 'react-query';
-import { PropsPostInterface } from '../../interfaces/posts';
+import { PropsPostInterface } from '@/interfaces/posts';
 
 interface filterUrlInterface {
   agent: string;
@@ -32,12 +32,12 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
       setTags([]);
       setFilters([]);
     },
-    [setFilters, setTags],
+    [],
   );
 
   const { isLoading, error, data, refetch } = useQuery(
     ['/posts', resolveQuery(dataRequest)],
-    () => api.get(resolveQuery('/posts', dataRequest)).then((data) => data.data),
+    () => api.get(resolveQuery('/posts', dataRequest)).then((response) => response.data),
     { enabled: false }, // send with manual update
   );
 
@@ -54,7 +54,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
       setTags(data.tags);
       setPosts(postsFiltered);
     }
-  }, [data?.count, data?.posts, data?.tags, setTags]);
+  }, [JSON.stringify(data)]);
 
   useEffect(() => {
     if (location.isReady) {
@@ -81,7 +81,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
 
       setDataRequest(data1);
     }
-  }, [location?.query, typeRequest, filters, setTags, setFilters]);
+  }, [JSON.stringify(location?.query), typeRequest, JSON.stringify(filters)]);
 
   // @ts-ignore
   return { posts, isLoading, errorMsg: error?.message || '', finishPage, queryUrl };

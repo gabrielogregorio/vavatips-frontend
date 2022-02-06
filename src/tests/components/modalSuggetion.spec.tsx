@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import { useEffect } from 'react';
-import ModalMessage from '../../components/widgets/modalMessage';
-import ModalOfSuggestion from '../../components/widgets/modalOfSuggestion';
-import { useModalContext } from '../../core/contexts/modalSuggestion';
+import ModalMessage from '@/widgets/modalMessage';
+import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
+import { useModalContext } from '@/contexts/modalSuggestion';
 import MockApp from '../core/App.Mock';
 import { URL_POST_SUGGESTION } from '../mock/ROUTES_API';
 
@@ -33,7 +33,9 @@ const handlers = [
     const { idPost, email, description }: any = req.body;
 
     const requestIsCorrectly =
-      (idPost === '12' && email === 'myEmail@email.com' && description === 'my long description for problem') ||
+      (idPost === '12' &&
+        email === 'myEmail@email.com' &&
+        description === 'my long description for problem') ||
       email === 'acceptDataWithNotId';
     if (requestIsCorrectly) {
       return res(
@@ -103,7 +105,9 @@ describe('<ModalOfSuggestion />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await waitFor(() =>
-      expect(screen.queryByText('Sugestão enviado com sucesso, muito obrigado!')).toBeInTheDocument(),
+      expect(
+        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+      ).toBeInTheDocument(),
     );
   });
 
@@ -121,7 +125,9 @@ describe('<ModalOfSuggestion />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await waitFor(() =>
-      expect(screen.queryByText('Sugestão enviado com sucesso, muito obrigado!')).toBeInTheDocument(),
+      expect(
+        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+      ).toBeInTheDocument(),
     );
   });
   it('should render modal suggestion and error to send suggestion', async () => {
@@ -131,14 +137,19 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para contato (Opcional)'), 'invalidEmailApi@email.com');
+    userEvent.type(
+      screen.getByLabelText('Email para contato (Opcional)'),
+      'invalidEmailApi@email.com',
+    );
 
     userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
     await waitFor(() =>
       expect(
-        screen.queryByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'),
+        screen.queryByText(
+          'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores',
+        ),
       ).toBeInTheDocument(),
     );
   });
@@ -173,7 +184,9 @@ describe('<ModalOfSuggestion />', () => {
     userEvent.type(screen.getByLabelText('Email para contato (Opcional)'), 'myEmail@email.com');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(screen.getByText('Você precisa preencher o campo Descrição com as informações')).toBeInTheDocument();
+    expect(
+      screen.getByText('Você precisa preencher o campo Descrição com as informações'),
+    ).toBeInTheDocument();
 
     userEvent.type(screen.getByLabelText('Descrição'), 'small');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));

@@ -30,8 +30,8 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
   }
 
   return (
-    <div className="w-full bg-skin-backgroundSecondary flex justify-center shadow-lg">
-      <div className="p-4 pb-2 flex max-w-maxWidthDefault w-full">{renderBreadCrumb()}</div>
+    <div className="w-full bg-skin-backgroundSecondary flex justify-center items-center shadow-md h-8">
+      <div className="p-0 flex max-w-maxWidthDefault w-full">{renderBreadCrumb()}</div>
     </div>
   );
 }

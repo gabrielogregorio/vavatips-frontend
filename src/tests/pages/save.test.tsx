@@ -1,18 +1,20 @@
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import MockApp from '../core/App.Mock';
 import SaveScreen from '../../pages/save';
 import { mockPosts } from '../mock/mockPosts';
 import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      route: '',
+      route: '/posts',
+      isReady: true,
       pathname: '',
-      query: '',
-      asPath: '',
+      query: { map: 'any', agent: 'any', type: 'save', page: 1 },
+      asPath: `/posts?map=any&agent=any`,
     };
   },
 }));
@@ -46,15 +48,14 @@ describe('<SaveScreen />', () => {
     render(
       <MockApp
         localstorage={{
-          SAVE_POSTS: '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
+          SAVE_POSTS:
+            '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
         }}>
         <SaveScreen />
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: mockPosts().posts[0].title })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: mockPosts().posts[1].title })).toBeInTheDocument();

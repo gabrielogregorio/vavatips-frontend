@@ -8,6 +8,8 @@ module.exports = {
     '!**/cypress/**',
     '!**/jest.config.js**',
     '!**/jest.setup.js**',
+    '!**/postcss.config.js**',
+    '!**/tailwind.config.js,**',
     '!**/next.config.js**',
     '!**/.eslintrc.js**',
     '!**/.prettierrc.js**',
@@ -25,7 +27,7 @@ module.exports = {
     '^@/helpers/(.*)$': '<rootDir>/src/core/helpers/$1',
     '^@/hooks/(.*)$': '<rootDir>/src/core/hooks/$1',
     '^@/services/(.*)$': '<rootDir>/src/core/services/$1',
-
+    '^@/schemas/(.*)$': '<rootDir>/src/core/schemas/$1',
     '^@/interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
 
     /* Handle CSS imports (with CSS modules)

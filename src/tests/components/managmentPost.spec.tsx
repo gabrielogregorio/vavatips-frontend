@@ -1,10 +1,11 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import MockApp from '../core/App.Mock';
 import CreatePostManagement from '../../components/widgets/managmentPost';
 import { URL_GET_POST_EDITABLE } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -14,6 +15,7 @@ jest.mock('next/router', () => ({
       pathname: '/admin/post-edit',
       query: { id: '6159c92b1775570b9c40612a', map: 'Ascent', agent: 'Sova' },
       asPath: '',
+      isReady: true,
     };
   },
 }));
@@ -80,9 +82,7 @@ describe('<CreatePostManagement />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
 
@@ -125,9 +125,7 @@ describe('<CreatePostManagement />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
 
@@ -212,9 +210,7 @@ describe('<CreatePostManagement />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
 

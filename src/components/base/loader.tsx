@@ -5,8 +5,13 @@ interface loaderProps {
 export default function LoaderComponent({ active }: loaderProps) {
   function renderActive() {
     return active ? (
-      <div data-testid="loader" className="w-full flex justify-center py-4">
-        <div className="w-20 h-20 border-2 border-emerald-200 rounded-full" />
+      <div className="flex items-center justify-center w-full">
+        <div
+          data-testid="loader"
+          className="spinner-border animate-spin w-10 h-10 inline-block border-4 rounded-full m-2 border-skin-btnActionsSave border-b-transparent"
+          role="status">
+          <span className="visually-hidden hidden">Loading...</span>
+        </div>
       </div>
     ) : null;
   }

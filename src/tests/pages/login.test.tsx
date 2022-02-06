@@ -1,12 +1,13 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
+import { TOKEN_JWT } from '@/services/auth';
 import MockApp from '../core/App.Mock';
 import Login from '../../pages/login';
-import { TOKEN_JWT } from '../../core/services/auth';
 import { URL_POST_AUTHENTICATED, URL_POST_CREATE_NEW_USER } from '../mock/ROUTES_API';
+import waitByLoading from '../mock/waitByLoading';
 
 const mock = {
   usernameValid: 'my username',
@@ -73,7 +74,11 @@ const handlers = [
       return res(ctx.status(400));
     }
 
-    if (username === mock.usernameToCreated && password === 'passwordConfirm' && code === 'codCadaster') {
+    if (
+      username === mock.usernameToCreated &&
+      password === 'passwordConfirm' &&
+      code === 'codCadaster'
+    ) {
       return res(
         ctx.status(200),
         ctx.json({
@@ -111,9 +116,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(localStorage.getItem(TOKEN_JWT)).toEqual('tokenJwtTest');
 
@@ -132,9 +135,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('Usuário não cadastrado!')).toBeDefined();
   });
@@ -151,9 +152,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('Erro Desconhecido')).toBeDefined();
   });
@@ -170,9 +169,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('Senha inválida!')).toBeDefined();
   });
@@ -215,9 +212,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(Router.push).toHaveBeenCalledWith('/admin/dashboard');
     Router.push('');
@@ -241,9 +236,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
     expect(screen.getByText('Esse e-mail já está cadastrado')).toBeDefined();
   });
 
@@ -265,9 +258,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
     expect(screen.getByText(/Erro ao cadastrar usuário/i)).toBeDefined();
   });
 
@@ -287,9 +278,7 @@ describe('<Login />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitForElementToBeRemoved(screen.queryByTestId('loader'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('Erro ao cadastrar usuário')).toBeDefined();
   });

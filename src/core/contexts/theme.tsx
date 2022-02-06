@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { changeTheme, getTheme } from '../services/theme';
+import { changeTheme, getTheme } from '@/services/theme';
 
 const initializeTheme: string = getTheme();
 
