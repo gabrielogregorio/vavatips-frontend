@@ -1,8 +1,10 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import ModalComponent from '../../components/widgets/modal';
+import ModalComponent from '@/widgets/modal';
+import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -24,7 +26,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.post(`http://127.0.0.1:3333/postLoadFile`, async (req, res, ctx) =>
+  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json({ filename: 'https://gcloud.com/123abc' })),
   ),
 ];
@@ -119,17 +121,22 @@ describe('<ModalComponent />', () => {
     const inputFIle: HTMLInputElement = screen.getByLabelText('Adicionar Imagem');
 
     userEvent.upload(inputFIle, file);
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(inputFIle.files[0]).toStrictEqual(file);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://gcloud.com/123abc');
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://gcloud.com/123abc',
+    );
 
-    expect(saveModal).toHaveBeenCalledWith('123', 'how test description', 'https://gcloud.com/123abc');
+    expect(saveModal).toHaveBeenCalledWith(
+      '123',
+      'how test description',
+      'https://gcloud.com/123abc',
+    );
   });
 
   it('should view Image and description and overwrite description with same image', async () => {
@@ -148,13 +155,20 @@ describe('<ModalComponent />', () => {
     );
 
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição post');
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'http://127.0.0.1:3333/images/https://uploads/file1');
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/https://uploads/file1',
+    );
     expect(inputDescription.value).toEqual('myDescription');
 
     userEvent.type(screen.getByLabelText('Descrição post'), ' how contatenate description');
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(saveModal).toHaveBeenCalledWith('123', 'myDescription how contatenate description', 'https://uploads/file1');
+    expect(saveModal).toHaveBeenCalledWith(
+      '123',
+      'myDescription how contatenate description',
+      'https://uploads/file1',
+    );
   });
 });

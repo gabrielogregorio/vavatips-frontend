@@ -3,9 +3,11 @@ import NavbarComponent from '@/layout/navbar';
 import api from '@/services/api';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
-import { navbarEnum } from '@/interfaces/navbar';
-import LoaderComponent from '../../components/base/loader';
-import LayoutComponent from '../../components/layout/layout';
+import navbarEnum from '@/interfaces/navbar';
+import LoaderComponent from '@/base/loader';
+import LayoutComponent from '@/layout/layout';
+import SubContainer from '@/base/subContainer';
+import { modelNavbarAdmin } from '@/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -35,39 +37,45 @@ export default function SuggestionScreen() {
 
   function renderSuggestions() {
     return suggestions.map((report) => (
-      <tr key={report.id}>
-        <td>{report.postId}</td>
-        <td>{report.email}</td>
-        <td>{report.description}</td>
-        <td>{report.status ?? 'Não atendido'}</td>
+      <tr key={report.id} className="border-b">
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.postId}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.email}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.description}
+        </td>
+        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+          {report.status ?? 'Não atendido'}
+        </td>
       </tr>
     ));
   }
 
   return (
     <LayoutComponent>
-      <div className="container">
-        <NavbarComponent selected={navbarEnum.SuggestionScreen} />
-        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+      <NavbarComponent selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-        <LoaderComponent active={loading} />
+      <LoaderComponent active={loading} />
 
-        <div className="sub__container">
-          <table>
-            <thead>
-              <tr>
-                <th>Post</th>
-                <th>Email</th>
-                <th>Descrição</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+      <SubContainer>
+        <table className="w-full max-w-maxWidthDefault">
+          <thead className="border-b">
+            <tr>
+              <th className="text-base text-skin-textColor text-left">Post</th>
+              <th className="text-base text-skin-textColor text-left">Email</th>
+              <th className="text-base text-skin-textColor text-left">Descrição</th>
+              <th className="text-base text-skin-textColor text-left">Status</th>
+            </tr>
+          </thead>
 
-            <tbody>{renderSuggestions()}</tbody>
-          </table>
-        </div>
-        <FooterComponent />
-      </div>
+          <tbody>{renderSuggestions()}</tbody>
+        </table>
+      </SubContainer>
+      <FooterComponent />
     </LayoutComponent>
   );
 }

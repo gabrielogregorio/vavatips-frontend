@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import NavbarComponentPublic from '@/layout/navbar_public';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import ModalMessage from '@/widgets/modalMessage';
 import FooterComponent from '@/layout/footer';
@@ -8,37 +7,44 @@ import PaginationComponent from '@/widgets/pagination';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts from '@/hooks/usePosts';
 import Title from '@/base/title';
-import { navbarEnum, navbarEnumPublic } from '@/interfaces/navbar';
-import NavbarComponent from '../layout/navbar';
-import TagsFixFilters from './tagsFixFilters';
-import PostTags from './tags';
-import LoaderComponent from '../base/loader';
-import Posts from './postsItem';
+import NavbarComponent from '@/layout/navbar';
+import LoaderComponent from '@/base/loader';
+import SubContainer from '@/base/subContainer';
+import navbarEnum from '@/interfaces/navbar';
+import { modelNavbarAdmin, modelNavbarPublic } from '@/schemas/navbar';
+import TagsFixFilters from '@/widgets/tagsFixFilters';
+import PostTags from '@/widgets/tags';
+import Posts from '@/widgets/postsItem';
 
 interface containerPosts {
   breadcrumbs: { url: string; text: string }[];
   type: '' | 'save' | 'tested';
-  typeSelected: navbarEnumPublic;
-  typeSelectedAdmin: navbarEnum;
+  typeSelected: navbarEnum;
+  mode: 'public' | 'admin';
   title: string;
 }
 
-export default function ContainerPosts({ breadcrumbs, type, typeSelected, title, typeSelectedAdmin }: containerPosts) {
+export default function ContainerPosts({
+  breadcrumbs,
+  type,
+  mode,
+  typeSelected,
+  title,
+}: containerPosts) {
   const location = useRouter();
-
-  const { posts, activeLoader, errorMsg, finishPage, queryUrl } = usePosts(location, type);
+  const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(location, type);
   const numberSelected = parseInt(queryUrl?.page || '1', 10);
 
   return (
-    <div className="container">
-      {typeSelectedAdmin !== navbarEnum.None ? (
-        <NavbarComponent selected={typeSelectedAdmin} />
+    <>
+      {mode === 'admin' ? (
+        <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarAdmin} />
       ) : (
-        <NavbarComponentPublic selected={typeSelected} />
+        <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarPublic} />
       )}
 
-      <BreadcrumbComponent breadcrumbs={breadcrumbs} />
-      <div className="sub__container">
+      <BreadcrumbComponent breadcrumbs={breadcrumbs} admin={false} />
+      <SubContainer>
         <ModalOfSuggestion title="fazer sugestão" />
 
         <ModalMessage />
@@ -46,14 +52,12 @@ export default function ContainerPosts({ breadcrumbs, type, typeSelected, title,
         <Title>{title}</Title>
         <ErrorMsg msg={errorMsg} />
 
-        <div className="containerPost">
+        <div>
           <TagsFixFilters queryUrl={queryUrl} />
           <PostTags />
-          <LoaderComponent active={activeLoader} />
+          <LoaderComponent active={isLoading} />
           <Posts posts={posts} />
         </div>
-
-        {activeLoader ? <p>Carregando posts...</p> : null}
 
         <PaginationComponent
           urlBase={type === '' ? 'posts' : type}
@@ -63,9 +67,9 @@ export default function ContainerPosts({ breadcrumbs, type, typeSelected, title,
           map={queryUrl.map}
           agent={queryUrl.agent}
         />
-      </div>
+      </SubContainer>
 
       <FooterComponent />
-    </div>
+    </>
   );
 }

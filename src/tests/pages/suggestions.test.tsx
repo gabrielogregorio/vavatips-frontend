@@ -1,10 +1,10 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import SuggestionScreen from '../../pages/admin/suggestions';
-import MockApp from '../core/App.Mock';
-
-// FIXME: test JWT token
+import SuggestionScreen from '@/pages/admin/suggestions';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -26,7 +26,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/suggestions`, async (req, res, ctx) =>
+  rest.get(URL_GET_ALL_SUGGESTIONS, async (req, res, ctx) =>
     res(
       ctx.json([
         {
@@ -70,9 +70,7 @@ describe('<SuggestionScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('description 111')).toBeDefined();
     expect(screen.getByText('email@email.com111')).toBeDefined();

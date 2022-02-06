@@ -4,10 +4,12 @@ import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSugg
 import api from '@/services/api';
 import Button from '@/base/button';
 import Input from '@/base/input';
-import ButtonCloseModal from '@/base/modalCloseButton';
 import TextArea from '@/base/textArea';
-import { modalType } from '../../interfaces/modal';
-import LoaderComponent from '../base/loader';
+import { modalType } from '@/interfaces/modal';
+import LoaderComponent from '@/base/loader';
+import ErrorMsg from '@/base/errorMsg';
+import FormComponent from '@/base/Form';
+import ModalRef from './modalRef';
 
 interface ModalProps {
   title: string;
@@ -15,7 +17,6 @@ interface ModalProps {
 
 export default function ModalOfSuggestion({ title }: ModalProps) {
   const [email, setEmail] = useState<string>('');
-
   const [description, setDescription] = useState<string>('');
   const [postTitle, setPostTitle] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState<string>('');
@@ -56,31 +57,52 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
     }
     setLoading(false);
   }
+  const handleCloseModal = () => {
+    setModalSuggestion(initializeModalSuggestion);
+  };
 
   return modalSuggestion.active ? (
-    <div className="modal">
-      <div className="modalItem">
-        <div className="modalTitle">
-          <h1>{title}</h1>
-          <ButtonCloseModal onClick={() => setModalSuggestion(initializeModalSuggestion)} />
+    <ModalRef title={title} closeModal={handleCloseModal}>
+      <FormComponent>
+        <ErrorMsg msg={errorMsg} />
+        <LoaderComponent active={loading} />
+        <Input
+          name="tip"
+          disabled
+          type="text"
+          text="Dica"
+          value={postTitle}
+          setValue={setPostTitle}
+        />
+
+        <Input
+          name="email"
+          type="email"
+          text="Email para contato (Opcional)"
+          value={email}
+          setValue={setEmail}
+        />
+
+        <TextArea
+          name="description"
+          title="Descrição"
+          value={description}
+          setValue={setDescription}
+        />
+
+        <div className="flex justify-end w-full">
+          <Button
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColor"
+            onClick={() => setModalSuggestion(initializeModalSuggestion)}>
+            Cancelar
+          </Button>
+          <Button
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColor"
+            onClick={() => saveModal()}>
+            Adicionar
+          </Button>
         </div>
-        <hr />
-
-        <div className="form">
-          <p className="errorMsg">{errorMsg}</p>
-          <LoaderComponent active={loading} />
-          <Input name="tip" disabled type="text" text="Dica" value={postTitle} setValue={setPostTitle} />
-
-          <Input name="email" type="email" text="Email para contato (Opcional)" value={email} setValue={setEmail} />
-
-          <TextArea name="description" title="Descrição" value={description} setValue={setDescription} />
-
-          <div className="modalActions">
-            <Button onClick={() => setModalSuggestion(initializeModalSuggestion)}>Cancelar</Button>
-            <Button onClick={() => saveModal()}>Adicionar</Button>
-          </div>
-        </div>
-      </div>
-    </div>
+      </FormComponent>
+    </ModalRef>
   ) : null;
 }

@@ -3,8 +3,11 @@ import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
 import LoaderComponent from '@/base/loader';
-import ButtonCloseModal from '@/base/modalCloseButton';
 import { ModalPropsBase } from '@/interfaces/modal';
+import FormComponent from '@/base/Form';
+import TextArea from '@/base/textArea';
+import InputFile from '@/base/inputFile';
+import ModalRef from './modalRef';
 
 export default function ModalComponent({
   id: idModal,
@@ -33,7 +36,7 @@ export default function ModalComponent({
     }
   }, [idModal, descriptionModal, image]);
 
-  function loadImage(event: any) {
+  const loadImage = (event: any) => {
     setActiveLoader(true);
     const formData = new FormData();
     formData.append('image', event.target.files[0]);
@@ -46,48 +49,47 @@ export default function ModalComponent({
       });
     }
     sendImageFromApi();
-  }
+  };
 
-  function closeModalItem() {
+  const closeModalItem = () => {
     closeModal(null);
-  }
+  };
 
   return (
-    <div className="modal" data-testid="modal">
-      <div className="modalItem">
-        <div className="modalTitle">
-          <h1>{title}</h1>
-          <ButtonCloseModal onClick={() => closeModalItem()} />
+    <ModalRef title={title} closeModal={closeModalItem}>
+      <FormComponent>
+        <TextArea
+          name="description"
+          title="Descrição post"
+          value={description}
+          setValue={setDescription}
+        />
+
+        <InputFile
+          text="Adicionar Imagem"
+          type="file"
+          name="image"
+          disabled={false}
+          onChange={loadImage}
+        />
+
+        <LoaderComponent active={activeLoader} />
+
+        <div>{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
+
+        <div className="flex justify-end w-full">
+          <Button
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
+            onClick={() => closeModalItem()}>
+            Cancelar
+          </Button>
+          <Button
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
+            onClick={() => saveModal(id, description, LinkImg)}>
+            Adicionar
+          </Button>
         </div>
-
-        <hr />
-
-        <div className="form">
-          <div className="groupInput">
-            <div className="groupInputSelect">
-              <label htmlFor="descriptionNewPost">Descrição post</label>
-              <textarea id="descriptionNewPost" value={description} onChange={(e) => setDescription(e.target.value)} />
-            </div>
-          </div>
-
-          <div className="groupInput">
-            <div className="groupInputSelect">
-              <label htmlFor="customFileUpload" className="customFileUpload">
-                Adicionar Imagem
-              </label>
-              <input id="customFileUpload" type="file" name="image" onChange={loadImage} />
-            </div>
-          </div>
-          <LoaderComponent active={activeLoader} />
-          <div className="instructionImage">{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
-
-          <div className="modalActions">
-            <Button onClick={() => closeModalItem()}>Cancelar</Button>
-
-            <Button onClick={() => saveModal(id, description, LinkImg)}>Adicionar</Button>
-          </div>
-        </div>
-      </div>
-    </div>
+      </FormComponent>
+    </ModalRef>
   );
 }

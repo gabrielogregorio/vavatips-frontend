@@ -1,4 +1,4 @@
-import { mockAllPosts, mockPosts } from '../mock/mockPosts';
+import { mockAllPosts, mockPosts } from '@/mock/mockPosts';
 
 describe('mockPosts', () => {
   it('should test resolve query', async () => {

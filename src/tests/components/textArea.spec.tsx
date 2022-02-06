@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import TextArea from '../../components/base/textArea';
+import TextArea from '@/base/textArea';
 
 describe('<TextArea />', () => {
-  it('should render input', () => {
+  it('should render textarea', () => {
     const fn = jest.fn();
     render(<TextArea title="Type our description 1" name="description" value="" setValue={fn} />);
 

@@ -1,4 +1,4 @@
-const resolveQuery = (urlBase: string, filters: any = []) => {
+const resolveQuery = (urlBase: string, filters: any = []): string => {
   let urlFinal = urlBase;
   if (filters.length === 0) {
     return urlFinal;

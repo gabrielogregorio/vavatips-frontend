@@ -1,10 +1,16 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import MockApp from '../core/App.Mock';
-import EditPostScreen from '../../pages/admin/post-edit';
+import MockApp from '@/mock/App.Mock';
+import EditPostScreen from '@/pages/admin/post-edit';
+import {
+  URL_DELETE_POST_BY_ID,
+  URL_GET_POST_BY_ID,
+  URL_PUT_EDIT_POST_BY_ID,
+} from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -14,6 +20,7 @@ jest.mock('next/router', () => ({
       pathname: '',
       query: { id: '617d44c81bc4243f9b2d5a67' },
       asPath: '',
+      isReady: true,
       push: jest.fn(),
       events: {
         on: jest.fn(),
@@ -62,14 +69,14 @@ const postBase = {
 };
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/post/:postId`, async (req, res, ctx) => {
+  rest.get(URL_GET_POST_BY_ID, async (req, res, ctx) => {
     if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
       return res(ctx.json(postBase));
     }
     return res(ctx.status(404));
   }),
 
-  rest.put(`http://127.0.0.1:3333/post/:postId`, async (req, res, ctx) => {
+  rest.put(URL_PUT_EDIT_POST_BY_ID, async (req, res, ctx) => {
     const { title, description, tags, imgs }: any = req.body;
     const postIsValid =
       title === `${postBase.title} concatenate new title` &&
@@ -88,7 +95,7 @@ const handlers = [
     return res(ctx.status(500));
   }),
 
-  rest.delete('http://127.0.0.1:3333/post/:postId', async (req, res, ctx) => {
+  rest.delete(URL_DELETE_POST_BY_ID, async (req, res, ctx) => {
     if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
       return res(ctx.status(200));
     }
@@ -112,9 +119,7 @@ describe('<EditPostScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
@@ -130,15 +135,24 @@ describe('<EditPostScreen />', () => {
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_111');
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_111',
+    );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_222');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_222',
+    );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
-    expect(screen.getAllByRole('img')[2]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_333');
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_333',
+    );
   });
 
   it('should render edit post screen and update post', async () => {
@@ -148,9 +162,7 @@ describe('<EditPostScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
@@ -166,21 +178,28 @@ describe('<EditPostScreen />', () => {
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_111');
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_111',
+    );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_222');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_222',
+    );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
-    expect(screen.getAllByRole('img')[2]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/image_333');
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute(
+      'src',
+      'http://127.0.0.1:3333/images/image_333',
+    );
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
     Router.push('');
@@ -193,17 +212,13 @@ describe('<EditPostScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
 
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
   });
 });

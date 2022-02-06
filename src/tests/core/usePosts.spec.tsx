@@ -1,19 +1,12 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import usePosts from '../../core/hooks/usePosts';
-import MockApp from './App.Mock';
-
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
-}));
+import ErrorMsg from '@/base/errorMsg';
+import usePosts from '@/hooks/usePosts';
+import LoaderComponent from '@/base/loader';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock(
   'next/link',
@@ -23,50 +16,115 @@ jest.mock(
     },
 );
 
-const server = setupServer(
-  rest.get('http://127.0.0.1:3333/posts', (req, res, ctx) =>
-    res(
-      ctx.status(200),
-      ctx.json({
-        posts: [
-          { id: 1, title: 'post 1' },
-          { id: 2, title: 'post 2' },
-          { id: 3, title: 'post 3' },
-        ],
-        count: 8,
-      }),
-    ),
-  ),
+const mockPosts = [
+  {
+    id: 1,
+    title: 'post 1',
+    agent: 'side',
+    map: 'moon',
+    type: 'most_popular',
+    page: 1,
+  },
+  {
+    id: 2,
+    title: 'post 2',
+    agent: 'side',
+    map: 'moon',
+    type: 'most_popular',
+    page: 1,
+  },
+  {
+    id: 3,
+    title: 'post 3',
+    agent: 'side',
+    map: 'moon',
+    type: 'most_popular',
+    page: 1,
+  },
+  {
+    id: 4,
+    title: 'post 4',
+    agent: 'kay/0',
+    map: 'ascent',
+    type: '',
+    page: 1,
+  },
+  {
+    id: 5,
+    title: 'post 5',
+    agent: 'kay/0',
+    map: 'ascent',
+    type: '',
+    page: 1,
+  },
+];
 
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
+const server = setupServer(
+  rest.get(URL_GET_ALL_POSTS, (req, res, ctx) => {
+    const map = req.url.searchParams.get('map');
+    const agent = req.url.searchParams.get('agent');
+    const idPosts = req.url.searchParams.get('idPosts');
+    const page = Number(req.url.searchParams.get('page'));
+
+    if (idPosts !== null) {
+      const filtered = mockPosts.filter((post) => idPosts.includes(post.id.toString()));
+      return res(
+        ctx.status(200),
+        ctx.json({
+          posts: filtered,
+          count: filtered.length,
+        }),
+      );
+    }
+
+    let finalFilter = mockPosts.filter((post) => post.map === map);
+    finalFilter = finalFilter.filter((post) => post.agent === agent);
+    finalFilter = finalFilter.filter((post) => post.page === page);
+
+    if (finalFilter.length === 0) {
+      return res(ctx.status(404));
+    }
+    if (idPosts === null) {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          posts: finalFilter,
+          count: finalFilter.length,
+        }),
+      );
+    }
+
+    return res(ctx.status(500));
+  }),
+
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-function ComponentPosts({ urlBase, typeRequest }: any) {
-  const { posts, activeLoader, errorMsg, finishPage, queryUrl } = usePosts(
+function ComponentPosts({ agent, map, type, page }: any) {
+  const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(
     {
-      query: {
-        agent: 'AgentItem',
-        map: 'MapItem',
-        type: 'TypeItem',
-        page: '5',
-      },
+      route: '/posts',
+      isReady: true,
+      pathname: '',
+      query: { map, agent, type, page }, //
+      asPath: `/posts?map=${map}&agent=${agent}`,
     },
-    urlBase ? typeRequest : undefined,
+    type,
   );
 
   function renderPosts() {
-    return posts?.map((agent: any) => (
-      <div key={agent.id}>
-        <h3>ID: {agent.id}</h3>
-        <h3>TITLE: {agent.title}</h3>
+    return posts?.map((agentItem: any) => (
+      <div key={agentItem.id}>
+        <h3>ID: {agentItem.id}</h3>
+        <h3>TITLE: {agentItem.title}</h3>
       </div>
     ));
   }
 
   return (
     <div>
-      {activeLoader ? <h3>Loading...</h3> : null}
-      {errorMsg !== '' ? <h3>{errorMsg}</h3> : null}
+      <LoaderComponent active={isLoading} />
+      {errorMsg !== '' ? <ErrorMsg msg={errorMsg} /> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>
       <h3>{`QUERY_MAP: ${queryUrl.map}`}</h3>
@@ -78,38 +136,6 @@ function ComponentPosts({ urlBase, typeRequest }: any) {
   );
 }
 
-function ComponentPostsWithSuccess() {
-  return (
-    <MockApp>
-      <ComponentPosts urlBase typeRequest="" />
-    </MockApp>
-  );
-}
-
-function ComponentPostsNoSendParamsUrlBase() {
-  return (
-    <MockApp>
-      <ComponentPosts urlBase={false} />
-    </MockApp>
-  );
-}
-
-function ComponentPostsWithSave() {
-  return (
-    <MockApp>
-      <ComponentPosts urlBase typeRequest="save" />
-    </MockApp>
-  );
-}
-
-function ComponentPostsWithTested() {
-  return (
-    <MockApp>
-      <ComponentPosts urlBase typeRequest="tested" />
-    </MockApp>
-  );
-}
-
 describe('<ComponentPosts />', () => {
   beforeAll(() => server.listen());
 
@@ -118,12 +144,12 @@ describe('<ComponentPosts />', () => {
   afterAll(() => server.close());
 
   it('should return posts', async () => {
-    render(<ComponentPostsWithSuccess />);
-
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
-
+    render(
+      <MockApp>
+        <ComponentPosts agent="side" map="moon" type="" page={1} />
+      </MockApp>,
+    );
+    await waitByLoading();
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
 
@@ -133,95 +159,71 @@ describe('<ComponentPosts />', () => {
     expect(screen.getByRole('heading', { name: 'ID: 3' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: post 3' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: 'PAGE: 8' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: AgentItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_MAP: MapItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: TypeItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 5' })).toBeInTheDocument();
-  });
-
-  it('should return post tested, but, not send url base', async () => {
-    render(<ComponentPostsNoSendParamsUrlBase />);
-
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
-
-    expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 2' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 2' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 3' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 3' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'PAGE: 8' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: AgentItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_MAP: MapItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: TypeItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 5' })).toBeInTheDocument();
-  });
-
-  it('should return post save', async () => {
-    // FIXME: integration with localstorage
-    render(<ComponentPostsWithSave />);
-
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
-
-    expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 2' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 2' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 3' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 3' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'PAGE: 8' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: AgentItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_MAP: MapItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: TypeItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 5' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'PAGE: 3' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: side' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_MAP: moon' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_TYPE:' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 1' })).toBeInTheDocument();
   });
 
   it('should return post tested', async () => {
-    // FIXME: integration with localstorage
-    render(<ComponentPostsWithTested />);
+    render(
+      <MockApp
+        localstorage={{
+          TESTED_POSTS: '["5"]',
+        }}>
+        <ComponentPosts agent="kay/0" map="ascent" type="tested" page={1} />
+      </MockApp>,
+    );
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 1' })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'ID: 4' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'TITLE: post 4' })).not.toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: 'ID: 2' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 2' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'ID: 5' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'TITLE: post 5' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: 'ID: 3' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: post 3' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'PAGE: 8' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: AgentItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_MAP: MapItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: TypeItem' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 5' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'PAGE: 1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: kay/0' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_MAP: ascent' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: tested' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 1' })).toBeInTheDocument();
   });
 
-  // it('should test error', async () => {
-  //   render(
-  //     <MockApp>
-  //       <ComponentPosts />
-  //     </MockApp>,
-  //   );
+  it('should return post save', async () => {
+    render(
+      <MockApp
+        localstorage={{
+          SAVE_POSTS: '["4"]',
+        }}>
+        <ComponentPosts agent="kay/0" map="ascent" type="save" page={1} />
+      </MockApp>,
+    );
 
-  //   await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-  //     timeout: 2000,
-  //   });
+    await waitByLoading();
 
-  //   expect(screen.queryByText(/Error/i)).toBeInTheDocument();
-  // });
+    expect(screen.getByRole('heading', { name: 'ID: 4' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'TITLE: post 4' })).toBeInTheDocument();
+
+    expect(screen.queryByRole('heading', { name: 'ID: 5' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: 'TITLE: post 5' })).not.toBeInTheDocument();
+
+    expect(screen.getByRole('heading', { name: 'PAGE: 1' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_AGENT: kay/0' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_MAP: ascent' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_TYPE: save' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'QUERY_PAGE: 1' })).toBeInTheDocument();
+  });
+
+  it('should test error', async () => {
+    render(
+      <MockApp>
+        <ComponentPosts agent="notExists" map="notExists" type="" page={0} />
+      </MockApp>,
+    );
+
+    await waitByLoading();
+    expect(screen.queryByText(/Request failed with status code 404/i)).toBeInTheDocument();
+  });
 });

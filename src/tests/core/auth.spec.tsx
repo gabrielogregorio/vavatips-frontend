@@ -1,4 +1,4 @@
-import { getToken, isAuthenticated, login, logout } from '../../core/services/auth';
+import { getToken, isAuthenticated, login, logout } from '@/services/auth';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -10,6 +10,7 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+Object.defineProperty(window, undefined, jest.fn());
 
 describe('auth', () => {
   it('should test auth localstorage', async () => {

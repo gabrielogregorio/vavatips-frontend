@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { changeTheme, getTheme } from '../services/theme';
+import { changeTheme } from '@/services/theme';
 
-const initializeTheme: string = getTheme();
+const initializeTheme: string = 'dark';
 
 // eslint-disable-next-line no-unused-vars
 const ContextTheme = createContext<{ theme: string; setTheme: (event: any) => void }>({

@@ -1,10 +1,12 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import MockApp from '../core/App.Mock';
-import CreatePostScreen from '../../pages/admin/post-create';
+import MockApp from '@/mock/App.Mock';
+import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
+import CreatePostScreen from '@/pages/admin/post-create';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -19,7 +21,7 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [
-  rest.post(`http://127.0.0.1:3333/post`, async (req, res, ctx) => {
+  rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
     const { title, description, tags, imgs }: any = req.body;
 
     const postIsValid =
@@ -117,10 +119,7 @@ describe('<CreatePostScreen />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
-
+    await waitByLoading();
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
     Router.push('');
   });

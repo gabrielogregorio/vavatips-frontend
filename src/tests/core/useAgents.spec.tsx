@@ -1,8 +1,13 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import useAgents from '../../core/hooks/useAgents';
-import MockApp from './App.Mock';
+import useAgents from '@/hooks/useAgents';
+import {
+  URL_GET_AGENTS_AND_MAP_SELECTED_ERROR,
+  URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS,
+} from '@/mock/ROUTES_API';
+import MockApp from '@/mock/App.Mock';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -24,7 +29,7 @@ jest.mock(
 );
 
 const server = setupServer(
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithSuccess', (req, res, ctx) =>
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS, (req, res, ctx) =>
     res(
       ctx.status(200),
       ctx.json({
@@ -37,7 +42,7 @@ const server = setupServer(
     ),
   ),
 
-  rest.get('http://127.0.0.1:3333/agents/mapSelectedWithError', (req, res, ctx) => res(ctx.status(500))),
+  rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
 function ComponentAgentTest({ typeMap }: any) {
@@ -67,12 +72,12 @@ function ComponentAgentTest({ typeMap }: any) {
 }
 
 function ComponentAgentTestSuccess() {
-  return <ComponentAgentTest typeMap="mapSelectedWithSuccess" />;
+  return <ComponentAgentTest typeMap="mapSuccess" />;
 }
 
-// function ComponentAgentTestError() {
-//   return <ComponentAgentTest typeMap="mapSelectedWithError" />;
-// }
+function ComponentAgentTestError() {
+  return <ComponentAgentTest typeMap="mapError" />;
+}
 
 describe('<ComponentAgentTest />', () => {
   beforeAll(() => server.listen());
@@ -88,9 +93,7 @@ describe('<ComponentAgentTest />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: title 1' })).toBeInTheDocument();
@@ -102,17 +105,15 @@ describe('<ComponentAgentTest />', () => {
     expect(screen.getByRole('heading', { name: 'TITLE: title 3' })).toBeInTheDocument();
   });
 
-  // it('should test error', async () => {
-  //   render(
-  //     <MockApp>
-  //       <ComponentAgentTestError />
-  //     </MockApp>,
-  //   );
+  it('should test error', async () => {
+    render(
+      <MockApp>
+        <ComponentAgentTestError />
+      </MockApp>,
+    );
 
-  //   await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-  //     timeout: 2000,
-  //   });
+    await waitByLoading();
 
-  //   expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
-  // });
+    expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
+  });
 });

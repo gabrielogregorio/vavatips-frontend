@@ -1,8 +1,10 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import useMaps from '../../core/hooks/useMaps';
-import MockApp from './App.Mock';
+import useMaps from '@/hooks/useMaps';
+import { URL_GET_ALL_MAPS } from '@/mock/ROUTES_API';
+import MockApp from '@/mock/App.Mock';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -25,7 +27,7 @@ jest.mock(
 let count = 0;
 
 const server = setupServer(
-  rest.get('http://127.0.0.1:3333/maps', (req, res, ctx) => {
+  rest.get(URL_GET_ALL_MAPS, (req, res, ctx) => {
     if (count === 1) {
       return res(ctx.status(500));
     }
@@ -78,9 +80,7 @@ describe('<ComponentAgentTest />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'TITLE: map 1' })).toBeInTheDocument();
@@ -92,22 +92,18 @@ describe('<ComponentAgentTest />', () => {
     expect(screen.getByRole('heading', { name: 'TITLE: map 3' })).toBeInTheDocument();
   });
 
-  // it('should render with unknown error', async () => {
-  //   render(
-  //     <MockApp>
-  //       <ComponentAgentTest />
-  //     </MockApp>,
-  //   );
+  it('should render with unknown error', async () => {
+    render(
+      <MockApp>
+        <ComponentAgentTest />
+      </MockApp>,
+    );
 
-  //   try {
-  //     await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
-  //       timeout: 2000,
-  //     });
-  //     // eslint-disable-next-line no-empty
-  //   } catch (error) {}
+    try {
+      await waitByLoading();
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
 
-  //   screen.debug(undefined, 300000);
-
-  //   expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
-  // });
+    expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
+  });
 });

@@ -1,38 +1,25 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { mockPosts } from '../mock/mockPosts';
-import MockApp from '../core/App.Mock';
-import ViewPostsScreen from '../../pages/admin/view-posts';
+import { mockPosts } from '@/mock/mockPosts';
+import MockApp from '@/mock/App.Mock';
+import ViewPostsScreen from '@/pages/admin/view-posts';
+import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
     return {
-      route: '',
+      route: '/posts',
+      isReady: true,
       pathname: '',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
+      query: { map: 'any', agent: 'any', type: '', page: 1 },
+      asPath: `/posts?map=any&agent=any`,
     };
   },
 }));
 
-let count = 0;
-
-const handlers = [
-  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
-    if (count === 2) {
-      return res(ctx.status(500));
-    }
-    count += 1;
-    const query = req.url.searchParams;
-    query.append('agent', 'Sova');
-    query.append('map', 'Ascent');
-    query.append('page', '1');
-    query.append('filters', '');
-
-    return res(ctx.json(mockPosts()));
-  }),
-];
+const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts())))];
 
 const server = setupServer(...handlers);
 
@@ -50,9 +37,7 @@ describe('<HomeScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: mockPosts().posts[0].title })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: mockPosts().posts[1].title })).toBeInTheDocument();
@@ -76,8 +61,14 @@ describe('<HomeScreen />', () => {
     expect(screen.getByText(mockPosts().posts[8].description)).toBeInTheDocument();
     expect(screen.getByText(mockPosts().posts[9].description)).toBeInTheDocument();
 
-    expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(mockPosts().posts.length);
-    expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(mockPosts().posts.length);
-    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(mockPosts().posts.length);
+    expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(
+      mockPosts().posts.length,
+    );
+    expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(
+      mockPosts().posts.length,
+    );
+    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(
+      mockPosts().posts.length,
+    );
   });
 });

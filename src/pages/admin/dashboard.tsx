@@ -5,9 +5,12 @@ import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import { logout } from '@/services/auth';
 import api from '@/services/api';
-import { navbarEnum } from '@/interfaces/navbar';
+import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
-import LayoutComponent from '../../components/layout/layout';
+import LayoutComponent from '@/layout/layout';
+import ErrorMsg from '@/base/errorMsg';
+import SubContainer from '@/base/subContainer';
+import { modelNavbarAdmin } from '@/schemas/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -18,7 +21,6 @@ export default function DashboardScreen() {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
-
   const [countViewsIps, setCountViewsIps] = useState<number>(0);
   const [countViewsAll, setCountViewsAll] = useState<number>(0);
   const [countAlAgents, setCountAlAgents] = useState<number>(0);
@@ -55,27 +57,24 @@ export default function DashboardScreen() {
 
   return (
     <LayoutComponent>
-      <div className="container">
-        <NavbarComponent selected={navbarEnum.Dashboard} />
-        <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+      <NavbarComponent selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />
+      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
-        <div className="sub__container">
+      <SubContainer>
+        <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
           <LoaderComponent active={activeLoader} />
-          <p>{errorMsg}</p>
-
-          <p>Bem vindo(a) {username}</p>
-
-          <p>Consultas: {countViewsAll}</p>
-          <p>Usuários: {countViewsIps}</p>
-
-          <p>agentes: {countAlAgents}</p>
-          <p>mapas: {countAlMaps}</p>
-          <p>posts: {countAllPosts}</p>
-          <p>sugestões: {countAllSuggestions}</p>
-          <p>administradores: {countAllUsers}</p>
+          <ErrorMsg msg={errorMsg} />
+          <p className="text-skin-textColor">Bem vindo(a) {username}</p>
+          <p className="text-skin-textColor">Consultas: {countViewsAll}</p>
+          <p className="text-skin-textColor">Usuários: {countViewsIps}</p>
+          <p className="text-skin-textColor">agentes: {countAlAgents}</p>
+          <p className="text-skin-textColor">mapas: {countAlMaps}</p>
+          <p className="text-skin-textColor">posts: {countAllPosts}</p>
+          <p className="text-skin-textColor">sugestões: {countAllSuggestions}</p>
+          <p className="text-skin-textColor">administradores: {countAllUsers}</p>
         </div>
-        <FooterComponent />
-      </div>
+      </SubContainer>
+      <FooterComponent />
     </LayoutComponent>
   );
 }

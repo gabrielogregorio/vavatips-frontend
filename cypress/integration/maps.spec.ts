@@ -81,7 +81,8 @@ describe('<Maps />', () => {
               },
               {
                 id: 'c0919e95-15bd-4984-8059-60c56583bf2f',
-                description: 'Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera',
+                description:
+                  'Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera',
                 image: '1633276257045-227ae204-eace-4ecb-8a2c-41d891d9f358',
               },
             ],
@@ -158,12 +159,12 @@ describe('<Maps />', () => {
     cy.visit('http://localhost:3000/');
 
     // Find a link with an href attribute containing "about" and click it
-    cy.get('a[href="/agents?map=Ascent"]').click();
+    cy.get('button[href="/agents?map=Ascent"]').click();
 
     // // The new page should contain an h1 with "About page"
     cy.contains('Escolha um Agente');
 
-    cy.get('a[href="/posts?map=Ascent&agent=Cypher"]').click();
+    cy.get('button[href="/posts?map=Ascent&agent=Cypher"]').click();
 
     cy.contains(/as melhores dicas de valorant/i, { timeout: 3000 });
 
@@ -205,7 +206,9 @@ describe('<Maps />', () => {
       '1 de 5 : Essa One Way pode e deve ser combinada com o fio armadilha, e você deve ficar na espera por alguém do time atacante cair na armadilha',
     );
 
-    cy.contains('Essa One Way te fornece uma grande vantagem, em especial quando combinada com os fios armadilhas');
+    cy.contains(
+      'Essa One Way te fornece uma grande vantagem, em especial quando combinada com os fios armadilhas',
+    );
 
     cy.contains('#Ascent');
     cy.contains('#Cypher');
@@ -237,7 +240,9 @@ describe('<Maps />', () => {
     // next page image
     cy.get('button[data-testid="prev-btn"]').first().click();
 
-    cy.contains('2 de 2 : Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera');
+    cy.contains(
+      '2 de 2 : Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera',
+    );
 
     // open suggestion
     cy.get('button[type=button]').contains('Sugerir').first().click();

@@ -5,8 +5,19 @@ import { ContextModalMessage } from '@/contexts/modalMessage';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { LocalStorageMock } from '@react-mock/localstorage';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import ContextThemeProvider from '../../core/contexts/theme';
+import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import ContextThemeProvider from '@/contexts/theme';
+
+// eslint-disable-next-line no-unused-vars
+function customLog(data) {
+  return null;
+}
+// Custom logger
+setLogger({
+  log: customLog,
+  warn: customLog,
+  error: customLog,
+});
 
 interface mockAppType {
   children: any;

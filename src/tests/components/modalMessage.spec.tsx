@@ -1,9 +1,9 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useEffect } from 'react';
-import ModalMessage from '../../components/widgets/modalMessage';
-import { useModalMessage } from '../../core/contexts/modalMessage';
-import MockApp from '../core/App.Mock';
+import ModalMessage from '@/widgets/modalMessage';
+import { useModalMessage } from '@/contexts/modalMessage';
+import MockApp from '@/mock/App.Mock';
 
 function ComponentSetup() {
   const { setModalMessage } = useModalMessage();
@@ -39,7 +39,9 @@ describe('<ModalMessage />', () => {
 
     expect(screen.getByText('Sugestão enviado com sucesso, muito obrigado!')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button'));
-    expect(screen.queryByText('Sugestão enviado com sucesso, muito obrigado!')).not.toBeInTheDocument();
+    expect(
+      screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+    ).not.toBeInTheDocument();
   });
 
   it('should render modal setup error', async () => {

@@ -1,27 +1,30 @@
 import Link from 'next/link';
-import styles from '../../styles/components/breadcrumb.style.module.css';
 
 interface propsInterface {
   breadcrumbs: { url: string; text: string }[];
-  admin?: boolean;
+  admin: boolean;
 }
 
 export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterface) {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
-    const color = admin ? styles.breadcrumbs__secondary : styles.breadcrumbs__primary;
+    const color = admin ? 'text-skin-secondary' : 'text-skin-textColor';
 
     return breadcrumbs.map((breadcrumb, index) => (
-      <div key={`${breadcrumb.text} `}>
+      <div key={`${breadcrumb.text}`} className="p-1 pb-0 pt-0 flex items-center ">
         {lastItem === index ? (
-          <p>{breadcrumb.text}</p>
+          <p className="text-skin-textColor p-0">{breadcrumb.text}</p>
         ) : (
           <>
-            <Link href={breadcrumb.url}>
-              <a className={color}>{breadcrumb.text}</a>
+            <Link href={breadcrumb.url} passHref>
+              <a href="#/" className={color} style={{ opacity: 0.7 }}>
+                {breadcrumb.text}
+              </a>
             </Link>
-            <span className={color}>&gt;</span>
+            <span className={`pl-1 ${color}`} style={{ opacity: 0.7 }}>
+              &gt;
+            </span>
           </>
         )}
       </div>
@@ -29,8 +32,8 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
   }
 
   return (
-    <div className={styles.breadcrumb}>
-      <div className={styles.breadcrumbItem}>{renderBreadCrumb()}</div>
+    <div className="w-full bg-skin-bgContainer flex justify-center items-center shadow-md h-8">
+      <div className="p-0 flex max-w-maxWidthDefault w-full">{renderBreadCrumb()}</div>
     </div>
   );
 }

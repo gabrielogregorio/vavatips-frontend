@@ -1,5 +1,3 @@
-import styles from '../../styles/components/loader.style.module.css';
-
 interface loaderProps {
   active: boolean;
 }
@@ -7,8 +5,13 @@ interface loaderProps {
 export default function LoaderComponent({ active }: loaderProps) {
   function renderActive() {
     return active ? (
-      <div data-testid="loader" className={styles.loader}>
-        <div />
+      <div className="flex items-center justify-center w-full">
+        <div
+          data-testid="loader"
+          className="spinner-border animate-spin w-10 h-10 inline-block border-4 rounded-full m-2 border-skin-primaryExtra border-b-transparent"
+          role="status">
+          <span className="visually-hidden hidden">Loading...</span>
+        </div>
       </div>
     ) : null;
   }

@@ -8,22 +8,15 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/react-in-jsx-scope': 'off',
+
+    // this doesn't make any sense in react projects, it just pollutes the imports!
     'react/jsx-filename-extension': [0],
-    'react/require-default-props': 'off',
     'import/extensions': 'off',
+
+    // the <Image from Next tag is shit for styling, I'll use it when they fix the component by deleting all the predefined styles.
+    // next js also requires manually configuring each server the project can receive images from, and the allow from any site feature is not yet available with "*"
+    // And to finalize, this component causes slowing in all images in valorant-tips-api. Bug without solution in github.
     '@next/next/no-img-element': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['off'],
-    'jsx-a11y/label-has-associated-control': 'off',
-    'react/jsx-no-bind': 'off',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
   },
   extends: ['next/core-web-vitals', 'airbnb', 'prettier'],
   overrides: [

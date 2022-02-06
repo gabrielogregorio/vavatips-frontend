@@ -1,10 +1,12 @@
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import { mockPosts } from '../mock/mockPosts';
-import HomeScreen from '../../pages/posts';
-import MockApp from '../core/App.Mock';
+import { mockPosts } from '@/mock/mockPosts';
+import HomeScreen from '@/pages/posts';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -12,6 +14,7 @@ jest.mock('next/router', () => ({
       route: '',
       pathname: '',
       query: { map: 'Ascent', agent: 'Sova' },
+      isReady: true,
       asPath: '',
     };
   },
@@ -20,7 +23,7 @@ jest.mock('next/router', () => ({
 // let count = 0;
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/posts`, async (req, res, ctx) => {
+  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     // if (count === 2) {
     //   return res(ctx.status(500));
     // }
@@ -51,9 +54,7 @@ describe('<HomeScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByRole('heading', { name: mockPosts().posts[0].title })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: mockPosts().posts[1].title })).toBeInTheDocument();
@@ -77,9 +78,15 @@ describe('<HomeScreen />', () => {
     expect(screen.getByText(mockPosts().posts[8].description)).toBeInTheDocument();
     expect(screen.getByText(mockPosts().posts[9].description)).toBeInTheDocument();
 
-    expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(mockPosts().posts.length);
-    expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(mockPosts().posts.length);
-    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(mockPosts().posts.length);
+    expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(
+      mockPosts().posts.length,
+    );
+    expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(
+      mockPosts().posts.length,
+    );
+    expect(screen.getAllByRole('button', { name: 'Sugerir' })).toHaveLength(
+      mockPosts().posts.length,
+    );
   });
 
   it('should change image on click in buttons of navigation', async () => {
@@ -89,9 +96,7 @@ describe('<HomeScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     // buttons of first post
     const buttonPrev = screen.getAllByLabelText('Item anterior')[0];
@@ -144,9 +149,7 @@ describe('<HomeScreen />', () => {
   //     </MockApp>,
   //   );
 
-  //   await waitForElementToBeRemoved(screen.getByText(/Carregando posts/i), {
-  //     timeout: 2000,
-  //   });
+  //   await waitByLoading()
   //   expect(screen.getByText('Request failed with status code 500')).toBeInTheDocument();
   // });
 });

@@ -1,10 +1,12 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import MapScreen from '../../pages';
-import MockApp from '../core/App.Mock';
-import { mockMaps } from '../mock/mock';
+import MapScreen from '@/pages/index';
+import MockApp from '@/mock/App.Mock';
+import { mockMaps } from '@/mock/mock';
+import { URL_GET_ALL_MAPS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock(
   'next/link',
@@ -14,7 +16,7 @@ jest.mock(
     },
 );
 
-const handlers = [rest.get(`http://127.0.0.1:3333/maps`, async (req, res, ctx) => res(ctx.json(mockMaps())))];
+const handlers = [rest.get(URL_GET_ALL_MAPS, async (req, res, ctx) => res(ctx.json(mockMaps())))];
 
 const server = setupServer(...handlers);
 
@@ -32,9 +34,7 @@ describe('<MapScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByText(/Buscando Mapas/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText(/Split/i)).toBeInTheDocument();
     expect(screen.getByText(/Ascent/i)).toBeInTheDocument();

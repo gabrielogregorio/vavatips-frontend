@@ -1,11 +1,13 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import MyProfileScreen from '../../pages/admin/profile';
-import { login } from '../../core/services/auth';
-import MockApp from '../core/App.Mock';
+import MyProfileScreen from '@/pages/admin/profile';
+import { login } from '@/services/auth';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -28,7 +30,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
+  rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
     if (req.headers.get('authorization') === 'Bearer VALUE_TOKEN_JWT') {
       return res(
         ctx.json({
@@ -59,9 +61,7 @@ describe('<MyProfileScreen />', () => {
     );
     login('VALUE_TOKEN_JWT');
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     const inputUsername: HTMLInputElement = screen.getByLabelText('Trocar nome de usuário');
     expect(inputUsername.value).toEqual('usernameUsername');
@@ -74,9 +74,7 @@ describe('<MyProfileScreen />', () => {
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     userEvent.click(screen.getByRole('button', { name: 'logoff' }));
 
@@ -91,9 +89,7 @@ describe('<MyProfileScreen />', () => {
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     userEvent.type(screen.getByLabelText('Trocar nome de usuário'), 'newUsername');
     userEvent.type(screen.getByLabelText('Digite uma nova senha'), 'newPassword');

@@ -1,4 +1,4 @@
-import { agents, difficult, maps, moment, side } from '../../core/data/data-valorant';
+import { agents, difficult, maps, moment, side } from '@/data/data-valorant';
 
 const SIZE_OF_SIDE = 2;
 const SIZE_OF_MOMENT = 6;

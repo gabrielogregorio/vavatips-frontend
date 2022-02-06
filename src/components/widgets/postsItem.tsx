@@ -9,10 +9,10 @@ export default function Posts({ posts }: postPropsInterface) {
   function renderPost() {
     return posts.map((post) => (
       <div key={post.id}>
-        <PostCard post={post} />
+        <PostCard post={post} viewAdmin={false} />
       </div>
     ));
   }
 
-  return <div className="postItems">{renderPost()}</div>;
+  return <div className="flex flex-col">{renderPost()}</div>;
 }

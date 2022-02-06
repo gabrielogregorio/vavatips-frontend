@@ -18,9 +18,17 @@ const dataComponent = [
 ];
 
 describe('<Selected />', () => {
-  it('should render input', () => {
+  it('should render selected 2', () => {
     const setValue = jest.fn();
-    render(<Selected name="Dificuldade" text="Dificuldade" value="" setValue={setValue} render={dataComponent} />);
+    render(
+      <Selected
+        name="Dificuldade"
+        text="Dificuldade"
+        value=""
+        setValue={setValue}
+        render={dataComponent}
+      />,
+    );
     expect(screen.getByLabelText('Dificuldade')).toBeInTheDocument();
 
     expect(screen.getByRole('option', { name: 'Facil' })).toBeInTheDocument();
@@ -28,10 +36,18 @@ describe('<Selected />', () => {
     expect(screen.getByRole('option', { name: 'Díficil' })).toBeInTheDocument();
   });
 
-  it('should render input', () => {
+  it('should render selected', () => {
     const setValue = jest.fn();
 
-    render(<Selected name="Dificuldade" text="Dificuldade" value="" setValue={setValue} render={dataComponent} />);
+    render(
+      <Selected
+        name="Dificuldade"
+        text="Dificuldade"
+        value=""
+        setValue={setValue}
+        render={dataComponent}
+      />,
+    );
     expect(setValue).toHaveBeenCalledTimes(0);
     expect(screen.getByLabelText('Dificuldade')).toBeInTheDocument();
 

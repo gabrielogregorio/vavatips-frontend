@@ -1,11 +1,11 @@
-import { screen, render, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import DashboardScreen from '../../pages/admin/dashboard';
-import MockApp from '../core/App.Mock';
-
-// FIXME: test JWT token
+import DashboardScreen from '@/pages/admin/dashboard';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -28,9 +28,8 @@ jest.mock(
 );
 
 let tryNumbers = 0;
-
 const handlers = [
-  rest.get(`http://127.0.0.1:3333/dashboard`, async (req, res, ctx) =>
+  rest.get(URL_GET_DASHBOARD, async (req, res, ctx) =>
     res(
       ctx.json({
         countAll: 134,
@@ -44,7 +43,7 @@ const handlers = [
     ),
   ),
 
-  rest.get(`http://127.0.0.1:3333/user`, async (req, res, ctx) => {
+  rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
     if (tryNumbers === 1) {
       return res(ctx.status(403), ctx.json({ msg: 'jwt expired' }));
     }
@@ -76,9 +75,7 @@ describe('<DashboardScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(screen.getByText('Bem vindo(a) codigo limpo?')).toBeInTheDocument();
     expect(screen.getByText('Consultas: 134')).toBeInTheDocument();
@@ -97,9 +94,7 @@ describe('<DashboardScreen />', () => {
       </MockApp>,
     );
 
-    await waitForElementToBeRemoved(screen.getByTestId(/loader/i), {
-      timeout: 2000,
-    });
+    await waitByLoading();
 
     expect(Router.push).toHaveBeenCalledWith('/login');
     Router.push('');

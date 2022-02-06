@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
-import '../styles/global.css';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -9,9 +8,17 @@ import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ContextThemeProvider from '../core/contexts/theme';
+import ContextThemeProvider from '@/contexts/theme';
 
-const queryClient = new QueryClient();
+import '../styles/global.css';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({

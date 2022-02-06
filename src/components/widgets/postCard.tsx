@@ -7,16 +7,16 @@ import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
-import styles from '../../styles/components/postCard.module.css';
+import ButtonForm from '@/base/buttonForm';
 
 type typeType = 'next' | 'prev';
 
 interface PropsPostInterface {
   post: postsProps;
-  viewAdmin?: boolean;
+  viewAdmin: boolean;
 }
 
-export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
+export default function PostCard({ post, viewAdmin = false }: PropsPostInterface) {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -65,82 +65,115 @@ export default function PostCard({ post, viewAdmin }: PropsPostInterface) {
   function handleModalAction() {
     setModalSuggestion({ active: true, post });
   }
-
   return (
-    <div className="postItems">
-      <div className={styles.posts}>
-        <div className={styles.profile}>
-          {post.user.image ? (
-            <img src={formatImage(post.user.image)} alt="Foto de perfil do Autor da postagem" />
-          ) : (
-            <img src="/images/users/profile.webp" alt="Foto de perfil do Autor da postagem" />
-          )}
+    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-500">
+      <div className="flex justify-center items-center mb-2 w-full">
+        {post.user.image ? (
+          <img
+            className="h-11 rounded-full object-cover w-11"
+            src={formatImage(post.user.image)}
+            alt="Foto de perfil do Autor da postagem"
+          />
+        ) : (
+          <img
+            className="h-11 rounded-full object-cover w-11"
+            src="/images/users/profile.webp"
+            alt="Foto de perfil do Autor da postagem"
+          />
+        )}
 
-          <p>{post.user.username ?? 'Ademir'}</p>
+        <p className="flex-1 text-skin-textColor ml-5 text-base">
+          {post.user.username ?? 'Ademir'}
+        </p>
 
-          {isAuthenticated() === true ? (
-            <Button>
-              <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
-            </Button>
-          ) : null}
-        </div>
+        {isAuthenticated() === true ? (
+          <Button className="block text-skin-primaryExtra ">
+            <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
+          </Button>
+        ) : null}
+      </div>
 
-        <h3>{post.title}</h3>
+      <h3 className="text-base text-skin-textColor w-full mb-2.5">{post.title}</h3>
 
-        <div className={styles.imgAndDescription}>
-          <div className={styles.imgPost}>
-            <img src={formatImage(post.imgs?.[idImage]?.image)} alt={post.imgs?.[idImage]?.description} />
+      <div className="w-full">
+        <div className="relative w-full">
+          <img
+            className="h-[500px] object-cover rounded-lg w-full"
+            src={formatImage(post.imgs?.[idImage]?.image)}
+            alt={post.imgs?.[idImage]?.description}
+          />
 
+          <div className="absolute left-0 top-2/4">
             <Button
               ariaLabel="Item anterior"
               dataTestid="prev-btn"
-              className={styles.previus}
+              className="text-skin-textColorInDarkness border-none bg-transparent"
               onClick={() => nextImage('prev', post.imgs.length)}>
-              <MdArrowBackIosNew />
+              <MdArrowBackIosNew className="text-4xl font-bold" />
             </Button>
+          </div>
 
+          <div className="absolute right-0 top-2/4">
             <Button
               ariaLabel="Proximo item"
               dataTestid="next-btn"
-              className={styles.next}
+              className="text-skin-textColorInDarkness border-none bg-transparent"
               onClick={() => nextImage('next', post.imgs.length)}>
-              <MdArrowForwardIos />
+              <MdArrowForwardIos className="text-4xl font-bold" />
             </Button>
+          </div>
 
-            <div className={styles.descriptionImage}>
-              <p aria-live="polite">
-                {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
-              </p>
-            </div>
+          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-backgroundDescription">
+            <p className="text-skin-textColorInDarkness text-base" aria-live="polite">
+              {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
+            </p>
           </div>
         </div>
-
-        <div className={styles.descriptionAndTags}>
-          <p className={styles.description}>{post.description}</p>
-          <p className={styles.tags}>
-            <span> #{post.tags.map}</span>
-            <span> #{post.tags.agent}</span>
-            <span> #{post.tags.ability}</span>
-            <span> #{post.tags.moment}</span>
-            <span> #{post.tags.difficult}</span>
-            <span> #{post.tags.side}</span>
-            <span> #{post.tags.mapPosition}</span>
-          </p>
-        </div>
-
-        {!viewAdmin ? (
-          <div className={styles.actions}>
-            <Button className={postTested ? styles.actionsActive : ''} onClick={() => handleAddTest()}>
-              Testar
-            </Button>
-
-            <Button className={postSave ? styles.actionsActive : ''} onClick={() => handleAddSave()}>
-              Salvar
-            </Button>
-            <Button onClick={() => handleModalAction()}>Sugerir</Button>
-          </div>
-        ) : null}
       </div>
+
+      <div>
+        <p className="text-base text-skin-textColor">{post.description}</p>
+
+        <p className="text-skin-primaryExtra text-lg bg-transparent">
+          <span className="text-base"> #{post.tags.map}</span>
+          <span className="text-base"> #{post.tags.agent}</span>
+          <span className="text-base"> #{post.tags.ability}</span>
+          <span className="text-base"> #{post.tags.moment}</span>
+          <span className="text-base"> #{post.tags.difficult}</span>
+          <span className="text-base"> #{post.tags.side}</span>
+          <span className="text-base"> #{post.tags.mapPosition}</span>
+        </p>
+      </div>
+
+      {!viewAdmin ? (
+        <div className="w-full flex justify-around mt-5">
+          <ButtonForm
+            className={`m-1 border-skin-secondary ${
+              postTested
+                ? 'text-skin-textColorInDarkness bg-skin-secondary '
+                : 'text-skin-secondary '
+            }`}
+            onClick={() => handleAddTest()}>
+            Testar
+          </ButtonForm>
+
+          <ButtonForm
+            className={`m-1 border-skin-primaryExtra  ${
+              postSave
+                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra'
+                : 'text-skin-primaryExtra'
+            }`}
+            onClick={() => handleAddSave()}>
+            Salvar
+          </ButtonForm>
+
+          <ButtonForm
+            className="m-1 text-skin-primarySmall border-skin-primarySmall"
+            onClick={() => handleModalAction()}>
+            Sugerir
+          </ButtonForm>
+        </div>
+      ) : null}
     </div>
   );
 }
