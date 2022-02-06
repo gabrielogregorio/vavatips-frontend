@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react';
-import '../styles/global.css';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -10,6 +9,8 @@ import { ContextModalMessage } from '@/contexts/modalMessage';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ContextThemeProvider from '@/contexts/theme';
+
+import '../styles/global.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {

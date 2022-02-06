@@ -4,9 +4,9 @@ import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import PostCard from '@/widgets/postCard';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
-import { mockPosts } from '../mock/mockPosts';
-import MockApp from '../core/App.Mock';
-import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
+import { mockPosts } from '@/mock/mockPosts';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 
 // FIXME: need test localstorage
 

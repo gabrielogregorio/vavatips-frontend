@@ -6,6 +6,7 @@ import NavbarLink from '@/base/navbarLink';
 import { useTheme } from '@/contexts/theme';
 import { modelNavbarType } from '@/schemas/navbar';
 import navbarEnum from '@/interfaces/navbar';
+import { changeTheme } from '../../core/services/theme';
 
 type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;
@@ -17,8 +18,10 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
 
   const handleNavbar = () => {
     if (theme === 'dark') {
+      changeTheme('light');
       setTheme('light');
     } else if (theme === 'light') {
+      changeTheme('dark');
       setTheme('dark');
     }
   };
@@ -37,7 +40,7 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
   }
 
   return (
-    <nav className="flex justify-between items-center w-full p-5 pl-10 pr-10 bg-skin-primary text-skin-textColorINVERSE">
+    <nav className="flex justify-between items-center w-full p-5 pl-10 pr-10 bg-skin-primary text-skin-textColorInDarkness">
       <Link href="/" passHref>
         <a href="#/" className="flex-1 text-left text-4xl border-none font-bold">
           VAVATIPS

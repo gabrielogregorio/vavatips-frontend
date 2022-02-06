@@ -80,12 +80,12 @@ export default function MyProfileScreen() {
               />
 
               <ButtonForm
-                className="text-skin-btnActionsTested border-none mt-2"
+                className="text-skin-secondary border-none mt-2"
                 onClick={() => handleLogout()}>
                 logoff
               </ButtonForm>
 
-              <ButtonForm className="bg-skin-btnActionsTested text-skin-textColorINVERSE border-skin-btnActionsTested mt-2">
+              <ButtonForm className="bg-skin-secondary text-skin-textColorInDarkness border-skin-secondary mt-2">
                 Atualizar dados
               </ButtonForm>
             </>

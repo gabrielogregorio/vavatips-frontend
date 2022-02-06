@@ -2,11 +2,11 @@ import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import MapScreen from '../../pages';
-import MockApp from '../core/App.Mock';
-import { mockMaps } from '../mock/mock';
-import { URL_GET_ALL_MAPS } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import MapScreen from '@/pages/index';
+import MockApp from '@/mock/App.Mock';
+import { mockMaps } from '@/mock/mock';
+import { URL_GET_ALL_MAPS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock(
   'next/link',

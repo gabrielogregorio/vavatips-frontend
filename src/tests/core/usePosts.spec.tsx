@@ -4,9 +4,9 @@ import { setupServer } from 'msw/node';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts from '@/hooks/usePosts';
 import LoaderComponent from '@/base/loader';
-import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
-import MockApp from './App.Mock';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock(
   'next/link',

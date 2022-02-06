@@ -11,10 +11,10 @@ import NavbarComponent from '@/layout/navbar';
 import LoaderComponent from '@/base/loader';
 import SubContainer from '@/base/subContainer';
 import navbarEnum from '@/interfaces/navbar';
-import TagsFixFilters from './tagsFixFilters';
-import PostTags from './tags';
-import Posts from './postsItem';
-import { modelNavbarAdmin, modelNavbarPublic } from '../../core/schemas/navbar';
+import { modelNavbarAdmin, modelNavbarPublic } from '@/schemas/navbar';
+import TagsFixFilters from '@/widgets/tagsFixFilters';
+import PostTags from '@/widgets/tags';
+import Posts from '@/widgets/postsItem';
 
 interface containerPosts {
   breadcrumbs: { url: string; text: string }[];

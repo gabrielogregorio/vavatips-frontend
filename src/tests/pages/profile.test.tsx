@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import MyProfileScreen from '../../pages/admin/profile';
-import { login } from '../../core/services/auth';
-import MockApp from '../core/App.Mock';
-import { URL_GET_YOUR_USER } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import MyProfileScreen from '@/pages/admin/profile';
+import { login } from '@/services/auth';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import MockApp from '../core/App.Mock';
-import CreatePostManagement from '../../components/widgets/managmentPost';
-import { URL_GET_POST_EDITABLE } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import MockApp from '@/mock/App.Mock';
+import CreatePostManagement from '@/widgets/managmentPost';
+import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

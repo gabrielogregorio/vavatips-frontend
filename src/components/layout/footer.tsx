@@ -5,25 +5,25 @@ export default function FooterComponent() {
       <div className="w-full bg-skin-primary flex justify-center">
         <div className="grid gap-2 grid-cols-3 w-full p-5 max-w-maxWidthDefault">
           <div className="flex flex-col">
-            <h3 className="text-lg text-skin-textColorINVERSE font-semibold text-left">
+            <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">
               Contribua
             </h3>
             <a
-              className="text-skin-textColorINVERSE text-sm"
+              className="text-skin-textColorInDarkness text-sm"
               target="_blank"
               rel="noopener noreferrer"
               href="https://gabrielogregorio.com/">
               Entre em contato
             </a>
             <a
-              className="text-skin-textColorINVERSE text-sm"
+              className="text-skin-textColorInDarkness text-sm"
               target="_blank"
               rel="noopener noreferrer"
               href="https://github.com/gabrielogregorio/vavatips-backend">
               Backend em Node.js github
             </a>
             <a
-              className="text-skin-textColorINVERSE text-sm"
+              className="text-skin-textColorInDarkness text-sm"
               target="_blank"
               rel="noopener noreferrer"
               href="https://github.com/gabrielogregorio/vavatips-frontend">
@@ -32,16 +32,18 @@ export default function FooterComponent() {
           </div>
 
           <div className="w-full pb-5 text-center">
-            <h3 className="text-lg text-skin-textColorINVERSE font-semibold text-left">Projeto</h3>
-            <p className="text-left text-sm text-skin-textColorINVERSE">
+            <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">
+              Projeto
+            </h3>
+            <p className="text-left text-sm text-skin-textColorInDarkness">
               Esse é um projeto feito por fãs do Valorant, com intenção de aumentar a qualidade das
               gameplays do nosso cenário.
             </p>
           </div>
 
           <div className="w-full pb-5 text-center">
-            <h3 className="text-lg text-skin-textColorINVERSE font-semibold text-left">Sobre</h3>
-            <p className="text-left text-sm text-skin-textColorINVERSE">
+            <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">Sobre</h3>
+            <p className="text-left text-sm text-skin-textColorInDarkness">
               <span className="text-sm">Vavatips</span> foi criado seguindo a política do
               <a
                 className="text-sm"

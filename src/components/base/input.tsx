@@ -15,7 +15,7 @@ export default function Input({
     <GroupInput>
       <LabelComponent name={name} text={text} />
       <input
-        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-backgroundSecondary outline-none rounded-lg resize-none text-skin-textColor"
+        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
         id={name}
         disabled={disabled}
         type={type}

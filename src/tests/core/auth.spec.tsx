@@ -10,6 +10,7 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+Object.defineProperty(window, undefined, jest.fn());
 
 describe('auth', () => {
   it('should test auth localstorage', async () => {

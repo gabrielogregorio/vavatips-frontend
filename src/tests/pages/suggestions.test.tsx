@@ -1,10 +1,10 @@
 import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import SuggestionScreen from '../../pages/admin/suggestions';
-import MockApp from '../core/App.Mock';
-import { URL_GET_ALL_SUGGESTIONS } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import SuggestionScreen from '@/pages/admin/suggestions';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {

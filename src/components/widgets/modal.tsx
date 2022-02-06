@@ -79,12 +79,12 @@ export default function ModalComponent({
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-btnActionsSave text-skin-textColorINVERSE"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
             onClick={() => closeModalItem()}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-btnActionsTested text-skin-textColorINVERSE"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
             onClick={() => saveModal(id, description, LinkImg)}>
             Adicionar
           </Button>

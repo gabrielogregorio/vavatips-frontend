@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 import ModalMessage from '@/widgets/modalMessage';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
-import MockApp from '../core/App.Mock';
-import { URL_POST_SUGGESTION } from '../mock/ROUTES_API';
+import MockApp from '@/mock/App.Mock';
+import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
 
 jest.mock('next/router', () => ({
   useRouter() {

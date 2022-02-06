@@ -302,7 +302,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
-            <Button className="text-skin-btnActionsSave" onClick={() => deletePost(id)}>
+            <Button className="text-skin-primaryExtra" onClick={() => deletePost(id)}>
               Excluir
             </Button>
           ) : null}
@@ -392,7 +392,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           <div className="mt-5 w-full">
             <GroupInput>
               <ButtonForm
-                className="border-skin-btnActionsTested text-skin-secondary"
+                className="border-skin-secondary text-skin-secondary"
                 onClick={() => showModal()}>
                 Novo Passo
               </ButtonForm>
@@ -401,7 +401,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
             <GroupInput>
               <ButtonForm
                 onClick={() => handleSubmit()}
-                className="border-skin-btnActionsTested text-skin-textColorINVERSE bg-skin-btnActionsTested">
+                className="border-skin-secondary text-skin-textColorInDarkness bg-skin-secondary">
                 Publicar Dica
               </ButtonForm>
             </GroupInput>

@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { mockPosts } from '../mock/mockPosts';
-import MockApp from '../core/App.Mock';
-import ViewPostsScreen from '../../pages/admin/view-posts';
-import { URL_GET_ALL_POSTS } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import { mockPosts } from '@/mock/mockPosts';
+import MockApp from '@/mock/App.Mock';
+import ViewPostsScreen from '@/pages/admin/view-posts';
+import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {

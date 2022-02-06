@@ -56,10 +56,13 @@ export default function PaginationComponent({
   }
 
   return (
-    <nav aria-label="Sistema de paginação" className="w-full flex items-center justify-center mt-2">
-      <ul className="b-2 p-1 flex items-center list-none border-2 rounded-xl border-skin-btnActionsSave">
-        {renderPaginationButtons()}
-      </ul>
+    <nav
+      aria-label="Sistema de paginação"
+      className={`
+     flex items-center justify-center mt-2 rounded-xl ${
+       pagination?.length > 0 ? 'b-2 p-1 border-2  border-skin-primaryExtra' : ''
+     }`}>
+      <ul className="flex items-center list-none">{renderPaginationButtons()}</ul>
     </nav>
   );
 }

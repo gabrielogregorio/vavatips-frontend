@@ -15,7 +15,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '2' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor bg-skin-btnActionsSave text-skin-textColorINVERSE',
+      'block p-2 bg-transparent hover:bg-skin-primaryExtra hover:text-skin-textColorInDarkness bg-skin-primaryExtra text-skin-textColorInDarkness',
     );
 
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
@@ -49,7 +49,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor bg-skin-btnActionsSave text-skin-textColorINVERSE',
+      'block p-2 bg-transparent hover:bg-skin-primaryExtra hover:text-skin-textColorInDarkness bg-skin-primaryExtra text-skin-textColorInDarkness',
     );
 
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
@@ -84,7 +84,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '28' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor bg-skin-btnActionsSave text-skin-textColorINVERSE',
+      'block p-2 bg-transparent hover:bg-skin-primaryExtra hover:text-skin-textColorInDarkness bg-skin-primaryExtra text-skin-textColorInDarkness',
     );
 
     expect(screen.getAllByText('...')[0]).toBeInTheDocument();

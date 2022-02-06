@@ -11,7 +11,7 @@ import NavbarComponent from '@/layout/navbar';
 import navbarEnum from '@/interfaces/navbar';
 import ImageCard from '@/widgets/imageCard';
 import SubContainer from '@/base/subContainer';
-import { modelNavbarPublic } from '../core/schemas/navbar';
+import { modelNavbarPublic } from '@/schemas/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 

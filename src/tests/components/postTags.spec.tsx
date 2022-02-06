@@ -3,7 +3,7 @@ import { useFilters } from '@/contexts/filters';
 import { useEffect } from 'react';
 import userEvent from '@testing-library/user-event';
 import PostTags from '@/widgets/tags';
-import MockApp from '../core/App.Mock';
+import MockApp from '@/mock/App.Mock';
 
 function ComponentSetup() {
   const { setTags, setFilters } = useFilters();
@@ -31,14 +31,14 @@ describe('<PostTags />', () => {
 
     expect(screen.getByRole('button', { name: 'tag2' })).toHaveAttribute(
       'class',
-      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorLink bg-skin-secondary',
+      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorInDarkness bg-skin-secondary',
     );
 
     userEvent.click(screen.getByRole('button', { name: 'tag2' }));
 
     expect(screen.getByRole('button', { name: 'tag2' })).not.toHaveAttribute(
       'class',
-      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorLink bg-skin-secondary',
+      'p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl text-skin-textColorInDarkness bg-skin-secondary',
     );
   });
 });

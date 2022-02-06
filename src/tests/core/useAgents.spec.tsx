@@ -5,9 +5,9 @@ import useAgents from '@/hooks/useAgents';
 import {
   URL_GET_AGENTS_AND_MAP_SELECTED_ERROR,
   URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS,
-} from '../mock/ROUTES_API';
-import MockApp from './App.Mock';
-import waitByLoading from '../mock/waitByLoading';
+} from '@/mock/ROUTES_API';
+import MockApp from '@/mock/App.Mock';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   useRouter() {

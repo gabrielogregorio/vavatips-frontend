@@ -24,7 +24,7 @@ export default function PostTags() {
         role="presentation">
         <Button
           className={`p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl ${
-            filters.includes(tag) ? 'text-skin-textColorLink bg-skin-secondary' : ''
+            filters.includes(tag) ? 'text-skin-textColorInDarkness bg-skin-secondary' : ''
           }`}>
           {tag}
         </Button>

@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import MockApp from '../core/App.Mock';
-import CreatePostScreen from '../../pages/admin/post-create';
-import { URL_POST_CREATE_POST } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import MockApp from '@/mock/App.Mock';
+import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
+import CreatePostScreen from '@/pages/admin/post-create';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

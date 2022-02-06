@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react';
 import NavbarComponent from '@/layout/navbar';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import navbarEnum from '@/interfaces/navbar';
+import userEvent from '@testing-library/user-event';
+import MockApp from '../mock/App.Mock';
 
 describe('<NavbarComponent />', () => {
   it('should render button like', () => {
@@ -57,5 +59,24 @@ describe('<NavbarComponent />', () => {
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
     );
+  });
+
+  it('should test change themes', () => {
+    render(
+      <MockApp
+        localstorage={{
+          theme: '',
+        }}>
+        <NavbarComponent selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
+      </MockApp>,
+    );
+
+    expect(localStorage.getItem('theme')).toEqual('dark');
+
+    userEvent.click(screen.getByRole('button'));
+    expect(localStorage.getItem('theme')).toEqual('light');
+
+    userEvent.click(screen.getByRole('button'));
+    expect(localStorage.getItem('theme')).toEqual('dark');
   });
 });

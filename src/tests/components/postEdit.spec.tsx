@@ -3,14 +3,14 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import MockApp from '../core/App.Mock';
-import EditPostScreen from '../../pages/admin/post-edit';
+import MockApp from '@/mock/App.Mock';
+import EditPostScreen from '@/pages/admin/post-edit';
 import {
   URL_DELETE_POST_BY_ID,
   URL_GET_POST_BY_ID,
   URL_PUT_EDIT_POST_BY_ID,
-} from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+} from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

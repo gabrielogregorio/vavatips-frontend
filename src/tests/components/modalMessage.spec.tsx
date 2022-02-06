@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { useEffect } from 'react';
 import ModalMessage from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
-import MockApp from '../core/App.Mock';
+import MockApp from '@/mock/App.Mock';
 
 function ComponentSetup() {
   const { setModalMessage } = useModalMessage();

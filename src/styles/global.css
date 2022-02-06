@@ -11,39 +11,27 @@
 }
 
 .dark {
-  --background-primary: #22272E;
-  --background-secondary: #2D333B;
-  --text-color-link: #dadada;
-  --text-color: #dedede;
-  --text-color-INVERSE: #dedede;
-  --btnActionsTested: #5e9ad3;
-  --btnActionsSave: #d85f5f;
-  --btnActionsSuggestion: #a75fd1;
-  --background-description: #111111;
-  --text-color-bold: #ddd;
-  --text-color-normal: #dedede;
   --primary: #2D333B;
   --secondary: #3386d3;
-  --link-normal:#237fd4;
-  --link-active:#999999;
+  --primaryExtra: #d85f5f;
+  --primarySmall: #a75fd1;
+  --bgPage: #22272E;
+  --bgContainer: #2D333B;
+  --background-description: #111111;
+  --text-color-in-darkness: #dedede;
+  --text-color: #dedede;
 }
 
 .light {
-  --background-primary: #efefef;
-  --background-secondary: #FFFFFF;
-  --text-color-link: #efefef;
-  --text-color: #505152;
-  --text-color-INVERSE: #ffffff;
-  --btnActionsTested: #438ACB;
-  --btnActionsSave: #cb4343;
-  --btnActionsSuggestion: #CB43BD;
-  --background-description: #000000;
-  --text-color-bold: #000000;
-  --text-color-normal: #3E3E3E;
   --primary: #cb4343;
   --secondary: #438ACB;
-  --link-normal:#438ACB;
-  --link-active:#cb4343;
+  --primaryExtra: #cb4343;
+  --primarySmall: #CB43BD;
+  --bgPage: #efefef;
+  --bgContainer: #FFFFFF;
+  --background-description: #111111;
+  --text-color-in-darkness: #ffffff;
+  --text-color: #2c2c2c;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');

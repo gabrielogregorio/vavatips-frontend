@@ -2,10 +2,10 @@ import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import DashboardScreen from '../../pages/admin/dashboard';
-import MockApp from '../core/App.Mock';
-import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import DashboardScreen from '@/pages/admin/dashboard';
+import MockApp from '@/mock/App.Mock';
+import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

@@ -4,10 +4,10 @@ import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { TOKEN_JWT } from '@/services/auth';
-import MockApp from '../core/App.Mock';
-import Login from '../../pages/login';
-import { URL_POST_AUTHENTICATED, URL_POST_CREATE_NEW_USER } from '../mock/ROUTES_API';
-import waitByLoading from '../mock/waitByLoading';
+import MockApp from '@/mock/App.Mock';
+import Login from '@/pages/login';
+import { URL_POST_AUTHENTICATED, URL_POST_CREATE_NEW_USER } from '@/mock/ROUTES_API';
+import waitByLoading from '@/utils/waitByLoading';
 
 const mock = {
   usernameValid: 'my username',

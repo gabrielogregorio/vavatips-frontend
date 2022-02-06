@@ -24,6 +24,9 @@
       "@/hooks/*": ["src/core/hooks/*"],
       "@/services/*": ["src/core/services/*"],
       "@/schemas/*": ["src/core/schemas/*"],
+      "@/mock/*": ["src/tests/mock/*"],
+      "@/utils/*": ["src/tests/utils/*"],
+      "@/pages/*": ["src/pages/*"],
       "@/interfaces/*": ["src/interfaces/*"]
     },
     "incremental": true

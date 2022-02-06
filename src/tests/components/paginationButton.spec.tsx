@@ -18,7 +18,7 @@ describe('PaginationButtons', () => {
 
     expect(screen.getByRole('link', { name: '7' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor bg-skin-btnActionsSave text-skin-textColorINVERSE',
+      'block p-2 bg-transparent hover:bg-skin-primaryExtra hover:text-skin-textColorInDarkness bg-skin-primaryExtra text-skin-textColorInDarkness',
     );
     expect(screen.getByRole('link', { name: '7' })).toHaveAttribute(
       'href',
@@ -42,7 +42,7 @@ describe('PaginationButtons', () => {
 
     expect(screen.getByRole('link', { name: '3' })).not.toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-btnActionsSave hover:text-skin-textColor bg-skin-btnActionsSave text-skin-textColorINVERSE',
+      'block p-2 bg-transparent hover:bg-skin-primaryExtra hover:text-skin-textColorInDarkness bg-skin-primaryExtra text-skin-textColorInDarkness',
     );
     expect(screen.getByRole('link', { name: '3' })).toHaveAttribute(
       'href',

@@ -82,18 +82,18 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
           />
         )}
 
-        <p className="flex-1 text-skin-textColorNormal ml-5 text-base">
+        <p className="flex-1 text-skin-textColor ml-5 text-base">
           {post.user.username ?? 'Ademir'}
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-btnActionsSave ">
+          <Button className="block text-skin-primaryExtra ">
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </Button>
         ) : null}
       </div>
 
-      <h3 className="text-base text-skin-textColorBold w-full mb-2.5">{post.title}</h3>
+      <h3 className="text-base text-skin-textColor w-full mb-2.5">{post.title}</h3>
 
       <div className="w-full">
         <div className="relative w-full">
@@ -107,7 +107,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
             <Button
               ariaLabel="Item anterior"
               dataTestid="prev-btn"
-              className="text-skin-textColor border-none bg-transparent"
+              className="text-skin-textColorInDarkness border-none bg-transparent"
               onClick={() => nextImage('prev', post.imgs.length)}>
               <MdArrowBackIosNew className="text-4xl font-bold" />
             </Button>
@@ -117,14 +117,14 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
             <Button
               ariaLabel="Proximo item"
               dataTestid="next-btn"
-              className="text-skin-textColor border-none bg-transparent"
+              className="text-skin-textColorInDarkness border-none bg-transparent"
               onClick={() => nextImage('next', post.imgs.length)}>
               <MdArrowForwardIos className="text-4xl font-bold" />
             </Button>
           </div>
 
           <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-backgroundDescription">
-            <p className="text-skin-textColorINVERSE text-base" aria-live="polite">
+            <p className="text-skin-textColorInDarkness text-base" aria-live="polite">
               {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
           </div>
@@ -132,9 +132,9 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       </div>
 
       <div>
-        <p className="text-base text-skin-textColorBold">{post.description}</p>
+        <p className="text-base text-skin-textColor">{post.description}</p>
 
-        <p className="text-skin-btnActionsSave text-lg bg-transparent">
+        <p className="text-skin-primaryExtra text-lg bg-transparent">
           <span className="text-base"> #{post.tags.map}</span>
           <span className="text-base"> #{post.tags.agent}</span>
           <span className="text-base"> #{post.tags.ability}</span>
@@ -148,27 +148,27 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       {!viewAdmin ? (
         <div className="w-full flex justify-around mt-5">
           <ButtonForm
-            className={`m-1 border-skin-btnActionsTested ${
+            className={`m-1 border-skin-secondary ${
               postTested
-                ? 'text-skin-textColorINVERSE bg-skin-btnActionsTested '
-                : 'text-skin-btnActionsTested '
+                ? 'text-skin-textColorInDarkness bg-skin-secondary '
+                : 'text-skin-secondary '
             }`}
             onClick={() => handleAddTest()}>
             Testar
           </ButtonForm>
 
           <ButtonForm
-            className={`m-1 border-skin-btnActionsSave  ${
+            className={`m-1 border-skin-primaryExtra  ${
               postSave
-                ? 'text-skin-textColorINVERSE bg-skin-btnActionsSave'
-                : 'text-skin-btnActionsSave'
+                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra'
+                : 'text-skin-primaryExtra'
             }`}
             onClick={() => handleAddSave()}>
             Salvar
           </ButtonForm>
 
           <ButtonForm
-            className="m-1 text-skin-btnActionsSuggestion border-skin-btnActionsSuggestion"
+            className="m-1 text-skin-primarySmall border-skin-primarySmall"
             onClick={() => handleModalAction()}>
             Sugerir
           </ButtonForm>

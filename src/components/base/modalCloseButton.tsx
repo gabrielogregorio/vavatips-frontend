@@ -8,7 +8,7 @@ type buttonType = {
 
 export default function ButtonCloseModal({ onClick }: buttonType) {
   return (
-    <Button onClick={onClick} dataTestid="closeModal" className="text-skin-textColorBold">
+    <Button onClick={onClick} dataTestid="closeModal" className="text-skin-textColor">
       <FaTimes />
     </Button>
   );
