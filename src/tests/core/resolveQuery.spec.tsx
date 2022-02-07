@@ -24,7 +24,9 @@ describe('resolveQuery', () => {
         page: undefined,
         filters: 'filtersList,filterList2',
       }),
-    ).toEqual('/user?idPosts=&agent=agentChoice&map=mapChoice&page=&filters=filtersList,filterList2');
+    ).toEqual(
+      '/user?idPosts=&agent=agentChoice&map=mapChoice&page=&filters=filtersList,filterList2',
+    );
   });
 
   it('should test resolve query with none and null params', async () => {

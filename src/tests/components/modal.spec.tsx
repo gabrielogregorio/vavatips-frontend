@@ -14,7 +14,5 @@ describe('<ModalComponent />', () => {
         saveModal={() => fn()}
       />,
     );
-
-    // expect(screen.getByTestId('modal')).toMatchSnapshot();
   });
 });

@@ -72,3 +72,9 @@ yarn start`
 ```
 
 Run in production mode, after run `yarn build`
+
+## Prettier fix all
+
+```bash
+yarn prettier --write .
+```

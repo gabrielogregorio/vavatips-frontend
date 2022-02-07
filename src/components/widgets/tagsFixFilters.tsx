@@ -9,14 +9,16 @@ export default function TagsFixFilters({ queryUrl }: propsInterface) {
     <div className="flex justify-center">
       <div>
         {queryUrl.agent ? (
-          <Button className="bg-transparent p-2 m-2 text-skin-primaryExtra">
+          <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-primaryExtra">
             #{queryUrl.agent}
           </Button>
         ) : null}
       </div>
       <div>
         {queryUrl.map ? (
-          <Button className="bg-transparent p-2 m-2 text-skin-primaryExtra">#{queryUrl.map}</Button>
+          <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-primaryExtra">
+            #{queryUrl.map}
+          </Button>
         ) : null}
       </div>
     </div>

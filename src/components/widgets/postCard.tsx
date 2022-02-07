@@ -41,9 +41,12 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
   }
 
   useEffect(() => {
-    // Este post está incluso nos posts testados!
-    setPostTested(getPostsTested()?.includes(post.id) ?? false);
-    setPostSave(getPostsSave()?.includes(post.id) ?? false);
+    function thisPostIsIncludeInSaveOrTestedPosts() {
+      setPostTested(getPostsTested()?.includes(post.id) ?? false);
+      setPostSave(getPostsSave()?.includes(post.id) ?? false);
+    }
+
+    thisPostIsIncludeInSaveOrTestedPosts();
   }, [post.id]);
 
   function nextImage(type: typeType, length: number) {
@@ -87,7 +90,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-primaryExtra ">
+          <Button className="block text-skin-primaryExtra" onClick={() => null}>
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </Button>
         ) : null}

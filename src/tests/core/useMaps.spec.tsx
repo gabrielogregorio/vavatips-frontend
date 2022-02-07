@@ -101,7 +101,6 @@ describe('<ComponentAgentTest />', () => {
 
     try {
       await waitByLoading();
-      // eslint-disable-next-line no-empty
     } catch (error) {}
 
     expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();

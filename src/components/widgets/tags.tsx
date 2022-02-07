@@ -23,6 +23,7 @@ export default function PostTags() {
         onClick={() => toggleTag(tag)}
         role="presentation">
         <Button
+          onClick={() => null}
           className={`p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl ${
             filters.includes(tag) ? 'text-skin-textColorInDarkness bg-skin-secondary' : ''
           }`}>

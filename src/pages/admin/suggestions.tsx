@@ -8,6 +8,7 @@ import LoaderComponent from '@/base/loader';
 import LayoutComponent from '@/layout/layout';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
+import ErrorMsg from '../../components/base/errorMsg';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -17,18 +18,21 @@ const breadcrumbs = [
 export default function SuggestionScreen() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  async function loadSuggestion() {
+  function loadSuggestion() {
     setLoading(true);
-    const suggestionResponse = api.get(`/suggestions`);
-
-    try {
-      const [suggestion] = await Promise.all([suggestionResponse]);
-      const suggestionJson = suggestion.data;
-      setSuggestions(suggestionJson);
-      // eslint-disable-next-line no-empty
-    } catch (error) {}
-    setLoading(false);
+    api
+      .get(`/suggestions`)
+      .then((res) => {
+        setSuggestions(res.data);
+      })
+      .catch((err) => {
+        setError(err?.message || 'Erro no servidor');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   useEffect(() => {
@@ -60,6 +64,7 @@ export default function SuggestionScreen() {
       <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
 
       <LoaderComponent active={loading} />
+      <ErrorMsg msg={error} />
 
       <SubContainer>
         <table className="w-full max-w-maxWidthDefault">

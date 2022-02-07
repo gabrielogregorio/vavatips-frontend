@@ -1,4 +1,10 @@
-import { agentInterface, difficultInterface, mapInterface, momentInterface, sideInterface } from '@/interfaces/posts';
+import {
+  agentInterface,
+  difficultInterface,
+  mapInterface,
+  momentInterface,
+  sideInterface,
+} from '@/interfaces/posts';
 
 export const side = (): sideInterface[] => [
   {

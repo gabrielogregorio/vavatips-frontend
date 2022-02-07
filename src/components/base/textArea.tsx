@@ -1,7 +1,13 @@
 import React from 'react';
-import { propsInterfaceTextArea } from '@/interfaces/textArea';
 import GroupInput from '@/base/groupInput';
 import LabelComponent from '@/base/label';
+
+export interface propsInterfaceTextArea {
+  name: string;
+  title: string;
+  value: string;
+  setValue: (value: string) => void;
+}
 
 export default function TextArea({ title, setValue, value, name }: propsInterfaceTextArea) {
   return (

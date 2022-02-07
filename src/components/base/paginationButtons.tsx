@@ -1,6 +1,13 @@
 import Link from 'next/link';
-import { PaginationButtonInterface } from '@/interfaces/pagination';
 import resolveQuery from '@/helpers/resolveQuery';
+
+export interface PaginationButtonInterface {
+  numberOfPage: any;
+  active: boolean;
+  map: string;
+  agent: string;
+  urlBase: string;
+}
 
 export default function PaginationButtons({
   numberOfPage: page = 1,

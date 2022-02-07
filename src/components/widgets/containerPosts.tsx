@@ -50,7 +50,7 @@ export default function ContainerPosts({
         <ModalMessage />
 
         <Title>{title}</Title>
-        <ErrorMsg msg={errorMsg} />
+        <ErrorMsg msg={errorMsg ? 'Erro desconhecido' : ''} />
 
         <div>
           <TagsFixFilters queryUrl={queryUrl} />

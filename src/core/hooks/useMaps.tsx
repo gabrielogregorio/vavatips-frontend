@@ -4,7 +4,9 @@ import { useQuery } from 'react-query';
 
 export default function useMaps() {
   const [mapsApi, setMapsApi] = useState<string[]>([]);
-  const { isLoading, error, data } = useQuery(['/maps'], () => api.get('/maps').then((maps) => maps.data));
+  const { isLoading, error, data } = useQuery(['/maps'], () =>
+    api.get('/maps').then((maps) => maps.data),
+  );
 
   useEffect(() => {
     if (data?.maps) {

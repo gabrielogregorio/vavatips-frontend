@@ -124,7 +124,7 @@ function ComponentPosts({ agent, map, type, page }: any) {
   return (
     <div>
       <LoaderComponent active={isLoading} />
-      {errorMsg !== '' ? <ErrorMsg msg={errorMsg} /> : null}
+      {errorMsg !== '' ? <ErrorMsg msg={errorMsg ? 'Erro desconhecido' : ''} /> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>
       <h3>{`QUERY_MAP: ${queryUrl.map}`}</h3>
@@ -224,6 +224,6 @@ describe('<ComponentPosts />', () => {
     );
 
     await waitByLoading();
-    expect(screen.queryByText(/Request failed with status code 404/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Erro desconhecido/i)).toBeInTheDocument();
   });
 });

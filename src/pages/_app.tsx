@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-props-no-spreading */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -9,7 +8,6 @@ import { ContextModalMessage } from '@/contexts/modalMessage';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ContextThemeProvider from '@/contexts/theme';
-
 import '../styles/global.css';
 
 const queryClient = new QueryClient({
@@ -32,6 +30,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
 
+  const valueModalMessage = useMemo(() => ({ modalMessage, setModalMessage }), [modalMessage]);
+  const valueModalSuggestion = useMemo(
+    () => ({ modalSuggestion, setModalSuggestion }),
+    [modalSuggestion],
+  );
+  const valueFilters = useMemo(() => ({ tags, filters, setTags, setFilters }), [tags, filters]);
+
   return (
     <>
       <Header>
@@ -41,9 +46,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       <QueryClientProvider client={queryClient}>
         <ContextThemeProvider>
-          <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
-            <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-              <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
+          <ContextModalSuggestion.Provider value={valueModalSuggestion}>
+            <ContextModalMessage.Provider value={valueModalMessage}>
+              <ContextFilters.Provider value={valueFilters}>
                 <Component {...pageProps} />
               </ContextFilters.Provider>
             </ContextModalMessage.Provider>

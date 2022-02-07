@@ -1,12 +1,20 @@
 import React from 'react';
-import { buttonTypeNormal } from '@/interfaces/button';
+
+type buttonTypeNormal = {
+  children: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  disabled?: boolean;
+  className?: string;
+  ariaLabel?: string;
+  dataTestid?: string;
+};
 
 export default function Button({
   children,
-  className = '',
-  ariaLabel = '',
-  disabled = false,
-  onClick = () => {},
+  ariaLabel,
+  className,
+  disabled,
+  onClick,
   dataTestid,
 }: buttonTypeNormal) {
   return (
@@ -21,3 +29,10 @@ export default function Button({
     </button>
   );
 }
+
+Button.defaultProps = {
+  disabled: false,
+  className: '',
+  ariaLabel: '',
+  dataTestid: '',
+};

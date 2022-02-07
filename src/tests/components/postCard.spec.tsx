@@ -8,8 +8,6 @@ import { mockPosts } from '@/mock/mockPosts';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 
-// FIXME: need test localstorage
-
 jest.mock('next/router', () => ({
   useRouter() {
     return {

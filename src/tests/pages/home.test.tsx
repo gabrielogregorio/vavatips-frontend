@@ -20,23 +20,7 @@ jest.mock('next/router', () => ({
   },
 }));
 
-// let count = 0;
-
-const handlers = [
-  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
-    // if (count === 2) {
-    //   return res(ctx.status(500));
-    // }
-    // count += 1;
-    const query = req.url.searchParams;
-    query.append('agent', 'Sova');
-    query.append('map', 'Ascent');
-    query.append('page', '1');
-    query.append('filters', '');
-
-    return res(ctx.json(mockPosts()));
-  }),
-];
+const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts())))];
 
 const server = setupServer(...handlers);
 
@@ -98,11 +82,9 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    // buttons of first post
     const buttonPrev = screen.getAllByLabelText('Item anterior')[0];
     const buttonNext = screen.getAllByLabelText('Proximo item')[0];
 
-    // navigation in items the post
     expect(screen.getByAltText(mockPosts().posts[0].imgs[0].description)).toBeInTheDocument();
     userEvent.click(buttonNext);
 

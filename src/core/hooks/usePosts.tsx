@@ -21,23 +21,15 @@ function getUrl(location: any): filterUrlInterface {
 type typeRequestType = '' | 'save' | 'tested';
 
 export default function usePosts(location: any, typeRequest: typeRequestType = '') {
-  const { filters, setTags, setFilters } = useFilters();
+  const { filters, setTags } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
   const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
   const [dataRequest, setDataRequest] = useState<any>({});
 
-  useEffect(
-    () => () => {
-      setTags([]);
-      setFilters([]);
-    },
-    [],
-  );
-
   const { isLoading, error, data, refetch } = useQuery(
     ['/posts', resolveQuery(dataRequest)],
-    () => api.get(resolveQuery('/posts', dataRequest)).then((response) => response.data),
+    () => api.get(resolveQuery('/posts', dataRequest)).then((res) => res.data),
     { enabled: false }, // send with manual update
   );
 
@@ -83,6 +75,5 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     }
   }, [JSON.stringify(location?.query), typeRequest, JSON.stringify(filters)]);
 
-  // @ts-ignore
-  return { posts, isLoading, errorMsg: error?.message || '', finishPage, queryUrl };
+  return { posts, isLoading, errorMsg: error || '', finishPage, queryUrl };
 }
