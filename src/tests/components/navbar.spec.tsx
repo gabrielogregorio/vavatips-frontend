@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { render, screen } from '@testing-library/react';
 import NavbarComponent from '@/layout/navbar';
 import { modelNavbarAdmin } from '@/schemas/navbar';

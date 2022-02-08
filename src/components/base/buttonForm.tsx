@@ -1,11 +1,14 @@
 import Button from './button';
 
-export default function ButtonForm({ children, className, ...rest }: any) {
+type ButtonType = {
+  children: any;
+  className: string;
+  onClick: () => void;
+};
+
+export default function ButtonForm({ children, className, onClick }: ButtonType) {
   return (
-    <Button
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
-      className={`w-full border-2 rounded-xl ${className}`}>
+    <Button className={`w-full border-2 rounded-xl ${className}`} onClick={() => onClick()}>
       {children}
     </Button>
   );

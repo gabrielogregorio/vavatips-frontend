@@ -7,7 +7,7 @@ export default function LayoutComponent({ children }: any) {
 
   useEffect(() => {
     setTheme(getTheme());
-  }, []);
+  }, [setTheme]);
 
   return (
     <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>

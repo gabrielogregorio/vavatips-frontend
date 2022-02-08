@@ -3,11 +3,19 @@ import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
 import LoaderComponent from '@/base/loader';
-import { ModalPropsBase } from '@/interfaces/modal';
 import FormComponent from '@/base/Form';
 import TextArea from '@/base/textArea';
 import InputFile from '@/base/inputFile';
 import ModalRef from './modalRef';
+
+export interface ModalPropsBase {
+  title: string;
+  id: string;
+  description: string;
+  image: string;
+  closeModal: React.MouseEventHandler<HTMLButtonElement>;
+  saveModal: (id: string, title: string, image: string) => void;
+}
 
 export default function ModalComponent({
   id: idModal,

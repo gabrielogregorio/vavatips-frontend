@@ -7,6 +7,5 @@ export default async function waitByLoading() {
     await waitForElementToBeRemoved(screen.queryByText('Loading...'), {
       timeout: 2000,
     });
-    // eslint-disable-next-line no-empty
   } catch (error) {}
 }

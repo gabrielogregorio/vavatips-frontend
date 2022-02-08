@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
-import { propsInterfacePaginationComponent } from '@/interfaces/pagination';
+
+export interface propsInterfacePaginationComponent {
+  initial: number;
+  finish: number;
+  selected: number;
+  map: string;
+  agent: string;
+  urlBase: 'ViewPosts' | 'posts' | 'save' | 'tested';
+}
 
 const maxValuePagination = 3;
 

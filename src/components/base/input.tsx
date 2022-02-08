@@ -1,6 +1,16 @@
-import { propsInterfaceInput } from '@/interfaces/input';
+import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
 import LabelComponent from './label';
+
+type setValueType = (a: string) => void;
+export interface propsInterfaceInput {
+  text: string;
+  value: string;
+  type: 'text' | 'password' | 'email';
+  disabled?: boolean;
+  setValue: setValueType;
+  name: string;
+}
 
 export default function Input({
   disabled,
@@ -10,7 +20,9 @@ export default function Input({
   setValue,
   name,
 }: propsInterfaceInput) {
-  // remo
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value);
+  };
   return (
     <GroupInput>
       <LabelComponent name={name} text={text} />
@@ -21,7 +33,7 @@ export default function Input({
         type={type}
         value={value}
         placeholder={text}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(event) => handleInput(event)}
       />
     </GroupInput>
   );

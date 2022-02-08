@@ -1,21 +1,9 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
 import { postsProps } from './posts';
 
 export type modalType = 'success' | 'error' | '';
-
-export interface modalMessageInterface {
+interface modalMessageInterface {
   msg: string;
   type: modalType;
-}
-
-export interface ModalPropsBase {
-  title: string;
-  id: string;
-  description: string;
-  image: string;
-  closeModal: React.MouseEventHandler<HTMLButtonElement>;
-  saveModal: (id: string, title: string, image: string) => void;
 }
 
 export type modalMessageTypeContext = {

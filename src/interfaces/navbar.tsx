@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-unused-vars */
 enum navbarEnum {
   Profile = '/admin/profile',
   PostCreate = '/admin/post-create',
@@ -14,5 +12,4 @@ enum navbarEnum {
   Mistic = '#',
   None = '',
 }
-
 export default navbarEnum;

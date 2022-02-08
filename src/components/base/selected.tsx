@@ -1,6 +1,14 @@
-import { propsInterfaceSelectedBase } from '@/interfaces/select';
+import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
 import LabelComponent from './label';
+
+export interface propsInterfaceSelectedBase {
+  text: string;
+  value: string;
+  setValue: (value: string) => any;
+  name: string;
+  render: any[];
+}
 
 export default function Selected({
   render,
@@ -17,6 +25,10 @@ export default function Selected({
     ));
   }
 
+  const onChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value);
+  };
+
   return (
     <GroupInput>
       <LabelComponent name={name} text={text} />
@@ -24,7 +36,7 @@ export default function Selected({
         className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
         id={name}
         value={value}
-        onChange={(e) => setValue(e.target.value)}>
+        onChange={(e) => onChange(e)}>
         <option value="" aria-label="Nenhum agente selecionado" />
         {renderItems()}
       </select>

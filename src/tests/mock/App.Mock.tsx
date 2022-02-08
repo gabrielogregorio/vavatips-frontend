@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import { useState } from 'react';
 import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
@@ -8,11 +7,9 @@ import { LocalStorageMock } from '@react-mock/localstorage';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import ContextThemeProvider from '@/contexts/theme';
 
-// eslint-disable-next-line no-unused-vars
 function customLog(data) {
   return null;
 }
-// Custom logger
 setLogger({
   log: customLog,
   warn: customLog,

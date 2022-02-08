@@ -89,7 +89,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           setLoading(false);
         });
     }
-  }, [id, mode]);
+  }, [id, mode, isReady]);
 
   async function handleSubmit() {
     setLoading(true);
@@ -244,7 +244,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     ));
   }
 
-  function saveModal(idPost: string, description: string, image: string) {
+  const saveModal = (idPost: string, description: string, image: string) => {
     if (idPost) {
       const copyImgAdded: imgInterface[] = JSON.parse(JSON.stringify(imgAdded));
       for (let x = 0; x < copyImgAdded.length; x += 1) {
@@ -259,7 +259,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
       setImgAdded([...imgAdded, { description, image, id: uuid.v4().toString() }]);
       setVisibleModal(false);
     }
-  }
+  };
 
   async function deletePost(idPost: string) {
     setLoading(true);
@@ -293,7 +293,6 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
             description={propsModal.description}
             image={propsModal.image}
             closeModal={() => closeModal()}
-            // eslint-disable-next-line react/jsx-no-bind
             saveModal={saveModal}
           />
         ) : null}
