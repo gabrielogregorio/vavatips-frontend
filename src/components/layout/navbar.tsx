@@ -28,7 +28,7 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
 
   function renderMenuItems() {
     return modelNavbar.map((model) => (
-      <div key={model.text}>
+      <div key={model.text} className="mb-4">
         <NavbarLink
           href={model.url}
           selected={selected}
@@ -40,9 +40,9 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
   }
 
   return (
-    <nav className="flex justify-between items-center w-full p-5 pl-10 pr-10 bg-skin-primary text-skin-textColorInDarkness">
+    <nav className="flex flex-col items-center w-full p-5 pl-10 pr-10 bg-skin-primary sm:flex-row text-skin-textColorInDarkness">
       <Link href="/" passHref>
-        <a href="#/" className="flex-1 text-left text-4xl border-none font-bold">
+        <a href="#/" className="text-left text-4xl border-none font-bold mb-2 sm:flex-1">
           VAVATIPS
         </a>
       </Link>

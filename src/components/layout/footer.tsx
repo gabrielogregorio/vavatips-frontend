@@ -3,8 +3,8 @@ export default function FooterComponent() {
     <>
       <div className="flex-1 bg-red-500" />
       <div className="w-full bg-skin-primary flex justify-center">
-        <div className="grid gap-2 grid-cols-3 w-full p-5 max-w-maxWidthDefault">
-          <div className="flex flex-col">
+        <div className="grid gap-2 grid-cols-1 w-full p-5 max-w-maxWidthDefault sm:grid-cols-3">
+          <div className="flex mb-4 flex-col">
             <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">
               Contribua
             </h3>
@@ -31,7 +31,7 @@ export default function FooterComponent() {
             </a>
           </div>
 
-          <div className="w-full pb-5 text-center">
+          <div className="w-full mb-4 text-center">
             <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">
               Projeto
             </h3>
@@ -41,7 +41,7 @@ export default function FooterComponent() {
             </p>
           </div>
 
-          <div className="w-full pb-5 text-center">
+          <div className="w-full mb-4 text-center">
             <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">Sobre</h3>
             <p className="text-left text-sm text-skin-textColorInDarkness">
               <span className="text-sm">Vavatips</span> foi criado seguindo a política do

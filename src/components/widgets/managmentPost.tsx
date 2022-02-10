@@ -91,7 +91,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     }
   }, [id, mode, isReady]);
 
-  async function handleSubmit() {
+  async function handleSubmitManagement() {
     setLoading(true);
     const request = {
       title: formTitle,
@@ -399,7 +399,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
 
             <GroupInput>
               <ButtonForm
-                onClick={() => handleSubmit()}
+                onClick={() => handleSubmitManagement()}
                 className="border-skin-secondary text-skin-textColorInDarkness bg-skin-secondary">
                 Publicar Dica
               </ButtonForm>
