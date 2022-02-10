@@ -41,7 +41,7 @@ export default function MapScreen() {
         <Title>Escolha um mapa ai parça </Title>
         <ErrorMsg msg={error} />
         <LoaderComponent active={isLoading} />
-        <div className="grid grid-cols-4 gap-6 pl-1 pr-1 mb-2 ">{renderMap()}</div>
+        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-4 ">{renderMap()}</div>
       </SubContainer>
 
       <FooterComponent />

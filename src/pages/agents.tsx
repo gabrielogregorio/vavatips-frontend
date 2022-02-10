@@ -46,7 +46,7 @@ export default function AgentScreen() {
         <Title>Escolha um Agente</Title>
         <LoaderComponent active={isLoading} />
         <ErrorMsg msg={error} />
-        <div className="grid grid-cols-3 gap-6 p-10">{renderAgent()}</div>
+        <div className="grid grid-cols-2 gap-6 p-10 sm:grid-cols-4">{renderAgent()}</div>
       </SubContainer>
       <FooterComponent />
     </LayoutComponent>
