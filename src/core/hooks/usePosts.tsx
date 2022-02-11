@@ -30,7 +30,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
   const { isLoading, error, data, refetch } = useQuery(
     ['/posts', resolveQuery(dataRequest)],
     () => api.get(resolveQuery('/posts', dataRequest)).then((res) => res.data),
-    { enabled: false }, // send with manual update
+    { enabled: false },
   );
 
   useEffect(() => {

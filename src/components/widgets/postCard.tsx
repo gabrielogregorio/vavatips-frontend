@@ -8,6 +8,7 @@ import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
 import ButtonForm from '@/base/buttonForm';
+import Image from 'next/image';
 
 type typeType = 'next' | 'prev';
 
@@ -71,19 +72,23 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-500">
       <div className="flex justify-center items-center mb-2 w-full">
-        {post.user.image ? (
-          <img
-            className="h-11 rounded-full object-cover w-11"
-            src={formatImage(post.user.image)}
-            alt="Foto de perfil do Autor da postagem"
-          />
-        ) : (
-          <img
-            className="h-11 rounded-full object-cover w-11"
-            src="/images/users/profile.webp"
-            alt="Foto de perfil do Autor da postagem"
-          />
-        )}
+        <div className="h-11 w-11 relative">
+          {post.user.image ? (
+            <Image
+              layout="fill"
+              className="rounded-full object-cover"
+              src={formatImage(post.user.image)}
+              alt="Foto de perfil do Autor da postagem"
+            />
+          ) : (
+            <Image
+              layout="fill"
+              className="rounded-full object-cover"
+              src="/images/users/profile.webp"
+              alt="Foto de perfil do Autor da postagem"
+            />
+          )}
+        </div>
 
         <p className="flex-1 text-skin-textColor ml-5 text-base">
           {post.user.username ?? 'Ademir'}
@@ -100,11 +105,14 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
 
       <div className="w-full">
         <div className="relative w-full">
-          <img
-            className="h-[500px] object-cover rounded-lg w-full"
-            src={formatImage(post.imgs?.[idImage]?.image)}
-            alt={post.imgs?.[idImage]?.description}
-          />
+          <div className="relative h-[500px] w-full ">
+            <Image
+              layout="fill"
+              className="object-cover rounded-lg"
+              src={formatImage(post.imgs?.[idImage]?.image)}
+              alt={post.imgs?.[idImage]?.description}
+            />
+          </div>
 
           <div className="absolute left-0 top-2/4">
             <Button

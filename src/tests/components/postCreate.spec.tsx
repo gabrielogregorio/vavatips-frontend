@@ -97,7 +97,6 @@ describe('<CreatePostScreen />', () => {
     userEvent.selectOptions(screen.getByLabelText('Dificuldade'), 'Medio');
     userEvent.selectOptions(screen.getByLabelText('Lado'), 'Atacantes');
 
-    // upload fake & test modal actions
     userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
     expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
@@ -112,7 +111,6 @@ describe('<CreatePostScreen />', () => {
     expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
-    // upload fake
 
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', '');
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/');

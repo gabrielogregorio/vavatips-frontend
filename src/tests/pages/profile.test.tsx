@@ -96,7 +96,5 @@ describe('<MyProfileScreen />', () => {
     userEvent.type(screen.getByLabelText('Confirme a nova senha'), 'newPassword');
 
     userEvent.click(screen.getByRole('button', { name: 'Atualizar dados' }));
-
-    // FIXME: create feature
   });
 });

@@ -90,7 +90,6 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    // FIXME: needs test localstorage
     userEvent.click(screen.getByRole('button', { name: 'Testar' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
 
@@ -187,7 +186,5 @@ describe('<PostCard />', () => {
         <PostCard post={post} viewAdmin />
       </MockApp>,
     );
-
-    // FIXME: Test authenticate
   });
 });

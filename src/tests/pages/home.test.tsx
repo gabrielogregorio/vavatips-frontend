@@ -123,15 +123,4 @@ describe('<HomeScreen />', () => {
       { timeout: 3000 },
     );
   });
-
-  // it('should render with error message', async () => {
-  //   render(
-  //     <MockApp>
-  //       <HomeScreen />
-  //     </MockApp>,
-  //   );
-
-  //   await waitByLoading()
-  //   expect(screen.getByText('Request failed with status code 500')).toBeInTheDocument();
-  // });
 });

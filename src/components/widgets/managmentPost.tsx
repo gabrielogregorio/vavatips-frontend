@@ -24,6 +24,7 @@ import FormComponent from '@/base/Form';
 import GroupInputMultiple from '@/base/groupInputMultiple';
 import HrComponent from '@/base/hr';
 import ButtonForm from '@/base/buttonForm';
+import Image from 'next/image';
 
 type actionType = 'top' | 'bottom';
 
@@ -202,7 +203,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
 
   function renderSteps() {
     return imgAdded.map((instruction, key) => (
-      <div key={`${instruction.id} ${instruction.image}`}>
+      <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
             className="text-skin-textColor flex-1 text-base"
@@ -218,12 +219,15 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           </Button>
         </div>
 
-        <div className="relative w-full">
-          <img
-            className="object-cover h-full"
-            src={formatImage(instruction.image)}
-            alt={instruction.description}
-          />
+        <div className="relative flex-1 ">
+          <div className="relative h-72 w-full ">
+            <Image
+              layout="fill"
+              className="object-cover"
+              src={formatImage(instruction.image)}
+              alt={instruction.description}
+            />
+          </div>
 
           <br />
           <Button

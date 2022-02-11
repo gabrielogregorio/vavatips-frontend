@@ -9,7 +9,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
-    '@next/next/no-img-element': 'off',
 
     'no-shadow': 'off',
     'react/react-in-jsx-scope': 'off',
