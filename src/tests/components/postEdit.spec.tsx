@@ -137,21 +137,21 @@ describe('<EditPostScreen />', () => {
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_111',
+      '/_next/image?url=http%3A%2F%2F127.0.0.1%3A3333%2Fimages%2Fimage_111&w=3840&q=75',
     );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_222',
+      '/_next/image?url=http%3A%2F%2F127.0.0.1%3A3333%2Fimages%2Fimage_222&w=3840&q=75',
     );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
     expect(screen.getAllByRole('img')[2]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_333',
+      '/_next/image?url=http%3A%2F%2F127.0.0.1%3A3333%2Fimages%2Fimage_333&w=3840&q=75',
     );
   });
 
@@ -180,21 +180,21 @@ describe('<EditPostScreen />', () => {
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_111',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_222',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
     expect(screen.getAllByRole('img')[2]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/image_333',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));

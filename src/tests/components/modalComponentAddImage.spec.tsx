@@ -129,7 +129,7 @@ describe('<ModalComponent />', () => {
 
     expect(screen.getByRole('img')).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://gcloud.com/123abc',
+      '/_next/image?url=http%3A%2F%2F127.0.0.1%3A3333%2Fimages%2Fhttps%3A%2F%2Fgcloud.com%2F123abc&w=3840&q=75',
     );
 
     expect(saveModal).toHaveBeenCalledWith(
@@ -157,7 +157,7 @@ describe('<ModalComponent />', () => {
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição post');
     expect(screen.getByRole('img')).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://uploads/file1',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
     expect(inputDescription.value).toEqual('myDescription');
 
