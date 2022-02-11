@@ -20,7 +20,7 @@
 
 <p align="center">
   a Valorant tips blog<br/>
-  <a href="https://vavatips.vercel.app/"><strong>Access the blog</strong></a>
+  <a href="https://valorant-tips.vercel.app/"><strong>Access the blog</strong></a>
   <br>
   <br>
 </p>
