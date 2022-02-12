@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Check tsc and lint
 
 on:
   push:
@@ -25,5 +25,3 @@ jobs:
         run: yarn install --frozen-lockfile
       - run: yarn type-check # test typescript
       - run: yarn lint # test eslint
-      - run: yarn test # test react testing library
-      - run: yarn e2e:headless # test cypress
