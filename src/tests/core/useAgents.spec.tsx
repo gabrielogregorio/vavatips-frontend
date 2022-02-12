@@ -8,6 +8,7 @@ import {
 } from '@/mock/ROUTES_API';
 import MockApp from '@/mock/App.Mock';
 import waitByLoading from '@/utils/waitByLoading';
+import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -23,7 +24,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );
@@ -33,11 +34,7 @@ const server = setupServer(
     res(
       ctx.status(200),
       ctx.json({
-        agents: [
-          { id: 1, title: 'title 1' },
-          { id: 2, title: 'title 2' },
-          { id: 3, title: 'title 3' },
-        ],
+        agents: ['Cypher', 'Killjoy', 'Sage', 'Sova', 'Viper'],
       }),
     ),
   ),
@@ -45,18 +42,32 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-function ComponentAgentTest({ typeMap }: any) {
+function ComponentAgentTest({ typeMap }: { typeMap: string }) {
   const { mapSelected, agentsApi, isLoading, error } = useAgents({
     query: {
       map: typeMap,
     },
+    route: '',
+    pathname: '',
+    asPath: '',
+    basePath: '',
+    isLocaleDomain: false,
+    push: () => null,
+    replace: () => null,
+    reload: () => null,
+    back: null,
+    prefetch: null,
+    beforePopState: null,
+    events: null,
+    isFallback: null,
+    isReady: null,
+    isPreview: null,
   });
 
   function renderPosts() {
-    return agentsApi?.map((agent: any) => (
-      <div key={agent.id}>
-        <h3>ID: {agent.id}</h3>
-        <h3>TITLE: {agent.title}</h3>
+    return agentsApi?.map((agent) => (
+      <div key={agent}>
+        <h3>NAME: {agent}</h3>
       </div>
     ));
   }
@@ -95,14 +106,11 @@ describe('<ComponentAgentTest />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'ID: 1' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: title 1' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 2' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: title 2' })).toBeInTheDocument();
-
-    expect(screen.getByRole('heading', { name: 'ID: 3' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'TITLE: title 3' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'NAME: Cypher' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'NAME: Killjoy' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'NAME: Sage' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'NAME: Sova' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'NAME: Viper' })).toBeInTheDocument();
   });
 
   it('should test error', async () => {

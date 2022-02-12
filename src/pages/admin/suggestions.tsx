@@ -15,8 +15,16 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'sugestões' },
 ];
 
+interface suggestionInterface {
+  id: string;
+  postId: string;
+  email: string;
+  description: string;
+  status: string;
+}
+
 export default function SuggestionScreen() {
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<suggestionInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
@@ -40,7 +48,7 @@ export default function SuggestionScreen() {
   }, []);
 
   function renderSuggestions() {
-    return suggestions.map((report) => (
+    return suggestions.map((report: suggestionInterface) => (
       <tr key={report.id} className="border-b">
         <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
           {report.postId}

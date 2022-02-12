@@ -5,6 +5,7 @@ import { setupServer } from 'msw/node';
 import ModalComponent from '@/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -20,7 +21,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );

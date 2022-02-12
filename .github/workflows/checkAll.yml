@@ -23,5 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - run: yarn test
-      - run: yarn e2e:headless
+      - run: yarn type-check # test typescript
+      - run: yarn lint # test eslint
+      - run: yarn test # test react testing library
+      - run: yarn e2e:headless # test cypress

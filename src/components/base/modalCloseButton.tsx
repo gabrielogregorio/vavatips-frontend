@@ -3,7 +3,7 @@ import { FaTimes } from 'react-icons/fa';
 import Button from './button';
 
 type buttonType = {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick: () => void;
 };
 
 export default function ButtonCloseModal({ onClick }: buttonType) {

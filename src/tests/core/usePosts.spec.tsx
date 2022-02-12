@@ -2,16 +2,18 @@ import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import ErrorMsg from '@/base/errorMsg';
-import usePosts from '@/hooks/usePosts';
+import usePosts, { typeRequestType } from '@/hooks/usePosts';
 import LoaderComponent from '@/base/loader';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ReactNode } from 'react';
+import { PropsPostInterface } from '../../interfaces/posts';
 
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );
@@ -100,20 +102,41 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-function ComponentPosts({ agent, map, type, page }: any) {
+function ComponentPosts({
+  agent,
+  map,
+  type,
+  page,
+}: {
+  agent: string;
+  map: string;
+  type: typeRequestType;
+  page: number;
+}) {
   const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(
     {
       route: '/posts',
       isReady: true,
       pathname: '',
-      query: { map, agent, type, page }, //
+      query: { map, agent, type, page: page.toString() }, //
       asPath: `/posts?map=${map}&agent=${agent}`,
+      basePath: null,
+      isLocaleDomain: null,
+      replace: null,
+      reload: null,
+      push: null,
+      back: null,
+      beforePopState: null,
+      events: null,
+      isFallback: null,
+      isPreview: null,
+      prefetch: null,
     },
     type,
   );
 
   function renderPosts() {
-    return posts?.map((agentItem: any) => (
+    return posts?.map((agentItem: PropsPostInterface) => (
       <div key={agentItem.id}>
         <h3>ID: {agentItem.id}</h3>
         <h3>TITLE: {agentItem.title}</h3>

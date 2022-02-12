@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useTheme } from '@/contexts/theme';
 import { getTheme } from '@/services/theme';
 
-export default function LayoutComponent({ children }: any) {
+type layoutComponentType = {
+  children: ReactNode;
+};
+
+export default function LayoutComponent({ children }: layoutComponentType) {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {

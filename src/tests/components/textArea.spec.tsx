@@ -14,9 +14,9 @@ describe('<TextArea />', () => {
     const fn = jest.fn();
     render(<TextArea title="Type our description 2" name="description" value="" setValue={fn} />);
 
-    const input: any = screen.getByLabelText(/Type our description 2/i);
+    const input: HTMLInputElement = screen.getByLabelText(/Type our description 2/i);
 
-    userEvent.type(input, 'a any text');
-    expect(fn).toHaveBeenCalledTimes('a any text'.length);
+    userEvent.type(input, 'a One2 text@12');
+    expect(fn).toHaveBeenCalledTimes('a One2 text@12'.length);
   });
 });

@@ -1,7 +1,8 @@
 import Button from '@/base/button';
+import { filterUrlInterface } from '@/hooks/usePosts';
 
 interface propsInterface {
-  queryUrl: any;
+  queryUrl: filterUrlInterface;
 }
 
 export default function TagsFixFilters({ queryUrl }: propsInterface) {

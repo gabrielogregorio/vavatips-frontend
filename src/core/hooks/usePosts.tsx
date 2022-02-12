@@ -5,30 +5,38 @@ import resolveQuery from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
 import { useQuery } from 'react-query';
 import { PropsPostInterface } from '@/interfaces/posts';
+import { NextRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
-interface filterUrlInterface {
+export interface filterUrlInterface {
   agent: string;
   map: string;
   type: string;
   page: string;
 }
 
-function getUrl(location: any): filterUrlInterface {
-  const { agent, map, type, page = '1' }: any = location;
-  return { agent, map, type, page };
+function getUrl(location: NextRouter): filterUrlInterface {
+  const { agent, map, type, page = '1' }: ParsedUrlQuery = location.query;
+
+  return {
+    agent: agent?.toString() ?? '',
+    map: map?.toString() ?? '',
+    type: type?.toString() ?? '',
+    page: page?.toString() ?? '',
+  };
 }
 
-type typeRequestType = '' | 'save' | 'tested';
+export type typeRequestType = '' | 'save' | 'tested';
 
-export default function usePosts(location: any, typeRequest: typeRequestType = '') {
+export default function usePosts(location: NextRouter, typeRequest: typeRequestType = '') {
   const { filters, setTags } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location?.query));
-  const [dataRequest, setDataRequest] = useState<any>({});
+  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location));
+  const [dataRequest, setDataRequest] = useState<{ [key: string]: string }>({});
 
   const { isLoading, error, data, refetch } = useQuery(
-    ['/posts', resolveQuery(dataRequest)],
+    ['/posts', resolveQuery('/posts', dataRequest)],
     () => api.get(resolveQuery('/posts', dataRequest)).then((res) => res.data),
     { enabled: false },
   );
@@ -37,7 +45,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
     if (JSON.stringify(dataRequest) !== '{}') {
       refetch();
     }
-  }, [dataRequest]);
+  }, [JSON.stringify(dataRequest)]);
 
   useEffect(() => {
     if (data?.posts) {
@@ -50,7 +58,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
 
   useEffect(() => {
     if (location.isReady) {
-      const { agent, map, type, page } = getUrl(location?.query);
+      const { agent, map, type, page } = getUrl(location);
       setQueryUrl({ agent, map, type, page });
 
       let idPosts = '[]';
@@ -60,7 +68,7 @@ export default function usePosts(location: any, typeRequest: typeRequestType = '
         idPosts = getPostsTested();
       }
 
-      const data1: any = {
+      const data1: { [key: string]: string } = {
         map,
         page,
         agent,

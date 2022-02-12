@@ -32,9 +32,9 @@ describe('should test input component', () => {
       />,
     );
 
-    const input: any = screen.getByPlaceholderText(/Description from input/i);
+    const input: HTMLInputElement = screen.getByPlaceholderText(/Description from input/i);
 
-    userEvent.type(input, 'a any text');
-    expect(fn).toHaveBeenCalledTimes('a any text'.length);
+    userEvent.type(input, 'a One text');
+    expect(fn).toHaveBeenCalledTimes('a One text'.length);
   });
 });

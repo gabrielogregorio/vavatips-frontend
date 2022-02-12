@@ -5,9 +5,9 @@ import LabelComponent from './label';
 export interface propsInterfaceSelectedBase {
   text: string;
   value: string;
-  setValue: (value: string) => any;
+  setValue: (value: string) => void;
   name: string;
-  render: any[];
+  render: { id: string; name: string }[];
 }
 
 export default function Selected({

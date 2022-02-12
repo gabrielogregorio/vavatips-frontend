@@ -6,7 +6,7 @@ const TESTED_POSTS = 'TESTED_POSTS';
 export const getPostsSave = () => localStorage.getItem(SAVE_POSTS);
 export const getPostsTested = () => localStorage.getItem(TESTED_POSTS);
 
-const verifyValidArray = (posts: any) => {
+const verifyValidArray = (posts: string): string[] => {
   if (posts !== undefined && posts !== null && posts !== '') {
     return JSON.parse(posts);
   }

@@ -42,7 +42,8 @@
     "e2e": "next build && start-server-and-test start http://localhost:3000 cypress",
     "e2e:headless": "next build && start-server-and-test start http://localhost:3000 cypress:headless",
     "type-check": "tsc",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-all": "tsc && next lint && jest"
   },
   "eslintConfig": {
     "extends": [

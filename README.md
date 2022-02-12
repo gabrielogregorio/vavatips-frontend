@@ -73,6 +73,13 @@ yarn start`
 
 Run in production mode, after run `yarn build`
 
+## Eslint, typescript
+
+```bash
+# check eslint, typescript and react testing library
+yarn check-all
+```
+
 ## Prettier fix all
 
 ```bash

@@ -12,7 +12,13 @@ import Selected from '@/base/selected';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import Button from '@/base/button';
-import { agentInterface, mapInterface } from '@/interfaces/posts';
+import {
+  agentInterface,
+  difficultInterface,
+  mapInterface,
+  momentInterface,
+  sideInterface,
+} from '@/interfaces/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import navbarEnum from '@/interfaces/navbar';
@@ -25,6 +31,7 @@ import GroupInputMultiple from '@/base/groupInputMultiple';
 import HrComponent from '@/base/hr';
 import ButtonForm from '@/base/buttonForm';
 import Image from 'next/image';
+import convertToSelectedRender from '@/helpers/convertToSelectedData';
 
 type actionType = 'top' | 'bottom';
 
@@ -41,7 +48,7 @@ interface propsModalInterface {
 }
 
 type modeManagment = {
-  breadcrumbs: any[];
+  breadcrumbs: { url: navbarEnum; text: string }[];
   mode: 'create' | 'edit';
 };
 
@@ -153,23 +160,23 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
     setImgAdded(copyImgAdded);
   }
 
-  function renderAgent() {
+  function renderAgent(): agentInterface[] {
     return agents();
   }
 
-  function renderSide() {
+  function renderSide(): sideInterface[] {
     return side();
   }
 
-  function renderMaps() {
+  function renderMaps(): mapInterface[] {
     return maps();
   }
 
-  function renderDifficult() {
+  function renderDifficult(): difficultInterface[] {
     return difficult();
   }
 
-  function renderMoment() {
+  function renderMoment(): momentInterface[] {
     return moment();
   }
 
@@ -224,6 +231,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
             <Image
               layout="fill"
               className="object-cover"
+              data-src={formatImage(instruction.image)}
               src={formatImage(instruction.image)}
               alt={instruction.description}
             />
@@ -327,14 +335,14 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
               text="Agente"
               value={formTagAgent}
               setValue={setFormTagAgent}
-              render={renderAgent()}
+              render={convertToSelectedRender(renderAgent())}
             />
             <Selected
               name="Mapa"
               text="Mapa"
               value={formTagMap}
               setValue={setFormTagMap}
-              render={renderMaps()}
+              render={convertToSelectedRender(renderMaps())}
             />
             <Selected
               name="Habilidade"

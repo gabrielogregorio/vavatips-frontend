@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePostScreen from '@/pages/admin/post-create';
 import waitByLoading from '@/utils/waitByLoading';
+import { rest } from 'msw';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -22,7 +22,7 @@ jest.mock('next/router', () => ({
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
-    const { title, description, tags, imgs }: any = req.body;
+    const { title, description, tags, imgs } = req.body as any;
 
     const postIsValid =
       title === `Title New Post` &&

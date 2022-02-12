@@ -7,11 +7,12 @@ import MockApp from '@/mock/App.Mock';
 import { mockMaps } from '@/mock/mock';
 import { URL_GET_ALL_MAPS } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ReactNode } from 'react';
 
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );

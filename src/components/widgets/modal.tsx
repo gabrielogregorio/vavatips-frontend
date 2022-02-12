@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
@@ -45,7 +45,7 @@ export default function ModalComponent({
     }
   }, [idModal, descriptionModal, image]);
 
-  const loadImage = (event: any) => {
+  const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     setActiveLoader(true);
     const formData = new FormData();
     formData.append('image', event.target.files[0]);

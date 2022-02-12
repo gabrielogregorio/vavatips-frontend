@@ -17,9 +17,9 @@ import SubContainer from '@/base/subContainer';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
 export default function AgentScreen() {
-  const item = useRouter();
+  const location = useRouter();
 
-  const { mapSelected, agentsApi, isLoading, error } = useAgents(item);
+  const { mapSelected, agentsApi, isLoading, error } = useAgents(location);
 
   function renderAgent() {
     if (agentsApi.length === 0) {

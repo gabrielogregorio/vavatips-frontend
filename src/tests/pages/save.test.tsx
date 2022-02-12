@@ -13,8 +13,8 @@ jest.mock('next/router', () => ({
       route: '/posts',
       isReady: true,
       pathname: '',
-      query: { map: 'any', agent: 'any', type: 'save', page: 1 },
-      asPath: `/posts?map=any&agent=any`,
+      query: { map: 'oneRandomData', agent: 'oneRandomData', type: 'save', page: 1 },
+      asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
     };
   },
 }));

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+// @ts-nocheck
 export {};
 
 describe('<Maps />', () => {

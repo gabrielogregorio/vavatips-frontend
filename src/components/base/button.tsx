@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 type buttonTypeNormal = {
-  children: any;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  children: ReactNode;
+  onClick: () => void;
   disabled?: boolean;
   className?: string;
   ariaLabel?: string;

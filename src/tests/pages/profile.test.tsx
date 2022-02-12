@@ -8,6 +8,7 @@ import { login } from '@/services/auth';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -24,7 +25,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );
