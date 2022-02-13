@@ -159,7 +159,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       {!viewAdmin ? (
         <div className="w-full flex justify-around mt-5">
           <ButtonForm
-            className={`m-1 border-skin-secondary ${
+            className={`m-1 border-skin-secondary p-1 ${
               postTested
                 ? 'text-skin-textColorInDarkness bg-skin-secondary '
                 : 'text-skin-secondary '
@@ -171,7 +171,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
           <ButtonForm
             className={`m-1 border-skin-primaryExtra  ${
               postSave
-                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra'
+                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra p-1'
                 : 'text-skin-primaryExtra'
             }`}
             onClick={() => handleAddSave()}>
@@ -179,7 +179,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
           </ButtonForm>
 
           <ButtonForm
-            className="m-1 text-skin-primarySmall border-skin-primarySmall"
+            className="m-1 text-skin-primarySmall border-skin-primarySmall p-1"
             onClick={() => handleModalAction()}>
             Sugerir
           </ButtonForm>

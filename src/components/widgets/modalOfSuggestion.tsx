@@ -92,12 +92,12 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColor"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
             onClick={() => setModalSuggestion(initializeModalSuggestion)}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColor"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
             onClick={() => saveModal()}>
             Adicionar
           </Button>

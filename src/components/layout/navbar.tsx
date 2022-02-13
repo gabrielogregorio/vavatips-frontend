@@ -40,7 +40,7 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
   }
 
   return (
-    <nav className="flex flex-col items-center w-full p-5 pl-10 pr-10 bg-skin-primary sm:flex-row text-skin-textColorInDarkness">
+    <nav className="flex flex-col items-center justify-center w-full p-5 pl-10 pr-10 bg-skin-primary sm:flex-row text-skin-textColorInDarkness">
       <Link href="/" passHref>
         <a href="#/" className="text-left text-4xl border-none font-bold mb-2 sm:flex-1">
           VAVATIPS
@@ -49,10 +49,12 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
 
       {renderMenuItems()}
 
-      <Button onClick={() => handleNavbar()} className="border-b-2 border-transparent ml-5 text-xl">
-        {theme === 'dark' ? <MdOutlineLightMode /> : null}
-        {theme === 'light' ? <MdOutlineNightlight /> : null}
-      </Button>
+      <div className="border-b-8 border-transparent">
+        <Button onClick={() => handleNavbar()} className=" ml-5 text-xl h-full">
+          {theme === 'dark' ? <MdOutlineLightMode /> : null}
+          {theme === 'light' ? <MdOutlineNightlight /> : null}
+        </Button>
+      </div>
     </nav>
   );
 }

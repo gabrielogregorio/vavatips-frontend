@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "axios": "^0.25.0",
-    "eslint": "8.8.0",
+    "eslint": "8.9.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "12.0.10",
     "eslint-config-prettier": "^8.3.0",
@@ -18,7 +18,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.5.0",
+    "jest": "^27.5.1",
     "msw": "^0.36.8",
     "next": "^12.0.10",
     "prettier": "^2.5.1",
@@ -27,7 +27,7 @@
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.4",
     "react-icons": "^4.3.1",
-    "react-query": "^3.34.14",
+    "react-query": "^3.34.15",
     "start-server-and-test": "^1.14.0",
     "uuid": "^8.3.2"
   },
@@ -36,14 +36,16 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --coverage",
-    "test:watchAll": "jest --watchAll --coverage",
+    "test:watch-all": "jest --watchAll",
+    "test:watch-all:coverage": "jest --watchAll --coverage",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "e2e": "next build && start-server-and-test start http://localhost:3000 cypress",
     "e2e:headless": "next build && start-server-and-test start http://localhost:3000 cypress:headless",
     "type-check": "tsc",
     "lint": "next lint",
-    "check-all": "tsc && next lint && jest && next build && start-server-and-test start http://localhost:3000 cypress:headless"
+    "stylelint": "stylelint '**.css'",
+    "check-all": "tsc && next lint && stylelint '**.css' && jest"
   },
   "eslintConfig": {
     "extends": [
@@ -65,14 +67,40 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.15",
+    "@types/node": "^17.0.17",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.1",
     "autoprefixer": "^10.4.2",
     "cypress": "^9.4.1",
     "eslint-plugin-cypress": "^2.12.1",
     "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.18",
+    "stylelint": "^14.5.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
+    "tailwindcss": "^3.0.22",
     "typescript": "4.5.5"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "rules": {
+      "length-zero-no-unit": true,
+      "block-no-empty": true,
+      "declaration-no-important": true,
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "tailwind",
+            "apply",
+            "variants",
+            "responsive",
+            "screen"
+          ]
+        }
+      ]
+    }
   }
 }

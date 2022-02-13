@@ -86,7 +86,7 @@ export default function MyProfileScreen() {
               </ButtonForm>
 
               <ButtonForm
-                className="bg-skin-secondary text-skin-textColorInDarkness border-skin-secondary mt-2"
+                className="bg-skin-secondary text-skin-textColorInDarkness border-skin-secondary mt-2 p-1"
                 onClick={() => {}}>
                 Atualizar dados
               </ButtonForm>

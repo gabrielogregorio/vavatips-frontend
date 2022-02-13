@@ -153,7 +153,7 @@ export default function Login() {
 
           <GroupInput>
             <Button
-              className="text-skin-textColor bg-skin-primaryExtra rounded-xl"
+              className="text-skin-textColorInDarkness bg-skin-primaryExtra rounded-xl p-1"
               onClick={() => submitData()}>
               {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
             </Button>

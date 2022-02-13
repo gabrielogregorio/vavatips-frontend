@@ -23,5 +23,6 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - run: yarn type-check # test typescript
-      - run: yarn lint # test eslint
+      - run: yarn type-check
+      - run: yarn lint
+      - run: yarn stylelint "**.css"
