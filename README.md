@@ -40,6 +40,8 @@ Read [Contributing.md](CONTRIBUTING.md)
 
 ## Available scripts
 
+### Run in develop mode
+
 ```bash
 yarn dev
 ```
@@ -47,13 +49,7 @@ yarn dev
 Runs the app in the development mode using react testing library.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-```bash
-yarn test
-yarn e2e
-```
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Run in production mode
 
 ```bash
 yarn build
@@ -73,15 +69,31 @@ yarn start`
 
 Run in production mode, after run `yarn build`
 
+### Tests with react testing library and cypress(e2e)
+
+```bash
+yarn test
+yarn e2e
+```
+
+### Tests in watch mode and coverage
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+```bash
+yarn test:watch-all
+yarn test:watch-all:coverage
+```
+
 ## Vscode extensions
 
 1. Eslint (Microsoft)
 2. Prettier - Code formatter (Prettier)
 
-## Eslint, typescript
+## Check tests, eslint and typescript
 
 ```bash
-# check eslint, typescript and react testing library
 yarn check-all
 ```
 
@@ -89,4 +101,16 @@ yarn check-all
 
 ```bash
 yarn prettier --write .
+```
+
+## Check libs not used
+
+```bash
+npx depcheck
+```
+
+## Uprade packages
+
+```bash
+yarn upgrade-interactive --latest
 ```
