@@ -403,7 +403,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
           <div className="mt-5 w-full">
             <GroupInput>
               <ButtonForm
-                className="border-skin-secondary text-skin-secondary"
+                className="border-skin-secondary text-skin-secondary p-1"
                 onClick={() => showModal()}>
                 Novo Passo
               </ButtonForm>
@@ -412,7 +412,7 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
             <GroupInput>
               <ButtonForm
                 onClick={() => handleSubmitManagement()}
-                className="border-skin-secondary text-skin-textColorInDarkness bg-skin-secondary">
+                className="border-skin-secondary text-skin-textColorInDarkness bg-skin-secondary p-1">
                 Publicar Dica
               </ButtonForm>
             </GroupInput>

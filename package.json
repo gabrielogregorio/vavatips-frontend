@@ -44,7 +44,8 @@
     "e2e:headless": "next build && start-server-and-test start http://localhost:3000 cypress:headless",
     "type-check": "tsc",
     "lint": "next lint",
-    "check-all": "tsc && next lint && jest"
+    "stylelint": "stylelint '**.css'",
+    "check-all": "tsc && next lint && stylelint '**.css' && jest"
   },
   "eslintConfig": {
     "extends": [
@@ -73,7 +74,33 @@
     "cypress": "^9.4.1",
     "eslint-plugin-cypress": "^2.12.1",
     "postcss": "^8.4.6",
+    "stylelint": "^14.5.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^25.0.0",
     "tailwindcss": "^3.0.22",
     "typescript": "4.5.5"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
+    "rules": {
+      "length-zero-no-unit": true,
+      "block-no-empty": true,
+      "declaration-no-important": true,
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "tailwind",
+            "apply",
+            "variants",
+            "responsive",
+            "screen"
+          ]
+        }
+      ]
+    }
   }
 }

@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 :root {
   --max-width: 800px;
   --max-width-form: 500px;
@@ -10,54 +14,55 @@
   --z-btn-post: 40;
 }
 
+
 .dark {
-  --primary: #2D333B;
+  --primary: #2d333b;
   --secondary: #3386d3;
-  --primaryExtra: #d85f5f;
-  --primarySmall: #a75fd1;
-  --bgPage: #22272E;
-  --bgContainer: #2D333B;
-  --background-description: #111111;
+  --primary-extra: #d85f5f;
+  --primary-small: #a75fd1;
+  --bg-page: #22272e;
+  --bg-container: #2d333b;
+  --background-description: #111;
   --text-color-in-darkness: #dedede;
   --text-color: #dedede;
 }
 
 .light {
   --primary: #cb4343;
-  --secondary: #438ACB;
-  --primaryExtra: #cb4343;
-  --primarySmall: #CB43BD;
-  --bgPage: #efefef;
-  --bgContainer: #FFFFFF;
-  --background-description: #111111;
-  --text-color-in-darkness: #ffffff;
+  --secondary: #438acb;
+  --primary-extra: #cb4343;
+  --primary-small: #cb43bd;
+  --bg-page: #efefef;
+  --bg-container: #fff;
+  --background-description: #111;
+  --text-color-in-darkness: #fff;
   --text-color: #2c2c2c;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins, sans-serif;
   font-size: 1rem;
   font-weight: 400;
 }
 
-/* Remove highlight on click in buttons, inputs in mobile with cursor pointer*/
+/* Remove highlight on click in buttons, inputs in mobile with cursor pointer */
 input,
 textarea,
 button,
 select,
 a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 }
 
 body {
   overflow-y: scroll;
 }
 
-html, body {
+html,
+body {
   min-height: 100vh;
 }
 
@@ -65,3 +70,4 @@ html, body {
   height: 100%;
   min-height: 100vh;
 }
+

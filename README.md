@@ -91,10 +91,11 @@ yarn test:watch-all:coverage
 1. Eslint (Microsoft)
 2. Prettier - Code formatter (Prettier)
 3. Prettier Eslint (Rebecca Vest)
-4. Gitignore (CodeZombie)
-5. EditorConfig for VS code (EditorConfig)
-6. Tailwind CSS IntelliSense (Tailwind Labs)
-7. TODO Highlight v2 (Jonathan Clark)
+4. Stylelint (Stylelint)
+5. Gitignore (CodeZombie)
+6. EditorConfig for VS code (EditorConfig)
+7. Tailwind CSS IntelliSense (Tailwind Labs)
+8. TODO Highlight v2 (Jonathan Clark)
 
 ## Check tests, eslint and typescript
 
