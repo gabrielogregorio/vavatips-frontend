@@ -15,6 +15,7 @@ module.exports = {
     '!**/.prettierrc.js**',
   ],
   coverageDirectory: '<rootDir>/coverage/',
+  coverageReporters: ['json-summary', 'text', 'lcov'],
   moduleNameMapper: {
     '^@/src/(.*)$': '<rootDir>/src/$1',
 

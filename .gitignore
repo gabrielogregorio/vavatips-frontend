@@ -8,7 +8,9 @@ tsconfig.tsbuildinfo
 .env
 
 # testing
-/coverage
+/coverage/lcov-report
+/coverage/coverage-summary.json
+/coverage/lcov.info
 
 # Ignore screenshot cypress
 /cypress/screenshots/*
