@@ -90,7 +90,6 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    // FIXME: needs test localstorage
     userEvent.click(screen.getByRole('button', { name: 'Testar' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
 
@@ -123,14 +122,14 @@ describe('<PostCard />', () => {
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image111.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('prev-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image555.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('next-btn'));
@@ -138,35 +137,35 @@ describe('<PostCard />', () => {
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image222.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image333.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image444.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image555.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
       'src',
-      'http://127.0.0.1:3333/images/https://image111.png',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     );
   });
 
@@ -187,7 +186,5 @@ describe('<PostCard />', () => {
         <PostCard post={post} viewAdmin />
       </MockApp>,
     );
-
-    // FIXME: Test authenticate
   });
 });

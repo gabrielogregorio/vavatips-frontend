@@ -8,6 +8,7 @@ import MockApp from '@/mock/App.Mock';
 import Login from '@/pages/login';
 import { URL_POST_AUTHENTICATED, URL_POST_CREATE_NEW_USER } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ParsedUrlQuery } from 'querystring';
 
 const mock = {
   usernameValid: 'my username',
@@ -24,7 +25,7 @@ jest.mock('next/router', () => ({
 
 const handlers = [
   rest.post(URL_POST_AUTHENTICATED, async (req, res, ctx) => {
-    const { username, password }: any = req.body;
+    const { username, password } = req.body as ParsedUrlQuery;
 
     if (username === 'forceError500') {
       return res(ctx.status(500));
@@ -48,7 +49,7 @@ const handlers = [
 
   rest.post(URL_POST_CREATE_NEW_USER, async (req, res, ctx) => {
     const validCode = 'codeCadasterValid';
-    const { username, password, code }: any = req.body;
+    const { username, password, code } = req.body as ParsedUrlQuery;
     const codIsInvalid = code !== validCode;
 
     if (username === 'forceError500') {
@@ -77,7 +78,7 @@ const handlers = [
     if (
       username === mock.usernameToCreated &&
       password === 'passwordConfirm' &&
-      code === 'codCadaster'
+      `${code}` === 'codCadaster'
     ) {
       return res(
         ctx.status(200),
@@ -131,7 +132,7 @@ describe('<Login />', () => {
     );
 
     userEvent.type(screen.getByLabelText('Usuário'), 'username with not exists');
-    userEvent.type(screen.getByLabelText('Senha'), 'any password');
+    userEvent.type(screen.getByLabelText('Senha'), 'wrong password');
 
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 

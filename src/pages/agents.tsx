@@ -17,9 +17,9 @@ import SubContainer from '@/base/subContainer';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
 export default function AgentScreen() {
-  const item = useRouter();
+  const location = useRouter();
 
-  const { mapSelected, agentsApi, isLoading, error } = useAgents(item);
+  const { mapSelected, agentsApi, isLoading, error } = useAgents(location);
 
   function renderAgent() {
     if (agentsApi.length === 0) {
@@ -27,12 +27,14 @@ export default function AgentScreen() {
     }
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
-        <ImageCard
-          href={`/posts?map=${mapSelected.map}&agent=${agent.name}`}
-          key={agent.id}
-          srcImage={agent.img}
-          titleImage={agent.name}
-        />
+        <div key={agent.id} className="flex flex-col">
+          <ImageCard
+            href={`/posts?map=${mapSelected.map}&agent=${agent.name}`}
+            srcImage={agent.img}
+            heightImage="h-64"
+            titleImage={agent.name}
+          />
+        </div>
       ) : null,
     );
   }
@@ -46,7 +48,7 @@ export default function AgentScreen() {
         <Title>Escolha um Agente</Title>
         <LoaderComponent active={isLoading} />
         <ErrorMsg msg={error} />
-        <div className="grid grid-cols-2 gap-6 p-10 sm:grid-cols-4">{renderAgent()}</div>
+        <div className="grid grid-cols-2 gap-6 p-10 sm:grid-cols-4 w-full">{renderAgent()}</div>
       </SubContainer>
       <FooterComponent />
     </LayoutComponent>

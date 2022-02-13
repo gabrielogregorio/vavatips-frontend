@@ -4,11 +4,17 @@
 /node_modules
 /.pnp
 .pnp.js
-
+tsconfig.tsbuildinfo
 .env
 
 # testing
 /coverage
+
+# Ignore screenshot cypress
+/cypress/screenshots/*
+
+# Ignore movies cypress
+/cypress/videos/*
 
 # next.js
 /.next/

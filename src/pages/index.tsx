@@ -26,7 +26,12 @@ export default function MapScreen() {
     return maps().map((map) =>
       mapsApi.includes(map.name) ? (
         <div key={map.id} className="flex flex-col">
-          <ImageCard href={`/agents?map=${map.name}`} srcImage={map.img} titleImage={map.name} />
+          <ImageCard
+            heightImage="h-40"
+            href={`/agents?map=${map.name}`}
+            srcImage={map.img}
+            titleImage={map.name}
+          />
         </div>
       ) : null,
     );
@@ -41,7 +46,9 @@ export default function MapScreen() {
         <Title>Escolha um mapa ai parça </Title>
         <ErrorMsg msg={error} />
         <LoaderComponent active={isLoading} />
-        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-4 ">{renderMap()}</div>
+        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-4 w-full">
+          {renderMap()}
+        </div>
       </SubContainer>
 
       <FooterComponent />

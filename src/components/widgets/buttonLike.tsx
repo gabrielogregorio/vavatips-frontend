@@ -1,5 +1,11 @@
 import Button from '@/base/button';
-import { propsInterfaceButtonLike } from '@/interfaces/posts';
+
+export interface propsInterfaceButtonLike {
+  active: boolean;
+  title: string;
+  styleBtn: 'testBtn' | 'likeBtn' | 'suggestionBtn';
+  onClick: () => {};
+}
 
 export default function ButtonLike({ styleBtn, title, onClick, active }: propsInterfaceButtonLike) {
   return (

@@ -41,7 +41,7 @@ export default function Login() {
     return true;
   }
 
-  async function submitData(): Promise<any> {
+  async function submitData(): Promise<boolean | void> {
     setActiveLoader(true);
 
     if (!username || !password || (!password2 && typeAccess === 'register')) {

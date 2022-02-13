@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -7,18 +7,15 @@ import { LocalStorageMock } from '@react-mock/localstorage';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import ContextThemeProvider from '@/contexts/theme';
 
-function customLog(data) {
-  return null;
-}
 setLogger({
-  log: customLog,
-  warn: customLog,
-  error: customLog,
+  log: () => {},
+  warn: () => {},
+  error: () => {},
 });
 
 interface mockAppType {
-  children: any;
-  localstorage?: any;
+  children: ReactNode;
+  localstorage?: { [key: string]: string };
 }
 
 const queryClient = new QueryClient({
@@ -30,8 +27,9 @@ const queryClient = new QueryClient({
   },
 });
 
-function MockApp({ children, localstorage = {} }: mockAppType) {
+function MockApp({ children, localstorage }: mockAppType) {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
+    post: null,
     active: false,
   });
   const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
@@ -41,15 +39,20 @@ function MockApp({ children, localstorage = {} }: mockAppType) {
   const [tags, setTags] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
 
+  const valueModalMessage = useMemo(() => ({ modalMessage, setModalMessage }), [modalMessage]);
+  const valueModalSuggestion = useMemo(
+    () => ({ modalSuggestion, setModalSuggestion }),
+    [modalSuggestion],
+  );
+  const valueFilters = useMemo(() => ({ tags, filters, setTags, setFilters }), [tags, filters]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ContextThemeProvider>
         <LocalStorageMock items={localstorage}>
-          <ContextModalSuggestion.Provider value={{ modalSuggestion, setModalSuggestion }}>
-            <ContextModalMessage.Provider value={{ modalMessage, setModalMessage }}>
-              <ContextFilters.Provider value={{ tags, filters, setFilters, setTags }}>
-                {children}
-              </ContextFilters.Provider>
+          <ContextModalSuggestion.Provider value={valueModalSuggestion}>
+            <ContextModalMessage.Provider value={valueModalMessage}>
+              <ContextFilters.Provider value={valueFilters}>{children}</ContextFilters.Provider>
             </ContextModalMessage.Provider>
           </ContextModalSuggestion.Provider>
         </LocalStorageMock>
@@ -59,3 +62,7 @@ function MockApp({ children, localstorage = {} }: mockAppType) {
 }
 
 export default MockApp;
+
+MockApp.defaultProps = {
+  localstorage: {},
+};

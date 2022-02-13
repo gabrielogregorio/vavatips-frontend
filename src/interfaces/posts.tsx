@@ -1,5 +1,3 @@
-type styleType = 'testBtn' | 'likeBtn' | 'suggestionBtn';
-
 export type momentType =
   | 'InicioPartida'
   | 'DuranteRush'
@@ -99,19 +97,6 @@ export interface postsProps {
     side: string;
     mapPosition: string;
   };
-}
-
-export interface propsInterfaceButtonLike {
-  active: boolean;
-  title: string;
-  styleBtn: styleType;
-  onClick: () => {};
-}
-
-export interface propsInterfaceContaienrPosts {
-  queryUrl: any;
-  activeLoader: boolean;
-  posts: postsProps[];
 }
 
 export interface contextTagsInterface {

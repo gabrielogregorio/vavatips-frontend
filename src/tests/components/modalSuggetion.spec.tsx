@@ -2,12 +2,13 @@ import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import ModalMessage from '@/widgets/modalMessage';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
+import { ParsedUrlQuery } from 'querystring';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -23,14 +24,14 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: any) {
+    function LinkComponent({ children }: { children: ReactNode }) {
       return children;
     },
 );
 
 const handlers = [
   rest.post(URL_POST_SUGGESTION, async (req, res, ctx) => {
-    const { idPost, email, description }: any = req.body;
+    const { idPost, email, description } = req.body as ParsedUrlQuery;
 
     const requestIsCorrectly =
       (idPost === '12' &&
@@ -51,7 +52,7 @@ const handlers = [
   }),
 ];
 
-function ComponentSetup({ notId = false }: any) {
+function ComponentSetup({ notId }: { notId?: boolean }) {
   const { setModalSuggestion } = useModalContext();
 
   const post = {
@@ -81,6 +82,10 @@ function ComponentSetup({ notId = false }: any) {
     </>
   );
 }
+
+ComponentSetup.defaultProps = {
+  notId: false,
+};
 
 const server = setupServer(...handlers);
 

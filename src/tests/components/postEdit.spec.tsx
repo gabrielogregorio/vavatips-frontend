@@ -11,6 +11,7 @@ import {
   URL_PUT_EDIT_POST_BY_ID,
 } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { ParsedUrlQuery } from 'querystring';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -77,7 +78,7 @@ const handlers = [
   }),
 
   rest.put(URL_PUT_EDIT_POST_BY_ID, async (req, res, ctx) => {
-    const { title, description, tags, imgs }: any = req.body;
+    const { title, description, tags, imgs } = req.body as ParsedUrlQuery;
     const postIsValid =
       title === `${postBase.title} concatenate new title` &&
       description === postBase.description &&
@@ -136,21 +137,21 @@ describe('<EditPostScreen />', () => {
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_111',
     );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_222',
     );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
     expect(screen.getAllByRole('img')[2]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_333',
     );
   });
@@ -179,21 +180,21 @@ describe('<EditPostScreen />', () => {
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'title1_img1');
     expect(screen.getAllByRole('img')[0]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_111',
     );
 
     expect(screen.getByText('2 - title1_img2')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'title1_img2');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_222',
     );
 
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
     expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'title1_img3');
     expect(screen.getAllByRole('img')[2]).toHaveAttribute(
-      'src',
+      'data-src',
       'http://127.0.0.1:3333/images/image_333',
     );
 

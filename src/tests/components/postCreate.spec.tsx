@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePostScreen from '@/pages/admin/post-create';
 import waitByLoading from '@/utils/waitByLoading';
+import { rest } from 'msw';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -22,7 +22,7 @@ jest.mock('next/router', () => ({
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
-    const { title, description, tags, imgs }: any = req.body;
+    const { title, description, tags, imgs } = req.body as any;
 
     const postIsValid =
       title === `Title New Post` &&
@@ -97,7 +97,6 @@ describe('<CreatePostScreen />', () => {
     userEvent.selectOptions(screen.getByLabelText('Dificuldade'), 'Medio');
     userEvent.selectOptions(screen.getByLabelText('Lado'), 'Atacantes');
 
-    // upload fake & test modal actions
     userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
     expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
@@ -112,10 +111,12 @@ describe('<CreatePostScreen />', () => {
     expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
-    // upload fake
 
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', '');
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('src', 'http://127.0.0.1:3333/images/');
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'src',
+      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+    );
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 

@@ -73,6 +73,18 @@ yarn start`
 
 Run in production mode, after run `yarn build`
 
+## Vscode extensions
+
+1. Eslint (Microsoft)
+2. Prettier - Code formatter (Prettier)
+
+## Eslint, typescript
+
+```bash
+# check eslint, typescript and react testing library
+yarn check-all
+```
+
 ## Prettier fix all
 
 ```bash

@@ -1,14 +1,18 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { changeTheme } from '@/services/theme';
 
 const initializeTheme: string = 'dark';
 
-const ContextTheme = createContext<{ theme: string; setTheme: (event: any) => void }>({
+const ContextTheme = createContext<{ theme: string; setTheme: (newTheme: string) => void }>({
   theme: initializeTheme,
   setTheme: null,
 });
 
-export default function ContextThemeProvider({ children }: any) {
+type contextThemeProviderType = {
+  children: ReactNode;
+};
+
+export default function ContextThemeProvider({ children }: contextThemeProviderType) {
   const [theme, setTheme] = useState<string>('dark');
   useEffect(() => {
     if (theme) {

@@ -1,7 +1,16 @@
+import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
 import LabelComponent from './label';
 
-export default function InputFile({ disabled, type, text, onChange, name }: any) {
+type inputFileType = {
+  disabled: boolean;
+  type: 'file';
+  text: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  name;
+};
+
+export default function InputFile({ disabled, type, text, onChange, name }: inputFileType) {
   return (
     <GroupInput>
       <LabelComponent name={name} text={text} />
@@ -11,7 +20,7 @@ export default function InputFile({ disabled, type, text, onChange, name }: any)
         disabled={disabled}
         type={type}
         placeholder={text}
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
       />
     </GroupInput>
   );

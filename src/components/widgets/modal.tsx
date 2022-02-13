@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
@@ -6,6 +6,7 @@ import LoaderComponent from '@/base/loader';
 import FormComponent from '@/base/Form';
 import TextArea from '@/base/textArea';
 import InputFile from '@/base/inputFile';
+import Image from 'next/image';
 import ModalRef from './modalRef';
 
 export interface ModalPropsBase {
@@ -44,7 +45,7 @@ export default function ModalComponent({
     }
   }, [idModal, descriptionModal, image]);
 
-  const loadImage = (event: any) => {
+  const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     setActiveLoader(true);
     const formData = new FormData();
     formData.append('image', event.target.files[0]);
@@ -83,7 +84,11 @@ export default function ModalComponent({
 
         <LoaderComponent active={activeLoader} />
 
-        <div>{LinkImg ? <img src={formatImage(LinkImg)} alt="" /> : null}</div>
+        {LinkImg !== '' ? (
+          <div className="relative w-full my-2 h-52">
+            <Image layout="fill" src={formatImage(LinkImg)} alt="" className="object-cover h-52" />
+          </div>
+        ) : null}
 
         <div className="flex justify-end w-full">
           <Button

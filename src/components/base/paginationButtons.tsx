@@ -2,7 +2,7 @@ import Link from 'next/link';
 import resolveQuery from '@/helpers/resolveQuery';
 
 export interface PaginationButtonInterface {
-  numberOfPage: any;
+  numberOfPage: number;
   active: boolean;
   map: string;
   agent: string;

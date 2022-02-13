@@ -1,6 +1,6 @@
-const resolveQuery = (urlBase: string, filters: any = []): string => {
+const resolveQuery = (urlBase: string, filters: object = {}): string => {
   let urlFinal = urlBase;
-  if (filters.length === 0) {
+  if (Object.keys(filters).length === 0) {
     return urlFinal;
   }
   urlFinal += '?';
