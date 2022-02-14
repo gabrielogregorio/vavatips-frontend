@@ -4,6 +4,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* stylelint-disable-next-line at-rule-no-unknown */
+@layer components {
+  .wait-load-pulse {
+    @apply animate-pulse bg-gray-500 bg-opacity-20;
+  }
+}
+
 
 :root {
   --max-width: 800px;

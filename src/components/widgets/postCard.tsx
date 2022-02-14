@@ -22,6 +22,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
   const { setModalSuggestion } = useModalContext();
+  const [errorImage, setErrorImage] = useState('');
 
   function handleAddTest() {
     if (postTested) {
@@ -105,11 +106,14 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
 
       <div className="w-full">
         <div className="relative w-full">
-          <div className="relative h-[500px] w-full ">
+          <div className="relative h-[500px] w-full">
             <Image
               layout="fill"
               className="object-cover rounded-lg"
-              src={formatImage(post.imgs?.[idImage]?.image)}
+              placeholder="blur"
+              blurDataURL="/images/assets/loader.png"
+              onError={() => setErrorImage('/images/assets/error.webp')}
+              src={errorImage || formatImage(post.imgs?.[idImage]?.image)}
               alt={post.imgs?.[idImage]?.description}
             />
           </div>
