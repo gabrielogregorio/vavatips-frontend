@@ -102,7 +102,7 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-function ComponentPosts({
+const ComponentPosts = ({
   agent,
   map,
   type,
@@ -112,7 +112,7 @@ function ComponentPosts({
   map: string;
   type: typeRequestType;
   page: number;
-}) {
+}) => {
   const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(
     {
       route: '/posts',
@@ -157,7 +157,7 @@ function ComponentPosts({
       {renderPosts()}
     </div>
   );
-}
+};
 
 describe('<ComponentPosts />', () => {
   beforeAll(() => server.listen());

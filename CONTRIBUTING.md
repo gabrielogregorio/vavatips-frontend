@@ -3,7 +3,7 @@
 When contributing to this repository, first discuss the change you want to make via an Issue,
 email or any other method with the owners of this repository before making a change.
 
-Note that we have a [code of conduct](CODE_OF_CONDUCT.md), follow it in all your interactions with the project.
+Note that we have a [code of conduct](CODE-OF-CONDUCT.md), follow it in all your interactions with the project.
 
 # Pull Request Process
 

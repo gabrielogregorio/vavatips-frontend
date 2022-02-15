@@ -2,7 +2,7 @@ interface loaderProps {
   active: boolean;
 }
 
-export default function LoaderComponent({ active }: loaderProps) {
+const LoaderComponent = ({ active }: loaderProps) => {
   function renderActive() {
     return active ? (
       <div className="flex items-center justify-center w-full">
@@ -17,4 +17,6 @@ export default function LoaderComponent({ active }: loaderProps) {
   }
 
   return <>{renderActive()}</>;
-}
+};
+
+export default LoaderComponent;

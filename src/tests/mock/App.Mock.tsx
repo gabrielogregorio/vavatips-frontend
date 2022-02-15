@@ -27,7 +27,7 @@ const queryClient = new QueryClient({
   },
 });
 
-function MockApp({ children, localstorage }: mockAppType) {
+const MockApp = ({ children, localstorage }: mockAppType) => {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     post: null,
     active: false,
@@ -59,7 +59,7 @@ function MockApp({ children, localstorage }: mockAppType) {
       </ContextThemeProvider>
     </QueryClientProvider>
   );
-}
+};
 
 export default MockApp;
 

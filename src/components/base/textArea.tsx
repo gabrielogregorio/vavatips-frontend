@@ -1,4 +1,3 @@
-import React from 'react';
 import GroupInput from '@/base/groupInput';
 import LabelComponent from '@/base/label';
 
@@ -9,17 +8,16 @@ export interface propsInterfaceTextArea {
   setValue: (value: string) => void;
 }
 
-export default function TextArea({ title, setValue, value, name }: propsInterfaceTextArea) {
-  return (
-    <GroupInput>
-      <LabelComponent name={name} text={title} aria-label="Escolha uma descrição" />
+const TextArea = ({ title, setValue, value, name }: propsInterfaceTextArea) => (
+  <GroupInput>
+    <LabelComponent name={name} text={title} aria-label="Escolha uma descrição" />
 
-      <textarea
-        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
-        id={name}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-    </GroupInput>
-  );
-}
+    <textarea
+      className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
+      id={name}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+    />
+  </GroupInput>
+);
+export default TextArea;

@@ -5,7 +5,7 @@ interface propsInterface {
   admin: boolean;
 }
 
-export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterface) {
+const BreadcrumbComponent = ({ breadcrumbs, admin }: propsInterface) => {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
@@ -36,4 +36,5 @@ export default function BreadcrumbComponent({ breadcrumbs, admin }: propsInterfa
       <div className="p-0 flex max-w-maxWidthDefault w-full">{renderBreadCrumb()}</div>
     </div>
   );
-}
+};
+export default BreadcrumbComponent;

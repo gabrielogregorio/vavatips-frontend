@@ -22,7 +22,7 @@ type accessType = 'login' | 'register';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
-export default function Login() {
+const Login = () => {
   const [code, setCode] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -164,4 +164,5 @@ export default function Login() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default Login;

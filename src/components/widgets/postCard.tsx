@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { isAuthenticated } from '@/services/auth';
 import { useModalContext } from '@/contexts/modalSuggestion';
@@ -17,7 +17,7 @@ interface PropsPostInterface {
   viewAdmin: boolean;
 }
 
-export default function PostCard({ post, viewAdmin = false }: PropsPostInterface) {
+const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -191,4 +191,5 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       ) : null}
     </div>
   );
-}
+};
+export default PostCard;

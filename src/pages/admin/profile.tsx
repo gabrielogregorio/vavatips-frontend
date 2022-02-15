@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import Input from '@/base/input';
 import LoaderComponent from '@/base/loader';
@@ -20,7 +20,7 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'perfil' },
 ];
 
-export default function MyProfileScreen() {
+const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
@@ -97,4 +97,5 @@ export default function MyProfileScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default MyProfileScreen;

@@ -3,10 +3,9 @@ type labelType = {
   text: string;
 };
 
-export default function LabelComponent({ name, text }: labelType) {
-  return (
-    <label className="text-skin-textColor" htmlFor={name}>
-      {text}
-    </label>
-  );
-}
+const LabelComponent = ({ name, text }: labelType) => (
+  <label className="text-skin-textColor" htmlFor={name}>
+    {text}
+  </label>
+);
+export default LabelComponent;

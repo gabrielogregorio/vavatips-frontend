@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
-import React from 'react';
 import Button from '@/base/button';
 import NavbarLink from '@/base/navbarLink';
 import { useTheme } from '@/contexts/theme';
@@ -12,8 +11,7 @@ type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;
   modelNavbar: modelNavbarType[];
 };
-
-export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNavbarBasicType) {
+const NavbarComponent = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
   const { theme, setTheme } = useTheme();
 
   const handleNavbar = () => {
@@ -57,4 +55,6 @@ export default function NavbarComponent({ selected, modelNavbar }: NavbarPropsNa
       </div>
     </nav>
   );
-}
+};
+
+export default NavbarComponent;

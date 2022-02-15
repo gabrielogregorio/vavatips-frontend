@@ -1,7 +1,7 @@
 import { useFilters } from '@/contexts/filters';
 import Button from '@/base/button';
 
-export default function PostTags() {
+const PostTags = () => {
   const { tags, filters, setFilters } = useFilters();
 
   function toggleTag(tag: string) {
@@ -33,4 +33,5 @@ export default function PostTags() {
     ));
   }
   return <div className="flex justify-center flex-wrap m-10 mt-1 mb-1"> {renderTags()} </div>;
-}
+};
+export default PostTags;

@@ -100,14 +100,14 @@ yarn test:watch-all:coverage
 
 ## Vscode extensions for this project
 
-1. Eslint (Microsoft)
-2. Prettier - Code formatter (Prettier)
-3. Prettier Eslint (Rebecca Vest)
-4. Stylelint (Stylelint)
-5. Gitignore (CodeZombie)
-6. EditorConfig for VS code (EditorConfig)
-7. Tailwind CSS IntelliSense (Tailwind Labs)
-8. TODO Highlight v2 (Jonathan Clark)
+1.  Eslint (Microsoft)
+2.  Prettier - Code formatter (Prettier)
+3.  Prettier Eslint (Rebecca Vest)
+4.  Stylelint (Stylelint)
+5.  Gitignore (CodeZombie)
+6.  EditorConfig for VS code (EditorConfig)
+7.  Tailwind CSS IntelliSense (Tailwind Labs)
+8.  TODO Highlight v2 (Jonathan Clark)
 
 ## Check tests, eslint and typescript
 

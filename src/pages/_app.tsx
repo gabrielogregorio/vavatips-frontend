@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     post: null,
     active: false,
@@ -57,4 +57,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </QueryClientProvider>
     </>
   );
-}
+};
+export default MyApp;

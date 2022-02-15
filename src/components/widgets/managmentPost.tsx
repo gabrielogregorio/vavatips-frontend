@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
 import NavbarComponent from '@/layout/navbar';
@@ -52,7 +52,7 @@ type modeManagment = {
   mode: 'create' | 'edit';
 };
 
-export default function CreatePostManagement({ breadcrumbs, mode }: modeManagment) {
+const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
 
@@ -422,4 +422,5 @@ export default function CreatePostManagement({ breadcrumbs, mode }: modeManagmen
       <FooterComponent />
     </>
   );
-}
+};
+export default CreatePostManagement;

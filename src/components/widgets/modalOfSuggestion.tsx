@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useModalMessage } from '@/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
 import api from '@/services/api';
@@ -15,7 +15,7 @@ interface ModalProps {
   title: string;
 }
 
-export default function ModalOfSuggestion({ title }: ModalProps) {
+const ModalOfSuggestion = ({ title }: ModalProps) => {
   const [email, setEmail] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [postTitle, setPostTitle] = useState<string>('');
@@ -105,4 +105,5 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
       </FormComponent>
     </ModalRef>
   ) : null;
-}
+};
+export default ModalOfSuggestion;

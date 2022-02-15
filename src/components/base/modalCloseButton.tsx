@@ -6,10 +6,10 @@ type buttonType = {
   onClick: () => void;
 };
 
-export default function ButtonCloseModal({ onClick }: buttonType) {
-  return (
-    <Button onClick={onClick} dataTestid="closeModal" className="text-skin-textColor">
-      <FaTimes />
-    </Button>
-  );
-}
+const ButtonCloseModal = ({ onClick }: buttonType) => (
+  <Button onClick={onClick} dataTestid="closeModal" className="text-skin-textColor">
+    <FaTimes />
+  </Button>
+);
+
+export default ButtonCloseModal;

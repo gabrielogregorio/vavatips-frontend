@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
@@ -17,7 +17,7 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'dashboard' },
 ];
 
-export default function DashboardScreen() {
+const DashboardScreen = () => {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -77,4 +77,5 @@ export default function DashboardScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default DashboardScreen;

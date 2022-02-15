@@ -3,7 +3,7 @@ import api from '@/services/api';
 import { useQuery } from 'react-query';
 import { NextRouter } from 'next/router';
 
-export default function useAgents(item: NextRouter) {
+function useAgents(item: NextRouter) {
   const mapSelected = item?.query;
   const [agentsApi, setAgentsApi] = useState<string[]>([]);
 
@@ -22,3 +22,4 @@ export default function useAgents(item: NextRouter) {
     error: error ? 'Erro desconhecido no servidor' : '',
   };
 }
+export default useAgents;

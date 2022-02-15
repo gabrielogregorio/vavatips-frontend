@@ -5,16 +5,15 @@ import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
-export default function TestScreen() {
-  return (
-    <LayoutComponent>
-      <ContainerPosts
-        breadcrumbs={breadcrumbs}
-        type="tested"
-        mode="public"
-        typeSelected={navbarEnum.Tested}
-        title="Posts para testar"
-      />
-    </LayoutComponent>
-  );
-}
+const TestScreen = () => (
+  <LayoutComponent>
+    <ContainerPosts
+      breadcrumbs={breadcrumbs}
+      type="tested"
+      mode="public"
+      typeSelected={navbarEnum.Tested}
+      title="Posts para testar"
+    />
+  </LayoutComponent>
+);
+export default TestScreen;

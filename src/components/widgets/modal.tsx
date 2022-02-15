@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
@@ -18,14 +18,14 @@ export interface ModalPropsBase {
   saveModal: (id: string, title: string, image: string) => void;
 }
 
-export default function ModalComponent({
+const ModalComponent = ({
   id: idModal,
   description: descriptionModal,
   image,
   closeModal,
   saveModal,
   title,
-}: ModalPropsBase) {
+}: ModalPropsBase) => {
   const [id, setId] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [LinkImg, setLinkImg] = useState<string>('');
@@ -105,4 +105,5 @@ export default function ModalComponent({
       </FormComponent>
     </ModalRef>
   );
-}
+};
+export default ModalComponent;

@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import PostTags from '@/widgets/tags';
 import MockApp from '@/mock/App.Mock';
 
-function ComponentSetup() {
+const ComponentSetup = () => {
   const { setTags, setFilters } = useFilters();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function ComponentSetup() {
   }, []);
 
   return <PostTags />;
-}
+};
 
 describe('<PostTags />', () => {
   it('should render component setup post tags', () => {

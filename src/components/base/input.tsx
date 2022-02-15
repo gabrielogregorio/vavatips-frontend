@@ -12,14 +12,7 @@ export interface propsInterfaceInput {
   name: string;
 }
 
-export default function Input({
-  disabled,
-  type,
-  value,
-  text,
-  setValue,
-  name,
-}: propsInterfaceInput) {
+const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };
@@ -37,4 +30,5 @@ export default function Input({
       />
     </GroupInput>
   );
-}
+};
+export default Input;

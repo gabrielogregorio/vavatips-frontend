@@ -15,7 +15,7 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
-export default function MapScreen() {
+const MapScreen = () => {
   const { mapsApi, isLoading, error } = useMaps();
 
   function renderMap() {
@@ -54,4 +54,5 @@ export default function MapScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default MapScreen;

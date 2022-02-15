@@ -42,7 +42,7 @@ const server = setupServer(
   }),
 );
 
-function ComponentAgentTest() {
+const ComponentAgentTest = () => {
   const { mapsApi, isLoading, error } = useMaps();
 
   function renderMaps() {
@@ -60,7 +60,7 @@ function ComponentAgentTest() {
       {renderMaps()}
     </div>
   );
-}
+};
 
 describe('<ComponentAgentTest />', () => {
   beforeAll(() => server.listen());

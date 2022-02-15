@@ -3,7 +3,7 @@ import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage
 import { FaTimes } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
 
-export default function ModalMessage() {
+const ModalMessage = () => {
   const { modalMessage, setModalMessage } = useModalMessage();
 
   return modalMessage.active ? (
@@ -30,4 +30,5 @@ export default function ModalMessage() {
       </div>
     </div>
   ) : null;
-}
+};
+export default ModalMessage;

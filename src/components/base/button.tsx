@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 type buttonTypeNormal = {
   children: ReactNode;
@@ -9,26 +9,24 @@ type buttonTypeNormal = {
   dataTestid?: string;
 };
 
-export default function Button({
+export const Button = ({
   children,
   ariaLabel,
   className,
   disabled,
   onClick,
   dataTestid,
-}: buttonTypeNormal) {
-  return (
-    <button
-      data-testid={dataTestid}
-      onClick={onClick}
-      className={className}
-      disabled={disabled}
-      aria-label={ariaLabel}
-      type="button">
-      {children}
-    </button>
-  );
-}
+}: buttonTypeNormal) => (
+  <button
+    data-testid={dataTestid}
+    onClick={onClick}
+    className={className}
+    disabled={disabled}
+    aria-label={ariaLabel}
+    type="button">
+    {children}
+  </button>
+);
 
 Button.defaultProps = {
   disabled: false,
@@ -36,3 +34,5 @@ Button.defaultProps = {
   ariaLabel: '',
   dataTestid: '',
 };
+
+export default Button;

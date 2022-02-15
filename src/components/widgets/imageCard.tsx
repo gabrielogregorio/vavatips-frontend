@@ -9,7 +9,7 @@ type imageCardType = {
   heightImage: string;
 };
 
-export default function ImageCard({ href, srcImage, titleImage, heightImage }: imageCardType) {
+const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -36,4 +36,5 @@ export default function ImageCard({ href, srcImage, titleImage, heightImage }: i
       </button>
     </Link>
   );
-}
+};
+export default ImageCard;

@@ -12,9 +12,7 @@ jest.mock('next/router', () => ({
   },
 }));
 
-function Component() {
-  return <div>aa</div>;
-}
+const Component = () => <div>aa</div>;
 
 describe('<HomeScreen />', () => {
   it('should render home screen', async () => {

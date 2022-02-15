@@ -10,13 +10,7 @@ export interface propsInterfaceSelectedBase {
   render: { id: string; name: string }[];
 }
 
-export default function Selected({
-  render,
-  text,
-  setValue,
-  value,
-  name,
-}: propsInterfaceSelectedBase) {
+const Selected = ({ render, text, setValue, value, name }: propsInterfaceSelectedBase) => {
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>
@@ -42,4 +36,5 @@ export default function Selected({
       </select>
     </GroupInput>
   );
-}
+};
+export default Selected;

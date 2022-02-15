@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import api from '@/services/api';
 import FooterComponent from '@/layout/footer';
@@ -23,7 +23,7 @@ interface suggestionInterface {
   status: string;
 }
 
-export default function SuggestionScreen() {
+const SuggestionScreen = () => {
   const [suggestions, setSuggestions] = useState<suggestionInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -91,4 +91,5 @@ export default function SuggestionScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default SuggestionScreen;
