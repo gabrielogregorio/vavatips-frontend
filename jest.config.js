@@ -8,6 +8,7 @@ module.exports = {
     '!**/cypress/**',
     '!**/jest.config.js**',
     '!**/jest.setup.js**',
+    '!**/stylelint.config.js**',
     '!**/postcss.config.js**',
     '!**/tailwind.config.js**',
     '!**/next.config.js**',

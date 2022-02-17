@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
 import api from '@/services/api';
-import { login } from '@/services/auth';
 import Input from '@/base/input';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
@@ -17,6 +16,7 @@ import SubContainer from '@/base/subContainer';
 import NavbarComponent from '@/layout/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import FormComponent from '@/base/Form';
+import { login } from '../core/services/auth';
 
 type accessType = 'login' | 'register';
 

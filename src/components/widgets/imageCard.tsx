@@ -12,6 +12,10 @@ type imageCardType = {
 const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const handleWithIsLoadedImage = () => {
+    setIsLoaded(true);
+  };
+
   return (
     <Link href={href} passHref>
       <button
@@ -27,7 +31,7 @@ const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) =
             src={srcImage}
             alt={titleImage}
             priority
-            onLoadingComplete={() => setIsLoaded(true)}
+            onLoadingComplete={() => handleWithIsLoadedImage()}
           />
         </div>
         <p className="text-skin-textColor" style={{ opacity: 0.8 }}>

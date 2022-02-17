@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
@@ -14,7 +14,7 @@ export interface ModalPropsBase {
   id: string;
   description: string;
   image: string;
-  closeModal: React.MouseEventHandler<HTMLButtonElement>;
+  closeModal: MouseEventHandler<HTMLButtonElement>;
   saveModal: (id: string, title: string, image: string) => void;
 }
 

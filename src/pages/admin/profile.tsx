@@ -5,7 +5,6 @@ import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
-import { logout } from '@/services/auth';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
@@ -14,6 +13,7 @@ import SubContainer from '@/base/subContainer';
 import FormComponent from '@/base/Form';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import ButtonForm from '@/base/buttonForm';
+import { logout } from '../../core/services/auth';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

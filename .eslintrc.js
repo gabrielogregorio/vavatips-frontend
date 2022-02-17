@@ -5,7 +5,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['react', '@typescript-eslint'],
+  plugins: ['react', '@typescript-eslint', 'cypress'],
   rules: {
     'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
@@ -22,8 +22,10 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
-  extends: ['next/core-web-vitals', 'airbnb', 'prettier'],
+
+  extends: ['next/core-web-vitals', 'airbnb', 'prettier', 'plugin:cypress/recommended'],
   overrides: [
     {
       files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
@@ -32,4 +34,7 @@ module.exports = {
       },
     },
   ],
+  globals: {
+    cy: true,
+  },
 };

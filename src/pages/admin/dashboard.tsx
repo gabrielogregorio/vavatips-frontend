@@ -3,7 +3,6 @@ import NavbarComponent from '@/layout/navbar';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
-import { logout } from '@/services/auth';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
@@ -11,6 +10,7 @@ import LayoutComponent from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
+import { logout } from '../../core/services/auth';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

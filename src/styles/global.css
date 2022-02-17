@@ -17,6 +17,9 @@
   --z-modal: 50;
   --z-modal-message: 50;
   --z-btn-post: 40;
+}
+
+.dark {
   --primary: #2d333b;
   --secondary: #3386d3;
   --primary-extra: #d85f5f;
@@ -26,6 +29,18 @@
   --background-description: #111;
   --text-color-in-darkness: #dedede;
   --text-color: #dedede;
+}
+
+.light {
+  --primary: #cb4343;
+  --secondary: #438acb;
+  --primary-extra: #cb4343;
+  --primary-small: #cb43bd;
+  --bg-page: #efefef;
+  --bg-container: #fff;
+  --background-description: #111;
+  --text-color-in-darkness: #fff;
+  --text-color: #2c2c2c;
 }
 
 * {

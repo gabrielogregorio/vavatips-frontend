@@ -9,7 +9,7 @@ type buttonTypeNormal = {
   dataTestid?: string;
 };
 
-export const Button = ({
+const Button = ({
   children,
   ariaLabel,
   className,

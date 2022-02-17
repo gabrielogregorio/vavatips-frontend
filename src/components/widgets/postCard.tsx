@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { isAuthenticated } from '@/services/auth';
 import { useModalContext } from '@/contexts/modalSuggestion';
 import formatImage from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
@@ -9,6 +8,7 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
 import ButtonForm from '@/base/buttonForm';
 import Image from 'next/image';
+import { isAuthenticated } from '../../core/services/auth';
 
 type typeType = 'next' | 'prev';
 
