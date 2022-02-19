@@ -43,8 +43,8 @@ This project was developed using NextJs, Typescript and React Testing Library. B
 
 ## Run Project
 
-1. Fully start the backend, available in the [vavatips-backend](<(https://github.com/gabrielogregorio/vavatips-backend)>) repository.
-2. With the backend working, create an .env file, based on the .env.example file.
+1.  Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
+2.  With the backend working, create an .env file, based on the .env.example file.
 
 ## Contributing with project
 

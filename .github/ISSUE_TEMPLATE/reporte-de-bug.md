@@ -19,18 +19,18 @@ Uma descrição clara e concisa do que você esperava que acontecesse.
 
 Se aplicável, adicione capturas de tela para ajudar a explicar seu problema.
 
-### Desktop (preencha as seguintes informações)
+### Desktop
 
--  SO: Windows
--  Navegador: Safari
--  Versão 22
+-   SO: Windows
+-   Navegador: Safari
+-   Versão 22
 
-### Smartphone (preencha as seguintes informações):
+### Smartphone
 
--  Dispositivo: Samsung J2 2016
--  SO: Android 4.4
--  Navegador: Internet Samsung
--  Versão: 19
+-   Dispositivo: Samsung J2 2016
+-   SO: Android 4.4
+-   Navegador: Internet Samsung
+-   Versão: 19
 
 ### Contexto adicional
 
