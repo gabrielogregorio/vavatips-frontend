@@ -21,7 +21,7 @@
     "jest": "^27.5.1",
     "jest-coverage-badges": "^1.1.2",
     "msw": "^0.36.8",
-    "next": "^12.0.10",
+    "next": "^12.1.0",
     "prettier": "^2.5.1",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
