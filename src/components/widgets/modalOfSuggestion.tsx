@@ -43,7 +43,7 @@ const ModalOfSuggestion = ({ title }: ModalProps) => {
       api
         .post('/suggestion', { idPost, email, description })
         .then(() => {
-          msg = 'Sugestão enviado com sucesso, muito obrigado!';
+          msg = 'Sugestão enviada com sucesso, muito obrigado!';
           type = 'success';
         })
         .catch(() => {

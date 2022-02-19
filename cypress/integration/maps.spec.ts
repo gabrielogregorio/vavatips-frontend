@@ -255,12 +255,12 @@ describe('<Maps />', () => {
     // Descrição
     cy.get('textarea[id="description"]').type('my description');
 
-    cy.contains('button', 'Cancelar');
-    cy.contains('button', 'Adicionar');
+    cy.contains('button', 'Cancelar').should('be.visible');
+    cy.contains('button', 'Adicionar').should('be.visible');
 
     cy.get('button').contains('Adicionar').click();
 
-    cy.contains('Sugestão enviado com sucesso, muito obrigado!', { timeout: 10000 });
+    cy.contains('Sugestão enviada com sucesso, muito obrigado!', { timeout: 10000 });
 
     // close notify
     cy.get('button[aria-label="close"]').click();

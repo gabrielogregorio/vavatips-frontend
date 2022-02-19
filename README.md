@@ -109,9 +109,10 @@ yarn test:watch-all:coverage
 7.  Tailwind CSS IntelliSense (Tailwind Labs)
 8.  TODO Highlight v2 (Jonathan Clark)
 
-## Check tests, eslint and typescript
+## Check typescript, eslint, unit tests, integration tests, e2e tests,  and
 
 ```bash
+yarn dev
 yarn check-all
 ```
 

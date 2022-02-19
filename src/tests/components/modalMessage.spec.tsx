@@ -7,7 +7,7 @@ import MockApp from '@/mock/App.Mock';
 
 const ComponentSetup = () => {
   const { setModalMessage } = useModalMessage();
-  const msg = 'Sugestão enviado com sucesso, muito obrigado!';
+  const msg = 'Sugestão enviada com sucesso, muito obrigado!';
   const type = 'success';
 
   useEffect(() => {
@@ -37,10 +37,10 @@ describe('<ModalMessage />', () => {
       </MockApp>,
     );
 
-    expect(screen.getByText('Sugestão enviado com sucesso, muito obrigado!')).toBeInTheDocument();
+    expect(screen.getByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument();
     userEvent.click(screen.getByRole('button'));
     expect(
-      screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+      screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
     ).not.toBeInTheDocument();
   });
 

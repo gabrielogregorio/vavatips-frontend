@@ -111,7 +111,7 @@ describe('<ModalOfSuggestion />', () => {
 
     await waitFor(() =>
       expect(
-        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
       ).toBeInTheDocument(),
     );
   });
@@ -131,7 +131,7 @@ describe('<ModalOfSuggestion />', () => {
 
     await waitFor(() =>
       expect(
-        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
       ).toBeInTheDocument(),
     );
   });

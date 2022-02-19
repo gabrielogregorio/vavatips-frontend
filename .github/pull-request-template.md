@@ -1,8 +1,8 @@
 # Pull request template
 ## Descrição
 
-1.   Breve resumo das alterações/correções/melhorias feitas.
-2.   Breve resumo das motivações
+1.  Breve resumo das alterações/correções/melhorias feitas.
+2.  Breve resumo das motivações
 
 ### Tipo de mudança
 
