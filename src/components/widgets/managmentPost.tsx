@@ -389,7 +389,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
 
           <HrComponent />
 
-          <p className="text-skin-textColor">
+          <p className="dark:text-skin-textColor text-skin-textColorGray">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
             bem visível.
             <br />

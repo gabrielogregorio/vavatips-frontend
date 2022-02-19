@@ -6,9 +6,9 @@ import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
-import ButtonForm from '@/base/buttonForm';
 import Image from 'next/image';
 import { isAuthenticated } from '../../core/services/auth';
+import PostButton from '../base/likeButton';
 
 type typeType = 'next' | 'prev';
 
@@ -91,7 +91,7 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
           )}
         </div>
 
-        <p className="flex-1 text-skin-textColor ml-5 text-base">
+        <p className="flex-1 dark:text-skin-textColor text-skin-textColorDark ml-5 text-base">
           {post.user.username ?? 'Ademir'}
         </p>
 
@@ -102,7 +102,9 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
         ) : null}
       </div>
 
-      <h3 className="text-base text-skin-textColor w-full mb-2.5">{post.title}</h3>
+      <h3 className="text-base dark:text-skin-textColor text-skin-textColorDark w-full mb-2.5">
+        {post.title}
+      </h3>
 
       <div className="w-full">
         <div className="relative w-full">
@@ -147,7 +149,9 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
       </div>
 
       <div>
-        <p className="text-base text-skin-textColor">{post.description}</p>
+        <p className="text-base dark:text-skin-textColor text-skin-textColorDark">
+          {post.description}
+        </p>
 
         <p className="text-skin-primaryExtra text-lg bg-transparent">
           <span className="text-base"> #{post.tags.map}</span>
@@ -161,32 +165,10 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
       </div>
 
       {!viewAdmin ? (
-        <div className="w-full flex justify-around mt-5">
-          <ButtonForm
-            className={`m-1 border-skin-secondary p-1 ${
-              postTested
-                ? 'text-skin-textColorInDarkness bg-skin-secondary '
-                : 'text-skin-secondary '
-            }`}
-            onClick={() => handleAddTest()}>
-            Testar
-          </ButtonForm>
-
-          <ButtonForm
-            className={`m-1 border-skin-primaryExtra  ${
-              postSave
-                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra p-1'
-                : 'text-skin-primaryExtra'
-            }`}
-            onClick={() => handleAddSave()}>
-            Salvar
-          </ButtonForm>
-
-          <ButtonForm
-            className="m-1 text-skin-primarySmall border-skin-primarySmall p-1"
-            onClick={() => handleModalAction()}>
-            Sugerir
-          </ButtonForm>
+        <div className="w-full flex justify-around m-1">
+          <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
+          <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />
+          <PostButton selected={false} onClick={() => handleModalAction()} variant="report" />
         </div>
       ) : null}
     </div>

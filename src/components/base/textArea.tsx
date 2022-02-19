@@ -13,7 +13,7 @@ const TextArea = ({ title, setValue, value, name }: propsInterfaceTextArea) => (
     <LabelComponent name={name} text={title} aria-label="Escolha uma descrição" />
 
     <textarea
-      className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
+      className="w-full p-1.5 border-2 border-skin-secondary dark:bg-skin-bgContainer bg-skin-bgPageWhite outline-none rounded-lg resize-none dark:text-skin-textColor text-skin-textColorGray"
       id={name}
       value={value}
       onChange={(e) => setValue(e.target.value)}

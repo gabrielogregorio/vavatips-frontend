@@ -15,7 +15,7 @@ const LayoutComponent = ({ children }: layoutComponentType) => {
 
   return (
     <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>
-      <div className="flex  items-center min-h-screen flex-col p-0 w-full bg-skin-bgPage ">
+      <div className="flex  items-center min-h-screen flex-col p-0 w-full bg-skin-bgPageWhite dark:bg-skin-bgPage  ">
         {children}
       </div>
     </div>

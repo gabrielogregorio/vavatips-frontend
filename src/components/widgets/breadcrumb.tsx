@@ -32,7 +32,7 @@ const BreadcrumbComponent = ({ breadcrumbs, admin }: propsInterface) => {
   }
 
   return (
-    <div className="w-full bg-skin-bgContainer flex justify-center items-center shadow-md h-8">
+    <div className="w-full dark:bg-skin-bgContainer bg-skin-primaryExtra flex justify-center items-center shadow-md h-8">
       <div className="p-0 flex max-w-maxWidthDefault w-full">{renderBreadCrumb()}</div>
     </div>
   );

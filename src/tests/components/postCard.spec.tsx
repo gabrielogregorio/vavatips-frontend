@@ -76,7 +76,7 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Testar' }));
+    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
   });
 
@@ -90,10 +90,10 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Testar' }));
+    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
 
-    userEvent.click(screen.getByRole('button', { name: 'Testar' }));
+    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
   });
 
@@ -176,7 +176,7 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.queryByRole('button', { name: 'Testar' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Testado' })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Salvar' })).not.toBeInTheDocument();
   });
 

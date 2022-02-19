@@ -34,7 +34,7 @@ const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) =
             onLoadingComplete={() => handleWithIsLoadedImage()}
           />
         </div>
-        <p className="text-skin-textColor" style={{ opacity: 0.8 }}>
+        <p className="dark:text-skin-textColor text-skin-textColorDark" style={{ opacity: 0.8 }}>
           {titleImage}
         </p>
       </button>

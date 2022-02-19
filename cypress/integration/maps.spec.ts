@@ -193,7 +193,7 @@ describe('<Maps />', () => {
     cy.contains('#Facil');
     cy.contains('#Defensores #B');
 
-    cy.contains('button', 'Testar');
+    cy.contains('button', 'Testado');
     cy.contains('button', 'Salvar');
     cy.contains('button', 'Sugerir');
 
@@ -215,7 +215,7 @@ describe('<Maps />', () => {
     cy.contains('#Medio');
     cy.contains('#Defensores #A');
 
-    cy.contains('button', 'Testar');
+    cy.contains('button', 'Testado');
     cy.contains('button', 'Salvar');
     cy.contains('button', 'Sugerir');
 

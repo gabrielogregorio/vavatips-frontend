@@ -20,7 +20,7 @@ const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceIn
     <GroupInput>
       <LabelComponent name={name} text={text} />
       <input
-        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
+        className="w-full p-1.5 border-2 border-skin-secondary dark:bg-skin-bgContainer bg-skin-bgPageWhite outline-none rounded-lg resize-none dark:text-skin-textColor text-skin-textColorGray"
         id={name}
         disabled={disabled}
         type={type}

@@ -1,7 +1,7 @@
 const FooterComponent = () => (
   <>
-    <div className="flex-1 bg-red-500" />
-    <div className="w-full bg-skin-primary flex justify-center">
+    <div className="flex-1" />
+    <div className="w-full dark:bg-skin-primary bg-skin-primaryExtra flex justify-center">
       <div className="grid gap-2 grid-cols-1 w-full p-5 max-w-maxWidthDefault sm:grid-cols-3">
         <div className="flex mb-4 flex-col">
           <h3 className="text-lg text-skin-textColorInDarkness font-semibold text-left">

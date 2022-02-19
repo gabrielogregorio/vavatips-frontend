@@ -38,7 +38,7 @@ const NavbarComponent = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) 
   }
 
   return (
-    <nav className="flex flex-col items-center justify-center w-full p-5 pl-10 pr-10 bg-skin-primary sm:flex-row text-skin-textColorInDarkness">
+    <nav className="flex flex-col items-center justify-center w-full p-5 pl-10 pr-10 dark:bg-skin-primary bg-skin-primaryExtra sm:flex-row text-skin-textColorInDarkness">
       <Link href="/" passHref>
         <a href="#/" className="text-left text-4xl border-none font-bold mb-2 sm:flex-1">
           VAVATIPS

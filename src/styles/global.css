@@ -10,39 +10,6 @@
   }
 }
 
-:root {
-  --max-width: 800px;
-  --max-width-form: 500px;
-  --max-width-modal: 400px;
-  --z-modal: 50;
-  --z-modal-message: 50;
-  --z-btn-post: 40;
-}
-
-.dark {
-  --primary: #2d333b;
-  --secondary: #3386d3;
-  --primary-extra: #d85f5f;
-  --primary-small: #a75fd1;
-  --bg-page: #22272e;
-  --bg-container: #2d333b;
-  --background-description: #111;
-  --text-color-in-darkness: #dedede;
-  --text-color: #dedede;
-}
-
-.light {
-  --primary: #cb4343;
-  --secondary: #438acb;
-  --primary-extra: #cb4343;
-  --primary-small: #cb43bd;
-  --bg-page: #efefef;
-  --bg-container: #fff;
-  --background-description: #111;
-  --text-color-in-darkness: #fff;
-  --text-color: #2c2c2c;
-}
-
 * {
   margin: 0;
   padding: 0;

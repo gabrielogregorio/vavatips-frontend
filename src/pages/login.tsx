@@ -146,7 +146,9 @@ const Login = () => {
           ) : null}
 
           <GroupInput>
-            <Button className="text-skin-textColor" onClick={() => toggleAccess()}>
+            <Button
+              className="dark:text-skin-textColor text-skin-textColorGray"
+              onClick={() => toggleAccess()}>
               {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
             </Button>
           </GroupInput>

@@ -50,16 +50,16 @@ const SuggestionScreen = () => {
   function renderSuggestions() {
     return suggestions.map((report: suggestionInterface) => (
       <tr key={report.id} className="border-b">
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-textColor text-skin-textColorGray text-left">
           {report.postId}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-textColor text-skin-textColorGray text-left">
           {report.email}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-textColor text-skin-textColorGray text-left">
           {report.description}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-textColor text-skin-textColorGray text-left">
           {report.status ?? 'Não atendido'}
         </td>
       </tr>
