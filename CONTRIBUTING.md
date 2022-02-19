@@ -7,7 +7,7 @@ Note that we have a [code of conduct](CODE-OF-CONDUCT.md), follow it in all your
 
 ## Pull Request Process
 
-1. Complete the PULL_REQUEST template completely
+1.  Complete the PULL_REQUEST template completely
 
 ### How to contribute in practice
 

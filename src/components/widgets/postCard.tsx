@@ -71,8 +71,8 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
     setModalSuggestion({ active: true, post });
   }
   return (
-    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-500">
-      <div className="flex justify-center items-center mb-2 w-full">
+    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-400">
+      <div className="flex justify-center items-center mb-2 mt-2 w-full">
         <div className="h-11 w-11 relative">
           {post.user.image ? (
             <Image
@@ -91,18 +91,18 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
           )}
         </div>
 
-        <p className="flex-1 dark:text-skin-textColor text-skin-textColorDark ml-5 text-base">
+        <p className="flex-1 dark:text-skin-gray-400 text-skin-gray-800 ml-5 text-base">
           {post.user.username ?? 'Ademir'}
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-primaryExtra" onClick={() => null}>
+          <Button className="block text-skin-secondary-regular" onClick={() => null}>
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </Button>
         ) : null}
       </div>
 
-      <h3 className="text-base dark:text-skin-textColor text-skin-textColorDark w-full mb-2.5">
+      <h3 className="text-base dark:text-skin-gray-400 text-skin-gray-800 w-full mb-2.5">
         {post.title}
       </h3>
 
@@ -124,7 +124,7 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
             <Button
               ariaLabel="Item anterior"
               dataTestid="prev-btn"
-              className="text-skin-textColorInDarkness border-none bg-transparent"
+              className="text-skin-gray-400 border-none bg-transparent"
               onClick={() => nextImage('prev', post.imgs.length)}>
               <MdArrowBackIosNew className="text-4xl font-bold" />
             </Button>
@@ -134,14 +134,14 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
             <Button
               ariaLabel="Proximo item"
               dataTestid="next-btn"
-              className="text-skin-textColorInDarkness border-none bg-transparent"
+              className="text-skin-gray-400 border-none bg-transparent"
               onClick={() => nextImage('next', post.imgs.length)}>
               <MdArrowForwardIos className="text-4xl font-bold" />
             </Button>
           </div>
 
-          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-backgroundDescription">
-            <p className="text-skin-textColorInDarkness text-base" aria-live="polite">
+          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-black">
+            <p className="text-skin-gray-400 text-base" aria-live="polite">
               {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
           </div>
@@ -149,11 +149,9 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
       </div>
 
       <div>
-        <p className="text-base dark:text-skin-textColor text-skin-textColorDark">
-          {post.description}
-        </p>
+        <p className="text-base dark:text-skin-gray-400 text-skin-gray-800">{post.description}</p>
 
-        <p className="text-skin-primaryExtra text-lg bg-transparent">
+        <p className="text-skin-secondary-regular text-lg bg-transparent">
           <span className="text-base"> #{post.tags.map}</span>
           <span className="text-base"> #{post.tags.agent}</span>
           <span className="text-base"> #{post.tags.ability}</span>

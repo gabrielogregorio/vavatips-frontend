@@ -9,7 +9,7 @@ const ButtonCloseModal = ({ onClick }: buttonType) => (
   <Button
     onClick={onClick}
     dataTestid="closeModal"
-    className="dark:text-skin-textColor text-skin-textColorGray">
+    className="dark:text-skin-gray-400 text-skin-gray-500">
     <FaTimes />
   </Button>
 );

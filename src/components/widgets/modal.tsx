@@ -92,12 +92,12 @@ const ModalComponent = ({
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-gray-400"
             onClick={() => closeModalItem()}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-gray-400"
             onClick={() => saveModal(id, description, LinkImg)}>
             Adicionar
           </Button>

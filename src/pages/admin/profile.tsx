@@ -80,13 +80,13 @@ const MyProfileScreen = () => {
               />
 
               <ButtonForm
-                className="text-skin-secondary border-none mt-2"
+                className="text-skin-primary-light border-none mt-2"
                 onClick={() => handleLogout()}>
                 logoff
               </ButtonForm>
 
               <ButtonForm
-                className="bg-skin-secondary text-skin-textColorInDarkness border-skin-secondary mt-2 p-1"
+                className="bg-skin-primary-light text-skin-gray-400 border-skin-primary-light mt-2 p-1"
                 onClick={() => {}}>
                 Atualizar dados
               </ButtonForm>

@@ -64,24 +64,16 @@ const DashboardScreen = () => {
         <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
           <LoaderComponent active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
-            Bem vindo(a) {username}
-          </p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
-            Consultas: {countViewsAll}
-          </p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
-            Usuários: {countViewsIps}
-          </p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
-            agentes: {countAlAgents}
-          </p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">mapas: {countAlMaps}</p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">posts: {countAllPosts}</p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Bem vindo(a) {username}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Consultas: {countViewsAll}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Usuários: {countViewsIps}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">agentes: {countAlAgents}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">mapas: {countAlMaps}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">posts: {countAllPosts}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">
             sugestões: {countAllSuggestions}
           </p>
-          <p className="dark:text-skin-textColor text-skin-textColorGray">
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">
             administradores: {countAllUsers}
           </p>
         </div>

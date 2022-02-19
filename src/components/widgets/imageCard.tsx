@@ -20,7 +20,7 @@ const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) =
     <Link href={href} passHref>
       <button
         type="button"
-        className="flex flex-col justify-center items-center flex-1 h-40 opacity-80 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
+        className="flex flex-col justify-center items-center flex-1 h-40 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
         <div
           className={`block relative w-full rounded-md overflow-hidden ${heightImage} ${
             isLoaded ? '' : 'wait-load-pulse'
@@ -34,7 +34,7 @@ const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) =
             onLoadingComplete={() => handleWithIsLoadedImage()}
           />
         </div>
-        <p className="dark:text-skin-textColor text-skin-textColorDark" style={{ opacity: 0.8 }}>
+        <p className="dark:text-skin-gray-400 text-skin-gray-800" style={{ opacity: 0.8 }}>
           {titleImage}
         </p>
       </button>

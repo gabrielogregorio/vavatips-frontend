@@ -7,22 +7,22 @@ const typeIconModel = {
     default: AiOutlineHeart,
     selected: AiFillHeart,
     text: 'Testado',
-    color: 'dark:text-skin-textColorInDarkness text-skin-textColorGray',
-    colorSelected: 'text-skin-primaryExtra',
+    color: 'dark:text-skin-gray-400 text-skin-gray-500',
+    colorSelected: 'text-skin-secondary-regular',
   },
   save: {
     default: MdBookmarkBorder,
     selected: MdOutlineBookmark,
     text: 'Salvar',
-    color: 'dark:text-skin-textColorInDarkness text-skin-textColorGray',
-    colorSelected: 'text-skin-secondary',
+    color: 'dark:text-skin-gray-400 text-skin-gray-500',
+    colorSelected: 'text-skin-primary-light',
   },
   report: {
     default: RiAlertLine,
     selected: RiAlertLine,
     text: 'Sugerir',
-    color: 'dark:text-skin-textColorInDarkness text-skin-textColorGray',
-    colorSelected: 'dark:text-skin-textColorInDarkness text-skin-textColorGray',
+    color: 'dark:text-skin-gray-400 text-skin-gray-500',
+    colorSelected: 'dark:text-skin-gray-400 text-skin-gray-500',
   },
 };
 
