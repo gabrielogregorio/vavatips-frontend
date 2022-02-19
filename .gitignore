@@ -43,3 +43,6 @@ yarn-error.log*
 # vercel
 .vercel
 
+
+# Ignore storybook static build
+storybook-static
