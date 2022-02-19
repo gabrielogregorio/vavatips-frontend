@@ -5,7 +5,7 @@ import ModalMessage from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
 import MockApp from '@/mock/App.Mock';
 
-function ComponentSetup() {
+const ComponentSetup = () => {
   const { setModalMessage } = useModalMessage();
   const msg = 'Sugestão enviado com sucesso, muito obrigado!';
   const type = 'success';
@@ -15,9 +15,9 @@ function ComponentSetup() {
   }, []);
 
   return <ModalMessage />;
-}
+};
 
-function ComponentSetupWithError() {
+const ComponentSetupWithError = () => {
   const { setModalMessage } = useModalMessage();
   const msg = 'Erro desconhecido';
   const type = 'error';
@@ -27,7 +27,7 @@ function ComponentSetupWithError() {
   }, []);
 
   return <ModalMessage />;
-}
+};
 
 describe('<ModalMessage />', () => {
   it('should render modal setup error', async () => {

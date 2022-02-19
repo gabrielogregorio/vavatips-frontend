@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import api from '@/services/api';
 import FooterComponent from '@/layout/footer';
@@ -23,7 +23,7 @@ interface suggestionInterface {
   status: string;
 }
 
-export default function SuggestionScreen() {
+const SuggestionScreen = () => {
   const [suggestions, setSuggestions] = useState<suggestionInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -50,16 +50,16 @@ export default function SuggestionScreen() {
   function renderSuggestions() {
     return suggestions.map((report: suggestionInterface) => (
       <tr key={report.id} className="border-b">
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
           {report.postId}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
           {report.email}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
           {report.description}
         </td>
-        <td className="px-5 pl-0 break-all text-base text-skin-textColor text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
           {report.status ?? 'Não atendido'}
         </td>
       </tr>
@@ -78,10 +78,10 @@ export default function SuggestionScreen() {
         <table className="w-full max-w-maxWidthDefault">
           <thead className="border-b">
             <tr>
-              <th className="text-base text-skin-textColor text-left">Post</th>
-              <th className="text-base text-skin-textColor text-left">Email</th>
-              <th className="text-base text-skin-textColor text-left">Descrição</th>
-              <th className="text-base text-skin-textColor text-left">Status</th>
+              <th className="text-base text-skin-gray-400 text-left">Post</th>
+              <th className="text-base text-skin-gray-400 text-left">Email</th>
+              <th className="text-base text-skin-gray-400 text-left">Descrição</th>
+              <th className="text-base text-skin-gray-400 text-left">Status</th>
             </tr>
           </thead>
 
@@ -91,4 +91,5 @@ export default function SuggestionScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default SuggestionScreen;

@@ -7,10 +7,9 @@ export interface propsInterfaceButtonLike {
   onClick: () => {};
 }
 
-export default function ButtonLike({ styleBtn, title, onClick, active }: propsInterfaceButtonLike) {
-  return (
-    <Button className={`${styleBtn} ${active ? 'active' : ''}`} onClick={onClick}>
-      {title}
-    </Button>
-  );
-}
+const ButtonLike = ({ styleBtn, title, onClick, active }: propsInterfaceButtonLike) => (
+  <Button className={`${styleBtn} ${active ? 'active' : ''}`} onClick={onClick}>
+    {title}
+  </Button>
+);
+export default ButtonLike;

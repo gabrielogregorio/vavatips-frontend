@@ -62,7 +62,7 @@ describe('<HomeScreen />', () => {
     expect(screen.getByText(mockPosts().posts[8].description)).toBeInTheDocument();
     expect(screen.getByText(mockPosts().posts[9].description)).toBeInTheDocument();
 
-    expect(screen.getAllByRole('button', { name: 'Testar' })).toHaveLength(
+    expect(screen.getAllByRole('button', { name: 'Testado' })).toHaveLength(
       mockPosts().posts.length,
     );
     expect(screen.getAllByRole('button', { name: 'Salvar' })).toHaveLength(

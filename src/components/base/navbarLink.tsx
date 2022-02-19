@@ -8,7 +8,7 @@ type NavbarLinkType = {
   textContent: string;
 };
 
-export default function NavbarLink({ href, selected, whoIs, textContent }: NavbarLinkType) {
+const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType) => {
   const isActiveClass = selected === whoIs ? 'border-b-2 border-cyan-50' : '';
 
   return (
@@ -18,4 +18,6 @@ export default function NavbarLink({ href, selected, whoIs, textContent }: Navba
       </a>
     </Link>
   );
-}
+};
+
+export default NavbarLink;

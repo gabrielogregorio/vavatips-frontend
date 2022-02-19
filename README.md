@@ -43,8 +43,8 @@ This project was developed using NextJs, Typescript and React Testing Library. B
 
 ## Run Project
 
-1. Fully start the backend, available in the [vavatips-backend](<(https://github.com/gabrielogregorio/vavatips-backend)>) repository.
-2. With the backend working, create an .env file, based on the .env.example file.
+1.  Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
+2.  With the backend working, create an .env file, based on the .env.example file.
 
 ## Contributing with project
 
@@ -100,14 +100,14 @@ yarn test:watch-all:coverage
 
 ## Vscode extensions for this project
 
-1. Eslint (Microsoft)
-2. Prettier - Code formatter (Prettier)
-3. Prettier Eslint (Rebecca Vest)
-4. Stylelint (Stylelint)
-5. Gitignore (CodeZombie)
-6. EditorConfig for VS code (EditorConfig)
-7. Tailwind CSS IntelliSense (Tailwind Labs)
-8. TODO Highlight v2 (Jonathan Clark)
+1.  Eslint (Microsoft)
+2.  Prettier - Code formatter (Prettier)
+3.  Prettier Eslint (Rebecca Vest)
+4.  Stylelint (Stylelint)
+5.  Gitignore (CodeZombie)
+6.  EditorConfig for VS code (EditorConfig)
+7.  Tailwind CSS IntelliSense (Tailwind Labs)
+8.  TODO Highlight v2 (Jonathan Clark)
 
 ## Check tests, eslint and typescript
 

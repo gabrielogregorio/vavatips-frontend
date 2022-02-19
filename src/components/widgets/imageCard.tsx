@@ -9,14 +9,18 @@ type imageCardType = {
   heightImage: string;
 };
 
-export default function ImageCard({ href, srcImage, titleImage, heightImage }: imageCardType) {
+const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleWithIsLoadedImage = () => {
+    setIsLoaded(true);
+  };
 
   return (
     <Link href={href} passHref>
       <button
         type="button"
-        className="flex flex-col justify-center items-center flex-1 h-40 opacity-80 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
+        className="flex flex-col justify-center items-center flex-1 h-40 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
         <div
           className={`block relative w-full rounded-md overflow-hidden ${heightImage} ${
             isLoaded ? '' : 'wait-load-pulse'
@@ -27,13 +31,14 @@ export default function ImageCard({ href, srcImage, titleImage, heightImage }: i
             src={srcImage}
             alt={titleImage}
             priority
-            onLoadingComplete={() => setIsLoaded(true)}
+            onLoadingComplete={() => handleWithIsLoadedImage()}
           />
         </div>
-        <p className="text-skin-textColor" style={{ opacity: 0.8 }}>
+        <p className="dark:text-skin-gray-400 text-skin-gray-800" style={{ opacity: 0.8 }}>
           {titleImage}
         </p>
       </button>
     </Link>
   );
-}
+};
+export default ImageCard;

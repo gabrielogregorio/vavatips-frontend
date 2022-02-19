@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useModalMessage } from '@/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
 import api from '@/services/api';
@@ -15,7 +15,7 @@ interface ModalProps {
   title: string;
 }
 
-export default function ModalOfSuggestion({ title }: ModalProps) {
+const ModalOfSuggestion = ({ title }: ModalProps) => {
   const [email, setEmail] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [postTitle, setPostTitle] = useState<string>('');
@@ -92,12 +92,12 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-gray-400"
             onClick={() => setModalSuggestion(initializeModalSuggestion)}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-gray-400"
             onClick={() => saveModal()}>
             Adicionar
           </Button>
@@ -105,4 +105,5 @@ export default function ModalOfSuggestion({ title }: ModalProps) {
       </FormComponent>
     </ModalRef>
   ) : null;
-}
+};
+export default ModalOfSuggestion;

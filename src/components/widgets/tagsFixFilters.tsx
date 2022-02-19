@@ -5,23 +5,22 @@ interface propsInterface {
   queryUrl: filterUrlInterface;
 }
 
-export default function TagsFixFilters({ queryUrl }: propsInterface) {
-  return (
-    <div className="flex justify-center">
-      <div>
-        {queryUrl.agent ? (
-          <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-primaryExtra">
-            #{queryUrl.agent}
-          </Button>
-        ) : null}
-      </div>
-      <div>
-        {queryUrl.map ? (
-          <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-primaryExtra">
-            #{queryUrl.map}
-          </Button>
-        ) : null}
-      </div>
+const TagsFixFilters = ({ queryUrl }: propsInterface) => (
+  <div className="flex justify-center">
+    <div>
+      {queryUrl.agent ? (
+        <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-secondary-regular">
+          #{queryUrl.agent}
+        </Button>
+      ) : null}
     </div>
-  );
-}
+    <div>
+      {queryUrl.map ? (
+        <Button onClick={() => null} className="bg-transparent p-2 m-2 text-skin-secondary-regular">
+          #{queryUrl.map}
+        </Button>
+      ) : null}
+    </div>
+  </div>
+);
+export default TagsFixFilters;

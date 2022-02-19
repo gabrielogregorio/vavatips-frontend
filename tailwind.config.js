@@ -1,47 +1,63 @@
 module.exports = {
   content: ['./src/components/**/*.{js,ts,jsx,tsx}', './src/pages/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0)' },
+          '50%': { transform: 'rotate(-10deg) scale(1.2)' },
+        },
+
+        scale: {
+          '0%, 100%': { transform: 'rotateX(1)' },
+          '50%': { transform: 'scaleX(1.1)' },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 200ms ease-in-out',
+        scale: 'scale 200ms ease-in-out',
+      },
+
       zIndex: {
-        modal: 'var(--z-modal)',
-        modalMessage: 'var(--z-modal-message)',
-        btnPost: 'var(--z-btn-post)',
+        modal: 50,
+        modalMessage: 50,
+        btnPost: 40,
       },
       maxWidth: {
-        maxWidthDefault: 'var(--max-width)',
-        maxWidthDefaultForm: 'var(--max-width-form)',
-        maxWidthModal: 'var(--max-width-modal)',
+        maxWidthDefault: '800px',
+        maxWidthDefaultForm: '500px',
+        maxWidthModal: '400px',
       },
       height: {
         maxHeightContent: '500px',
       },
       textColor: {
         skin: {
-          primaryExtra: 'var(--primary-extra)',
-          textColor: 'var(--text-color)',
-          secondary: 'var(--secondary)',
-          primary: 'var(--primary)',
-          primarySmall: 'var(--primary-small)',
-          textColorInDarkness: 'var(--text-color-in-darkness)',
+          'secondary-regular': 'var(--secondary-regular)',
+          'gray-400': 'var(--gray-400)',
+          'gray-800': 'var(--gray-800)',
+          'gray-500': 'var(--gray-500)',
+          'primary-light': 'var(--primary-light)',
+          'gray-900': 'var(--gray-900)',
         },
       },
       backgroundColor: {
         skin: {
-          bgPage: 'var(--bg-page)',
-          primary: 'var(--primary)',
-          secondary: 'var(--secondary)',
-          bgContainer: 'var(--bg-container)',
-          backgroundDescription: 'var(--background-description)',
-          primaryExtra: 'var(--primary-extra)',
-          primarySmall: 'var(--primary-small)',
-          textColorInDarkness: 'var(--text-color-in-darkness)',
+          'gray-300': 'var(--gray-300)',
+          'gray-700': 'var(--gray-700)',
+          'primary-light': 'var(--primary-light)',
+          white: 'var(--white)',
+          'gray-900': 'var(--gray-900)',
+          black: 'var(--black)',
+          'secondary-light': 'var(--secondary-light)',
+          'gray-400': 'var(--gray-400)',
         },
       },
       borderColor: {
         skin: {
-          secondary: 'var(--secondary)',
-          primaryExtra: 'var(--primary-extra)',
-          primarySmall: 'var(--primary-small)',
+          'primary-light': 'var(--primary-light)',
+          'secondary-regular': 'var(--secondary-regular)',
         },
       },
     },

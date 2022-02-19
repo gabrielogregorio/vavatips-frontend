@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
 
 export interface propsInterfacePaginationComponent {
@@ -12,13 +12,13 @@ export interface propsInterfacePaginationComponent {
 
 const maxValuePagination = 3;
 
-export default function PaginationComponent({
+const PaginationComponent = ({
   finish,
   selected,
   map,
   agent,
   urlBase,
-}: propsInterfacePaginationComponent) {
+}: propsInterfacePaginationComponent) => {
   const [pagination, setPagination] = useState<{ id: number }[]>([]);
 
   useEffect(() => {
@@ -68,9 +68,10 @@ export default function PaginationComponent({
       aria-label="Sistema de paginação"
       className={`
      flex items-center justify-center mt-2 rounded-xl ${
-       pagination?.length > 0 ? 'b-2 p-1 border-2  border-skin-primaryExtra' : ''
+       pagination?.length > 0 ? 'b-2 p-1 border-2  border-skin-secondary-regular' : ''
      }`}>
       <ul className="flex items-center list-none">{renderPaginationButtons()}</ul>
     </nav>
   );
-}
+};
+export default PaginationComponent;

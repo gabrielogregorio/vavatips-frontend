@@ -1,7 +1,3 @@
-/* eslint-disable no-undef */
-// @ts-nocheck
-export {};
-
 describe('<Maps />', () => {
   beforeEach(() => {
     cy.intercept('/maps', (req) =>
@@ -157,7 +153,7 @@ describe('<Maps />', () => {
 
   it('should navigate to the about page', () => {
     // Start from the index page
-    cy.visit('http://localhost:3000/');
+    cy.visit('http://localhost:3000/', { timeout: 120000 });
     cy.contains('Ascent', { timeout: 10000 });
 
     // Find a link with an href attribute containing "about" and click it
@@ -197,7 +193,7 @@ describe('<Maps />', () => {
     cy.contains('#Facil');
     cy.contains('#Defensores #B');
 
-    cy.contains('button', 'Testar');
+    cy.contains('button', 'Testado');
     cy.contains('button', 'Salvar');
     cy.contains('button', 'Sugerir');
 
@@ -219,7 +215,7 @@ describe('<Maps />', () => {
     cy.contains('#Medio');
     cy.contains('#Defensores #A');
 
-    cy.contains('button', 'Testar');
+    cy.contains('button', 'Testado');
     cy.contains('button', 'Salvar');
     cy.contains('button', 'Sugerir');
 

@@ -4,6 +4,9 @@ type titleType = {
   children: ReactNode;
 };
 
-export default function Title({ children }: titleType) {
-  return <h1 className="text-2xl text-center p-7 pl-0 pr-0 text-skin-textColor">{children}</h1>;
-}
+const Title = ({ children }: titleType) => (
+  <h1 className="text-2xl text-center p-7 pl-0 pr-0 dark:text-skin-gray-400 text-skin-gray-800">
+    {children}
+  </h1>
+);
+export default Title;

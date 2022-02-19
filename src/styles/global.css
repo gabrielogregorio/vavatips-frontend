@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,40 +10,22 @@
   }
 }
 
-
 :root {
-  --max-width: 800px;
-  --max-width-form: 500px;
-  --max-width-modal: 400px;
-  --z-modal: 50;
-  --z-modal-message: 50;
-  --z-btn-post: 40;
+  --primary-light: #3386d3;
+  --secondary-light: #cb4343;
+  --secondary-regular: #d85f5f;
+  --white: #fff;
+  --black: #111;
+  --purple-light: #7936e3;
+  --gray-300: #efefef;
+  --gray-400: rgb(255 255 255);
+  --gray-500: #6c6c6c;
+  --gray-700: #22272e;
+  --gray-800: #2c2c2c;
+  --gray-900: #2d333b
 }
 
 
-.dark {
-  --primary: #2d333b;
-  --secondary: #3386d3;
-  --primary-extra: #d85f5f;
-  --primary-small: #a75fd1;
-  --bg-page: #22272e;
-  --bg-container: #2d333b;
-  --background-description: #111;
-  --text-color-in-darkness: #dedede;
-  --text-color: #dedede;
-}
-
-.light {
-  --primary: #cb4343;
-  --secondary: #438acb;
-  --primary-extra: #cb4343;
-  --primary-small: #cb43bd;
-  --bg-page: #efefef;
-  --bg-container: #fff;
-  --background-description: #111;
-  --text-color-in-darkness: #fff;
-  --text-color: #2c2c2c;
-}
 
 * {
   margin: 0;

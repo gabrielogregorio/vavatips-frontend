@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
-import { logout } from '@/services/auth';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
@@ -11,13 +10,14 @@ import LayoutComponent from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
+import { logout } from '../../core/services/auth';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
   { url: navbarEnum.Dashboard, text: 'dashboard' },
 ];
 
-export default function DashboardScreen() {
+const DashboardScreen = () => {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -64,17 +64,22 @@ export default function DashboardScreen() {
         <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
           <LoaderComponent active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
-          <p className="text-skin-textColor">Bem vindo(a) {username}</p>
-          <p className="text-skin-textColor">Consultas: {countViewsAll}</p>
-          <p className="text-skin-textColor">Usuários: {countViewsIps}</p>
-          <p className="text-skin-textColor">agentes: {countAlAgents}</p>
-          <p className="text-skin-textColor">mapas: {countAlMaps}</p>
-          <p className="text-skin-textColor">posts: {countAllPosts}</p>
-          <p className="text-skin-textColor">sugestões: {countAllSuggestions}</p>
-          <p className="text-skin-textColor">administradores: {countAllUsers}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Bem vindo(a) {username}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Consultas: {countViewsAll}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">Usuários: {countViewsIps}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">agentes: {countAlAgents}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">mapas: {countAlMaps}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">posts: {countAllPosts}</p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">
+            sugestões: {countAllSuggestions}
+          </p>
+          <p className="dark:text-skin-gray-400 text-skin-gray-500">
+            administradores: {countAllUsers}
+          </p>
         </div>
       </SubContainer>
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default DashboardScreen;

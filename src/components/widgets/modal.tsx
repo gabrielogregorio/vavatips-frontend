@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
@@ -14,18 +14,18 @@ export interface ModalPropsBase {
   id: string;
   description: string;
   image: string;
-  closeModal: React.MouseEventHandler<HTMLButtonElement>;
+  closeModal: MouseEventHandler<HTMLButtonElement>;
   saveModal: (id: string, title: string, image: string) => void;
 }
 
-export default function ModalComponent({
+const ModalComponent = ({
   id: idModal,
   description: descriptionModal,
   image,
   closeModal,
   saveModal,
   title,
-}: ModalPropsBase) {
+}: ModalPropsBase) => {
   const [id, setId] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [LinkImg, setLinkImg] = useState<string>('');
@@ -92,12 +92,12 @@ export default function ModalComponent({
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primaryExtra text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-gray-400"
             onClick={() => closeModalItem()}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary text-skin-textColorInDarkness"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-gray-400"
             onClick={() => saveModal(id, description, LinkImg)}>
             Adicionar
           </Button>
@@ -105,4 +105,5 @@ export default function ModalComponent({
       </FormComponent>
     </ModalRef>
   );
-}
+};
+export default ModalComponent;

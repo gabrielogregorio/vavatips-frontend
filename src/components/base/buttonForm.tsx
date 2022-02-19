@@ -7,10 +7,10 @@ type ButtonType = {
   onClick: () => void;
 };
 
-export default function ButtonForm({ children, className, onClick }: ButtonType) {
-  return (
-    <Button className={`w-full border-2 rounded-xl ${className}`} onClick={onClick}>
-      {children}
-    </Button>
-  );
-}
+const ButtonForm = ({ children, className, onClick }: ButtonType) => (
+  <Button className={`w-full border-2 rounded-xl ${className}`} onClick={onClick}>
+    {children}
+  </Button>
+);
+
+export default ButtonForm;

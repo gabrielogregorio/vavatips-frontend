@@ -10,13 +10,7 @@ export interface propsInterfaceSelectedBase {
   render: { id: string; name: string }[];
 }
 
-export default function Selected({
-  render,
-  text,
-  setValue,
-  value,
-  name,
-}: propsInterfaceSelectedBase) {
+const Selected = ({ render, text, setValue, value, name }: propsInterfaceSelectedBase) => {
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>
@@ -33,7 +27,7 @@ export default function Selected({
     <GroupInput>
       <LabelComponent name={name} text={text} />
       <select
-        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
+        className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-gray-400 text-skin-gray-500 outline-none rounded-lg resize-none"
         id={name}
         value={value}
         onChange={(e) => onChange(e)}>
@@ -42,4 +36,5 @@ export default function Selected({
       </select>
     </GroupInput>
   );
-}
+};
+export default Selected;

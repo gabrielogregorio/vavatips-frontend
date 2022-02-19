@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Router from 'next/router';
 import api from '@/services/api';
-import { login } from '@/services/auth';
 import Input from '@/base/input';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
@@ -17,12 +16,13 @@ import SubContainer from '@/base/subContainer';
 import NavbarComponent from '@/layout/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import FormComponent from '@/base/Form';
+import { login } from '../core/services/auth';
 
 type accessType = 'login' | 'register';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
-export default function Login() {
+const Login = () => {
   const [code, setCode] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -146,14 +146,16 @@ export default function Login() {
           ) : null}
 
           <GroupInput>
-            <Button className="text-skin-textColor" onClick={() => toggleAccess()}>
+            <Button
+              className="dark:text-skin-gray-400 text-skin-gray-500"
+              onClick={() => toggleAccess()}>
               {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
             </Button>
           </GroupInput>
 
           <GroupInput>
             <Button
-              className="text-skin-textColorInDarkness bg-skin-primaryExtra rounded-xl p-1"
+              className="text-skin-gray-400 bg-skin-secondary-light rounded-xl p-1"
               onClick={() => submitData()}>
               {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
             </Button>
@@ -164,4 +166,5 @@ export default function Login() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default Login;

@@ -5,7 +5,7 @@ interface postPropsInterface {
   posts: postsProps[];
 }
 
-export default function Posts({ posts }: postPropsInterface) {
+const Posts = ({ posts }: postPropsInterface) => {
   function renderPost() {
     return posts.map((post) => (
       <div key={post.id}>
@@ -15,4 +15,5 @@ export default function Posts({ posts }: postPropsInterface) {
   }
 
   return <div className="flex flex-col">{renderPost()}</div>;
-}
+};
+export default Posts;

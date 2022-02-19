@@ -24,13 +24,7 @@ interface containerPosts {
   title: string;
 }
 
-export default function ContainerPosts({
-  breadcrumbs,
-  type,
-  mode,
-  typeSelected,
-  title,
-}: containerPosts) {
+const ContainerPosts = ({ breadcrumbs, type, mode, typeSelected, title }: containerPosts) => {
   const location = useRouter();
   const { posts, isLoading, errorMsg, finishPage, queryUrl } = usePosts(location, type);
   const numberSelected = parseInt(queryUrl?.page || '1', 10);
@@ -72,4 +66,5 @@ export default function ContainerPosts({
       <FooterComponent />
     </>
   );
-}
+};
+export default ContainerPosts;

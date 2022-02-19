@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { isAuthenticated } from '@/services/auth';
 import { useModalContext } from '@/contexts/modalSuggestion';
 import formatImage from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { postsProps } from '@/interfaces/posts';
-import ButtonForm from '@/base/buttonForm';
 import Image from 'next/image';
+import { isAuthenticated } from '../../core/services/auth';
+import PostButton from '../base/likeButton';
 
 type typeType = 'next' | 'prev';
 
@@ -17,7 +17,7 @@ interface PropsPostInterface {
   viewAdmin: boolean;
 }
 
-export default function PostCard({ post, viewAdmin = false }: PropsPostInterface) {
+const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -71,8 +71,8 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
     setModalSuggestion({ active: true, post });
   }
   return (
-    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-500">
-      <div className="flex justify-center items-center mb-2 w-full">
+    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-400">
+      <div className="flex justify-center items-center mb-2 mt-2 w-full">
         <div className="h-11 w-11 relative">
           {post.user.image ? (
             <Image
@@ -91,18 +91,20 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
           )}
         </div>
 
-        <p className="flex-1 text-skin-textColor ml-5 text-base">
+        <p className="flex-1 dark:text-skin-gray-400 text-skin-gray-800 ml-5 text-base">
           {post.user.username ?? 'Ademir'}
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-primaryExtra" onClick={() => null}>
+          <Button className="block text-skin-secondary-regular" onClick={() => null}>
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </Button>
         ) : null}
       </div>
 
-      <h3 className="text-base text-skin-textColor w-full mb-2.5">{post.title}</h3>
+      <h3 className="text-base dark:text-skin-gray-400 text-skin-gray-800 w-full mb-2.5">
+        {post.title}
+      </h3>
 
       <div className="w-full">
         <div className="relative w-full">
@@ -122,7 +124,7 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
             <Button
               ariaLabel="Item anterior"
               dataTestid="prev-btn"
-              className="text-skin-textColorInDarkness border-none bg-transparent"
+              className="text-skin-gray-400 border-none bg-transparent"
               onClick={() => nextImage('prev', post.imgs.length)}>
               <MdArrowBackIosNew className="text-4xl font-bold" />
             </Button>
@@ -132,14 +134,14 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
             <Button
               ariaLabel="Proximo item"
               dataTestid="next-btn"
-              className="text-skin-textColorInDarkness border-none bg-transparent"
+              className="text-skin-gray-400 border-none bg-transparent"
               onClick={() => nextImage('next', post.imgs.length)}>
               <MdArrowForwardIos className="text-4xl font-bold" />
             </Button>
           </div>
 
-          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-backgroundDescription">
-            <p className="text-skin-textColorInDarkness text-base" aria-live="polite">
+          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-black">
+            <p className="text-skin-gray-400 text-base" aria-live="polite">
               {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
           </div>
@@ -147,9 +149,9 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       </div>
 
       <div>
-        <p className="text-base text-skin-textColor">{post.description}</p>
+        <p className="text-base dark:text-skin-gray-400 text-skin-gray-800">{post.description}</p>
 
-        <p className="text-skin-primaryExtra text-lg bg-transparent">
+        <p className="text-skin-secondary-regular text-lg bg-transparent">
           <span className="text-base"> #{post.tags.map}</span>
           <span className="text-base"> #{post.tags.agent}</span>
           <span className="text-base"> #{post.tags.ability}</span>
@@ -161,34 +163,13 @@ export default function PostCard({ post, viewAdmin = false }: PropsPostInterface
       </div>
 
       {!viewAdmin ? (
-        <div className="w-full flex justify-around mt-5">
-          <ButtonForm
-            className={`m-1 border-skin-secondary p-1 ${
-              postTested
-                ? 'text-skin-textColorInDarkness bg-skin-secondary '
-                : 'text-skin-secondary '
-            }`}
-            onClick={() => handleAddTest()}>
-            Testar
-          </ButtonForm>
-
-          <ButtonForm
-            className={`m-1 border-skin-primaryExtra  ${
-              postSave
-                ? 'text-skin-textColorInDarkness bg-skin-primaryExtra p-1'
-                : 'text-skin-primaryExtra'
-            }`}
-            onClick={() => handleAddSave()}>
-            Salvar
-          </ButtonForm>
-
-          <ButtonForm
-            className="m-1 text-skin-primarySmall border-skin-primarySmall p-1"
-            onClick={() => handleModalAction()}>
-            Sugerir
-          </ButtonForm>
+        <div className="w-full flex justify-around m-1">
+          <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
+          <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />
+          <PostButton selected={false} onClick={() => handleModalAction()} variant="report" />
         </div>
       ) : null}
     </div>
   );
-}
+};
+export default PostCard;

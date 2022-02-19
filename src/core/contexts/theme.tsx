@@ -12,7 +12,7 @@ type contextThemeProviderType = {
   children: ReactNode;
 };
 
-export default function ContextThemeProvider({ children }: contextThemeProviderType) {
+const ContextThemeProvider = ({ children }: contextThemeProviderType) => {
   const [theme, setTheme] = useState<string>('dark');
   useEffect(() => {
     if (theme) {
@@ -22,6 +22,7 @@ export default function ContextThemeProvider({ children }: contextThemeProviderT
 
   const value = useMemo(() => ({ theme, setTheme }), [theme]);
   return <ContextTheme.Provider value={value}>{children}</ContextTheme.Provider>;
-}
+};
 
+export default ContextThemeProvider;
 export const useTheme = () => useContext(ContextTheme);

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavbarComponent from '@/layout/navbar';
 import Input from '@/base/input';
 import LoaderComponent from '@/base/loader';
 import FooterComponent from '@/layout/footer';
 import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
-import { logout } from '@/services/auth';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
@@ -14,13 +13,14 @@ import SubContainer from '@/base/subContainer';
 import FormComponent from '@/base/Form';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import ButtonForm from '@/base/buttonForm';
+import { logout } from '../../core/services/auth';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
   { url: navbarEnum.Dashboard, text: 'perfil' },
 ];
 
-export default function MyProfileScreen() {
+const MyProfileScreen = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
@@ -80,13 +80,13 @@ export default function MyProfileScreen() {
               />
 
               <ButtonForm
-                className="text-skin-secondary border-none mt-2"
+                className="text-skin-primary-light border-none mt-2"
                 onClick={() => handleLogout()}>
                 logoff
               </ButtonForm>
 
               <ButtonForm
-                className="bg-skin-secondary text-skin-textColorInDarkness border-skin-secondary mt-2 p-1"
+                className="bg-skin-primary-light text-skin-gray-400 border-skin-primary-light mt-2 p-1"
                 onClick={() => {}}>
                 Atualizar dados
               </ButtonForm>
@@ -97,4 +97,5 @@ export default function MyProfileScreen() {
       <FooterComponent />
     </LayoutComponent>
   );
-}
+};
+export default MyProfileScreen;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import Button from './button';
 
@@ -6,10 +5,13 @@ type buttonType = {
   onClick: () => void;
 };
 
-export default function ButtonCloseModal({ onClick }: buttonType) {
-  return (
-    <Button onClick={onClick} dataTestid="closeModal" className="text-skin-textColor">
-      <FaTimes />
-    </Button>
-  );
-}
+const ButtonCloseModal = ({ onClick }: buttonType) => (
+  <Button
+    onClick={onClick}
+    dataTestid="closeModal"
+    className="dark:text-skin-gray-400 text-skin-gray-500">
+    <FaTimes />
+  </Button>
+);
+
+export default ButtonCloseModal;

@@ -1,7 +1,7 @@
 import { useFilters } from '@/contexts/filters';
 import Button from '@/base/button';
 
-export default function PostTags() {
+const PostTags = () => {
   const { tags, filters, setFilters } = useFilters();
 
   function toggleTag(tag: string) {
@@ -18,14 +18,14 @@ export default function PostTags() {
   function renderTags() {
     return tags.map((tag) => (
       <div
-        className="m-1 text-skin-secondary"
+        className="m-1 text-skin-primary-light"
         key={tag}
         onClick={() => toggleTag(tag)}
         role="presentation">
         <Button
           onClick={() => null}
-          className={`p-3 pb-1 pt-1 border border-skin-secondary rounded-2xl ${
-            filters.includes(tag) ? 'text-skin-textColorInDarkness bg-skin-secondary' : ''
+          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-2xl ${
+            filters.includes(tag) ? 'text-skin-gray-400 bg-skin-primary-light' : ''
           }`}>
           {tag}
         </Button>
@@ -33,4 +33,5 @@ export default function PostTags() {
     ));
   }
   return <div className="flex justify-center flex-wrap m-10 mt-1 mb-1"> {renderTags()} </div>;
-}
+};
+export default PostTags;

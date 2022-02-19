@@ -52,7 +52,7 @@ const handlers = [
   }),
 ];
 
-function ComponentSetup({ notId }: { notId?: boolean }) {
+const ComponentSetup = ({ notId }: { notId?: boolean }) => {
   const { setModalSuggestion } = useModalContext();
 
   const post = {
@@ -81,7 +81,7 @@ function ComponentSetup({ notId }: { notId?: boolean }) {
       <ModalOfSuggestion title="fazer sugestão" />
     </>
   );
-}
+};
 
 ComponentSetup.defaultProps = {
   notId: false,

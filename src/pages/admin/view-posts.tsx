@@ -7,16 +7,15 @@ const breadcrumbs = [
   { url: navbarEnum.ViewPosts, text: 'posts' },
 ];
 
-export default function ViewPostsScreen() {
-  return (
-    <LayoutComponent>
-      <ContainerPosts
-        breadcrumbs={breadcrumbs}
-        mode="admin"
-        type=""
-        typeSelected={navbarEnum.ViewPosts}
-        title="Todos os Posts"
-      />
-    </LayoutComponent>
-  );
-}
+const ViewPostsScreen = () => (
+  <LayoutComponent>
+    <ContainerPosts
+      breadcrumbs={breadcrumbs}
+      mode="admin"
+      type=""
+      typeSelected={navbarEnum.ViewPosts}
+      title="Todos os Posts"
+    />
+  </LayoutComponent>
+);
+export default ViewPostsScreen;

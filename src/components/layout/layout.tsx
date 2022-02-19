@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useTheme } from '@/contexts/theme';
 import { getTheme } from '@/services/theme';
 
@@ -6,7 +6,7 @@ type layoutComponentType = {
   children: ReactNode;
 };
 
-export default function LayoutComponent({ children }: layoutComponentType) {
+const LayoutComponent = ({ children }: layoutComponentType) => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -15,9 +15,10 @@ export default function LayoutComponent({ children }: layoutComponentType) {
 
   return (
     <div className={`${theme === 'dark' ? 'dark' : 'light'}`}>
-      <div className="flex  items-center min-h-screen flex-col p-0 w-full bg-skin-bgPage ">
+      <div className="flex  items-center min-h-screen flex-col p-0 w-full bg-skin-gray-300 dark:bg-skin-gray-700  ">
         {children}
       </div>
     </div>
   );
-}
+};
+export default LayoutComponent;

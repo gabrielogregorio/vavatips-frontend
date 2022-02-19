@@ -1,3 +1,9 @@
 {
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "baseUrl": "http://127.0.0.1:3000",
+  "viewportWidth": 1920,
+  "viewPortHeight": 1080,
+  "env": {
+    "apiHost": "http://127.0.0.1:3333"
+  }
 }

@@ -1,6 +1,6 @@
 ### Descrição
 
-Uma breve descrição, clara e concisa de qual é o problema. Ex. Sempre fico frustrado quando [...]
+Uma breve descrição, clara e concisa de qual é o problema. Ex. Sempre fico frustrado quando
 
 ### Solução
 

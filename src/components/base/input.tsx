@@ -12,14 +12,7 @@ export interface propsInterfaceInput {
   name: string;
 }
 
-export default function Input({
-  disabled,
-  type,
-  value,
-  text,
-  setValue,
-  name,
-}: propsInterfaceInput) {
+const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };
@@ -27,7 +20,7 @@ export default function Input({
     <GroupInput>
       <LabelComponent name={name} text={text} />
       <input
-        className="w-full p-1.5 border-2 border-skin-secondary bg-skin-bgContainer outline-none rounded-lg resize-none text-skin-textColor"
+        className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 outline-none rounded-lg resize-none dark:text-skin-gray-400 text-skin-gray-500"
         id={name}
         disabled={disabled}
         type={type}
@@ -37,4 +30,5 @@ export default function Input({
       />
     </GroupInput>
   );
-}
+};
+export default Input;

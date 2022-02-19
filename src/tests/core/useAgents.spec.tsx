@@ -42,7 +42,7 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-function ComponentAgentTest({ typeMap }: { typeMap: string }) {
+const ComponentAgentTest = ({ typeMap }: { typeMap: string }) => {
   const { mapSelected, agentsApi, isLoading, error } = useAgents({
     query: {
       map: typeMap,
@@ -80,15 +80,11 @@ function ComponentAgentTest({ typeMap }: { typeMap: string }) {
       {renderPosts()}
     </div>
   );
-}
+};
 
-function ComponentAgentTestSuccess() {
-  return <ComponentAgentTest typeMap="mapSuccess" />;
-}
+const ComponentAgentTestSuccess = () => <ComponentAgentTest typeMap="mapSuccess" />;
 
-function ComponentAgentTestError() {
-  return <ComponentAgentTest typeMap="mapError" />;
-}
+const ComponentAgentTestError = () => <ComponentAgentTest typeMap="mapError" />;
 
 describe('<ComponentAgentTest />', () => {
   beforeAll(() => server.listen());
