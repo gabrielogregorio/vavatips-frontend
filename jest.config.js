@@ -5,6 +5,8 @@ module.exports = {
     '!**/node_modules/**',
     '!**/.next/**',
     '!**/coverage/**',
+    '!**/storybook-static/**',
+    '!**/src/stories/**',
     '!**/cypress/**',
     '!**/jest.config.js**',
     '!**/jest.setup.js**',
@@ -48,7 +50,13 @@ module.exports = {
     https://jestjs.io/docs/webpack#handling-static-assets */
     '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/', '<rootDir>/cypress/'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/.next/',
+    '<rootDir>/cypress/',
+    '<rootDir>/.storybook/',
+    '<rootDir>/src/stories/',
+  ],
   testEnvironment: 'jsdom',
   transform: {
     /* Use babel-jest to transpile tests with the next/babel preset

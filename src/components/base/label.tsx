@@ -4,7 +4,7 @@ type labelType = {
 };
 
 const LabelComponent = ({ name, text }: labelType) => (
-  <label className="dark:text-skin-gray-400 text-skin-gray-500" htmlFor={name}>
+  <label className="dark:text-skin-white text-skin-gray-500" htmlFor={name}>
     {text}
   </label>
 );

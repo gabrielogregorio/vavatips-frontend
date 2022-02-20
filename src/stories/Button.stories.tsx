@@ -1,37 +1,18 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import Button from '../components/base/button';
 
 export default {
-  title: 'Example/Button',
+  title: 'base/Button',
   component: Button,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  children: 'Button',
-};
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
-};
-
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+export const Default = Template.bind({});
+Default.args = {
+  children: 'Choice Option',
+  className: '',
+  disabled: false,
+  onClick: action('onClick'),
 };

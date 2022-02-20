@@ -35,7 +35,6 @@ module.exports = {
       textColor: {
         skin: {
           'secondary-regular': '#d85f5f',
-          'gray-400': 'rgb(255 255 255);',
           'gray-800': '#2c2c2c',
           'gray-500': '#6c6c6c',
           'primary-light': '#3386d3',
@@ -51,7 +50,6 @@ module.exports = {
           'gray-900': '#2d333b',
           black: '#111',
           'secondary-light': '#cb4343',
-          'gray-400': 'rgb(255 255 255);',
         },
       },
       borderColor: {

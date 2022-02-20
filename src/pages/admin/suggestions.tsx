@@ -50,16 +50,16 @@ const SuggestionScreen = () => {
   function renderSuggestions() {
     return suggestions.map((report: suggestionInterface) => (
       <tr key={report.id} className="border-b">
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">
           {report.postId}
         </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">
           {report.email}
         </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">
           {report.description}
         </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
+        <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">
           {report.status ?? 'Não atendido'}
         </td>
       </tr>
@@ -78,10 +78,10 @@ const SuggestionScreen = () => {
         <table className="w-full max-w-maxWidthDefault">
           <thead className="border-b">
             <tr>
-              <th className="text-base text-skin-gray-400 text-left">Post</th>
-              <th className="text-base text-skin-gray-400 text-left">Email</th>
-              <th className="text-base text-skin-gray-400 text-left">Descrição</th>
-              <th className="text-base text-skin-gray-400 text-left">Status</th>
+              <th className="text-base text-skin-white text-left">Post</th>
+              <th className="text-base text-skin-white text-left">Email</th>
+              <th className="text-base text-skin-white text-left">Descrição</th>
+              <th className="text-base text-skin-white text-left">Status</th>
             </tr>
           </thead>
 

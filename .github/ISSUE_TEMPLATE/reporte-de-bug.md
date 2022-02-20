@@ -4,12 +4,12 @@ Uma descrição clara e concisa do que é o bug.
 
 ## Reproduzir
 
-Passos para reproduzir o comportamento:
+### Passos para reproduzir o comportamento
 
-1.   Vá para '...'
-2.   Clique em '....'
-3.   Role para baixo até '....'
-4.   Veja o erro
+-   Vá para '...'
+-   Clique em '....'
+-   Role para baixo até '....'
+-   Veja o erro
 
 ### Comportamento esperado
 

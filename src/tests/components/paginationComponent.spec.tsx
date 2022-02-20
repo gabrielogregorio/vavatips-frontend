@@ -15,7 +15,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '2' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-gray-400 bg-skin-secondary-light text-skin-gray-400',
+      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
     );
 
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
@@ -49,7 +49,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-gray-400 bg-skin-secondary-light text-skin-gray-400',
+      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
     );
 
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
@@ -84,7 +84,7 @@ describe('PaginationComponent', () => {
     );
     expect(screen.getByRole('link', { name: '28' })).toHaveAttribute(
       'class',
-      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-gray-400 bg-skin-secondary-light text-skin-gray-400',
+      'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
     );
 
     expect(screen.getAllByText('...')[0]).toBeInTheDocument();

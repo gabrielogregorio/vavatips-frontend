@@ -1,37 +1,30 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import InputFile from '../components/base/inputFile';
+import { ComponentMeta, Story } from '@storybook/react';
+import InputFile, { inputFileType } from '../components/base/inputFile';
 
 export default {
-  title: 'Example/InputFile',
+  title: 'form/inputFileType',
   component: InputFile,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof InputFile>;
 
-const Template: ComponentStory<typeof InputFile> = (args) => <InputFile {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  children: 'InputFile',
+const Template: Story<inputFileType> = (props) => {
+  const onChangeInput = (event) => {
+    //
+  };
+  return <InputFile {...props} onChange={onChangeInput} />;
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'InputFile',
+export const Default: Story<inputFileType> = Template.bind({});
+Default.args = {
+  disabled: false,
+  type: 'file',
+  text: 'type your name',
+  name: 'name',
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'InputFile',
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'InputFile',
+export const Password = Template.bind({});
+Password.args = {
+  disabled: false,
+  type: 'file',
+  text: 'type your password',
+  name: 'password',
 };

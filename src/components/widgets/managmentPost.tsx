@@ -213,13 +213,13 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
-            className="text-skin-gray-400 flex-1 text-base"
+            className="text-skin-white flex-1 text-base"
             onClick={() => showModalWithItem(instruction.id)}
             role="presentation">
             {key + 1} - {instruction.description}
           </p>
           <Button
-            className="text-skin-gray-400 text-base ml-2"
+            className="text-skin-white text-base ml-2"
             onClick={() => deleteStep(instruction.id)}
             dataTestid={`deleteStepButton-${key + 1}`}>
             <FaTimes />
@@ -242,13 +242,13 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             className="top-0 left-2/4 absolute z-btnPost"
             onClick={() => putPosition(instruction.id, 'bottom')}
             dataTestid={`btn-top-${key + 1}`}>
-            <BsChevronUp className="text-3xl font-extrabold text-skin-gray-400 " />
+            <BsChevronUp className="text-3xl font-extrabold text-skin-white " />
           </Button>
           <Button
             className="bottom-5 left-2/4 absolute z-btnPost"
             onClick={() => putPosition(instruction.id, 'top')}
             dataTestid={`btn-bottom-${key + 1}`}>
-            <BsChevronDown className="text-3xl font-extrabold text-skin-gray-400" />
+            <BsChevronDown className="text-3xl font-extrabold text-skin-white" />
           </Button>
         </div>
         <HrComponent />
@@ -389,7 +389,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
 
           <HrComponent />
 
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">
+          <p className="dark:text-skin-white text-skin-gray-500">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
             bem visível.
             <br />
@@ -412,7 +412,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             <GroupInput>
               <ButtonForm
                 onClick={() => handleSubmitManagement()}
-                className="border-skin-primary-light text-skin-gray-400 bg-skin-primary-light p-1">
+                className="border-skin-primary-light text-skin-white bg-skin-primary-light p-1">
                 Publicar Dica
               </ButtonForm>
             </GroupInput>

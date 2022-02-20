@@ -92,12 +92,12 @@ const ModalOfSuggestion = ({ title }: ModalProps) => {
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-gray-400"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-white"
             onClick={() => setModalSuggestion(initializeModalSuggestion)}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-gray-400"
+            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-white"
             onClick={() => saveModal()}>
             Adicionar
           </Button>

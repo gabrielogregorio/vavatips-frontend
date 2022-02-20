@@ -27,7 +27,7 @@ const Selected = ({ render, text, setValue, value, name }: propsInterfaceSelecte
     <GroupInput>
       <LabelComponent name={name} text={text} />
       <select
-        className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-gray-400 text-skin-gray-500 outline-none rounded-lg resize-none"
+        className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-white text-skin-gray-500 outline-none rounded-lg resize-none"
         id={name}
         value={value}
         onChange={(e) => onChange(e)}>

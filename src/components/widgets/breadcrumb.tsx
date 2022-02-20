@@ -9,12 +9,12 @@ const BreadcrumbComponent = ({ breadcrumbs, admin }: propsInterface) => {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
-    const color = admin ? 'text-skin-gray-400' : 'text-skin-gray-400';
+    const color = admin ? 'text-skin-white' : 'text-skin-white';
 
     return breadcrumbs.map((breadcrumb, index) => (
       <div key={`${breadcrumb.text}`} className="p-1 pb-0 pt-0 flex items-center ">
         {lastItem === index ? (
-          <p className="text-skin-gray-400 p-0">{breadcrumb.text}</p>
+          <p className="text-skin-white p-0">{breadcrumb.text}</p>
         ) : (
           <>
             <Link href={breadcrumb.url} passHref>

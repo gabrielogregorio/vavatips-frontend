@@ -13,26 +13,29 @@ export interface filterUrlInterface {
   map: string;
   type: string;
   page: string;
+  isReady: boolean;
 }
 
-function getUrl(location: NextRouter): filterUrlInterface {
-  const { agent, map, type, page = '1' }: ParsedUrlQuery = location.query;
+export type typeRequestType = '' | 'save' | 'tested';
+
+function getParamsFromLocation(location): filterUrlInterface {
+  const { agent, map, type, page }: ParsedUrlQuery = location.query;
+  const { isReady } = location;
 
   return {
     agent: agent?.toString() ?? '',
     map: map?.toString() ?? '',
     type: type?.toString() ?? '',
-    page: page?.toString() ?? '',
+    page: page?.toString() ?? '1',
+    isReady,
   };
 }
-
-export type typeRequestType = '' | 'save' | 'tested';
 
 export default function usePosts(location: NextRouter, typeRequest: typeRequestType = '') {
   const { filters, setTags } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getUrl(location));
+  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getParamsFromLocation(location));
   const [dataRequest, setDataRequest] = useState<{ [key: string]: string }>({});
 
   const { isLoading, error, data, refetch } = useQuery(
@@ -40,6 +43,8 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
     () => api.get(resolveQuery('/posts', dataRequest)).then((res) => res.data),
     { enabled: false },
   );
+
+  const { agent, map, type, page, isReady } = getParamsFromLocation(location);
 
   useEffect(() => {
     if (JSON.stringify(dataRequest) !== '{}') {
@@ -57,9 +62,8 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
   }, [JSON.stringify(data)]);
 
   useEffect(() => {
-    if (location.isReady) {
-      const { agent, map, type, page } = getUrl(location);
-      setQueryUrl({ agent, map, type, page });
+    if (isReady) {
+      setQueryUrl({ agent, map, type, page, isReady });
 
       let idPosts = '[]';
       if (typeRequest === 'save') {
@@ -81,7 +85,7 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
 
       setDataRequest(data1);
     }
-  }, [JSON.stringify(location?.query), typeRequest, JSON.stringify(filters)]);
+  }, [agent, map, type, page, isReady, typeRequest, filters]);
 
   return { posts, isLoading, errorMsg: error || '', finishPage, queryUrl };
 }
