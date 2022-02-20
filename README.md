@@ -1,19 +1,6 @@
 <div align="center">
 
 # Valorant tips
-</div>
-
-<div align="center">
-
-![GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)
-![GitHub last commit](https://img.shields.io/github/last-commit/gabrielogregorio/vavatips-frontend?style=flat-square)
-![GitHub contributors](https://img.shields.io/github/contributors/gabrielogregorio/vavatips-frontend)
-![GitHub language count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
-![GitHub repo size](https://img.shields.io/github/repo-size/gabrielogregorio/vavatips-frontend)
-
-</div>
-
-<div align="center">
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
@@ -22,121 +9,95 @@
 ![Testing-Library](https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white)
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)
-
-</div>
-
-<div align="center">
-
-![statements](./coverage/badge-statements.svg)
-![branchs](./coverage/badge-branches.svg)
-![functions](./coverage/badge-functions.svg)
-![lines](./coverage/badge-lines.svg)
-</div>
-
-<div align="center">
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa7397922b484be6943daaa86f16f919)](https://www.codacy.com/gh/gabrielogregorio/valorant-tips/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gabrielogregorio/valorant-tips&amp;utm_campaign=Badge_Grade)
 </div>
 
 ## Introduction
-This project was developed using NextJs, Typescript and api is available at [vavatips-backend](https://github.com/gabrielogregorio/valorant-tips-api)
+This project was developed using NextJs, Typescript and api is available at [vavatips-backend](https://github.com/gabrielogregorio/valorant-tips-api).
 
-### Deployment
-A Valorant tips blog [Access the blog](https://valorant-tips.vercel.app/)
+Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https://gabrielogregorio.github.io/valorant-tips/)
 
-### Run Project
+![](public/home.png)
+## Badges
+
+![GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)
+![GitHub last commit](https://img.shields.io/github/last-commit/gabrielogregorio/vavatips-frontend?style=flat-square)
+![GitHub contributors](https://img.shields.io/github/contributors/gabrielogregorio/vavatips-frontend)
+![GitHub language count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
+![GitHub repo size](https://img.shields.io/github/repo-size/gabrielogregorio/vavatips-frontend) ![statements](./coverage/badge-statements.svg) ![branchs](./coverage/badge-branches.svg) ![functions](./coverage/badge-functions.svg) ![lines](./coverage/badge-lines.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa7397922b484be6943daaa86f16f919)](https://www.codacy.com/gh/gabrielogregorio/valorant-tips/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gabrielogregorio/valorant-tips&amp;utm_campaign=Badge_Grade)
+
+## Run Project for development
 
 1.  Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
 2.  With the backend working, create an .env file, based on the .env.example file.
 
-### Contributing with project
+## Contributing with project
 
 Read [Contributing.md](CONTRIBUTING.md)
 
-### Available scripts
+## Available scripts
 
-#### Run in develop mode
-
+### Run
 ```bash
+# Run in develop mode
+# Open in http://localhost:3000
 yarn dev
-```
 
-Runs the app in the development mode using react testing library.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-#### Run in production mode
-
-```bash
+## Run in production mode
 yarn build
+yarn start
+
+# Run storybook in localhost:6006
+yarn run storybook
+
 ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
+### Tests
 ```bash
-yarn start`
-```
-
-#### Tests with react testing library and cypress(e2e)
-
-```bash
+# Tests with react testing library and cypress(e2e)
 yarn test
-yarn e2e
-```
+yarn cypress
 
-#### Tests in watch mode and coverage
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-```bash
+# Tests in watch mode and coverage
 yarn test:watch-all
 yarn test:watch-all:coverage
-```
 
-#### Check typescript, eslint, unit tests, integration tests, e2e tests,  and
+```
+### Deploy
 
 ```bash
+# Deploy storybook to github pages
+yarn run deploy-storybook-gh-pages
+```
+
+### Generics
+
+```bash
+
+# Check typescript, eslint, unit tests, integration tests, update badges, e2e tests and audit production
 yarn dev
 yarn check-all
-```
 
-#### Prettier fix all
-
-```bash
+# Prettier fix all
 yarn prettier --write .
-```
 
-#### Audit dependencies
-
-```bash
+# Audit dependencies
 yarn audit --groups "dependencies"
-```
 
-#### Check libs not used
-
-```bash
+# Check libs not used
 npx depcheck
-```
 
-#### Uprade packages
-
-```bash
+# Uprade packages
 yarn upgrade-interactive --latest
 ```
+## Vscode extensions for this project
 
-### Vscode extensions for this project
-
-1.  Eslint (Microsoft)
-2.  Prettier - Code formatter (Prettier)
-3.  Prettier Eslint (Rebecca Vest)
-4.  Stylelint (Stylelint)
-5.  Gitignore (CodeZombie)
-6.  EditorConfig for VS code (EditorConfig)
-7.  Tailwind CSS IntelliSense (Tailwind Labs)
-8.  TODO Highlight v2 (Jonathan Clark)
+| Extension | Description | Author |
+|-----------|--------|---------|
+| Eslint  | For linting code | Microsoft |
+| Prettier - Code formatter | For beautifully formate code | Prettier |
+| Prettier Eslint  | Integration prettier and eslint | Rebecca Vest |
+| Stylelint  | For lint in styles | Stylelint|
+| Gitignore  | For use .gitignore | CodeZombie |
+| EditorConfig for VS code | For basics formatter in code |  EditorConfig |
+| Tailwind CSS IntelliSense | For highlight and autocomplete tailwind | Tailwind Labs |
+| TODO Highlight v2 | For highlight FIXME: and TODO: | Jonathan Clark |
