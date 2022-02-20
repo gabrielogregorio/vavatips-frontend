@@ -39,6 +39,8 @@
 
 ## Introduction
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/abe77416a70249f38ac456e74e2f1a2a)](https://app.codacy.com/gh/gabrielogregorio/valorant-tips?utm_source=github.com&utm_medium=referral&utm_content=gabrielogregorio/valorant-tips&utm_campaign=Badge_Grade_Settings)
+
 This project was developed using NextJs, Typescript and React Testing Library. Backend is available at [vavatips-backend](https://github.com/gabrielogregorio/vavatips-backend)
 
 ## Run Project
