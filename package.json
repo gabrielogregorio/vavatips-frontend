@@ -20,7 +20,8 @@
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "yarn run build-storybook",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "deploy-storybook": "gh-pages -d storybook-static",
+    "deploy-storybook-gh-pages": "yarn run build-storybook && yarn run deploy-storybook"
   },
   "dependencies": {
     "axios": "^0.26.0",
