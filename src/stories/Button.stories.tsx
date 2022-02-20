@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  children: 'Choice Option',
+  children: 'Choice Option Name',
   className: '',
   disabled: false,
   onClick: action('onClick'),
