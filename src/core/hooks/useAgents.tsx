@@ -13,7 +13,7 @@ function useAgents(item: NextRouter) {
 
   useEffect(() => {
     setAgentsApi(data?.agents || []);
-  }, [mapSelected?.map, `${data}`]);
+  }, [mapSelected?.map, data?.agents]);
 
   return {
     mapSelected,

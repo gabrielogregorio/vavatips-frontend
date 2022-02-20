@@ -25,7 +25,7 @@ const PostTags = () => {
         <Button
           onClick={() => null}
           className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-2xl ${
-            filters.includes(tag) ? 'text-skin-gray-400 bg-skin-primary-light' : ''
+            filters.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
           }`}>
           {tag}
         </Button>

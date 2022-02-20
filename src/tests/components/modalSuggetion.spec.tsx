@@ -2,7 +2,7 @@ import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import ModalMessage from '@/widgets/modalMessage';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
@@ -20,6 +20,21 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+const post = {
+  user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
+  description: 'my Description post',
+  title: 'my title post',
+  imgs: [{ id: '98', image: 'https://image.png', description: 'description image' }],
+  tags: {
+    map: 'Ascent',
+    agent: 'Sova',
+    ability: 'Flecha rastread1ora',
+    moment: 'post plant',
+    difficult: 'médio',
+    side: 'a',
+    mapPosition: 'b',
+  },
+};
 
 jest.mock(
   'next/link',
@@ -54,26 +69,15 @@ const handlers = [
 
 const ComponentSetup = ({ notId }: { notId?: boolean }) => {
   const { setModalSuggestion } = useModalContext();
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
+  const localPost = useMemo(() => ({ ...post, id: notId ? undefined : '12' }), [notId]);
 
-  const post = {
-    id: notId ? undefined : '12',
-    user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
-    description: 'my Description post',
-    title: 'my title post',
-    imgs: [{ id: '98', image: 'https://image.png', description: 'description image' }],
-    tags: {
-      map: 'Ascent',
-      agent: 'Sova',
-      ability: 'Flecha rastread1ora',
-      moment: 'post plant',
-      difficult: 'médio',
-      side: 'a',
-      mapPosition: 'b',
-    },
-  };
   useEffect(() => {
-    setModalSuggestion({ active: true, post });
-  }, []);
+    if (isFirstLoading) {
+      setModalSuggestion({ active: true, post: localPost });
+      setIsFirstLoading(false);
+    }
+  }, [isFirstLoading, setModalSuggestion, localPost]);
 
   return (
     <>
@@ -111,7 +115,7 @@ describe('<ModalOfSuggestion />', () => {
 
     await waitFor(() =>
       expect(
-        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
       ).toBeInTheDocument(),
     );
   });
@@ -131,7 +135,7 @@ describe('<ModalOfSuggestion />', () => {
 
     await waitFor(() =>
       expect(
-        screen.queryByText('Sugestão enviado com sucesso, muito obrigado!'),
+        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
       ).toBeInTheDocument(),
     );
   });

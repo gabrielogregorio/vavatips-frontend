@@ -147,7 +147,7 @@ const Login = () => {
 
           <GroupInput>
             <Button
-              className="dark:text-skin-gray-400 text-skin-gray-500"
+              className="dark:text-skin-white text-skin-gray-500"
               onClick={() => toggleAccess()}>
               {typeAccess === 'login' ? 'Fazer Cadastro' : 'Fazer Login'}
             </Button>
@@ -155,7 +155,7 @@ const Login = () => {
 
           <GroupInput>
             <Button
-              className="text-skin-gray-400 bg-skin-secondary-light rounded-xl p-1"
+              className="text-skin-white bg-skin-secondary-light rounded-xl p-1"
               onClick={() => submitData()}>
               {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
             </Button>

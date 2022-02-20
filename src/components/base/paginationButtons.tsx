@@ -23,8 +23,8 @@ const PaginationButtons = ({
       href={resolveQuery(urlBase, { page, map, agent })}>
       <a
         href="#/"
-        className={`block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-gray-400 ${
-          active ? 'bg-skin-secondary-light text-skin-gray-400' : ''
+        className={`block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white ${
+          active ? 'bg-skin-secondary-light text-skin-white' : ''
         }`}>
         {page}
       </a>

@@ -9,6 +9,7 @@ import LayoutComponent from '@/layout/layout';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import ErrorMsg from '../../components/base/errorMsg';
+import { Table, Tbody, Td, Th, Thead, Tr } from '../../components/base/table';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -49,20 +50,12 @@ const SuggestionScreen = () => {
 
   function renderSuggestions() {
     return suggestions.map((report: suggestionInterface) => (
-      <tr key={report.id} className="border-b">
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
-          {report.postId}
-        </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
-          {report.email}
-        </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
-          {report.description}
-        </td>
-        <td className="px-5 pl-0 break-all text-base dark:text-skin-gray-400 text-skin-gray-500 text-left">
-          {report.status ?? 'Não atendido'}
-        </td>
-      </tr>
+      <Tr keyItem={report.id}>
+        <Td>{report.postId}</Td>
+        <Td>{report.email}</Td>
+        <Td>{report.description}</Td>
+        <Td>{report.status ?? 'Não atendido'}</Td>
+      </Tr>
     ));
   }
 
@@ -75,18 +68,18 @@ const SuggestionScreen = () => {
       <ErrorMsg msg={error} />
 
       <SubContainer>
-        <table className="w-full max-w-maxWidthDefault">
-          <thead className="border-b">
-            <tr>
-              <th className="text-base text-skin-gray-400 text-left">Post</th>
-              <th className="text-base text-skin-gray-400 text-left">Email</th>
-              <th className="text-base text-skin-gray-400 text-left">Descrição</th>
-              <th className="text-base text-skin-gray-400 text-left">Status</th>
-            </tr>
-          </thead>
+        <Table>
+          <Thead>
+            <Tr keyItem={1}>
+              <Th>Post</Th>
+              <Th>Email</Th>
+              <Th>Descrição</Th>
+              <Th>Status</Th>
+            </Tr>
+          </Thead>
 
-          <tbody>{renderSuggestions()}</tbody>
-        </table>
+          <Tbody>{renderSuggestions()}</Tbody>
+        </Table>
       </SubContainer>
       <FooterComponent />
     </LayoutComponent>

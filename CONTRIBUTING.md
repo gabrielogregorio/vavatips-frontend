@@ -69,7 +69,7 @@ git commit -m "Added a color swap button"
 git push -u origin feature/name-branch
 ```
 
-10.  Open your github and create a pull request
-11.  Point the pull request to merge in the 'develop' branch of this project (gabrielogregorio/project)
-12.  Create the pull request
-13.  Follow the discussion, and everything works out, your contribution will be merged into the project's develop branch
+10. Open your github and create a pull request
+11. Point the pull request to merge in the 'develop' branch of this project (gabrielogregorio/project)
+12. Create the pull request
+13. Follow the discussion, and everything works out, your contribution will be merged into the project's develop branch

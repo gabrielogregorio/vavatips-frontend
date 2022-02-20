@@ -11,6 +11,7 @@ tsconfig.tsbuildinfo
 /coverage/lcov-report
 /coverage/coverage-summary.json
 /coverage/lcov.info
+/coverage/
 
 # Ignore screenshot cypress
 /cypress/screenshots/*
@@ -43,3 +44,6 @@ yarn-error.log*
 # vercel
 .vercel
 
+
+# Ignore storybook static build
+/storybook-static

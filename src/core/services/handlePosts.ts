@@ -17,11 +17,13 @@ const savePosts = (action: actionTypesHandlePosts, updatePosts: string[]) => {
   localStorage.setItem(action === 'save' ? SAVE_POSTS : TESTED_POSTS, JSON.stringify(updatePosts));
 };
 
-export const addNewPost = (postId: string, action: actionTypesHandlePosts) => {
+const getStatePosts = (action) => {
   const posts = action === 'save' ? getPostsSave() : getPostsTested();
-  let updatePosts: string[] = [];
+  return verifyValidArray(posts);
+};
 
-  updatePosts = verifyValidArray(posts);
+export const addNewPost = (postId: string, action: actionTypesHandlePosts) => {
+  const updatePosts = getStatePosts(action);
 
   if (!updatePosts.includes(postId)) {
     updatePosts.push(postId);
@@ -31,10 +33,7 @@ export const addNewPost = (postId: string, action: actionTypesHandlePosts) => {
 };
 
 export const removePost = (postId: string, action: actionTypesHandlePosts) => {
-  const posts = action === 'save' ? getPostsSave() : getPostsTested();
-  let updatePosts: string[] = [];
-
-  updatePosts = verifyValidArray(posts);
+  let updatePosts = getStatePosts(action);
 
   if (updatePosts.includes(postId)) {
     updatePosts = updatePosts.filter((id) => id !== postId);

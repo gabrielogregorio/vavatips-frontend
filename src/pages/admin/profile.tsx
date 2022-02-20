@@ -86,7 +86,7 @@ const MyProfileScreen = () => {
               </ButtonForm>
 
               <ButtonForm
-                className="bg-skin-primary-light text-skin-gray-400 border-skin-primary-light mt-2 p-1"
+                className="bg-skin-primary-light text-skin-white border-skin-primary-light mt-2 p-1"
                 onClick={() => {}}>
                 Atualizar dados
               </ButtonForm>

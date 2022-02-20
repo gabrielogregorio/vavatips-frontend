@@ -11,6 +11,7 @@ import ErrorMsg from '@/base/errorMsg';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { logout } from '../../core/services/auth';
+import ItemList from '../../components/base/itemList';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -64,18 +65,14 @@ const DashboardScreen = () => {
         <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
           <LoaderComponent active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">Bem vindo(a) {username}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">Consultas: {countViewsAll}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">Usuários: {countViewsIps}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">agentes: {countAlAgents}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">mapas: {countAlMaps}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">posts: {countAllPosts}</p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">
-            sugestões: {countAllSuggestions}
-          </p>
-          <p className="dark:text-skin-gray-400 text-skin-gray-500">
-            administradores: {countAllUsers}
-          </p>
+          <ItemList>Bem vindo(a) {username}</ItemList>
+          <ItemList>Consultas: {countViewsAll}</ItemList>
+          <ItemList>Usuários: {countViewsIps}</ItemList>
+          <ItemList>agentes: {countAlAgents}</ItemList>
+          <ItemList>mapas: {countAlMaps}</ItemList>
+          <ItemList>posts: {countAllPosts}</ItemList>
+          <ItemList>sugestões: {countAllSuggestions}</ItemList>
+          <ItemList>administradores: {countAllUsers}</ItemList>
         </div>
       </SubContainer>
       <FooterComponent />

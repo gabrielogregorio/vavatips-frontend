@@ -10,23 +10,6 @@
   }
 }
 
-:root {
-  --primary-light: #3386d3;
-  --secondary-light: #cb4343;
-  --secondary-regular: #d85f5f;
-  --white: #fff;
-  --black: #111;
-  --purple-light: #7936e3;
-  --gray-300: #efefef;
-  --gray-400: rgb(255 255 255);
-  --gray-500: #6c6c6c;
-  --gray-700: #22272e;
-  --gray-800: #2c2c2c;
-  --gray-900: #2d333b
-}
-
-
-
 * {
   margin: 0;
   padding: 0;

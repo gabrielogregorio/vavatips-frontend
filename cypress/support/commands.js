@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('loginCookie', () => {
+  const timeToExpire = 1 * 24 * 60 * 60 * 1000;
+
+  const date = new Date();
+  date.setTime(date.getTime() + timeToExpire);
+  const expires = `; expires=${date.toUTCString()}`;
+
+  document.cookie = `app-token-valorant=valueToken${expires}; path=/`;
+});
+
+Cypress.Commands.add('loginLocalStorage', () => {
+  window.localStorage.setItem('app-token-valorant', 'valueToken');
+});
