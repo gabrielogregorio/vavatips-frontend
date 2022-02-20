@@ -47,10 +47,25 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
   const { agent, map, type, page, isReady } = getParamsFromLocation(location);
 
   useEffect(() => {
-    if (JSON.stringify(dataRequest) !== '{}') {
+    const localData = {
+      map: dataRequest.map,
+      page: dataRequest.page,
+      agent: dataRequest.agent,
+      filters: dataRequest.filters,
+      idPosts: dataRequest.idPosts,
+    };
+
+    if (JSON.stringify(localData) !== '{}') {
       refetch();
     }
-  }, [JSON.stringify(dataRequest)]);
+  }, [
+    dataRequest.map,
+    dataRequest.page,
+    dataRequest.agent,
+    dataRequest.filters,
+    dataRequest.idPosts,
+    refetch,
+  ]);
 
   useEffect(() => {
     if (data?.posts) {
@@ -59,7 +74,7 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
       setTags(data.tags);
       setPosts(postsFiltered);
     }
-  }, [JSON.stringify(data)]);
+  }, [data?.posts, data?.count, data?.tags, setTags]);
 
   useEffect(() => {
     if (isReady) {

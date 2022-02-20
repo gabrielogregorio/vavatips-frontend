@@ -1,17 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import { useFilters } from '@/contexts/filters';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import userEvent from '@testing-library/user-event';
 import PostTags from '@/widgets/tags';
 import MockApp from '@/mock/App.Mock';
 
 const ComponentSetup = () => {
   const { setTags, setFilters } = useFilters();
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
 
   useEffect(() => {
-    setTags(['tag1', 'tag2']);
-    setFilters(['filter1', 'filter2']);
-  }, []);
+    if (isFirstLoading) {
+      setTags(['tag1', 'tag2']);
+      setFilters(['filter1', 'filter2']);
+      setIsFirstLoading(false);
+    }
+  }, [isFirstLoading, setFilters, setTags]);
 
   return <PostTags />;
 };
