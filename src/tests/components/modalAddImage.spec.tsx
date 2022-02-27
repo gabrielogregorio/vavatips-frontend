@@ -2,7 +2,7 @@ import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import ModalComponent from '@/widgets/modal';
+import Modal from '@/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
@@ -21,7 +21,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
+    function Link({ children }: { children: ReactNode }) {
       return children;
     },
 );
@@ -34,7 +34,7 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<ModalComponent />', () => {
+describe('<Modal />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -46,7 +46,7 @@ describe('<ModalComponent />', () => {
     const saveModal = jest.fn();
 
     render(
-      <ModalComponent
+      <Modal
         title="Adicionar Post"
         id="123"
         description=""
@@ -66,7 +66,7 @@ describe('<ModalComponent />', () => {
     const saveModal = jest.fn();
 
     render(
-      <ModalComponent
+      <Modal
         title="Adicionar Post"
         id="123"
         description=""
@@ -86,7 +86,7 @@ describe('<ModalComponent />', () => {
     const saveModal = jest.fn();
 
     render(
-      <ModalComponent
+      <Modal
         title="Adicionar Post"
         id="123"
         description=""
@@ -106,7 +106,7 @@ describe('<ModalComponent />', () => {
     const saveModal = jest.fn();
 
     render(
-      <ModalComponent
+      <Modal
         title="Adicionar Post"
         id="123"
         description=""
@@ -145,7 +145,7 @@ describe('<ModalComponent />', () => {
     const saveModal = jest.fn();
 
     render(
-      <ModalComponent
+      <Modal
         title="Adicionar Post"
         id="123"
         description="myDescription"

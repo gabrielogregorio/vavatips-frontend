@@ -5,7 +5,7 @@ import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
-const TestScreen = () => (
+const Tested = () => (
   <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
@@ -16,4 +16,4 @@ const TestScreen = () => (
     />
   </Layout>
 );
-export default TestScreen;
+export default Tested;

@@ -5,7 +5,7 @@ import navbarEnum from '@/interfaces/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
-const HomeScreen = () => (
+const Posts = () => (
   <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
@@ -16,4 +16,4 @@ const HomeScreen = () => (
     />
   </Layout>
 );
-export default HomeScreen;
+export default Posts;

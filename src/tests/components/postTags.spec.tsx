@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Tags from '@/widgets/tags';
 import MockApp from '@/mock/App.Mock';
 
-const ComponentSetup = () => {
+const Setup = () => {
   const { setTags, setFilters } = useFilters();
   const [isFirstLoading, setIsFirstLoading] = useState(true);
 
@@ -24,7 +24,7 @@ describe('<Tags />', () => {
   it('should render component setup post tags', () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 

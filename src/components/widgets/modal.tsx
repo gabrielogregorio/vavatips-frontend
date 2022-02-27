@@ -18,7 +18,7 @@ export interface ModalPropsBase {
   saveModal: (id: string, title: string, image: string) => void;
 }
 
-const ModalComponent = ({
+const Modal = ({
   id: idModal,
   description: descriptionModal,
   image,
@@ -106,4 +106,4 @@ const ModalComponent = ({
     </ModalRef>
   );
 };
-export default ModalComponent;
+export default Modal;

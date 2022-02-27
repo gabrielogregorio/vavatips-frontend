@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
-import ModalComponent from '@/widgets/modal';
+import Modal from '@/widgets/modal';
 
-describe('<ModalComponent />', () => {
-  it('should render ModalComponent', () => {
+describe('<Modal />', () => {
+  it('should render Modal', () => {
     const fn = jest.fn();
     render(
-      <ModalComponent
+      <Modal
         id="id item"
         title="title"
         description="description"

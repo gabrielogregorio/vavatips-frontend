@@ -5,7 +5,7 @@ import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Save];
 
-const SaveScreen = () => (
+const Save = () => (
   <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
@@ -16,4 +16,4 @@ const SaveScreen = () => (
     />
   </Layout>
 );
-export default SaveScreen;
+export default Save;

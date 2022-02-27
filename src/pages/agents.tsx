@@ -16,7 +16,7 @@ import SubContainer from '@/base/subContainer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
-const AgentScreen = () => {
+const Agents = () => {
   const location = useRouter();
 
   const { mapSelected, agentsApi, isLoading, error } = useAgents(location);
@@ -54,4 +54,4 @@ const AgentScreen = () => {
     </Layout>
   );
 };
-export default AgentScreen;
+export default Agents;

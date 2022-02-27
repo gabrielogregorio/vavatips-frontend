@@ -24,7 +24,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
+    function Component({ children }: { children: ReactNode }) {
       return children;
     },
 );
@@ -42,7 +42,7 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-const ComponentAgentTest = ({ typeMap }: { typeMap: string }) => {
+const AgentTest = ({ typeMap }: { typeMap: string }) => {
   const { mapSelected, agentsApi, isLoading, error } = useAgents({
     query: {
       map: typeMap,
@@ -82,11 +82,11 @@ const ComponentAgentTest = ({ typeMap }: { typeMap: string }) => {
   );
 };
 
-const ComponentAgentTestSuccess = () => <ComponentAgentTest typeMap="mapSuccess" />;
+const AgentTestSuccess = () => <AgentTest typeMap="mapSuccess" />;
 
-const ComponentAgentTestError = () => <ComponentAgentTest typeMap="mapError" />;
+const AgentTestError = () => <AgentTest typeMap="mapError" />;
 
-describe('<ComponentAgentTest />', () => {
+describe('<AgentTest />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -96,7 +96,7 @@ describe('<ComponentAgentTest />', () => {
   it('should test resolve query', async () => {
     render(
       <MockApp>
-        <ComponentAgentTestSuccess />
+        <AgentTestSuccess />
       </MockApp>,
     );
 
@@ -112,7 +112,7 @@ describe('<ComponentAgentTest />', () => {
   it('should test error', async () => {
     render(
       <MockApp>
-        <ComponentAgentTestError />
+        <AgentTestError />
       </MockApp>,
     );
 
