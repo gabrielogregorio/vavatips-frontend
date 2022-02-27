@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import NavbarComponent from '@/layout/navbar';
-import LoaderComponent from '@/base/loader';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Navbar from '@/layout/navbar';
+import Loader from '@/base/loader';
+import Footer from '@/layout/footer';
+import Breadcrumb from '@/widgets/breadcrumb';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
@@ -57,13 +57,13 @@ const DashboardScreen = () => {
   }, []);
 
   return (
-    <LayoutComponent>
-      <NavbarComponent selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <Layout>
+      <Navbar selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />
+      <Breadcrumb admin breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">
-          <LoaderComponent active={activeLoader} />
+          <Loader active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
           <ItemList>Bem vindo(a) {username}</ItemList>
           <ItemList>Consultas: {countViewsAll}</ItemList>
@@ -75,8 +75,8 @@ const DashboardScreen = () => {
           <ItemList>administradores: {countAllUsers}</ItemList>
         </div>
       </SubContainer>
-      <FooterComponent />
-    </LayoutComponent>
+      <Footer />
+    </Layout>
   );
 };
 export default DashboardScreen;

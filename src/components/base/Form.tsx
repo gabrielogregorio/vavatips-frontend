@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-type formComponentType = {
+type formType = {
   children: ReactNode;
 };
 
-const FormComponent = ({ children }: formComponentType) => (
+const Form = ({ children }: formType) => (
   <div className="flex flex-col items-center w-full max-w-maxWidthDefaultForm">{children}</div>
 );
-export default FormComponent;
+export default Form;

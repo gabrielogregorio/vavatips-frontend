@@ -2,8 +2,8 @@ import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
 import api from '@/services/api';
 import formatImage from '@/services/formatEnvironment';
 import Button from '@/base/button';
-import LoaderComponent from '@/base/loader';
-import FormComponent from '@/base/Form';
+import Loader from '@/base/loader';
+import Form from '@/base/Form';
 import TextArea from '@/base/textArea';
 import InputFile from '@/base/inputFile';
 import Image from 'next/image';
@@ -66,7 +66,7 @@ const ModalComponent = ({
 
   return (
     <ModalRef title={title} closeModal={closeModalItem}>
-      <FormComponent>
+      <Form>
         <TextArea
           name="description"
           title="Descrição post"
@@ -82,7 +82,7 @@ const ModalComponent = ({
           onChange={loadImage}
         />
 
-        <LoaderComponent active={activeLoader} />
+        <Loader active={activeLoader} />
 
         {LinkImg !== '' ? (
           <div className="relative w-full my-2 h-52">
@@ -102,7 +102,7 @@ const ModalComponent = ({
             Adicionar
           </Button>
         </div>
-      </FormComponent>
+      </Form>
     </ModalRef>
   );
 };

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
-import NavbarComponent from '@/layout/navbar';
+import Navbar from '@/layout/navbar';
 import api from '@/services/api';
 import { agents, maps, difficult, moment, side } from '@/data/data-valorant';
 import Input from '@/base/input';
 import ModalComponent from '@/widgets/modal';
 import formatImage from '@/services/formatEnvironment';
-import FooterComponent from '@/layout/footer';
+import Footer from '@/layout/footer';
 import Selected from '@/base/selected';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Breadcrumb from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import {
@@ -22,13 +22,13 @@ import {
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import navbarEnum from '@/interfaces/navbar';
-import LoaderComponent from '@/base/loader';
+import Loader from '@/base/loader';
 import GroupInput from '@/base/groupInput';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import SubContainer from '@/base/subContainer';
-import FormComponent from '@/base/Form';
+import Form from '@/base/Form';
 import GroupInputMultiple from '@/base/groupInputMultiple';
-import HrComponent from '@/base/hr';
+import Hr from '@/base/hr';
 import ButtonForm from '@/base/buttonForm';
 import Image from 'next/image';
 import convertToSelectedRender from '@/helpers/convertToSelectedData';
@@ -251,7 +251,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             <BsChevronDown className="text-3xl font-extrabold text-skin-white" />
           </Button>
         </div>
-        <HrComponent />
+        <Hr />
       </div>
     ));
   }
@@ -290,12 +290,12 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
   return (
     <>
       {mode === 'create' ? (
-        <NavbarComponent selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />
+        <Navbar selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />
       ) : (
-        <NavbarComponent selected={navbarEnum.EditScreen} modelNavbar={modelNavbarAdmin} />
+        <Navbar selected={navbarEnum.EditScreen} modelNavbar={modelNavbarAdmin} />
       )}
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
-      <LoaderComponent active={loading} />
+      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Loader active={loading} />
 
       <SubContainer>
         {visibleModal ? (
@@ -309,7 +309,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
           />
         ) : null}
 
-        <FormComponent>
+        <Form>
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
@@ -327,7 +327,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             setValue={setFormDescription}
           />
 
-          <HrComponent />
+          <Hr />
 
           <GroupInputMultiple>
             <Selected
@@ -387,7 +387,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             />
           </GroupInputMultiple>
 
-          <HrComponent />
+          <Hr />
 
           <p className="dark:text-skin-white text-skin-gray-500">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
@@ -396,7 +396,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
             <br /> Clique nos titulos para EDITAR os itens
           </p>
 
-          <HrComponent />
+          <Hr />
 
           {renderSteps()}
 
@@ -417,9 +417,9 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
               </ButtonForm>
             </GroupInput>
           </div>
-        </FormComponent>
+        </Form>
       </SubContainer>
-      <FooterComponent />
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
-import LabelComponent from './label';
+import Label from './label';
 
 export interface PropsInterfaceSelectedBase {
   text: string;
@@ -25,7 +25,7 @@ const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelecte
 
   return (
     <GroupInput>
-      <LabelComponent name={name} text={text} />
+      <Label name={name} text={text} />
       <select
         className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-white text-skin-gray-500 outline-none rounded-lg resize-none"
         id={name}

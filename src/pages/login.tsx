@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react';
 import Router from 'next/router';
 import api from '@/services/api';
 import Input from '@/base/input';
-import LoaderComponent from '@/base/loader';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Loader from '@/base/loader';
+import Footer from '@/layout/footer';
+import Breadcrumb from '@/widgets/breadcrumb';
 import LINKS from '@/data/links';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import navbarEnum from '@/interfaces/navbar';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ErrorMsg from '@/base/errorMsg';
 import GroupInput from '@/base/groupInput';
 import SubContainer from '@/base/subContainer';
-import NavbarComponent from '@/layout/navbar';
+import Navbar from '@/layout/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
-import FormComponent from '@/base/Form';
+import Form from '@/base/Form';
 import { login } from '../core/services/auth';
 
 type accessType = 'login' | 'register';
@@ -99,15 +99,15 @@ const Login = () => {
   }, [redirect]);
 
   return (
-    <LayoutComponent>
-      <NavbarComponent selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <Layout>
+      <Navbar selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
+      <Breadcrumb admin breadcrumbs={breadcrumbs} />
 
       <SubContainer>
-        <FormComponent>
+        <Form>
           <Title>{typeAccess === 'login' ? 'Fazer Login' : 'Criar uma conta'} </Title>
 
-          <LoaderComponent active={activeLoader} />
+          <Loader active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
 
           {typeAccess === 'register' ? (
@@ -160,11 +160,11 @@ const Login = () => {
               {typeAccess === 'register' ? 'Cadastrar' : 'Login'}
             </Button>
           </GroupInput>
-        </FormComponent>
+        </Form>
       </SubContainer>
 
-      <FooterComponent />
-    </LayoutComponent>
+      <Footer />
+    </Layout>
   );
 };
 export default Login;

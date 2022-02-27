@@ -1,8 +1,8 @@
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 
 const Error404 = () => (
-  <LayoutComponent>
+  <Layout>
     <h1>Página não encontrada</h1>
-  </LayoutComponent>
+  </Layout>
 );
 export default Error404;

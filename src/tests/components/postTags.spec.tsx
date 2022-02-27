@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { useFilters } from '@/contexts/filters';
 import { useEffect, useState } from 'react';
 import userEvent from '@testing-library/user-event';
-import PostTags from '@/widgets/tags';
+import Tags from '@/widgets/tags';
 import MockApp from '@/mock/App.Mock';
 
 const ComponentSetup = () => {
@@ -17,10 +17,10 @@ const ComponentSetup = () => {
     }
   }, [isFirstLoading, setFilters, setTags]);
 
-  return <PostTags />;
+  return <Tags />;
 };
 
-describe('<PostTags />', () => {
+describe('<Tags />', () => {
   it('should render component setup post tags', () => {
     render(
       <MockApp>

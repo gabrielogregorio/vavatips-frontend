@@ -1,8 +1,8 @@
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 
 const Error500 = () => (
-  <LayoutComponent>
+  <Layout>
     <h1>Aconteceu um erro não mapeado, f, por favor, abra uma issue no github</h1>
-  </LayoutComponent>
+  </Layout>
 );
 export default Error500;

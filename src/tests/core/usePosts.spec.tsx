@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts, { typeRequestType } from '@/hooks/usePosts';
-import LoaderComponent from '@/base/loader';
+import Loader from '@/base/loader';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
@@ -146,7 +146,7 @@ const ComponentPosts = ({
 
   return (
     <div>
-      <LoaderComponent active={isLoading} />
+      <Loader active={isLoading} />
       {errorMsg !== '' ? <ErrorMsg msg={errorMsg ? 'Erro desconhecido' : ''} /> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>

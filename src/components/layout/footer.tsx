@@ -1,4 +1,4 @@
-const FooterComponent = () => (
+const Footer = () => (
   <>
     <div className="flex-1" />
     <div className="w-full dark:bg-skin-gray-900 bg-skin-secondary-light flex justify-center">
@@ -55,4 +55,4 @@ const FooterComponent = () => (
     </div>
   </>
 );
-export default FooterComponent;
+export default Footer;

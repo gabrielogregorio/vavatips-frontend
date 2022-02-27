@@ -1,18 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import PaginationComponent from '@/widgets/pagination';
+import Pagination from '@/widgets/pagination';
 
-describe('PaginationComponent', () => {
+describe('Pagination', () => {
   it('should render pagination component', () => {
-    render(
-      <PaginationComponent
-        urlBase="posts"
-        initial={1}
-        finish={4}
-        selected={2}
-        map="Ascent"
-        agent="Neon"
-      />,
-    );
+    render(<Pagination urlBase="posts" finish={4} selected={2} map="Ascent" agent="Neon" />);
     expect(screen.getByRole('link', { name: '2' })).toHaveAttribute(
       'class',
       'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
@@ -37,16 +28,7 @@ describe('PaginationComponent', () => {
   });
 
   it('should render pagination component 2', () => {
-    render(
-      <PaginationComponent
-        urlBase="posts"
-        initial={1}
-        finish={10}
-        selected={1}
-        map="Ascent"
-        agent="Neon"
-      />,
-    );
+    render(<Pagination urlBase="posts" finish={10} selected={1} map="Ascent" agent="Neon" />);
     expect(screen.getByRole('link', { name: '1' })).toHaveAttribute(
       'class',
       'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
@@ -72,16 +54,7 @@ describe('PaginationComponent', () => {
   });
 
   it('should render pagination component 3', () => {
-    render(
-      <PaginationComponent
-        urlBase="posts"
-        initial={1}
-        finish={100}
-        selected={28}
-        map="Ascent"
-        agent="Neon"
-      />,
-    );
+    render(<Pagination urlBase="posts" finish={100} selected={28} map="Ascent" agent="Neon" />);
     expect(screen.getByRole('link', { name: '28' })).toHaveAttribute(
       'class',
       'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',

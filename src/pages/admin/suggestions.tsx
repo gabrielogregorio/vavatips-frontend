@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import NavbarComponent from '@/layout/navbar';
+import Navbar from '@/layout/navbar';
 import api from '@/services/api';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Footer from '@/layout/footer';
+import Breadcrumb from '@/widgets/breadcrumb';
 import navbarEnum from '@/interfaces/navbar';
-import LoaderComponent from '@/base/loader';
-import LayoutComponent from '@/layout/layout';
+import Loader from '@/base/loader';
+import Layout from '@/layout/layout';
 import SubContainer from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import ErrorMsg from '../../components/base/errorMsg';
@@ -62,11 +62,11 @@ const SuggestionScreen = () => {
   }
 
   return (
-    <LayoutComponent>
-      <NavbarComponent selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <Layout>
+      <Navbar selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
+      <Breadcrumb admin breadcrumbs={breadcrumbs} />
 
-      <LoaderComponent active={loading} />
+      <Loader active={loading} />
       <ErrorMsg msg={error} />
 
       <SubContainer>
@@ -83,8 +83,8 @@ const SuggestionScreen = () => {
           <Tbody>{renderSuggestions()}</Tbody>
         </Table>
       </SubContainer>
-      <FooterComponent />
-    </LayoutComponent>
+      <Footer />
+    </Layout>
   );
 };
 export default SuggestionScreen;

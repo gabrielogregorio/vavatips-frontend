@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
-import NavbarComponent from '@/layout/navbar';
+import Navbar from '@/layout/navbar';
 import Input from '@/base/input';
-import LoaderComponent from '@/base/loader';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Loader from '@/base/loader';
+import Footer from '@/layout/footer';
+import Breadcrumb from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';
 import Router from 'next/router';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import SubContainer from '@/base/subContainer';
-import FormComponent from '@/base/Form';
+import Form from '@/base/Form';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import ButtonForm from '@/base/buttonForm';
 import { logout } from '../../core/services/auth';
@@ -46,14 +46,14 @@ const MyProfileScreen = () => {
     Router.push('/login');
   }
   return (
-    <LayoutComponent>
-      <NavbarComponent selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
-      <BreadcrumbComponent admin breadcrumbs={breadcrumbs} />
+    <Layout>
+      <Navbar selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
+      <Breadcrumb admin breadcrumbs={breadcrumbs} />
 
       <SubContainer>
-        <FormComponent>
+        <Form>
           <Title>Seu perfil</Title>
-          <LoaderComponent active={activeLoader} />
+          <Loader active={activeLoader} />
 
           {activeLoader === false ? (
             <>
@@ -92,10 +92,10 @@ const MyProfileScreen = () => {
               </ButtonForm>
             </>
           ) : null}
-        </FormComponent>
+        </Form>
       </SubContainer>
-      <FooterComponent />
-    </LayoutComponent>
+      <Footer />
+    </Layout>
   );
 };
 export default MyProfileScreen;

@@ -11,7 +11,7 @@ type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;
   modelNavbar: modelNavbarType[];
 };
-const NavbarComponent = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
+const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
   const { theme, setTheme } = useTheme();
 
   const handleNavbar = () => {
@@ -57,4 +57,4 @@ const NavbarComponent = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) 
   );
 };
 
-export default NavbarComponent;
+export default Navbar;

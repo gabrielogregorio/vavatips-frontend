@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
-import LabelComponent from './label';
+import Label from './label';
 
 type setValueType = (a: string) => void;
 export interface PropsInterfaceInput {
@@ -18,7 +18,7 @@ const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceIn
   };
   return (
     <GroupInput>
-      <LabelComponent name={name} text={text} />
+      <Label name={name} text={text} />
       <input
         className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 outline-none rounded-lg resize-none dark:text-skin-white text-skin-gray-500"
         id={name}
