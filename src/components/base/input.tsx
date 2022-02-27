@@ -31,4 +31,8 @@ const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceIn
     </GroupInput>
   );
 };
+Input.defaultProps = {
+  disabled: false,
+};
+
 export default Input;

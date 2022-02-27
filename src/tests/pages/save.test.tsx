@@ -3,9 +3,10 @@ import { setupServer } from 'msw/node';
 import { render, screen } from '@testing-library/react';
 import MockApp from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
-import mockPosts from '@/mock/mockPosts.json';
+import { posts } from '@/mock/mockPosts.json';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
+import { getDescription, getTitle } from '../utils/getPosts';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -23,7 +24,7 @@ const handlers = [
   rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     const idPosts = req.url.searchParams.get('idPosts');
     const idPostsList = JSON.parse(idPosts);
-    const filteredPosts = mockPosts.posts.filter((post) => idPostsList.includes(post.id));
+    const filteredPosts = posts.filter((post) => idPostsList.includes(post.id));
 
     return res(
       ctx.json({
@@ -57,12 +58,12 @@ describe('<SaveScreen />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: mockPosts.posts[0].title })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: mockPosts.posts[1].title })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: mockPosts.posts[2].title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(0) })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(1) })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(2) })).toBeInTheDocument();
 
-    expect(screen.getByText(mockPosts.posts[0].description)).toBeInTheDocument();
-    expect(screen.getByText(mockPosts.posts[1].description)).toBeInTheDocument();
-    expect(screen.getByText(mockPosts.posts[2].description)).toBeInTheDocument();
+    expect(screen.getByText(getDescription(0))).toBeInTheDocument();
+    expect(screen.getByText(getDescription(1))).toBeInTheDocument();
+    expect(screen.getByText(getDescription(2))).toBeInTheDocument();
   });
 });
