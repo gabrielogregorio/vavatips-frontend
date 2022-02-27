@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { Props, useState } from 'react';
 import { ComponentStory, ComponentMeta, Story } from '@storybook/react';
 import Input, { PropsInterfaceInput } from '../components/base/input';

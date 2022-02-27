@@ -13,7 +13,7 @@ setLogger({
   error: () => {},
 });
 
-interface mockAppType {
+interface mockAppInterface {
   children: ReactNode;
   localstorage?: { [key: string]: string };
 }
@@ -27,7 +27,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const MockApp = ({ children, localstorage }: mockAppType) => {
+const MockApp = ({ children, localstorage }: mockAppInterface) => {
   const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
     post: null,
     active: false,

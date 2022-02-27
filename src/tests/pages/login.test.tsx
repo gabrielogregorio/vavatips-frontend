@@ -11,8 +11,8 @@ import waitByLoading from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 
 const mock = {
-  usernameValid: 'my username',
-  passwordValid: 'my password',
+  usernameValid: 'testUsername',
+  passwordValid: 'testPassword',
   usernameToCreated: 'usernameTest',
   passwordToCreated: 'passwordConfirm',
   validCodeToCreated: 'codCadaster',
