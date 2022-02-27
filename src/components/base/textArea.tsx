@@ -1,14 +1,14 @@
 import GroupInput from '@/base/groupInput';
 import LabelComponent from '@/base/label';
 
-export interface propsInterfaceTextArea {
+export interface PropsInterfaceTextArea {
   name: string;
   title: string;
   value: string;
   setValue: (value: string) => void;
 }
 
-const TextArea = ({ title, setValue, value, name }: propsInterfaceTextArea) => (
+const TextArea = ({ title, setValue, value, name }: PropsInterfaceTextArea) => (
   <GroupInput>
     <LabelComponent name={name} text={title} aria-label="Escolha uma descrição" />
 

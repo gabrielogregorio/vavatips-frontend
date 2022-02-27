@@ -1,4 +1,4 @@
-import { postsProps } from './posts';
+import { PostsPropsInterface } from './posts';
 
 export type modalType = 'success' | 'error' | '';
 interface modalMessageInterface {
@@ -17,7 +17,7 @@ export interface contextModalMessageInterface {
 }
 
 export type modalContextTypeSuggestion = {
-  post?: postsProps;
+  post?: PostsPropsInterface;
   active: boolean;
 };
 

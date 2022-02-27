@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
 import LabelComponent from './label';
 
-export interface propsInterfaceSelectedBase {
+export interface PropsInterfaceSelectedBase {
   text: string;
   value: string;
   setValue: (value: string) => void;
@@ -10,7 +10,7 @@ export interface propsInterfaceSelectedBase {
   render: { id: string; name: string }[];
 }
 
-const Selected = ({ render, text, setValue, value, name }: propsInterfaceSelectedBase) => {
+const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelectedBase) => {
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
 
-export interface propsInterfacePaginationComponent {
+export interface PropsInterfacePaginationComponent {
   initial: number;
   finish: number;
   selected: number;
@@ -18,7 +18,7 @@ const PaginationComponent = ({
   map,
   agent,
   urlBase,
-}: propsInterfacePaginationComponent) => {
+}: PropsInterfacePaginationComponent) => {
   const [pagination, setPagination] = useState<{ id: number }[]>([]);
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import GroupInput from './groupInput';
 import LabelComponent from './label';
 
 type setValueType = (a: string) => void;
-export interface propsInterfaceInput {
+export interface PropsInterfaceInput {
   text: string;
   value: string;
   type: 'text' | 'password' | 'email' | 'number';
@@ -12,7 +12,7 @@ export interface propsInterfaceInput {
   name: string;
 }
 
-const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceInput) => {
+const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };

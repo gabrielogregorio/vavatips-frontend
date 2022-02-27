@@ -1,11 +1,11 @@
 import Button from '@/base/button';
-import { filterUrlInterface } from '@/hooks/usePosts';
+import { FilterUrlInterface } from '@/hooks/usePosts';
 
-interface propsInterface {
-  queryUrl: filterUrlInterface;
+interface PropsInterface {
+  queryUrl: FilterUrlInterface;
 }
 
-const TagsFixFilters = ({ queryUrl }: propsInterface) => (
+const TagsFixFilters = ({ queryUrl }: PropsInterface) => (
   <div className="flex justify-center">
     <div>
       {queryUrl.agent ? (

@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { Props, useState } from 'react';
 import { ComponentStory, ComponentMeta, Story } from '@storybook/react';
-import Input, { propsInterfaceInput } from '../components/base/input';
+import Input, { PropsInterfaceInput } from '../components/base/input';
 
 export default {
   title: 'form/Input',
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: Story<propsInterfaceInput> = (props) => {
+const Template: Story<PropsInterfaceInput> = (props) => {
   const [localValue, setValue] = useState<string>('');
   const onChangeInput = (inputValue: string) => {
     setValue(inputValue);
@@ -16,7 +16,7 @@ const Template: Story<propsInterfaceInput> = (props) => {
   return <Input {...props} value={localValue} setValue={onChangeInput} />;
 };
 
-export const Default: Story<propsInterfaceInput> = Template.bind({});
+export const Default: Story<PropsInterfaceInput> = Template.bind({});
 Default.args = {
   disabled: false,
   type: 'text',

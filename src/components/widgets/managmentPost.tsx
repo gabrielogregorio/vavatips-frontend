@@ -13,11 +13,11 @@ import BreadcrumbComponent from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import {
-  agentInterface,
-  difficultInterface,
-  mapInterface,
-  momentInterface,
-  sideInterface,
+  AgentInterface,
+  DifficultInterface,
+  MapInterface,
+  MomentInterface,
+  SideInterface,
 } from '@/interfaces/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
@@ -160,35 +160,35 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
     setImgAdded(copyImgAdded);
   }
 
-  function renderAgent(): agentInterface[] {
+  function renderAgent(): AgentInterface[] {
     return agents();
   }
 
-  function renderSide(): sideInterface[] {
+  function renderSide(): SideInterface[] {
     return side();
   }
 
-  function renderMaps(): mapInterface[] {
+  function renderMaps(): MapInterface[] {
     return maps();
   }
 
-  function renderDifficult(): difficultInterface[] {
+  function renderDifficult(): DifficultInterface[] {
     return difficult();
   }
 
-  function renderMoment(): momentInterface[] {
+  function renderMoment(): MomentInterface[] {
     return moment();
   }
 
-  function renderHabilits() {
-    const filterAbilities: agentInterface = agents().filter(
+  function renderAbilities() {
+    const filterAbilities: AgentInterface = agents().filter(
       (agent) => agent.name === formTagAgent,
     )?.[0];
-    return filterAbilities?.habilits ?? [];
+    return filterAbilities?.abilities ?? [];
   }
 
   function renderPositionsMap() {
-    const filterMapPositions: mapInterface = maps().filter((map) => map.name === formTagMap)?.[0];
+    const filterMapPositions: MapInterface = maps().filter((map) => map.name === formTagMap)?.[0];
     return filterMapPositions?.mapPosition ?? [];
   }
 
@@ -349,7 +349,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
               text="Habilidade"
               value={formTagAbility}
               setValue={setFormTagAbility}
-              render={renderHabilits()}
+              render={renderAbilities()}
             />
           </GroupInputMultiple>
 

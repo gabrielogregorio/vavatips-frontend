@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+const browserify = require('@cypress/browserify-preprocessor');
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -11,12 +13,20 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = () => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+
+module.exports = (on, config) => {
+  require('@cypress/code-coverage/task')(on, config);
+  on('file:preprocessor', require('@cypress/code-coverage/use-browserify-istanbul'));
+
+  on(
+    'file:preprocessor',
+    browserify({
+      typescript: require.resolve('typescript'),
+    }),
+  );
+  return config;
 };

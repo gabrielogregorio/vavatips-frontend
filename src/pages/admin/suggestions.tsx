@@ -50,12 +50,14 @@ const SuggestionScreen = () => {
 
   function renderSuggestions() {
     return suggestions.map((report: suggestionInterface) => (
-      <Tr keyItem={report.id}>
-        <Td>{report.postId}</Td>
-        <Td>{report.email}</Td>
-        <Td>{report.description}</Td>
-        <Td>{report.status ?? 'Não atendido'}</Td>
-      </Tr>
+      <div className={report.id}>
+        <Tr keyItem={report.id}>
+          <Td>{report.postId}</Td>
+          <Td>{report.email}</Td>
+          <Td>{report.description}</Td>
+          <Td>{report.status ?? 'Não atendido'}</Td>
+        </Tr>
+      </div>
     ));
   }
 

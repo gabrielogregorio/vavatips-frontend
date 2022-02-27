@@ -42,47 +42,41 @@ export interface PropsPostInterface {
   };
 }
 
-export interface habilitsInterface {
+export interface AbilityInterface {
   id: string;
   name: string;
   keyboard: string;
 }
 
-export interface sideInterface {
+export interface SideInterface {
   id: string;
   name: sideType;
 }
 
-export interface momentInterface {
+export interface MomentInterface {
   id: string;
   name: momentType;
 }
 
-export interface difficultInterface {
+export interface DifficultInterface {
   id: string;
   name: difficultType;
 }
 
-export interface agentInterface {
+export interface AgentInterface {
   id: number;
   name: string;
   img: string;
-  habilits: habilitsInterface[];
+  abilities: AbilityInterface[];
 }
 
-export interface mapInterface {
+export interface MapInterface {
   id: number;
   name: mapType;
   img: string;
   mapPosition: PositionMapInterface[];
 }
-
-export interface imgsInterface {
-  title: string;
-  img: string;
-}
-
-export interface postsProps {
+export interface PostsPropsInterface {
   id: string;
   user: { id: string; username: string; image?: string };
   description: string;
@@ -99,7 +93,7 @@ export interface postsProps {
   };
 }
 
-export interface contextTagsInterface {
+export interface ContextTagsInterface {
   tags: string[];
   filters: string[];
   setFilters: (filter: string[]) => void;

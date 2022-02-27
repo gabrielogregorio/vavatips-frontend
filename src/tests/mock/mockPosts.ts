@@ -1,7 +1,7 @@
-import { postsProps } from '@/interfaces/posts';
+import { PostsPropsInterface } from '@/interfaces/posts';
 
 interface returnPostsMock {
-  posts: postsProps[];
+  posts: PostsPropsInterface[];
   count: number;
   tags: string[];
 }
