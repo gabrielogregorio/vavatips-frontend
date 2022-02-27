@@ -1,5 +1,5 @@
-import React, { Props, useState } from 'react';
-import { ComponentStory, ComponentMeta, Story } from '@storybook/react';
+import React, { useState } from 'react';
+import { ComponentMeta, Story } from '@storybook/react';
 import Input, { PropsInterfaceInput } from '../components/base/input';
 
 export default {
