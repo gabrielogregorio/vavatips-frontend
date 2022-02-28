@@ -1,4 +1,4 @@
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import CreatePostManagement from '@/widgets/managmentPost';
 import navbarEnum from '@/interfaces/navbar';
 
@@ -8,8 +8,8 @@ const breadcrumbs = [
 ];
 
 const EditPostScreen = () => (
-  <LayoutComponent>
+  <Layout>
     <CreatePostManagement breadcrumbs={breadcrumbs} mode="edit" />
-  </LayoutComponent>
+  </Layout>
 );
 export default EditPostScreen;

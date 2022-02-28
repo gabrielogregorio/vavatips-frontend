@@ -6,9 +6,9 @@ import Button from '@/base/button';
 import Input from '@/base/input';
 import TextArea from '@/base/textArea';
 import { modalType } from '@/interfaces/modal';
-import LoaderComponent from '@/base/loader';
+import Loader from '@/base/loader';
 import ErrorMsg from '@/base/errorMsg';
-import FormComponent from '@/base/Form';
+import Form from '@/base/Form';
 import ModalRef from './modalRef';
 
 interface ModalProps {
@@ -63,9 +63,9 @@ const ModalOfSuggestion = ({ title }: ModalProps) => {
 
   return modalSuggestion.active ? (
     <ModalRef title={title} closeModal={handleCloseModal}>
-      <FormComponent>
+      <Form>
         <ErrorMsg msg={errorMsg} />
-        <LoaderComponent active={loading} />
+        <Loader active={loading} />
         <Input
           name="tip"
           disabled
@@ -102,7 +102,7 @@ const ModalOfSuggestion = ({ title }: ModalProps) => {
             Adicionar
           </Button>
         </div>
-      </FormComponent>
+      </Form>
     </ModalRef>
   ) : null;
 };

@@ -2,8 +2,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   plugins: ['react', '@typescript-eslint', 'cypress'],
   rules: {
@@ -13,22 +13,44 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
-    'react/function-component-definition': [2, {
-      namedComponents: 'arrow-function',
-      unnamedComponents: 'arrow-function'
-    }],
-    'import/no-extraneous-dependencies': ['error', {
-      devDependencies: true
-    }]
+
+    // The pattern is not compatible with codacy
+    'react/function-component-definition': [
+      2,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
+
+    // eslint does not identify libs used in development, such as jest.
+
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
+
+    // for use in storybook, app.js from next and others libs
+    'react/jsx-props-no-spreading': 'off',
   },
-  extends: ["next/core-web-vitals", "airbnb", "prettier", "plugin:cypress/recommended", "plugin:storybook/recommended"],
-  overrides: [{
-    files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
-    env: {
-      jest: true
-    }
-  }],
+  extends: [
+    'next/core-web-vitals',
+    'airbnb',
+    'prettier',
+    'plugin:cypress/recommended',
+    'plugin:storybook/recommended',
+  ],
+  overrides: [
+    {
+      files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
   globals: {
-    cy: true
-  }
+    cy: true,
+  },
 };

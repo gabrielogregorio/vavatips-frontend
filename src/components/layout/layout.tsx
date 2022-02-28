@@ -2,11 +2,11 @@ import { ReactNode, useEffect } from 'react';
 import { useTheme } from '@/contexts/theme';
 import { getTheme } from '@/services/theme';
 
-type layoutComponentType = {
+type layoutType = {
   children: ReactNode;
 };
 
-const LayoutComponent = ({ children }: layoutComponentType) => {
+const Layout = ({ children }: layoutType) => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -21,4 +21,4 @@ const LayoutComponent = ({ children }: layoutComponentType) => {
     </div>
   );
 };
-export default LayoutComponent;
+export default Layout;

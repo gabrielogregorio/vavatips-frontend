@@ -8,7 +8,7 @@ import { PropsPostInterface } from '@/interfaces/posts';
 import { NextRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
-export interface filterUrlInterface {
+export interface FilterUrlInterface {
   agent: string;
   map: string;
   type: string;
@@ -18,7 +18,7 @@ export interface filterUrlInterface {
 
 export type typeRequestType = '' | 'save' | 'tested';
 
-function getParamsFromLocation(location): filterUrlInterface {
+function getParamsFromLocation(location): FilterUrlInterface {
   const { agent, map, type, page }: ParsedUrlQuery = location.query;
   const { isReady } = location;
 
@@ -35,7 +35,7 @@ export default function usePosts(location: NextRouter, typeRequest: typeRequestT
   const { filters, setTags } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryUrl, setQueryUrl] = useState<filterUrlInterface>(getParamsFromLocation(location));
+  const [queryUrl, setQueryUrl] = useState<FilterUrlInterface>(getParamsFromLocation(location));
   const [dataRequest, setDataRequest] = useState<{ [key: string]: string }>({});
 
   const { isLoading, error, data, refetch } = useQuery(

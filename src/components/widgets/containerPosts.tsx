@@ -1,19 +1,19 @@
 import { useRouter } from 'next/router';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import ModalMessage from '@/widgets/modalMessage';
-import FooterComponent from '@/layout/footer';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
-import PaginationComponent from '@/widgets/pagination';
+import Footer from '@/layout/footer';
+import Breadcrumb from '@/widgets/breadcrumb';
+import Pagination from '@/widgets/pagination';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts from '@/hooks/usePosts';
 import Title from '@/base/title';
-import NavbarComponent from '@/layout/navbar';
-import LoaderComponent from '@/base/loader';
+import Navbar from '@/layout/navbar';
+import Loader from '@/base/loader';
 import SubContainer from '@/base/subContainer';
 import navbarEnum from '@/interfaces/navbar';
 import { modelNavbarAdmin, modelNavbarPublic } from '@/schemas/navbar';
 import TagsFixFilters from '@/widgets/tagsFixFilters';
-import PostTags from '@/widgets/tags';
+import Tags from '@/widgets/tags';
 import Posts from '@/widgets/postsItem';
 
 interface containerPosts {
@@ -32,12 +32,12 @@ const ContainerPosts = ({ breadcrumbs, type, mode, typeSelected, title }: contai
   return (
     <>
       {mode === 'admin' ? (
-        <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarAdmin} />
+        <Navbar selected={typeSelected} modelNavbar={modelNavbarAdmin} />
       ) : (
-        <NavbarComponent selected={typeSelected} modelNavbar={modelNavbarPublic} />
+        <Navbar selected={typeSelected} modelNavbar={modelNavbarPublic} />
       )}
 
-      <BreadcrumbComponent breadcrumbs={breadcrumbs} admin={false} />
+      <Breadcrumb breadcrumbs={breadcrumbs} admin={false} />
       <SubContainer>
         <ModalOfSuggestion title="fazer sugestão" />
 
@@ -48,14 +48,13 @@ const ContainerPosts = ({ breadcrumbs, type, mode, typeSelected, title }: contai
 
         <div>
           <TagsFixFilters queryUrl={queryUrl} />
-          <PostTags />
-          <LoaderComponent active={isLoading} />
+          <Tags />
+          <Loader active={isLoading} />
           <Posts posts={posts} />
         </div>
 
-        <PaginationComponent
+        <Pagination
           urlBase={type === '' ? 'posts' : type}
-          initial={1}
           finish={finishPage}
           selected={numberSelected}
           map={queryUrl.map}
@@ -63,7 +62,7 @@ const ContainerPosts = ({ breadcrumbs, type, mode, typeSelected, title }: contai
         />
       </SubContainer>
 
-      <FooterComponent />
+      <Footer />
     </>
   );
 };

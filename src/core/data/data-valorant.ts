@@ -1,12 +1,12 @@
 import {
-  agentInterface,
-  difficultInterface,
-  mapInterface,
-  momentInterface,
-  sideInterface,
+  AgentInterface,
+  DifficultInterface,
+  MapInterface,
+  MomentInterface,
+  SideInterface,
 } from '@/interfaces/posts';
 
-export const side = (): sideInterface[] => [
+export const side = (): SideInterface[] => [
   {
     id: '1',
     name: 'Atacantes',
@@ -17,7 +17,7 @@ export const side = (): sideInterface[] => [
   },
 ];
 
-export const moment = (): momentInterface[] => [
+export const moment = (): MomentInterface[] => [
   {
     id: '1',
     name: 'QualquerMomento',
@@ -44,7 +44,7 @@ export const moment = (): momentInterface[] => [
   },
 ];
 
-export const difficult = (): difficultInterface[] => [
+export const difficult = (): DifficultInterface[] => [
   {
     id: '1',
     name: 'Facil',
@@ -59,12 +59,12 @@ export const difficult = (): difficultInterface[] => [
   },
 ];
 
-export const agents = (): agentInterface[] => [
+export const agents = (): AgentInterface[] => [
   {
     id: 1,
     name: 'Cypher',
     img: '/images/agents/Cypher.webp',
-    habilits: [
+    abilities: [
       { id: '_11_', keyboard: 'Q', name: 'JaulaCibernética' },
       { id: '_12_', keyboard: 'E', name: 'CâmeraDeVigilância' },
       { id: '_13_', keyboard: 'C', name: 'FioArmadilha' },
@@ -75,7 +75,7 @@ export const agents = (): agentInterface[] => [
     id: 2,
     name: 'Killjoy',
     img: '/images/agents/Killjoy.webp',
-    habilits: [
+    abilities: [
       { id: '_15_', keyboard: 'Q', name: 'RobôDeAlarme' },
       { id: '_16_', keyboard: 'E', name: 'Torreta' },
       { id: '_17_', keyboard: 'C', name: 'Nanoenxame' },
@@ -86,7 +86,7 @@ export const agents = (): agentInterface[] => [
     id: 3,
     name: 'Sova',
     img: '/images/agents/Sova.webp',
-    habilits: [
+    abilities: [
       { id: '_19_', keyboard: 'Q', name: 'FlechaDeChoque' },
       { id: '_10_', keyboard: 'E', name: 'FlechaRastreadora' },
       { id: '_11_', keyboard: 'C', name: 'DroneCoruka' },
@@ -97,7 +97,7 @@ export const agents = (): agentInterface[] => [
     id: 4,
     name: 'Viper',
     img: '/images/agents/Viper.webp',
-    habilits: [
+    abilities: [
       { id: '_13_', keyboard: 'Q', name: 'NuvemVenenosa' },
       { id: '_14_', keyboard: 'E', name: 'CortinaTóxica' },
       { id: '_15_', keyboard: 'C', name: 'VenenoDeCobra' },
@@ -108,7 +108,7 @@ export const agents = (): agentInterface[] => [
     id: 5,
     name: 'Sage',
     img: '/images/agents/Sage.webp',
-    habilits: [
+    abilities: [
       { id: '_17_', keyboard: 'Q', name: 'OrdeDeLentidão' },
       { id: '_18_', keyboard: 'E', name: 'OrbeCurativo' },
       { id: '_19_', keyboard: 'C', name: 'OrbeDeBarreira' },
@@ -119,7 +119,7 @@ export const agents = (): agentInterface[] => [
     id: 6,
     name: 'Astra',
     img: '/images/agents/Astra.webp',
-    habilits: [
+    abilities: [
       { id: '_21_', keyboard: 'Q', name: 'PulsoNova' },
       { id: '_22_', keyboard: 'E', name: 'Nebulosa' },
       { id: '_23_', keyboard: 'C', name: 'PoçoGravitacional' },
@@ -130,7 +130,7 @@ export const agents = (): agentInterface[] => [
     id: 7,
     name: 'Skye',
     img: '/images/agents/Skye.webp',
-    habilits: [
+    abilities: [
       { id: '_25_', keyboard: 'Q', name: 'PredadorExplosivo' },
       { id: '_26_', keyboard: 'E', name: 'LuzDesbravadora' },
       { id: '_27_', keyboard: 'C', name: 'Reflorescer' },
@@ -141,7 +141,7 @@ export const agents = (): agentInterface[] => [
     id: 8,
     name: 'Reyna',
     img: '/images/agents/Reyna.webp',
-    habilits: [
+    abilities: [
       { id: '_29_', keyboard: 'Q', name: 'Devorar' },
       { id: '_30_', keyboard: 'E', name: 'Dispensar' },
       { id: '_31_', keyboard: 'C', name: 'OlharVoraz' },
@@ -152,7 +152,7 @@ export const agents = (): agentInterface[] => [
     id: 9,
     name: 'Yoru',
     img: '/images/agents/Yoru.webp',
-    habilits: [
+    abilities: [
       { id: '_33_', keyboard: 'Q', name: 'PontoCego' },
       { id: '_34_', keyboard: 'E', name: 'PassagemDimensional' },
       { id: '_35_', keyboard: 'C', name: 'Falcatrua' },
@@ -163,7 +163,7 @@ export const agents = (): agentInterface[] => [
     id: 10,
     name: 'Jett',
     img: '/images/agents/Jett.webp',
-    habilits: [
+    abilities: [
       { id: '_37_', keyboard: 'Q', name: 'CorrenteAscendente' },
       { id: '_38_', keyboard: 'E', name: 'BrisaDeImpulso' },
       { id: '_39_', keyboard: 'C', name: 'ErupçãoDasBrumas' },
@@ -174,7 +174,7 @@ export const agents = (): agentInterface[] => [
     id: 11,
     name: 'Raze',
     img: '/images/agents/Raze.webp',
-    habilits: [
+    abilities: [
       { id: '_41_', keyboard: 'Q', name: 'CargaDeExplosivos' },
       { id: '_42_', keyboard: 'E', name: 'CartuchosDeTintaGranada' },
       { id: '_43_', keyboard: 'C', name: 'Bumba' },
@@ -185,7 +185,7 @@ export const agents = (): agentInterface[] => [
     id: 12,
     name: 'Phoenix',
     img: '/images/agents/Phoenix.webp',
-    habilits: [
+    abilities: [
       { id: '_45_', keyboard: 'Q', name: 'BolaCurva' },
       { id: '_46_', keyboard: 'E', name: 'MãosQuentes' },
       { id: '_47_', keyboard: 'C', name: 'Labareda' },
@@ -196,7 +196,7 @@ export const agents = (): agentInterface[] => [
     id: 13,
     name: 'Kay/0',
     img: '/images/agents/Kay0.webp',
-    habilits: [
+    abilities: [
       { id: '_49_', keyboard: 'Q', name: 'Clarão' },
       { id: '_50_', keyboard: 'E', name: 'PontoZeroSpot' },
       { id: '_51_', keyboard: 'C', name: 'Fragmento' },
@@ -207,7 +207,7 @@ export const agents = (): agentInterface[] => [
     id: 14,
     name: 'Breach',
     img: '/images/agents/Breach.webp',
-    habilits: [
+    abilities: [
       { id: '_53_', keyboard: 'Q', name: 'EstopimBang' },
       { id: '_54_', keyboard: 'E', name: 'FalhaTectônica' },
       { id: '_55_', keyboard: 'C', name: 'PósChoque' },
@@ -218,7 +218,7 @@ export const agents = (): agentInterface[] => [
     id: 15,
     name: 'Omen',
     img: '/images/agents/Omen.webp',
-    habilits: [
+    abilities: [
       { id: '_57_', keyboard: 'Q', name: 'Paranoia' },
       { id: '_58_', keyboard: 'E', name: 'MantoSombrio' },
       { id: '_59_', keyboard: 'C', name: 'PassosTenebrosos' },
@@ -229,7 +229,7 @@ export const agents = (): agentInterface[] => [
     id: 16,
     name: 'Brimstone',
     img: '/images/agents/Brimstone.webp',
-    habilits: [
+    abilities: [
       { id: '_61_', keyboard: 'Q', name: 'Incendiário' },
       { id: '_62_', keyboard: 'E', name: 'FumaçaCeleste' },
       { id: '_63_', keyboard: 'C', name: 'SinalizadorEstimulante' },
@@ -238,7 +238,7 @@ export const agents = (): agentInterface[] => [
   },
 ];
 
-export const maps = (): mapInterface[] => [
+export const maps = (): MapInterface[] => [
   {
     id: 1,
     name: 'Ascent',

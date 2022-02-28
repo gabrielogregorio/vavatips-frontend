@@ -1,12 +1,12 @@
 import LINKS from '@/data/links';
 import navbarEnum from '@/interfaces/navbar';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Save];
 
-const SaveScreen = () => (
-  <LayoutComponent>
+const Save = () => (
+  <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
       type="save"
@@ -14,6 +14,6 @@ const SaveScreen = () => (
       typeSelected={navbarEnum.Save}
       title="Posts Salvos"
     />
-  </LayoutComponent>
+  </Layout>
 );
-export default SaveScreen;
+export default Save;

@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 import GroupInput from './groupInput';
-import LabelComponent from './label';
+import Label from './label';
 
 type setValueType = (a: string) => void;
-export interface propsInterfaceInput {
+export interface PropsInterfaceInput {
   text: string;
   value: string;
   type: 'text' | 'password' | 'email' | 'number';
@@ -12,13 +12,13 @@ export interface propsInterfaceInput {
   name: string;
 }
 
-const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceInput) => {
+const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };
   return (
     <GroupInput>
-      <LabelComponent name={name} text={text} />
+      <Label name={name} text={text} />
       <input
         className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 outline-none rounded-lg resize-none dark:text-skin-white text-skin-gray-500"
         id={name}
@@ -31,4 +31,8 @@ const Input = ({ disabled, type, value, text, setValue, name }: propsInterfaceIn
     </GroupInput>
   );
 };
+Input.defaultProps = {
+  disabled: false,
+};
+
 export default Input;

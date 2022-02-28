@@ -42,7 +42,7 @@ const server = setupServer(
   }),
 );
 
-const ComponentAgentTest = () => {
+const AgentTest = () => {
   const { mapsApi, isLoading, error } = useMaps();
 
   function renderMaps() {
@@ -62,7 +62,7 @@ const ComponentAgentTest = () => {
   );
 };
 
-describe('<ComponentAgentTest />', () => {
+describe('<AgentTest />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -72,7 +72,7 @@ describe('<ComponentAgentTest />', () => {
   it('should render map component', async () => {
     render(
       <MockApp>
-        <ComponentAgentTest />
+        <AgentTest />
       </MockApp>,
     );
 
@@ -90,7 +90,7 @@ describe('<ComponentAgentTest />', () => {
   it('should render with unknown error', async () => {
     render(
       <MockApp>
-        <ComponentAgentTest />
+        <AgentTest />
       </MockApp>,
     );
 

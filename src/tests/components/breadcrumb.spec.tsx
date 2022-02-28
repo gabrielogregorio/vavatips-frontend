@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Breadcrumb from '@/widgets/breadcrumb';
 
 const breadcrumbs = [
   { url: '/', text: 'inicio' },
@@ -8,9 +8,9 @@ const breadcrumbs = [
   { url: '/posts', text: 'dicas' },
 ];
 
-describe('<BreadcrumbComponent />', () => {
+describe('<Breadcrumb />', () => {
   it('should render breadcrumb', () => {
-    render(<BreadcrumbComponent breadcrumbs={breadcrumbs} admin={false} />);
+    render(<Breadcrumb breadcrumbs={breadcrumbs} admin={false} />);
     expect(screen.getByRole('link', { name: 'inicio' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'mapas' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'agentes' })).toBeInTheDocument();

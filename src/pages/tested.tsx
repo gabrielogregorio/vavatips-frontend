@@ -1,12 +1,12 @@
 import LINKS from '@/data/links';
 import navbarEnum from '@/interfaces/navbar';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
-const TestScreen = () => (
-  <LayoutComponent>
+const Tested = () => (
+  <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
       type="tested"
@@ -14,6 +14,6 @@ const TestScreen = () => (
       typeSelected={navbarEnum.Tested}
       title="Posts para testar"
     />
-  </LayoutComponent>
+  </Layout>
 );
-export default TestScreen;
+export default Tested;

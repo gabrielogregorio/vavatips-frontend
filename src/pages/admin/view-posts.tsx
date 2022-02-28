@@ -1,5 +1,5 @@
 import navbarEnum from '@/interfaces/navbar';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ContainerPosts from '@/widgets/containerPosts';
 
 const breadcrumbs = [
@@ -8,7 +8,7 @@ const breadcrumbs = [
 ];
 
 const ViewPostsScreen = () => (
-  <LayoutComponent>
+  <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
       mode="admin"
@@ -16,6 +16,6 @@ const ViewPostsScreen = () => (
       typeSelected={navbarEnum.ViewPosts}
       title="Todos os Posts"
     />
-  </LayoutComponent>
+  </Layout>
 );
 export default ViewPostsScreen;

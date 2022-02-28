@@ -1,12 +1,12 @@
 import LINKS from '@/data/links';
-import LayoutComponent from '@/layout/layout';
+import Layout from '@/layout/layout';
 import ContainerPosts from '@/widgets/containerPosts';
 import navbarEnum from '@/interfaces/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
-const HomeScreen = () => (
-  <LayoutComponent>
+const Posts = () => (
+  <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
       type=""
@@ -14,6 +14,6 @@ const HomeScreen = () => (
       typeSelected={navbarEnum.Posts}
       title="As melhores dicas de Valorant"
     />
-  </LayoutComponent>
+  </Layout>
 );
-export default HomeScreen;
+export default Posts;

@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
-import NavbarComponent from '@/layout/navbar';
+import Navbar from '@/layout/navbar';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import navbarEnum from '@/interfaces/navbar';
 import userEvent from '@testing-library/user-event';
 import MockApp from '../mock/App.Mock';
 
-describe('<NavbarComponent />', () => {
+describe('<Navbar />', () => {
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.None} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.None} modelNavbar={modelNavbarAdmin} />);
 
     expect(screen.getByRole('link', { name: 'VAVATIPS' })).toBeInTheDocument();
 
@@ -19,7 +19,7 @@ describe('<NavbarComponent />', () => {
   });
 
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'dashboard' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
@@ -27,7 +27,7 @@ describe('<NavbarComponent />', () => {
   });
 
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'criar posts' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
@@ -35,7 +35,7 @@ describe('<NavbarComponent />', () => {
   });
 
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.ViewPosts} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.ViewPosts} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'posts' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
@@ -43,9 +43,7 @@ describe('<NavbarComponent />', () => {
   });
 
   it('should render button like', () => {
-    render(
-      <NavbarComponent selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />,
-    );
+    render(<Navbar selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'sugestões' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
@@ -53,7 +51,7 @@ describe('<NavbarComponent />', () => {
   });
 
   it('should render button like', () => {
-    render(<NavbarComponent selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'perfil' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',
@@ -66,7 +64,7 @@ describe('<NavbarComponent />', () => {
         localstorage={{
           theme: '',
         }}>
-        <NavbarComponent selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
+        <Navbar selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
       </MockApp>,
     );
 

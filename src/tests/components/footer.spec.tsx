@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import FooterComponent from '@/layout/footer';
+import Footer from '@/layout/footer';
 
-describe('<FooterComponent />', () => {
+describe('<Footer />', () => {
   it('should render footer with primary color', () => {
-    render(<FooterComponent />);
+    render(<Footer />);
     expect(screen.getByRole('heading', { name: 'Sobre' })).toBeInTheDocument();
   });
 });

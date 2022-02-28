@@ -5,7 +5,7 @@ import formatImage from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
 import Button from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
-import { postsProps } from '@/interfaces/posts';
+import { PostsPropsInterface } from '@/interfaces/posts';
 import Image from 'next/image';
 import { isAuthenticated } from '../../core/services/auth';
 import PostButton from '../base/likeButton';
@@ -13,7 +13,7 @@ import PostButton from '../base/likeButton';
 type typeType = 'next' | 'prev';
 
 interface PropsPostInterface {
-  post: postsProps;
+  post: PostsPropsInterface;
   viewAdmin: boolean;
 }
 

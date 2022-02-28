@@ -1,13 +1,13 @@
-import BreadcrumbComponent from '@/widgets/breadcrumb';
+import Breadcrumb from '@/widgets/breadcrumb';
 import ErrorMsg from '@/base/errorMsg';
-import FooterComponent from '@/layout/footer';
-import LoaderComponent from '@/base/loader';
+import Footer from '@/layout/footer';
+import Loader from '@/base/loader';
 import { maps } from '@/data/data-valorant';
 import LINKS from '@/data/links';
 import useMaps from '@/hooks/useMaps';
 import Title from '@/base/title';
-import LayoutComponent from '@/layout/layout';
-import NavbarComponent from '@/layout/navbar';
+import Layout from '@/layout/layout';
+import Navbar from '@/layout/navbar';
 import navbarEnum from '@/interfaces/navbar';
 import ImageCard from '@/widgets/imageCard';
 import SubContainer from '@/base/subContainer';
@@ -15,7 +15,7 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
-const MapScreen = () => {
+const Index = () => {
   const { mapsApi, isLoading, error } = useMaps();
 
   function renderMap() {
@@ -38,21 +38,21 @@ const MapScreen = () => {
   }
 
   return (
-    <LayoutComponent>
-      <NavbarComponent selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
-      <BreadcrumbComponent breadcrumbs={breadcrumbs} admin={false} />
+    <Layout>
+      <Navbar selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
+      <Breadcrumb breadcrumbs={breadcrumbs} admin={false} />
 
       <SubContainer>
         <Title>Escolha um mapa ai parça </Title>
         <ErrorMsg msg={error} />
-        <LoaderComponent active={isLoading} />
+        <Loader active={isLoading} />
         <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-4 w-full">
           {renderMap()}
         </div>
       </SubContainer>
 
-      <FooterComponent />
-    </LayoutComponent>
+      <Footer />
+    </Layout>
   );
 };
-export default MapScreen;
+export default Index;

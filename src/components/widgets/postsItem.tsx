@@ -1,8 +1,8 @@
-import { postsProps } from '@/interfaces/posts';
+import { PostsPropsInterface } from '@/interfaces/posts';
 import PostCard from './postCard';
 
 interface postPropsInterface {
-  posts: postsProps[];
+  posts: PostsPropsInterface[];
 }
 
 const Posts = ({ posts }: postPropsInterface) => {

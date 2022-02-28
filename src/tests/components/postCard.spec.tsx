@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import PostCard from '@/widgets/postCard';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
-import { mockPosts } from '@/mock/mockPosts';
+import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 
@@ -56,7 +56,7 @@ const handlers = [
     query.append('page', '1');
     query.append('filters', '');
 
-    return res(ctx.json(mockPosts()));
+    return res(ctx.json(mockPosts));
   }),
 ];
 

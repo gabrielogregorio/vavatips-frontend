@@ -39,7 +39,7 @@ const post = {
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
+    function Link({ children }: { children: ReactNode }) {
       return children;
     },
 );
@@ -67,7 +67,7 @@ const handlers = [
   }),
 ];
 
-const ComponentSetup = ({ notId }: { notId?: boolean }) => {
+const Setup = ({ notId }: { notId?: boolean }) => {
   const { setModalSuggestion } = useModalContext();
   const [isFirstLoading, setIsFirstLoading] = useState(true);
   const localPost = useMemo(() => ({ ...post, id: notId ? undefined : '12' }), [notId]);
@@ -87,7 +87,7 @@ const ComponentSetup = ({ notId }: { notId?: boolean }) => {
   );
 };
 
-ComponentSetup.defaultProps = {
+Setup.defaultProps = {
   notId: false,
 };
 
@@ -103,7 +103,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should render modal suggestion and send suggestion', async () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 
@@ -123,7 +123,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should send suggestion simulated dont id post', async () => {
     render(
       <MockApp>
-        <ComponentSetup notId />
+        <Setup notId />
       </MockApp>,
     );
 
@@ -142,7 +142,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should render modal suggestion and error to send suggestion', async () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 
@@ -166,7 +166,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should closed Modal in button closed', async () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 
@@ -176,7 +176,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should closed Modal in button cancel', async () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 
@@ -186,7 +186,7 @@ describe('<ModalOfSuggestion />', () => {
   it('should render modal suggestion and send suggestion', async () => {
     render(
       <MockApp>
-        <ComponentSetup />
+        <Setup />
       </MockApp>,
     );
 

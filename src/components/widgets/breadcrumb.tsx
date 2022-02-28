@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-interface propsInterface {
+interface PropsInterface {
   breadcrumbs: { url: string; text: string }[];
   admin: boolean;
 }
 
-const BreadcrumbComponent = ({ breadcrumbs, admin }: propsInterface) => {
+const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
@@ -37,4 +37,4 @@ const BreadcrumbComponent = ({ breadcrumbs, admin }: propsInterface) => {
     </div>
   );
 };
-export default BreadcrumbComponent;
+export default Breadcrumb;

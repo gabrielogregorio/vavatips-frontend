@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import Header from 'next/head';

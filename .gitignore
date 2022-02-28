@@ -46,3 +46,9 @@ yarn-error.log*
 
 # Ignore storybook static build
 /storybook-static
+
+
+# Ignore coverage cypress
+.nyc_output
+coverage/clover.xml
+coverage/coverage-final.json

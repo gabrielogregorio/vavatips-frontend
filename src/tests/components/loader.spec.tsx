@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
-import LoaderComponent from '@/base/loader';
+import Loader from '@/base/loader';
 
-describe('<LoaderComponent />', () => {
-  it('should render LoaderComponent', () => {
-    render(<LoaderComponent active />);
+describe('<Loader />', () => {
+  it('should render Loader', () => {
+    render(<Loader active />);
     expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 
-  it('should not render LoaderComponent if active === false', () => {
-    render(<LoaderComponent active={false} />);
+  it('should not render Loader if active === false', () => {
+    render(<Loader active={false} />);
     expect(screen.queryByTestId('loader')).not.toBeInTheDocument();
   });
 });

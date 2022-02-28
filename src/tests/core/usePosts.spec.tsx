@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts, { typeRequestType } from '@/hooks/usePosts';
-import LoaderComponent from '@/base/loader';
+import Loader from '@/base/loader';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import waitByLoading from '@/utils/waitByLoading';
@@ -102,7 +102,7 @@ const server = setupServer(
   rest.get(URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, (req, res, ctx) => res(ctx.status(500))),
 );
 
-const ComponentPosts = ({
+const Posts = ({
   agent,
   map,
   type,
@@ -146,7 +146,7 @@ const ComponentPosts = ({
 
   return (
     <div>
-      <LoaderComponent active={isLoading} />
+      <Loader active={isLoading} />
       {errorMsg !== '' ? <ErrorMsg msg={errorMsg ? 'Erro desconhecido' : ''} /> : null}
       <h3>{`PAGE: ${finishPage}`}</h3>
       <h3>{`QUERY_AGENT: ${queryUrl.agent}`}</h3>
@@ -159,7 +159,7 @@ const ComponentPosts = ({
   );
 };
 
-describe('<ComponentPosts />', () => {
+describe('<Posts />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -169,7 +169,7 @@ describe('<ComponentPosts />', () => {
   it('should return posts', async () => {
     render(
       <MockApp>
-        <ComponentPosts agent="side" map="moon" type="" page={1} />
+        <Posts agent="side" map="moon" type="" page={1} />
       </MockApp>,
     );
     await waitByLoading();
@@ -195,7 +195,7 @@ describe('<ComponentPosts />', () => {
         localstorage={{
           TESTED_POSTS: '["5"]',
         }}>
-        <ComponentPosts agent="kay/0" map="ascent" type="tested" page={1} />
+        <Posts agent="kay/0" map="ascent" type="tested" page={1} />
       </MockApp>,
     );
 
@@ -220,7 +220,7 @@ describe('<ComponentPosts />', () => {
         localstorage={{
           SAVE_POSTS: '["4"]',
         }}>
-        <ComponentPosts agent="kay/0" map="ascent" type="save" page={1} />
+        <Posts agent="kay/0" map="ascent" type="save" page={1} />
       </MockApp>,
     );
 
@@ -242,7 +242,7 @@ describe('<ComponentPosts />', () => {
   it('should test error', async () => {
     render(
       <MockApp>
-        <ComponentPosts agent="notExists" map="notExists" type="" page={0} />
+        <Posts agent="notExists" map="notExists" type="" page={0} />
       </MockApp>,
     );
 
