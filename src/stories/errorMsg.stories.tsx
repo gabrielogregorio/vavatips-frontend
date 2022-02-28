@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ErrorMsg from '../components/base/errorMsg';
+import { ErrorMsg } from '../components/base/errorMsg';
 
 export default {
   title: 'base/ErrorMsg',

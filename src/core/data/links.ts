@@ -1,4 +1,4 @@
-const LINKS = {
+export const LINKS = {
   inicio: { url: '/', text: 'inicio' },
   Maps: { url: '/', text: 'mapas' },
   Agents: { url: '/', text: 'agentes' },
@@ -7,5 +7,3 @@ const LINKS = {
   Save: { url: '/save', text: 'salvos' },
   Tested: { url: '/tested', text: 'testados' },
 };
-
-export default LINKS;

@@ -5,7 +5,7 @@ import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { LocalStorageMock } from '@react-mock/localstorage';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
-import ContextThemeProvider from '@/contexts/theme';
+import { ContextThemeProvider } from '@/contexts/theme';
 
 setLogger({
   log: () => {},

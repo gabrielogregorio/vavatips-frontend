@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useModalMessage } from '@/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
-import api from '@/services/api';
-import Button from '@/base/button';
-import Input from '@/base/input';
-import TextArea from '@/base/textArea';
+import { api } from '@/services/api';
+import { Button } from '@/base/button';
+import { Input } from '@/base/input';
+import { TextArea } from '@/base/textArea';
 import { modalType } from '@/interfaces/modal';
-import Loader from '@/base/loader';
-import ErrorMsg from '@/base/errorMsg';
-import Form from '@/base/Form';
-import ModalRef from './modalRef';
+import { Loader } from '@/base/loader';
+import { ErrorMsg } from '@/base/errorMsg';
+import { Form } from '@/base/Form';
+import { ModalRef } from './modalRef';
 
 interface ModalProps {
   title: string;
 }
 
-const ModalOfSuggestion = ({ title }: ModalProps) => {
+export const ModalOfSuggestion = ({ title }: ModalProps) => {
   const [email, setEmail] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [postTitle, setPostTitle] = useState<string>('');
@@ -106,4 +106,3 @@ const ModalOfSuggestion = ({ title }: ModalProps) => {
     </ModalRef>
   ) : null;
 };
-export default ModalOfSuggestion;

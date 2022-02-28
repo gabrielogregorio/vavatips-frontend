@@ -9,7 +9,7 @@ type buttonTypeNormal = {
   dataTestid?: string;
 };
 
-const Button = ({
+export const Button = ({
   children,
   ariaLabel,
   className,
@@ -34,5 +34,3 @@ Button.defaultProps = {
   ariaLabel: '',
   dataTestid: '',
 };
-
-export default Button;

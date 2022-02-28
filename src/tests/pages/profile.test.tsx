@@ -7,7 +7,7 @@ import MyProfileScreen from '@/pages/admin/profile';
 import { login } from '@/services/auth';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({

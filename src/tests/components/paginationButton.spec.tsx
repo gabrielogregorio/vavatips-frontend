@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
+import { PaginationButtons, PaginationDotItems } from '@/base/paginationButtons';
 
 describe('PaginationButtons', () => {
   it('should render pagination buttons', () => {

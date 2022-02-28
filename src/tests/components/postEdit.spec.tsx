@@ -10,7 +10,7 @@ import {
   URL_GET_POST_BY_ID,
   URL_PUT_EDIT_POST_BY_ID,
 } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 
 jest.mock('next/router', () => ({

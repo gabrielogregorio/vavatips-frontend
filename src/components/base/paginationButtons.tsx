@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import resolveQuery from '@/helpers/resolveQuery';
+import { resolveQuery } from '@/helpers/resolveQuery';
 
 export interface PaginationButtonInterface {
   numberOfPage: number;
@@ -9,7 +9,7 @@ export interface PaginationButtonInterface {
   urlBase: string;
 }
 
-const PaginationButtons = ({
+export const PaginationButtons = ({
   numberOfPage: page = 1,
   active,
   urlBase,
@@ -39,5 +39,3 @@ export const PaginationDotItems = () => (
     </a>
   </li>
 );
-
-export default PaginationButtons;

@@ -1,16 +1,16 @@
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import ErrorMsg from '@/base/errorMsg';
-import Footer from '@/layout/footer';
-import Loader from '@/base/loader';
+import { ErrorMsg } from '@/base/errorMsg';
+import { Footer } from '@/layout/footer';
+import { Loader } from '@/base/loader';
 import { maps } from '@/data/data-valorant';
-import LINKS from '@/data/links';
-import useMaps from '@/hooks/useMaps';
-import Title from '@/base/title';
-import Layout from '@/layout/layout';
-import Navbar from '@/layout/navbar';
-import navbarEnum from '@/interfaces/navbar';
-import ImageCard from '@/widgets/imageCard';
-import SubContainer from '@/base/subContainer';
+import { LINKS } from '@/data/links';
+import { useMaps } from '@/hooks/useMaps';
+import { Title } from '@/base/title';
+import { Layout } from '@/layout/layout';
+import { Navbar } from '@/layout/navbar';
+import { navbarEnum } from '@/interfaces/navbar';
+import { ImageCard } from '@/widgets/imageCard';
+import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];

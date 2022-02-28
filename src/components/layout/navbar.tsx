@@ -1,17 +1,18 @@
 import Link from 'next/link';
 import { MdOutlineLightMode, MdOutlineNightlight } from 'react-icons/md';
-import Button from '@/base/button';
-import NavbarLink from '@/base/navbarLink';
+import { Button } from '@/base/button';
+import { NavbarLink } from '@/base/navbarLink';
 import { useTheme } from '@/contexts/theme';
 import { modelNavbarType } from '@/schemas/navbar';
-import navbarEnum from '@/interfaces/navbar';
+import { navbarEnum } from '@/interfaces/navbar';
 import { changeTheme } from '../../core/services/theme';
 
 type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;
   modelNavbar: modelNavbarType[];
 };
-const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
+
+export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
   const { theme, setTheme } = useTheme();
 
   const handleNavbar = () => {
@@ -56,5 +57,3 @@ const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
     </nav>
   );
 };
-
-export default Navbar;

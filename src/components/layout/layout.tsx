@@ -6,7 +6,7 @@ type layoutType = {
   children: ReactNode;
 };
 
-const Layout = ({ children }: layoutType) => {
+export const Layout = ({ children }: layoutType) => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -21,4 +21,3 @@ const Layout = ({ children }: layoutType) => {
     </div>
   );
 };
-export default Layout;

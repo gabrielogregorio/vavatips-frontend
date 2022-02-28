@@ -2,9 +2,9 @@ import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import Modal from '@/widgets/modal';
+import { Modal } from '@/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({

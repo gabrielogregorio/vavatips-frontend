@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ImageCard from '../components/widgets/imageCard';
+import { ImageCard } from '../components/widgets/imageCard';
 
 export default {
   title: 'widgets/ImageCard',

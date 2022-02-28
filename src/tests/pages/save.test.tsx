@@ -5,7 +5,7 @@ import MockApp from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
 import { posts } from '@/mock/mockPosts.json';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
 
 jest.mock('next/router', () => ({

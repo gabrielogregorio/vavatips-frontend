@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import GroupInput from './groupInput';
-import Label from './label';
+import { GroupInput } from './groupInput';
+import { Label } from './label';
 
 export interface PropsInterfaceSelectedBase {
   text: string;
@@ -10,7 +10,7 @@ export interface PropsInterfaceSelectedBase {
   render: { id: string; name: string }[];
 }
 
-const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelectedBase) => {
+export const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelectedBase) => {
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>
@@ -37,4 +37,3 @@ const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelecte
     </GroupInput>
   );
 };
-export default Selected;

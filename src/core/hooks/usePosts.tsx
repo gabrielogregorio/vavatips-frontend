@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import api from '@/services/api';
+import { api } from '@/services/api';
 import { useFilters } from '@/contexts/filters';
-import resolveQuery from '@/helpers/resolveQuery';
+import { resolveQuery } from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
 import { useQuery } from 'react-query';
 import { PropsPostInterface } from '@/interfaces/posts';
@@ -18,7 +18,7 @@ export interface FilterUrlInterface {
 
 export type typeRequestType = '' | 'save' | 'tested';
 
-function getParamsFromLocation(location): FilterUrlInterface {
+export function getParamsFromLocation(location): FilterUrlInterface {
   const { agent, map, type, page }: ParsedUrlQuery = location.query;
   const { isReady } = location;
 
@@ -31,7 +31,7 @@ function getParamsFromLocation(location): FilterUrlInterface {
   };
 }
 
-export default function usePosts(location: NextRouter, typeRequest: typeRequestType = '') {
+export function usePosts(location: NextRouter, typeRequest: typeRequestType = '') {
   const { filters, setTags } = useFilters();
   const [posts, setPosts] = useState<PropsPostInterface[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);

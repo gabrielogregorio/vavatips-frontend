@@ -1,4 +1,4 @@
-const resolveQuery = (urlBase: string, filters: object = {}): string => {
+export const resolveQuery = (urlBase: string, filters: object = {}): string => {
   let urlFinal = urlBase;
   if (Object.keys(filters).length === 0) {
     return urlFinal;
@@ -21,4 +21,3 @@ const resolveQuery = (urlBase: string, filters: object = {}): string => {
   }
   return `${urlFinal}`;
 };
-export default resolveQuery;

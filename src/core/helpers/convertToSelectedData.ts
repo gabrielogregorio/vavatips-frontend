@@ -1,4 +1,4 @@
-export default function convertToSelectedRender(data: any[]): { id: string; name: string }[] {
+export function convertToSelectedRender(data: any[]): { id: string; name: string }[] {
   const dataSelected: { id: string; name: string }[] = [];
 
   data.forEach((item) => {

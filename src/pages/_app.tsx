@@ -6,7 +6,7 @@ import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ContextThemeProvider from '@/contexts/theme';
+import { ContextThemeProvider } from '@/contexts/theme';
 import '../styles/global.css';
 
 const queryClient = new QueryClient({

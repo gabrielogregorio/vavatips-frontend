@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import Navbar from '@/layout/navbar';
+import { Navbar } from '@/layout/navbar';
 import { modelNavbarAdmin } from '@/schemas/navbar';
-import navbarEnum from '@/interfaces/navbar';
+import { navbarEnum } from '@/interfaces/navbar';
 import userEvent from '@testing-library/user-event';
 import MockApp from '../mock/App.Mock';
 

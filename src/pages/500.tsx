@@ -1,4 +1,4 @@
-import Layout from '@/layout/layout';
+import { Layout } from '@/layout/layout';
 
 const Error500 = () => (
   <Layout>

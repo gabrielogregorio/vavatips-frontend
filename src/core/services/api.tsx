@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from './auth';
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_HOST,
 });
 api.interceptors.request.use(async (config) => {
@@ -12,5 +12,3 @@ api.interceptors.request.use(async (config) => {
   }
   return config;
 });
-
-export default api;

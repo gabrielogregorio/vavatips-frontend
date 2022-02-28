@@ -5,9 +5,9 @@ import MockApp from '@/mock/App.Mock';
 import { posts } from '@/mock/mockPosts.json';
 import TestScreen from '@/pages/tested';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
-import generateNumericList from '../../core/helpers/generateArray';
+import { generateNumericList } from '../../core/helpers/generateArray';
 
 jest.mock('next/router', () => ({
   useRouter() {

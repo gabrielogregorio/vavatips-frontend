@@ -1,18 +1,18 @@
 import { useRouter } from 'next/router';
 import { agents } from '@/data/data-valorant';
-import Loader from '@/base/loader';
-import Footer from '@/layout/footer';
+import { Loader } from '@/base/loader';
+import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import ErrorMsg from '@/base/errorMsg';
-import useAgents from '@/hooks/useAgents';
-import Title from '@/base/title';
-import LINKS from '@/data/links';
-import Layout from '@/layout/layout';
-import navbarEnum from '@/interfaces/navbar';
+import { ErrorMsg } from '@/base/errorMsg';
+import { useAgents } from '@/hooks/useAgents';
+import { Title } from '@/base/title';
+import { LINKS } from '@/data/links';
+import { Layout } from '@/layout/layout';
+import { navbarEnum } from '@/interfaces/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
-import Navbar from '@/layout/navbar';
-import ImageCard from '@/widgets/imageCard';
-import SubContainer from '@/base/subContainer';
+import { Navbar } from '@/layout/navbar';
+import { ImageCard } from '@/widgets/imageCard';
+import { SubContainer } from '@/base/subContainer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 

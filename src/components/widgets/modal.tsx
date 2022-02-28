@@ -1,13 +1,13 @@
 import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
-import api from '@/services/api';
-import formatImage from '@/services/formatEnvironment';
-import Button from '@/base/button';
-import Loader from '@/base/loader';
-import Form from '@/base/Form';
-import TextArea from '@/base/textArea';
-import InputFile from '@/base/inputFile';
+import { api } from '@/services/api';
+import { formatImage } from '@/services/formatEnvironment';
+import { Button } from '@/base/button';
+import { Loader } from '@/base/loader';
+import { Form } from '@/base/Form';
+import { TextArea } from '@/base/textArea';
+import { InputFile } from '@/base/inputFile';
 import Image from 'next/image';
-import ModalRef from './modalRef';
+import { ModalRef } from './modalRef';
 
 export interface ModalPropsBase {
   title: string;
@@ -18,7 +18,7 @@ export interface ModalPropsBase {
   saveModal: (id: string, title: string, image: string) => void;
 }
 
-const Modal = ({
+export const Modal = ({
   id: idModal,
   description: descriptionModal,
   image,
@@ -106,4 +106,3 @@ const Modal = ({
     </ModalRef>
   );
 };
-export default Modal;

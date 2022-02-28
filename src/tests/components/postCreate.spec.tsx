@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePostScreen from '@/pages/admin/post-create';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
 
 jest.mock('next/router', () => ({

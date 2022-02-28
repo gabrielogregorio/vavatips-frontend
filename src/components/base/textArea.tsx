@@ -1,5 +1,5 @@
-import GroupInput from '@/base/groupInput';
-import Label from '@/base/label';
+import { GroupInput } from '@/base/groupInput';
+import { Label } from '@/base/label';
 
 export interface PropsInterfaceTextArea {
   name: string;
@@ -8,7 +8,7 @@ export interface PropsInterfaceTextArea {
   setValue: (value: string) => void;
 }
 
-const TextArea = ({ title, setValue, value, name }: PropsInterfaceTextArea) => (
+export const TextArea = ({ title, setValue, value, name }: PropsInterfaceTextArea) => (
   <GroupInput>
     <Label name={name} text={title} aria-label="Escolha uma descrição" />
 
@@ -20,4 +20,3 @@ const TextArea = ({ title, setValue, value, name }: PropsInterfaceTextArea) => (
     />
   </GroupInput>
 );
-export default TextArea;

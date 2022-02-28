@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
-import ModalMessage from '@/widgets/modalMessage';
+import { ModalMessage } from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
 import MockApp from '@/mock/App.Mock';
 
