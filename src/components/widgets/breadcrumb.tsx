@@ -5,7 +5,7 @@ interface PropsInterface {
   admin: boolean;
 }
 
-const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
+export const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
 
@@ -37,4 +37,3 @@ const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
     </div>
   );
 };
-export default Breadcrumb;

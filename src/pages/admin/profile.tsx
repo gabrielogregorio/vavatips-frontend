@@ -3,7 +3,7 @@ import Navbar from '@/layout/navbar';
 import Input from '@/base/input';
 import Loader from '@/base/loader';
 import Footer from '@/layout/footer';
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import api from '@/services/api';
 import navbarEnum from '@/interfaces/navbar';

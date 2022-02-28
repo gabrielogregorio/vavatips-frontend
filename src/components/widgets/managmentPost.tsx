@@ -9,7 +9,7 @@ import ModalComponent from '@/widgets/modal';
 import formatImage from '@/services/formatEnvironment';
 import Footer from '@/layout/footer';
 import Selected from '@/base/selected';
-import Breadcrumb from '@/widgets/breadcrumb';
+import {Breadcrumb} from '@/widgets/breadcrumb';
 import Title from '@/base/title';
 import Button from '@/base/button';
 import {

@@ -34,6 +34,8 @@ module.exports = {
 
     // for use in storybook, app.js from next and others libs
     'react/jsx-props-no-spreading': 'off',
+
+    'import/prefer-default-export': 'off',
   },
   extends: [
     'next/core-web-vitals',
