@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Hr from '../components/base/hr';
+import { Hr } from '../components/base/hr';
 
 export default {
   title: 'base/Hr',

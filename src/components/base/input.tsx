@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import GroupInput from './groupInput';
-import Label from './label';
+import { GroupInput } from './groupInput';
+import { Label } from './label';
 
 type setValueType = (a: string) => void;
 export interface PropsInterfaceInput {
@@ -12,7 +12,7 @@ export interface PropsInterfaceInput {
   name: string;
 }
 
-const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceInput) => {
+export const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };
@@ -34,5 +34,3 @@ const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceIn
 Input.defaultProps = {
   disabled: false,
 };
-
-export default Input;

@@ -1,12 +1,12 @@
 import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import ErrorMsg from '@/base/errorMsg';
-import usePosts, { typeRequestType } from '@/hooks/usePosts';
-import Loader from '@/base/loader';
+import { ErrorMsg } from '@/base/errorMsg';
+import { usePosts, typeRequestType } from '@/hooks/usePosts';
+import { Loader } from '@/base/loader';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 import { PropsPostInterface } from '../../interfaces/posts';
 

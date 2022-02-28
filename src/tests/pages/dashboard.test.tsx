@@ -5,7 +5,7 @@ import Router from 'next/router';
 import DashboardScreen from '@/pages/admin/dashboard';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({

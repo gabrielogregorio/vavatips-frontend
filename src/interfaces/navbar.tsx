@@ -1,4 +1,4 @@
-enum navbarEnum {
+export enum navbarEnum {
   Profile = '/admin/profile',
   PostCreate = '/admin/post-create',
   ViewPosts = '/admin/view-posts',
@@ -12,4 +12,3 @@ enum navbarEnum {
   Mistic = '#',
   None = '',
 }
-export default navbarEnum;

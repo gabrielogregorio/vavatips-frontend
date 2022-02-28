@@ -1,9 +1,9 @@
-import Button from '@/base/button';
+import { Button } from '@/base/button';
 import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage';
 import { FaTimes } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
 
-const ModalMessage = () => {
+export const ModalMessage = () => {
   const { modalMessage, setModalMessage } = useModalMessage();
 
   return modalMessage.active ? (
@@ -31,4 +31,3 @@ const ModalMessage = () => {
     </div>
   ) : null;
 };
-export default ModalMessage;

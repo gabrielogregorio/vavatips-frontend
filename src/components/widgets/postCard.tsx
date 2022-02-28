@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useModalContext } from '@/contexts/modalSuggestion';
-import formatImage from '@/services/formatEnvironment';
+import { formatImage } from '@/services/formatEnvironment';
 import { addNewPost, removePost, getPostsTested, getPostsSave } from '@/services/handlePosts';
-import Button from '@/base/button';
+import { Button } from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { PostsPropsInterface } from '@/interfaces/posts';
 import Image from 'next/image';
 import { isAuthenticated } from '../../core/services/auth';
-import PostButton from '../base/likeButton';
+import { PostButton } from '../base/likeButton';
 
 type typeType = 'next' | 'prev';
 
@@ -17,7 +17,7 @@ interface PropsPostInterface {
   viewAdmin: boolean;
 }
 
-const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
+export const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -172,4 +172,3 @@ const PostCard = ({ post, viewAdmin = false }: PropsPostInterface) => {
     </div>
   );
 };
-export default PostCard;

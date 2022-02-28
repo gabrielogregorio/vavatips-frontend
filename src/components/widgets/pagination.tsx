@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PaginationButtons, { PaginationDotItems } from '@/base/paginationButtons';
+import { PaginationButtons, PaginationDotItems } from '@/base/paginationButtons';
 
 interface PropsInterfacePagination {
   finish: number;
@@ -11,7 +11,7 @@ interface PropsInterfacePagination {
 
 const maxValuePagination = 3;
 
-const Pagination = ({ finish, selected, map, agent, urlBase }: PropsInterfacePagination) => {
+export const Pagination = ({ finish, selected, map, agent, urlBase }: PropsInterfacePagination) => {
   const [pagination, setPagination] = useState<{ id: number }[]>([]);
 
   useEffect(() => {
@@ -67,4 +67,3 @@ const Pagination = ({ finish, selected, map, agent, urlBase }: PropsInterfacePag
     </nav>
   );
 };
-export default Pagination;

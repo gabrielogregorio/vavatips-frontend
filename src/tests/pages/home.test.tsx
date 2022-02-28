@@ -6,9 +6,9 @@ import mockPosts from '@/mock/mockPosts.json';
 import HomeScreen from '@/pages/posts';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
-import generateNumericList from '../../core/helpers/generateArray';
+import { generateNumericList } from '../../core/helpers/generateArray';
 
 const { posts } = mockPosts;
 

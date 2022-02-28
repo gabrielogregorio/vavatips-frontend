@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
-import Navbar from '@/layout/navbar';
-import Loader from '@/base/loader';
-import Footer from '@/layout/footer';
+import { Navbar } from '@/layout/navbar';
+import { Loader } from '@/base/loader';
+import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import api from '@/services/api';
-import navbarEnum from '@/interfaces/navbar';
+import { api } from '@/services/api';
+import { navbarEnum } from '@/interfaces/navbar';
 import Router from 'next/router';
-import Layout from '@/layout/layout';
-import ErrorMsg from '@/base/errorMsg';
-import SubContainer from '@/base/subContainer';
+import { Layout } from '@/layout/layout';
+import { ErrorMsg } from '@/base/errorMsg';
+import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { logout } from '../../core/services/auth';
-import ItemList from '../../components/base/itemList';
+import { ItemList } from '../../components/base/itemList';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

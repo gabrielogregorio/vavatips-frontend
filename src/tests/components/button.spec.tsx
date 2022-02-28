@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Button from '@/base/button';
+import { Button } from '@/base/button';
 
 describe('<Button />', () => {
   it('should render component', () => {

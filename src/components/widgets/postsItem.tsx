@@ -1,11 +1,11 @@
 import { PostsPropsInterface } from '@/interfaces/posts';
-import PostCard from './postCard';
+import { PostCard } from './postCard';
 
 interface postPropsInterface {
   posts: PostsPropsInterface[];
 }
 
-const Posts = ({ posts }: postPropsInterface) => {
+export const Posts = ({ posts }: postPropsInterface) => {
   function renderPost() {
     return posts.map((post) => (
       <div key={post.id}>
@@ -16,4 +16,3 @@ const Posts = ({ posts }: postPropsInterface) => {
 
   return <div className="flex flex-col">{renderPost()}</div>;
 };
-export default Posts;

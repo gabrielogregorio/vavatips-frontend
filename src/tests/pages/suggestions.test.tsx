@@ -4,7 +4,7 @@ import { setupServer } from 'msw/node';
 import SuggestionScreen from '@/pages/admin/suggestions';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({

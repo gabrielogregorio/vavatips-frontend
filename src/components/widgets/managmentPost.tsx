@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
-import Navbar from '@/layout/navbar';
-import api from '@/services/api';
+import { Navbar } from '@/layout/navbar';
+import { api } from '@/services/api';
 import { agents, maps, difficult, moment, side } from '@/data/data-valorant';
-import Input from '@/base/input';
-import ModalComponent from '@/widgets/modal';
-import formatImage from '@/services/formatEnvironment';
-import Footer from '@/layout/footer';
-import Selected from '@/base/selected';
-import {Breadcrumb} from '@/widgets/breadcrumb';
-import Title from '@/base/title';
-import Button from '@/base/button';
+import { Input } from '@/base/input';
+import { Modal } from '@/widgets/modal';
+import { formatImage } from '@/services/formatEnvironment';
+import { Footer } from '@/layout/footer';
+import { Selected } from '@/base/selected';
+import { Breadcrumb } from '@/widgets/breadcrumb';
+import { Title } from '@/base/title';
+import { Button } from '@/base/button';
 import {
   AgentInterface,
   DifficultInterface,
@@ -21,17 +21,17 @@ import {
 } from '@/interfaces/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
-import navbarEnum from '@/interfaces/navbar';
-import Loader from '@/base/loader';
-import GroupInput from '@/base/groupInput';
+import { navbarEnum } from '@/interfaces/navbar';
+import { Loader } from '@/base/loader';
+import { GroupInput } from '@/base/groupInput';
 import { modelNavbarAdmin } from '@/schemas/navbar';
-import SubContainer from '@/base/subContainer';
-import Form from '@/base/Form';
-import GroupInputMultiple from '@/base/groupInputMultiple';
-import Hr from '@/base/hr';
-import ButtonForm from '@/base/buttonForm';
+import { SubContainer } from '@/base/subContainer';
+import { Form } from '@/base/Form';
+import { GroupInputMultiple } from '@/base/groupInputMultiple';
+import { Hr } from '@/base/hr';
+import { ButtonForm } from '@/base/buttonForm';
 import Image from 'next/image';
-import convertToSelectedRender from '@/helpers/convertToSelectedData';
+import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 
 type actionType = 'top' | 'bottom';
 
@@ -52,7 +52,7 @@ type modeManagment = {
   mode: 'create' | 'edit';
 };
 
-const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
+export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
 
@@ -299,7 +299,7 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
 
       <SubContainer>
         {visibleModal ? (
-          <ModalComponent
+          <Modal
             title="Adicionar Post"
             id={propsModal.id}
             description={propsModal.description}
@@ -423,4 +423,3 @@ const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
     </>
   );
 };
-export default CreatePostManagement;

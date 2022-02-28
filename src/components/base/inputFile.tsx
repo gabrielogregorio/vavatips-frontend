@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
-import GroupInput from './groupInput';
-import Label from './label';
+import { GroupInput } from './groupInput';
+import { Label } from './label';
 
 export type inputFileType = {
   disabled: boolean;
@@ -10,7 +10,7 @@ export type inputFileType = {
   name;
 };
 
-const InputFile = ({ disabled, type, text, onChange, name }: inputFileType) => (
+export const InputFile = ({ disabled, type, text, onChange, name }: inputFileType) => (
   <GroupInput>
     <Label name={name} text={text} />
     <input
@@ -23,5 +23,3 @@ const InputFile = ({ disabled, type, text, onChange, name }: inputFileType) => (
     />
   </GroupInput>
 );
-
-export default InputFile;

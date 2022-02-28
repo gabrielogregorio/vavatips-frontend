@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import api from '@/services/api';
+import { api } from '@/services/api';
 import { useQuery } from 'react-query';
 
-export default function useMaps() {
+export function useMaps() {
   const [mapsApi, setMapsApi] = useState<string[]>([]);
   const { isLoading, error, data } = useQuery(['/maps'], () =>
     api.get('/maps').then((maps) => maps.data),

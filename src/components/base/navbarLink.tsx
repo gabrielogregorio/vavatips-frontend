@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import navbarEnum from '@/interfaces/navbar';
+import { navbarEnum } from '@/interfaces/navbar';
 
 type NavbarLinkType = {
   href: string;
@@ -8,7 +8,7 @@ type NavbarLinkType = {
   textContent: string;
 };
 
-const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType) => {
+export const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType) => {
   const isActiveClass = selected === whoIs ? 'border-b-2 border-cyan-50' : '';
 
   return (
@@ -19,5 +19,3 @@ const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType) => {
     </Link>
   );
 };
-
-export default NavbarLink;

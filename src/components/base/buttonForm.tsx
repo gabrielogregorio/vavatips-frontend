@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Button from './button';
+import { Button } from './button';
 
 type ButtonType = {
   children: ReactNode;
@@ -7,10 +7,8 @@ type ButtonType = {
   onClick: () => void;
 };
 
-const ButtonForm = ({ children, className, onClick }: ButtonType) => (
+export const ButtonForm = ({ children, className, onClick }: ButtonType) => (
   <Button className={`w-full border-2 rounded-xl ${className}`} onClick={onClick}>
     {children}
   </Button>
 );
-
-export default ButtonForm;

@@ -32,7 +32,7 @@ type selectedLikeButton = {
   variant: 'like' | 'save' | 'report';
 };
 
-const PostButton = ({ selected, onClick, variant }: selectedLikeButton) => {
+export const PostButton = ({ selected, onClick, variant }: selectedLikeButton) => {
   const modelButton = typeIconModel[variant];
   const IconDisplayed = modelButton[selected ? 'selected' : 'default'];
   const textFromIcon = modelButton.text;
@@ -50,5 +50,3 @@ const PostButton = ({ selected, onClick, variant }: selectedLikeButton) => {
     </button>
   );
 };
-
-export default PostButton;

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Pagination from '@/widgets/pagination';
+import { Pagination } from '@/widgets/pagination';
 
 describe('Pagination', () => {
   it('should render pagination component', () => {

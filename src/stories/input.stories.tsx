@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import Input, { PropsInterfaceInput } from '../components/base/input';
+import { Input, PropsInterfaceInput } from '../components/base/input';
 
 export default {
   title: 'form/Input',

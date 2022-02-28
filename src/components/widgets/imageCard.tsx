@@ -8,8 +8,7 @@ type imageCardType = {
   titleImage: string;
   heightImage: string;
 };
-
-const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
+export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleWithIsLoadedImage = () => {
@@ -41,4 +40,3 @@ const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) =
     </Link>
   );
 };
-export default ImageCard;

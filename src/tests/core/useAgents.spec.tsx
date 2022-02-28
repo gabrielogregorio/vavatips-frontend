@@ -1,13 +1,13 @@
 import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import useAgents from '@/hooks/useAgents';
+import { useAgents } from '@/hooks/useAgents';
 import {
   URL_GET_AGENTS_AND_MAP_SELECTED_ERROR,
   URL_GET_AGENTS_AND_MAP_SELECTED_SUCCESS,
 } from '@/mock/ROUTES_API';
 import MockApp from '@/mock/App.Mock';
-import waitByLoading from '@/utils/waitByLoading';
+import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({

@@ -1,4 +1,4 @@
-import resolveQuery from '@/helpers/resolveQuery';
+import { resolveQuery } from '@/helpers/resolveQuery';
 
 describe('resolveQuery', () => {
   it('should test resolve query', async () => {

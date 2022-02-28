@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Footer from '@/layout/footer';
+import { Footer } from '@/layout/footer';
 
 describe('<Footer />', () => {
   it('should render footer with primary color', () => {

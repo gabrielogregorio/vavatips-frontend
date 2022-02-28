@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import Navbar from '@/layout/navbar';
-import Input from '@/base/input';
-import Loader from '@/base/loader';
-import Footer from '@/layout/footer';
+import { Navbar } from '@/layout/navbar';
+import { Input } from '@/base/input';
+import { Loader } from '@/base/loader';
+import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import Title from '@/base/title';
-import api from '@/services/api';
-import navbarEnum from '@/interfaces/navbar';
+import { Title } from '@/base/title';
+import { api } from '@/services/api';
+import { navbarEnum } from '@/interfaces/navbar';
 import Router from 'next/router';
-import Layout from '@/layout/layout';
-import SubContainer from '@/base/subContainer';
-import Form from '@/base/Form';
+import { Layout } from '@/layout/layout';
+import { SubContainer } from '@/base/subContainer';
+import { Form } from '@/base/Form';
 import { modelNavbarAdmin } from '@/schemas/navbar';
-import ButtonForm from '@/base/buttonForm';
+import { ButtonForm } from '@/base/buttonForm';
 import { logout } from '../../core/services/auth';
 
 const breadcrumbs = [

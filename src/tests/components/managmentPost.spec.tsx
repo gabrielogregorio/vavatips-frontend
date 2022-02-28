@@ -3,10 +3,10 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import MockApp from '@/mock/App.Mock';
-import CreatePostManagement from '@/widgets/managmentPost';
+import { CreatePostManagement } from '@/widgets/managmentPost';
 import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
-import waitByLoading from '@/utils/waitByLoading';
-import navbarEnum from '@/interfaces/navbar';
+import { waitByLoading } from '@/utils/waitByLoading';
+import { navbarEnum } from '@/interfaces/navbar';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
