@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import Navbar from '@/layout/navbar';
 import api from '@/services/api';
 import Footer from '@/layout/footer';
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import navbarEnum from '@/interfaces/navbar';
 import Loader from '@/base/loader';
 import Layout from '@/layout/layout';

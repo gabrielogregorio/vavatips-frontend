@@ -1,4 +1,4 @@
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import ErrorMsg from '@/base/errorMsg';
 import Footer from '@/layout/footer';
 import Loader from '@/base/loader';

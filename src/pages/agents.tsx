@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { agents } from '@/data/data-valorant';
 import Loader from '@/base/loader';
 import Footer from '@/layout/footer';
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import ErrorMsg from '@/base/errorMsg';
 import useAgents from '@/hooks/useAgents';
 import Title from '@/base/title';

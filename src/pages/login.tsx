@@ -4,7 +4,7 @@ import api from '@/services/api';
 import Input from '@/base/input';
 import Loader from '@/base/loader';
 import Footer from '@/layout/footer';
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import LINKS from '@/data/links';
 import Title from '@/base/title';
 import Button from '@/base/button';

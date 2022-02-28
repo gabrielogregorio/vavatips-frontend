@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import ModalOfSuggestion from '@/widgets/modalOfSuggestion';
 import ModalMessage from '@/widgets/modalMessage';
 import Footer from '@/layout/footer';
-import Breadcrumb from '@/widgets/breadcrumb';
+import { Breadcrumb } from '@/widgets/breadcrumb';
 import Pagination from '@/widgets/pagination';
 import ErrorMsg from '@/base/errorMsg';
 import usePosts from '@/hooks/usePosts';
