@@ -12,16 +12,10 @@ import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
-import {
-  AgentInterface,
-  DifficultInterface,
-  MapInterface,
-  MomentInterface,
-  SideInterface,
-} from '@/interfaces/posts';
+import { IAgent, IDifficult, IMap, IMoment, ISide } from '@/types/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { Loader } from '@/base/loader';
 import { GroupInput } from '@/base/groupInput';
 import { modelNavbarAdmin } from '@/schemas/navbar';
@@ -35,29 +29,29 @@ import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 
 type actionType = 'top' | 'bottom';
 
-interface imgInterface {
+type imgType = {
   description: string;
   image: string;
   id: string;
-}
+};
 
-interface propsModalInterface {
+type modalType = {
   id: string;
   description: string;
   image: string;
-}
+};
 
-type modeManagment = {
+type ModelManagementType = {
   breadcrumbs: { url: navbarEnum; text: string }[];
   mode: 'create' | 'edit';
 };
 
-export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
+export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
 
   const [redirect, setRedirect] = useState<boolean>(false);
-  const [imgAdded, setImgAdded] = useState<imgInterface[]>([]);
+  const [imgAdded, setImgAdded] = useState<imgType[]>([]);
   const [formTitle, setFormTitle] = useState<string>('');
   const [formDescription, setFormDescription] = useState<string>('');
   const [formTagMoment, setFormTagMoment] = useState<string>('');
@@ -69,7 +63,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
   const [formTagAgent, setFormTagAgent] = useState<string>('');
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [propsModal, setPropsModal] = useState<propsModalInterface>({
+  const [propsModal, setPropsModal] = useState<modalType>({
     id: '',
     description: '',
     image: '',
@@ -160,35 +154,33 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
     setImgAdded(copyImgAdded);
   }
 
-  function renderAgent(): AgentInterface[] {
+  function renderAgent(): IAgent[] {
     return agents();
   }
 
-  function renderSide(): SideInterface[] {
+  function renderSide(): ISide[] {
     return side();
   }
 
-  function renderMaps(): MapInterface[] {
+  function renderMaps(): IMap[] {
     return maps();
   }
 
-  function renderDifficult(): DifficultInterface[] {
+  function renderDifficult(): IDifficult[] {
     return difficult();
   }
 
-  function renderMoment(): MomentInterface[] {
+  function renderMoment(): IMoment[] {
     return moment();
   }
 
   function renderAbilities() {
-    const filterAbilities: AgentInterface = agents().filter(
-      (agent) => agent.name === formTagAgent,
-    )?.[0];
+    const filterAbilities: IAgent = agents().filter((agent) => agent.name === formTagAgent)?.[0];
     return filterAbilities?.abilities ?? [];
   }
 
   function renderPositionsMap() {
-    const filterMapPositions: MapInterface = maps().filter((map) => map.name === formTagMap)?.[0];
+    const filterMapPositions: IMap = maps().filter((map) => map.name === formTagMap)?.[0];
     return filterMapPositions?.mapPosition ?? [];
   }
 
@@ -258,7 +250,8 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
 
   const saveModal = (idPost: string, description: string, image: string) => {
     if (idPost) {
-      const copyImgAdded: imgInterface[] = JSON.parse(JSON.stringify(imgAdded));
+      const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
+
       for (let x = 0; x < copyImgAdded.length; x += 1) {
         if (copyImgAdded[x].id === idPost) {
           copyImgAdded[x].description = description;
@@ -294,7 +287,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: modeManagment) => {
       ) : (
         <Navbar selected={navbarEnum.EditScreen} modelNavbar={modelNavbarAdmin} />
       )}
-      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       <Loader active={loading} />
 
       <SubContainer>

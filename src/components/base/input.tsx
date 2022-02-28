@@ -3,16 +3,16 @@ import { GroupInput } from './groupInput';
 import { Label } from './label';
 
 type setValueType = (a: string) => void;
-export interface PropsInterfaceInput {
+export type TPropsInput = {
   text: string;
   value: string;
   type: 'text' | 'password' | 'email' | 'number';
   disabled?: boolean;
   setValue: setValueType;
   name: string;
-}
+};
 
-export const Input = ({ disabled, type, value, text, setValue, name }: PropsInterfaceInput) => {
+export const Input = ({ disabled, type, value, text, setValue, name }: TPropsInput) => {
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.currentTarget.value);
   };

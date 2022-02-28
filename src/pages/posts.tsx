@@ -1,7 +1,7 @@
 import { LINKS } from '@/data/links';
 import { Layout } from '@/layout/layout';
 import { ContainerPosts } from '@/widgets/containerPosts';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 

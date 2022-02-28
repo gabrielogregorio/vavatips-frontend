@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
-import { ContextTagsInterface } from '@/interfaces/posts';
+import { TContextTags } from '@/types/posts';
 
-export const ContextFilters = createContext<ContextTagsInterface>({
+export const ContextFilters = createContext<TContextTags>({
   tags: [],
   filters: [],
   setFilters: (filters) => new Error(`do you need use context Filters ${filters}`),

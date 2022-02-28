@@ -2,15 +2,15 @@ import { ChangeEvent } from 'react';
 import { GroupInput } from './groupInput';
 import { Label } from './label';
 
-export interface PropsInterfaceSelectedBase {
+type TPropsSelectedBase = {
   text: string;
   value: string;
   setValue: (value: string) => void;
   name: string;
   render: { id: string; name: string }[];
-}
+};
 
-export const Selected = ({ render, text, setValue, value, name }: PropsInterfaceSelectedBase) => {
+export const Selected = ({ render, text, setValue, value, name }: TPropsSelectedBase) => {
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>

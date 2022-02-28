@@ -1,11 +1,11 @@
-import { PostsPropsInterface } from '@/interfaces/posts';
+import { TPostsProps } from '@/types/posts';
 import { PostCard } from './postCard';
 
-interface postPropsInterface {
-  posts: PostsPropsInterface[];
-}
+type IPostProps = {
+  posts: TPostsProps[];
+};
 
-export const Posts = ({ posts }: postPropsInterface) => {
+export const Posts = ({ posts }: IPostProps) => {
   function renderPost() {
     return posts.map((post) => (
       <div key={post.id}>

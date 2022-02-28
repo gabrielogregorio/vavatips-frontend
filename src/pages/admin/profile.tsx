@@ -6,7 +6,7 @@ import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { api } from '@/services/api';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import Router from 'next/router';
 import { Layout } from '@/layout/layout';
 import { SubContainer } from '@/base/subContainer';
@@ -48,7 +48,7 @@ const MyProfileScreen = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />
-      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <Form>

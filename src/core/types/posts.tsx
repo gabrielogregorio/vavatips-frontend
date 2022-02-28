@@ -20,12 +20,12 @@ export type positionMapType =
   | 'Meio'
   | 'Outra';
 
-export interface PositionMapInterface {
+type TPositionMap = {
   id: string;
   name: positionMapType;
-}
+};
 
-export interface PropsPostInterface {
+export type TPropsPost = {
   id: string;
   user: { id: string; username: string; image: string };
   description: string;
@@ -40,43 +40,43 @@ export interface PropsPostInterface {
     side: sideType;
     mapPosition: string;
   };
-}
+};
 
-export interface AbilityInterface {
+type TAbility = {
   id: string;
   name: string;
   keyboard: string;
-}
+};
 
-export interface SideInterface {
+export type ISide = {
   id: string;
   name: sideType;
-}
+};
 
-export interface MomentInterface {
+export type IMoment = {
   id: string;
   name: momentType;
-}
+};
 
-export interface DifficultInterface {
+export type IDifficult = {
   id: string;
   name: difficultType;
-}
+};
 
-export interface AgentInterface {
+export type IAgent = {
   id: number;
   name: string;
   img: string;
-  abilities: AbilityInterface[];
-}
+  abilities: TAbility[];
+};
 
-export interface MapInterface {
+export type IMap = {
   id: number;
   name: mapType;
   img: string;
-  mapPosition: PositionMapInterface[];
-}
-export interface PostsPropsInterface {
+  mapPosition: TPositionMap[];
+};
+export type TPostsProps = {
   id: string;
   user: { id: string; username: string; image?: string };
   description: string;
@@ -91,13 +91,13 @@ export interface PostsPropsInterface {
     side: string;
     mapPosition: string;
   };
-}
+};
 
-export interface ContextTagsInterface {
+export type TContextTags = {
   tags: string[];
   filters: string[];
   setFilters: (filter: string[]) => void;
   setTags: (tags: string[]) => void;
-}
+};
 
 export type actionTypesHandlePosts = 'save' | 'test';

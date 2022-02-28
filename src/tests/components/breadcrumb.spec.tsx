@@ -10,7 +10,7 @@ const breadcrumbs = [
 
 describe('<Breadcrumb />', () => {
   it('should render breadcrumb', () => {
-    render(<Breadcrumb breadcrumbs={breadcrumbs} admin={false} />);
+    render(<Breadcrumb breadcrumbs={breadcrumbs} />);
     expect(screen.getByRole('link', { name: 'inicio' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'mapas' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'agentes' })).toBeInTheDocument();
