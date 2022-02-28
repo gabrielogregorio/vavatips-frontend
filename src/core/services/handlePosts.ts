@@ -1,4 +1,4 @@
-import { actionTypesHandlePosts } from '@/interfaces/posts';
+import { actionTypesHandlePosts } from '@/types/posts';
 
 const SAVE_POSTS = 'SAVE_POSTS';
 const TESTED_POSTS = 'TESTED_POSTS';

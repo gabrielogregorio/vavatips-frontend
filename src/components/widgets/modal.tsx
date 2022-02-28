@@ -9,14 +9,14 @@ import { InputFile } from '@/base/inputFile';
 import Image from 'next/image';
 import { ModalRef } from './modalRef';
 
-export interface ModalPropsBase {
+export type ModalPropsBase = {
   title: string;
   id: string;
   description: string;
   image: string;
   closeModal: MouseEventHandler<HTMLButtonElement>;
   saveModal: (id: string, title: string, image: string) => void;
-}
+};
 
 export const Modal = ({
   id: idModal,

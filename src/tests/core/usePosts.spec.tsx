@@ -8,7 +8,7 @@ import MockApp from '@/mock/App.Mock';
 import { URL_GET_AGENTS_AND_MAP_SELECTED_ERROR, URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
-import { PropsPostInterface } from '../../interfaces/posts';
+import { TPropsPost } from '@/types/posts';
 
 jest.mock(
   'next/link',
@@ -136,7 +136,7 @@ const Posts = ({
   );
 
   function renderPosts() {
-    return posts?.map((agentItem: PropsPostInterface) => (
+    return posts?.map((agentItem: TPropsPost) => (
       <div key={agentItem.id}>
         <h3>ID: {agentItem.id}</h3>
         <h3>TITLE: {agentItem.title}</h3>

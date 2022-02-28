@@ -4,7 +4,7 @@ import { Button } from '@/base/button';
 import { NavbarLink } from '@/base/navbarLink';
 import { useTheme } from '@/contexts/theme';
 import { modelNavbarType } from '@/schemas/navbar';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { changeTheme } from '../../core/services/theme';
 
 type NavbarPropsNavbarBasicType = {

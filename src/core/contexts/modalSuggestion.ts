@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
-import { modalContextTypeSuggestion, modalSuggestionInterface } from '@/interfaces/modal';
+import { IModalContextSuggestion, IModalSuggestion } from '@/types/modal';
 
-export const initializeModalSuggestion: modalContextTypeSuggestion = { active: false };
+export const initializeModalSuggestion: IModalContextSuggestion = { active: false };
 
-export const ContextModalSuggestion = createContext<modalSuggestionInterface>({
+export const ContextModalSuggestion = createContext<IModalSuggestion>({
   modalSuggestion: initializeModalSuggestion,
   setModalSuggestion: null,
 });

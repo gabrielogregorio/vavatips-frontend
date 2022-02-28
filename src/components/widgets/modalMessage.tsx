@@ -6,16 +6,17 @@ import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai
 export const ModalMessage = () => {
   const { modalMessage, setModalMessage } = useModalMessage();
 
+  const modalIcon = {
+    '': null,
+    success: <AiOutlineCheckCircle className="text-skin-white text-lg" />,
+    error: <AiOutlineExclamationCircle className="text-skin-white text-lg" />,
+  };
+
   return modalMessage.active ? (
     <div className="fixed flex items-center justify-center z-modalMessage bottom-0 mb-2">
       <div className="bg-skin-primary-light flex p-5 rounded-lg items-center">
         <div className="pr-2 border-2 border-y-0 border-l-0 mr-2 text-skin-white">
-          {modalMessage.message.type === 'success' ? (
-            <AiOutlineCheckCircle className="text-skin-white text-lg" />
-          ) : null}
-          {modalMessage.message.type === 'error' ? (
-            <AiOutlineExclamationCircle className="text-skin-white text-lg" />
-          ) : null}
+          {modalIcon[modalMessage.message.type]}
         </div>
         <p className="w-full text-left text-base break-all text-skin-white">
           {modalMessage.message.msg}

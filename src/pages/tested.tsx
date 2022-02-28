@@ -1,5 +1,5 @@
 import { LINKS } from '@/data/links';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
 import { ContainerPosts } from '@/widgets/containerPosts';
 

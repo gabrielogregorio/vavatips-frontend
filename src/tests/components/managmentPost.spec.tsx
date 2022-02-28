@@ -6,7 +6,7 @@ import MockApp from '@/mock/App.Mock';
 import { CreatePostManagement } from '@/widgets/managmentPost';
 import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),

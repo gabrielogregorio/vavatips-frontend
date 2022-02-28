@@ -2,21 +2,15 @@ import { ReactNode, useMemo, useState } from 'react';
 import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
-import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
+import { IModalContextSuggestion, modalMessageTypeContext } from '@/types/modal';
 import { LocalStorageMock } from '@react-mock/localstorage';
-import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ContextThemeProvider } from '@/contexts/theme';
 
-setLogger({
-  log: () => {},
-  warn: () => {},
-  error: () => {},
-});
-
-interface MockAppInterface {
+type mockType = {
   children: ReactNode;
   localstorage?: { [key: string]: string };
-}
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,8 +21,8 @@ const queryClient = new QueryClient({
   },
 });
 
-const MockApp = ({ children, localstorage }: MockAppInterface) => {
-  const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
+const MockApp = ({ children, localstorage }: mockType) => {
+  const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
     post: null,
     active: false,
   });

@@ -1,15 +1,12 @@
 import Link from 'next/link';
 
-interface PropsInterface {
+type propsType = {
   breadcrumbs: { url: string; text: string }[];
-  admin: boolean;
-}
+};
 
-export const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
+export const Breadcrumb = ({ breadcrumbs }: propsType) => {
   function renderBreadCrumb() {
     const lastItem = breadcrumbs.length - 1;
-
-    const color = admin ? 'text-skin-white' : 'text-skin-white';
 
     return breadcrumbs.map((breadcrumb, index) => (
       <div key={`${breadcrumb.text}`} className="p-1 pb-0 pt-0 flex items-center ">
@@ -18,11 +15,11 @@ export const Breadcrumb = ({ breadcrumbs, admin }: PropsInterface) => {
         ) : (
           <>
             <Link href={breadcrumb.url} passHref>
-              <a href="#/" className={color} style={{ opacity: 0.7 }}>
+              <a href="#/" className="text-skin-white" style={{ opacity: 0.7 }}>
                 {breadcrumb.text}
               </a>
             </Link>
-            <span className={`pl-1 ${color}`} style={{ opacity: 0.7 }}>
+            <span className={`pl-1 ${'text-skin-white'}`} style={{ opacity: 0.7 }}>
               &gt;
             </span>
           </>

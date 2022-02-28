@@ -5,34 +5,32 @@ import { ModalMessage } from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
 import MockApp from '@/mock/App.Mock';
 
-const Setup = () => {
-  const { setModalMessage } = useModalMessage();
+const useModalMock = (msg, type, setModalMessage) => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
-  const msg = 'Sugestão enviada com sucesso, muito obrigado!';
-  const type = 'success';
-
   useEffect(() => {
     if (isFirstLoading) {
       setModalMessage({ active: true, message: { type, msg } });
       setIsFirstLoading(false);
     }
-  }, [isFirstLoading, setModalMessage]);
+  }, [isFirstLoading, setModalMessage, msg, type]);
+
+  return { isFirstLoading };
+};
+
+const Setup = () => {
+  const msg = 'Sugestão enviada com sucesso, muito obrigado!';
+  const type = 'success';
+  const { setModalMessage } = useModalMessage();
+  useModalMock(msg, type, setModalMessage);
 
   return <ModalMessage />;
 };
 
 const SetupWithError = () => {
-  const { setModalMessage } = useModalMessage();
-  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const msg = 'Erro desconhecido';
   const type = 'error';
-
-  useEffect(() => {
-    if (isFirstLoading) {
-      setModalMessage({ active: true, message: { type, msg } });
-      setIsFirstLoading(false);
-    }
-  }, [isFirstLoading, setModalMessage]);
+  const { setModalMessage } = useModalMessage();
+  useModalMock(msg, type, setModalMessage);
 
   return <ModalMessage />;
 };

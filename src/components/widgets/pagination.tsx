@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { PaginationButtons, PaginationDotItems } from '@/base/paginationButtons';
 
-interface PropsInterfacePagination {
+type propsType = {
   finish: number;
   selected: number;
   map: string;
   agent: string;
   urlBase: 'ViewPosts' | 'posts' | 'save' | 'tested';
-}
+};
 
 const maxValuePagination = 3;
 
-export const Pagination = ({ finish, selected, map, agent, urlBase }: PropsInterfacePagination) => {
+export const Pagination = ({ finish, selected, map, agent, urlBase }: propsType) => {
   const [pagination, setPagination] = useState<{ id: number }[]>([]);
 
   useEffect(() => {

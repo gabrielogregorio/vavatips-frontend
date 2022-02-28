@@ -8,7 +8,7 @@ import { Breadcrumb } from '@/widgets/breadcrumb';
 import { LINKS } from '@/data/links';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
 import { ErrorMsg } from '@/base/errorMsg';
 import { GroupInput } from '@/base/groupInput';
@@ -101,7 +101,7 @@ const Login = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
-      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <Form>

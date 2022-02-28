@@ -4,21 +4,21 @@ import { useFilters } from '@/contexts/filters';
 import { resolveQuery } from '@/helpers/resolveQuery';
 import { getPostsSave, getPostsTested } from '@/services/handlePosts';
 import { useQuery } from 'react-query';
-import { PropsPostInterface } from '@/interfaces/posts';
+import { TPropsPost } from '@/types/posts';
 import { NextRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
-export interface FilterUrlInterface {
+export type IFilterUrl = {
   agent: string;
   map: string;
   type: string;
   page: string;
   isReady: boolean;
-}
+};
 
 export type typeRequestType = '' | 'save' | 'tested';
 
-export function getParamsFromLocation(location): FilterUrlInterface {
+export function getParamsFromLocation(location): IFilterUrl {
   const { agent, map, type, page }: ParsedUrlQuery = location.query;
   const { isReady } = location;
 
@@ -33,9 +33,9 @@ export function getParamsFromLocation(location): FilterUrlInterface {
 
 export function usePosts(location: NextRouter, typeRequest: typeRequestType = '') {
   const { filters, setTags } = useFilters();
-  const [posts, setPosts] = useState<PropsPostInterface[]>([]);
+  const [posts, setPosts] = useState<TPropsPost[]>([]);
   const [finishPage, setFinishPage] = useState<number>(1);
-  const [queryUrl, setQueryUrl] = useState<FilterUrlInterface>(getParamsFromLocation(location));
+  const [queryUrl, setQueryUrl] = useState<IFilterUrl>(getParamsFromLocation(location));
   const [dataRequest, setDataRequest] = useState<{ [key: string]: string }>({});
 
   const { isLoading, error, data, refetch } = useQuery(

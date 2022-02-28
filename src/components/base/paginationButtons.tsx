@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { resolveQuery } from '@/helpers/resolveQuery';
 
-export interface PaginationButtonInterface {
+type TPaginationButton = {
   numberOfPage: number;
   active: boolean;
   map: string;
   agent: string;
   urlBase: string;
-}
+};
 
 export const PaginationButtons = ({
   numberOfPage: page = 1,
@@ -15,7 +15,7 @@ export const PaginationButtons = ({
   urlBase,
   map,
   agent,
-}: PaginationButtonInterface) => (
+}: TPaginationButton) => (
   <li className="bg-transparent text-skin-secondary-regular p-3 pb-1 pt-1 transition duration-150">
     <Link
       passHref

@@ -8,7 +8,7 @@ import { useMaps } from '@/hooks/useMaps';
 import { Title } from '@/base/title';
 import { Layout } from '@/layout/layout';
 import { Navbar } from '@/layout/navbar';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
@@ -40,7 +40,7 @@ const Index = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
-      <Breadcrumb breadcrumbs={breadcrumbs} admin={false} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <Title>Escolha um mapa ai parça </Title>

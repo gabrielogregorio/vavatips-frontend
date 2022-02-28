@@ -3,7 +3,7 @@ import { Navbar } from '@/layout/navbar';
 import { api } from '@/services/api';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { Loader } from '@/base/loader';
 import { Layout } from '@/layout/layout';
 import { SubContainer } from '@/base/subContainer';
@@ -15,13 +15,13 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'sugestões' },
 ];
 
-interface suggestionInterface {
+type suggestionType = {
   id: string;
   postId: string;
   email: string;
   description: string;
   status: string;
-}
+};
 const Th = ({ children }: { children: ReactNode }) => (
   <th className="text-base text-skin-white text-left">{children}</th>
 );
@@ -33,7 +33,7 @@ const Td = ({ children }: { children: ReactNode }) => (
 );
 
 const SuggestionScreen = () => {
-  const [suggestions, setSuggestions] = useState<suggestionInterface[]>([]);
+  const [suggestions, setSuggestions] = useState<suggestionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
@@ -59,7 +59,7 @@ const SuggestionScreen = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
-      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <Loader active={loading} />
       <ErrorMsg msg={error} />
@@ -76,7 +76,7 @@ const SuggestionScreen = () => {
           </thead>
 
           <tbody>
-            {suggestions.map((report: suggestionInterface) => (
+            {suggestions.map((report: suggestionType) => (
               <tr key={report.id} className="border-b">
                 <Td>{report.postId}</Td>
                 <Td>{report.email}</Td>

@@ -1,18 +1,16 @@
-import { PostsPropsInterface } from '@/interfaces/posts';
+import { TPostsProps } from '@/types/posts';
 import { PostCard } from './postCard';
 
-interface postPropsInterface {
-  posts: PostsPropsInterface[];
-}
+type IPostProps = {
+  posts: TPostsProps[];
+};
 
-export const Posts = ({ posts }: postPropsInterface) => {
-  function renderPost() {
-    return posts.map((post) => (
+export const Posts = ({ posts }: IPostProps) => (
+  <div className="flex flex-col">
+    {posts.map((post) => (
       <div key={post.id}>
         <PostCard post={post} viewAdmin={false} />
       </div>
-    ));
-  }
-
-  return <div className="flex flex-col">{renderPost()}</div>;
-};
+    ))}
+  </div>
+);
