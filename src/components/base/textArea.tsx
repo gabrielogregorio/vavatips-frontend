@@ -1,7 +1,7 @@
 import { GroupInput } from '@/base/groupInput';
 import { Label } from '@/base/label';
 
-type IPropsTextArea = {
+export type IPropsTextArea = {
   name: string;
   title: string;
   value: string;
