@@ -5,14 +5,12 @@ type IPostProps = {
   posts: TPostsProps[];
 };
 
-export const Posts = ({ posts }: IPostProps) => {
-  function renderPost() {
-    return posts.map((post) => (
+export const Posts = ({ posts }: IPostProps) => (
+  <div className="flex flex-col">
+    {posts.map((post) => (
       <div key={post.id}>
         <PostCard post={post} viewAdmin={false} />
       </div>
-    ));
-  }
-
-  return <div className="flex flex-col">{renderPost()}</div>;
-};
+    ))}
+  </div>
+);

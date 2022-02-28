@@ -22,7 +22,8 @@ jest.mock('next/router', () => ({
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
-    const { title, description, tags, imgs } = req.body as any;
+    const { body } = req;
+    const { title, description, tags, imgs }: any = body;
 
     const postIsValid =
       title === `Title New Post` &&

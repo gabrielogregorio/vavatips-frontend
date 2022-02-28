@@ -36,6 +36,11 @@ const post = {
   },
 };
 
+const waitForSuccessfully = async () =>
+  waitFor(() =>
+    expect(screen.queryByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument(),
+  );
+
 jest.mock(
   'next/link',
   () =>
@@ -113,11 +118,7 @@ describe('<ModalOfSuggestion />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
-      ).toBeInTheDocument(),
-    );
+    await waitForSuccessfully();
   });
 
   it('should send suggestion simulated dont id post', async () => {
@@ -133,12 +134,9 @@ describe('<ModalOfSuggestion />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() =>
-      expect(
-        screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
-      ).toBeInTheDocument(),
-    );
+    await waitForSuccessfully();
   });
+
   it('should render modal suggestion and error to send suggestion', async () => {
     render(
       <MockApp>

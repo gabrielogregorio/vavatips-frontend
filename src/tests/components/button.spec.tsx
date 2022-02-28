@@ -4,7 +4,7 @@ import { Button } from '@/base/button';
 
 describe('<Button />', () => {
   it('should render component', () => {
-    render(<Button onClick={() => {}}>Conteudo Btn</Button>);
+    render(<Button onClick={() => jest.fn()}>Conteudo Btn</Button>);
     expect(screen.getByRole('button', { name: 'Conteudo Btn' })).toBeInTheDocument();
   });
 
