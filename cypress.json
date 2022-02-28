@@ -8,6 +8,6 @@
   },
   "defaultCommandTimeout": 25000,
   "pageLoadTimeout": 25000,
-  "screenshotOnRunFailure":	false,
+  "screenshotOnRunFailure": false,
   "video": false
 }
