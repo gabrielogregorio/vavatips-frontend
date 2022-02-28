@@ -5,15 +5,15 @@ import { api } from '@/services/api';
 import { Button } from '@/base/button';
 import { Input } from '@/base/input';
 import { TextArea } from '@/base/textArea';
-import { modalType } from '@/interfaces/modal';
+import { modalType } from '@/types/modal';
 import { Loader } from '@/base/loader';
 import { ErrorMsg } from '@/base/errorMsg';
 import { Form } from '@/base/Form';
 import { ModalRef } from './modalRef';
 
-interface ModalProps {
+type ModalProps = {
   title: string;
-}
+};
 
 export const ModalOfSuggestion = ({ title }: ModalProps) => {
   const [email, setEmail] = useState<string>('');

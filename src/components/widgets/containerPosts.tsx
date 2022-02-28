@@ -10,19 +10,19 @@ import { Title } from '@/base/title';
 import { Navbar } from '@/layout/navbar';
 import { Loader } from '@/base/loader';
 import { SubContainer } from '@/base/subContainer';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { modelNavbarAdmin, modelNavbarPublic } from '@/schemas/navbar';
 import { TagsFixFilters } from '@/widgets/tagsFixFilters';
 import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 
-interface containerPosts {
+type containerPosts = {
   breadcrumbs: { url: string; text: string }[];
   type: '' | 'save' | 'tested';
   typeSelected: navbarEnum;
   mode: 'public' | 'admin';
   title: string;
-}
+};
 
 export const ContainerPosts = ({
   breadcrumbs,
@@ -43,7 +43,7 @@ export const ContainerPosts = ({
         <Navbar selected={typeSelected} modelNavbar={modelNavbarPublic} />
       )}
 
-      <Breadcrumb breadcrumbs={breadcrumbs} admin={false} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
       <SubContainer>
         <ModalOfSuggestion title="fazer sugestão" />
 

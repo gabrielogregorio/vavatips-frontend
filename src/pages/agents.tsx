@@ -8,7 +8,7 @@ import { useAgents } from '@/hooks/useAgents';
 import { Title } from '@/base/title';
 import { LINKS } from '@/data/links';
 import { Layout } from '@/layout/layout';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
@@ -42,7 +42,7 @@ const Agents = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
-      <Breadcrumb breadcrumbs={breadcrumbs} admin={false} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <Title>Escolha um Agente</Title>

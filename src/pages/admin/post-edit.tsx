@@ -1,6 +1,6 @@
 import { Layout } from '@/layout/layout';
 import { CreatePostManagement } from '@/widgets/managmentPost';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

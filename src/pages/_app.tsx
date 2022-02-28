@@ -4,7 +4,7 @@ import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
 import { ContextFilters } from '@/contexts/filters';
 import { ContextModalMessage } from '@/contexts/modalMessage';
-import { modalContextTypeSuggestion, modalMessageTypeContext } from '@/interfaces/modal';
+import { IModalContextSuggestion, modalMessageTypeContext } from '@/types/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ContextThemeProvider } from '@/contexts/theme';
 import '../styles/global.css';
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const [modalSuggestion, setModalSuggestion] = useState<modalContextTypeSuggestion>({
+  const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
     post: null,
     active: false,
   });

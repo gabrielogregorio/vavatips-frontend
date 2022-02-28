@@ -1,6 +1,6 @@
-interface loaderProps {
+type loaderProps = {
   active: boolean;
-}
+};
 
 export const Loader = ({ active }: loaderProps) => {
   function renderActive() {

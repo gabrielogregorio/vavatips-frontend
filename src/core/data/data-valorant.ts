@@ -1,12 +1,6 @@
-import {
-  AgentInterface,
-  DifficultInterface,
-  MapInterface,
-  MomentInterface,
-  SideInterface,
-} from '@/interfaces/posts';
+import { IAgent, IDifficult, IMap, IMoment, ISide } from '@/types/posts';
 
-export const side = (): SideInterface[] => [
+export const side = (): ISide[] => [
   {
     id: '1',
     name: 'Atacantes',
@@ -17,7 +11,7 @@ export const side = (): SideInterface[] => [
   },
 ];
 
-export const moment = (): MomentInterface[] => [
+export const moment = (): IMoment[] => [
   {
     id: '1',
     name: 'QualquerMomento',
@@ -44,7 +38,7 @@ export const moment = (): MomentInterface[] => [
   },
 ];
 
-export const difficult = (): DifficultInterface[] => [
+export const difficult = (): IDifficult[] => [
   {
     id: '1',
     name: 'Facil',
@@ -59,7 +53,7 @@ export const difficult = (): DifficultInterface[] => [
   },
 ];
 
-export const agents = (): AgentInterface[] => [
+export const agents = (): IAgent[] => [
   {
     id: 1,
     name: 'Cypher',
@@ -238,7 +232,7 @@ export const agents = (): AgentInterface[] => [
   },
 ];
 
-export const maps = (): MapInterface[] => [
+export const maps = (): IMap[] => [
   {
     id: 1,
     name: 'Ascent',

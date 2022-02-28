@@ -4,7 +4,7 @@ import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { api } from '@/services/api';
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 import Router from 'next/router';
 import { Layout } from '@/layout/layout';
 import { ErrorMsg } from '@/base/errorMsg';
@@ -59,7 +59,7 @@ const DashboardScreen = () => {
   return (
     <Layout>
       <Navbar selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />
-      <Breadcrumb admin breadcrumbs={breadcrumbs} />
+      <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
         <div className="max-w-maxWidthDefaultForm flex flex-col justify-start w-full">

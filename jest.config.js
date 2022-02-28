@@ -37,7 +37,8 @@ module.exports = {
     '^@/utils/(.*)$': '<rootDir>/src/tests/utils/$1',
     '^@/pages/(.*)$': '<rootDir>/src/pages/$1',
 
-    '^@/interfaces/(.*)$': '<rootDir>/src/interfaces/$1',
+    '^@/types/(.*)$': '<rootDir>/src/core/types/$1',
+    '^@/enums/(.*)$': '<rootDir>/src/core/enums/$1',
 
     /* Handle CSS imports (with CSS modules)
     https://jestjs.io/docs/webpack#mocking-css-modules */

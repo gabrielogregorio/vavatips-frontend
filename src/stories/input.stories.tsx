@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Input, PropsInterfaceInput } from '../components/base/input';
+import { Input, TPropsInput } from '../components/base/input';
 
 export default {
   title: 'form/Input',
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: Story<PropsInterfaceInput> = (props) => {
+const Template: Story<TPropsInput> = (props) => {
   const [localValue, setValue] = useState<string>('');
   const onChangeInput = (inputValue: string) => {
     setValue(inputValue);
@@ -15,7 +15,7 @@ const Template: Story<PropsInterfaceInput> = (props) => {
   return <Input {...props} value={localValue} setValue={onChangeInput} />;
 };
 
-export const Default: Story<PropsInterfaceInput> = Template.bind({});
+export const Default: Story<TPropsInput> = Template.bind({});
 Default.args = {
   disabled: false,
   type: 'text',

@@ -27,7 +27,8 @@
       "@/mock/*": ["src/tests/mock/*"],
       "@/utils/*": ["src/tests/utils/*"],
       "@/pages/*": ["src/pages/*"],
-      "@/interfaces/*": ["src/interfaces/*"]
+      "@/types/*": ["src/core/types/*"],
+      "@/enums/*": ["src/core/enums/*"]
     },
     "incremental": true
   },

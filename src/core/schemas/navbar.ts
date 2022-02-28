@@ -1,4 +1,4 @@
-import { navbarEnum } from '@/interfaces/navbar';
+import { navbarEnum } from '@/enums/navbar';
 
 export type modelNavbarType = { url: navbarEnum; text: string };
 
