@@ -21,6 +21,7 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCard
         type="button"
         className="flex flex-col justify-center items-center flex-1 h-40 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
         <div
+          data-testid="loading"
           className={`block relative w-full rounded-md overflow-hidden ${heightImage} ${
             isLoaded ? '' : 'wait-load-pulse'
           }`}>
@@ -28,6 +29,7 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCard
             layout="fill"
             className="flex-1 object-cover"
             src={srcImage}
+            data-src={srcImage}
             alt={titleImage}
             priority
             onLoadingComplete={() => handleWithIsLoadedImage()}

@@ -86,7 +86,13 @@ export const Modal = ({
 
         {LinkImg !== '' ? (
           <div className="relative w-full my-2 h-52">
-            <Image layout="fill" src={formatImage(LinkImg)} alt="" className="object-cover h-52" />
+            <Image
+              layout="fill"
+              data-src={formatImage(LinkImg)}
+              src={formatImage(LinkImg)}
+              alt=""
+              className="object-cover h-52"
+            />
           </div>
         ) : null}
 

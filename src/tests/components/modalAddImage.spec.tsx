@@ -129,8 +129,8 @@ describe('<Modal />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByRole('img')).toHaveAttribute(
-      'src',
-      '/_next/image?url=http%3A%2F%2F127.0.0.1%3A3333%2Fimages%2Fhttps%3A%2F%2Fgcloud.com%2F123abc&w=3840&q=75',
+      'data-src',
+      'http://127.0.0.1:3333/images/https://gcloud.com/123abc',
     );
 
     expect(saveModal).toHaveBeenCalledWith(
@@ -157,8 +157,8 @@ describe('<Modal />', () => {
 
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição post');
     expect(screen.getByRole('img')).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+      'data-src',
+      'http://127.0.0.1:3333/images/https://uploads/file1',
     );
     expect(inputDescription.value).toEqual('myDescription');
 

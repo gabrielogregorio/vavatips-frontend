@@ -14,15 +14,13 @@ type typeType = 'next' | 'prev';
 
 type TProps = {
   post: TPostsProps;
-  viewAdmin: boolean;
 };
 
-export const PostCard = ({ post, viewAdmin = false }: TProps) => {
+export const PostCard = ({ post }: TProps) => {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
   const { setModalSuggestion } = useModalContext();
-  const [errorImage, setErrorImage] = useState('');
 
   function handleAddTest() {
     if (postTested) {
@@ -30,7 +28,7 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
     } else {
       addNewPost(post.id, 'test');
     }
-    setPostTested(getPostsTested()?.includes(post.id) ?? false);
+    setPostTested(getPostsTested()?.includes(post.id));
   }
 
   function handleAddSave() {
@@ -39,13 +37,13 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
     } else {
       addNewPost(post.id, 'save');
     }
-    setPostSave(getPostsSave()?.includes(post.id) ?? false);
+    setPostSave(getPostsSave()?.includes(post.id));
   }
 
   useEffect(() => {
     function thisPostIsIncludeInSaveOrTestedPosts() {
-      setPostTested(getPostsTested()?.includes(post.id) ?? false);
-      setPostSave(getPostsSave()?.includes(post.id) ?? false);
+      setPostTested(getPostsTested()?.includes(post.id));
+      setPostSave(getPostsSave()?.includes(post.id));
     }
 
     thisPostIsIncludeInSaveOrTestedPosts();
@@ -78,15 +76,19 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
             <Image
               layout="fill"
               className="rounded-full object-cover"
+              data-src={formatImage(post.user.image)}
               src={formatImage(post.user.image)}
               alt="Foto de perfil do Autor da postagem"
+              priority
             />
           ) : (
             <Image
               layout="fill"
               className="rounded-full object-cover"
+              data-src="/images/users/profile.webp"
               src="/images/users/profile.webp"
               alt="Foto de perfil do Autor da postagem"
+              priority
             />
           )}
         </div>
@@ -96,9 +98,9 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
         </p>
 
         {isAuthenticated() === true ? (
-          <Button className="block text-skin-secondary-regular" onClick={() => null}>
+          <button type="button" className="block text-skin-secondary-regular">
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
-          </Button>
+          </button>
         ) : null}
       </div>
 
@@ -113,9 +115,10 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
               layout="fill"
               className="object-cover rounded-lg"
               placeholder="blur"
+              priority
               blurDataURL="/images/assets/loader.png"
-              onError={() => setErrorImage('/images/assets/error.webp')}
-              src={errorImage || formatImage(post.imgs?.[idImage]?.image)}
+              data-src={formatImage(post.imgs?.[idImage]?.image)}
+              src={formatImage(post.imgs?.[idImage]?.image)}
               alt={post.imgs?.[idImage]?.description}
             />
           </div>
@@ -162,7 +165,7 @@ export const PostCard = ({ post, viewAdmin = false }: TProps) => {
         </p>
       </div>
 
-      {!viewAdmin ? (
+      {isAuthenticated() === false ? (
         <div className="w-full flex justify-around m-1">
           <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
           <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />

@@ -67,7 +67,7 @@ describe('<CreatePost />', () => {
 
       cy.get('button:contains("Publicar Dica")').click();
 
-      cy.get('h1:contains("Todos os Posts")', { timeout: 15000 }).should('be.visible');
+      cy.get('h1:contains("Todos os Posts")').should('be.visible');
     });
   });
 });

@@ -20,5 +20,4 @@ const Template: ComponentStory<typeof PostCard> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   post: mockPosts.posts[0],
-  viewAdmin: false,
 };

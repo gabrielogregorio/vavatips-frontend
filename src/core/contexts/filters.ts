@@ -4,8 +4,8 @@ import { TContextTags } from '@/types/posts';
 export const ContextFilters = createContext<TContextTags>({
   tags: [],
   filters: [],
-  setFilters: (filters) => new Error(`do you need use context Filters ${filters}`),
-  setTags: (tags) => new Error(`do you need use context Filters ${tags}`),
+  setFilters: null,
+  setTags: null,
 });
 
 export const useFilters = () => useContext(ContextFilters);
