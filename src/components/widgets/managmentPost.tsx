@@ -220,13 +220,15 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
         <div className="relative flex-1 ">
           <div className="relative h-72 w-full ">
-            <Image
-              layout="fill"
-              className="object-cover"
-              data-src={formatImage(instruction.image)}
-              src={formatImage(instruction.image)}
-              alt={instruction.description}
-            />
+            {formatImage(instruction.image) !== '' ? (
+              <Image
+                layout="fill"
+                className="object-cover"
+                data-src={formatImage(instruction.image)}
+                src={formatImage(instruction.image)}
+                alt={instruction.description}
+              />
+            ) : null}
           </div>
 
           <br />

@@ -6,8 +6,8 @@
   "env": {
     "apiHost": "http://127.0.0.1:3333"
   },
-  "defaultCommandTimeout": 25000,
-  "pageLoadTimeout": 25000,
+  "defaultCommandTimeout": 45000,
+  "pageLoadTimeout": 45000,
   "screenshotOnRunFailure": false,
   "video": false
 }

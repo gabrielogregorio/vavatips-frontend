@@ -24,7 +24,7 @@ let count = 0;
 
 const post = {
   id: '12',
-  user: { id: '53', username: 'Gabriel', image: 'user.png' },
+  user: { id: '53', username: 'Gabriel', image: '/user.png' },
   description: 'my Description post',
   title: 'my title post',
   imgs: [
@@ -45,7 +45,7 @@ const post = {
   },
 };
 
-const baseUrlImage = 'http://127.0.0.1:3333/images';
+const baseUrlImage = '';
 
 const handlers = [
   rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
@@ -84,7 +84,7 @@ describe('<PostCard />', () => {
       'Foto de perfil do Autor da postagem',
     );
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `${baseUrlImage}/user.png`);
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/user.png`);
   });
 
   it('should test if image author is render in not image available', async () => {
@@ -148,53 +148,32 @@ describe('<PostCard />', () => {
     );
 
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image111.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
 
     userEvent.click(screen.getByTestId('prev-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image555.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image222.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image222.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image333.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image333.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image444.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image444.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image555.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'data-src',
-      `${baseUrlImage}/https://image111.png`,
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
   });
 
   it('should test save and test posts and return', async () => {

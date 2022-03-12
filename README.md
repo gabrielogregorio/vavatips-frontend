@@ -38,6 +38,13 @@ Read [Contributing.md](CONTRIBUTING.md)
 
 ### Run
 ```bash
+
+# Install full dependencies
+yarn
+
+# Ignore storybook dependencies, but resolve in lockfile.
+yarn install --ignore-optional
+
 # Run in develop mode
 # Open in http://localhost:3000
 yarn dev

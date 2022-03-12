@@ -9,7 +9,7 @@ describe('<Modal />', () => {
         id="id item"
         title="title"
         description="description"
-        image="image"
+        image="/image"
         closeModal={() => jest.fn()}
         saveModal={() => fn()}
       />,

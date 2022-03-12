@@ -113,12 +113,6 @@ describe('<CreatePostScreen />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', '');
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
-
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
     await waitByLoading();

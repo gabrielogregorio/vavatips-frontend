@@ -1,4 +1,4 @@
-name: Check tsc and lint
+name: Integration and End to End tests
 
 on:
   push:
@@ -23,6 +23,4 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --ignore-optional --frozen-lockfile
-      - run: yarn type-check
-      - run: yarn lint
-      - run: yarn stylelint "**.css"
+      - run: yarn e2e:headless

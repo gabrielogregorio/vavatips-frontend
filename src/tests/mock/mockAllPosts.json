@@ -21,7 +21,7 @@
         {
           "id": "45f83bdc-1f44-44a5-a03d-47ab7d9b7c9f",
           "description": "abc",
-          "image": "image-1635599600225"
+          "image": "/image-1635599600225"
         }
       ]
     },
@@ -46,7 +46,7 @@
         {
           "id": "13782385-5125-4fc5-96c2-1df29089c1e2",
           "description": "",
-          "image": "image-1635599579266"
+          "image": "/image-1635599579266"
         }
       ]
     },
@@ -71,7 +71,7 @@
         {
           "id": "9aa8a971-cd39-4fae-b1f9-7a31202bb273",
           "description": "",
-          "image": "image-1635599545528"
+          "image": "/image-1635599545528"
         }
       ]
     },
@@ -115,7 +115,7 @@
         {
           "id": "aefdee5f-eea6-4d6b-bf6a-a42aa950b201",
           "description": "",
-          "image": "image-1635599510471"
+          "image": "/image-1635599510471"
         }
       ]
     },
@@ -140,7 +140,7 @@
         {
           "id": "49d71936-fd0e-4d5f-a294-22bf571972c4",
           "description": "",
-          "image": "image-1635599482539"
+          "image": "/image-1635599482539"
         }
       ]
     },
@@ -165,7 +165,7 @@
         {
           "id": "c1dce16a-5023-4915-9170-64b99acaebb5",
           "description": "",
-          "image": "image-1635599463295"
+          "image": "/image-1635599463295"
         }
       ]
     },
@@ -190,7 +190,7 @@
         {
           "id": "dcc446a6-ab07-4e51-b405-3a67d2b3b968",
           "description": "",
-          "image": "image-1635599441810"
+          "image": "/image-1635599441810"
         }
       ]
     },
@@ -215,7 +215,7 @@
         {
           "id": "400da6df-31c1-4829-9bc4-03d705ced35f",
           "description": "llllllllllllllllll",
-          "image": "image-1635539049044"
+          "image": "/image-1635539049044"
         }
       ]
     },
@@ -240,12 +240,12 @@
         {
           "id": "2c868ff6-9961-4f7c-8667-d325bbd812e7",
           "description": "sdsddsssddssdsdsddsdsd",
-          "image": "image-1635538971373"
+          "image": "/image-1635538971373"
         },
         {
           "id": "1f1bd279-a45c-48a6-8599-d184ed30cf62",
           "description": "sdsdsdsdssddsdsdsdsdsds",
-          "image": "image-1635538951428"
+          "image": "/image-1635538951428"
         }
       ]
     }

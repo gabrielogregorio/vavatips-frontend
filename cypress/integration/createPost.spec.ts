@@ -2,7 +2,7 @@ describe('<CreatePost />', () => {
   beforeEach(() => {
     cy.intercept('/postLoadFile', (req) => {
       req.reply({
-        body: { filename: 'image-1234' },
+        body: { filename: '/image-1234' },
       });
     }).as('sendImage');
 
@@ -25,10 +25,10 @@ describe('<CreatePost />', () => {
 
       expect(req.body.tags.agent).equal('Killjoy');
       expect(req.body.imgs[0].description).equal('Description image 1');
-      expect(req.body.imgs[0].image).equal('image-1234');
+      expect(req.body.imgs[0].image).equal('/image-1234');
 
       expect(req.body.imgs[1].description).equal('Description image 2');
-      expect(req.body.imgs[1].image).equal('image-1234');
+      expect(req.body.imgs[1].image).equal('/image-1234');
       req.reply({
         statusCode: 200,
       });
@@ -54,14 +54,14 @@ describe('<CreatePost />', () => {
       cy.get('h1:contains("Adicionar Post")').should('be.visible').should('exist');
       cy.get(':nth-child(1) > .flex > #description').type('Description image 1');
       // @ts-ignore
-      cy.get('input[type="file"]').attachFile('images/img1.webp');
+      cy.get('input[type="file"]').attachFile('/images/img1.webp');
       cy.wait('@sendImage');
       cy.get('button:contains("Adicionar")').click();
 
       cy.get('button:contains("Novo Passo")').click();
       cy.get(':nth-child(1) > .flex > #description').type('Description image 2');
       // @ts-ignore
-      cy.get('input[type="file"]').attachFile('images/img2.webp');
+      cy.get('input[type="file"]').attachFile('/images/img2.webp');
       cy.wait('@sendImage');
       cy.get('button:contains("Adicionar")').click();
 
