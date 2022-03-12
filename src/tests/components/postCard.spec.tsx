@@ -45,8 +45,6 @@ const post = {
   },
 };
 
-const baseUrlImage = '';
-
 const handlers = [
   rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     if (count === 2) {

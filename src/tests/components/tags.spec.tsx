@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { Footer } from '@/layout/footer';
 import { useMemo, useState } from 'react';
 import { Tags } from '../../components/widgets/tags';
 import { ContextFilters } from '../../core/contexts/filters';

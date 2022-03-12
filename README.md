@@ -108,25 +108,3 @@ yarn upgrade-interactive --latest
 | EditorConfig for VS code | For basics formatter in code |  EditorConfig |
 | Tailwind CSS IntelliSense | For highlight and autocomplete tailwind | Tailwind Labs |
 | TODO Highlight v2 | For highlight FIXME: and TODO: | Jonathan Clark |
-
-
-## Components to add in storybook
-
-Form
-GroupInput
-GroupInputMultiple
-Layout
-Breadcrumb
-ItemList
-SubContainer
-PostButton
-CreatePostManagement
-ButtonCloseModal
-NavbarLink
-PaginationButtons
-Modal
-ModalRef
-ModalOfSuggestion
-ContainerPosts
-Pagination
-Posts
