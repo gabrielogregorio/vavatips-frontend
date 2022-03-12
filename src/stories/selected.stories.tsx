@@ -1,7 +1,7 @@
 import { ComponentMeta, Story } from '@storybook/react';
-import { TPropsSelectedBase, Selected } from '../components/base/selected';
+import { TPropsSelectedBase, Selected } from '@/base/selected';
 import { agents } from '@/data/data-valorant';
-import { convertToSelectedRender } from '../core/helpers/convertToSelectedData';
+import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 
 export default {
   title: 'form/Selected',
@@ -9,8 +9,7 @@ export default {
 } as ComponentMeta<typeof Selected>;
 
 const Template: Story<TPropsSelectedBase> = (props) => {
-  const onChangeInput = () => {};
-  return <Selected {...props} setValue={onChangeInput} />;
+  return <Selected {...props} setValue={() => null} />;
 };
 
 export const Default: Story<TPropsSelectedBase> = Template.bind({});

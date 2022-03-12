@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import MyProfileScreen from '@/pages/admin/profile';
+import Profile from '@/pages/admin/profile';
 import { login } from '@/services/auth';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
@@ -47,7 +47,7 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<MyProfileScreen />', () => {
+describe('<Profile />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -57,7 +57,7 @@ describe('<MyProfileScreen />', () => {
   it('should render profile screen', async () => {
     render(
       <MockApp>
-        <MyProfileScreen />
+        <Profile />
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
@@ -71,7 +71,7 @@ describe('<MyProfileScreen />', () => {
   it('should logout screen', async () => {
     render(
       <MockApp>
-        <MyProfileScreen />
+        <Profile />
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');
@@ -86,7 +86,7 @@ describe('<MyProfileScreen />', () => {
   it('should edit user and save', async () => {
     render(
       <MockApp>
-        <MyProfileScreen />
+        <Profile />
       </MockApp>,
     );
     login('VALUE_TOKEN_JWT');

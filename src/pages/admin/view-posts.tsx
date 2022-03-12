@@ -7,7 +7,7 @@ const breadcrumbs = [
   { url: navbarEnum.ViewPosts, text: 'posts' },
 ];
 
-const ViewPostsScreen = () => (
+const ViewPosts = () => (
   <Layout>
     <ContainerPosts
       breadcrumbs={breadcrumbs}
@@ -18,4 +18,4 @@ const ViewPostsScreen = () => (
     />
   </Layout>
 );
-export default ViewPostsScreen;
+export default ViewPosts;

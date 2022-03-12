@@ -32,7 +32,7 @@ const Td = ({ children }: { children: ReactNode }) => (
   </td>
 );
 
-const SuggestionScreen = () => {
+const Suggestions = () => {
   const [suggestions, setSuggestions] = useState<suggestionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -58,7 +58,7 @@ const SuggestionScreen = () => {
 
   return (
     <Layout>
-      <Navbar selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />
+      <Navbar selected={navbarEnum.Suggestions} modelNavbar={modelNavbarAdmin} />
       <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <Loader active={loading} />
@@ -91,4 +91,4 @@ const SuggestionScreen = () => {
     </Layout>
   );
 };
-export default SuggestionScreen;
+export default Suggestions;

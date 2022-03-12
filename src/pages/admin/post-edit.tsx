@@ -7,9 +7,9 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'editar' },
 ];
 
-const EditPostScreen = () => (
+const EditPost = () => (
   <Layout>
     <CreatePostManagement breadcrumbs={breadcrumbs} mode="edit" />
   </Layout>
 );
-export default EditPostScreen;
+export default EditPost;

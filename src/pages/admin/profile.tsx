@@ -20,7 +20,7 @@ const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'perfil' },
 ];
 
-const MyProfileScreen = () => {
+const Profile = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [password2, setPassword2] = useState<string>('');
@@ -87,7 +87,7 @@ const MyProfileScreen = () => {
 
               <ButtonForm
                 className="bg-skin-primary-light text-skin-white border-skin-primary-light mt-2 p-1"
-                onClick={() => {}}>
+                onClick={() => null}>
                 Atualizar dados
               </ButtonForm>
             </>
@@ -98,4 +98,4 @@ const MyProfileScreen = () => {
     </Layout>
   );
 };
-export default MyProfileScreen;
+export default Profile;

@@ -24,11 +24,14 @@ module.exports = {
     '!**/*.stories.tsx/**', // ignore ALL stories from storybook // NEEDS TEST STORYBOOK ? //
   ],
   testPathIgnorePatterns: [
-    '<rootDir>/node_modules/', // packages
-    '<rootDir>/.next/', // build next
-    '<rootDir>/cypress/', // cypress
-    '<rootDir>/.storybook/', // storybook
-    '<rootDir>/src/stories/', // stories from storybook
+    '/node_modules/',
+    '/.next/',
+    '/cypress/',
+    '/.storybook/',
+    '/storybook-static/',
+    '/coverage',
+    '/.nyc_output',
+    '/src/stories/',
   ],
   coverageDirectory: '<rootDir>/coverage/',
   coverageReporters: ['json-summary', 'text', 'lcov'],

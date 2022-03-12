@@ -7,9 +7,9 @@ const breadcrumbs = [
   { url: navbarEnum.PostCreate, text: 'criar' },
 ];
 
-const CreatePostScreen = () => (
+const CreatePost = () => (
   <Layout>
     <CreatePostManagement breadcrumbs={breadcrumbs} mode="create" />
   </Layout>
 );
-export default CreatePostScreen;
+export default CreatePost;

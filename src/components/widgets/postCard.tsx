@@ -68,6 +68,8 @@ export const PostCard = ({ post }: TProps) => {
   function handleModalAction() {
     setModalSuggestion({ active: true, post });
   }
+
+  const existsImages = post.imgs.length !== 0;
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-white">
       <div className="flex justify-center items-center mb-2 mt-2 w-full">
@@ -111,16 +113,18 @@ export const PostCard = ({ post }: TProps) => {
       <div className="w-full">
         <div className="relative w-full">
           <div className="relative h-[500px] w-full">
-            <Image
-              layout="fill"
-              className="object-cover rounded-lg"
-              placeholder="blur"
-              priority
-              blurDataURL="/images/assets/loader.png"
-              data-src={formatImage(post.imgs?.[idImage]?.image)}
-              src={formatImage(post.imgs?.[idImage]?.image)}
-              alt={post.imgs?.[idImage]?.description}
-            />
+            {existsImages ? (
+              <Image
+                layout="fill"
+                className="object-cover rounded-lg"
+                placeholder="blur"
+                priority
+                blurDataURL="/images/assets/loader.png"
+                data-src={formatImage(post.imgs?.[idImage]?.image)}
+                src={formatImage(post.imgs?.[idImage]?.image)}
+                alt={post.imgs?.[idImage]?.description}
+              />
+            ) : null}
           </div>
 
           <div className="absolute left-0 top-2/4">

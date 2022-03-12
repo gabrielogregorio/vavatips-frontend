@@ -4,7 +4,7 @@ import Router from 'next/router';
 import { setupServer } from 'msw/node';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
-import CreatePostScreen from '@/pages/admin/post-create';
+import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
 
@@ -53,7 +53,7 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<CreatePostScreen />', () => {
+describe('<CreatePost />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -63,7 +63,7 @@ describe('<CreatePostScreen />', () => {
   it('should render screen to create post', async () => {
     render(
       <MockApp>
-        <CreatePostScreen />
+        <CreatePost />
       </MockApp>,
     );
 
@@ -81,7 +81,7 @@ describe('<CreatePostScreen />', () => {
   it('should render create post screen and create post', async () => {
     render(
       <MockApp>
-        <CreatePostScreen />
+        <CreatePost />
       </MockApp>,
     );
 

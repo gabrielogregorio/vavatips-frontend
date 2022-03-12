@@ -43,7 +43,7 @@ describe('<Navbar />', () => {
   });
 
   it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.SuggestionScreen} modelNavbar={modelNavbarAdmin} />);
+    render(<Navbar selected={navbarEnum.Suggestions} modelNavbar={modelNavbarAdmin} />);
     expect(screen.getByRole('link', { name: 'sugestões' })).toHaveAttribute(
       'class',
       'p-2 text-xl border-b-2 border-cyan-50',

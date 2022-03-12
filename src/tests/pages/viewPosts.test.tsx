@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
-import ViewPostsScreen from '@/pages/admin/view-posts';
+import ViewPosts from '@/pages/admin/view-posts';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
@@ -37,7 +37,7 @@ describe('<HomeScreen />', () => {
   it('should render home screen', async () => {
     render(
       <MockApp>
-        <ViewPostsScreen />
+        <ViewPosts />
       </MockApp>,
     );
 

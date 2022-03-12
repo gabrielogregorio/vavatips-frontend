@@ -3,7 +3,7 @@ export enum navbarEnum {
   PostCreate = '/admin/post-create',
   ViewPosts = '/admin/view-posts',
   EditScreen = '#',
-  SuggestionScreen = '/admin/suggestions',
+  Suggestions = '/admin/suggestions',
   Dashboard = '/admin/dashboard',
   Inicio = '/',
   Posts = '/posts',
