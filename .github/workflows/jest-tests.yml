@@ -1,4 +1,4 @@
-name: Check tsc and lint
+name: Unit tests
 
 on:
   push:
@@ -22,7 +22,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install --ignore-optional --frozen-lockfile
-      - run: yarn type-check
-      - run: yarn lint
-      - run: yarn stylelint "**.css"
+        run: yarn install --frozen-lockfile
+      - run: yarn jest

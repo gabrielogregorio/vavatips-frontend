@@ -57,18 +57,18 @@ describe('<Maps />', () => {
 
   it('should navigate to the about page', () => {
     // Start from the index page
-    cy.visit('http://localhost:3000/', { timeout: 120000 });
-    cy.contains('Ascent', { timeout: 10000 });
+    cy.visit('http://localhost:3000/');
+    cy.contains('Ascent');
 
     // Find a link with an href attribute containing "about" and click it
     cy.get('button[href="/agents?map=Ascent"]').click();
 
     // // The new page should contain an h1 with "About page"
-    cy.contains('Escolha um Agente', { timeout: 10000 });
+    cy.contains('Escolha um Agente');
 
     cy.get('button[href="/posts?map=Ascent&agent=Cypher"]').click();
 
-    cy.contains(/as melhores dicas de valorant/i, { timeout: 5000 });
+    cy.contains(/as melhores dicas de valorant/i);
 
     cy.contains('button', 'QualquerMomento');
     cy.contains('button', 'Facil');
@@ -85,7 +85,7 @@ describe('<Maps />', () => {
     // second first
     cy.contains('developer');
 
-    cy.contains('Aquela câmera mocada do cypher', { timeout: 10000 });
+    cy.contains('Aquela câmera mocada do cypher');
     cy.contains('1 de 2 : Basta posicionar nessa região');
 
     cy.contains('Aquela câmera mocada do cypher');
@@ -164,7 +164,7 @@ describe('<Maps />', () => {
 
     cy.get('button:contains("Adicionar")').click();
 
-    cy.contains('Sugestão enviada com sucesso, muito obrigado!', { timeout: 15000 });
+    cy.contains('Sugestão enviada com sucesso, muito obrigado!');
 
     // close notify
     cy.get('button[aria-label="close"]').click();

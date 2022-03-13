@@ -13,6 +13,6 @@ export const modelNavbarAdmin: modelNavbarType[] = [
   { url: navbarEnum.Dashboard, text: 'dashboard' },
   { url: navbarEnum.PostCreate, text: 'criar posts' },
   { url: navbarEnum.ViewPosts, text: 'posts' },
-  { url: navbarEnum.SuggestionScreen, text: 'sugestões' },
+  { url: navbarEnum.Suggestions, text: 'sugestões' },
   { url: navbarEnum.Profile, text: 'perfil' },
 ];

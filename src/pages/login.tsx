@@ -5,7 +5,7 @@ import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links.json';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
 import { navbarEnum } from '@/enums/navbar';

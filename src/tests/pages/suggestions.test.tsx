@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import SuggestionScreen from '@/pages/admin/suggestions';
+import Suggestions from '@/pages/admin/suggestions';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -57,7 +57,7 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<SuggestionScreen />', () => {
+describe('<Suggestions />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -67,7 +67,7 @@ describe('<SuggestionScreen />', () => {
   it('should render suggestion screen', async () => {
     render(
       <MockApp>
-        <SuggestionScreen />
+        <Suggestions />
       </MockApp>,
     );
 

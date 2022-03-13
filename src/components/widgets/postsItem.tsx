@@ -9,7 +9,7 @@ export const Posts = ({ posts }: IPostProps) => (
   <div className="flex flex-col">
     {posts.map((post) => (
       <div key={post.id}>
-        <PostCard post={post} viewAdmin={false} />
+        <PostCard post={post} />
       </div>
     ))}
   </div>

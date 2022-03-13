@@ -7,6 +7,7 @@ import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
+import { TOKEN_JWT } from '../../core/services/auth';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -23,7 +24,7 @@ let count = 0;
 
 const post = {
   id: '12',
-  user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
+  user: { id: '53', username: 'Gabriel', image: '/user.png' },
   description: 'my Description post',
   title: 'my title post',
   imgs: [
@@ -69,29 +70,54 @@ describe('<PostCard />', () => {
 
   afterAll(() => server.close());
 
+  it('should test normal mode', async () => {
+    render(
+      <MockApp>
+        <PostCard post={post} />
+      </MockApp>,
+    );
+
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'alt',
+      'Foto de perfil do Autor da postagem',
+    );
+
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/user.png`);
+  });
+
+  it('should test if image author is render in not image available', async () => {
+    render(
+      <MockApp>
+        <PostCard post={{ ...post, user: { id: '53', username: 'Gabriel', image: '' } }} />
+      </MockApp>,
+    );
+
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
+      'alt',
+      'Foto de perfil do Autor da postagem',
+    );
+
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/images/users/profile.webp`);
+  });
+
   it('should render correctly post card, save post and test post', async () => {
     render(
       <MockApp>
-        <PostCard post={post} viewAdmin={false} />
+        <PostCard post={post} />
       </MockApp>,
     );
 
     userEvent.click(screen.getByRole('button', { name: 'Testado' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
+    expect(screen.queryByRole('button', { name: 'Editar' })).not.toBeInTheDocument();
   });
 
   it('should render correctly post card with undefined user', async () => {
     render(
       <MockApp>
-        <PostCard
-          post={{ ...post, user: { ...post.user, username: undefined } }}
-          viewAdmin={false}
-        />
+        <PostCard post={{ ...post, user: { ...post.user, username: undefined } }} />
       </MockApp>,
     );
-
-    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
-    userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
 
     userEvent.click(screen.getByRole('button', { name: 'Testado' }));
     userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
@@ -101,7 +127,7 @@ describe('<PostCard />', () => {
     render(
       <MockApp>
         <ModalOfSuggestion title="fazer sugestão" />
-        <PostCard post={post} viewAdmin={false} />
+        <PostCard post={post} />
       </MockApp>,
     );
 
@@ -115,76 +141,83 @@ describe('<PostCard />', () => {
   it('should navigated correctly post card images', async () => {
     render(
       <MockApp>
-        <PostCard post={post} viewAdmin={false} />
+        <PostCard post={post} />
       </MockApp>,
     );
 
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
 
     userEvent.click(screen.getByTestId('prev-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image222.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image333.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image444.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    );
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(
-      'src',
-      'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
+  });
+
+  it('should test save and test posts and return', async () => {
+    render(
+      <MockApp
+        localstorage={{
+          SAVE_POSTS: '[]',
+          TESTED_POSTS: '[]',
+        }}>
+        <PostCard post={post} />
+      </MockApp>,
     );
+
+    expect(localStorage.getItem('SAVE_POSTS')).toEqual('[]');
+    expect(localStorage.getItem('TESTED_POSTS')).toEqual('[]');
+
+    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
+    expect(localStorage.getItem('SAVE_POSTS')).toEqual('[]');
+    expect(localStorage.getItem('TESTED_POSTS')).toEqual('["12"]');
+
+    userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
+    expect(localStorage.getItem('SAVE_POSTS')).toEqual('["12"]');
+    expect(localStorage.getItem('TESTED_POSTS')).toEqual('["12"]');
+
+    userEvent.click(screen.getByRole('button', { name: 'Testado' }));
+    expect(localStorage.getItem('SAVE_POSTS')).toEqual('["12"]');
+    expect(localStorage.getItem('TESTED_POSTS')).toEqual('[]');
+
+    userEvent.click(screen.getByRole('button', { name: 'Salvar' }));
+    expect(localStorage.getItem('SAVE_POSTS')).toEqual('[]');
+    expect(localStorage.getItem('TESTED_POSTS')).toEqual('[]');
   });
 
   it('should test view admin', async () => {
     render(
-      <MockApp>
-        <PostCard post={post} viewAdmin />
+      <MockApp
+        localstorage={{
+          'app-token-valorant': 'token jwt',
+        }}>
+        <PostCard post={post} />
       </MockApp>,
     );
 
     expect(screen.queryByRole('button', { name: 'Testado' })).not.toBeInTheDocument();
     expect(screen.queryByRole('button', { name: 'Salvar' })).not.toBeInTheDocument();
-  });
-
-  it('should test view admin', async () => {
-    render(
-      <MockApp>
-        <PostCard post={post} viewAdmin />
-      </MockApp>,
-    );
+    expect(screen.queryByRole('button', { name: 'Editar' })).toBeInTheDocument();
+    expect(localStorage.getItem(TOKEN_JWT)).toEqual('token jwt');
   });
 });

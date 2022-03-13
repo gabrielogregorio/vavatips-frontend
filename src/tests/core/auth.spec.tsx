@@ -25,4 +25,10 @@ describe('auth', () => {
 
     expect(getToken()).toEqual(null);
   });
+
+  it('should test auth localstorage with simulate run in server', async () => {
+    delete window.localStorage;
+    expect(isAuthenticated()).toEqual(false);
+    expect(getToken()).toEqual('');
+  });
 });

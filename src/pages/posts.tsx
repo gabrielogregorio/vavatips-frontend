@@ -1,4 +1,4 @@
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links.json';
 import { Layout } from '@/layout/layout';
 import { ContainerPosts } from '@/widgets/containerPosts';
 import { navbarEnum } from '@/enums/navbar';

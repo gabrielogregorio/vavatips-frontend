@@ -1,21 +1,37 @@
 module.exports = {
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-    '!**/.next/**',
-    '!**/coverage/**',
-    '!**/storybook-static/**',
-    '!**/src/stories/**',
-    '!**/cypress/**',
-    '!**/jest.config.js**',
-    '!**/jest.setup.js**',
-    '!**/stylelint.config.js**',
-    '!**/postcss.config.js**',
-    '!**/tailwind.config.js**',
-    '!**/next.config.js**',
-    '!**/.eslintrc.js**',
-    '!**/.prettierrc.js**',
+    '!**/src/pages/**', // [ *** IMPORTANT *** ] IGNORE PAGES, PAGES ARE TESTED IN CYPRESS
+    '!**/*.d.ts', // ignore envs
+    '!**/node_modules/**', // ignore packages node modules
+    '!**/.github/**', // ignore github yml
+    '!**/.jest/**', // ignore .env jest
+    '!**/.next/**', // ignore build next
+    '!**/.nyc_output/**', // ignore nyc coverage
+    '!**/.storybook/**', // ignore storybook configs
+    '!**/.vscode/**', // ignore vscode configs
+    '!**/coverage/**', // ignore coverage from jest
+    '!**/cypress/**', // ignore cypress configs and tests
+    '!**/public/**', // ignore public files
+    '!**/storybook-static/**', // ignore build storybook
+    '!**/.eslintrc.js/**', // ignore eslint configs
+    '!**/.prettierrc.js/**', // ignore prettier configs
+    '!**/jest.config.js/**', // ignore jest configs
+    '!**/next.config.js/**', // ignore next configs
+    '!**/postcss.config.js/**', // ignore postcss from tailwind
+    '!**/stylelint.config.js/**', // ignore stylelint configs
+    '!**/tailwind.config.js/**', // ignore tailwind configs
+    '!**/*.stories.tsx/**', // ignore ALL stories from storybook // NEEDS TEST STORYBOOK ? //
+  ],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/',
+    '/cypress/',
+    '/.storybook/',
+    '/storybook-static/',
+    '/coverage',
+    '/.nyc_output',
+    '/src/stories/',
   ],
   coverageDirectory: '<rootDir>/coverage/',
   coverageReporters: ['json-summary', 'text', 'lcov'],
@@ -51,13 +67,7 @@ module.exports = {
     https://jestjs.io/docs/webpack#handling-static-assets */
     '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/.next/',
-    '<rootDir>/cypress/',
-    '<rootDir>/.storybook/',
-    '<rootDir>/src/stories/',
-  ],
+
   testEnvironment: 'jsdom',
   transform: {
     /* Use babel-jest to transpile tests with the next/babel preset

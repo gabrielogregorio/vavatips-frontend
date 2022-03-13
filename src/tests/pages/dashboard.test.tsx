@@ -2,7 +2,7 @@ import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
-import DashboardScreen from '@/pages/admin/dashboard';
+import Dashboard from '@/pages/admin/dashboard';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -62,7 +62,7 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-describe('<DashboardScreen />', () => {
+describe('<Dashboard />', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => server.resetHandlers());
@@ -72,7 +72,7 @@ describe('<DashboardScreen />', () => {
   it('should render dashboard', async () => {
     render(
       <MockApp>
-        <DashboardScreen />
+        <Dashboard />
       </MockApp>,
     );
 
@@ -91,7 +91,7 @@ describe('<DashboardScreen />', () => {
   it('should force error jwt', async () => {
     render(
       <MockApp>
-        <DashboardScreen />
+        <Dashboard />
       </MockApp>,
     );
 

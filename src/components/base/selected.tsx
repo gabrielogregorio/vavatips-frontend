@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { GroupInput } from './groupInput';
 import { Label } from './label';
 
-type TPropsSelectedBase = {
+export type TPropsSelectedBase = {
   text: string;
   value: string;
   setValue: (value: string) => void;

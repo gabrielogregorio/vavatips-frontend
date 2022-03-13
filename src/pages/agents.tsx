@@ -6,7 +6,7 @@ import { Breadcrumb } from '@/widgets/breadcrumb';
 import { ErrorMsg } from '@/base/errorMsg';
 import { useAgents } from '@/hooks/useAgents';
 import { Title } from '@/base/title';
-import { LINKS } from '@/data/links';
+import LINKS from '@/data/links.json';
 import { Layout } from '@/layout/layout';
 import { navbarEnum } from '@/enums/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';

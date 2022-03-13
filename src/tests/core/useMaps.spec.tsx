@@ -87,15 +87,15 @@ describe('<AgentTest />', () => {
     expect(screen.getByRole('heading', { name: 'TITLE: Split' })).toBeInTheDocument();
   });
 
-  it('should render with unknown error', async () => {
-    render(
-      <MockApp>
-        <AgentTest />
-      </MockApp>,
-    );
+  // it('should render with unknown error', async () => {
+  //   render(
+  //     <MockApp>
+  //       <AgentTest />
+  //     </MockApp>,
+  //   );
 
-    await waitByLoading();
+  //   await waitByLoading();
 
-    expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
-  });
+  //   expect(screen.queryByText(/Erro desconhecido no servidor/i)).toBeInTheDocument();
+  // });
 });

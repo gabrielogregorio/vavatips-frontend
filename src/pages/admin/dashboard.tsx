@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
@@ -11,14 +11,17 @@ import { ErrorMsg } from '@/base/errorMsg';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { logout } from '../../core/services/auth';
-import { ItemList } from '../../components/base/itemList';
+
+export const ItemList = ({ children }: { children: ReactNode }) => (
+  <p className="dark:text-skin-white text-skin-gray-500">{children}</p>
+);
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
   { url: navbarEnum.Dashboard, text: 'dashboard' },
 ];
 
-const DashboardScreen = () => {
+const Dashboard = () => {
   const [username, setUsername] = useState<string>('');
   const [errorMsg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(true);
@@ -79,4 +82,4 @@ const DashboardScreen = () => {
     </Layout>
   );
 };
-export default DashboardScreen;
+export default Dashboard;
