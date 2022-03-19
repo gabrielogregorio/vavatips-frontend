@@ -60,7 +60,7 @@ export const Pagination = ({ finish, selected, map, agent, urlBase }: propsType)
     <nav
       aria-label="Sistema de paginação"
       className={`
-     flex items-center justify-center mt-2 rounded-xl ${
+     flex items-center justify-center mt-2 rounded-md ${
        pagination?.length > 0 ? 'b-2 p-1 border-2  border-skin-secondary-regular' : ''
      }`}>
       <ul className="flex items-center list-none">{renderPaginationButtons()}</ul>

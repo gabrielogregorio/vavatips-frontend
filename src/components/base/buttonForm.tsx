@@ -8,7 +8,7 @@ type ButtonType = {
 };
 
 export const ButtonForm = ({ children, className, onClick }: ButtonType) => (
-  <Button className={`w-full border-2 rounded-xl ${className}`} onClick={onClick}>
+  <Button className={`w-full border-2 rounded-md ${className}`} onClick={onClick}>
     {children}
   </Button>
 );

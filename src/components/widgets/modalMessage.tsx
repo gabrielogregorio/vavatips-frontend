@@ -14,7 +14,7 @@ export const ModalMessage = () => {
 
   return modalMessage.active ? (
     <div className="fixed flex items-center justify-center z-modalMessage bottom-0 mb-2">
-      <div className="bg-skin-primary-light flex p-5 rounded-lg items-center">
+      <div className="bg-skin-primary-light flex p-5 rounded-md items-center">
         <div className="pr-2 border-2 border-y-0 border-l-0 mr-2 text-skin-white">
           {modalIcon[modalMessage.message.type]}
         </div>

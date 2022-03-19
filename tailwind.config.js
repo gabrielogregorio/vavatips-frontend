@@ -26,11 +26,16 @@ module.exports = {
       },
       maxWidth: {
         maxWidthDefault: '800px',
-        maxWidthDefaultForm: '500px',
+        maxWidthDefaultForm: '400px',
         maxWidthModal: '400px',
       },
       height: {
         maxHeightContent: '500px',
+      },
+      colors: {
+        success: '#61c42f',
+        primary: '#3386d3',
+        secondary: '#d85f5f',
       },
       textColor: {
         skin: {

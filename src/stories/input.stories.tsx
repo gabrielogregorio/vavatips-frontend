@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Input, TPropsInput } from '../components/base/input';
+import { Input, TPropsInput } from '@/base/input';
 
 export default {
   title: 'form/Input',
@@ -12,15 +12,21 @@ const Template: Story<TPropsInput> = (props) => {
   const onChangeInput = (inputValue: string) => {
     setValue(inputValue);
   };
-  return <Input {...props} value={localValue} setValue={onChangeInput} />;
+  return (
+    <div>
+      <Input {...props} value={localValue} setValue={onChangeInput} />
+    </div>
+  );
 };
 
 export const Default: Story<TPropsInput> = Template.bind({});
 Default.args = {
-  disabled: false,
   type: 'text',
   text: 'type your name',
   name: 'name',
+  message: '',
+  status: 'default',
+  disabled: false,
 };
 
 export const Password = Template.bind({});
@@ -29,6 +35,8 @@ Password.args = {
   type: 'password',
   text: 'type your password',
   name: 'password',
+  message: '',
+  status: 'default',
 };
 
 export const Email = Template.bind({});
@@ -37,6 +45,8 @@ Email.args = {
   type: 'email',
   text: 'type your email',
   name: 'email',
+  message: '',
+  status: 'default',
 };
 
 export const Number = Template.bind({});
@@ -45,4 +55,6 @@ Number.args = {
   type: 'number',
   text: 'choice a number',
   name: 'number',
+  message: '',
+  status: 'default',
 };

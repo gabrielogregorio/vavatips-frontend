@@ -7,8 +7,8 @@ import { Button } from '@/base/button';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { TPostsProps } from '@/types/posts';
 import Image from 'next/image';
-import { isAuthenticated } from '../../core/services/auth';
-import { PostButton } from '../base/likeButton';
+import { isAuthenticated } from '@/services/auth';
+import { PostButton } from '@/base/likeButton';
 
 type typeType = 'next' | 'prev';
 
@@ -71,7 +71,7 @@ export const PostCard = ({ post }: TProps) => {
 
   const existsImages = post.imgs.length !== 0;
   return (
-    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-white">
+    <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">
       <div className="flex justify-center items-center mb-2 mt-2 w-full">
         <div className="h-11 w-11 relative">
           {post.user.image ? (
@@ -116,7 +116,7 @@ export const PostCard = ({ post }: TProps) => {
             {existsImages ? (
               <Image
                 layout="fill"
-                className="object-cover rounded-lg"
+                className="object-cover rounded-md"
                 placeholder="blur"
                 priority
                 blurDataURL="/images/assets/loader.png"
@@ -147,7 +147,7 @@ export const PostCard = ({ post }: TProps) => {
             </Button>
           </div>
 
-          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-lg rounded-t-none  bg-skin-black">
+          <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-md rounded-t-none  bg-skin-black">
             <p className="text-skin-white text-base" aria-live="polite">
               {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
@@ -169,13 +169,11 @@ export const PostCard = ({ post }: TProps) => {
         </p>
       </div>
 
-      {isAuthenticated() === false ? (
-        <div className="w-full flex justify-around m-1">
-          <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
-          <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />
-          <PostButton selected={false} onClick={() => handleModalAction()} variant="report" />
-        </div>
-      ) : null}
+      <div className="w-full flex justify-around m-1">
+        <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
+        <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />
+        <PostButton selected={false} onClick={() => handleModalAction()} variant="report" />
+      </div>
     </div>
   );
 };

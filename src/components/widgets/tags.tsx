@@ -24,7 +24,7 @@ export const Tags = () => {
         role="presentation">
         <Button
           onClick={() => null}
-          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-2xl ${
+          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md ${
             filters.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
           }`}>
           {tag}

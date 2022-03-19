@@ -15,7 +15,6 @@ const Template: Story<inputFileType> = (props) => {
 
 export const Default: Story<inputFileType> = Template.bind({});
 Default.args = {
-  disabled: false,
   type: 'file',
   text: 'type your name',
   name: 'name',
@@ -23,7 +22,6 @@ Default.args = {
 
 export const Password = Template.bind({});
 Password.args = {
-  disabled: false,
   type: 'file',
   text: 'type your password',
   name: 'password',

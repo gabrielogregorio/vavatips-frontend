@@ -205,13 +205,13 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
-            className="text-skin-white flex-1 text-base"
+            className="flex-1 text-sm text-gray-600 dark:text-gray-200"
             onClick={() => showModalWithItem(instruction.id)}
             role="presentation">
             {key + 1} - {instruction.description}
           </p>
           <Button
-            className="text-skin-white text-base ml-2"
+            className="text-base ml-2 text-red-400"
             onClick={() => deleteStep(instruction.id)}
             dataTestid={`deleteStepButton-${key + 1}`}>
             <FaTimes />
@@ -384,7 +384,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
           <Hr />
 
-          <p className="dark:text-skin-white text-skin-gray-500">
+          <p className="dark:text-skin-white text-gray-500 text-sm">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
             bem visível.
             <br />
@@ -398,7 +398,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <div className="mt-5 w-full">
             <GroupInput>
               <ButtonForm
-                className="border-skin-primary-light text-skin-primary-light p-1"
+                className="border-red-400 text-red-400 px-3.5 py-2 text-sm"
                 onClick={() => showModal()}>
                 Novo Passo
               </ButtonForm>
@@ -407,7 +407,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <GroupInput>
               <ButtonForm
                 onClick={() => handleSubmitManagement()}
-                className="border-skin-primary-light text-skin-white bg-skin-primary-light p-1">
+                className="border-red-400 text-white bg-red-400 px-3.5 py-2 text-sm">
                 Publicar Dica
               </ButtonForm>
             </GroupInput>

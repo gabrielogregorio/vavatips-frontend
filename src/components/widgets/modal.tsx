@@ -74,13 +74,7 @@ export const Modal = ({
           setValue={setDescription}
         />
 
-        <InputFile
-          text="Adicionar Imagem"
-          type="file"
-          name="image"
-          disabled={false}
-          onChange={loadImage}
-        />
+        <InputFile text="Adicionar Imagem" type="file" name="image" onChange={loadImage} />
 
         <Loader active={activeLoader} />
 
@@ -98,12 +92,12 @@ export const Modal = ({
 
         <div className="flex justify-end w-full">
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-secondary-light text-skin-white"
+            className="p-1 px-2 mx-1 rounded-md bg-skin-secondary-light text-skin-white"
             onClick={() => closeModalItem()}>
             Cancelar
           </Button>
           <Button
-            className="p-1 px-2 mx-1 rounded-xl bg-skin-primary-light text-skin-white"
+            className="p-1 px-2 mx-1 rounded-md bg-skin-primary-light text-skin-white"
             onClick={() => saveModal(id, description, LinkImg)}>
             Adicionar
           </Button>

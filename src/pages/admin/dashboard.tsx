@@ -10,7 +10,7 @@ import { Layout } from '@/layout/layout';
 import { ErrorMsg } from '@/base/errorMsg';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
-import { logout } from '../../core/services/auth';
+import { logout } from '@/services/auth';
 
 export const ItemList = ({ children }: { children: ReactNode }) => (
   <p className="dark:text-skin-white text-skin-gray-500">{children}</p>

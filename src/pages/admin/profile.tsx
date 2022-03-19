@@ -13,7 +13,7 @@ import { SubContainer } from '@/base/subContainer';
 import { Form } from '@/base/Form';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { ButtonForm } from '@/base/buttonForm';
-import { logout } from '../../core/services/auth';
+import { logout } from '@/services/auth';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

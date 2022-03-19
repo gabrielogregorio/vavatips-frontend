@@ -43,11 +43,8 @@ yarn-error.log*
 # vercel
 .vercel
 
-
 # Ignore storybook static build
 /storybook-static
-
-
 # Ignore coverage cypress
 .nyc_output
 coverage/clover.xml

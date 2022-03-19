@@ -1,25 +1,37 @@
 import { ChangeEvent } from 'react';
 import { GroupInput } from './groupInput';
+import { getStylesFromInput } from './input';
 import { Label } from './label';
 
 export type inputFileType = {
-  disabled: boolean;
   type: 'file';
   text: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  name;
+  name: string;
+  status?: string;
 };
 
-export const InputFile = ({ disabled, type, text, onChange, name }: inputFileType) => (
-  <GroupInput>
-    <Label name={name} text={text} />
-    <input
-      className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-white text-skin-gray-500 outline-none rounded-lg resize-none"
-      id={name}
-      disabled={disabled}
-      type={type}
-      placeholder={text}
-      onChange={(e) => onChange(e)}
-    />
-  </GroupInput>
-);
+export const InputFile = ({ type, text, onChange, name, status }: inputFileType) => {
+  const getStyles = getStylesFromInput(status);
+
+  const disabled = status === 'disabled';
+  return (
+    <GroupInput>
+      <Label name={name} text={text} className={[getStyles]} />
+      <input
+        className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 ${getStyles} ${
+          disabled ? 'bg-gray-50' : ''
+        }`}
+        id={name}
+        disabled={disabled}
+        type={type}
+        placeholder={text}
+        onChange={(e) => onChange(e)}
+      />
+    </GroupInput>
+  );
+};
+
+InputFile.defaultProps = {
+  status: '',
+};

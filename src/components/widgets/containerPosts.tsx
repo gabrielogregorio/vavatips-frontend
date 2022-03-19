@@ -45,7 +45,7 @@ export const ContainerPosts = ({
 
       <Breadcrumb breadcrumbs={breadcrumbs} />
       <SubContainer>
-        <ModalOfSuggestion title="fazer sugestão" />
+        <ModalOfSuggestion title="Fazer sugestão" />
 
         <ModalMessage />
 

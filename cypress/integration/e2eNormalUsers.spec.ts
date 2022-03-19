@@ -153,7 +153,7 @@ describe('<Maps />', () => {
 
     cy.get('button[type=button]').contains('Sugerir').first().click();
 
-    cy.contains('fazer sugestão');
+    cy.contains('Fazer sugestão');
 
     cy.contains('Dica');
     cy.get('input[placeholder="Email para contato (Opcional)"]').type('myEmail@gmail.com');

@@ -31,7 +31,7 @@ const Agents = () => {
           <ImageCard
             href={`/posts?map=${mapSelected.map}&agent=${agent.name}`}
             srcImage={agent.img}
-            heightImage="h-64"
+            heightImage="h-72 w-32"
             titleImage={agent.name}
           />
         </div>
@@ -48,7 +48,7 @@ const Agents = () => {
         <Title>Escolha um Agente</Title>
         <Loader active={isLoading} />
         <ErrorMsg msg={error} />
-        <div className="grid grid-cols-2 gap-6 p-10 sm:grid-cols-4 w-full">{renderAgent()}</div>
+        <div className="grid grid-cols-1 gap-6 p-10 sm:grid-cols-4 w-full">{renderAgent()}</div>
       </SubContainer>
       <Footer />
     </Layout>
