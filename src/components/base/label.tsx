@@ -1,10 +1,19 @@
 type labelType = {
   name: string;
   text: string;
+  className?: string[];
 };
 
-export const Label = ({ name, text }: labelType) => (
-  <label className="dark:text-skin-white text-skin-gray-500" htmlFor={name}>
-    {text}
-  </label>
-);
+export const Label = ({ name, text, className }: labelType) => {
+  const classString = className.join(' ');
+
+  return (
+    <label className={`text-xs uppercase mb-1 ${classString} dark:text-gray-300`} htmlFor={name}>
+      {text}
+    </label>
+  );
+};
+
+Label.defaultProps = {
+  className: [],
+};

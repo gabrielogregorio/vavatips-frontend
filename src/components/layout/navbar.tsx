@@ -5,7 +5,7 @@ import { NavbarLink } from '@/base/navbarLink';
 import { useTheme } from '@/contexts/theme';
 import { modelNavbarType } from '@/schemas/navbar';
 import { navbarEnum } from '@/enums/navbar';
-import { changeTheme } from '../../core/services/theme';
+import { changeTheme } from '@/services/theme';
 
 type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;

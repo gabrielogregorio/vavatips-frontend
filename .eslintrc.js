@@ -5,7 +5,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['react', '@typescript-eslint', 'cypress'],
+  plugins: ['@typescript-eslint', 'cypress'],
   rules: {
     'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
@@ -39,9 +39,9 @@ module.exports = {
   },
   extends: [
     'next/core-web-vitals',
+    'plugin:cypress/recommended',
     'airbnb',
     'prettier',
-    'plugin:cypress/recommended',
     'plugin:storybook/recommended',
   ],
   overrides: [

@@ -18,4 +18,6 @@ Default.args = {
   text: 'Agente',
   value: '',
   render: convertToSelectedRender(agents()),
+  status: 'default',
+  disabled: false,
 };

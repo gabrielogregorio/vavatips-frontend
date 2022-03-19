@@ -44,7 +44,6 @@ yarn
 
 # Ignore storybook dependencies, but resolve in lockfile.
 yarn install --ignore-optional
-
 # Run in develop mode
 # Open in http://localhost:3000
 yarn dev
@@ -55,7 +54,6 @@ yarn start
 
 # Run storybook in localhost:6006
 yarn run storybook
-
 ```
 
 ### Tests
@@ -69,6 +67,7 @@ yarn test:watch-all
 yarn test:watch-all:coverage
 
 ```
+
 ### Deploy
 
 ```bash

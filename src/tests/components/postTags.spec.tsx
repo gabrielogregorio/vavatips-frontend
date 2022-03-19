@@ -35,14 +35,14 @@ describe('<Tags />', () => {
 
     expect(screen.getByRole('button', { name: 'tag2' })).toHaveAttribute(
       'class',
-      'p-3 pb-1 pt-1 border border-skin-primary-light rounded-2xl text-skin-white bg-skin-primary-light',
+      'p-3 pb-1 pt-1 border border-skin-primary-light rounded-md text-skin-white bg-skin-primary-light',
     );
 
     userEvent.click(screen.getByRole('button', { name: 'tag2' }));
 
     expect(screen.getByRole('button', { name: 'tag2' })).not.toHaveAttribute(
       'class',
-      'p-3 pb-1 pt-1 border border-skin-primary-light rounded-2xl text-skin-white bg-skin-primary-light',
+      'p-3 pb-1 pt-1 border border-skin-primary-light rounded-md text-skin-white bg-skin-primary-light',
     );
   });
 });

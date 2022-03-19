@@ -5,7 +5,7 @@ type titleType = {
 };
 
 export const Title = ({ children }: titleType) => (
-  <h1 className="text-2xl text-center p-7 pl-0 pr-0 dark:text-skin-white text-skin-gray-800">
+  <h1 className="text-xl text-center p-4 pl-0 pr-0 dark:text-skin-white text-gray-500">
     {children}
   </h1>
 );

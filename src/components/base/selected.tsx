@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { GroupInput } from './groupInput';
+import { getStylesFromInput, typeInputColors } from './input';
 import { Label } from './label';
 
 export type TPropsSelectedBase = {
@@ -8,9 +9,21 @@ export type TPropsSelectedBase = {
   setValue: (value: string) => void;
   name: string;
   render: { id: string; name: string }[];
+  status?: typeInputColors;
+  disabled?: boolean;
 };
 
-export const Selected = ({ render, text, setValue, value, name }: TPropsSelectedBase) => {
+export const Selected = ({
+  render,
+  text,
+  setValue,
+  value,
+  name,
+  status,
+  disabled,
+}: TPropsSelectedBase) => {
+  const getStyles = getStylesFromInput(status);
+
   function renderItems() {
     return render.map((item) => (
       <option value={item.name} key={item.id}>
@@ -25,9 +38,11 @@ export const Selected = ({ render, text, setValue, value, name }: TPropsSelected
 
   return (
     <GroupInput>
-      <Label name={name} text={text} />
+      <Label name={name} text={text} className={[getStyles]} />
       <select
-        className="w-full p-1.5 border-2 border-skin-primary-light dark:bg-skin-gray-900 bg-skin-gray-300 dark:text-skin-white text-skin-gray-500 outline-none rounded-lg resize-none"
+        className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 ${getStyles} ${
+          disabled ? 'bg-gray-50' : ''
+        }`}
         id={name}
         value={value}
         onChange={(e) => onChange(e)}>
@@ -36,4 +51,9 @@ export const Selected = ({ render, text, setValue, value, name }: TPropsSelected
       </select>
     </GroupInput>
   );
+};
+
+Selected.defaultProps = {
+  status: '',
+  disabled: false,
 };

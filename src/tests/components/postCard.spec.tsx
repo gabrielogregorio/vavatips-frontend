@@ -7,7 +7,7 @@ import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
-import { TOKEN_JWT } from '../../core/services/auth';
+import { TOKEN_JWT } from '@/services/auth';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -126,14 +126,14 @@ describe('<PostCard />', () => {
   it('should render correctly post card and open suggestion modal', async () => {
     render(
       <MockApp>
-        <ModalOfSuggestion title="fazer sugestão" />
+        <ModalOfSuggestion title="Fazer sugestão" />
         <PostCard post={post} />
       </MockApp>,
     );
 
     userEvent.click(screen.getByRole('button', { name: 'Sugerir' }));
 
-    screen.getByRole('heading', { name: 'fazer sugestão' });
+    screen.getByRole('heading', { name: 'Fazer sugestão' });
     const inputType: HTMLInputElement = screen.getByLabelText('Dica');
     expect(inputType.value).toEqual(post.title);
   });
@@ -215,9 +215,9 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.queryByRole('button', { name: 'Testado' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Salvar' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: 'Editar' })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Testado/i })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Salvar/i })).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /Editar/i })).toBeInTheDocument();
     expect(localStorage.getItem(TOKEN_JWT)).toEqual('token jwt');
   });
 });

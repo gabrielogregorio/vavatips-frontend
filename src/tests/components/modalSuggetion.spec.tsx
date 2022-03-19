@@ -87,7 +87,7 @@ const Setup = ({ notId }: { notId?: boolean }) => {
   return (
     <>
       <ModalMessage />
-      <ModalOfSuggestion title="fazer sugestão" />
+      <ModalOfSuggestion title="Fazer sugestão" />
     </>
   );
 };
