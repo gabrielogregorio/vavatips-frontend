@@ -51,19 +51,26 @@ describe('<Maps />', () => {
     });
 
     cy.intercept('/posts?map=Ascent&page=1&agent=Cypher&filters=', (req) =>
-      req.reply({ fixture: 'maps/request.json' }),
+      req.reply({ fixture: 'e2e/request.json' }),
+    );
+
+    cy.intercept(
+      '/posts?map=&page=1&agent=&filters=&idPosts=[%22615f3653d5dfc1f8ad206f4f%22]',
+      (req) => req.reply({ fixture: 'e2e/requestSave.json' }),
+    );
+
+    cy.intercept(
+      '/posts?map=&page=1&agent=&filters=&idPosts=[%226159d1db1775570b9c406147%22]',
+      (req) => req.reply({ fixture: 'e2e/requestTested.json' }),
     );
   });
 
   it('should navigate to the about page', () => {
-    // Start from the index page
     cy.visit('http://localhost:3000/');
     cy.contains('Ascent');
 
-    // Find a link with an href attribute containing "about" and click it
     cy.get('button[href="/agents?map=Ascent"]').click();
 
-    // // The new page should contain an h1 with "About page"
     cy.contains('Escolha um Agente');
 
     cy.get('button[href="/posts?map=Ascent&agent=Cypher"]').click();
@@ -82,7 +89,6 @@ describe('<Maps />', () => {
     cy.contains('button', 'InicioPartida');
     cy.contains('button', 'Meio');
 
-    // second first
     cy.contains('developer');
 
     cy.contains('Aquela câmera mocada do cypher');
@@ -101,7 +107,6 @@ describe('<Maps />', () => {
     cy.contains('button', 'Salvar');
     cy.contains('button', 'Sugerir');
 
-    // second post
     cy.contains('One Way no bom A');
 
     cy.contains(
@@ -146,17 +151,13 @@ describe('<Maps />', () => {
       '2 de 2 : Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera',
     );
 
-    // open suggestion
     cy.get('button[type=button]').contains('Sugerir').first().click();
 
-    // make sugestion
     cy.contains('fazer sugestão');
 
     cy.contains('Dica');
-    // cy.get('input[value="Aquela câmera mocada do cypher"]')
     cy.get('input[placeholder="Email para contato (Opcional)"]').type('myEmail@gmail.com');
 
-    // Descrição
     cy.get('textarea[id="description"]').type('my description');
 
     cy.contains('button', 'Cancelar').should('be.visible');
@@ -166,7 +167,21 @@ describe('<Maps />', () => {
 
     cy.contains('Sugestão enviada com sucesso, muito obrigado!');
 
-    // close notify
     cy.get('button[aria-label="close"]').click();
+  });
+
+  it('slould save and tested posts', () => {
+    cy.get('button:contains("Salvar")').eq(1).click();
+    cy.get('button:contains("Testado")').first().click();
+
+    cy.get('a:contains("salvos")').click();
+    cy.get('h1:contains("Posts Salvos")').should('be.visible');
+
+    cy.get('h3:contains("One Way no bom A")').should('be.visible');
+
+    cy.get('a:contains("testados")').click();
+    cy.get('h1:contains("Posts para testar")').should('be.visible');
+
+    cy.get('h3:contains("Aquela câmera mocada do cypher")').should('be.visible');
   });
 });
