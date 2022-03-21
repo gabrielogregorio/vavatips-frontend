@@ -8,7 +8,7 @@ export const Label = ({ name, text, className }: labelType) => {
   const classString = className.join(' ');
 
   return (
-    <label className={`text-xs uppercase mb-1 ${classString} dark:text-gray-300`} htmlFor={name}>
+    <label className={`text-xs uppercase mb-1 ${classString} `} htmlFor={name}>
       {text}
     </label>
   );

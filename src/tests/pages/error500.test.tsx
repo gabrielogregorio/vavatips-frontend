@@ -12,7 +12,7 @@ describe('<Error500 />', () => {
 
     expect(
       screen.getByRole('heading', {
-        name: 'Aconteceu um erro não mapeado, f, por favor, abra uma issue no github',
+        name: 'Puts, aconteceu algo inesperado, os devs serão avisados. F pelo problema',
       }),
     ).toBeInTheDocument();
   });

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { TagsFixFilters } from '../../components/widgets/tagsFixFilters';
+import { TagsFixFilters } from '@/widgets/tagsFixFilters';
 
 describe('<TagsFixFilters />', () => {
   it('should render fix tags', () => {

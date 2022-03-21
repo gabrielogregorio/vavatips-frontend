@@ -40,26 +40,26 @@ describe('<CreatePost />', () => {
       cy.visit('/admin/post-create');
 
       cy.get('#title').type('Title of post');
-      cy.get('#description').type('Description of post');
+      cy.get('#description').first().type('Description of post');
 
-      cy.get('#Agente').select('Killjoy');
-      cy.get('#Mapa').select('Ascent');
-      cy.get('#Habilidade').select('Torreta');
-      cy.get('#Posição').select('Meio');
-      cy.get('#Momento').select('DuranteRush');
-      cy.get('#Dificuldade').select('Medio');
-      cy.get('#Lado').select('Defensores');
+      cy.get('#agent').select('Killjoy');
+      cy.get('#map').select('Ascent');
+      cy.get('#ability').select('Torreta');
+      cy.get('#position').select('Meio');
+      cy.get('#moment').select('DuranteRush');
+      cy.get('#difficult').select('Medio');
+      cy.get('#side').select('Defensores');
 
       cy.get('button:contains("Novo Passo")').click();
       cy.get('h1:contains("Adicionar Post")').should('be.visible').should('exist');
-      cy.get(':nth-child(1) > .flex > #description').type('Description image 1');
+      cy.get('#descriptionImage').type('Description image 1');
       // @ts-ignore
       cy.get('input[type="file"]').attachFile('/images/img1.webp');
       cy.wait('@sendImage');
       cy.get('button:contains("Adicionar")').click();
 
       cy.get('button:contains("Novo Passo")').click();
-      cy.get(':nth-child(1) > .flex > #description').type('Description image 2');
+      cy.get('#descriptionImage').type('Description image 2');
       // @ts-ignore
       cy.get('input[type="file"]').attachFile('/images/img2.webp');
       cy.wait('@sendImage');

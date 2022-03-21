@@ -7,7 +7,11 @@ import { Form } from '@/base/Form';
 import { TextArea } from '@/base/textArea';
 import { InputFile } from '@/base/inputFile';
 import Image from 'next/image';
-import { ModalRef } from './modalRef';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaModalNewSep } from '@/handlers/forms';
+import { Input } from '@/base/input';
+import { ModalRef } from '@/widgets/modalRef';
 
 export type ModalPropsBase = {
   title: string;
@@ -18,6 +22,11 @@ export type ModalPropsBase = {
   saveModal: (id: string, title: string, image: string) => void;
 };
 
+export type registrationFormFields = {
+  id: string;
+  descriptionImage: string;
+};
+
 export const Modal = ({
   id: idModal,
   description: descriptionModal,
@@ -26,24 +35,27 @@ export const Modal = ({
   saveModal,
   title,
 }: ModalPropsBase) => {
-  const [id, setId] = useState<string>('');
-  const [description, setDescription] = useState<string>('');
   const [LinkImg, setLinkImg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<registrationFormFields>({ resolver: yupResolver(schemaModalNewSep) });
 
   useEffect(() => {
-    if (idModal) {
-      setId(idModal);
-    }
+    const formToReset = {
+      descriptionImage: descriptionModal ?? '',
+      id: idModal ?? '',
+    };
 
-    if (descriptionModal) {
-      setDescription(descriptionModal);
-    }
+    reset(formToReset);
 
     if (image) {
       setLinkImg(image);
     }
-  }, [idModal, descriptionModal, image]);
+  }, [idModal, descriptionModal, image, reset]);
 
   const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     setActiveLoader(true);
@@ -64,15 +76,16 @@ export const Modal = ({
     closeModal(null);
   };
 
+  const onSubmit = async ({ descriptionImage, id }) => {
+    saveModal(id, descriptionImage, LinkImg);
+  };
+
   return (
     <ModalRef title={title} closeModal={closeModalItem}>
-      <Form>
-        <TextArea
-          name="description"
-          title="Descrição post"
-          value={description}
-          setValue={setDescription}
-        />
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Input name="id" label="" type="hidden" placeholder="" register={register} errors={errors} />
+
+        <TextArea name="descriptionImage" title="Descrição post" register={register} errors={errors} />
 
         <InputFile text="Adicionar Imagem" type="file" name="image" onChange={loadImage} />
 
@@ -96,9 +109,7 @@ export const Modal = ({
             onClick={() => closeModalItem()}>
             Cancelar
           </Button>
-          <Button
-            className="p-1 px-2 mx-1 rounded-md bg-skin-primary-light text-skin-white"
-            onClick={() => saveModal(id, description, LinkImg)}>
+          <Button className="p-1 px-2 mx-1 rounded-md bg-skin-primary-light text-skin-white" type="submit">
             Adicionar
           </Button>
         </div>

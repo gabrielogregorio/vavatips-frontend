@@ -50,18 +50,14 @@ describe('<Maps />', () => {
       fixture: '1633629710516-758b3624-000e-4110-88f6-0cf13775a45a',
     });
 
-    cy.intercept('/posts?map=Ascent&page=1&agent=Cypher&filters=', (req) =>
-      req.reply({ fixture: 'e2e/request.json' }),
+    cy.intercept('/posts?map=Ascent&page=1&agent=Cypher&filters=', (req) => req.reply({ fixture: 'e2e/request.json' }));
+
+    cy.intercept('/posts?map=&page=1&agent=&filters=&idPosts=[%22615f3653d5dfc1f8ad206f4f%22]', (req) =>
+      req.reply({ fixture: 'e2e/requestSave.json' }),
     );
 
-    cy.intercept(
-      '/posts?map=&page=1&agent=&filters=&idPosts=[%22615f3653d5dfc1f8ad206f4f%22]',
-      (req) => req.reply({ fixture: 'e2e/requestSave.json' }),
-    );
-
-    cy.intercept(
-      '/posts?map=&page=1&agent=&filters=&idPosts=[%226159d1db1775570b9c406147%22]',
-      (req) => req.reply({ fixture: 'e2e/requestTested.json' }),
+    cy.intercept('/posts?map=&page=1&agent=&filters=&idPosts=[%226159d1db1775570b9c406147%22]', (req) =>
+      req.reply({ fixture: 'e2e/requestTested.json' }),
     );
   });
 
@@ -113,9 +109,7 @@ describe('<Maps />', () => {
       '1 de 5 : Essa One Way pode e deve ser combinada com o fio armadilha, e você deve ficar na espera por alguém do time atacante cair na armadilha',
     );
 
-    cy.contains(
-      'Essa One Way te fornece uma grande vantagem, em especial quando combinada com os fios armadilhas',
-    );
+    cy.contains('Essa One Way te fornece uma grande vantagem, em especial quando combinada com os fios armadilhas');
 
     cy.contains('#Ascent');
     cy.contains('#Cypher');
@@ -147,16 +141,14 @@ describe('<Maps />', () => {
     // next page image
     cy.get('button[data-testid="prev-btn"]').first().click();
 
-    cy.contains(
-      '2 de 2 : Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera',
-    );
+    cy.contains('2 de 2 : Não subestime essa câmera, o time inimigo poderá demorar para perceber essa câmera');
 
     cy.get('button[type=button]').contains('Sugerir').first().click();
 
     cy.contains('Fazer sugestão');
 
     cy.contains('Dica');
-    cy.get('input[placeholder="Email para contato (Opcional)"]').type('myEmail@gmail.com');
+    cy.get('input[placeholder="Digite seu e-mail"]').type('myEmail@gmail.com');
 
     cy.get('textarea[id="description"]').type('my description');
 

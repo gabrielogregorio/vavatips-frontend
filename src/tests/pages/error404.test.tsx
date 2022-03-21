@@ -10,6 +10,6 @@ describe('<Error404 />', () => {
       </MockApp>,
     );
 
-    expect(screen.getByRole('heading', { name: 'Página não encontrada' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Oooops, acho que essa página não existe!' })).toBeInTheDocument();
   });
 });

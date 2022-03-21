@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { setupServer } from 'msw/node';
@@ -41,7 +41,7 @@ const handlers = [
           },
         }}` &&
       imgs.length === 1 &&
-      imgs[0].description === '' &&
+      imgs[0].description === 'De um pulo e jogue o bombinho' &&
       imgs[0].image === '';
 
     if (postIsValid) {
@@ -99,24 +99,26 @@ describe('<CreatePost />', () => {
     userEvent.selectOptions(screen.getByLabelText('Lado'), 'Atacantes');
 
     userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
-    expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
+    userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
-    expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
 
     userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
-    expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
+    userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
+    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+
     userEvent.click(screen.getByTestId('closeModal'));
-    expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Adicionar/i)).not.toBeInTheDocument();
 
     userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
-    expect(screen.getByText('Adicionar Post')).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
-    expect(screen.queryByText('Adicionar Post')).not.toBeInTheDocument();
+    userEvent.type(screen.getByLabelText(/Descrição post/i), 'De um pulo e jogue o bombinho');
+    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+
+    await waitFor(() => screen.getByText(/De um pulo e jogue o bombinho/i));
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
     await waitByLoading();
-    expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
-    Router.push('');
+
+    await waitFor(() => expect(Router.push).toHaveBeenCalledWith('/admin/view-posts'));
   });
 });

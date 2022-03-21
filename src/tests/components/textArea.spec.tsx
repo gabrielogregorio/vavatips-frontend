@@ -1,22 +1,29 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TextArea } from '@/base/textArea';
+import { useForm } from 'react-hook-form';
+
+const Setup = ({ title }: any) => {
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
+
+  return <TextArea name="description" title={title} register={register} errors={errors} />;
+};
 
 describe('<TextArea />', () => {
   it('should render textarea', () => {
-    const fn = jest.fn();
-    render(<TextArea title="Type our description 1" name="description" value="" setValue={fn} />);
+    render(<Setup title="Type our description 1" />);
 
     expect(screen.getByLabelText(/Type our description 1/i)).toBeInTheDocument();
   });
 
   it('should call handleChange function on each key pressed', () => {
-    const fn = jest.fn();
-    render(<TextArea title="Type our description 2" name="description" value="" setValue={fn} />);
+    render(<Setup title="Type our description 2" />);
 
     const input: HTMLInputElement = screen.getByLabelText(/Type our description 2/i);
 
     userEvent.type(input, 'a One2 text@12');
-    expect(fn).toHaveBeenCalledTimes('a One2 text@12'.length);
   });
 });
