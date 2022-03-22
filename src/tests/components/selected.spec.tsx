@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Selected } from '@/base/selected';
+import { useForm } from 'react-hook-form';
 
 const dataComponent = [
   {
@@ -17,18 +18,18 @@ const dataComponent = [
   },
 ];
 
+const Setup = () => {
+  const {
+    register,
+    formState: { errors },
+  } = useForm();
+
+  return <Selected name="Dificuldade" text="Dificuldade" register={register} errors={errors} render={dataComponent} />;
+};
+
 describe('<Selected />', () => {
   it('should render selected 2', () => {
-    const setValue = jest.fn();
-    render(
-      <Selected
-        name="Dificuldade"
-        text="Dificuldade"
-        value=""
-        setValue={setValue}
-        render={dataComponent}
-      />,
-    );
+    render(<Setup />);
     expect(screen.getByLabelText('Dificuldade')).toBeInTheDocument();
 
     expect(screen.getByRole('option', { name: 'Facil' })).toBeInTheDocument();
@@ -37,23 +38,10 @@ describe('<Selected />', () => {
   });
 
   it('should render selected', () => {
-    const setValue = jest.fn();
+    render(<Setup />);
 
-    render(
-      <Selected
-        name="Dificuldade"
-        text="Dificuldade"
-        value=""
-        setValue={setValue}
-        render={dataComponent}
-      />,
-    );
-    expect(setValue).toHaveBeenCalledTimes(0);
     expect(screen.getByLabelText('Dificuldade')).toBeInTheDocument();
 
     userEvent.selectOptions(screen.getByLabelText('Dificuldade'), 'Díficil');
-
-    expect(setValue).toHaveBeenCalledTimes(1);
-    expect(setValue).toHaveBeenCalledWith('Díficil');
   });
 });

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
@@ -24,9 +24,7 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [
-  rest.get(URL_GET_POST_EDITABLE, async (req, res, ctx) => res(ctx.json(postBase))),
-];
+const handlers = [rest.get(URL_GET_POST_EDITABLE, async (req, res, ctx) => res(ctx.json(postBase)))];
 
 const server = setupServer(...handlers);
 
@@ -153,12 +151,12 @@ describe('<CreatePostManagement />', () => {
 
     userEvent.click(screen.getByText('2 - title1_img2'));
 
-    userEvent.type(screen.getByLabelText('Descrição post'), ' add in final');
+    userEvent.type(screen.getByLabelText(/Descrição post/i), 'add in final');
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
-    expect(screen.getByText('2 - title1_img2 add in final')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('2 - title1_img2add in final')).toBeInTheDocument());
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
   });
 });

@@ -47,6 +47,7 @@ module.exports = {
     '^@/helpers/(.*)$': '<rootDir>/src/core/helpers/$1',
     '^@/hooks/(.*)$': '<rootDir>/src/core/hooks/$1',
     '^@/services/(.*)$': '<rootDir>/src/core/services/$1',
+    '^@/handlers/(.*)$': '<rootDir>/src/core/handlers/$1',
     '^@/schemas/(.*)$': '<rootDir>/src/core/schemas/$1',
 
     '^@/mock/(.*)$': '<rootDir>/src/tests/mock/$1',

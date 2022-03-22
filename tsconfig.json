@@ -23,6 +23,7 @@
       "@/helpers/*": ["src/core/helpers/*"],
       "@/hooks/*": ["src/core/hooks/*"],
       "@/services/*": ["src/core/services/*"],
+      "@/handlers/*": ["src/core/handlers/*"],
       "@/schemas/*": ["src/core/schemas/*"],
       "@/mock/*": ["src/tests/mock/*"],
       "@/utils/*": ["src/tests/utils/*"],

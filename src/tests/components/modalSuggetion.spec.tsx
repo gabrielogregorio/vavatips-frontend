@@ -20,6 +20,7 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+
 const post = {
   user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
   description: 'my Description post',
@@ -37,9 +38,7 @@ const post = {
 };
 
 const waitForSuccessfully = async () =>
-  waitFor(() =>
-    expect(screen.queryByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument(),
-  );
+  waitFor(() => expect(screen.queryByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument());
 
 jest.mock(
   'next/link',
@@ -54,10 +53,8 @@ const handlers = [
     const { idPost, email, description } = req.body as ParsedUrlQuery;
 
     const requestIsCorrectly =
-      (idPost === '12' &&
-        email === 'myEmail@email.com' &&
-        description === 'my long description for problem') ||
-      email === 'acceptDataWithNotId';
+      (idPost === '12' && email === 'myEmail@email.com' && description === 'my long description for problem') ||
+      email === 'email@email.com';
     if (requestIsCorrectly) {
       return res(
         ctx.status(200),
@@ -112,7 +109,7 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para contato (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
 
     userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
 
@@ -128,7 +125,7 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para contato (Opcional)'), 'acceptDataWithNotId');
+    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'email@email.com');
 
     userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
 
@@ -144,19 +141,14 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(
-      screen.getByLabelText('Email para contato (Opcional)'),
-      'invalidEmailApi@email.com',
-    );
+    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'invalidEmailApi@email.com');
 
     userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
     await waitFor(() =>
       expect(
-        screen.queryByText(
-          'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores',
-        ),
+        screen.queryByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'),
       ).toBeInTheDocument(),
     );
   });
@@ -188,16 +180,14 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para contato (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(
-      screen.getByText('Você precisa preencher o campo Descrição com as informações'),
-    ).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
 
     userEvent.type(screen.getByLabelText('Descrição'), 'small');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(screen.getByText('Você precisa de uma descrição mais detalhada')).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
   });
 });

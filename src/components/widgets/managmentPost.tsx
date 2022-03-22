@@ -3,7 +3,13 @@ import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
 import { api } from '@/services/api';
-import { agents, maps, difficult, moment, side } from '@/data/data-valorant';
+import {
+  agents as renderAgents,
+  maps as renderMaps,
+  difficult as renderDifficult,
+  moment as renderMoment,
+  side as renderSide,
+} from '@/data/data-valorant';
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
 import { formatImage } from '@/services/formatEnvironment';
@@ -12,7 +18,7 @@ import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
-import { IAgent, IDifficult, IMap, IMoment, ISide } from '@/types/posts';
+import { IAgent, IMap } from '@/types/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import { navbarEnum } from '@/enums/navbar';
@@ -23,9 +29,11 @@ import { SubContainer } from '@/base/subContainer';
 import { Form } from '@/base/Form';
 import { GroupInputMultiple } from '@/base/groupInputMultiple';
 import { Hr } from '@/base/hr';
-import { ButtonForm } from '@/base/buttonForm';
 import Image from 'next/image';
 import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaManagementPosts } from '@/handlers/forms';
 
 type actionType = 'top' | 'bottom';
 
@@ -46,21 +54,33 @@ type ModelManagementType = {
   mode: 'create' | 'edit';
 };
 
+export type registrationFormFields = {
+  title: string;
+  description: string;
+  imgs: imgType[];
+  moment: string;
+  difficult: string;
+  ability: string;
+  side: string;
+  map: string;
+  position: string;
+  agent: string;
+};
+
 export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
 
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<registrationFormFields>({ resolver: yupResolver(schemaManagementPosts) });
+
   const [redirect, setRedirect] = useState<boolean>(false);
   const [imgAdded, setImgAdded] = useState<imgType[]>([]);
-  const [formTitle, setFormTitle] = useState<string>('');
-  const [formDescription, setFormDescription] = useState<string>('');
-  const [formTagMoment, setFormTagMoment] = useState<string>('');
-  const [formTagDifficult, setFormTagDifficult] = useState<string>('');
-  const [formTagAbility, setFormTagAbility] = useState<string>('');
-  const [formTagSide, setFormTagSide] = useState<string>('');
-  const [formTagMap, setFormTagMap] = useState<string>('');
-  const [formTagMapPosition, setFormTagMapPosition] = useState<string>('');
-  const [formTagAgent, setFormTagAgent] = useState<string>('');
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [propsModal, setPropsModal] = useState<modalType>({
@@ -70,67 +90,41 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   });
 
   useEffect(() => {
-    if (mode === 'edit' && isReady) {
+    const isEditModeReadyAndIdIsAvaliable = mode === 'edit' && isReady && id;
+
+    if (isEditModeReadyAndIdIsAvaliable) {
       setLoading(true);
       api
         .get(`/post/${id}`)
-        .then((res) => {
-          const postJson = res.data;
-          setFormTitle(postJson.title);
-          setFormDescription(postJson.description);
-          setFormTagMoment(postJson.tags.moment);
-          setFormTagDifficult(postJson.tags.difficult);
-          setFormTagAbility(postJson.tags.ability);
-          setFormTagSide(postJson.tags.side);
-          setFormTagMap(postJson.tags.map);
-          setFormTagMapPosition(postJson.tags.mapPosition);
-          setFormTagAgent(postJson.tags.agent);
-          setImgAdded(postJson.imgs);
+        .then(({ data }) => {
+          const { title, description, tags, imgs } = data;
+
+          const newImages = imgs.map((item) => ({
+            ...item,
+            id: uuid.v4().toString(),
+          }));
+
+          const formToReset = {
+            title,
+            description,
+            moment: tags.moment,
+            difficult: tags.difficult,
+            ability: tags.ability,
+            side: tags.side,
+            map: tags.map,
+            position: tags.mapPosition,
+            agent: tags.agent,
+          };
+
+          setImgAdded(newImages);
+          reset(formToReset);
         })
+        .catch(() => {})
         .finally(() => {
           setLoading(false);
         });
     }
-  }, [id, mode, isReady]);
-
-  async function handleSubmitManagement() {
-    setLoading(true);
-    const request = {
-      title: formTitle,
-      description: formDescription,
-      user: '',
-      tags: {
-        moment: formTagMoment,
-        difficult: formTagDifficult,
-        ability: formTagAbility,
-        side: formTagSide,
-        map: formTagMap,
-        mapPosition: formTagMapPosition,
-        agent: formTagAgent,
-      },
-      imgs: imgAdded,
-    };
-
-    if (mode === 'create') {
-      api
-        .post(`/post`, { ...request })
-        .then(() => {
-          setRedirect(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else if (mode === 'edit') {
-      api
-        .put(`/post/${id}`, { ...request })
-        .then(() => {
-          setRedirect(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  }
+  }, [id, mode, isReady, reset]);
 
   function deleteStep(idPost: string) {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
@@ -154,33 +148,15 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     setImgAdded(copyImgAdded);
   }
 
-  function renderAgent(): IAgent[] {
-    return agents();
-  }
-
-  function renderSide(): ISide[] {
-    return side();
-  }
-
-  function renderMaps(): IMap[] {
-    return maps();
-  }
-
-  function renderDifficult(): IDifficult[] {
-    return difficult();
-  }
-
-  function renderMoment(): IMoment[] {
-    return moment();
-  }
-
   function renderAbilities() {
-    const filterAbilities: IAgent = agents().filter((agent) => agent.name === formTagAgent)?.[0];
+    const agente = watch('agent');
+    const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[0];
     return filterAbilities?.abilities ?? [];
   }
 
   function renderPositionsMap() {
-    const filterMapPositions: IMap = maps().filter((map) => map.name === formTagMap)?.[0];
+    const mapa: string = watch('map');
+    const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[0];
     return filterMapPositions?.mapPosition ?? [];
   }
 
@@ -282,6 +258,45 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [redirect]);
 
+  const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
+    setLoading(true);
+    const request = {
+      title,
+      description,
+      user: '',
+      tags: {
+        moment,
+        difficult,
+        ability,
+        side,
+        map,
+        mapPosition: position,
+        agent,
+      },
+      imgs: imgAdded,
+    };
+
+    if (mode === 'create') {
+      api
+        .post(`/post`, { ...request })
+        .then(() => {
+          setRedirect(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else if (mode === 'edit') {
+      api
+        .put(`/post/${id}`, { ...request })
+        .then(() => {
+          setRedirect(true);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  };
+
   return (
     <>
       {mode === 'create' ? (
@@ -304,7 +319,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           />
         ) : null}
 
-        <Form>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
@@ -313,80 +328,55 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             </Button>
           ) : null}
 
-          <Input name="title" type="text" text="Titulo" value={formTitle} setValue={setFormTitle} />
-          <Input
-            name="description"
-            type="text"
-            text="Descrição"
-            value={formDescription}
-            setValue={setFormDescription}
-          />
+          <Input placeholder="" name="title" type="text" label="Titulo" register={register} errors={errors} />
+          <Input placeholder="" name="description" type="text" label="Descrição" register={register} errors={errors} />
 
           <Hr />
 
           <GroupInputMultiple>
             <Selected
-              name="Agente"
+              name="agent"
               text="Agente"
-              value={formTagAgent}
-              setValue={setFormTagAgent}
-              render={convertToSelectedRender(renderAgent())}
+              register={register}
+              errors={errors}
+              render={convertToSelectedRender(renderAgents())}
             />
             <Selected
-              name="Mapa"
+              name="map"
               text="Mapa"
-              value={formTagMap}
-              setValue={setFormTagMap}
+              register={register}
+              errors={errors}
               render={convertToSelectedRender(renderMaps())}
             />
-            <Selected
-              name="Habilidade"
-              text="Habilidade"
-              value={formTagAbility}
-              setValue={setFormTagAbility}
-              render={renderAbilities()}
-            />
+            <Selected name="ability" text="Habilidade" register={register} errors={errors} render={renderAbilities()} />
           </GroupInputMultiple>
 
           <GroupInputMultiple>
             <Selected
-              name="Posição"
+              name="position"
               text="Posição"
-              value={formTagMapPosition}
-              setValue={setFormTagMapPosition}
+              register={register}
+              errors={errors}
               render={renderPositionsMap()}
             />
+            <Selected name="moment" text="Momento" register={register} errors={errors} render={renderMoment()} />
             <Selected
-              name="Momento"
-              text="Momento"
-              value={formTagMoment}
-              setValue={setFormTagMoment}
-              render={renderMoment()}
-            />
-            <Selected
-              name="Dificuldade"
+              name="difficult"
               text="Dificuldade"
-              value={formTagDifficult}
-              setValue={setFormTagDifficult}
+              register={register}
+              errors={errors}
               render={renderDifficult()}
             />
           </GroupInputMultiple>
 
           <GroupInputMultiple>
-            <Selected
-              name="Lado"
-              text="Lado"
-              value={formTagSide}
-              setValue={setFormTagSide}
-              render={renderSide()}
-            />
+            <Selected name="side" text="Lado" register={register} errors={errors} render={renderSide()} />
           </GroupInputMultiple>
 
           <Hr />
 
           <p className="dark:text-skin-white text-gray-500 text-sm">
-            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja
-            bem visível.
+            Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.
             <br />
             <br /> Clique nos titulos para EDITAR os itens
           </p>
@@ -397,19 +387,15 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
           <div className="mt-5 w-full">
             <GroupInput>
-              <ButtonForm
-                className="border-red-400 text-red-400 px-3.5 py-2 text-sm"
-                onClick={() => showModal()}>
+              <Button className="border-red-400 text-red-400 px-3.5 py-2 text-sm" onClick={() => showModal()}>
                 Novo Passo
-              </ButtonForm>
+              </Button>
             </GroupInput>
 
             <GroupInput>
-              <ButtonForm
-                onClick={() => handleSubmitManagement()}
-                className="border-red-400 text-white bg-red-400 px-3.5 py-2 text-sm">
+              <Button type="submit" className="border-red-400 text-white bg-red-400 px-3.5 py-2 text-sm">
                 Publicar Dica
-              </ButtonForm>
+              </Button>
             </GroupInput>
           </div>
         </Form>

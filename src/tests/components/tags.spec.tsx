@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { useMemo, useState } from 'react';
-import { Tags } from '../../components/widgets/tags';
-import { ContextFilters } from '../../core/contexts/filters';
+import { Tags } from '@/widgets/tags';
+import { ContextFilters } from '@/contexts/filters';
 
 const TestTags = () => {
   const [tags, setTags] = useState<string[]>(['Ascent', 'Raze', 'Atacante']);

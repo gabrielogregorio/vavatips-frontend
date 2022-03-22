@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { AiFillWarning, AiFillEye, AiTwotoneEyeInvisible } from 'react-icons/ai';
 import { MdError } from 'react-icons/md';
 import { GroupInput } from './groupInput';
@@ -17,30 +17,25 @@ export function getStylesFromInput(status) {
   return styleLiteral[status] ?? styleLiteral.default;
 }
 
-type setValueType = (a: string) => void;
-
 export type TPropsInput = {
-  text: string;
-  value: string;
-  type?: 'text' | 'password' | 'email' | 'number';
-  setValue: setValueType;
+  label: string;
+  placeholder: string;
+  type?: 'text' | 'password' | 'email' | 'number' | 'hidden';
   name: string;
   status?: typeInputColors;
   disabled?: boolean;
-  message?: string;
+  register: any;
+  errors: any;
 };
 
 type iconsFromInputType = {
   children: ReactNode;
-  status: string;
+  getStyles: string;
   onClick?: Function;
 };
 
-const IconsFromInput = ({ children, status, onClick }: iconsFromInputType) => (
-  <button
-    type="button"
-    onClick={() => onClick()}
-    className={`cursor-pointer flex ${getStylesFromInput(status)}  `}>
+const IconsFromInput = ({ children, getStyles, onClick }: iconsFromInputType) => (
+  <button type="button" onClick={() => onClick()} className={`cursor-pointer flex ${getStyles}  `}>
     {children}
   </button>
 );
@@ -49,20 +44,8 @@ IconsFromInput.defaultProps = {
   onClick: () => null,
 };
 
-export const Input = ({
-  type,
-  value,
-  text,
-  setValue,
-  name,
-  status,
-  message,
-  disabled,
-}: TPropsInput) => {
+export const Input = ({ type, label, name, status, disabled, register, errors, placeholder }: TPropsInput) => {
   const [showEyeIcon, setShowEyeIcon] = useState<boolean>(false);
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value);
-  };
 
   const togglePassword = () => {
     setShowEyeIcon((prev) => !prev);
@@ -75,42 +58,51 @@ export const Input = ({
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;
 
-  const getStyles = disabled ? styleLiteral.default : getStylesFromInput(status);
+  let getStyles = disabled ? styleLiteral.default : getStylesFromInput(status);
+  const errorMessages = errors?.[name]?.message ?? '';
+  const hasError = !!(errors && errorMessages);
+
+  getStyles = hasError ? styleLiteral.invalid : getStyles;
 
   return (
     <GroupInput>
-      <Label name={name} text={text} className={[getStyles]} />
+      <Label name={name} text={label} className={[getStyles]} />
       <div className="relative">
         <input
-          className={`w-full px-3 py-2 pr-12 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 ${getStyles} ${
+          {...(register && register(name))}
+          className={`w-full px-3 py-2 pr-12 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs  ${getStyles} ${
             disabled ? 'bg-gray-50 dark:bg-gray-600' : ''
           }`}
           id={name}
           disabled={disabled}
           type={displayTextIfForPassword}
-          value={value}
-          placeholder={text}
-          onChange={(event) => handleInput(event)}
+          placeholder={placeholder}
         />
 
         <div className="absolute top-0 right-2 h-full flex items-center justify-center">
-          <IconsFromInput status={status} onClick={togglePassword}>
-            {displayEyeIcon ? showIcon() : null}
-          </IconsFromInput>
+          {displayEyeIcon ? (
+            <IconsFromInput getStyles={getStyles} onClick={togglePassword}>
+              {showIcon()}
+            </IconsFromInput>
+          ) : null}
 
-          <IconsFromInput status={status}>
-            {status === 'warning' ? <AiFillWarning className="ml-1" /> : null}
-          </IconsFromInput>
+          {status === 'warning' ? (
+            <IconsFromInput getStyles={getStyles}>
+              <AiFillWarning className="ml-1" />
+            </IconsFromInput>
+          ) : null}
 
-          <IconsFromInput status={status}>
-            {status === 'invalid' ? <MdError className="ml-1" /> : null}
-          </IconsFromInput>
+          {hasError ? (
+            <IconsFromInput getStyles={getStyles}>
+              <MdError className="ml-1" />
+            </IconsFromInput>
+          ) : null}
         </div>
       </div>
 
-      {message ? (
+      {hasError ? (
         <div role="alert" className={`text-xs mt-1 ${getStyles}`}>
-          {message}
+          {errorMessages}
         </div>
       ) : null}
     </GroupInput>
@@ -119,7 +111,6 @@ export const Input = ({
 
 Input.defaultProps = {
   status: '',
-  message: '',
   disabled: false,
   type: '',
 };

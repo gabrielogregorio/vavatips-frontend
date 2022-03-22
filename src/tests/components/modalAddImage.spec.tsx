@@ -1,4 +1,4 @@
-import { screen, render } from '@testing-library/react';
+import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -130,10 +130,8 @@ describe('<Modal />', () => {
 
     expect(screen.getByRole('img')).toHaveAttribute('data-src', 'https://gcloud.com/123abc');
 
-    expect(saveModal).toHaveBeenCalledWith(
-      '123',
-      'how test description',
-      'https://gcloud.com/123abc',
+    await waitFor(() =>
+      expect(saveModal).toHaveBeenCalledWith('123', 'how test description', 'https://gcloud.com/123abc'),
     );
   });
 
@@ -160,10 +158,12 @@ describe('<Modal />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(saveModal).toHaveBeenCalledWith(
-      '123',
-      'myDescription how contatenate description',
-      'https://uploads/file1',
+    await waitFor(() =>
+      expect(saveModal).toHaveBeenCalledWith(
+        '123',
+        'myDescription how contatenate description',
+        'https://uploads/file1',
+      ),
     );
   });
 });

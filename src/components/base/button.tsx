@@ -1,29 +1,24 @@
+/* eslint-disable react/button-has-type */
 import { ReactNode } from 'react';
 
-type buttonTypeNormal = {
+interface buttonTypeNormal {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
   className?: string;
   ariaLabel?: string;
   dataTestid?: string;
-};
+  type?: 'button' | 'submit';
+}
 
-export const Button = ({
-  children,
-  ariaLabel,
-  className,
-  disabled,
-  onClick,
-  dataTestid,
-}: buttonTypeNormal) => (
+export const Button = ({ children, ariaLabel, className, disabled, onClick, dataTestid, type }: buttonTypeNormal) => (
   <button
     data-testid={dataTestid}
     onClick={onClick}
     className={className}
     disabled={disabled}
     aria-label={ariaLabel}
-    type="button">
+    type={type === 'button' ? 'button' : 'submit'}>
     {children}
   </button>
 );
@@ -33,4 +28,6 @@ Button.defaultProps = {
   className: '',
   ariaLabel: '',
   dataTestid: '',
+  type: 'button',
+  onClick: () => null,
 };

@@ -8,13 +8,9 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template: Story<TPropsInput> = (props) => {
-  const [localValue, setValue] = useState<string>('');
-  const onChangeInput = (inputValue: string) => {
-    setValue(inputValue);
-  };
   return (
     <div>
-      <Input {...props} value={localValue} setValue={onChangeInput} />
+      <Input {...props} />
     </div>
   );
 };
@@ -22,10 +18,10 @@ const Template: Story<TPropsInput> = (props) => {
 export const Default: Story<TPropsInput> = Template.bind({});
 Default.args = {
   type: 'text',
-  text: 'type your name',
+  label: 'type your name',
   name: 'name',
-  message: '',
   status: 'default',
+  placeholder: '',
   disabled: false,
 };
 
@@ -33,9 +29,9 @@ export const Password = Template.bind({});
 Password.args = {
   disabled: false,
   type: 'password',
-  text: 'type your password',
+  label: 'type your password',
   name: 'password',
-  message: '',
+  placeholder: '',
   status: 'default',
 };
 
@@ -43,9 +39,9 @@ export const Email = Template.bind({});
 Email.args = {
   disabled: false,
   type: 'email',
-  text: 'type your email',
+  label: 'type your email',
   name: 'email',
-  message: '',
+  placeholder: '',
   status: 'default',
 };
 
@@ -53,8 +49,8 @@ export const Number = Template.bind({});
 Number.args = {
   disabled: false,
   type: 'number',
-  text: 'choice a number',
+  label: 'choice a number',
+  placeholder: '',
   name: 'number',
-  message: '',
   status: 'default',
 };

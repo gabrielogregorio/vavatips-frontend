@@ -17,10 +17,9 @@ import { Navbar } from '@/layout/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Form } from '@/base/Form';
 import { useForm } from 'react-hook-form';
-import { login } from '@/services/auth';
-import { schemaLogin } from '@/handlers/forms';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
+import { schemaRegister } from '@/handlers/forms';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
@@ -38,31 +37,27 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<registrationFormFields>({ resolver: yupResolver(schemaLogin) });
+  } = useForm<registrationFormFields>({ resolver: yupResolver(schemaRegister) });
 
   useEffect(() => {
     if (redirect) {
-      Router.push('/admin/dashboard');
+      Router.push('/login');
     }
   }, [redirect]);
 
-  const onSubmit = async ({ username, password }) => {
+  const onSubmit = async ({ keyCode, username: usernameLocal, password: passwordLocal }) => {
     setActiveLoader(true);
 
     try {
-      const token = await api.post('/auth', { username, password });
-      login(token.data.token);
+      await api.post('/user', { username: usernameLocal, password: passwordLocal, code: keyCode });
       setRedirect(true);
     } catch (error) {
-      if (error?.response?.status === 404) {
+      if (error?.response?.status === 409) {
+        setErrorMsg('Esse e-mail já está cadastrado');
         setActiveLoader(false);
-        setErrorMsg('Usuário não cadastrado!');
-      } else if (error?.response?.status === 403) {
-        setActiveLoader(false);
-        setErrorMsg('Senha inválida!');
       } else {
+        setErrorMsg('Erro ao cadastrar usuário');
         setActiveLoader(false);
-        setErrorMsg(`Erro Desconhecido`);
       }
     } finally {
       setActiveLoader(false);
@@ -76,10 +71,19 @@ const Login = () => {
 
       <SubContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Title>Login</Title>
+          <Title>Criar uma conta</Title>
 
           <Loader active={activeLoader} />
           <ErrorMsg msg={errorMsg} />
+
+          <Input
+            placeholder="Digite seu código de acesso"
+            name="keyCode"
+            register={register}
+            type="password"
+            label="Código"
+            errors={errors}
+          />
 
           <Input
             placeholder="Digite seu usuário"
@@ -99,20 +103,27 @@ const Login = () => {
             errors={errors}
           />
 
+          <Input
+            placeholder="Confirme sua senha"
+            name="passwordConfirmation"
+            type="password"
+            label="Confirme uma senha"
+            register={register}
+            errors={errors}
+          />
           <GroupInput>
-            <p className=" flex flex-col   py-1">
-              <span className="text-xs text-gray-500 dark:text-white text-center">Recebeu um código de cadastro?</span>
-              <Link href="/register">
-                <a className="text-xs text-center text-secondary ml-1" href="#/">
-                  Fazer cadastro
+            <p className="flex flex-col  py-1 ml-1">
+              <span className="text-xs text-gray-500 dark:text-white text-center">Já tem cadastro?</span>
+              <Link href="/login">
+                <a className="text-xs text-center text-secondary" href="#/">
+                  Fazer Login
                 </a>
               </Link>
             </p>
           </GroupInput>
-
           <GroupInput>
             <Button type="submit" className="text-skin-white bg-skin-secondary-light rounded-md p-2 text-sm">
-              Login
+              Cadastrar
             </Button>
           </GroupInput>
         </Form>
