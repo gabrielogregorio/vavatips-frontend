@@ -28,7 +28,7 @@ export type registrationFormFields = {
   password: string;
 };
 
-const Login = () => {
+const Register = () => {
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [redirect, setRedirect] = useState<boolean>(false);
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
@@ -133,4 +133,4 @@ const Login = () => {
     </Layout>
   );
 };
-export default Login;
+export default Register;

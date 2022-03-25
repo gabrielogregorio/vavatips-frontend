@@ -1,18 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Tags } from '@/widgets/tags';
-import { ContextFilters } from '@/contexts/filters';
 
 const TestTags = () => {
-  const [tags, setTags] = useState<string[]>(['Ascent', 'Raze', 'Atacante']);
-  const [filters, setFilters] = useState<string[]>([]);
+  const tags = ['Ascent', 'Raze', 'Atacante'];
+  const [filteredActives, setFilteredsActive] = useState<string[]>([]);
 
-  const valueFilters = useMemo(() => ({ tags, filters, setTags, setFilters }), [tags, filters]);
-  return (
-    <ContextFilters.Provider value={valueFilters}>
-      <Tags />
-    </ContextFilters.Provider>
-  );
+  return <Tags tags={tags} setFilteredsActive={setFilteredsActive} filteredActives={filteredActives} />;
 };
 
 describe('<Tags />', () => {

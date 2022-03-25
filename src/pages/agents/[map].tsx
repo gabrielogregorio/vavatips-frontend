@@ -10,12 +10,13 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
+import { api } from '@/services/api';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
 export async function getStaticPaths() {
-  const resp = await fetch('https://backend-valorant.herokuapp.com/maps');
-  const { maps } = await resp.json();
+  const resp = await api('/maps');
+  const { maps } = await resp.data;
 
   return {
     paths: maps.map((map) => ({
@@ -28,11 +29,11 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const response = await fetch(`https://backend-valorant.herokuapp.com/agents/${params.map}`);
-  const post = await response.json();
+  const response = await api(`/agents/${params.map}`);
+  const agentsData = await response.data;
   return {
     props: {
-      agentsApi: post.agents,
+      agentsApi: agentsData.agents,
     },
   };
 }
@@ -46,7 +47,7 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
       agentsApi.includes(agent.name) ? (
         <div key={agent.id} className="flex flex-col">
           <ImageCard
-            href={`/posts?map=${mapSelected}&agent=${agent.name}`}
+            href={`/posts/${mapSelected}/${agent.name}`}
             srcImage={agent.img}
             heightImage="h-72 w-32"
             titleImage={agent.name}

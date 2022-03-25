@@ -77,10 +77,7 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
-      'alt',
-      'Foto de perfil do Autor da postagem',
-    );
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
 
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/user.png`);
   });
@@ -92,10 +89,7 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute(
-      'alt',
-      'Foto de perfil do Autor da postagem',
-    );
+    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
 
     expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/images/users/profile.webp`);
   });

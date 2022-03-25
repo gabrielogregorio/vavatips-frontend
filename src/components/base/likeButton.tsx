@@ -39,14 +39,9 @@ export const PostButton = ({ selected, onClick, variant }: selectedLikeButton) =
   const color = selected ? modelButton.colorSelected : modelButton.color;
 
   return (
-    <button
-      type="button"
-      className={`m-1 flex items-center transition ${color}`}
-      onClick={() => onClick()}>
+    <button type="button" className={`m-1 flex items-center transition ${color}`} onClick={() => onClick()}>
       <IconDisplayed className={`mr-2 text-xl h-10 block ${selected ? 'animate-wiggle' : ''}`} />
-      <span className={`hidden sm:block font-semibold ${selected ? 'animate-scale' : ''}`}>
-        {textFromIcon}
-      </span>
+      <span className={`hidden sm:block font-semibold ${selected ? 'animate-scale' : ''}`}>{textFromIcon}</span>
     </button>
   );
 };

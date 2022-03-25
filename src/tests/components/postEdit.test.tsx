@@ -5,11 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import MockApp from '@/mock/App.Mock';
 import EditPost from '@/pages/admin/post-edit';
-import {
-  URL_DELETE_POST_BY_ID,
-  URL_GET_POST_BY_ID,
-  URL_PUT_EDIT_POST_BY_ID,
-} from '@/mock/ROUTES_API';
+import { URL_DELETE_POST_BY_ID, URL_GET_POST_BY_ID, URL_PUT_EDIT_POST_BY_ID } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import postBase from '@/mock/responseGetPostById.json';

@@ -9,8 +9,20 @@ import { navbarEnum } from '@/enums/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
+import { api } from '@/services/api';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
+
+export async function getStaticProps() {
+  const resp = await api('/maps');
+  const mapsApi = await resp.data;
+
+  return {
+    props: {
+      mapsApi: mapsApi.maps,
+    },
+  };
+}
 
 const Index = ({ mapsApi }: { mapsApi: string[] }) => {
   function renderMap() {
@@ -39,14 +51,3 @@ const Index = ({ mapsApi }: { mapsApi: string[] }) => {
   );
 };
 export default Index;
-
-export async function getStaticProps() {
-  const resp = await fetch('https://backend-valorant.herokuapp.com/maps');
-  const mapsApi = await resp.json();
-
-  return {
-    props: {
-      mapsApi: mapsApi.maps,
-    },
-  };
-}

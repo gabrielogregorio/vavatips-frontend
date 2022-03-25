@@ -106,9 +106,7 @@ export const PostCard = ({ post }: TProps) => {
         ) : null}
       </div>
 
-      <h3 className="text-base dark:text-skin-white text-skin-gray-800 w-full mb-2.5">
-        {post.title}
-      </h3>
+      <h3 className="text-base dark:text-skin-white text-skin-gray-800 w-full mb-2.5">{post.title}</h3>
 
       <div className="w-full">
         <div className="relative w-full">
