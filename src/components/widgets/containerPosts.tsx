@@ -12,6 +12,7 @@ import { TagsFixFilters } from '@/widgets/tagsFixFilters';
 import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
+import { InfiniteScroll } from '@/widgets/infinitScroll';
 
 type containerPosts = {
   breadcrumbs: { url: string; text: string }[];
@@ -22,7 +23,7 @@ type containerPosts = {
   showTags?: boolean;
 };
 
-const skip = 10;
+const skip = 4;
 
 function getAllTags(posts, agent, map): string[] {
   const tags = new Set();
@@ -60,6 +61,11 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
   const [filteredActives, setFilteredsActive] = useState<string[]>([]);
   const [final, setFinal] = useState<number>(skip);
   const tags = getAllTags(posts, agent, map);
+  const [isFirstLoading, setIsFirstLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsFirstLoading(true);
+  }, []);
 
   const data = applyFilters(posts, filteredActives);
 
@@ -67,6 +73,10 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
   useEffect(() => {
     setFinal(skip);
   }, [dataItem]);
+
+  function handleAddedMore() {
+    setFinal(final + skip);
+  }
 
   return (
     <>
@@ -90,15 +100,12 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
               <Tags tags={tags} setFilteredsActive={setFilteredsActive} filteredActives={filteredActives} />
             </>
           ) : null}
-          <Posts posts={data.slice(0, final)} />
+          {isFirstLoading ? (
+            <InfiniteScroll length={final} LoadMore={() => handleAddedMore()} hasMore={data.length > final}>
+              <Posts posts={data.slice(0, final)} />
+            </InfiniteScroll>
+          ) : null}
         </div>
-
-        <button
-          type="button"
-          onClick={() => setFinal((prev) => prev + skip)}
-          className=" bg-secondary text-white rounded-sm w-full py-2 px-3.5 hover:bg-red-400 transition duration-150">
-          Load more
-        </button>
       </SubContainer>
 
       <Footer />
