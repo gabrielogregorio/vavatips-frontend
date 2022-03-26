@@ -1,10 +1,7 @@
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { render, screen } from '@testing-library/react';
 import MockApp from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
 import { posts } from '@/mock/mockPosts.json';
-import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
 
@@ -20,39 +17,17 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [
-  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
-    const idPosts = req.url.searchParams.get('idPosts');
-    const idPostsList = JSON.parse(idPosts);
+describe('<SaveScreen />', () => {
+  it('should render sage screen', async () => {
+    const idPostsList = ['617d44c81bc4243f9b2d5a67', '617d44dd1bc4243f9b2d5a75', '617d44bb1bc4243f9b2d5a5d'];
     const filteredPosts = posts.filter((post) => idPostsList.includes(post.id));
 
-    return res(
-      ctx.json({
-        posts: filteredPosts,
-        count: filteredPosts.length,
-        tags: [],
-      }),
-    );
-  }),
-];
-
-const server = setupServer(...handlers);
-
-describe('<SaveScreen />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
-  it('should render sage screen', async () => {
     render(
       <MockApp
         localstorage={{
-          SAVE_POSTS:
-            '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
+          SAVE_POSTS: '["617d44c81bc4243f9b2d5a67","617d44dd1bc4243f9b2d5a75","617d44bb1bc4243f9b2d5a5d"]',
         }}>
-        <SaveScreen />
+        <SaveScreen posts={filteredPosts} />
       </MockApp>,
     );
 

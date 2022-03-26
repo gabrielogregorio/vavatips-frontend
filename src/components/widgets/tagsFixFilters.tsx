@@ -1,22 +1,21 @@
-import { IFilterUrl } from '@/hooks/usePosts';
-
-type TProps = {
-  queryUrl: IFilterUrl;
+type tagFixFiltersType = {
+  agent: string;
+  map: string;
 };
 
-export const TagsFixFilters = ({ queryUrl }: TProps) => (
+export const TagsFixFilters = ({ agent, map }: tagFixFiltersType) => (
   <div className="flex justify-center">
     <div>
-      {queryUrl.agent ? (
+      {agent ? (
         <button type="button" className="bg-transparent p-2 m-2 text-skin-secondary-regular">
-          #{queryUrl.agent}
+          #{agent}
         </button>
       ) : null}
     </div>
     <div>
-      {queryUrl.map ? (
+      {map ? (
         <button type="button" className="bg-transparent p-2 m-2 text-skin-secondary-regular">
-          #{queryUrl.map}
+          #{map}
         </button>
       ) : null}
     </div>

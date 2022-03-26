@@ -1,10 +1,7 @@
 import { useRouter } from 'next/router';
 import { agents } from '@/data/data-valorant';
-import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import { ErrorMsg } from '@/base/errorMsg';
-import { useAgents } from '@/hooks/useAgents';
 import { Title } from '@/base/title';
 import LINKS from '@/data/links.json';
 import { Layout } from '@/layout/layout';
@@ -13,23 +10,44 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
+import { api } from '@/services/api';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
-const Agents = () => {
+export async function getStaticPaths() {
+  const resp = await api('/maps');
+  const { maps } = await resp.data;
+
+  return {
+    paths: maps.map((map) => ({
+      params: {
+        map,
+      },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const response = await api(`/agents/${params.map}`);
+  const agentsData = await response.data;
+  return {
+    props: {
+      agentsApi: agentsData.agents,
+    },
+  };
+}
+
+const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
   const location = useRouter();
 
-  const { mapSelected, agentsApi, isLoading, error } = useAgents(location);
-
   function renderAgent() {
-    if (agentsApi.length === 0) {
-      return null;
-    }
+    const mapSelected = location?.query?.map;
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
         <div key={agent.id} className="flex flex-col">
           <ImageCard
-            href={`/posts?map=${mapSelected.map}&agent=${agent.name}`}
+            href={`/posts/${mapSelected}/${agent.name}`}
             srcImage={agent.img}
             heightImage="h-72 w-32"
             titleImage={agent.name}
@@ -46,8 +64,6 @@ const Agents = () => {
 
       <SubContainer>
         <Title>Escolha um Agente</Title>
-        <Loader active={isLoading} />
-        <ErrorMsg msg={error} />
         <div className="grid grid-cols-1 gap-6 p-10 sm:grid-cols-4 w-full">{renderAgent()}</div>
       </SubContainer>
       <Footer />

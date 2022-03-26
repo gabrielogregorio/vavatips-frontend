@@ -1,11 +1,8 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import MapScreen from '@/pages/index';
 import MockApp from '@/mock/App.Mock';
 import { mockMaps } from '@/mock/mock';
-import { URL_GET_ALL_MAPS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
@@ -17,21 +14,11 @@ jest.mock(
     },
 );
 
-const handlers = [rest.get(URL_GET_ALL_MAPS, async (req, res, ctx) => res(ctx.json(mockMaps())))];
-
-const server = setupServer(...handlers);
-
 describe('<MapScreen />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render maps screen', async () => {
     render(
       <MockApp>
-        <MapScreen />
+        <MapScreen mapsApi={mockMaps().maps} />
       </MockApp>,
     );
 

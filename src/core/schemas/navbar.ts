@@ -4,7 +4,7 @@ export type modelNavbarType = { url: navbarEnum; text: string };
 
 export const modelNavbarPublic: modelNavbarType[] = [
   { url: navbarEnum.Inicio, text: 'inicio' },
-  { url: navbarEnum.Posts, text: 'posts' },
+  // { url: navbarEnum.Posts, text: 'posts' },
   { url: navbarEnum.Save, text: 'salvos' },
   { url: navbarEnum.Tested, text: 'testados' },
 ];

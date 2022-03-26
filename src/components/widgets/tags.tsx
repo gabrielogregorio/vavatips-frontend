@@ -1,31 +1,27 @@
-import { useFilters } from '@/contexts/filters';
 import { Button } from '@/base/button';
 
-export const Tags = () => {
-  const { tags, filters, setFilters } = useFilters();
+type tagsType = {
+  tags: string[];
+  filteredActives: string[];
+  setFilteredsActive: Function;
+};
 
-  function toggleTag(tag: string) {
-    const filterCopy: string[] = JSON.parse(JSON.stringify(filters));
-
-    if (filterCopy.includes(tag)) {
-      filterCopy.splice(filterCopy.indexOf(tag), 1);
+export const Tags = ({ tags, filteredActives, setFilteredsActive }: tagsType) => {
+  function toggleTag(tag) {
+    if (filteredActives.includes(tag)) {
+      setFilteredsActive(filteredActives.filter((filter) => filter !== tag));
     } else {
-      filterCopy.push(tag);
+      setFilteredsActive([...filteredActives, tag]);
     }
-    setFilters(filterCopy);
   }
 
   function renderTags() {
     return tags.map((tag) => (
-      <div
-        className="m-1 text-skin-primary-light"
-        key={tag}
-        onClick={() => toggleTag(tag)}
-        role="presentation">
+      <div className="m-1 text-skin-primary-light" key={tag} onClick={() => toggleTag(tag)} role="presentation">
         <Button
           onClick={() => null}
-          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md ${
-            filters.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
+          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md transition duration-100 ${
+            filteredActives.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
           }`}>
           {tag}
         </Button>

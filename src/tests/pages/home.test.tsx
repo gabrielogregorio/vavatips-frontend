@@ -1,14 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import mockPosts from '@/mock/mockPosts.json';
-import HomeScreen from '@/pages/posts';
 import MockApp from '@/mock/App.Mock';
-import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
+import HomeScreen from '@/pages/posts/[map]/[agent]';
+import { generateNumericList } from '@/helpers/generateArray';
 import { getDescription, getTitle } from '../utils/getPosts';
-import { generateNumericList } from '../../core/helpers/generateArray';
 
 const { posts } = mockPosts;
 
@@ -24,21 +21,11 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts)))];
-
-const server = setupServer(...handlers);
-
 describe('<HomeScreen />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render home screen', async () => {
     render(
       <MockApp>
-        <HomeScreen />
+        <HomeScreen posts={posts} />
       </MockApp>,
     );
 
@@ -60,7 +47,7 @@ describe('<HomeScreen />', () => {
   it('should change image on click in buttons of navigation', async () => {
     render(
       <MockApp>
-        <HomeScreen />
+        <HomeScreen posts={posts} />
       </MockApp>,
     );
 
