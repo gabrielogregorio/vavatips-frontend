@@ -23,7 +23,7 @@ type containerPosts = {
   showTags?: boolean;
 };
 
-const skip = 4;
+const skip = 10;
 
 function getAllTags(posts, agent, map): string[] {
   const tags = new Set();
@@ -100,6 +100,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
               <Tags tags={tags} setFilteredsActive={setFilteredsActive} filteredActives={filteredActives} />
             </>
           ) : null}
+
           {isFirstLoading ? (
             <InfiniteScroll length={final} LoadMore={() => handleAddedMore()} hasMore={data.length > final}>
               <Posts posts={data.slice(0, final)} />

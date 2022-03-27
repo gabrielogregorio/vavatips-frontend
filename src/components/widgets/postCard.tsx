@@ -20,6 +20,8 @@ export const PostCard = ({ post }: TProps) => {
   const [idImage, setIdImage] = useState<number>(0);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
+  const [startedANavigation, setStartedANavigation] = useState<boolean>(false);
+
   const { setModalSuggestion } = useModalContext();
 
   function handleAddTest() {
@@ -50,6 +52,7 @@ export const PostCard = ({ post }: TProps) => {
   }, [post.id]);
 
   function nextImage(type: typeType, length: number) {
+    setStartedANavigation(true);
     if (type === 'next') {
       if (idImage < length - 1) {
         setIdImage(idImage + 1);
@@ -69,7 +72,6 @@ export const PostCard = ({ post }: TProps) => {
     setModalSuggestion({ active: true, post });
   }
 
-  const existsImages = post.imgs.length !== 0;
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">
       <div className="flex justify-center items-center mb-2 mt-2 w-full">
@@ -111,18 +113,32 @@ export const PostCard = ({ post }: TProps) => {
       <div className="w-full">
         <div className="relative w-full">
           <div className="relative h-[500px] w-full">
-            {existsImages ? (
-              <Image
-                layout="fill"
-                className="object-cover rounded-md"
-                placeholder="blur"
-                priority
-                blurDataURL="/images/assets/loader.png"
-                data-src={formatImage(post.imgs?.[idImage]?.image)}
-                src={formatImage(post.imgs?.[idImage]?.image)}
-                alt={post.imgs?.[idImage]?.description}
-              />
-            ) : null}
+            <div className="w-full h-full overflow-x-auto flex">
+              {post.imgs?.map((image, index) => {
+                const navigationHasNotStarted = !startedANavigation;
+                const isSelectedImage = idImage === index;
+
+                if (navigationHasNotStarted && index > 0) {
+                  return null;
+                }
+
+                return (
+                  <div className={`h-full min-w-full relative ${isSelectedImage ? 'block' : 'hidden'}`} key={image.id}>
+                    <Image
+                      layout="fill"
+                      className="object-cover rounded-md"
+                      placeholder="blur"
+                      priority
+                      blurDataURL="/images/assets/loader.png"
+                      data-src={formatImage(image.image)}
+                      src={formatImage(image.image)}
+                      data-is-selected={isSelectedImage}
+                      alt={image.description}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <div className="absolute left-0 top-2/4">
