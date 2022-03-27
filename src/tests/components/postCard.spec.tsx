@@ -141,27 +141,30 @@ describe('<PostCard />', () => {
 
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-is-selected', `true`);
 
     userEvent.click(screen.getByTestId('prev-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', 'description image 555');
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-is-selected', `true`);
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-is-selected', `false`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image222.png`);
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'description image 222');
+    expect(screen.getAllByRole('img')[2]).toHaveAttribute('data-src', `https://image222.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image333.png`);
+    expect(screen.getAllByRole('img')[3]).toHaveAttribute('alt', 'description image 333');
+    expect(screen.getAllByRole('img')[3]).toHaveAttribute('data-src', `https://image333.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image444.png`);
+    expect(screen.getAllByRole('img')[4]).toHaveAttribute('alt', 'description image 444');
+    expect(screen.getAllByRole('img')[4]).toHaveAttribute('data-src', `https://image444.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 555');
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image555.png`);
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', 'description image 555');
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');

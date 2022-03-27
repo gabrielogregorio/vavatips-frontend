@@ -7,7 +7,7 @@ type IPostProps = {
 };
 
 export const Posts = ({ posts }: IPostProps) => (
-  <div className="flex flex-col">
+  <div className="flex flex-col ">
     {posts.map((post) => (
       <div key={post.id}>
         <ErrorBoundary>
