@@ -4,9 +4,9 @@ import { Tags } from '@/widgets/tags';
 
 const TestTags = () => {
   const tags = ['Ascent', 'Raze', 'Atacante'];
-  const [filteredActives, setFilteredsActive] = useState<string[]>([]);
+  const [filteredActives, setFilteredActive] = useState<string[]>([]);
 
-  return <Tags tags={tags} setFilteredsActive={setFilteredsActive} filteredActives={filteredActives} />;
+  return <Tags tags={tags} setFilteredActive={setFilteredActive} filteredActives={filteredActives} />;
 };
 
 describe('<Tags />', () => {

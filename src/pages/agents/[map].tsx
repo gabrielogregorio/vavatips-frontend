@@ -10,12 +10,12 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
-import { api } from '@/services/api';
+import { Api } from '@/services/api';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
 export async function getStaticPaths() {
-  const resp = await api('/maps');
+  const resp = await Api.get('/maps');
   const { maps } = await resp.data;
 
   return {
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const response = await api(`/agents/${params.map}`);
+  const response = await Api.get(`/agents/${params.map}`);
   const agentsData = await response.data;
   return {
     props: {

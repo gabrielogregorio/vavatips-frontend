@@ -33,7 +33,7 @@ export const Selected = ({ render, text, register, errors, name, status, disable
       <Label name={name} text={text} className={[getStyles]} />
       <select
         {...(register && register(name))}
-        className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 ${getStyles} ${
+        className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 dark:bg-skin-gray-900 ${getStyles} ${
           disabled ? 'bg-gray-50' : ''
         }`}
         id={name}>

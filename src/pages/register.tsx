@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
-import { api } from '@/services/api';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
@@ -20,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { schemaRegister } from '@/handlers/forms';
+import { useRegister } from '@/hooks/useRegister';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
@@ -29,15 +29,13 @@ export type registrationFormFields = {
 };
 
 const Register = () => {
-  const [errorMsg, setErrorMsg] = useState<string>('');
-  const [redirect, setRedirect] = useState<boolean>(false);
-  const [activeLoader, setActiveLoader] = useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<registrationFormFields>({ resolver: yupResolver(schemaRegister) });
+
+  const { tryRegister, errorMsg, redirect, activeLoader } = useRegister();
 
   useEffect(() => {
     if (redirect) {
@@ -45,32 +43,13 @@ const Register = () => {
     }
   }, [redirect]);
 
-  const onSubmit = async ({ keyCode, username: usernameLocal, password: passwordLocal }) => {
-    setActiveLoader(true);
-
-    try {
-      await api.post('/user', { username: usernameLocal, password: passwordLocal, code: keyCode });
-      setRedirect(true);
-    } catch (error) {
-      if (error?.response?.status === 409) {
-        setErrorMsg('Esse e-mail já está cadastrado');
-        setActiveLoader(false);
-      } else {
-        setErrorMsg('Erro ao cadastrar usuário');
-        setActiveLoader(false);
-      }
-    } finally {
-      setActiveLoader(false);
-    }
-  };
-
   return (
     <Layout>
       <Navbar selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
       <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(tryRegister)}>
           <Title>Criar uma conta</Title>
 
           <Loader active={activeLoader} />
@@ -111,6 +90,7 @@ const Register = () => {
             register={register}
             errors={errors}
           />
+
           <GroupInput>
             <p className="flex flex-col  py-1 ml-1">
               <span className="text-xs text-gray-500 dark:text-white text-center">Já tem cadastro?</span>

@@ -1,7 +1,7 @@
 import LINKS from '@/data/links.json';
 import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
-import { api } from '@/services/api';
+import { Api } from '@/services/api';
 import { TPostsProps } from '@/types/posts';
 import { ContainerPosts } from '@/widgets/containerPosts';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { getPostsTested } from '../core/services/handlePosts';
 const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
 export async function getStaticProps() {
-  const resp = await api('/posts');
+  const resp = await Api.get('/posts');
   const { posts } = await resp.data;
 
   return {

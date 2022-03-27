@@ -1,8 +1,7 @@
 import { navbarEnum } from '@/enums/navbar';
+import { useViewAdminPosts } from '@/hooks/useViewAdminPosts';
 import { Layout } from '@/layout/layout';
-import { api } from '@/services/api';
 import { ContainerPosts } from '@/widgets/containerPosts';
-import { useEffect, useState } from 'react';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -10,21 +9,7 @@ const breadcrumbs = [
 ];
 
 const ViewPosts = () => {
-  const [data, setData] = useState<any[]>([]);
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        const resp = await api('/posts');
-        const posts = await resp.data;
-        setData(posts.posts);
-        return 'ok';
-      } catch (error) {
-        return 'ooopss';
-      }
-    }
-    getData();
-  }, []);
+  const { posts } = useViewAdminPosts();
 
   return (
     <Layout>
@@ -33,7 +18,7 @@ const ViewPosts = () => {
         mode="admin"
         typeSelected={navbarEnum.ViewPosts}
         title="Todos os Posts"
-        posts={data}
+        posts={posts}
         showTags={false}
       />
     </Layout>

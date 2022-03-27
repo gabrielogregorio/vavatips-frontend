@@ -33,7 +33,7 @@ module.exports = {
         maxHeightContent: '500px',
       },
       colors: {
-        success: '#61c42f',
+        success: '#9df76f',
         primary: '#3386d3',
         secondary: '#d85f5f',
       },

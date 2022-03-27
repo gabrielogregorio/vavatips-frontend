@@ -1,6 +1,5 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
-import { api } from '@/services/api';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/enums/navbar';
@@ -9,52 +8,24 @@ import { Layout } from '@/layout/layout';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { ErrorMsg } from '@/base/errorMsg';
+import { useSuggestions } from '@/hooks/useSuggestions';
+import { suggestionType } from '@/types/suggestions';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
   { url: navbarEnum.Dashboard, text: 'sugestões' },
 ];
 
-type suggestionType = {
-  id: string;
-  postId: string;
-  email: string;
-  description: string;
-  status: string;
-};
 const Th = ({ children }: { children: ReactNode }) => (
   <th className="text-base text-skin-white text-left">{children}</th>
 );
 
 const Td = ({ children }: { children: ReactNode }) => (
-  <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">
-    {children}
-  </td>
+  <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">{children}</td>
 );
 
 const Suggestions = () => {
-  const [suggestions, setSuggestions] = useState<suggestionType[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
-
-  function loadSuggestion() {
-    setLoading(true);
-    api
-      .get(`/suggestions`)
-      .then((res) => {
-        setSuggestions(res.data);
-      })
-      .catch((err) => {
-        setError(err?.message || 'Erro no servidor');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }
-
-  useEffect(() => {
-    loadSuggestion();
-  }, []);
+  const { suggestions, loading, error } = useSuggestions();
 
   return (
     <Layout>
