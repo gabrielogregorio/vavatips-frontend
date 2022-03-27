@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
-import { api } from '@/services/api';
+import { Api } from '@/services/api';
 import { formatImage } from '@/services/formatEnvironment';
 import { Button } from '@/base/button';
 import { Loader } from '@/base/loader';
@@ -63,7 +63,7 @@ export const Modal = ({
     formData.append('image', event.target.files[0]);
 
     function sendImageFromApi() {
-      api.post(`/postLoadFile`, formData).then((res) => {
+      Api.post(`/postLoadFile`, formData).then((res) => {
         const urlImg = `${res.data.filename}`;
         setLinkImg(urlImg);
         setActiveLoader(false);

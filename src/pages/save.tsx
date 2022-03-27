@@ -1,7 +1,7 @@
 import LINKS from '@/data/links.json';
 import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
-import { api } from '@/services/api';
+import { Api } from '@/services/api';
 import { TPostsProps } from '@/types/posts';
 import { ContainerPosts } from '@/widgets/containerPosts';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ import { getPostsSave } from '../core/services/handlePosts';
 const breadcrumbs = [LINKS.inicio, LINKS.Save];
 
 export async function getStaticProps() {
-  const resp = await api('/posts');
+  const resp = await Api.get('/posts');
   const { posts } = await resp.data;
 
   return {
@@ -21,10 +21,10 @@ export async function getStaticProps() {
 }
 
 const Save = ({ posts }: { posts: TPostsProps[] }) => {
-  const [postsFiltereds, setPostsFiltereds] = useState<TPostsProps[]>([]);
+  const [postsFiltered, setPostsFiltered] = useState<TPostsProps[]>([]);
 
   useEffect(() => {
-    setPostsFiltereds(posts.filter((post) => getPostsSave().includes(post.id)));
+    setPostsFiltered(posts.filter((post) => getPostsSave().includes(post.id)));
   }, [posts]);
 
   return (
@@ -34,7 +34,7 @@ const Save = ({ posts }: { posts: TPostsProps[] }) => {
         mode="public"
         typeSelected={navbarEnum.Save}
         title="Posts Salvos"
-        posts={postsFiltereds}
+        posts={postsFiltered}
       />
     </Layout>
   );

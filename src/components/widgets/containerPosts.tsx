@@ -12,7 +12,7 @@ import { TagsFixFilters } from '@/widgets/tagsFixFilters';
 import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
-import { InfiniteScroll } from '@/widgets/infinitScroll';
+import { InfiniteScroll } from '@/widgets/infiniteScroll';
 
 type containerPosts = {
   breadcrumbs: { url: string; text: string }[];
@@ -58,7 +58,7 @@ function applyFilters(posts, filteredActives) {
 export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, showTags }: containerPosts) => {
   const { query } = useRouter();
   const { agent, map } = query;
-  const [filteredActives, setFilteredsActive] = useState<string[]>([]);
+  const [filteredActives, setFilteredActive] = useState<string[]>([]);
   const [final, setFinal] = useState<number>(skip);
   const tags = getAllTags(posts, agent, map);
   const [isFirstLoading, setIsFirstLoading] = useState<boolean>(false);
@@ -97,7 +97,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
           {showTags ? (
             <>
               <TagsFixFilters agent={agent?.toString()} map={map?.toString()} />
-              <Tags tags={tags} setFilteredsActive={setFilteredsActive} filteredActives={filteredActives} />
+              <Tags tags={tags} setFilteredActive={setFilteredActive} filteredActives={filteredActives} />
             </>
           ) : null}
 

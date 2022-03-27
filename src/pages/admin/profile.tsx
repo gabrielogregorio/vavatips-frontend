@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
-import { api } from '@/services/api';
 import { navbarEnum } from '@/enums/navbar';
 import Router from 'next/router';
 import { Layout } from '@/layout/layout';
@@ -17,6 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/base/button';
 import { schemaUpdateProfile } from '@/handlers/forms';
+import { useProfile } from '@/hooks/useProfile';
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },
@@ -30,8 +30,6 @@ export type registrationFormFields = {
 };
 
 const Profile = () => {
-  const [activeLoader, setActiveLoader] = useState<boolean>(true);
-
   const {
     register,
     handleSubmit,
@@ -42,27 +40,18 @@ const Profile = () => {
     defaultValues: {},
   });
 
+  const { isLoading, infoUser } = useProfile();
+
+  useEffect(() => {
+    reset({
+      username: infoUser?.username,
+    });
+  }, [infoUser?.username, reset]);
+
   function handleLogout() {
     logout();
     Router.push('/login');
   }
-
-  useEffect(() => {
-    api
-      .get(`/user`)
-      .then(({ data }) => {
-        const { username: usernameLocal } = data;
-
-        const formToReset = {
-          username: usernameLocal,
-        };
-
-        reset(formToReset);
-      })
-      .finally(() => {
-        setActiveLoader(false);
-      });
-  }, [reset]);
 
   const onSubmit = async () => {};
 
@@ -74,9 +63,9 @@ const Profile = () => {
       <SubContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Title>Seu perfil</Title>
-          <Loader active={activeLoader} />
+          <Loader active={isLoading} />
 
-          {activeLoader === false ? (
+          {isLoading === false ? (
             <>
               <Input
                 placeholder=""

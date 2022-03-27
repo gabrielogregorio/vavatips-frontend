@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
-import { api } from '@/services/api';
 import {
   agents as renderAgents,
   maps as renderMaps,
@@ -34,6 +33,7 @@ import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaManagementPosts } from '@/handlers/forms';
+import { useManagementPosts } from '@/hooks/useManagementPosts';
 
 type actionType = 'top' | 'bottom';
 
@@ -70,6 +70,12 @@ export type registrationFormFields = {
 export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
+  const [visibleModal, setVisibleModal] = useState<boolean>(false);
+  const [propsModal, setPropsModal] = useState<modalType>({
+    id: '',
+    description: '',
+    image: '',
+  });
 
   const {
     register,
@@ -79,52 +85,31 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     formState: { errors },
   } = useForm<registrationFormFields>({ resolver: yupResolver(schemaManagementPosts) });
 
-  const [redirect, setRedirect] = useState<boolean>(false);
-  const [imgAdded, setImgAdded] = useState<imgType[]>([]);
-  const [visibleModal, setVisibleModal] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [propsModal, setPropsModal] = useState<modalType>({
-    id: '',
-    description: '',
-    image: '',
-  });
+  const {
+    getOnePost,
+    redirect,
+    initialPost,
+    deleteThisPost,
+    isLoading,
+    imgAdded,
+    setImgAdded,
+    createNewPost,
+    editOnePost,
+  } = useManagementPosts();
 
   useEffect(() => {
-    const isEditModeReadyAndIdIsAvaliable = mode === 'edit' && isReady && id;
-
-    if (isEditModeReadyAndIdIsAvaliable) {
-      setLoading(true);
-      api
-        .get(`/post/${id}`)
-        .then(({ data }) => {
-          const { title, description, tags, imgs } = data;
-
-          const newImages = imgs.map((item) => ({
-            ...item,
-            id: uuid.v4().toString(),
-          }));
-
-          const formToReset = {
-            title,
-            description,
-            moment: tags.moment,
-            difficult: tags.difficult,
-            ability: tags.ability,
-            side: tags.side,
-            map: tags.map,
-            position: tags.mapPosition,
-            agent: tags.agent,
-          };
-
-          setImgAdded(newImages);
-          reset(formToReset);
-        })
-        .catch(() => {})
-        .finally(() => {
-          setLoading(false);
-        });
+    if (initialPost) {
+      reset(initialPost);
     }
-  }, [id, mode, isReady, reset]);
+  }, [JSON.stringify(initialPost)]);
+
+  useEffect(() => {
+    const isEditModeReadyAndIdIsAvailable = mode === 'edit' && isReady && id;
+
+    if (isEditModeReadyAndIdIsAvailable) {
+      getOnePost(id);
+    }
+  }, [id, mode, isReady]);
 
   function deleteStep(idPost: string) {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
@@ -245,11 +230,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   };
 
   async function deletePost(idPost: string) {
-    setLoading(true);
-    api.delete(`/post/${idPost}`).finally(() => {
-      setLoading(false);
-      setRedirect(true);
-    });
+    deleteThisPost(idPost);
   }
 
   useEffect(() => {
@@ -259,7 +240,6 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   }, [redirect]);
 
   const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
-    setLoading(true);
     const request = {
       title,
       description,
@@ -277,23 +257,9 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     };
 
     if (mode === 'create') {
-      api
-        .post(`/post`, { ...request })
-        .then(() => {
-          setRedirect(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      createNewPost(request);
     } else if (mode === 'edit') {
-      api
-        .put(`/post/${id}`, { ...request })
-        .then(() => {
-          setRedirect(true);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      editOnePost(id, request);
     }
   };
 
@@ -305,7 +271,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
         <Navbar selected={navbarEnum.EditScreen} modelNavbar={modelNavbarAdmin} />
       )}
       <Breadcrumb breadcrumbs={breadcrumbs} />
-      <Loader active={loading} />
+      <Loader active={isLoading} />
 
       <SubContainer>
         {visibleModal ? (

@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
-import { api } from '@/services/api';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
 import { Footer } from '@/layout/footer';
@@ -17,10 +16,10 @@ import { Navbar } from '@/layout/navbar';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Form } from '@/base/Form';
 import { useForm } from 'react-hook-form';
-import { login } from '@/services/auth';
 import { schemaLogin } from '@/handlers/forms';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
+import { useLoginAndSetToken } from '@/hooks/useLoginAndSetToken';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 
@@ -30,15 +29,13 @@ export type registrationFormFields = {
 };
 
 const Login = () => {
-  const [errorMsg, setErrorMsg] = useState<string>('');
-  const [redirect, setRedirect] = useState<boolean>(false);
-  const [activeLoader, setActiveLoader] = useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm<registrationFormFields>({ resolver: yupResolver(schemaLogin) });
+
+  const { tryLogin, errorMsg, redirect, isLoading } = useLoginAndSetToken();
 
   useEffect(() => {
     if (redirect) {
@@ -46,39 +43,16 @@ const Login = () => {
     }
   }, [redirect]);
 
-  const onSubmit = async ({ username, password }) => {
-    setActiveLoader(true);
-
-    try {
-      const token = await api.post('/auth', { username, password });
-      login(token.data.token);
-      setRedirect(true);
-    } catch (error) {
-      if (error?.response?.status === 404) {
-        setActiveLoader(false);
-        setErrorMsg('Usuário não cadastrado!');
-      } else if (error?.response?.status === 403) {
-        setActiveLoader(false);
-        setErrorMsg('Senha inválida!');
-      } else {
-        setActiveLoader(false);
-        setErrorMsg(`Erro Desconhecido`);
-      }
-    } finally {
-      setActiveLoader(false);
-    }
-  };
-
   return (
     <Layout>
       <Navbar selected={navbarEnum.Mistic} modelNavbar={modelNavbarPublic} />
       <Breadcrumb breadcrumbs={breadcrumbs} />
 
       <SubContainer>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(tryLogin)}>
           <Title>Login</Title>
 
-          <Loader active={activeLoader} />
+          <Loader active={isLoading} />
           <ErrorMsg msg={errorMsg} />
 
           <Input
@@ -88,6 +62,7 @@ const Login = () => {
             label="Usuário"
             register={register}
             errors={errors}
+            isSubmitted={isSubmitted}
           />
 
           <Input
@@ -97,6 +72,7 @@ const Login = () => {
             label="Senha"
             register={register}
             errors={errors}
+            isSubmitted={isSubmitted}
           />
 
           <GroupInput>

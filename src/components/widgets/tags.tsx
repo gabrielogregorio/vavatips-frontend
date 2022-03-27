@@ -3,15 +3,15 @@ import { Button } from '@/base/button';
 type tagsType = {
   tags: string[];
   filteredActives: string[];
-  setFilteredsActive: Function;
+  setFilteredActive: Function;
 };
 
-export const Tags = ({ tags, filteredActives, setFilteredsActive }: tagsType) => {
+export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => {
   function toggleTag(tag) {
     if (filteredActives.includes(tag)) {
-      setFilteredsActive(filteredActives.filter((filter) => filter !== tag));
+      setFilteredActive(filteredActives.filter((filter) => filter !== tag));
     } else {
-      setFilteredsActive([...filteredActives, tag]);
+      setFilteredActive([...filteredActives, tag]);
     }
   }
 

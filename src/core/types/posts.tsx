@@ -10,15 +10,7 @@ export type difficultType = 'Facil' | 'Medio' | 'Díficil';
 export type sideType = 'Defensores' | 'Atacantes';
 export type mapType = 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind';
 export type mapPositionType = 'Meio' | 'B' | 'A' | 'C';
-export type positionMapType =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'BaseAtacante'
-  | 'BaseDefensora'
-  | 'Meio'
-  | 'Outra';
+export type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
 
 type TPositionMap = {
   id: string;
@@ -76,6 +68,7 @@ export type IMap = {
   img: string;
   mapPosition: TPositionMap[];
 };
+
 export type TPostsProps = {
   id: string;
   user: { id: string; username: string; image?: string };

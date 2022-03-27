@@ -26,6 +26,7 @@ export type TPropsInput = {
   disabled?: boolean;
   register: any;
   errors: any;
+  isSubmitted?: boolean;
 };
 
 type iconsFromInputType = {
@@ -44,7 +45,17 @@ IconsFromInput.defaultProps = {
   onClick: () => null,
 };
 
-export const Input = ({ type, label, name, status, disabled, register, errors, placeholder }: TPropsInput) => {
+export const Input = ({
+  type,
+  label,
+  name,
+  status,
+  disabled,
+  register,
+  errors,
+  placeholder,
+  isSubmitted,
+}: TPropsInput) => {
   const [showEyeIcon, setShowEyeIcon] = useState<boolean>(false);
 
   const togglePassword = () => {
@@ -63,6 +74,7 @@ export const Input = ({ type, label, name, status, disabled, register, errors, p
   const hasError = !!(errors && errorMessages);
 
   getStyles = hasError ? styleLiteral.invalid : getStyles;
+  getStyles = !hasError && isSubmitted ? styleLiteral.valid : getStyles;
 
   return (
     <GroupInput>
@@ -113,4 +125,5 @@ Input.defaultProps = {
   status: '',
   disabled: false,
   type: '',
+  isSubmitted: false,
 };

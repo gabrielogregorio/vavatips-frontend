@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useModalMessage } from '@/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
-import { api } from '@/services/api';
+import { Api } from '@/services/api';
 import { Button } from '@/base/button';
 import { Input } from '@/base/input';
 import { TextArea } from '@/base/textArea';
@@ -45,8 +45,7 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     const idPost = modalSuggestion.post?.id ?? '';
     setLoading(true);
 
-    api
-      .post('/suggestion', { idPost, email, description })
+    Api.post('/suggestion', { idPost, email, description })
       .then(() => {
         setModalMessage({
           active: true,
