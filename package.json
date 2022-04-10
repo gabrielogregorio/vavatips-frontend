@@ -9,6 +9,7 @@
     "start": "next start",
     "jest": "jest",
     "test": "jest && yarn run cypress:headless",
+    "jest:coverage": "jest --coverage",
     "jest:watchAll": "jest --watchAll",
     "jest:watchAll:coverage": "jest --watchAll --coverage",
     "cypress": "cypress open",
