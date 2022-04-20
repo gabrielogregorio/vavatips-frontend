@@ -13,7 +13,7 @@
   <a href="https://valorant-tips.vercel.app/" target="blank">Access blog</a>
 </div>
 
-## Introduction
+## Introduction this project
 This project was developed using NextJs, Typescript and api is available at [vavatips-backend](https://github.com/gabrielogregorio/valorant-tips-api).
 
 Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https://gabrielogregorio.github.io/valorant-tips/)
