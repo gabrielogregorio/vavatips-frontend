@@ -40,7 +40,6 @@ Read [Contributing.md](CONTRIBUTING.md)
 
 ### Run
 ```bash
-
 # Install full dependencies
 yarn
 
