@@ -33,7 +33,7 @@ const breadcrumbs = [
 const Dashboard = () => {
   const { info, username, errorMsg, isLoading } = useDashboard();
 
-  function renderDashboardItems() {
+  const renderDashboardItems = () => {
     const itemsDashboard = getKeysFromAnyObject(info);
 
     return itemsDashboard.map((key) => (
@@ -41,7 +41,7 @@ const Dashboard = () => {
         {keyLabel[key] ?? key}: {info?.[key].toString()}
       </ItemList>
     ));
-  }
+  };
 
   return (
     <Layout>

@@ -1,3 +1,5 @@
+import axios, { AxiosError } from 'axios';
+import Error from 'next/error';
 import Router from 'next/router';
 
 const defaultStatusCode = {
@@ -8,13 +10,17 @@ type handleInputErrorsType = {
   statusCode: number;
 };
 
-function handleInputErrors(error: any): handleInputErrorsType {
-  const statusCode = error?.response?.status ?? 0;
-
+const handleInputErrors = (error: Error | AxiosError): handleInputErrorsType => {
+  if (axios.isAxiosError(error)) {
+    const statusCode = error?.response?.status ?? 0;
+    return {
+      statusCode,
+    };
+  }
   return {
-    statusCode,
+    statusCode: 0,
   };
-}
+};
 
 export const handleDashboard = (error: any): string => {
   const { statusCode } = handleInputErrors(error);
@@ -28,7 +34,7 @@ export const handleDashboard = (error: any): string => {
   return 'Erro ao obter dados do dashboard';
 };
 
-export const handleErrorLogin = (error: any): string => {
+export const handleErrorLogin = (error: Error | AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
@@ -40,7 +46,7 @@ export const handleErrorLogin = (error: any): string => {
   return literalHandler[statusCode] ?? literalHandler.default;
 };
 
-export const handleErrorRegister = (error: any): string => {
+export const handleErrorRegister = (error: Error | AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
@@ -51,7 +57,7 @@ export const handleErrorRegister = (error: any): string => {
   return literalHandler[statusCode] ?? literalHandler.default;
 };
 
-export const handleErrorViewAdminPosts = (error: any): string => {
+export const handleErrorViewAdminPosts = (error: Error | AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
@@ -61,17 +67,17 @@ export const handleErrorViewAdminPosts = (error: any): string => {
   return literalHandler[statusCode] ?? literalHandler.default;
 };
 
-export const handleErrorSuggestion = (error: any): string => {
+export const handleErrorSuggestion = (error: Error | AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
     default: 'Erro no servidor',
   };
 
-  return error.message || literalHandler[statusCode] || literalHandler.default;
+  return literalHandler[statusCode] || literalHandler.default;
 };
 
-export const handleErrorProfile = (error: any): string => {
+export const handleErrorProfile = (error: Error | AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {

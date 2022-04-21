@@ -14,7 +14,7 @@ export const useManagementPosts = () => {
   const [imgAdded, setImgAdded] = useState<imgType[]>([]);
   const [redirect, setRedirect] = useState<boolean>(false);
 
-  function getOnePost(id: string) {
+  const getOnePost = (id: string) => {
     setIsLoading(true);
     Api.get(`/post/${id}`)
       .then(({ data }) => {
@@ -45,9 +45,9 @@ export const useManagementPosts = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  };
 
-  function deleteThisPost(idPost) {
+  const deleteThisPost = (idPost) => {
     setIsLoading(true);
     Api.delete(`/post/${idPost}`)
       .catch((error) => {
@@ -57,9 +57,9 @@ export const useManagementPosts = () => {
         setIsLoading(false);
         setRedirect(true);
       });
-  }
+  };
 
-  function createNewPost(request) {
+  const createNewPost = (request) => {
     Api.post(`/post`, { ...request })
       .then(() => {
         setRedirect(true);
@@ -67,9 +67,9 @@ export const useManagementPosts = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  };
 
-  function editOnePost(id, request) {
+  const editOnePost = (id, request) => {
     Api.put(`/post/${id}`, { ...request })
       .then(() => {
         setRedirect(true);
@@ -77,7 +77,7 @@ export const useManagementPosts = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  };
 
   return {
     initialPost,

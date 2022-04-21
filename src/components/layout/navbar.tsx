@@ -25,18 +25,12 @@ export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) =>
     }
   };
 
-  function renderMenuItems() {
-    return modelNavbar.map((model) => (
+  const renderMenuItems = () =>
+    modelNavbar.map((model) => (
       <div key={model.text} className="mb-4">
-        <NavbarLink
-          href={model.url}
-          selected={selected}
-          whoIs={model.url}
-          textContent={model.text}
-        />
+        <NavbarLink href={model.url} selected={selected} whoIs={model.url} textContent={model.text} />
       </div>
     ));
-  }
 
   return (
     <nav className="flex flex-col items-center justify-center w-full p-5 pl-10 pr-10 dark:bg-skin-gray-900 bg-skin-secondary-light sm:flex-row text-skin-white">

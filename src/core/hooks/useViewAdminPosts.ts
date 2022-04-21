@@ -8,7 +8,7 @@ export const useViewAdminPosts = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       setIsLoading(true);
       try {
         const resp = await Api.get('/posts');
@@ -19,7 +19,7 @@ export const useViewAdminPosts = () => {
       } finally {
         setIsLoading(true);
       }
-    }
+    };
     getData();
   }, []);
 

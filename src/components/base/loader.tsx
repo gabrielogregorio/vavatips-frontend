@@ -3,8 +3,8 @@ type loaderProps = {
 };
 
 export const Loader = ({ active }: loaderProps) => {
-  function renderActive() {
-    return active ? (
+  const renderActive = () =>
+    active ? (
       <div className="flex items-center justify-center w-full">
         <div
           data-testid="loader"
@@ -14,7 +14,6 @@ export const Loader = ({ active }: loaderProps) => {
         </div>
       </div>
     ) : null;
-  }
 
   return <>{renderActive()}</>;
 };

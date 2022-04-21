@@ -1,12 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { PaginationButtons, PaginationDotItems } from '@/base/paginationButtons';
 
+const EXAMPLE_KEY_PAGE = 32;
+const EXAMPLE_NUMBER_PAGE = 7;
+const EXAMPLE_NUMBER_PAGE_SECOND = 3;
+
 describe('PaginationButtons', () => {
   it('should render pagination buttons', () => {
     render(
       <PaginationButtons
-        numberOfPage={7}
-        key={32}
+        numberOfPage={EXAMPLE_NUMBER_PAGE}
+        key={EXAMPLE_KEY_PAGE}
         active
         urlBase="items"
         map="Ascent"
@@ -14,13 +18,13 @@ describe('PaginationButtons', () => {
       />,
     );
 
-    expect(screen.getByRole('link', { name: '7' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE.toString() })).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: '7' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE.toString() })).toHaveAttribute(
       'class',
       'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
     );
-    expect(screen.getByRole('link', { name: '7' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE.toString() })).toHaveAttribute(
       'href',
       '/items?page=7&map=Ascent&agent=Jett',
     );
@@ -29,8 +33,8 @@ describe('PaginationButtons', () => {
   it('should render not active', () => {
     render(
       <PaginationButtons
-        numberOfPage={3}
-        key={32}
+        numberOfPage={EXAMPLE_NUMBER_PAGE_SECOND}
+        key={EXAMPLE_KEY_PAGE}
         active={false}
         urlBase="posts"
         map="Bind"
@@ -38,13 +42,13 @@ describe('PaginationButtons', () => {
       />,
     );
 
-    expect(screen.getByRole('link', { name: '3' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE_SECOND.toString() })).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: '3' })).not.toHaveAttribute(
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE_SECOND.toString() })).not.toHaveAttribute(
       'class',
       'block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white bg-skin-secondary-light text-skin-white',
     );
-    expect(screen.getByRole('link', { name: '3' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: EXAMPLE_NUMBER_PAGE_SECOND.toString() })).toHaveAttribute(
       'href',
       '/posts?page=3&map=Bind&agent=Raze',
     );

@@ -14,9 +14,7 @@ export const styleLiteral = {
   default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
 };
 
-export function getStylesFromInput(status) {
-  return styleLiteral[status] ?? styleLiteral.default;
-}
+export const getStylesFromInput = (status) => styleLiteral[status] ?? styleLiteral.default;
 
 export type TPropsInput = {
   label: string;

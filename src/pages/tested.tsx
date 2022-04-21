@@ -9,7 +9,7 @@ import { getPostsTested } from '../core/services/handlePosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Tested];
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const resp = await Api.get('/posts');
   const { posts } = await resp.data;
 
@@ -18,7 +18,7 @@ export async function getStaticProps() {
       posts,
     },
   };
-}
+};
 
 const Tested = ({ posts }: { posts: TPostsProps[] }) => {
   const [postsFiltered, setPostsFiltered] = useState<any[]>([]);

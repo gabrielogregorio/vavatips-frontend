@@ -1,12 +1,13 @@
+import { registrationFormFields } from '@/widgets/modalOfSuggestion';
 import { ReactElement } from 'react';
-import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { GroupInput } from './groupInput';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
 export type TPropsSelectedBase = {
   text: string;
-  register: UseFormRegister<FieldValues>;
+  register: UseFormRegister<registrationFormFields>;
   errors: FieldErrors;
   name: string;
   render: { id: string; name: string }[];
@@ -17,13 +18,12 @@ export type TPropsSelectedBase = {
 export const Selected = ({ render, text, register, errors, name, status, disabled }: TPropsSelectedBase) => {
   let getStyles = getStylesFromInput(status);
 
-  function renderItems(): ReactElement[] {
-    return render.map((item) => (
+  const renderItems = (): ReactElement[] =>
+    render.map((item) => (
       <option value={item.name} key={item.id}>
         {item.name}
       </option>
     ));
-  }
 
   const errorMessages = errors?.[name]?.message ?? '';
   const hasError = !!(errors && errorMessages);

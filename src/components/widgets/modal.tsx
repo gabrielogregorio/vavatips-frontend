@@ -7,7 +7,7 @@ import { Form } from '@/base/Form';
 import { TextArea } from '@/base/textArea';
 import { InputFile } from '@/base/inputFile';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaModalNewSep } from '@/handlers/forms';
 import { Input } from '@/base/input';
@@ -22,10 +22,10 @@ export type ModalPropsBase = {
   saveModal: (id: string, title: string, image: string) => void;
 };
 
-export type registrationFormFields = {
+export interface registrationFormFields extends FieldValues {
   id: string;
   descriptionImage: string;
-};
+}
 
 export const Modal = ({
   id: idModal,
@@ -62,21 +62,21 @@ export const Modal = ({
     const formData = new FormData();
     formData.append('image', event.target.files[0]);
 
-    function sendImageFromApi() {
+    const sendImageFromApi = (): void => {
       Api.post(`/postLoadFile`, formData).then((res) => {
         const urlImg = `${res.data.filename}`;
         setLinkImg(urlImg);
         setActiveLoader(false);
       });
-    }
+    };
     sendImageFromApi();
   };
 
-  const closeModalItem = () => {
+  const closeModalItem = (): void => {
     closeModal(null);
   };
 
-  const onSubmit = async ({ descriptionImage, id }) => {
+  const onSubmit = ({ descriptionImage, id }): void => {
     saveModal(id, descriptionImage, LinkImg);
   };
 

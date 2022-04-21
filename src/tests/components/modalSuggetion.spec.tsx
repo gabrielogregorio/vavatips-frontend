@@ -45,9 +45,8 @@ const waitForSuccessfully = async () =>
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }): ReactNode {
-      return children;
-    },
+    ({ children }: { children: ReactNode }): ReactNode =>
+      children,
 );
 
 const handlers = [

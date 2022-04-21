@@ -23,9 +23,9 @@ type containerPosts = {
   showTags?: boolean;
 };
 
-const skip = 10;
+const skip: number = 10;
 
-function getAllTags(posts, agent, map): string[] {
+const getAllTags = (posts, agent, map): string[] => {
   const tags = new Set();
   posts.forEach((post) => {
     const values = Object.values(post.tags);
@@ -38,10 +38,10 @@ function getAllTags(posts, agent, map): string[] {
   });
 
   return [...tags] as string[];
-}
+};
 
-function applyFilters(posts, filteredActives) {
-  function existsFilterActiveInPost(tags) {
+const applyFilters = (posts, filteredActives) => {
+  const existsFilterActiveInPost = (tags) => {
     let existsFilter = 0;
 
     filteredActives.forEach((filter) => {
@@ -51,9 +51,9 @@ function applyFilters(posts, filteredActives) {
     });
 
     return existsFilter === filteredActives.length;
-  }
+  };
   return posts.filter((post) => existsFilterActiveInPost(post.tags));
-}
+};
 
 export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, showTags }: containerPosts) => {
   const { query } = useRouter();
@@ -74,9 +74,9 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
     setFinal(skip);
   }, [dataItem]);
 
-  function handleAddedMore() {
+  const handleAddedMore = (): void => {
     setFinal(final + skip);
-  }
+  };
 
   return (
     <>

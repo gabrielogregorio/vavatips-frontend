@@ -1,9 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { ScreenError } from './screenError';
 
-function sendLogsToServer(error, errorInfo) {
-  return `${error} ${errorInfo}`;
-}
+const sendLogsToServer = (error, errorInfo): string => `${error} ${errorInfo}`;
 
 type propsErrorBoundaryType = {
   children: ReactNode;
@@ -21,11 +19,11 @@ export default class ErrorBoundary extends Component<propsErrorBoundaryType, sta
     };
   }
 
-  static getDerivedStateFromError() {
+  static getDerivedStateFromError(): { hasError: boolean } {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error, errorInfo): void {
     sendLogsToServer(error, errorInfo);
   }
 
