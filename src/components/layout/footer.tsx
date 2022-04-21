@@ -9,8 +9,8 @@ export const Footer = () => (
             className="text-skin-white text-sm"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://gabrielogregorio.com/">
-            Entre em contato
+            href="https://github.com/gabrielogregorio/valorant-tips/issues/new">
+            Reportar Bugs/Solicitar agentes e mapas
           </a>
           <a
             className="text-skin-white text-sm"
@@ -31,15 +31,15 @@ export const Footer = () => (
         <div className="w-full mb-4 text-center">
           <h3 className="text-lg text-skin-white font-semibold text-left">Projeto</h3>
           <p className="text-left text-sm text-skin-white">
-            Esse é um projeto feito por fãs do Valorant, com intenção de aumentar a qualidade das
-            gameplays do nosso cenário.
+            Esse é um projeto feito por fãs do Valorant, com intenção de aumentar a qualidade das gameplays do nosso
+            cenário.
           </p>
         </div>
 
         <div className="w-full mb-4 text-center">
           <h3 className="text-lg text-skin-white font-semibold text-left">Sobre</h3>
           <p className="text-left text-sm text-skin-white">
-            <span className="text-sm">Vavatips</span> foi criado seguindo a política do
+            <span className="text-sm">Valorant tips</span> foi criado seguindo a política do
             <a
               className="text-sm"
               target="_blank"
@@ -47,8 +47,7 @@ export const Footer = () => (
               href="https://www.riotgames.com/pt-br/juridico">
               “Lenga-Lenga Jurídico”
             </a>
-            da Riot Games com recursos pertencentes à Riot Games. A Riot Games não endossa ou
-            patrocina este projeto.
+            da Riot Games com recursos pertencentes à Riot Games. A Riot Games não endossa ou patrocina este projeto.
           </p>
         </div>
       </div>
