@@ -3,11 +3,12 @@ import MockApp from '@/mock/App.Mock';
 import { posts } from '@/mock/mockPosts.json';
 import TestScreen from '@/pages/tested';
 import { waitByLoading } from '@/utils/waitByLoading';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 import { getDescription, getTitle } from '../utils/getPosts';
 import { generateNumericList } from '../../core/helpers/generateArray';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/posts',
       isReady: true,

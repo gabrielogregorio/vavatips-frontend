@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
@@ -17,7 +17,7 @@ import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
-import { IAgent, IMap } from '@/types/posts';
+import { IAgent, IMap, TAbility, TPositionMap } from '@/types/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import { navbarEnum } from '@/enums/navbar';
@@ -111,11 +111,11 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [id, mode, isReady]);
 
-  function deleteStep(idPost: string) {
+  function deleteStep(idPost: string): void {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
   }
 
-  function putPosition(idPost: string, action: actionType) {
+  function putPosition(idPost: string, action: actionType): void {
     const positionPut = imgAdded.findIndex((item) => item.id === idPost);
     const copyListDelete = imgAdded[positionPut];
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
@@ -133,35 +133,35 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     setImgAdded(copyImgAdded);
   }
 
-  function renderAbilities() {
+  function renderAbilities(): TAbility[] {
     const agente = watch('agent');
     const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[0];
     return filterAbilities?.abilities ?? [];
   }
 
-  function renderPositionsMap() {
+  function renderPositionsMap(): TPositionMap[] {
     const mapa: string = watch('map');
     const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[0];
     return filterMapPositions?.mapPosition ?? [];
   }
 
-  function showModalWithItem(idPost: string) {
+  function showModalWithItem(idPost: string): void {
     const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[0];
     setPropsModal(item);
     setVisibleModal(true);
   }
 
-  function showModal() {
+  function showModal(): void {
     setPropsModal({ id: '', description: '', image: '' });
     setVisibleModal(true);
   }
 
-  function closeModal() {
+  function closeModal(): void {
     setPropsModal({ id: '', description: '', image: '' });
     setVisibleModal(false);
   }
 
-  function renderSteps() {
+  function renderSteps(): ReactElement[] {
     return imgAdded.map((instruction, key) => (
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
@@ -211,7 +211,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     ));
   }
 
-  const saveModal = (idPost: string, description: string, image: string) => {
+  const saveModal = (idPost: string, description: string, image: string): void => {
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
@@ -229,7 +229,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   };
 
-  async function deletePost(idPost: string) {
+  async function deletePost(idPost: string): Promise<void> {
     deleteThisPost(idPost);
   }
 
@@ -239,7 +239,17 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [redirect]);
 
-  const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
+  const onSubmit = async ({
+    title,
+    description,
+    agent,
+    map,
+    ability,
+    difficult,
+    position,
+    moment,
+    side,
+  }): Promise<void> => {
     const request = {
       title,
       description,

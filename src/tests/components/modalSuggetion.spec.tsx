@@ -9,14 +9,16 @@ import { useModalContext } from '@/contexts/modalSuggestion';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
 import { ParsedUrlQuery } from 'querystring';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/',
       pathname: '',
       query: { map: 'Ascent32' },
       asPath: '',
+      isReady: true,
     };
   },
 }));
@@ -43,7 +45,7 @@ const waitForSuccessfully = async () =>
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
+    function Link({ children }: { children: ReactNode }): ReactNode {
       return children;
     },
 );

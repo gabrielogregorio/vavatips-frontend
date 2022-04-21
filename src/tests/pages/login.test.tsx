@@ -27,7 +27,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
+    function Link({ children }: { children: ReactNode }): ReactNode {
       return children;
     },
 );

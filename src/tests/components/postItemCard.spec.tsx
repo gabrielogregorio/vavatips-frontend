@@ -5,14 +5,16 @@ import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { Posts } from '@/widgets/postsItem';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '',
       query: { map: 'Ascent', agent: 'Sova' },
       asPath: '',
+      isReady: true,
     };
   },
 }));

@@ -12,7 +12,7 @@ export type mapType = 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Frac
 export type mapPositionType = 'Meio' | 'B' | 'A' | 'C';
 export type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
 
-type TPositionMap = {
+export type TPositionMap = {
   id: string;
   name: positionMapType;
 };
@@ -34,7 +34,7 @@ export type TPropsPost = {
   };
 };
 
-type TAbility = {
+export type TAbility = {
   id: string;
   name: string;
   keyboard: string;

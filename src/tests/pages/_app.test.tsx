@@ -1,13 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import MyApp from '@/pages/_app';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '',
       query: { map: 'Ascent', agent: 'Sova' },
       asPath: '',
+      isReady: true,
     };
   },
 }));

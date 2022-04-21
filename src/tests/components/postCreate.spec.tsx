@@ -7,15 +7,17 @@ import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '/posts',
       query: { map: 'Ascent', agent: 'Sova' },
       asPath: '',
+      isReady: true,
     };
   },
 }));

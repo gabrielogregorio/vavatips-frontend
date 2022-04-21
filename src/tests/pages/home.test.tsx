@@ -5,12 +5,13 @@ import MockApp from '@/mock/App.Mock';
 import { waitByLoading } from '@/utils/waitByLoading';
 import HomeScreen from '@/pages/posts/[map]/[agent]';
 import { generateNumericList } from '@/helpers/generateArray';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 import { getDescription, getTitle } from '../utils/getPosts';
 
 const { posts } = mockPosts;
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '',
@@ -52,27 +53,30 @@ describe('<HomeScreen />', () => {
     );
 
     await waitByLoading();
+    const FIRST_ITEM: number = 0;
+    const SECOND_ITEM: number = 1;
+    const THREE_ITEM: number = 2;
+    const DEFAULT_TIMEOUT_TESTS = 3000;
+    const buttonPrev = screen.getAllByLabelText('Item anterior')[FIRST_ITEM];
+    const buttonNext = screen.getAllByLabelText('Proximo item')[FIRST_ITEM];
 
-    const buttonPrev = screen.getAllByLabelText('Item anterior')[0];
-    const buttonNext = screen.getAllByLabelText('Proximo item')[0];
-
-    expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+    expect(screen.getByAltText(posts[FIRST_ITEM].imgs[FIRST_ITEM].description)).toBeInTheDocument();
     userEvent.click(buttonNext);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[1].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_ITEM].imgs[SECOND_ITEM].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: DEFAULT_TIMEOUT_TESTS },
     );
 
     userEvent.click(buttonPrev);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_ITEM].imgs[FIRST_ITEM].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: DEFAULT_TIMEOUT_TESTS },
     );
 
     userEvent.click(buttonNext);
@@ -80,18 +84,18 @@ describe('<HomeScreen />', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[2].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_ITEM].imgs[THREE_ITEM].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: DEFAULT_TIMEOUT_TESTS },
     );
 
     userEvent.click(buttonNext);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_ITEM].imgs[FIRST_ITEM].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: DEFAULT_TIMEOUT_TESTS },
     );
   });
 });

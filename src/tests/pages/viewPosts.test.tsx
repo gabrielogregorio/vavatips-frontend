@@ -7,12 +7,13 @@ import ViewPosts from '@/pages/admin/view-posts';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { generateNumericList } from '@/helpers/generateArray';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 import { getDescription, getTitle } from '../utils/getPosts';
 
 const postsLength = mockPosts.posts.length;
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/posts',
       isReady: true,

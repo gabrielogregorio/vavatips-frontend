@@ -6,14 +6,16 @@ import { Modal } from '@/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/',
       pathname: '',
       query: { map: 'Ascent32' },
       asPath: '',
+      isReady: true,
     };
   },
 }));
@@ -21,7 +23,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
+    function Link({ children }: { children: ReactNode }): ReactNode {
       return children;
     },
 );
@@ -31,6 +33,10 @@ const handlers = [
     res(ctx.status(200), ctx.json({ filename: 'https://gcloud.com/123abc' })),
   ),
 ];
+
+const NOT_CALLED = 0;
+const CALLED_FUNCTION_MOCK = 1;
+const FIRST_FILE_ITEM = 0;
 
 const server = setupServer(...handlers);
 
@@ -76,9 +82,9 @@ describe('<Modal />', () => {
       />,
     );
 
-    expect(closeModal).toHaveBeenCalledTimes(0);
+    expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
     userEvent.click(screen.getByTestId('closeModal'));
-    expect(closeModal).toHaveBeenCalledTimes(1);
+    expect(closeModal).toHaveBeenCalledTimes(CALLED_FUNCTION_MOCK);
   });
 
   it('should test close Modal', async () => {
@@ -96,9 +102,9 @@ describe('<Modal />', () => {
       />,
     );
 
-    expect(closeModal).toHaveBeenCalledTimes(0);
+    expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
     userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
-    expect(closeModal).toHaveBeenCalledTimes(1);
+    expect(closeModal).toHaveBeenCalledTimes(CALLED_FUNCTION_MOCK);
   });
 
   it('should render agent screen, write description, add upload and save', async () => {
@@ -124,7 +130,7 @@ describe('<Modal />', () => {
     userEvent.upload(inputFIle, file);
     await waitByLoading();
 
-    expect(inputFIle.files[0]).toStrictEqual(file);
+    expect(inputFIle.files[FIRST_FILE_ITEM]).toStrictEqual(file);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 

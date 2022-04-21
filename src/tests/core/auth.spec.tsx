@@ -1,12 +1,14 @@
 import { getToken, isAuthenticated, login, logout } from '@/services/auth';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '',
       query: '',
       asPath: '',
+      isReady: true,
     };
   },
 }));

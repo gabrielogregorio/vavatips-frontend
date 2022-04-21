@@ -24,23 +24,23 @@ export const PostCard = ({ post }: TProps) => {
 
   const { setModalSuggestion } = useModalContext();
 
-  function handleAddTest() {
+  const handleAddTest = (): void => {
     if (postTested) {
       removePost(post.id, 'test');
     } else {
       addNewPost(post.id, 'test');
     }
     setPostTested(getPostsTested()?.includes(post.id));
-  }
+  };
 
-  function handleAddSave() {
+  const handleAddSave = (): void => {
     if (postSave) {
       removePost(post.id, 'save');
     } else {
       addNewPost(post.id, 'save');
     }
     setPostSave(getPostsSave()?.includes(post.id));
-  }
+  };
 
   useEffect(() => {
     function thisPostIsIncludeInSaveOrTestedPosts() {
@@ -117,8 +117,9 @@ export const PostCard = ({ post }: TProps) => {
               {post.imgs?.map((image, index) => {
                 const navigationHasNotStarted = !startedANavigation;
                 const isSelectedImage = idImage === index;
+                const FIRST_PAGE = 0;
 
-                if (navigationHasNotStarted && index > 0) {
+                if (navigationHasNotStarted && index > FIRST_PAGE) {
                   return null;
                 }
 

@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { AiFillWarning, AiFillEye, AiTwotoneEyeInvisible } from 'react-icons/ai';
 import { MdError } from 'react-icons/md';
 import { GroupInput } from './groupInput';
@@ -24,8 +25,8 @@ export type TPropsInput = {
   name: string;
   status?: typeInputColors;
   disabled?: boolean;
-  register: any;
-  errors: any;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
   isSubmitted?: boolean;
 };
 
@@ -62,9 +63,7 @@ export const Input = ({
     setShowEyeIcon((prev) => !prev);
   };
 
-  function showIcon() {
-    return showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />;
-  }
+  const showIcon = () => (showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />);
 
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;

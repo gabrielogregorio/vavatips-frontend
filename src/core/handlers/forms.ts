@@ -3,6 +3,7 @@ import * as yup from 'yup';
 const username = yup.string().required('Digite um usuário!');
 const password = yup.string().required('Você precisa informar uma senha');
 const emailNotRequired = yup.string().email('O e-mail precisa ser válido').notRequired();
+const MINIMAL_DESCRIPTION_SIZE: number = 8;
 
 export const schemaLogin = yup.object().shape({
   username,
@@ -22,7 +23,10 @@ export const schemaRegister = yup.object().shape({
 export const schemaSendSuggestion = yup.object().shape({
   tip: yup.string(),
   email: emailNotRequired,
-  description: yup.string().min(8, 'Essa descrição está muito curta').required('Você precisa fornecer uma descrição'),
+  description: yup
+    .string()
+    .min(MINIMAL_DESCRIPTION_SIZE, 'Essa descrição está muito curta')
+    .required('Você precisa fornecer uma descrição'),
 });
 
 export const schemaManagementPosts = yup.object().shape({

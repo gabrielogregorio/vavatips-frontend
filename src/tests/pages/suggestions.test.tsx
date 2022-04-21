@@ -6,14 +6,16 @@ import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/',
       pathname: '',
       query: { map: 'Ascent32' },
       asPath: '',
+      isReady: true,
     };
   },
 }));
@@ -21,13 +23,13 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
+    function LinkComponent({ children }: { children: ReactNode }): ReactNode {
       return children;
     },
 );
 
 const handlers = [
-  rest.get(URL_GET_ALL_SUGGESTIONS, async (req, res, ctx) =>
+  rest.get(URL_GET_ALL_SUGGESTIONS, async (_req, res, ctx) =>
     res(
       ctx.json([
         {

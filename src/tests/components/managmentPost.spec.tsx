@@ -11,9 +11,24 @@ import postBase from '@/mock/responseGetPostById.json';
 import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
 
+export type defaultMockRouterType = {
+  route: string;
+  pathname: string;
+  query: { id?: string; map?: string; agent?: string; type?: string; page?: string };
+  asPath: string;
+  push?: Function;
+  events?: {
+    on: Function;
+    off: Function;
+  };
+  beforePopState?: Function;
+  prefetch?: Function;
+  isReady: boolean;
+};
+
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '',
       pathname: '/admin/post-edit',

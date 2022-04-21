@@ -11,10 +11,11 @@ import { ParsedUrlQuery } from 'querystring';
 import postBase from '@/mock/responseGetPostById.json';
 import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/admin/post-edit',
       pathname: '',

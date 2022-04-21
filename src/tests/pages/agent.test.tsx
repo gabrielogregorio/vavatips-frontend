@@ -5,14 +5,16 @@ import MockApp from '@/mock/App.Mock';
 import { mockAgents } from '@/mock/mock';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/',
       pathname: '',
       query: { map: 'Ascent32' },
       asPath: '',
+      isReady: true,
     };
   },
 }));
@@ -20,7 +22,7 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
+    function LinkComponent({ children }: { children: ReactNode }): ReactNode {
       return children;
     },
 );

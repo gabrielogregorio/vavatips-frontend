@@ -3,15 +3,16 @@ import MockApp from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
 import { posts } from '@/mock/mockPosts.json';
 import { waitByLoading } from '@/utils/waitByLoading';
+import { defaultMockRouterType } from 'src/tests/components/managmentPost.spec';
 import { getDescription, getTitle } from '../utils/getPosts';
 
 jest.mock('next/router', () => ({
-  useRouter() {
+  useRouter(): defaultMockRouterType {
     return {
       route: '/posts',
       isReady: true,
       pathname: '',
-      query: { map: 'oneRandomData', agent: 'oneRandomData', type: 'save', page: 1 },
+      query: { map: 'oneRandomData', agent: 'oneRandomData', type: 'save', page: '1' },
       asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
     };
   },

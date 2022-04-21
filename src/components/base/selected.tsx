@@ -1,11 +1,13 @@
+import { ReactElement } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { GroupInput } from './groupInput';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
 export type TPropsSelectedBase = {
   text: string;
-  register: any;
-  errors: any;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors;
   name: string;
   render: { id: string; name: string }[];
   status?: typeInputColors;
@@ -15,7 +17,7 @@ export type TPropsSelectedBase = {
 export const Selected = ({ render, text, register, errors, name, status, disabled }: TPropsSelectedBase) => {
   let getStyles = getStylesFromInput(status);
 
-  function renderItems() {
+  function renderItems(): ReactElement[] {
     return render.map((item) => (
       <option value={item.name} key={item.id}>
         {item.name}
