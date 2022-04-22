@@ -230,6 +230,17 @@ export const agents = (): IAgent[] => [
       { id: '_64_', keyboard: 'X', name: 'AtaqueOrbital' },
     ],
   },
+  {
+    id: 17,
+    name: 'Chamber',
+    img: '/images/agents/Chamber.webp',
+    abilities: [
+      { id: '_65_', keyboard: 'Q', name: 'Sheriff' },
+      { id: '_66_', keyboard: 'E', name: 'Teleporte' },
+      { id: '_67_', keyboard: 'C', name: 'Armadilha' },
+      { id: '_68_', keyboard: 'X', name: 'Operator' },
+    ],
+  },
 ];
 
 export const maps = (): IMap[] => [
