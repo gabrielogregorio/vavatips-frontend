@@ -44,11 +44,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="language" content="pt-BR" />
+        <meta name="theme-color" content="#d85f5fcd " />
 
         <meta name="description" content="As melhores dicas e pixels do Valorant" />
         <meta
           name="keywords"
-          content="valorant,dicas,tips,pixels,fps,granadas,flechas rastreadoras,flechas de choque,Ascent,Bind,Haven,Split,Breeze,Fracture,Icebox,Cypher,Killjoy,Sova,Viper,Sage,Astra,Skye,Reyna,Yoru,Jett,Raze,Phoenix,Kay/0,Breach,Omen,Brimstone,chamber,Neon,veneninho,granadas"
+          content="valorant,dicas,tips,pixels,fps,granadas,flechas rastreadoras,flechas de choque,Ascent,Bind,Haven,Split,Breeze,Fracture,Icebox,Cypher,Killjoy,Sova,Viper,Sage,Astra,Skye,Reyna,Yoru,Jett,Raze,Phoenix,Kay0,Breach,Omen,Brimstone,chamber,Neon,veneninho,granadas"
         />
         <meta name="author" content="Gabriel Gregorio" />
         <meta name="creator" content="Gabriel Gregorio" />

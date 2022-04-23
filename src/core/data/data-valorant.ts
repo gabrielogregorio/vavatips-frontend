@@ -188,7 +188,7 @@ export const agents = (): IAgent[] => [
   },
   {
     id: 13,
-    name: 'Kay/0',
+    name: 'Kay0',
     img: '/images/agents/Kay0.webp',
     abilities: [
       { id: '_49_', keyboard: 'Q', name: 'Clarão' },
