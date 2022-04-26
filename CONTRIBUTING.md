@@ -73,3 +73,68 @@ git push -u origin feature/name-branch
 11. Point the pull request to merge in the 'develop' branch of this project (gabrielogregorio/project)
 12. Create the pull request
 13. Follow the discussion, and everything works out, your contribution will be merged into the project's develop branch
+
+### How make commit
+
+1.  make fix, feat, test, docs commit. use :
+2.  do message commit
+
+```shell
+git clone <your-repository-forked>
+```
+
+3.  Access the Development Branch
+
+```shell
+git checkout -b develop origin/develop
+```
+
+4.  Update the development branch always
+
+```shell
+git pull
+```
+
+5.  Create a new branch based on develop by following one of the options below:
+
+```shell
+# New Feature Branch
+# Replace 'dark-theme-button' with the feature name
+git checkout -b feature/dark-theme-button
+
+# New Bug Fix Branch
+# Replace 'count-posts-pagination' with the bug name
+git checkout -b bugfix/count-posts-pagination
+
+# New refactoring/content addition/content update branch
+# Replace 'update-folders' with the refactoring name
+git checkout -b refactoring/update-folders
+
+# Nova Branch Documentation only
+# Replace 'contributing' with the name of the documentation
+git checkout -b doc/adjust-contributing
+
+# Branch for direct contributors only
+git checkout -b hotfix/error-login
+```
+
+6.  Create the features/fixes
+7.  Add tests
+8.  Add and commit the modified files, example:
+
+```shell
+git add ./src/components/navbar.tsx ./src/store/
+
+git commit -m "Added a color swap button"
+```
+
+9.  Do a push, replacing 'feature/name-branch' with the name of the branch you created
+
+```shell
+git push -u origin feature/name-branch
+```
+
+10. Open your github and create a pull request
+11. Point the pull request to merge in the 'develop' branch of this project (gabrielogregorio/project)
+12. Create the pull request
+13. Follow the discussion, and everything works out, your contribution will be merged into the project's develop branch

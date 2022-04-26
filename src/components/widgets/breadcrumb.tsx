@@ -15,11 +15,11 @@ export const Breadcrumb = ({ breadcrumbs }: propsType) => {
         ) : (
           <>
             <Link href={breadcrumb.url} passHref>
-              <a href="#/" className="text-skin-white" style={{ opacity: 0.7 }}>
+              <a href="#/" className="text-skin-white" style={{ opacity: 0.9 }}>
                 {breadcrumb.text}
               </a>
             </Link>
-            <span className={`pl-1 ${'text-skin-white'}`} style={{ opacity: 0.7 }}>
+            <span className={`pl-1 ${'text-skin-white'}`} style={{ opacity: 0.9 }}>
               &gt;
             </span>
           </>

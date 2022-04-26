@@ -108,7 +108,7 @@ export const PostCard = ({ post }: TProps) => {
         ) : null}
       </div>
 
-      <h3 className="text-base dark:text-skin-white text-skin-gray-800 w-full mb-2.5">{post.title}</h3>
+      <h2 className="text-base dark:text-skin-white text-skin-gray-800 w-full mb-2.5">{post.title}</h2>
 
       <div className="w-full">
         <div className="relative w-full">
@@ -129,7 +129,7 @@ export const PostCard = ({ post }: TProps) => {
                       className="object-cover rounded-md"
                       placeholder="blur"
                       priority
-                      blurDataURL="/images/assets/loader.png"
+                      blurDataURL="/images/assets/loader.webp"
                       data-src={formatImage(image.image)}
                       src={formatImage(image.image)}
                       data-is-selected={isSelectedImage}
@@ -184,9 +184,9 @@ export const PostCard = ({ post }: TProps) => {
       </div>
 
       <div className="w-full flex justify-around m-1">
-        <PostButton selected={postTested} onClick={() => handleAddTest()} variant="like" />
-        <PostButton selected={postSave} onClick={() => handleAddSave()} variant="save" />
-        <PostButton selected={false} onClick={() => handleModalAction()} variant="report" />
+        <PostButton ariaLabel="Salvar" selected={postTested} onClick={() => handleAddSave()} variant="like" />
+        <PostButton ariaLabel="Testado" selected={postSave} onClick={() => handleAddTest()} variant="save" />
+        <PostButton ariaLabel="Sugerir" selected={false} onClick={() => handleModalAction()} variant="report" />
       </div>
     </div>
   );

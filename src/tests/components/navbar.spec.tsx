@@ -9,53 +9,13 @@ describe('<Navbar />', () => {
   it('should render button like', () => {
     render(<Navbar selected={navbarEnum.None} modelNavbar={modelNavbarAdmin} />);
 
-    expect(screen.getByRole('link', { name: 'VAVATIPS' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'VALORANT TIPS' })).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: 'dashboard' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'criar posts' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'posts' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'sugestões' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'perfil' })).toBeInTheDocument();
-  });
-
-  it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.Dashboard} modelNavbar={modelNavbarAdmin} />);
-    expect(screen.getByRole('link', { name: 'dashboard' })).toHaveAttribute(
-      'class',
-      'p-2 text-xl border-b-2 border-cyan-50',
-    );
-  });
-
-  it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.PostCreate} modelNavbar={modelNavbarAdmin} />);
-    expect(screen.getByRole('link', { name: 'criar posts' })).toHaveAttribute(
-      'class',
-      'p-2 text-xl border-b-2 border-cyan-50',
-    );
-  });
-
-  it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.ViewPosts} modelNavbar={modelNavbarAdmin} />);
-    expect(screen.getByRole('link', { name: 'posts' })).toHaveAttribute(
-      'class',
-      'p-2 text-xl border-b-2 border-cyan-50',
-    );
-  });
-
-  it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.Suggestions} modelNavbar={modelNavbarAdmin} />);
-    expect(screen.getByRole('link', { name: 'sugestões' })).toHaveAttribute(
-      'class',
-      'p-2 text-xl border-b-2 border-cyan-50',
-    );
-  });
-
-  it('should render button like', () => {
-    render(<Navbar selected={navbarEnum.Profile} modelNavbar={modelNavbarAdmin} />);
-    expect(screen.getByRole('link', { name: 'perfil' })).toHaveAttribute(
-      'class',
-      'p-2 text-xl border-b-2 border-cyan-50',
-    );
   });
 
   it('should test change themes', () => {

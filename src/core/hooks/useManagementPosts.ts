@@ -50,9 +50,7 @@ export const useManagementPosts = () => {
   function deleteThisPost(idPost) {
     setIsLoading(true);
     Api.delete(`/post/${idPost}`)
-      .catch((error) => {
-        console.log(error);
-      })
+      .catch((error) => error)
       .finally(() => {
         setIsLoading(false);
         setRedirect(true);
