@@ -16,9 +16,9 @@ export const InfiniteScroll = ({ children, length, LoadMore, hasMore }: infinite
     hasMore={hasMore}
     loader={<h4>Carregando...</h4>}
     endMessage={
-      <h4 className="p-0 m-0 w-full text-center text-gray-600 font-bold dark:text-white">
+      <h3 className="p-0 m-0 w-full text-center text-gray-600 font-bold dark:text-white">
         Isso é tudo, por enquanto...
-      </h4>
+      </h3>
     }>
     {children}
   </ReactInfiniteScroll>

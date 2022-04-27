@@ -44,9 +44,9 @@ export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) =>
       {renderMenuItems()}
 
       <div className="border-b-8 border-transparent">
-        <Button onClick={() => handleNavbar()} className=" ml-5 text-xl h-full">
-          {theme === 'dark' ? <MdOutlineLightMode /> : null}
-          {theme === 'light' ? <MdOutlineNightlight /> : null}
+        <Button onClick={() => handleNavbar()} className=" ml-5 text-xl h-full" ariaLabel="Trocar tema">
+          {theme === 'dark' ? <MdOutlineLightMode className="w-10 h-10 p-2" /> : null}
+          {theme !== 'dark' ? <MdOutlineNightlight className="w-10 h-10 p-2" /> : null}
         </Button>
       </div>
     </nav>

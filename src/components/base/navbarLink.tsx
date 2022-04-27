@@ -13,7 +13,7 @@ export const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkTyp
 
   return (
     <Link href={href} passHref>
-      <a href="#/" className={`p-2 text-xl ${isActiveClass}`}>
+      <a href="#/" className={`p-4 py-2 text-xl ${isActiveClass}`}>
         {textContent}
       </a>
     </Link>

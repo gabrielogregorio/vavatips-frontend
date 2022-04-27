@@ -18,7 +18,40 @@ const browserify = require('@cypress/browserify-preprocessor');
  */
 // eslint-disable-next-line no-unused-vars
 
-module.exports = (on, config) => {
+const http = require('http');
+const next = require('next');
+const { startServer, stopServer } = require('../../mockApi/api');
+
+module.exports = async (on, config) => {
+  const app = next({ dev: true });
+  const handleNextRequest = app.getRequestHandler();
+  await app.prepare();
+
+  const customServer = new http.Server(async (req, res) => handleNextRequest(req, res));
+
+  await new Promise((resolve, reject) => {
+    customServer.listen(3000, (err) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve();
+    });
+  });
+
+  on('task', {
+    stopServer() {
+      stopServer();
+      return null;
+    },
+
+    startServer() {
+      startServer();
+
+      return null;
+    },
+  });
+
+  // typescript
   on(
     'file:preprocessor',
     browserify({
