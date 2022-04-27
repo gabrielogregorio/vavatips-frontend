@@ -184,8 +184,8 @@ export const PostCard = ({ post }: TProps) => {
       </div>
 
       <div className="w-full flex justify-around m-1">
-        <PostButton ariaLabel="Salvar" selected={postTested} onClick={() => handleAddSave()} variant="like" />
-        <PostButton ariaLabel="Testado" selected={postSave} onClick={() => handleAddTest()} variant="save" />
+        <PostButton ariaLabel="Salvar" selected={postSave} onClick={() => handleAddSave()} variant="like" />
+        <PostButton ariaLabel="Testado" selected={postTested} onClick={() => handleAddTest()} variant="save" />
         <PostButton ariaLabel="Sugerir" selected={false} onClick={() => handleModalAction()} variant="report" />
       </div>
     </div>
