@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Input, TPropsInput } from '@/base/input';
+import { Input, typeInputColors } from '@/base/input';
 
 export default {
   title: 'form/Input',
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: Story<TPropsInput> = (props) => {
+const Template: Story<typeof Input> = (props: unknown) => {
   return (
     <div>
-      <Input {...props} />
+      <Input
+        isSubmitted={false}
+        label="type} your name"
+        name="name"
+        status="default"
+        placeholder=""
+        errors={[]}
+        register={null}
+        disabled={false}
+        type="password"
+        {...props}
+      />
     </div>
   );
 };
 
-export const Default: Story<TPropsInput> = Template.bind({});
-Default.args = {
-  type: 'text',
-  label: 'type your name',
-  name: 'name',
-  status: 'default',
-  placeholder: '',
-  disabled: false,
-};
+export const Default: Story<typeof Input> = Template.bind({});
+Default.args = {};
 
 export const Password = Template.bind({});
 Password.args = {

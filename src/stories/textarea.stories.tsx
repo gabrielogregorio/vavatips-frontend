@@ -1,5 +1,5 @@
 import { ComponentMeta, Story } from '@storybook/react';
-import { IPropsTextArea, TextArea } from '@/base/textArea';
+import { TextArea } from '@/base/textArea';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -8,17 +8,14 @@ export default {
   component: TextArea,
 } as ComponentMeta<typeof TextArea>;
 
-const Template: Story<IPropsTextArea> = (props) => {
+const Template: Story<typeof TextArea> = (props) => {
   const {
     register,
     formState: { errors },
   } = useForm();
 
-  return <TextArea {...props} errors={errors} register={register} />;
+  return <TextArea name="Agente" title="Agente" {...props} errors={errors} register={register} />;
 };
 
-export const Default: Story<IPropsTextArea> = Template.bind({});
-Default.args = {
-  name: 'Agente',
-  title: 'Agente',
-};
+export const Default: Story<typeof TextArea> = Template.bind({});
+Default.args = {};
