@@ -2,7 +2,7 @@ import { GroupInput } from '@/base/groupInput';
 import { Label } from '@/base/label';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 
-export type IPropsTextArea = {
+type IPropsTextArea = {
   name: string;
   title: string;
   register: any;

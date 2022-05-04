@@ -1,11 +1,31 @@
 module.exports = {
+  root: true,
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  plugins: ['@typescript-eslint', 'cypress'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'deprecate',
+    'no-loops',
+    'jest-formatting',
+    'promise',
+    'jest',
+    'jsx-a11y',
+    'testing-library',
+    'sonarjs',
+    'cypress',
+  ],
+  extends: [
+    'next/core-web-vitals',
+    'plugin:cypress/recommended',
+    'airbnb',
+    'plugin:markdown/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:sonarjs/recommended',
+    'plugin:jest-formatting/recommended',
+    'plugin:promise/recommended',
+    'prettier',
+    'plugin:storybook/recommended',
+  ],
   rules: {
     'react/jsx-filename-extension': [0],
     'import/extensions': 'off',
@@ -13,8 +33,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
-
-    // The pattern is not compatible with codacy
     'react/function-component-definition': [
       2,
       {
@@ -22,9 +40,6 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-
-    // eslint does not identify libs used in development, such as jest.
-
     'import/no-extraneous-dependencies': [
       'error',
       {
@@ -32,26 +47,28 @@ module.exports = {
       },
     ],
 
-    // for use in storybook, app.js from next and others libs
     'react/jsx-props-no-spreading': 'off',
-
     'import/prefer-default-export': 'off',
+    'import/no-unused-modules': [1, { unusedExports: true, ignoreExports: ['./src/pages'] }],
+    'no-loops/no-loops': 2,
+    indent: ['error', 2],
   },
-  extends: [
-    'next/core-web-vitals',
-    'plugin:cypress/recommended',
-    'airbnb',
-    'prettier',
-    'plugin:storybook/recommended',
-  ],
+
   overrides: [
     {
-      files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.test.ts', '**/*.test.tsx'],
-      env: {
-        jest: true,
-      },
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+      extends: ['plugin:testing-library/react'],
+    },
+    {
+      files: ['test/**'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
+      rules: { 'jest/prefer-expect-assertions': 'off' },
     },
   ],
+  env: {
+    jest: true,
+  },
   globals: {
     cy: true,
   },

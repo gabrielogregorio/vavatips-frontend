@@ -17,7 +17,7 @@ export function getStylesFromInput(status) {
   return styleLiteral[status] ?? styleLiteral.default;
 }
 
-export type TPropsInput = {
+type TPropsInput = {
   label: string;
   placeholder: string;
   type?: 'text' | 'password' | 'email' | 'number' | 'hidden';
