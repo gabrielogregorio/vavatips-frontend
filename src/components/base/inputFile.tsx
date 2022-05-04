@@ -3,7 +3,7 @@ import { GroupInput } from './groupInput';
 import { getStylesFromInput } from './input';
 import { Label } from './label';
 
-export type inputFileType = {
+type inputFileType = {
   type: 'file';
   text: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;

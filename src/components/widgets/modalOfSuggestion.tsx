@@ -16,7 +16,7 @@ type ModalProps = {
   title: string;
 };
 
-export type registrationFormFields = {
+type registrationFormFields = {
   tip: string;
   email: string;
   description: string;
@@ -45,22 +45,23 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     const idPost = modalSuggestion.post?.id ?? '';
     setLoading(true);
 
+    // eslint-disable-next-line promise/catch-or-return
     Api.post('/suggestion', { idPost, email, description })
-      .then(() => {
+      .then(() =>
         setModalMessage({
           active: true,
           message: { type: 'success', msg: 'Sugestão enviada com sucesso, muito obrigado!' },
-        });
-      })
-      .catch(() => {
+        }),
+      )
+      .catch(() =>
         setModalMessage({
           active: true,
           message: {
             type: 'error',
             msg: 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores',
           },
-        });
-      })
+        }),
+      )
       .finally(() => {
         setModalSuggestion(initializeModalSuggestion);
         setLoading(false);

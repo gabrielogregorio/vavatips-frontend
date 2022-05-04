@@ -13,7 +13,7 @@ import { schemaModalNewSep } from '@/handlers/forms';
 import { Input } from '@/base/input';
 import { ModalRef } from '@/widgets/modalRef';
 
-export type ModalPropsBase = {
+type ModalPropsBase = {
   title: string;
   id: string;
   description: string;
@@ -22,7 +22,7 @@ export type ModalPropsBase = {
   saveModal: (id: string, title: string, image: string) => void;
 };
 
-export type registrationFormFields = {
+type registrationFormFields = {
   id: string;
   descriptionImage: string;
 };
@@ -63,11 +63,14 @@ export const Modal = ({
     formData.append('image', event.target.files[0]);
 
     function sendImageFromApi() {
-      Api.post(`/postLoadFile`, formData).then((res) => {
-        const urlImg = `${res.data.filename}`;
-        setLinkImg(urlImg);
-        setActiveLoader(false);
-      });
+      Api.post(`/postLoadFile`, formData)
+        .then((res) => {
+          const urlImg = `${res.data.filename}`;
+          setLinkImg(urlImg);
+          setActiveLoader(false);
+          return res;
+        })
+        .catch((error) => error);
     }
     sendImageFromApi();
   };

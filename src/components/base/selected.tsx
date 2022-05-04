@@ -2,7 +2,7 @@ import { GroupInput } from './groupInput';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
-export type TPropsSelectedBase = {
+type TPropsSelectedBase = {
   text: string;
   register: any;
   errors: any;

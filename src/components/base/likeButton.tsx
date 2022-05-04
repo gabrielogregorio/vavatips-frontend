@@ -2,27 +2,29 @@ import { MdBookmarkBorder, MdOutlineBookmark } from 'react-icons/md';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { RiAlertLine } from 'react-icons/ri';
 
+const darkButton = 'dark:text-skin-white text-skin-gray-500';
+
 const typeIconModel = {
   like: {
     default: AiOutlineHeart,
     selected: AiFillHeart,
     text: 'Testado',
-    color: 'dark:text-skin-white text-skin-gray-500',
+    color: darkButton,
     colorSelected: 'text-skin-secondary-regular',
   },
   save: {
     default: MdBookmarkBorder,
     selected: MdOutlineBookmark,
     text: 'Salvar',
-    color: 'dark:text-skin-white text-skin-gray-500',
+    color: darkButton,
     colorSelected: 'text-skin-primary-light',
   },
   report: {
     default: RiAlertLine,
     selected: RiAlertLine,
     text: 'Sugerir',
-    color: 'dark:text-skin-white text-skin-gray-500',
-    colorSelected: 'dark:text-skin-white text-skin-gray-500',
+    color: darkButton,
+    colorSelected: darkButton,
   },
 };
 

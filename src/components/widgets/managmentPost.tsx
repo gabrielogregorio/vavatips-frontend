@@ -54,7 +54,7 @@ type ModelManagementType = {
   mode: 'create' | 'edit';
 };
 
-export type registrationFormFields = {
+type registrationFormFields = {
   title: string;
   description: string;
   imgs: imgType[];
@@ -215,6 +215,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
+      // eslint-disable-next-line no-loops/no-loops
       for (let x = 0; x < copyImgAdded.length; x += 1) {
         if (copyImgAdded[x].id === idPost) {
           copyImgAdded[x].description = description;

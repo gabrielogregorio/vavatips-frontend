@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export type screenErrorType = {
+type screenErrorType = {
   tryRenderAgain: Function;
 };
 
