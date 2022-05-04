@@ -6,9 +6,7 @@ export default {
   component: Label,
 } as ComponentMeta<typeof Label>;
 
-const Template: ComponentStory<typeof Label> = (props) => {
-  return <Label {...props} />;
-};
+const Template: ComponentStory<typeof Label> = (props) => <Label {...props} />;
 
 export const Default: ComponentStory<typeof Label> = Template.bind({});
 Default.args = {

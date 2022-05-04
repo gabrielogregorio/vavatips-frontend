@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { useMemo, useState } from 'react';
 import { Tags } from '../components/widgets/tags';
 import { ContextFilters } from '../core/contexts/filters';
-import { useMemo, useState } from 'react';
 
 export default {
   title: 'widgets/Tags',

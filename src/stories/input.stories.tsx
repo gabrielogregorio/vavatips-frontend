@@ -1,30 +1,28 @@
 import React from 'react';
 import { ComponentMeta, Story } from '@storybook/react';
-import { Input, typeInputColors } from '@/base/input';
+import { Input } from '@/base/input';
 
 export default {
   title: 'form/Input',
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: Story<typeof Input> = (props: unknown) => {
-  return (
-    <div>
-      <Input
-        isSubmitted={false}
-        label="type} your name"
-        name="name"
-        status="default"
-        placeholder=""
-        errors={[]}
-        register={null}
-        disabled={false}
-        type="password"
-        {...props}
-      />
-    </div>
-  );
-};
+const Template: Story<typeof Input> = (props: unknown) => (
+  <div>
+    <Input
+      isSubmitted={false}
+      label="type} your name"
+      name="name"
+      status="default"
+      placeholder=""
+      errors={[]}
+      register={null}
+      disabled={false}
+      type="password"
+      {...props}
+    />
+  </div>
+);
 
 export const Default: Story<typeof Input> = Template.bind({});
 Default.args = {};

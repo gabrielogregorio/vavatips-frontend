@@ -6,9 +6,7 @@ export default {
   component: TagsFixFilters,
 } as ComponentMeta<typeof TagsFixFilters>;
 
-const Template: ComponentStory<typeof TagsFixFilters> = (args) => {
-  return <TagsFixFilters {...args} />;
-};
+const Template: ComponentStory<typeof TagsFixFilters> = (args) => <TagsFixFilters {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
