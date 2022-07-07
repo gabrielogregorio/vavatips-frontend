@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
@@ -63,7 +64,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta property="og:url" content="https://valorant-tips.vercel.app/" />
         <meta property="og:site_name" content="Vavatips - Dicas de gameplay" />
         <meta property="og:locale" content="pt_BR" />
+        <script type="text/javascript" src="/scripts/gtm.js" />
       </Header>
+
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id=GTM-NSPTNDP"
+          height="0"
+          title="gtm"
+          width="0"
+          style={{ display: 'none', visibility: 'hidden' }}
+        />
+      </noscript>
 
       <QueryClientProvider client={queryClient}>
         <ContextThemeProvider>
