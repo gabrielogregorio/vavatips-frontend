@@ -10,7 +10,17 @@
 ![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)
 
-  <a href="https://valorant-tips.vercel.app/" target="blank">Access blog</a>
+</div>
+
+<div align="center">
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa7397922b484be6943daaa86f16f919)](https://www.codacy.com/gh/gabrielogregorio/valorant-tips/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gabrielogregorio/valorant-tips&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/aa7397922b484be6943daaa86f16f919)](https://www.codacy.com/gh/gabrielogregorio/valorant-tips/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gabrielogregorio/valorant-tips&amp;utm_campaign=Badge_Coverage)
+</div>
+
+<div align="center">
+
+<a href="https://valorant-tips.vercel.app/" target="blank">Access blog</a>
 </div>
 
 ## Introduction this project
