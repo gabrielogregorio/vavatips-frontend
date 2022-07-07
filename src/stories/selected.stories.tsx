@@ -16,10 +16,10 @@ const Template: Story<typeof Selected> = (props) => {
   } = useForm();
   return (
     <Selected
-      name={'Agente'}
-      text={'Agente'}
+      name="Agente"
+      text="Agente"
       render={convertToSelectedRender(agents())}
-      status={'default'}
+      status="default"
       disabled={false}
       {...props}
       register={register}

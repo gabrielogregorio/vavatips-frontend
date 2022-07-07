@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof InputFile>;
 
 const Template: Story<typeof InputFile> = (props) => {
-  const onChangeInput = (event) => {};
+  const onChangeInput = () => {};
   return <InputFile type="file" name="name" text="" {...props} onChange={onChangeInput} />;
 };
 

@@ -49,7 +49,7 @@ module.exports = {
 
     'react/jsx-props-no-spreading': 'off',
     'import/prefer-default-export': 'off',
-    'import/no-unused-modules': [1, { unusedExports: true, ignoreExports: ['./src/pages'] }],
+    'import/no-unused-modules': [1, { unusedExports: true, ignoreExports: ['./src/pages', './src/stories'] }],
     'no-loops/no-loops': 2,
     indent: ['error', 2],
   },

@@ -1,6 +1,5 @@
 import { ComponentMeta, Story } from '@storybook/react';
 import { TextArea } from '@/base/textArea';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default {

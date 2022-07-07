@@ -1,4 +1,4 @@
-name: Integration and End to End tests
+name: Unit and e2e tests
 
 on:
   push:
@@ -8,7 +8,11 @@ on:
 
 jobs:
   build:
+    environment: base
     runs-on: ubuntu-latest
+
+    env:
+      CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
     strategy:
       matrix:
@@ -20,7 +24,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - run: yarn run jest:coverage
       - run: yarn cypress:headless
+      - name: up coverage to codacy
+        run: bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r ./coverage/lcov.info
