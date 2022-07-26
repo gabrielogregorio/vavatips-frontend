@@ -22,15 +22,16 @@ Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https:/
 ## Badges
 
 ![GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)
-![GitHub last commit](https://img.shields.io/github/last-commit/gabrielogregorio/vavatips-frontend?style=flat-square)
-![GitHub contributors](https://img.shields.io/github/contributors/gabrielogregorio/vavatips-frontend)
-![GitHub language count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
+anguage count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
 ![GitHub repo size](https://img.shields.io/github/repo-size/gabrielogregorio/vavatips-frontend) ![statements](./coverage/badge-statements.svg) ![branchs](./coverage/badge-branches.svg) ![functions](./coverage/badge-functions.svg) ![lines](./coverage/badge-lines.svg) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa7397922b484be6943daaa86f16f919)](https://www.codacy.com/gh/gabrielogregorio/valorant-tips/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gabrielogregorio/valorant-tips&amp;utm_campaign=Badge_Grade)
 
-## Run Project for development
+#          # Run Project for development
 
-1.  Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
-2.  With the backend working, create an .env file, based on the .env.example file.
+1.                Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
+2.
+
+
+ With the backend working, create an .env file, based on the .env.example file.
 
 ## Contributing with project
 
@@ -99,10 +100,10 @@ yarn upgrade-interactive --latest
 ## Vscode extensions for this project
 
 | Extension | Description | Author |
-|-----------|--------|---------|
+|-----------|--------|---------
 | Eslint  | For linting code | Microsoft |
 | Prettier - Code formatter | For beautifully formate code | Prettier |
-| Prettier Eslint  | Integration prettier and eslint | Rebecca Vest |
+| Pre        ttier Eslint  | Integration prettier and eslint | Rebecca Vest |
 | Stylelint  | For lint in styles | Stylelint|
 | Gitignore  | For use .gitignore | CodeZombie |
 | EditorConfig for VS code | For basics formatter in code |  EditorConfig |
