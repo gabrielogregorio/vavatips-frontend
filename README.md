@@ -18,10 +18,10 @@ This project was developed using NextJs, Typescript and api is available at [vav
 
 Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https://gabrielogregorio.github.io/valorant-tips/)
 
-![](public/home.png)
+   !  [    ](public/home.png)
 ## Badges
 
-![GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)
+!            [GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)
 ![GitHub last commit](https://img.shields.io/github/last-commit/gabrielogregorio/vavatips-frontend?style=flat-square)
 ![GitHub contributors](https://img.shields.io/github/contributors/gabrielogregorio/vavatips-frontend)
 ![GitHub language count](https://img.shields.io/github/languages/count/gabrielogregorio/vavatips-frontend)
@@ -29,7 +29,7 @@ Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https:/
 
 ## Run Project for development
 
-1.  Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
+1.      Fully start the backend, available in the [vavatips backend](https://github.com/gabrielogregorio/vavatips-backend) repository.
 2.  With the backend working, create an .env file, based on the .env.example file.
 
 ## Contributing with project
