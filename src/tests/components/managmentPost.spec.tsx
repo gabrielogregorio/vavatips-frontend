@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
@@ -24,9 +24,19 @@ jest.mock('next/router', () => ({
   },
 }));
 
-const handlers = [rest.get(URL_GET_POST_EDITABLE, async (req, res, ctx) => res(ctx.json(postBase)))];
-
+const handlers = [rest.get(URL_GET_POST_EDITABLE, async (_req, res, ctx) => res(ctx.json(postBase)))];
+const editPost = 'Editar um post';
 const server = setupServer(...handlers);
+
+const verifyDefaultRender = (listRender = defaultListFromRender) => {
+  const listOfImages = screen.getAllByRole('img');
+
+  listRender.forEach(({ title, alt, src }, index) => {
+    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
+    expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
+  });
+};
 
 describe('<CreatePostManagement />', () => {
   beforeAll(() => server.listen());
@@ -50,7 +60,7 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
 
     const listOfImages = screen.getAllByRole('img');
 
@@ -88,41 +98,25 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
 
-    let listOfImages = screen.getAllByRole('img');
-
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyDefaultRender();
 
     userEvent.click(screen.getByTestId('btn-top-2'));
-    listOfImages = screen.getAllByRole('img');
 
-    [
+    verifyDefaultRender([
       { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
       { title: '2 - title1_img1', alt: 'title1_img1', src: '/image_111' },
       { title: '3 - title1_img3', alt: 'title1_img3', src: '/image_333' },
-    ].forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    ]);
 
     userEvent.click(screen.getByTestId('btn-bottom-2'));
-    listOfImages = screen.getAllByRole('img');
 
-    [
+    verifyDefaultRender([
       { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
       { title: '2 - title1_img3', alt: 'title1_img3', src: '/image_333' },
       { title: '3 - title1_img1', alt: 'title1_img1', src: '/image_111' },
-    ].forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    ]);
   });
 
   it('should edit step', async () => {
@@ -140,14 +134,8 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
-    const listOfImages = screen.getAllByRole('img');
-
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    verifyDefaultRender();
 
     userEvent.click(screen.getByText('2 - title1_img2'));
 
@@ -156,7 +144,7 @@ describe('<CreatePostManagement />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
-    await waitFor(() => expect(screen.getByText('2 - title1_img2add in final')).toBeInTheDocument());
+    await screen.findByText('2 - title1_img2add in final');
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
   });
 });

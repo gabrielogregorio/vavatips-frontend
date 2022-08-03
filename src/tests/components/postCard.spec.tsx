@@ -21,6 +21,8 @@ jest.mock('next/router', () => ({
 }));
 
 let count = 0;
+const descriptionOne = 'description image 111';
+const descriptionFive = 'description image 555';
 
 const post = {
   id: '12',
@@ -28,11 +30,11 @@ const post = {
   description: 'my Description post',
   title: 'my title post',
   imgs: [
-    { id: '111', image: 'https://image111.png', description: 'description image 111' },
+    { id: '111', image: 'https://image111.png', description: descriptionOne },
     { id: '222', image: 'https://image222.png', description: 'description image 222' },
     { id: '333', image: 'https://image333.png', description: 'description image 333' },
     { id: '444', image: 'https://image444.png', description: 'description image 444' },
-    { id: '555', image: 'https://image555.png', description: 'description image 555' },
+    { id: '555', image: 'https://image555.png', description: descriptionFive },
   ],
   tags: {
     map: 'Ascent',
@@ -138,16 +140,16 @@ describe('<PostCard />', () => {
         <PostCard post={post} />
       </MockApp>,
     );
-
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
+    const dataIsSelected = 'data-is-selected';
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', descriptionOne);
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-is-selected', `true`);
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(dataIsSelected, `true`);
 
     userEvent.click(screen.getByTestId('prev-btn'));
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', 'description image 555');
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', descriptionFive);
     expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-is-selected', `true`);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-is-selected', `false`);
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute(dataIsSelected, `true`);
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute(dataIsSelected, `false`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
@@ -163,11 +165,11 @@ describe('<PostCard />', () => {
     expect(screen.getAllByRole('img')[4]).toHaveAttribute('data-src', `https://image444.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', 'description image 555');
+    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', descriptionFive);
     expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', 'description image 111');
+    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', descriptionOne);
     expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
   });
 
@@ -212,9 +214,9 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.queryByRole('button', { name: /Testado/i })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /Salvar/i })).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /Editar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Testado/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Salvar/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Editar/i })).toBeInTheDocument();
     expect(localStorage.getItem(TOKEN_JWT)).toEqual('token jwt');
   });
 });

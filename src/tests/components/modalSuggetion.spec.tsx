@@ -38,7 +38,7 @@ const post = {
 };
 
 const waitForSuccessfully = async () =>
-  waitFor(() => expect(screen.queryByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument());
+  waitFor(() => expect(screen.getByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument());
 
 jest.mock(
   'next/link',
@@ -48,13 +48,15 @@ jest.mock(
     },
 );
 
+const defaultEmail = 'myEmail@email.com';
+const defaultDescription = 'my long description for problem';
+
 const handlers = [
   rest.post(URL_POST_SUGGESTION, async (req, res, ctx) => {
     const { idPost, email, description } = req.body as ParsedUrlQuery;
 
     const requestIsCorrectly =
-      (idPost === '12' && email === 'myEmail@email.com' && description === 'my long description for problem') ||
-      email === 'email@email.com';
+      (idPost === '12' && email === defaultEmail && description === defaultDescription) || email === 'email@email.com';
     if (requestIsCorrectly) {
       return res(
         ctx.status(200),
@@ -95,6 +97,8 @@ Setup.defaultProps = {
 
 const server = setupServer(...handlers);
 
+const optionalEmail = 'Email para retorno (Opcional)';
+
 describe('<ModalOfSuggestion />', () => {
   beforeAll(() => server.listen());
 
@@ -109,9 +113,9 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
@@ -125,9 +129,9 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'email@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), 'email@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
@@ -141,16 +145,12 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'invalidEmailApi@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), 'invalidEmailApi@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
-    await waitFor(() =>
-      expect(
-        screen.queryByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'),
-      ).toBeInTheDocument(),
-    );
+    await screen.findByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores');
   });
 
   it('should closed Modal in button closed', async () => {
@@ -180,14 +180,14 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
+    await screen.findByText('Essa descrição está muito curta');
 
     userEvent.type(screen.getByLabelText('Descrição'), 'small');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
+    await screen.findByText('Essa descrição está muito curta');
   });
 });

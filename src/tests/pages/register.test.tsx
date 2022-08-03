@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
@@ -30,6 +30,8 @@ jest.mock(
       return children;
     },
 );
+
+const confirmYourPassword = 'Confirme uma senha';
 
 const handlers = [
   rest.post(URL_POST_CREATE_NEW_USER, async (req, res, ctx) => {
@@ -98,12 +100,12 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirm');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
     const inputCod: HTMLInputElement = screen.getByLabelText('Código');
     const inputUser: HTMLInputElement = screen.getByLabelText('Usuário');
     const inputPassword: HTMLInputElement = screen.getByLabelText('Senha');
-    const inputConfirmPassword: HTMLInputElement = screen.getByLabelText('Confirme uma senha');
+    const inputConfirmPassword: HTMLInputElement = screen.getByLabelText(confirmYourPassword);
 
     expect(inputCod.value).toEqual('codeCadasterValid');
     expect(inputUser.value).toEqual(mock.usernameToCreated);
@@ -130,7 +132,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'userIfExists');
     userEvent.type(screen.getByLabelText('Usuário'), 'userIfExists');
     userEvent.type(screen.getByLabelText('Senha'), 'userIfExists');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'userIfExists');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'userIfExists');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -150,7 +152,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'forceError500');
     userEvent.type(screen.getByLabelText('Usuário'), 'forceError500');
     userEvent.type(screen.getByLabelText('Senha'), 'forceError500');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'forceError500');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'forceError500');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -168,7 +170,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterInvalidValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirm');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -187,11 +189,11 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirmDeferent');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitFor(() => expect(screen.getByText(/Senhas não combinam/i)).toBeInTheDocument());
+    await screen.findByText(/Senhas não combinam/i);
   });
 
   it('should render error if cadaster in blank inputs', async () => {
@@ -204,10 +206,10 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
 
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirmDeferent');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitFor(() => expect(screen.getByText(/Digite um usuário!/i)).toBeInTheDocument());
+    await screen.findByText(/Digite um usuário!/i);
   });
 });

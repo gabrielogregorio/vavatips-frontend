@@ -12,6 +12,8 @@ import postBase from '@/mock/responseGetPostById.json';
 import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
 
+const editPost = 'Editar um post';
+
 jest.mock('next/router', () => ({
   push: jest.fn(),
   useRouter() {
@@ -69,6 +71,16 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
+const verifyListRender = () => {
+  const listOfImages = screen.getAllByRole('img');
+
+  defaultListFromRender.forEach(({ title, alt, src }, index) => {
+    expect(screen.getByText(title)).toBeInTheDocument();
+    expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
+    expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
+  });
+};
+
 describe('<EditPost />', () => {
   beforeAll(() => server.listen());
 
@@ -87,7 +99,7 @@ describe('<EditPost />', () => {
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
 
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
@@ -96,13 +108,8 @@ describe('<EditPost />', () => {
     expect(inputDescription.value).toEqual('description1');
 
     userEvent.type(inputTitle, ' concatenate new title');
-    const listOfImages = screen.getAllByRole('img');
 
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyListRender();
   });
 
   it('should render edit post screen and update post', async () => {
@@ -116,7 +123,7 @@ describe('<EditPost />', () => {
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
 
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
@@ -125,13 +132,8 @@ describe('<EditPost />', () => {
     expect(inputDescription.value).toEqual('description1');
 
     userEvent.type(inputTitle, ' concatenate new title');
-    const listOfImages = screen.getAllByRole('img');
 
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyListRender();
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
@@ -150,7 +152,7 @@ describe('<EditPost />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
     userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
 
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');

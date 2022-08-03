@@ -52,6 +52,7 @@ const handlers = [
 ];
 
 const server = setupServer(...handlers);
+const newStep = 'Novo Passo';
 
 describe('<CreatePost />', () => {
   beforeAll(() => server.listen());
@@ -98,22 +99,22 @@ describe('<CreatePost />', () => {
     userEvent.selectOptions(screen.getByLabelText('Dificuldade'), 'Medio');
     userEvent.selectOptions(screen.getByLabelText('Lado'), 'Atacantes');
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     userEvent.click(screen.getByTestId('closeModal'));
     expect(screen.queryByText(/Adicionar/i)).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText(/Descrição post/i), 'De um pulo e jogue o bombinho');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => screen.getByText(/De um pulo e jogue o bombinho/i));
+    await waitFor(() => screen.findByText(/De um pulo e jogue o bombinho/i));
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 

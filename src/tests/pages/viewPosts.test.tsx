@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
@@ -43,7 +43,7 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    await waitFor(() => expect(screen.getByRole('heading', { name: getTitle(0) })).toBeInTheDocument());
+    await screen.findByRole('heading', { name: getTitle(0) });
 
     generateNumericList(9).forEach((index) => {
       expect(screen.getByRole('heading', { name: getTitle(index) })).toBeInTheDocument();

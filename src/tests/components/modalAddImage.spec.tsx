@@ -7,6 +7,10 @@ import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
+const descriptionPost = 'Descrição post';
+const textDescriptionPost = 'how test description';
+const linkCloud = 'https://gcloud.com/123abc';
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {
@@ -27,9 +31,7 @@ jest.mock(
 );
 
 const handlers = [
-  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) =>
-    res(ctx.status(200), ctx.json({ filename: 'https://gcloud.com/123abc' })),
-  ),
+  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) => res(ctx.status(200), ctx.json({ filename: linkCloud }))),
 ];
 
 const server = setupServer(...handlers);
@@ -56,9 +58,9 @@ describe('<Modal />', () => {
       />,
     );
 
-    userEvent.type(screen.getByLabelText('Descrição post'), 'how test description');
-    const textArea: HTMLInputElement = screen.getByLabelText('Descrição post');
-    expect(textArea.value).toEqual('how test description');
+    userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
+    const textArea: HTMLInputElement = screen.getByLabelText(descriptionPost);
+    expect(textArea.value).toEqual(textDescriptionPost);
   });
 
   it('should test close Modal', async () => {
@@ -115,7 +117,7 @@ describe('<Modal />', () => {
         saveModal={saveModal}
       />,
     );
-    userEvent.type(screen.getByLabelText('Descrição post'), 'how test description');
+    userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
 
     const file = new File(['hello'], 'hello.png', { type: 'image/png' });
@@ -128,11 +130,9 @@ describe('<Modal />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    expect(screen.getByRole('img')).toHaveAttribute('data-src', 'https://gcloud.com/123abc');
+    expect(screen.getByRole('img')).toHaveAttribute('data-src', linkCloud);
 
-    await waitFor(() =>
-      expect(saveModal).toHaveBeenCalledWith('123', 'how test description', 'https://gcloud.com/123abc'),
-    );
+    await waitFor(() => expect(saveModal).toHaveBeenCalledWith('123', textDescriptionPost, linkCloud));
   });
 
   it('should view Image and description and overwrite description with same image', async () => {
@@ -150,11 +150,11 @@ describe('<Modal />', () => {
       />,
     );
 
-    const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição post');
+    const inputDescription: HTMLInputElement = screen.getByLabelText(descriptionPost);
     expect(screen.getByRole('img')).toHaveAttribute('data-src', 'https://uploads/file1');
     expect(inputDescription.value).toEqual('myDescription');
 
-    userEvent.type(screen.getByLabelText('Descrição post'), ' how contatenate description');
+    userEvent.type(screen.getByLabelText(descriptionPost), ' how contatenate description');
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
