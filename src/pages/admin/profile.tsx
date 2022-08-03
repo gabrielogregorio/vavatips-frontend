@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { navbarEnum } from '@/enums/navbar';
@@ -17,6 +16,9 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/base/button';
 import { schemaUpdateProfile } from '@/handlers/forms';
 import { useProfile } from '@/hooks/useProfile';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

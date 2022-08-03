@@ -117,3 +117,5 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     </ModalRef>
   ) : null;
 };
+
+export default ModalOfSuggestion;

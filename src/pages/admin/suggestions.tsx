@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/enums/navbar';
 import { Loader } from '@/base/loader';
@@ -10,6 +9,9 @@ import { modelNavbarAdmin } from '@/schemas/navbar';
 import { ErrorMsg } from '@/base/errorMsg';
 import { useSuggestions } from '@/hooks/useSuggestions';
 import { suggestionType } from '@/types/suggestions';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 const breadcrumbs = [
   { url: navbarEnum.Dashboard, text: 'admin' },

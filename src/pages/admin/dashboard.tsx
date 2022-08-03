@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Loader } from '@/base/loader';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
@@ -10,6 +9,9 @@ import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { useDashboard } from '@/hooks/useDashboard';
 import { getKeysFromAnyObject } from '@/helpers/handleObjects';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 const keyLabel = {
   countAll: 'Consultas',

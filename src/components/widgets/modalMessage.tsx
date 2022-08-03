@@ -18,9 +18,7 @@ export const ModalMessage = () => {
         <div className="pr-2 border-2 border-y-0 border-l-0 mr-2 text-skin-white">
           {modalIcon[modalMessage.message.type]}
         </div>
-        <p className="w-full text-left text-base break-all text-skin-white">
-          {modalMessage.message.msg}
-        </p>
+        <p className="w-full text-left text-base break-all text-skin-white">{modalMessage.message.msg}</p>
 
         <Button
           className="bg-transparent outline-none border-none text-skin-white ml-4"
@@ -32,3 +30,5 @@ export const ModalMessage = () => {
     </div>
   ) : null;
 };
+
+export default ModalMessage;

@@ -12,7 +12,6 @@ import {
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
 import { formatImage } from '@/services/formatEnvironment';
-import { Footer } from '@/layout/footer';
 import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
@@ -34,6 +33,9 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaManagementPosts } from '@/handlers/forms';
 import { useManagementPosts } from '@/hooks/useManagementPosts';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 type actionType = 'top' | 'bottom';
 

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { agents } from '@/data/data-valorant';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import LINKS from '@/data/links.json';
@@ -11,6 +10,9 @@ import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { Api } from '@/services/api';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 

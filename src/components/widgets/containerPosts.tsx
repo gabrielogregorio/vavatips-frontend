@@ -1,7 +1,4 @@
 import { useRouter } from 'next/router';
-import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
-import { ModalMessage } from '@/widgets/modalMessage';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Navbar } from '@/layout/navbar';
@@ -13,6 +10,11 @@ import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
 import { InfiniteScroll } from '@/widgets/infiniteScroll';
+import loadable from '@loadable/component';
+
+const ModalOfSuggestion = loadable(() => import(`@/widgets/modalOfSuggestion`));
+const ModalMessage = loadable(() => import(`@/widgets/modalMessage`));
+const Footer = loadable(() => import(`@/layout/footer`));
 
 type containerPosts = {
   breadcrumbs: { url: string; text: string }[];

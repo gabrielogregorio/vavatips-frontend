@@ -1,5 +1,4 @@
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import { Footer } from '@/layout/footer';
 import { maps } from '@/data/data-valorant';
 import LINKS from '@/data/links.json';
 import { Title } from '@/base/title';
@@ -10,6 +9,9 @@ import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Api } from '@/services/api';
+import loadable from '@loadable/component';
+
+const Footer = loadable(() => import(`@/layout/footer`));
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
@@ -29,7 +31,7 @@ const Index = ({ mapsApi }: { mapsApi: string[] }) => {
     return maps().map((map) =>
       mapsApi.includes(map.name) ? (
         <div key={map.id} className="flex flex-col">
-          <ImageCard heightImage="h-40" href={`/agents/${map.name}`} srcImage={map.img} titleImage={map.name} />
+          <ImageCard heightImage="h-64 sm:h-40" href={`/agents/${map.name}`} srcImage={map.img} titleImage={map.name} />
         </div>
       ) : null,
     );
@@ -43,7 +45,7 @@ const Index = ({ mapsApi }: { mapsApi: string[] }) => {
       <SubContainer>
         <Title>Escolha um mapa ai parça </Title>
 
-        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-4 w-full">{renderMap()}</div>
+        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-3 w-full">{renderMap()}</div>
       </SubContainer>
 
       <Footer />
