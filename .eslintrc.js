@@ -61,7 +61,7 @@ module.exports = {
       extends: ['plugin:testing-library/react'],
     },
     {
-      files: ['./cypress/integration/**'],
+      files: ['./cypress/**'],
       rules: {
         'sonarjs/no-duplicate-string': 'off',
       },
