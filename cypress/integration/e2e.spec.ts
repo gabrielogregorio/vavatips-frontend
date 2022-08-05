@@ -80,9 +80,9 @@ describe('<E2e />', () => {
     cy.contains('button', 'Sugerir');
 
     cy.contains('Contribua');
-    cy.get('a').contains('Solicitar agentes e mapas');
-    cy.get('a').contains('Backend em Node.js github');
-    cy.get('a').contains('Frontend com React.Js github');
+    cy.get('a:contains("Solicitar agentes e mapas")').should('be.visible');
+    cy.get('a:contains("Backend em Node.js")').should('be.visible');
+    cy.get('a:contains("Frontend com Next.Js")').should('be.visible');
 
     cy.contains('Projeto');
     cy.contains(

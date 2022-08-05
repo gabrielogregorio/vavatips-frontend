@@ -52,12 +52,19 @@ module.exports = {
     'import/no-unused-modules': [1, { unusedExports: true, ignoreExports: ['./src/pages', './src/stories'] }],
     'no-loops/no-loops': 2,
     indent: ['error', 2],
+    'id-length': [2, { properties: 'never', min: 3 }],
   },
 
   overrides: [
     {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       extends: ['plugin:testing-library/react'],
+    },
+    {
+      files: ['./cypress/integration/**'],
+      rules: {
+        'sonarjs/no-duplicate-string': 'off',
+      },
     },
     {
       files: ['test/**'],
