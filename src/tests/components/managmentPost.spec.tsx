@@ -55,18 +55,21 @@ describe('<CreatePostManagement />', () => {
     expectTitlePost();
 
     const listOfImages = screen.getAllByRole('img');
+    const FIRST_POSITION = 0;
+    const SECOND_POSITION = 1;
+    const THIRD_POSITION = 2;
 
-    expect(screen.getByText(defaultListFromRender[0].title)).toBeInTheDocument();
-    expect(listOfImages[0]).toHaveAttribute(DATA_ALT, defaultListFromRender[0].alt);
-    expect(listOfImages[0]).toHaveAttribute(DATA_SRC, defaultListFromRender[0].src);
+    expect(screen.getByText(defaultListFromRender[FIRST_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[FIRST_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[0].alt);
+    expect(listOfImages[FIRST_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[0].src);
 
-    expect(screen.getByText(defaultListFromRender[1].title)).toBeInTheDocument();
-    expect(listOfImages[1]).toHaveAttribute(DATA_ALT, defaultListFromRender[1].alt);
-    expect(listOfImages[1]).toHaveAttribute(DATA_SRC, defaultListFromRender[1].src);
+    expect(screen.getByText(defaultListFromRender[SECOND_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[SECOND_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[1].alt);
+    expect(listOfImages[SECOND_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[1].src);
 
-    expect(screen.getByText(defaultListFromRender[2].title)).toBeInTheDocument();
-    expect(listOfImages[2]).toHaveAttribute(DATA_ALT, defaultListFromRender[2].alt);
-    expect(listOfImages[2]).toHaveAttribute(DATA_SRC, defaultListFromRender[2].src);
+    expect(screen.getByText(defaultListFromRender[THIRD_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[2].alt);
+    expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[2].src);
 
     userEvent.click(screen.getByTestId('deleteStepButton-2'));
 

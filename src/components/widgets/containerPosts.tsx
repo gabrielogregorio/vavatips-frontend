@@ -11,6 +11,7 @@ import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
 import { InfiniteScroll } from '@/widgets/infiniteScroll';
 import loadable from '@loadable/component';
+import { TPostsProps } from '@/types/posts';
 
 const ModalOfSuggestion = loadable(() => import(`@/widgets/modalOfSuggestion`));
 const ModalMessage = loadable(() => import(`@/widgets/modalMessage`));
@@ -21,15 +22,15 @@ type containerPosts = {
   typeSelected: navbarEnum;
   mode: 'public' | 'admin';
   title: string;
-  posts: any[];
+  posts: TPostsProps[];
   showTags?: boolean;
 };
 
 const skip = 10;
 
-function getAllTags(posts, agent, map): string[] {
+const getAllTags = (posts: TPostsProps[], agent, map): string[] => {
   const tags = new Set();
-  posts.forEach((post) => {
+  posts.forEach((post: TPostsProps) => {
     const values = Object.values(post.tags);
 
     values.forEach((value) => {
@@ -40,10 +41,10 @@ function getAllTags(posts, agent, map): string[] {
   });
 
   return [...tags] as string[];
-}
+};
 
-function applyFilters(posts, filteredActives) {
-  function existsFilterActiveInPost(tags) {
+const applyFilters = (posts, filteredActives) => {
+  const existsFilterActiveInPost = (tags) => {
     let existsFilter = 0;
 
     filteredActives.forEach((filter) => {
@@ -53,9 +54,9 @@ function applyFilters(posts, filteredActives) {
     });
 
     return existsFilter === filteredActives.length;
-  }
+  };
   return posts.filter((post) => existsFilterActiveInPost(post.tags));
-}
+};
 
 export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, showTags }: containerPosts) => {
   const { query } = useRouter();
@@ -76,9 +77,9 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
     setFinal(skip);
   }, [dataItem]);
 
-  function handleAddedMore() {
+  const handleAddedMore = () => {
     setFinal(final + skip);
-  }
+  };
 
   return (
     <>

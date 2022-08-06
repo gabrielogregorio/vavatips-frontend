@@ -1,9 +1,7 @@
 import { Component, ReactNode } from 'react';
 import { ScreenError } from './screenError';
 
-function sendLogsToServer(error, errorInfo) {
-  return `${error} ${errorInfo}`;
-}
+const sendLogsToServer = (error, errorInfo) => `${error} ${errorInfo}`;
 
 type propsErrorBoundaryType = {
   children: ReactNode;

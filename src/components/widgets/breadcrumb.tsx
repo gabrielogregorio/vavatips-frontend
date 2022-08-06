@@ -5,7 +5,7 @@ type propsType = {
 };
 
 export const Breadcrumb = ({ breadcrumbs }: propsType) => {
-  function renderBreadCrumb() {
+  const renderBreadCrumb = () => {
     const lastItem = breadcrumbs.length - 1;
 
     return breadcrumbs.map((breadcrumb, index) => (
@@ -26,7 +26,7 @@ export const Breadcrumb = ({ breadcrumbs }: propsType) => {
         )}
       </div>
     ));
-  }
+  };
 
   return (
     <div className="w-full dark:bg-skin-gray-900 bg-skin-secondary-light flex justify-center items-center shadow-md h-8">

@@ -1,20 +1,21 @@
+import { ERROR_CONFLICT_HTTP_CODE, ERROR_NOT_ACCESS_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE } from '@/utils/statusCode';
 import Router from 'next/router';
 
 const defaultStatusCode = {
-  403: { label: 'UNAUTHORIZED', action: () => Router.push('/login') },
+  [ERROR_NOT_ACCESS_HTTP_CODE]: { label: 'UNAUTHORIZED', action: () => Router.push('/login') },
 };
 
 type handleInputErrorsType = {
   statusCode: number;
 };
 
-function handleInputErrors(error: any): handleInputErrorsType {
+const handleInputErrors = (error: any): handleInputErrorsType => {
   const statusCode = error?.response?.status ?? 0;
 
   return {
     statusCode,
   };
-}
+};
 
 export const handleDashboard = (error: any): string => {
   const { statusCode } = handleInputErrors(error);
@@ -32,8 +33,8 @@ export const handleErrorLogin = (error: any): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
-    404: 'Usuário não cadastrado!',
-    403: 'Senha inválida!',
+    [ERROR_NOT_FOUND_HTTP_CODE]: 'Usuário não cadastrado!',
+    [ERROR_NOT_ACCESS_HTTP_CODE]: 'Senha inválida!',
     default: 'Erro Desconhecido',
   };
 
@@ -44,7 +45,7 @@ export const handleErrorRegister = (error: any): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
-    409: 'Esse e-mail já está cadastrado',
+    [ERROR_CONFLICT_HTTP_CODE]: 'Esse e-mail já está cadastrado',
     default: 'Erro ao cadastrar usuário',
   };
 

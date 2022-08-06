@@ -15,7 +15,9 @@ const Template: ComponentStory<typeof PostCard> = (args) => (
   </div>
 );
 
+const FIRST_POSITION = 0;
+
 export const Default = Template.bind({});
 Default.args = {
-  post: mockPosts.posts[0],
+  post: mockPosts.posts[FIRST_POSITION],
 };

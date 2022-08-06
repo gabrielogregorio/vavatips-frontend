@@ -113,11 +113,11 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [id, mode, isReady]);
 
-  function deleteStep(idPost: string) {
+  const deleteStep = (idPost: string) => {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
-  }
+  };
 
-  function putPosition(idPost: string, action: actionType) {
+  const putPosition = (idPost: string, action: actionType) => {
     const positionPut = imgAdded.findIndex((item) => item.id === idPost);
     const copyListDelete = imgAdded[positionPut];
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
@@ -133,38 +133,38 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     copyImgAdded.splice(positionPut, 1);
     copyImgAdded.splice(positionPut + increment, 0, copyListDelete);
     setImgAdded(copyImgAdded);
-  }
+  };
 
-  function renderAbilities() {
+  const renderAbilities = () => {
     const agente = watch('agent');
     const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[0];
     return filterAbilities?.abilities ?? [];
-  }
+  };
 
-  function renderPositionsMap() {
+  const renderPositionsMap = () => {
     const mapa: string = watch('map');
     const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[0];
     return filterMapPositions?.mapPosition ?? [];
-  }
+  };
 
-  function showModalWithItem(idPost: string) {
+  const showModalWithItem = (idPost: string) => {
     const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[0];
     setPropsModal(item);
     setVisibleModal(true);
-  }
+  };
 
-  function showModal() {
+  const showModal = () => {
     setPropsModal({ id: '', description: '', image: '' });
     setVisibleModal(true);
-  }
+  };
 
-  function closeModal() {
+  const closeModal = () => {
     setPropsModal({ id: '', description: '', image: '' });
     setVisibleModal(false);
-  }
+  };
 
-  function renderSteps() {
-    return imgAdded.map((instruction, key) => (
+  const renderSteps = () =>
+    imgAdded.map((instruction, key) => (
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
@@ -211,17 +211,16 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
         <Hr />
       </div>
     ));
-  }
 
   const saveModal = (idPost: string, description: string, image: string) => {
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
       // eslint-disable-next-line no-loops/no-loops
-      for (let x = 0; x < copyImgAdded.length; x += 1) {
-        if (copyImgAdded[x].id === idPost) {
-          copyImgAdded[x].description = description;
-          copyImgAdded[x].image = image;
+      for (let count = 0; count < copyImgAdded.length; count += 1) {
+        if (copyImgAdded[count].id === idPost) {
+          copyImgAdded[count].description = description;
+          copyImgAdded[count].image = image;
         }
       }
       setImgAdded(copyImgAdded);
@@ -232,9 +231,9 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   };
 
-  async function deletePost(idPost: string) {
+  const deletePost = async (idPost: string) => {
     deleteThisPost(idPost);
-  }
+  };
 
   useEffect(() => {
     if (redirect) {

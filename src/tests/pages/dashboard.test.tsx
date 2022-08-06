@@ -7,6 +7,7 @@ import MockApp from '@/mock/App.Mock';
 import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { ERROR_NOT_ACCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -23,9 +24,8 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 let tryNumbers = 0;
@@ -46,7 +46,7 @@ const handlers = [
 
   rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
     if (tryNumbers === 1) {
-      return res(ctx.status(403), ctx.json({ msg: 'jwt expired' }));
+      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'jwt expired' }));
     }
     tryNumbers += 1;
 

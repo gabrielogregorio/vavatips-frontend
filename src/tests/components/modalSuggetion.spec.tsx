@@ -9,6 +9,7 @@ import { useModalContext } from '@/contexts/modalSuggestion';
 import MockApp from '@/mock/App.Mock';
 import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
 import { ParsedUrlQuery } from 'querystring';
+import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -43,9 +44,8 @@ const waitForSuccessfully = async () =>
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 const defaultEmail = 'myEmail@email.com';
@@ -59,7 +59,7 @@ const handlers = [
       (idPost === '12' && email === defaultEmail && description === defaultDescription) || email === 'email@email.com';
     if (requestIsCorrectly) {
       return res(
-        ctx.status(200),
+        ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
           post_id: 'aaa',
           email: 'vv',
@@ -67,7 +67,7 @@ const handlers = [
         }),
       );
     }
-    return res(ctx.status(500), ctx.json({ error: 'Erro no Servidor' }));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE), ctx.json({ error: 'Erro no Servidor' }));
   }),
 ];
 

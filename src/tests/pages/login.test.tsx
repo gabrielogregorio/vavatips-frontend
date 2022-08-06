@@ -10,6 +10,7 @@ import { URL_POST_AUTHENTICATED } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
+import { ERROR_NOT_ACCESS_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 const mock = {
   usernameValid: 'testUsername',
@@ -27,9 +28,8 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 const handlers = [
@@ -40,15 +40,15 @@ const handlers = [
       return res(ctx.status(500));
     }
     if (username !== mock.usernameValid) {
-      return res(ctx.status(404));
+      return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
     }
 
     if (password !== mock.passwordValid) {
-      return res(ctx.status(403));
+      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE));
     }
 
     return res(
-      ctx.status(200),
+      ctx.status(SUCCESS_HTTP_CODE),
       ctx.json({
         token: 'tokenJwtTest',
         id: 'idUserNameTest',

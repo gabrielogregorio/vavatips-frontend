@@ -7,7 +7,7 @@ export const useRegister = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
 
-  async function tryRegister({ keyCode, username: usernameLocal, password: passwordLocal }) {
+  const tryRegister = async ({ keyCode, username: usernameLocal, password: passwordLocal }) => {
     setActiveLoader(true);
 
     try {
@@ -18,7 +18,7 @@ export const useRegister = () => {
     } finally {
       setActiveLoader(false);
     }
-  }
+  };
 
   return {
     tryRegister,

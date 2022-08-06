@@ -15,7 +15,7 @@ const Footer = loadable(() => import(`@/layout/footer`));
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const resp = await Api.get('/maps');
   const mapsApi = await resp.data;
 
@@ -24,18 +24,17 @@ export async function getStaticProps() {
       mapsApi: mapsApi.maps,
     },
   };
-}
+};
 
 const Index = ({ mapsApi }: { mapsApi: string[] }) => {
-  function renderMap() {
-    return maps().map((map) =>
+  const renderMap = () =>
+    maps().map((map) =>
       mapsApi.includes(map.name) ? (
         <div key={map.id} className="flex flex-col">
           <ImageCard heightImage="h-64 sm:h-40" href={`/agents/${map.name}`} srcImage={map.img} titleImage={map.name} />
         </div>
       ) : null,
     );
-  }
 
   return (
     <Layout>

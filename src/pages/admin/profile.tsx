@@ -50,10 +50,10 @@ const Profile = () => {
     });
   }, [infoUser?.username, reset]);
 
-  function handleLogout() {
+  const handleLogout = () => {
     logout();
     Router.push('/login');
-  }
+  };
 
   const onSubmit = async () => {};
 

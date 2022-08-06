@@ -9,7 +9,7 @@ export const useDashboard = () => {
   const [info, setInfo] = useState<object>(null);
 
   useEffect(() => {
-    async function getInfoUserLogged() {
+    const getInfoUserLogged = async () => {
       setIsLoading(true);
       try {
         const [dashboard, user] = await Promise.all([Api.get(`/dashboard`), Api.get(`/user`)]);
@@ -20,7 +20,7 @@ export const useDashboard = () => {
       } finally {
         setIsLoading(false);
       }
-    }
+    };
 
     getInfoUserLogged();
   }, []);

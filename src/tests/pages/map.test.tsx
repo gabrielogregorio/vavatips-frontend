@@ -9,9 +9,8 @@ import { ReactNode } from 'react';
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 describe('<MapScreen />', () => {

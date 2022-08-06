@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { AiFillWarning, AiFillEye, AiTwotoneEyeInvisible } from 'react-icons/ai';
 import { MdError } from 'react-icons/md';
 import { GroupInput } from './groupInput';
@@ -13,9 +14,7 @@ export const styleLiteral = {
   default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
 };
 
-export function getStylesFromInput(status) {
-  return styleLiteral[status] ?? styleLiteral.default;
-}
+export const getStylesFromInput = (status) => styleLiteral[status] ?? styleLiteral.default;
 
 type TPropsInput = {
   label: string;
@@ -24,8 +23,8 @@ type TPropsInput = {
   name: string;
   status?: typeInputColors;
   disabled?: boolean;
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   isSubmitted?: boolean;
 };
 
@@ -62,9 +61,7 @@ export const Input = ({
     setShowEyeIcon((prev) => !prev);
   };
 
-  function showIcon() {
-    return showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />;
-  }
+  const showIcon = () => (showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />);
 
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;

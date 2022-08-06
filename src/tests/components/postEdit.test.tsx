@@ -11,6 +11,7 @@ import { ParsedUrlQuery } from 'querystring';
 import postBase from '@/mock/responseGetPostById.json';
 import { verifyListRender } from '@/utils/verifyListRender';
 import { expectTitlePost } from '@/utils/expectTitlePost';
+import { ERROR_IN_SERVER_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -37,7 +38,7 @@ const handlers = [
     if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
       return res(ctx.json(postBase));
     }
-    return res(ctx.status(404));
+    return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
   }),
 
   rest.put(URL_PUT_EDIT_POST_BY_ID, async (req, res, ctx) => {
@@ -49,21 +50,21 @@ const handlers = [
       `${imgs}` === `${postBase.imgs}`;
 
     if (req.params.postId !== '617d44c81bc4243f9b2d5a67') {
-      return res(ctx.status(404));
+      return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
     }
 
     if (postIsValid) {
-      return res(ctx.status(200));
+      return res(ctx.status(SUCCESS_HTTP_CODE));
     }
 
-    return res(ctx.status(500));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
   }),
 
   rest.delete(URL_DELETE_POST_BY_ID, async (req, res, ctx) => {
     if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
-      return res(ctx.status(200));
+      return res(ctx.status(SUCCESS_HTTP_CODE));
     }
-    return res(ctx.status(404));
+    return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
   }),
 ];
 

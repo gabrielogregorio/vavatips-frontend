@@ -24,34 +24,34 @@ export const PostCard = ({ post }: TProps) => {
 
   const { setModalSuggestion } = useModalContext();
 
-  function handleAddTest() {
+  const handleAddTest = () => {
     if (postTested) {
       removePost(post.id, 'test');
     } else {
       addNewPost(post.id, 'test');
     }
     setPostTested(getPostsTested()?.includes(post.id));
-  }
+  };
 
-  function handleAddSave() {
+  const handleAddSave = () => {
     if (postSave) {
       removePost(post.id, 'save');
     } else {
       addNewPost(post.id, 'save');
     }
     setPostSave(getPostsSave()?.includes(post.id));
-  }
+  };
 
   useEffect(() => {
-    function thisPostIsIncludeInSaveOrTestedPosts() {
+    const thisPostIsIncludeInSaveOrTestedPosts = () => {
       setPostTested(getPostsTested()?.includes(post.id));
       setPostSave(getPostsSave()?.includes(post.id));
-    }
+    };
 
     thisPostIsIncludeInSaveOrTestedPosts();
   }, [post.id]);
 
-  function nextImage(type: typeType, length: number) {
+  const nextImage = (type: typeType, length: number) => {
     setStartedANavigation(true);
     if (type === 'next') {
       if (idImage < length - 1) {
@@ -66,11 +66,11 @@ export const PostCard = ({ post }: TProps) => {
         setIdImage(length - 1);
       }
     }
-  }
+  };
 
-  function handleModalAction() {
+  const handleModalAction = () => {
     setModalSuggestion({ active: true, post });
-  }
+  };
 
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">

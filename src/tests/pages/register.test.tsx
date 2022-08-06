@@ -9,6 +9,12 @@ import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
 import Register from '@/pages/register';
+import {
+  ERROR_CONFLICT_HTTP_CODE,
+  ERROR_IN_SERVER_HTTP_CODE,
+  ERROR_NOT_ACCESS_HTTP_CODE,
+  SUCCESS_HTTP_CODE,
+} from '@/utils/statusCode';
 
 const mock = {
   usernameValid: 'testUsername',
@@ -26,9 +32,8 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 const confirmYourPassword = 'Confirme uma senha';
@@ -42,15 +47,15 @@ const handlers = [
     const userExists = username === 'userIfExists';
 
     if (forceError500) {
-      return res(ctx.status(500));
+      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
     }
 
     if (userExists) {
-      return res(ctx.status(409), ctx.json({ error: 'Username já está cadastrado!' }));
+      return res(ctx.status(ERROR_CONFLICT_HTTP_CODE), ctx.json({ error: 'Username já está cadastrado!' }));
     }
 
     if (codIsInvalid) {
-      return res(ctx.status(403), ctx.json({ msg: 'invalid code' }));
+      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'invalid code' }));
     }
 
     if (
@@ -66,7 +71,7 @@ const handlers = [
 
     if (username === 'usernameTest' && password === 'passwordConfirm' && code === 'codeCadasterValid') {
       return res(
-        ctx.status(200),
+        ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
           id: '1234567890',
           username,
@@ -75,7 +80,7 @@ const handlers = [
       );
     }
 
-    return res(ctx.status(500));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
   }),
 ];
 

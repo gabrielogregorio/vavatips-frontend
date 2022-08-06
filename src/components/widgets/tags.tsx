@@ -7,16 +7,16 @@ type tagsType = {
 };
 
 export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => {
-  function toggleTag(tag) {
+  const toggleTag = (tag) => {
     if (filteredActives.includes(tag)) {
       setFilteredActive(filteredActives.filter((filter) => filter !== tag));
     } else {
       setFilteredActive([...filteredActives, tag]);
     }
-  }
+  };
 
-  function renderTags() {
-    return tags.map((tag) => (
+  const renderTags = () =>
+    tags.map((tag) => (
       <div className="m-1 text-skin-primary-light" key={tag} onClick={() => toggleTag(tag)} role="presentation">
         <Button
           onClick={() => null}
@@ -27,6 +27,5 @@ export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => 
         </Button>
       </div>
     ));
-  }
   return <div className="flex justify-center flex-wrap m-10 mt-1 mb-1"> {renderTags()} </div>;
 };

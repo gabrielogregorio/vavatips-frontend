@@ -6,6 +6,7 @@ import { Modal } from '@/widgets/modal';
 import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 const descriptionPost = 'Descrição post';
 const textDescriptionPost = 'how test description';
@@ -25,13 +26,14 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 const handlers = [
-  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) => res(ctx.status(200), ctx.json({ filename: linkCloud }))),
+  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) =>
+    res(ctx.status(SUCCESS_HTTP_CODE), ctx.json({ filename: linkCloud })),
+  ),
 ];
 
 const server = setupServer(...handlers);
@@ -126,7 +128,8 @@ describe('<Modal />', () => {
     userEvent.upload(inputFIle, file);
     await waitByLoading();
 
-    expect(inputFIle.files[0]).toStrictEqual(file);
+    const FIRST_POSITION = 0;
+    expect(inputFIle.files[FIRST_POSITION]).toStrictEqual(file);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 

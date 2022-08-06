@@ -8,6 +8,7 @@ import mockPosts from '@/mock/mockPosts.json';
 import MockApp from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { TOKEN_JWT } from '@/services/auth';
+import { ERROR_IN_SERVER_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   useRouter() {
@@ -50,7 +51,7 @@ const post = {
 const handlers = [
   rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
     if (count === 2) {
-      return res(ctx.status(500));
+      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
     }
     count += 1;
     const query = req.url.searchParams;

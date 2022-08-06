@@ -1,14 +1,15 @@
 import { handleErrorViewAdminPosts } from '@/handlers/errors';
 import { Api } from '@/services/api';
+import { TPostsProps } from '@/types/posts';
 import { useEffect, useState } from 'react';
 
 export const useViewAdminPosts = () => {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<TPostsProps[]>([]);
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       setIsLoading(true);
       try {
         const resp = await Api.get('/posts');
@@ -19,7 +20,7 @@ export const useViewAdminPosts = () => {
       } finally {
         setIsLoading(true);
       }
-    }
+    };
     getData();
   }, []);
 

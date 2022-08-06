@@ -21,6 +21,12 @@ jest.mock('next/router', () => ({
   },
 }));
 
+const FIRST_POSITION = 0;
+const SECOND_POSITION = 1;
+const THIRD_POSITION = 2;
+const TIME_TO_EXPECT_REQUEST_IN_MS = 300;
+const QUANTITY_POSTS = 9;
+
 describe('<HomeScreen />', () => {
   it('should render home screen', async () => {
     render(
@@ -31,11 +37,11 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByRole('heading', { name: getTitle(index) })).toBeInTheDocument();
     });
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByText(getDescription(index))).toBeInTheDocument();
     });
 
@@ -53,26 +59,26 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    const buttonPrev = screen.getAllByLabelText('Item anterior')[0];
-    const buttonNext = screen.getAllByLabelText('Proximo item')[0];
+    const buttonPrev = screen.getAllByLabelText('Item anterior')[FIRST_POSITION];
+    const buttonNext = screen.getAllByLabelText('Proximo item')[FIRST_POSITION];
 
-    expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+    expect(screen.getByAltText(posts[FIRST_POSITION].imgs[FIRST_POSITION].description)).toBeInTheDocument();
     userEvent.click(buttonNext);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[1].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_POSITION].imgs[SECOND_POSITION].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
     userEvent.click(buttonPrev);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_POSITION].imgs[FIRST_POSITION].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
     userEvent.click(buttonNext);
@@ -80,18 +86,18 @@ describe('<HomeScreen />', () => {
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[2].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_POSITION].imgs[THIRD_POSITION].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
     userEvent.click(buttonNext);
 
     await waitFor(
       () => {
-        expect(screen.getByAltText(posts[0].imgs[0].description)).toBeInTheDocument();
+        expect(screen.getByAltText(posts[FIRST_POSITION].imgs[FIRST_POSITION].description)).toBeInTheDocument();
       },
-      { timeout: 3000 },
+      { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
   });
 });

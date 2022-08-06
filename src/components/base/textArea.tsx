@@ -1,12 +1,13 @@
 import { GroupInput } from '@/base/groupInput';
 import { Label } from '@/base/label';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 
 type IPropsTextArea = {
   name: string;
   title: string;
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   status?: typeInputColors;
   disabled?: boolean;
 };

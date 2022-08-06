@@ -7,6 +7,7 @@ import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
+import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -19,6 +20,8 @@ jest.mock('next/router', () => ({
     };
   },
 }));
+
+const FIRST_POSITION = 0;
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
@@ -41,13 +44,13 @@ const handlers = [
           },
         }}` &&
       imgs.length === 1 &&
-      imgs[0].description === 'De um pulo e jogue o bombinho' &&
-      imgs[0].image === '';
+      imgs[FIRST_POSITION].description === 'De um pulo e jogue o bombinho' &&
+      imgs[FIRST_POSITION].image === '';
 
     if (postIsValid) {
-      return res(ctx.status(200));
+      return res(ctx.status(SUCCESS_HTTP_CODE));
     }
-    return res(ctx.status(500));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
   }),
 ];
 
