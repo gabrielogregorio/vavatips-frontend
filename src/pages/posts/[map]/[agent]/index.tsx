@@ -26,13 +26,13 @@ export const getStaticPaths = async () => {
     oneResponse.agents.forEach((agentName) => flatAgentsAndMaps.push({ agents: agentName, map: oneResponse.map })),
   );
   return {
+    fallback: false,
     paths: flatAgentsAndMaps.map((item) => ({
       params: {
-        map: item.map,
         agent: item.agents,
+        map: item.map,
       },
     })),
-    fallback: false,
   };
 };
 

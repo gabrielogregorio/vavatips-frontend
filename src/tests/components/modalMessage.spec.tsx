@@ -3,13 +3,14 @@ import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 
 const useModalMock = (msg, type, setModalMessage) => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
+
   useEffect(() => {
     if (isFirstLoading) {
-      setModalMessage({ active: true, message: { type, msg } });
+      setModalMessage({ active: true, message: { msg, type } });
       setIsFirstLoading(false);
     }
   }, [isFirstLoading, setModalMessage, msg, type]);

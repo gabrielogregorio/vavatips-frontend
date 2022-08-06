@@ -1,14 +1,12 @@
 import { getToken, isAuthenticated, login, logout } from '@/services/auth';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: '',
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: '',
+    route: '',
+  }),
 }));
 Object.defineProperty(window, undefined, jest.fn());
 

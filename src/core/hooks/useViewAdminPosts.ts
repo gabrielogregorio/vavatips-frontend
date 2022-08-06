@@ -25,8 +25,8 @@ export const useViewAdminPosts = () => {
   }, []);
 
   return {
-    posts,
     errorMsg,
     isLoading,
+    posts,
   };
 };

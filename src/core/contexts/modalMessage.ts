@@ -7,11 +7,11 @@ type TContextModalMessage = {
 };
 
 export const initializeModalMessage: modalMessageTypeContext = {
+  active: false,
   message: {
     msg: '',
     type: 'success',
   },
-  active: false,
 };
 
 export const ContextModalMessage = createContext<TContextModalMessage>({

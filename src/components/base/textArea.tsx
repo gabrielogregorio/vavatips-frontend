@@ -40,6 +40,6 @@ export const TextArea = ({ title, register, errors, name, status, disabled }: IP
 };
 
 TextArea.defaultProps = {
-  status: '',
   disabled: false,
+  status: '',
 };

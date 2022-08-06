@@ -34,11 +34,11 @@ export const Button = ({
 );
 
 Button.defaultProps = {
-  disabled: false,
-  className: '',
-  ariaLabel: '',
-  dataTestid: '',
-  type: 'button',
   ariaHidden: false,
+  ariaLabel: '',
+  className: '',
+  dataTestid: '',
+  disabled: false,
   onClick: () => null,
+  type: 'button',
 };

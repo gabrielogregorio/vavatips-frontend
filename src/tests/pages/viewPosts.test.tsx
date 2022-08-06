@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import ViewPosts from '@/pages/admin/view-posts';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -12,15 +12,13 @@ import { getDescription, getTitle } from '../utils/getPosts';
 const postsLength = mockPosts.posts.length;
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/posts',
-      isReady: true,
-      pathname: '',
-      query: { map: 'randomInformation', agent: 'randomInformation', type: '', page: 1 },
-      asPath: `/posts?map=randomInformation&agent=randomInformation`,
-    };
-  },
+  useRouter: () => ({
+    asPath: `/posts?map=randomInformation&agent=randomInformation`,
+    isReady: true,
+    pathname: '',
+    query: { agent: 'randomInformation', map: 'randomInformation', page: 1, type: '' },
+    route: '/posts',
+  }),
 }));
 
 const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts)))];

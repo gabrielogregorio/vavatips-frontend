@@ -87,10 +87,10 @@ export type TPostsProps = {
 };
 
 export type TContextTags = {
-  tags: string[];
   filters: string[];
   setFilters: (filter: string[]) => void;
   setTags: (tags: string[]) => void;
+  tags: string[];
 };
 
 export type actionTypesHandlePosts = 'save' | 'test';

@@ -10,12 +10,12 @@ describe('<E2e />', () => {
         req.body.idPost === '6159d1db1775570b9c406147'
       ) {
         return req.reply({
-          email: 'myEmail@gmail.com',
-          description: 'my description',
+          __v: 0,
           _id: '61f72cb5bb0a62db4131bc36',
           createdAt: '2022-01-31T00:26:29.293Z',
+          description: 'my description',
+          email: 'myEmail@gmail.com',
           updatedAt: '2022-01-31T00:26:29.293Z',
-          __v: 0,
         });
       }
       return req.reply({ error: 'error' });

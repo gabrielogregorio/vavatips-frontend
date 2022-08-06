@@ -1,5 +1,42 @@
 module.exports = {
-  root: true,
+  env: {
+    jest: true,
+  },
+  extends: [
+    'next/core-web-vitals',
+    'plugin:cypress/recommended',
+    'airbnb',
+    'plugin:markdown/recommended',
+    'plugin:jsx-a11y/recommended',
+    'plugin:sonarjs/recommended',
+    'plugin:jest-formatting/recommended',
+    'plugin:promise/recommended',
+    'prettier',
+    'plugin:storybook/recommended',
+  ],
+
+  globals: {
+    cy: true,
+  },
+
+  overrides: [
+    {
+      extends: ['plugin:testing-library/react'],
+      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+    },
+    {
+      files: ['./cypress/**'],
+      rules: {
+        'sonarjs/no-duplicate-string': 'off',
+      },
+    },
+    {
+      extends: ['plugin:jest/recommended'],
+      files: ['test/**'],
+      plugins: ['jest'],
+      rules: { 'jest/prefer-expect-assertions': 'off' },
+    },
+  ],
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
@@ -14,25 +51,28 @@ module.exports = {
     'sonarjs',
     'cypress',
   ],
-  extends: [
-    'next/core-web-vitals',
-    'plugin:cypress/recommended',
-    'airbnb',
-    'plugin:markdown/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:sonarjs/recommended',
-    'plugin:jest-formatting/recommended',
-    'plugin:promise/recommended',
-    'prettier',
-    'plugin:storybook/recommended',
-  ],
+
+  root: true,
+
   rules: {
-    'react/jsx-filename-extension': [0],
-    'import/extensions': 'off',
-    'no-shadow': 'off',
-    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars': ['error'],
+
+    'id-length': [2, { min: 3, properties: 'never' }],
+    'import/extensions': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
+    'import/no-unused-modules': [1, { ignoreExports: ['./src/pages', './src/stories'], unusedExports: true }],
+    'import/prefer-default-export': 'off',
+    indent: ['error', 2],
+
+    'no-loops/no-loops': 2,
+    'no-shadow': 'off',
+
     'react/function-component-definition': [
       2,
       {
@@ -40,43 +80,10 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-      },
-    ],
-
+    'react/jsx-filename-extension': [0],
     'react/jsx-props-no-spreading': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-unused-modules': [1, { unusedExports: true, ignoreExports: ['./src/pages', './src/stories'] }],
-    'no-loops/no-loops': 2,
-    indent: ['error', 2],
-    'id-length': [2, { properties: 'never', min: 3 }],
-  },
+    'react/react-in-jsx-scope': 'off',
 
-  overrides: [
-    {
-      files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
-      extends: ['plugin:testing-library/react'],
-    },
-    {
-      files: ['./cypress/**'],
-      rules: {
-        'sonarjs/no-duplicate-string': 'off',
-      },
-    },
-    {
-      files: ['test/**'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended'],
-      rules: { 'jest/prefer-expect-assertions': 'off' },
-    },
-  ],
-  env: {
-    jest: true,
-  },
-  globals: {
-    cy: true,
+    'sort-keys': ['error', 'asc', { caseSensitive: true, minKeys: 2, natural: false }],
   },
 };

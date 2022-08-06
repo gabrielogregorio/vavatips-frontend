@@ -6,25 +6,25 @@ const darkButton = 'dark:text-skin-white text-skin-gray-500';
 
 const typeIconModel = {
   like: {
+    color: darkButton,
+    colorSelected: 'text-skin-secondary-regular',
     default: AiOutlineHeart,
     selected: AiFillHeart,
     text: 'Testado',
-    color: darkButton,
-    colorSelected: 'text-skin-secondary-regular',
-  },
-  save: {
-    default: MdBookmarkBorder,
-    selected: MdOutlineBookmark,
-    text: 'Salvar',
-    color: darkButton,
-    colorSelected: 'text-skin-primary-light',
   },
   report: {
+    color: darkButton,
+    colorSelected: darkButton,
     default: RiAlertLine,
     selected: RiAlertLine,
     text: 'Sugerir',
+  },
+  save: {
     color: darkButton,
-    colorSelected: darkButton,
+    colorSelected: 'text-skin-primary-light',
+    default: MdBookmarkBorder,
+    selected: MdOutlineBookmark,
+    text: 'Salvar',
   },
 };
 

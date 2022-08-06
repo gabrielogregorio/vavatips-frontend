@@ -2,20 +2,18 @@ import { screen, render } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Suggestions from '@/pages/admin/suggestions';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 jest.mock(

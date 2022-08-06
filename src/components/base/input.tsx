@@ -8,10 +8,10 @@ import { Label } from './label';
 export type typeInputColors = 'invalid' | 'valid' | 'warning' | 'default';
 
 export const styleLiteral = {
+  default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
   invalid: 'border-red-400 text-red-400 focus:shadow-red-400 ',
   valid: 'border-success text-success focus:shadow-success',
   warning: 'border-orange-400 text-orange-400 focus:shadow-orange-400 ',
-  default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
 };
 
 export const getStylesFromInput = (status) => styleLiteral[status] ?? styleLiteral.default;
@@ -119,8 +119,8 @@ export const Input = ({
 };
 
 Input.defaultProps = {
-  status: '',
   disabled: false,
-  type: '',
   isSubmitted: false,
+  status: '',
+  type: '',
 };

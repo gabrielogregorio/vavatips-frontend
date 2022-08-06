@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { CreatePostManagement } from '@/widgets/managmentPost';
 import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -15,15 +15,13 @@ import { expectTitlePost } from '@/utils/expectTitlePost';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '',
-      pathname: '/admin/post-edit',
-      query: { id: '6159c92b1775570b9c40612a', map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-      isReady: true,
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    isReady: true,
+    pathname: '/admin/post-edit',
+    query: { agent: 'Sova', id: '6159c92b1775570b9c40612a', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 const handlers = [rest.get(URL_GET_POST_EDITABLE, async (_req, res, ctx) => res(ctx.json(postBase)))];
@@ -42,8 +40,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />
@@ -83,8 +81,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />
@@ -100,17 +98,17 @@ describe('<CreatePostManagement />', () => {
     userEvent.click(screen.getByTestId('btn-top-2'));
 
     verifyListRender([
-      { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
-      { title: '2 - title1_img1', alt: 'title1_img1', src: '/image_111' },
-      { title: '3 - title1_img3', alt: 'title1_img3', src: '/image_333' },
+      { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
+      { alt: 'title1_img1', src: '/image_111', title: '2 - title1_img1' },
+      { alt: 'title1_img3', src: '/image_333', title: '3 - title1_img3' },
     ]);
 
     userEvent.click(screen.getByTestId('btn-bottom-2'));
 
     verifyListRender([
-      { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
-      { title: '2 - title1_img3', alt: 'title1_img3', src: '/image_333' },
-      { title: '3 - title1_img1', alt: 'title1_img1', src: '/image_111' },
+      { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
+      { alt: 'title1_img3', src: '/image_333', title: '2 - title1_img3' },
+      { alt: 'title1_img1', src: '/image_111', title: '3 - title1_img1' },
     ]);
   });
 
@@ -119,8 +117,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />

@@ -23,8 +23,8 @@ type ModalPropsBase = {
 };
 
 type registrationFormFields = {
-  id: string;
   descriptionImage: string;
+  id: string;
 };
 
 export const Modal = ({

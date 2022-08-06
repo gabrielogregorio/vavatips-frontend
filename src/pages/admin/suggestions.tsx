@@ -9,13 +9,11 @@ import { modelNavbarAdmin } from '@/schemas/navbar';
 import { ErrorMsg } from '@/base/errorMsg';
 import { useSuggestions } from '@/hooks/useSuggestions';
 import { suggestionType } from '@/types/suggestions';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'sugestões' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'sugestões', url: navbarEnum.Dashboard },
 ];
 
 const Th = ({ children }: { children: ReactNode }) => (

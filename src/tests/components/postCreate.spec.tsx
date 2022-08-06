@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { setupServer } from 'msw/node';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -11,14 +11,12 @@ import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '',
-      pathname: '/posts',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '/posts',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 const FIRST_POSITION = 0;
@@ -34,13 +32,13 @@ const handlers = [
       `${tags}` ===
         `${{
           tags: {
-            moment: 'InicioPartida',
-            difficult: 'Medio',
             ability: 'RobôDeAlarme',
-            side: 'Atacantes',
+            agent: 'Killjoy',
+            difficult: 'Medio',
             map: 'Ascent',
             mapPosition: 'BaseAtacante',
-            agent: 'Killjoy',
+            moment: 'InicioPartida',
+            side: 'Atacantes',
           },
         }}` &&
       imgs.length === 1 &&

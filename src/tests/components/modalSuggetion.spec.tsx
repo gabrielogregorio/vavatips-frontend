@@ -6,36 +6,34 @@ import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
 import { ParsedUrlQuery } from 'querystring';
 import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 const post = {
-  user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
   description: 'my Description post',
-  title: 'my title post',
-  imgs: [{ id: '98', image: 'https://image.png', description: 'description image' }],
+  imgs: [{ description: 'description image', id: '98', image: 'https://image.png' }],
   tags: {
-    map: 'Ascent',
-    agent: 'Sova',
     ability: 'Flecha rastread1ora',
-    moment: 'post plant',
+    agent: 'Sova',
     difficult: 'médio',
-    side: 'a',
+    map: 'Ascent',
     mapPosition: 'b',
+    moment: 'post plant',
+    side: 'a',
   },
+  title: 'my title post',
+  user: { id: '53', image: 'https://docker.png', username: 'Gabriel' },
 };
 
 const waitForSuccessfully = async () =>
@@ -61,9 +59,9 @@ const handlers = [
       return res(
         ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
-          post_id: 'aaa',
-          email: 'vv',
           description: 'dddssd',
+          email: 'vv',
+          post_id: 'aaa',
         }),
       );
     }

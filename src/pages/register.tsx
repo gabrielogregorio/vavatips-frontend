@@ -19,9 +19,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { schemaRegister } from '@/handlers/forms';
 import { useRegister } from '@/hooks/useRegister';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 

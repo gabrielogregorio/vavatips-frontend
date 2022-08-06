@@ -5,8 +5,8 @@ import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 import { useForm } from 'react-hook-form';
 
 export default {
-  title: 'form/Selected',
   component: Selected,
+  title: 'form/Selected',
 } as ComponentMeta<typeof Selected>;
 
 const Template: Story<typeof Selected> = (props) => {

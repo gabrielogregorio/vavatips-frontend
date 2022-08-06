@@ -9,9 +9,7 @@ import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Api } from '@/services/api';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 

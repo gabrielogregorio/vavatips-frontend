@@ -11,7 +11,7 @@ type stateErrorBoundaryType = {
   hasError: boolean;
 };
 
-export default class ErrorBoundary extends Component<propsErrorBoundaryType, stateErrorBoundaryType> {
+export class ErrorBoundary extends Component<propsErrorBoundaryType, stateErrorBoundaryType> {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component<propsErrorBoundaryType, sta
     };
   }
 
-  static getDerivedStateFromError() {
+  private static getDerivedStateFromError() {
     return { hasError: true };
   }
 

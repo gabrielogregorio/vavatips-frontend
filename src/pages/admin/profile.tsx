@@ -16,13 +16,11 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/base/button';
 import { schemaUpdateProfile } from '@/handlers/forms';
 import { useProfile } from '@/hooks/useProfile';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'perfil' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'perfil', url: navbarEnum.Dashboard },
 ];
 
 export type registrationFormFields = {
@@ -38,8 +36,8 @@ const Profile = () => {
     reset,
     formState: { errors },
   } = useForm<registrationFormFields>({
-    resolver: yupResolver(schemaUpdateProfile),
     defaultValues: {},
+    resolver: yupResolver(schemaUpdateProfile),
   });
 
   const { isLoading, infoUser } = useProfile();

@@ -33,9 +33,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaManagementPosts } from '@/handlers/forms';
 import { useManagementPosts } from '@/hooks/useManagementPosts';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 type actionType = 'top' | 'bottom';
 
@@ -75,8 +73,8 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   const id = `${query?.id || ''}`;
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [propsModal, setPropsModal] = useState<modalType>({
-    id: '',
     description: '',
+    id: '',
     image: '',
   });
 
@@ -156,12 +154,12 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   };
 
   const showModal = () => {
-    setPropsModal({ id: '', description: '', image: '' });
+    setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(true);
   };
 
   const closeModal = () => {
-    setPropsModal({ id: '', description: '', image: '' });
+    setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(false);
   };
 
@@ -245,19 +243,19 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
   const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
     const request = {
-      title,
       description,
-      user: '',
+      imgs: imgAdded,
       tags: {
-        moment,
-        difficult,
         ability,
-        side,
+        agent,
+        difficult,
         map,
         mapPosition: position,
-        agent,
+        moment,
+        side,
       },
-      imgs: imgAdded,
+      title,
+      user: '',
     };
 
     if (mode === 'create') {

@@ -26,9 +26,9 @@ export const useDashboard = () => {
   }, []);
 
   return {
-    info,
-    username,
     errorMsg,
+    info,
     isLoading,
+    username,
   };
 };

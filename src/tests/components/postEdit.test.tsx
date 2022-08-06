@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import EditPost from '@/pages/admin/post-edit';
 import { URL_DELETE_POST_BY_ID, URL_GET_POST_BY_ID, URL_PUT_EDIT_POST_BY_ID } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -15,22 +15,20 @@ import { ERROR_IN_SERVER_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE, SUCCESS_HTTP_CODE
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '/admin/post-edit',
-      pathname: '',
-      query: { id: '617d44c81bc4243f9b2d5a67' },
-      asPath: '',
-      isReady: true,
-      push: jest.fn(),
-      events: {
-        on: jest.fn(),
-        off: jest.fn(),
-      },
-      beforePopState: jest.fn(() => null),
-      prefetch: jest.fn(() => null),
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    beforePopState: jest.fn(() => null),
+    events: {
+      off: jest.fn(),
+      on: jest.fn(),
+    },
+    isReady: true,
+    pathname: '',
+    prefetch: jest.fn(() => null),
+    push: jest.fn(),
+    query: { id: '617d44c81bc4243f9b2d5a67' },
+    route: '/admin/post-edit',
+  }),
 }));
 
 const handlers = [

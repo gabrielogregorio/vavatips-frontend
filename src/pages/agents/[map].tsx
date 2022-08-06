@@ -10,9 +10,7 @@ import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { Api } from '@/services/api';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
@@ -21,12 +19,12 @@ export const getStaticPaths = async () => {
   const { maps } = await resp.data;
 
   return {
+    fallback: false,
     paths: maps.map((map) => ({
       params: {
         map,
       },
     })),
-    fallback: false,
   };
 };
 

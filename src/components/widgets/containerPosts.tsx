@@ -10,12 +10,10 @@ import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
 import { InfiniteScroll } from '@/widgets/infiniteScroll';
-import loadable from '@loadable/component';
 import { TPostsProps } from '@/types/posts';
-
-const ModalOfSuggestion = loadable(() => import(`@/widgets/modalOfSuggestion`));
-const ModalMessage = loadable(() => import(`@/widgets/modalMessage`));
-const Footer = loadable(() => import(`@/layout/footer`));
+import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
+import { ModalMessage } from '@/widgets/modalMessage';
+import { Footer } from '@/layout/footer';
 
 type containerPosts = {
   breadcrumbs: { url: string; text: string }[];

@@ -9,18 +9,16 @@ import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { useDashboard } from '@/hooks/useDashboard';
 import { getKeysFromAnyObject } from '@/helpers/handleObjects';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const keyLabel = {
-  countAll: 'Consultas',
-  countIps: 'Usuários',
-  countAllPosts: 'posts',
-  countAlMaps: 'mapas',
   countAlAgents: 'agentes',
+  countAlMaps: 'mapas',
+  countAll: 'Consultas',
+  countAllPosts: 'posts',
   countAllSuggestions: 'sugestões',
   countAllUsers: 'administradores',
+  countIps: 'Usuários',
 };
 
 export const ItemList = ({ children }: { children: ReactNode }) => (
@@ -28,8 +26,8 @@ export const ItemList = ({ children }: { children: ReactNode }) => (
 );
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'dashboard' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'dashboard', url: navbarEnum.Dashboard },
 ];
 
 const Dashboard = () => {

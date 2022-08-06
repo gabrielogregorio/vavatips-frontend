@@ -3,7 +3,7 @@ import { Navbar } from '@/layout/navbar';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { navbarEnum } from '@/enums/navbar';
 import userEvent from '@testing-library/user-event';
-import MockApp from '../mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 
 describe('<Navbar />', () => {
   it('should render button like', () => {

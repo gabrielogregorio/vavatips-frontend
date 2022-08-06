@@ -19,9 +19,7 @@ import { schemaLogin } from '@/handlers/forms';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useLoginAndSetToken } from '@/hooks/useLoginAndSetToken';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 

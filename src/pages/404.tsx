@@ -6,9 +6,7 @@ import { Breadcrumb } from '@/widgets/breadcrumb';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { navbarEnum } from '@/enums/navbar';
 import Image from 'next/image';
-import loadable from '@loadable/component';
-
-const Footer = loadable(() => import(`@/layout/footer`));
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [];
 

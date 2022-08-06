@@ -34,5 +34,3 @@ export const Breadcrumb = ({ breadcrumbs }: propsType) => {
     </div>
   );
 };
-
-export default Breadcrumb;

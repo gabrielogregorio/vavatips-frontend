@@ -2,8 +2,8 @@ import { ComponentMeta, Story } from '@storybook/react';
 import { InputFile } from '../components/base/inputFile';
 
 export default {
-  title: 'form/inputFileType',
   component: InputFile,
+  title: 'form/inputFileType',
 } as ComponentMeta<typeof InputFile>;
 
 const Template: Story<typeof InputFile> = (props) => {

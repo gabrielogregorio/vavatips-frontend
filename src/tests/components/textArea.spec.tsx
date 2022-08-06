@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { TextArea } from '@/base/textArea';
 import { useForm } from 'react-hook-form';
 
-const Setup = ({ title }: any) => {
+const Setup = ({ title }: { title: string }) => {
   const {
     register,
     formState: { errors },

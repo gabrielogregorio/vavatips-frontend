@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
 import { posts } from '@/mock/mockPosts.json';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -10,15 +10,13 @@ const SECOND_POSITION = 1;
 const THIRD_POSITION = 2;
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/posts',
-      isReady: true,
-      pathname: '',
-      query: { map: 'oneRandomData', agent: 'oneRandomData', type: 'save', page: 1 },
-      asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
-    };
-  },
+  useRouter: () => ({
+    asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
+    isReady: true,
+    pathname: '',
+    query: { agent: 'oneRandomData', map: 'oneRandomData', page: 1, type: 'save' },
+    route: '/posts',
+  }),
 }));
 
 describe('<SaveScreen />', () => {

@@ -8,8 +8,8 @@ export const ModalMessage = () => {
 
   const modalIcon = {
     '': null,
-    success: <AiOutlineCheckCircle className="text-skin-white text-lg" />,
     error: <AiOutlineExclamationCircle className="text-skin-white text-lg" />,
+    success: <AiOutlineCheckCircle className="text-skin-white text-lg" />,
   };
 
   return modalMessage.active ? (
@@ -30,5 +30,3 @@ export const ModalMessage = () => {
     </div>
   ) : null;
 };
-
-export default ModalMessage;

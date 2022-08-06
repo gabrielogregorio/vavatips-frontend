@@ -3,8 +3,8 @@ import mockPosts from '@/mock/mockAllPosts.json';
 import { PostCard } from '../components/widgets/postCard';
 
 export default {
-  title: 'widgets/PostCard',
   component: PostCard,
+  title: 'widgets/PostCard',
 } as ComponentMeta<typeof PostCard>;
 
 const Template: ComponentStory<typeof PostCard> = (args) => (

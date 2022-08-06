@@ -8,14 +8,14 @@ export const resolveQuery = (urlBase: string, filters: object = {}): string => {
   urlFinal += '?';
 
   const keys: string[] = Object.keys(filters);
-  for (let x = 0; x < keys.length; x += 1) {
-    const key: string = keys[x];
+  for (let count = 0; count < keys.length; count += 1) {
+    const key: string = keys[count];
     let value: string = filters[key];
     if (value === undefined || value === null) {
       value = '';
     }
 
-    if (x === keys.length - 1) {
+    if (count === keys.length - 1) {
       urlFinal = `${urlFinal}${key}=${value}`;
     } else {
       urlFinal = `${urlFinal}${key}=${value}&`;

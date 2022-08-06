@@ -3,8 +3,8 @@ import { CreatePostManagement } from '@/widgets/managmentPost';
 import { navbarEnum } from '@/enums/navbar';
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'editar' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'editar', url: navbarEnum.Dashboard },
 ];
 
 const EditPost = () => (

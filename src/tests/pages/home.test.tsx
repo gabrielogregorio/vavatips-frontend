@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import mockPosts from '@/mock/mockPosts.json';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { waitByLoading } from '@/utils/waitByLoading';
 import HomeScreen from '@/pages/posts/[map]/[agent]';
 import { generateNumericList } from '@/helpers/generateArray';
@@ -10,15 +10,13 @@ import { getDescription, getTitle } from '../utils/getPosts';
 const { posts } = mockPosts;
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: { map: 'Ascent', agent: 'Sova' },
-      isReady: true,
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    isReady: true,
+    pathname: '',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 const FIRST_POSITION = 0;

@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import Dashboard from '@/pages/admin/dashboard';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
@@ -11,14 +11,12 @@ import { ERROR_NOT_ACCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 jest.mock(
@@ -33,13 +31,13 @@ const handlers = [
   rest.get(URL_GET_DASHBOARD, async (req, res, ctx) =>
     res(
       ctx.json({
-        countAll: 134,
-        countIps: 318,
-        countAllPosts: 190,
-        countAlMaps: 15,
         countAlAgents: 30,
+        countAlMaps: 15,
+        countAll: 134,
+        countAllPosts: 190,
         countAllSuggestions: 10,
         countAllUsers: 3,
+        countIps: 318,
       }),
     ),
   ),
@@ -53,8 +51,8 @@ const handlers = [
     return res(
       ctx.json({
         id: '12345678',
-        username: 'codigo limpo?',
         image: 'image.png',
+        username: 'codigo limpo?',
       }),
     );
   }),

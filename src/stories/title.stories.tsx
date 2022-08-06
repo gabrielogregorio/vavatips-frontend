@@ -2,8 +2,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Title } from '../components/base/title';
 
 export default {
-  title: 'base/Title',
   component: Title,
+  title: 'base/Title',
 } as ComponentMeta<typeof Title>;
 
 const Template: ComponentStory<typeof Title> = (args) => <Title {...args} />;

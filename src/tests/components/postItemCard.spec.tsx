@@ -2,56 +2,54 @@ import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { Posts } from '@/widgets/postsItem';
 import { ERROR_IN_SERVER_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 let count = 0;
 
 const posts = [
   {
-    id: '10',
-    user: { id: '15', username: 'user1', image: '/user.png' },
     description: 'desc1',
-    title: 'title1',
+    id: '10',
     imgs: [],
     tags: {
-      map: 'map1',
-      agent: 'agent1',
       ability: 'ability1',
-      moment: 'moment1',
+      agent: 'agent1',
       difficult: 'difficult1',
-      side: 'side1',
+      map: 'map1',
       mapPosition: 'mapPosition1',
+      moment: 'moment1',
+      side: 'side1',
     },
+    title: 'title1',
+    user: { id: '15', image: '/user.png', username: 'user1' },
   },
   {
-    id: '20',
-    user: { id: '25', username: 'user2', image: '/user.png' },
     description: 'desc2',
-    title: 'title2',
+    id: '20',
     imgs: [],
     tags: {
-      map: 'map2',
-      agent: 'agent2',
       ability: 'ability2',
-      moment: 'moment2',
+      agent: 'agent2',
       difficult: 'difficult2',
-      side: 'side2',
+      map: 'map2',
       mapPosition: 'mapPosition2',
+      moment: 'moment2',
+      side: 'side2',
     },
+    title: 'title2',
+    user: { id: '25', image: '/user.png', username: 'user2' },
   },
 ];
 

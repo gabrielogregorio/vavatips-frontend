@@ -5,20 +5,18 @@ import userEvent from '@testing-library/user-event';
 import { PostCard } from '@/widgets/postCard';
 import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import mockPosts from '@/mock/mockPosts.json';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { TOKEN_JWT } from '@/services/auth';
 import { ERROR_IN_SERVER_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 let count = 0;
@@ -26,26 +24,28 @@ const descriptionOne = 'description image 111';
 const descriptionFive = 'description image 555';
 
 const post = {
-  id: '12',
-  user: { id: '53', username: 'Gabriel', image: '/user.png' },
   description: 'my Description post',
-  title: 'my title post',
+  id: '12',
+
   imgs: [
-    { id: '111', image: 'https://image111.png', description: descriptionOne },
-    { id: '222', image: 'https://image222.png', description: 'description image 222' },
-    { id: '333', image: 'https://image333.png', description: 'description image 333' },
-    { id: '444', image: 'https://image444.png', description: 'description image 444' },
-    { id: '555', image: 'https://image555.png', description: descriptionFive },
+    { description: descriptionOne, id: '111', image: 'https://image111.png' },
+    { description: 'description image 222', id: '222', image: 'https://image222.png' },
+    { description: 'description image 333', id: '333', image: 'https://image333.png' },
+    { description: 'description image 444', id: '444', image: 'https://image444.png' },
+    { description: descriptionFive, id: '555', image: 'https://image555.png' },
   ],
+
   tags: {
-    map: 'Ascent',
-    agent: 'Sova',
     ability: 'Flecha rastread1ora',
-    moment: 'post plant',
+    agent: 'Sova',
     difficult: 'médio',
-    side: 'a',
+    map: 'Ascent',
     mapPosition: 'b',
+    moment: 'post plant',
+    side: 'a',
   },
+  title: 'my title post',
+  user: { id: '53', image: '/user.png', username: 'Gabriel' },
 };
 
 const handlers = [
@@ -89,7 +89,7 @@ describe('<PostCard />', () => {
   it('should test if image author is render in not image available', async () => {
     render(
       <MockApp>
-        <PostCard post={{ ...post, user: { id: '53', username: 'Gabriel', image: '' } }} />
+        <PostCard post={{ ...post, user: { id: '53', image: '', username: 'Gabriel' } }} />
       </MockApp>,
     );
 

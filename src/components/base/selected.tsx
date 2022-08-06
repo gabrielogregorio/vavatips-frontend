@@ -51,6 +51,6 @@ export const Selected = ({ render, text, register, errors, name, status, disable
 };
 
 Selected.defaultProps = {
-  status: '',
   disabled: false,
+  status: '',
 };

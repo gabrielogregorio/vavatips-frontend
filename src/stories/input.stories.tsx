@@ -3,8 +3,8 @@ import { ComponentMeta, Story } from '@storybook/react';
 import { Input } from '@/base/input';
 
 export default {
-  title: 'form/Input',
   component: Input,
+  title: 'form/Input',
 } as ComponentMeta<typeof Input>;
 
 const Template: Story<typeof Input> = (props: unknown) => (
@@ -30,29 +30,29 @@ Default.args = {};
 export const Password = Template.bind({});
 Password.args = {
   disabled: false,
-  type: 'password',
   label: 'type your password',
   name: 'password',
   placeholder: '',
   status: 'default',
+  type: 'password',
 };
 
 export const Email = Template.bind({});
 Email.args = {
   disabled: false,
-  type: 'email',
   label: 'type your email',
   name: 'email',
   placeholder: '',
   status: 'default',
+  type: 'email',
 };
 
 export const Number = Template.bind({});
 Number.args = {
   disabled: false,
-  type: 'number',
   label: 'choice a number',
-  placeholder: '',
   name: 'number',
+  placeholder: '',
   status: 'default',
+  type: 'number',
 };

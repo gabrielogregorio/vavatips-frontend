@@ -2,14 +2,12 @@ import { render, screen } from '@testing-library/react';
 import MyApp from '@/pages/_app';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '',
-      pathname: '',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
 const Component = () => <div>aa</div>;

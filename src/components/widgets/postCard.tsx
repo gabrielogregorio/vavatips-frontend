@@ -17,6 +17,7 @@ type TProps = {
 };
 
 const FIRST_IMAGE_ID = 0;
+const POSITION_FIRST_IMAGE = 0;
 
 export const PostCard = ({ post }: TProps) => {
   const [idImage, setIdImage] = useState<number>(FIRST_IMAGE_ID);
@@ -120,7 +121,7 @@ export const PostCard = ({ post }: TProps) => {
                 const navigationHasNotStarted = !startedANavigation;
                 const isSelectedImage = idImage === index;
 
-                if (navigationHasNotStarted && index > 0) {
+                if (navigationHasNotStarted && index > POSITION_FIRST_IMAGE) {
                   return null;
                 }
 

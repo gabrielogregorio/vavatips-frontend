@@ -14,78 +14,82 @@ export const useManagementPosts = () => {
   const [imgAdded, setImgAdded] = useState<imgType[]>([]);
   const [redirect, setRedirect] = useState<boolean>(false);
 
-  const getOnePost = (id: string) => {
+  const getOnePost = async (postId: string) => {
     setIsLoading(true);
-    Api.get(`/post/${id}`)
-      .then(({ data }) => {
-        const { title, description, tags, imgs } = data;
+    try {
+      const { data } = await Api.get(`/post/${postId}`);
+      const { title, description, tags, imgs } = data;
 
-        const newImages = imgs.map((item) => ({
-          ...item,
-          id: uuid.v4().toString(),
-        }));
+      const newImages = imgs.map((item) => ({
+        ...item,
+        id: uuid.v4().toString(),
+      }));
 
-        const formToReset = {
-          title,
-          description,
-          moment: tags.moment,
-          difficult: tags.difficult,
-          ability: tags.ability,
-          side: tags.side,
-          map: tags.map,
-          position: tags.mapPosition,
-          agent: tags.agent,
-        };
+      const formToReset = {
+        ability: tags.ability,
+        agent: tags.agent,
+        description,
+        difficult: tags.difficult,
+        map: tags.map,
+        moment: tags.moment,
+        position: tags.mapPosition,
+        side: tags.side,
+        title,
+      };
 
-        setInitialPost(formToReset);
-
-        setImgAdded(newImages);
-      })
-      .catch(() => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
+      setInitialPost(formToReset);
+      setImgAdded(newImages);
+    } catch (error) {
+      //
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const deleteThisPost = (idPost) => {
+  const deleteThisPost = async (idPost) => {
     setIsLoading(true);
-    Api.delete(`/post/${idPost}`)
-      .catch((error) => error)
-      .finally(() => {
-        setIsLoading(false);
-        setRedirect(true);
-      });
+
+    try {
+      await Api.delete(`/post/${idPost}`);
+    } catch (error) {
+      //
+    } finally {
+      setIsLoading(false);
+      setRedirect(true);
+    }
   };
 
   const createNewPost = async (request) => {
-    Api.post(`/post`, { ...request })
-      .then(() => {
-        setRedirect(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      await Api.post(`/post`, { ...request });
+      setRedirect(true);
+    } catch (error) {
+      //
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const editOnePost = (id, request) => {
-    Api.put(`/post/${id}`, { ...request })
-      .then(() => {
-        setRedirect(true);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const editOnePost = async (postId, request) => {
+    try {
+      await Api.put(`/post/${postId}`, { ...request });
+      setRedirect(true);
+    } catch (error) {
+      //
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
-    initialPost,
-    getOnePost,
-    isLoading,
-    redirect,
-    editOnePost,
-    imgAdded,
-    setImgAdded,
     createNewPost,
     deleteThisPost,
+    editOnePost,
+    getOnePost,
+    imgAdded,
+    initialPost,
+    isLoading,
+    redirect,
+    setImgAdded,
   };
 };

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { getToken } from './auth';
 
 const axiosConfig = axios.create({
@@ -14,19 +14,19 @@ axiosConfig.interceptors.request.use(async (config) => {
 });
 
 export class Api {
-  static get(relativeUrl: string): Promise<any> {
+  static get(relativeUrl: string): Promise<AxiosResponse> {
     return axiosConfig.get(relativeUrl);
   }
 
-  static post(relativeUrl: string, data?: any): Promise<any> {
+  static post(relativeUrl: string, data?: any): Promise<AxiosResponse> {
     return axiosConfig.post(relativeUrl, data ?? {});
   }
 
-  static put(relativeUrl: string, data?: any): Promise<any> {
+  static put(relativeUrl: string, data?: any): Promise<AxiosResponse> {
     return axiosConfig.put(relativeUrl, data ?? {});
   }
 
-  static delete(relativeUrl: string): Promise<any> {
+  static delete(relativeUrl: string): Promise<AxiosResponse> {
     return axiosConfig.delete(relativeUrl);
   }
 }

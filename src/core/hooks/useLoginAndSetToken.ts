@@ -11,7 +11,7 @@ export const useLoginAndSetToken = () => {
   const tryLogin = async ({ username, password }) => {
     setIsLoading(true);
     try {
-      const { data } = await Api.post('/auth', { username, password });
+      const { data } = await Api.post('/auth', { password, username });
       login(data.token);
       setRedirect(true);
     } catch (error) {
@@ -23,8 +23,8 @@ export const useLoginAndSetToken = () => {
 
   return {
     errorMsg,
-    redirect,
     isLoading,
+    redirect,
     tryLogin,
   };
 };

@@ -21,9 +21,9 @@ export const useRegister = () => {
   };
 
   return {
-    tryRegister,
+    activeLoader,
     errorMsg,
     redirect,
-    activeLoader,
+    tryRegister,
   };
 };

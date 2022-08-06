@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_CREATE_NEW_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
@@ -18,12 +18,12 @@ import {
 } from '@/utils/statusCode';
 
 const mock = {
-  usernameValid: 'testUsername',
-  passwordValid: 'testPassword',
-  usernameToCreated: 'usernameTest',
   passwordToCreated: 'passwordConfirm',
-  validCodeToCreated: 'codCadaster',
+  passwordValid: 'testPassword',
   userNameToCreatedWithNotExists: 'usernameTestIfNotExists',
+  usernameToCreated: 'usernameTest',
+  usernameValid: 'testUsername',
+  validCodeToCreated: 'codCadaster',
 };
 
 jest.mock('next/router', () => ({
@@ -75,8 +75,8 @@ const handlers = [
         ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
           id: '1234567890',
-          username,
           image: '',
+          username,
         }),
       );
     }

@@ -51,5 +51,3 @@ export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) =>
     </nav>
   );
 };
-
-export default Navbar;

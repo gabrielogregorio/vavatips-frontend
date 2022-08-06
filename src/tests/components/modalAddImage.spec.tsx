@@ -16,14 +16,12 @@ const NOT_CALLED = 0;
 const CALLED_FIRST = 1;
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 jest.mock(
