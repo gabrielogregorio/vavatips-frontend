@@ -10,6 +10,8 @@ import { navbarEnum } from '@/enums/navbar';
 import postBase from '@/mock/responseGetPostById.json';
 import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
+import { verifyListRender } from '@/utils/verifyListRender';
+import { expectTitlePost } from '@/utils/expectTitlePost';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -25,18 +27,8 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [rest.get(URL_GET_POST_EDITABLE, async (_req, res, ctx) => res(ctx.json(postBase)))];
-const editPost = 'Editar um post';
+
 const server = setupServer(...handlers);
-
-const verifyDefaultRender = (listRender = defaultListFromRender) => {
-  const listOfImages = screen.getAllByRole('img');
-
-  listRender.forEach(({ title, alt, src }, index) => {
-    expect(screen.getByText(title)).toBeInTheDocument();
-    expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-    expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-  });
-};
 
 describe('<CreatePostManagement />', () => {
   beforeAll(() => server.listen());
@@ -60,7 +52,7 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    expectTitlePost();
 
     const listOfImages = screen.getAllByRole('img');
 
@@ -98,13 +90,13 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    expectTitlePost();
 
-    verifyDefaultRender();
+    verifyListRender();
 
     userEvent.click(screen.getByTestId('btn-top-2'));
 
-    verifyDefaultRender([
+    verifyListRender([
       { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
       { title: '2 - title1_img1', alt: 'title1_img1', src: '/image_111' },
       { title: '3 - title1_img3', alt: 'title1_img3', src: '/image_333' },
@@ -112,7 +104,7 @@ describe('<CreatePostManagement />', () => {
 
     userEvent.click(screen.getByTestId('btn-bottom-2'));
 
-    verifyDefaultRender([
+    verifyListRender([
       { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
       { title: '2 - title1_img3', alt: 'title1_img3', src: '/image_333' },
       { title: '3 - title1_img1', alt: 'title1_img1', src: '/image_111' },
@@ -134,8 +126,8 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
-    verifyDefaultRender();
+    expectTitlePost();
+    verifyListRender();
 
     userEvent.click(screen.getByText('2 - title1_img2'));
 

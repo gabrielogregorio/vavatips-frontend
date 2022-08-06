@@ -9,10 +9,8 @@ import { URL_DELETE_POST_BY_ID, URL_GET_POST_BY_ID, URL_PUT_EDIT_POST_BY_ID } fr
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import postBase from '@/mock/responseGetPostById.json';
-import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
-import defaultListFromRender from '@/mock/defaultListFromRender.json';
-
-const editPost = 'Editar um post';
+import { verifyListRender } from '@/utils/verifyListRender';
+import { expectTitlePost } from '@/utils/expectTitlePost';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -71,16 +69,6 @@ const handlers = [
 
 const server = setupServer(...handlers);
 
-const verifyListRender = () => {
-  const listOfImages = screen.getAllByRole('img');
-
-  defaultListFromRender.forEach(({ title, alt, src }, index) => {
-    expect(screen.getByText(title)).toBeInTheDocument();
-    expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-    expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-  });
-};
-
 describe('<EditPost />', () => {
   beforeAll(() => server.listen());
 
@@ -99,7 +87,7 @@ describe('<EditPost />', () => {
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    expectTitlePost();
 
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
@@ -123,7 +111,7 @@ describe('<EditPost />', () => {
 
     expect(screen.getByRole('button', { name: 'Excluir' })).toBeInTheDocument();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    expectTitlePost();
 
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
@@ -152,7 +140,7 @@ describe('<EditPost />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: editPost })).toBeInTheDocument();
+    expectTitlePost();
     userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
 
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
