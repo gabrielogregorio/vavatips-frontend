@@ -4,12 +4,12 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 
 type IPropsTextArea = {
+  disabled?: boolean;
   name: string;
   title: string;
   register: UseFormRegister<any>;
   errors: FieldErrors;
   status?: typeInputColors;
-  disabled?: boolean;
 };
 
 export const TextArea = ({ title, register, errors, name, status, disabled }: IPropsTextArea) => {

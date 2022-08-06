@@ -27,6 +27,7 @@ type containerPosts = {
 };
 
 const skip = 10;
+const START_POSITION = 0;
 
 const getAllTags = (posts: TPostsProps[], agent, map): string[] => {
   const tags = new Set();
@@ -106,7 +107,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
 
           {isFirstLoading ? (
             <InfiniteScroll length={final} LoadMore={() => handleAddedMore()} hasMore={data.length > final}>
-              <Posts posts={data.slice(0, final)} />
+              <Posts posts={data.slice(START_POSITION, final)} />
             </InfiniteScroll>
           ) : null}
         </div>

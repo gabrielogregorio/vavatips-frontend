@@ -1,6 +1,8 @@
+const NOT_HAS_FILTERS = 0;
+
 export const resolveQuery = (urlBase: string, filters: object = {}): string => {
   let urlFinal = urlBase;
-  if (Object.keys(filters).length === 0) {
+  if (Object.keys(filters).length === NOT_HAS_FILTERS) {
     return urlFinal;
   }
   urlFinal += '?';

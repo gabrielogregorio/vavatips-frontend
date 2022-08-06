@@ -65,6 +65,7 @@ const handlers = [
 ];
 
 const server = setupServer(...handlers);
+const FIRST_POSITION = 0;
 
 describe('<PostCard />', () => {
   beforeAll(() => server.listen());
@@ -80,9 +81,9 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
+    expect(screen.getAllByRole('img')[FIRST_POSITION]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/user.png`);
+    expect(screen.getAllByRole('img')[FIRST_POSITION]).toHaveAttribute('data-src', `/user.png`);
   });
 
   it('should test if image author is render in not image available', async () => {
@@ -92,9 +93,9 @@ describe('<PostCard />', () => {
       </MockApp>,
     );
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
+    expect(screen.getAllByRole('img')[FIRST_POSITION]).toHaveAttribute('alt', 'Foto de perfil do Autor da postagem');
 
-    expect(screen.getAllByRole('img')[0]).toHaveAttribute('data-src', `/images/users/profile.webp`);
+    expect(screen.getAllByRole('img')[FIRST_POSITION]).toHaveAttribute('data-src', `/images/users/profile.webp`);
   });
 
   it('should render correctly post card, save post and test post', async () => {
@@ -141,37 +142,43 @@ describe('<PostCard />', () => {
         <PostCard post={post} />
       </MockApp>,
     );
+
+    const SIXTH_POSITION = 5;
+    const SECOND_POSITION = 1;
+    const THIRD_POSITION = 2;
+    const FOUR_POSITION = 3;
+    const FIVE_POSITION = 4;
     const dataIsSelected = 'data-is-selected';
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', descriptionOne);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(dataIsSelected, `true`);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute('alt', descriptionOne);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute('data-src', `https://image111.png`);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute(dataIsSelected, `true`);
 
     userEvent.click(screen.getByTestId('prev-btn'));
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', descriptionFive);
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute(dataIsSelected, `true`);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute(dataIsSelected, `false`);
+    expect(screen.getAllByRole('img')[SIXTH_POSITION]).toHaveAttribute('alt', descriptionFive);
+    expect(screen.getAllByRole('img')[SIXTH_POSITION]).toHaveAttribute('data-src', `https://image555.png`);
+    expect(screen.getAllByRole('img')[SIXTH_POSITION]).toHaveAttribute(dataIsSelected, `true`);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute(dataIsSelected, `false`);
 
     userEvent.click(screen.getByTestId('next-btn'));
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[2]).toHaveAttribute('alt', 'description image 222');
-    expect(screen.getAllByRole('img')[2]).toHaveAttribute('data-src', `https://image222.png`);
+    expect(screen.getAllByRole('img')[THIRD_POSITION]).toHaveAttribute('alt', 'description image 222');
+    expect(screen.getAllByRole('img')[THIRD_POSITION]).toHaveAttribute('data-src', `https://image222.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[3]).toHaveAttribute('alt', 'description image 333');
-    expect(screen.getAllByRole('img')[3]).toHaveAttribute('data-src', `https://image333.png`);
+    expect(screen.getAllByRole('img')[FOUR_POSITION]).toHaveAttribute('alt', 'description image 333');
+    expect(screen.getAllByRole('img')[FOUR_POSITION]).toHaveAttribute('data-src', `https://image333.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[4]).toHaveAttribute('alt', 'description image 444');
-    expect(screen.getAllByRole('img')[4]).toHaveAttribute('data-src', `https://image444.png`);
+    expect(screen.getAllByRole('img')[FIVE_POSITION]).toHaveAttribute('alt', 'description image 444');
+    expect(screen.getAllByRole('img')[FIVE_POSITION]).toHaveAttribute('data-src', `https://image444.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('alt', descriptionFive);
-    expect(screen.getAllByRole('img')[5]).toHaveAttribute('data-src', `https://image555.png`);
+    expect(screen.getAllByRole('img')[SIXTH_POSITION]).toHaveAttribute('alt', descriptionFive);
+    expect(screen.getAllByRole('img')[SIXTH_POSITION]).toHaveAttribute('data-src', `https://image555.png`);
 
     userEvent.click(screen.getByTestId('next-btn'));
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('alt', descriptionOne);
-    expect(screen.getAllByRole('img')[1]).toHaveAttribute('data-src', `https://image111.png`);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute('alt', descriptionOne);
+    expect(screen.getAllByRole('img')[SECOND_POSITION]).toHaveAttribute('data-src', `https://image111.png`);
   });
 
   it('should test save and test posts and return', async () => {

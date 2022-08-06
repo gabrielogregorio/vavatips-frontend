@@ -18,11 +18,15 @@ export const schemaRegister = yup.object().shape({
     .required('Você precisa informar uma senha')
     .oneOf([yup.ref('password'), null], 'Senhas não combinam'),
 });
+const MINIMUM_SIZE_DESCRIPTION = 8;
 
 export const schemaSendSuggestion = yup.object().shape({
   tip: yup.string(),
   email: emailNotRequired,
-  description: yup.string().min(8, 'Essa descrição está muito curta').required('Você precisa fornecer uma descrição'),
+  description: yup
+    .string()
+    .min(MINIMUM_SIZE_DESCRIPTION, 'Essa descrição está muito curta')
+    .required('Você precisa fornecer uma descrição'),
 });
 
 export const schemaManagementPosts = yup.object().shape({

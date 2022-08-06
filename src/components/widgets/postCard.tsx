@@ -16,8 +16,10 @@ type TProps = {
   post: TPostsProps;
 };
 
+const FIRST_IMAGE_ID = 0;
+
 export const PostCard = ({ post }: TProps) => {
-  const [idImage, setIdImage] = useState<number>(0);
+  const [idImage, setIdImage] = useState<number>(FIRST_IMAGE_ID);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
   const [startedANavigation, setStartedANavigation] = useState<boolean>(false);
@@ -57,10 +59,10 @@ export const PostCard = ({ post }: TProps) => {
       if (idImage < length - 1) {
         setIdImage(idImage + 1);
       } else {
-        setIdImage(0);
+        setIdImage(FIRST_IMAGE_ID);
       }
     } else if (type === 'prev') {
-      if (idImage > 0) {
+      if (idImage > FIRST_IMAGE_ID) {
         setIdImage(idImage - 1);
       } else {
         setIdImage(length - 1);

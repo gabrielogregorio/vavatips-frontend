@@ -24,8 +24,9 @@ jest.mock('next/router', () => ({
 }));
 
 const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts)))];
-
+const FIRST_POSITION = 0;
 const server = setupServer(...handlers);
+const QUANTITY_POSTS = 9;
 
 describe('<HomeScreen />', () => {
   beforeAll(() => server.listen());
@@ -43,13 +44,13 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    await screen.findByRole('heading', { name: getTitle(0) });
+    await screen.findByRole('heading', { name: getTitle(FIRST_POSITION) });
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByRole('heading', { name: getTitle(index) })).toBeInTheDocument();
     });
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByText(getDescription(index))).toBeInTheDocument();
     });
 

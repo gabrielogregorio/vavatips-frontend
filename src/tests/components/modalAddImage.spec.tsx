@@ -12,6 +12,9 @@ const descriptionPost = 'Descrição post';
 const textDescriptionPost = 'how test description';
 const linkCloud = 'https://gcloud.com/123abc';
 
+const NOT_CALLED = 0;
+const CALLED_FIRST = 1;
+
 jest.mock('next/router', () => ({
   useRouter() {
     return {
@@ -80,9 +83,9 @@ describe('<Modal />', () => {
       />,
     );
 
-    expect(closeModal).toHaveBeenCalledTimes(0);
+    expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
     userEvent.click(screen.getByTestId('closeModal'));
-    expect(closeModal).toHaveBeenCalledTimes(1);
+    expect(closeModal).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
   it('should test close Modal', async () => {
@@ -100,9 +103,9 @@ describe('<Modal />', () => {
       />,
     );
 
-    expect(closeModal).toHaveBeenCalledTimes(0);
+    expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
     userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
-    expect(closeModal).toHaveBeenCalledTimes(1);
+    expect(closeModal).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
   it('should render agent screen, write description, add upload and save', async () => {

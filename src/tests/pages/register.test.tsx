@@ -10,6 +10,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
 import Register from '@/pages/register';
 import {
+  BAD_REQUEST_HTTP_CODE,
   ERROR_CONFLICT_HTTP_CODE,
   ERROR_IN_SERVER_HTTP_CODE,
   ERROR_NOT_ACCESS_HTTP_CODE,
@@ -66,7 +67,7 @@ const handlers = [
       password === null ||
       password === ''
     ) {
-      return res(ctx.status(400));
+      return res(ctx.status(BAD_REQUEST_HTTP_CODE));
     }
 
     if (username === 'usernameTest' && password === 'passwordConfirm' && code === 'codeCadasterValid') {
@@ -100,7 +101,8 @@ describe('<Register />', () => {
       </MockApp>,
     );
 
-    expect(Router.push).toHaveBeenCalledTimes(0);
+    const NON_CALLED = 0;
+    expect(Router.push).toHaveBeenCalledTimes(NON_CALLED);
 
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);

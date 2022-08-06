@@ -68,7 +68,8 @@ type registrationFormFields = {
   position: string;
   agent: string;
 };
-
+const FIRST_POSITION = 0;
+const SECOND_POSITION = 1;
 export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
   const id = `${query?.id || ''}`;
@@ -123,32 +124,33 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
 
     let increment = 0;
+    const DECREASE_BY = 1;
 
-    if (action === 'bottom' && positionPut > 0) {
-      increment = -1;
+    if (action === 'bottom' && positionPut > FIRST_POSITION) {
+      increment = -DECREASE_BY;
     } else if (action === 'top' && positionPut < imgAdded.length) {
       increment = 1;
     }
 
-    copyImgAdded.splice(positionPut, 1);
-    copyImgAdded.splice(positionPut + increment, 0, copyListDelete);
+    copyImgAdded.splice(positionPut, SECOND_POSITION);
+    copyImgAdded.splice(positionPut + increment, FIRST_POSITION, copyListDelete);
     setImgAdded(copyImgAdded);
   };
 
   const renderAbilities = () => {
     const agente = watch('agent');
-    const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[0];
+    const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[FIRST_POSITION];
     return filterAbilities?.abilities ?? [];
   };
 
   const renderPositionsMap = () => {
     const mapa: string = watch('map');
-    const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[0];
+    const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[FIRST_POSITION];
     return filterMapPositions?.mapPosition ?? [];
   };
 
   const showModalWithItem = (idPost: string) => {
-    const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[0];
+    const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[FIRST_POSITION];
     setPropsModal(item);
     setVisibleModal(true);
   };

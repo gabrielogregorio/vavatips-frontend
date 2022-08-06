@@ -10,7 +10,12 @@ import { URL_POST_AUTHENTICATED } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
-import { ERROR_NOT_ACCESS_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import {
+  ERROR_IN_SERVER_HTTP_CODE,
+  ERROR_NOT_ACCESS_HTTP_CODE,
+  ERROR_NOT_FOUND_HTTP_CODE,
+  SUCCESS_HTTP_CODE,
+} from '@/utils/statusCode';
 
 const mock = {
   usernameValid: 'testUsername',
@@ -37,7 +42,7 @@ const handlers = [
     const { username, password } = req.body as ParsedUrlQuery;
 
     if (username === 'forceError500') {
-      return res(ctx.status(500));
+      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
     }
     if (username !== mock.usernameValid) {
       return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
