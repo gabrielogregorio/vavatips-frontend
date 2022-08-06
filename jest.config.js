@@ -76,6 +76,6 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
-
+  testTimeout: 20000,
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js', '<rootDir>/.jest/setEnvVars.js'],
 };

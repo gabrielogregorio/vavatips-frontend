@@ -1,9 +1,10 @@
+/* eslint-disable sonarjs/no-identical-functions */
 import { ERROR_CONFLICT_HTTP_CODE, ERROR_NOT_ACCESS_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE } from '@/utils/statusCode';
 import { AxiosError } from 'axios';
 import Router from 'next/router';
 
 const defaultStatusCode = {
-  [ERROR_NOT_ACCESS_HTTP_CODE]: { label: 'UNAUTHORIZED', action: () => Router.push('/login') },
+  [ERROR_NOT_ACCESS_HTTP_CODE]: { action: () => Router.push('/login'), label: 'UNAUTHORIZED' },
 };
 
 type handleInputErrorsType = {
@@ -35,8 +36,8 @@ export const handleErrorLogin = (error: AxiosError): string => {
   const { statusCode } = handleInputErrors(error);
 
   const literalHandler = {
-    [ERROR_NOT_FOUND_HTTP_CODE]: 'Usuário não cadastrado!',
     [ERROR_NOT_ACCESS_HTTP_CODE]: 'Senha inválida!',
+    [ERROR_NOT_FOUND_HTTP_CODE]: 'Usuário não cadastrado!',
     default: 'Erro Desconhecido',
   };
 

@@ -14,19 +14,19 @@ axiosConfig.interceptors.request.use(async (config) => {
 });
 
 export class Api {
-  static get(relativeUrl: string): Promise<AxiosResponse> {
+  public static get(relativeUrl: string): Promise<AxiosResponse> {
     return axiosConfig.get(relativeUrl);
   }
 
-  static post(relativeUrl: string, data?: any): Promise<AxiosResponse> {
+  public static post(relativeUrl: string, data?: object): Promise<AxiosResponse> {
     return axiosConfig.post(relativeUrl, data ?? {});
   }
 
-  static put(relativeUrl: string, data?: any): Promise<AxiosResponse> {
+  public static put(relativeUrl: string, data?: object): Promise<AxiosResponse> {
     return axiosConfig.put(relativeUrl, data ?? {});
   }
 
-  static delete(relativeUrl: string): Promise<AxiosResponse> {
+  public static delete(relativeUrl: string): Promise<AxiosResponse> {
     return axiosConfig.delete(relativeUrl);
   }
 }

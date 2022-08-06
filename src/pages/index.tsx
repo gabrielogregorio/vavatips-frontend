@@ -1,5 +1,5 @@
 import { Breadcrumb } from '@/widgets/breadcrumb';
-import { maps } from '@/data/data-valorant';
+import { maps } from '@/data/data-valorant-maps';
 import LINKS from '@/data/links.json';
 import { Title } from '@/base/title';
 import { Layout } from '@/layout/layout';

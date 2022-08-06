@@ -3,7 +3,7 @@ import { Modal } from '@/widgets/modal';
 
 describe('<Modal />', () => {
   it('should render Modal', () => {
-    const fn = jest.fn();
+    const fnMock = jest.fn();
     render(
       <Modal
         id="id item"
@@ -11,7 +11,7 @@ describe('<Modal />', () => {
         description="description"
         image="/image"
         closeModal={() => jest.fn()}
-        saveModal={() => fn()}
+        saveModal={() => fnMock()}
       />,
     );
   });

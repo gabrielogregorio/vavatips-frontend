@@ -1,6 +1,6 @@
 import { TPostsProps } from './posts';
 
-export type modalType = 'success' | 'error' | '';
+type modalType = 'success' | 'error' | '';
 
 type TModalMessage = {
   msg: string;

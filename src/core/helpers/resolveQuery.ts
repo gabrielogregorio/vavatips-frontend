@@ -8,18 +8,18 @@ export const resolveQuery = (urlBase: string, filters: object = {}): string => {
   urlFinal += '?';
 
   const keys: string[] = Object.keys(filters);
-  for (let count = 0; count < keys.length; count += 1) {
-    const key: string = keys[count];
+
+  keys.forEach((key, index) => {
     let value: string = filters[key];
     if (value === undefined || value === null) {
       value = '';
     }
 
-    if (count === keys.length - 1) {
+    if (index === keys.length - 1) {
       urlFinal = `${urlFinal}${key}=${value}`;
     } else {
       urlFinal = `${urlFinal}${key}=${value}&`;
     }
-  }
+  });
   return `${urlFinal}`;
 };

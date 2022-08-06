@@ -1,4 +1,4 @@
-export const THEME = 'theme';
+const THEME = 'theme';
 
 export const getTheme = (): string => localStorage.getItem(THEME) || 'dark';
 

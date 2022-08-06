@@ -9,7 +9,7 @@ type imgType = {
 };
 
 export const useManagementPosts = () => {
-  const [initialPost, setInitialPost] = useState<any>(null);
+  const [initialPost, setInitialPost] = useState(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [imgAdded, setImgAdded] = useState<imgType[]>([]);
   const [redirect, setRedirect] = useState<boolean>(false);

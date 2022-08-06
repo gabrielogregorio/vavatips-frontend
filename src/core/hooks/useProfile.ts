@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 export const useProfile = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [infoUser, setInfoUser] = useState<any>(null);
+  const [infoUser, setInfoUser] = useState<{ username: string }>(null);
 
   const setProfileData = useCallback(async () => {
     try {

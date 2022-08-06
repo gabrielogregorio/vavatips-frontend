@@ -9,22 +9,25 @@ export const useSuggestions = () => {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    setLoading(true);
-    Api.get(`/suggestions`)
-      .then((res) => {
+    const getSuggestions = async () => {
+      setLoading(true);
+
+      try {
+        const res = await Api.get(`/suggestions`);
         setSuggestions(res.data);
-      })
-      .catch((err) => {
+      } catch (err) {
         setError(handleErrorSuggestion(err));
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    getSuggestions();
   }, []);
 
   return {
-    suggestions,
-    loading,
     error,
+    loading,
+    suggestions,
   };
 };

@@ -1,6 +1,6 @@
 import { ButtonCloseModal } from '@/base/modalCloseButton';
 import { ReactNode } from 'react';
-import { Hr } from '../base/hr';
+import { HrComponent } from '../base/hr';
 
 type modalRefType = {
   children: ReactNode;
@@ -14,7 +14,7 @@ export const ModalRef = ({ children, title, closeModal }: modalRefType) => (
         <h1 className="flex-1 dark:text-skin-white text-skin-gray-500">{title}</h1>
         <ButtonCloseModal onClick={() => closeModal()} />
       </div>
-      <Hr />
+      <HrComponent />
       {children}
     </div>
   </div>

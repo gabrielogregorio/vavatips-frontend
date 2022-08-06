@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 import { TContextTags } from '@/types/posts';
 
 export const ContextFilters = createContext<TContextTags>({
@@ -7,5 +7,3 @@ export const ContextFilters = createContext<TContextTags>({
   setTags: null,
   tags: [],
 });
-
-export const useFilters = () => useContext(ContextFilters);

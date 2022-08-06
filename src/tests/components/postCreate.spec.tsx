@@ -8,6 +8,7 @@ import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
 import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import { TPostsProps } from '@/types/posts';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -23,8 +24,7 @@ const FIRST_POSITION = 0;
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
-    const { body } = req;
-    const { title, description, tags, imgs }: any = body;
+    const { title, description, tags, imgs } = req.body as TPostsProps;
 
     const postIsValid =
       title === `Title New Post` &&

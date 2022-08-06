@@ -11,7 +11,7 @@ export const useRegister = () => {
     setActiveLoader(true);
 
     try {
-      await Api.post('/user', { username: usernameLocal, password: passwordLocal, code: keyCode });
+      await Api.post('/user', { code: keyCode, password: passwordLocal, username: usernameLocal });
       setRedirect(true);
     } catch (error) {
       setErrorMsg(handleErrorRegister(error));

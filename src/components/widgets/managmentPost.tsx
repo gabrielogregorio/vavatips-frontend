@@ -4,11 +4,13 @@ import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
 import {
   agents as renderAgents,
-  maps as renderMaps,
   difficult as renderDifficult,
   moment as renderMoment,
   side as renderSide,
 } from '@/data/data-valorant';
+
+import {  maps as renderMaps,
+} from '@/data/data-valorant-maps';
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
 import { formatImage } from '@/services/formatEnvironment';
@@ -26,7 +28,7 @@ import { modelNavbarAdmin } from '@/schemas/navbar';
 import { SubContainer } from '@/base/subContainer';
 import { Form } from '@/base/Form';
 import { GroupInputMultiple } from '@/base/groupInputMultiple';
-import { Hr } from '@/base/hr';
+import { HrComponent } from '@/base/hr';
 import Image from 'next/image';
 import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 import { useForm } from 'react-hook-form';
@@ -34,6 +36,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaManagementPosts } from '@/handlers/forms';
 import { useManagementPosts } from '@/hooks/useManagementPosts';
 import { Footer } from '@/layout/footer';
+import { generateNumericList } from '@/helpers/generateArray';
 
 type actionType = 'top' | 'bottom';
 
@@ -70,7 +73,7 @@ const FIRST_POSITION = 0;
 const SECOND_POSITION = 1;
 export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
-  const id = `${query?.id || ''}`;
+  const postId = `${query?.id || ''}`;
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [propsModal, setPropsModal] = useState<modalType>({
     description: '',
@@ -105,12 +108,12 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   }, [JSON.stringify(initialPost)]);
 
   useEffect(() => {
-    const isEditModeReadyAndIdIsAvailable = mode === 'edit' && isReady && id;
+    const isEditModeReadyAndIdIsAvailable = mode === 'edit' && isReady && postId;
 
     if (isEditModeReadyAndIdIsAvailable) {
-      getOnePost(id);
+      getOnePost(postId);
     }
-  }, [id, mode, isReady]);
+  }, [postId, mode, isReady]);
 
   const deleteStep = (idPost: string) => {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
@@ -208,7 +211,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <BsChevronDown className="text-3xl font-extrabold text-skin-white" />
           </Button>
         </div>
-        <Hr />
+        <HrComponent />
       </div>
     ));
 
@@ -216,17 +219,17 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
-      // eslint-disable-next-line no-loops/no-loops
-      for (let count = 0; count < copyImgAdded.length; count += 1) {
-        if (copyImgAdded[count].id === idPost) {
-          copyImgAdded[count].description = description;
-          copyImgAdded[count].image = image;
+      generateNumericList(copyImgAdded.length).forEach((_item, index) => {
+        if (copyImgAdded[index].id === idPost) {
+          copyImgAdded[index].description = description;
+          copyImgAdded[index].image = image;
         }
-      }
+      });
+
       setImgAdded(copyImgAdded);
       setVisibleModal(false);
     } else {
-      setImgAdded([...imgAdded, { description, image, id: uuid.v4().toString() }]);
+      setImgAdded([...imgAdded, { description, id: uuid.v4().toString(), image }]);
       setVisibleModal(false);
     }
   };
@@ -261,7 +264,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     if (mode === 'create') {
       createNewPost(request);
     } else if (mode === 'edit') {
-      editOnePost(id, request);
+      editOnePost(postId, request);
     }
   };
 
@@ -291,7 +294,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
-            <Button className="text-skin-secondary-regular" onClick={() => deletePost(id)}>
+            <Button className="text-skin-secondary-regular" onClick={() => deletePost(postId)}>
               Excluir
             </Button>
           ) : null}
@@ -299,7 +302,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <Input placeholder="" name="title" type="text" label="Titulo" register={register} errors={errors} />
           <Input placeholder="" name="description" type="text" label="Descrição" register={register} errors={errors} />
 
-          <Hr />
+          <HrComponent />
 
           <GroupInputMultiple>
             <Selected
@@ -341,7 +344,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <Selected name="side" text="Lado" register={register} errors={errors} render={renderSide()} />
           </GroupInputMultiple>
 
-          <Hr />
+          <HrComponent />
 
           <p className="dark:text-skin-white text-gray-500 text-sm">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.
@@ -349,7 +352,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <br /> Clique nos titulos para EDITAR os itens
           </p>
 
-          <Hr />
+          <HrComponent />
 
           {renderSteps()}
 

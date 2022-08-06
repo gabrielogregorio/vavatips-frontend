@@ -16,11 +16,11 @@ const breadcrumbs = [
   { text: 'sugestões', url: navbarEnum.Dashboard },
 ];
 
-const Th = ({ children }: { children: ReactNode }) => (
+const ThTable = ({ children }: { children: ReactNode }) => (
   <th className="text-base text-skin-white text-left">{children}</th>
 );
 
-const Td = ({ children }: { children: ReactNode }) => (
+const TdTable = ({ children }: { children: ReactNode }) => (
   <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">{children}</td>
 );
 
@@ -39,20 +39,20 @@ const Suggestions = () => {
         <table className="w-full max-w-maxWidthDefault">
           <thead className="border-b">
             <tr className="border-b">
-              <Th>Post</Th>
-              <Th>Email</Th>
-              <Th>Descrição</Th>
-              <Th>Status</Th>
+              <ThTable>Post</ThTable>
+              <ThTable>Email</ThTable>
+              <ThTable>Descrição</ThTable>
+              <ThTable>Status</ThTable>
             </tr>
           </thead>
 
           <tbody>
             {suggestions.map((report: suggestionType) => (
               <tr key={report.id} className="border-b">
-                <Td>{report.postId}</Td>
-                <Td>{report.email}</Td>
-                <Td>{report.description}</Td>
-                <Td>{report.status ?? 'Não atendido'}</Td>
+                <TdTable>{report.postId}</TdTable>
+                <TdTable>{report.email}</TdTable>
+                <TdTable>{report.description}</TdTable>
+                <TdTable>{report.status ?? 'Não atendido'}</TdTable>
               </tr>
             ))}
           </tbody>

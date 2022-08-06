@@ -21,7 +21,7 @@ describe('PaginationButtons', () => {
 
     expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toHaveAttribute(
       'href',
-      '/items?page=7&map=Ascent&agent=Jett',
+      '/items?agent=Jett&map=Ascent&page=7',
     );
   });
 
@@ -42,7 +42,7 @@ describe('PaginationButtons', () => {
 
     expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toHaveAttribute(
       'href',
-      '/posts?page=3&map=Bind&agent=Raze',
+      '/posts?agent=Raze&map=Bind&page=3',
     );
   });
 

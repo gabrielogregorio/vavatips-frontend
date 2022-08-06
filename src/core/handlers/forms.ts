@@ -1,9 +1,9 @@
 import * as yup from 'yup';
 
-const passwordText = 'Você precisa informar uma senha';
+const messagePass = 'Você precisa informar uma senha';
 
 const username = yup.string().required('Digite um usuário!');
-const password = yup.string().required(passwordText);
+const password = yup.string().required(messagePass);
 const emailNotRequired = yup.string().email('O e-mail precisa ser válido').notRequired();
 
 export const schemaLogin = yup.object().shape({
@@ -16,7 +16,7 @@ export const schemaRegister = yup.object().shape({
   password,
   passwordConfirmation: yup
     .string()
-    .required(passwordText)
+    .required(messagePass)
     .oneOf([yup.ref('password'), null], 'Senhas não combinam'),
   username,
 });
@@ -47,7 +47,7 @@ export const schemaUpdateProfile = yup.object().shape({
   password,
   passwordConfirmation: yup
     .string()
-    .required(passwordText)
+    .required(messagePass)
     .oneOf([yup.ref('password'), null], 'Senhas não combinam'),
   username,
 });

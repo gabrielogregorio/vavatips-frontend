@@ -1,4 +1,5 @@
-import { agents, difficult, maps, moment, side } from '@/data/data-valorant';
+import { agents, difficult, moment, side } from '@/data/data-valorant';
+import { maps } from '@/data/data-valorant-maps';
 
 const SIZE_OF_SIDE = 2;
 const SIZE_OF_MOMENT = 6;
