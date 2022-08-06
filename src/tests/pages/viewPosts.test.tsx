@@ -1,8 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import ViewPosts from '@/pages/admin/view-posts';
 import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -12,20 +12,19 @@ import { getDescription, getTitle } from '../utils/getPosts';
 const postsLength = mockPosts.posts.length;
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/posts',
-      isReady: true,
-      pathname: '',
-      query: { map: 'randomInformation', agent: 'randomInformation', type: '', page: 1 },
-      asPath: `/posts?map=randomInformation&agent=randomInformation`,
-    };
-  },
+  useRouter: () => ({
+    asPath: `/posts?map=randomInformation&agent=randomInformation`,
+    isReady: true,
+    pathname: '',
+    query: { agent: 'randomInformation', map: 'randomInformation', page: 1, type: '' },
+    route: '/posts',
+  }),
 }));
 
 const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts)))];
-
+const FIRST_POSITION = 0;
 const server = setupServer(...handlers);
+const QUANTITY_POSTS = 9;
 
 describe('<HomeScreen />', () => {
   beforeAll(() => server.listen());
@@ -43,13 +42,13 @@ describe('<HomeScreen />', () => {
 
     await waitByLoading();
 
-    await waitFor(() => expect(screen.getByRole('heading', { name: getTitle(0) })).toBeInTheDocument());
+    await screen.findByRole('heading', { name: getTitle(FIRST_POSITION) });
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByRole('heading', { name: getTitle(index) })).toBeInTheDocument();
     });
 
-    generateNumericList(9).forEach((index) => {
+    generateNumericList(QUANTITY_POSTS).forEach((index) => {
       expect(screen.getByText(getDescription(index))).toBeInTheDocument();
     });
 

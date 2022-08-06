@@ -33,8 +33,8 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     reset,
     formState: { errors },
   } = useForm<registrationFormFields>({
-    resolver: yupResolver(schemaSendSuggestion),
     defaultValues: {},
+    resolver: yupResolver(schemaSendSuggestion),
   });
 
   const handleCloseModal = () => {
@@ -46,19 +46,19 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     setLoading(true);
 
     // eslint-disable-next-line promise/catch-or-return
-    Api.post('/suggestion', { idPost, email, description })
+    Api.post('/suggestion', { description, email, idPost })
       .then(() =>
         setModalMessage({
           active: true,
-          message: { type: 'success', msg: 'Sugestão enviada com sucesso, muito obrigado!' },
+          message: { msg: 'Sugestão enviada com sucesso, muito obrigado!', type: 'success' },
         }),
       )
       .catch(() =>
         setModalMessage({
           active: true,
           message: {
-            type: 'error',
             msg: 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores',
+            type: 'error',
           },
         }),
       )

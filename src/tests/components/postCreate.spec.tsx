@@ -2,28 +2,29 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { setupServer } from 'msw/node';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { rest } from 'msw';
+import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import { TPostsProps } from '@/types/posts';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '',
-      pathname: '/posts',
-      query: { map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '/posts',
+    query: { agent: 'Sova', map: 'Ascent' },
+    route: '',
+  }),
 }));
+
+const FIRST_POSITION = 0;
 
 const handlers = [
   rest.post(URL_POST_CREATE_POST, async (req, res, ctx) => {
-    const { body } = req;
-    const { title, description, tags, imgs }: any = body;
+    const { title, description, tags, imgs } = req.body as TPostsProps;
 
     const postIsValid =
       title === `Title New Post` &&
@@ -31,27 +32,28 @@ const handlers = [
       `${tags}` ===
         `${{
           tags: {
-            moment: 'InicioPartida',
-            difficult: 'Medio',
             ability: 'RobôDeAlarme',
-            side: 'Atacantes',
+            agent: 'Killjoy',
+            difficult: 'Medio',
             map: 'Ascent',
             mapPosition: 'BaseAtacante',
-            agent: 'Killjoy',
+            moment: 'InicioPartida',
+            side: 'Atacantes',
           },
         }}` &&
       imgs.length === 1 &&
-      imgs[0].description === 'De um pulo e jogue o bombinho' &&
-      imgs[0].image === '';
+      imgs[FIRST_POSITION].description === 'De um pulo e jogue o bombinho' &&
+      imgs[FIRST_POSITION].image === '';
 
     if (postIsValid) {
-      return res(ctx.status(200));
+      return res(ctx.status(SUCCESS_HTTP_CODE));
     }
-    return res(ctx.status(500));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
   }),
 ];
 
 const server = setupServer(...handlers);
+const newStep = 'Novo Passo';
 
 describe('<CreatePost />', () => {
   beforeAll(() => server.listen());
@@ -98,22 +100,22 @@ describe('<CreatePost />', () => {
     userEvent.selectOptions(screen.getByLabelText('Dificuldade'), 'Medio');
     userEvent.selectOptions(screen.getByLabelText('Lado'), 'Atacantes');
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     userEvent.click(screen.getByTestId('closeModal'));
     expect(screen.queryByText(/Adicionar/i)).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByRole('button', { name: 'Novo Passo' }));
+    userEvent.click(screen.getByRole('button', { name: newStep }));
     userEvent.type(screen.getByLabelText(/Descrição post/i), 'De um pulo e jogue o bombinho');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => screen.getByText(/De um pulo e jogue o bombinho/i));
+    await waitFor(() => screen.findByText(/De um pulo e jogue o bombinho/i));
 
     userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 

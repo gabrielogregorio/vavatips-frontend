@@ -4,8 +4,8 @@ import { Layout } from '@/layout/layout';
 import { ContainerPosts } from '@/widgets/containerPosts';
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.ViewPosts, text: 'posts' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'posts', url: navbarEnum.ViewPosts },
 ];
 
 const ViewPosts = () => {

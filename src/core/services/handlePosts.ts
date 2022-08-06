@@ -36,7 +36,7 @@ export const removePost = (postId: string, action: actionTypesHandlePosts) => {
   let updatePosts = getStatePosts(action);
 
   if (updatePosts.includes(postId)) {
-    updatePosts = updatePosts.filter((id) => id !== postId);
+    updatePosts = updatePosts.filter((postIdLocal) => postIdLocal !== postId);
   }
 
   savePosts(action, updatePosts);

@@ -1,22 +1,29 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_CREATE_NEW_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
 import Register from '@/pages/register';
+import {
+  BAD_REQUEST_HTTP_CODE,
+  ERROR_CONFLICT_HTTP_CODE,
+  ERROR_IN_SERVER_HTTP_CODE,
+  ERROR_NOT_ACCESS_HTTP_CODE,
+  SUCCESS_HTTP_CODE,
+} from '@/utils/statusCode';
 
 const mock = {
-  usernameValid: 'testUsername',
-  passwordValid: 'testPassword',
-  usernameToCreated: 'usernameTest',
   passwordToCreated: 'passwordConfirm',
-  validCodeToCreated: 'codCadaster',
+  passwordValid: 'testPassword',
   userNameToCreatedWithNotExists: 'usernameTestIfNotExists',
+  usernameToCreated: 'usernameTest',
+  usernameValid: 'testUsername',
+  validCodeToCreated: 'codCadaster',
 };
 
 jest.mock('next/router', () => ({
@@ -26,10 +33,11 @@ jest.mock('next/router', () => ({
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
+
+const confirmYourPassword = 'Confirme uma senha';
 
 const handlers = [
   rest.post(URL_POST_CREATE_NEW_USER, async (req, res, ctx) => {
@@ -40,15 +48,15 @@ const handlers = [
     const userExists = username === 'userIfExists';
 
     if (forceError500) {
-      return res(ctx.status(500));
+      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
     }
 
     if (userExists) {
-      return res(ctx.status(409), ctx.json({ error: 'Username já está cadastrado!' }));
+      return res(ctx.status(ERROR_CONFLICT_HTTP_CODE), ctx.json({ error: 'Username já está cadastrado!' }));
     }
 
     if (codIsInvalid) {
-      return res(ctx.status(403), ctx.json({ msg: 'invalid code' }));
+      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'invalid code' }));
     }
 
     if (
@@ -59,21 +67,21 @@ const handlers = [
       password === null ||
       password === ''
     ) {
-      return res(ctx.status(400));
+      return res(ctx.status(BAD_REQUEST_HTTP_CODE));
     }
 
     if (username === 'usernameTest' && password === 'passwordConfirm' && code === 'codeCadasterValid') {
       return res(
-        ctx.status(200),
+        ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
           id: '1234567890',
-          username,
           image: '',
+          username,
         }),
       );
     }
 
-    return res(ctx.status(500));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
   }),
 ];
 
@@ -93,17 +101,18 @@ describe('<Register />', () => {
       </MockApp>,
     );
 
-    expect(Router.push).toHaveBeenCalledTimes(0);
+    const NON_CALLED = 0;
+    expect(Router.push).toHaveBeenCalledTimes(NON_CALLED);
 
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirm');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
     const inputCod: HTMLInputElement = screen.getByLabelText('Código');
     const inputUser: HTMLInputElement = screen.getByLabelText('Usuário');
     const inputPassword: HTMLInputElement = screen.getByLabelText('Senha');
-    const inputConfirmPassword: HTMLInputElement = screen.getByLabelText('Confirme uma senha');
+    const inputConfirmPassword: HTMLInputElement = screen.getByLabelText(confirmYourPassword);
 
     expect(inputCod.value).toEqual('codeCadasterValid');
     expect(inputUser.value).toEqual(mock.usernameToCreated);
@@ -130,7 +139,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'userIfExists');
     userEvent.type(screen.getByLabelText('Usuário'), 'userIfExists');
     userEvent.type(screen.getByLabelText('Senha'), 'userIfExists');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'userIfExists');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'userIfExists');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -150,7 +159,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'forceError500');
     userEvent.type(screen.getByLabelText('Usuário'), 'forceError500');
     userEvent.type(screen.getByLabelText('Senha'), 'forceError500');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'forceError500');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'forceError500');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -168,7 +177,7 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterInvalidValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirm');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
@@ -187,11 +196,11 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
     userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirmDeferent');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitFor(() => expect(screen.getByText(/Senhas não combinam/i)).toBeInTheDocument());
+    await screen.findByText(/Senhas não combinam/i);
   });
 
   it('should render error if cadaster in blank inputs', async () => {
@@ -204,10 +213,10 @@ describe('<Register />', () => {
     userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
 
     userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText('Confirme uma senha'), 'passwordConfirmDeferent');
+    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
     userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
-    await waitFor(() => expect(screen.getByText(/Digite um usuário!/i)).toBeInTheDocument());
+    await screen.findByText(/Digite um usuário!/i);
   });
 });

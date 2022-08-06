@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Loader } from '@/base/loader';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/enums/navbar';
 import { Layout } from '@/layout/layout';
@@ -10,15 +9,16 @@ import { SubContainer } from '@/base/subContainer';
 import { modelNavbarAdmin } from '@/schemas/navbar';
 import { useDashboard } from '@/hooks/useDashboard';
 import { getKeysFromAnyObject } from '@/helpers/handleObjects';
+import { Footer } from '@/layout/footer';
 
 const keyLabel = {
-  countAll: 'Consultas',
-  countIps: 'Usuários',
-  countAllPosts: 'posts',
-  countAlMaps: 'mapas',
   countAlAgents: 'agentes',
+  countAlMaps: 'mapas',
+  countAll: 'Consultas',
+  countAllPosts: 'posts',
   countAllSuggestions: 'sugestões',
   countAllUsers: 'administradores',
+  countIps: 'Usuários',
 };
 
 export const ItemList = ({ children }: { children: ReactNode }) => (
@@ -26,14 +26,14 @@ export const ItemList = ({ children }: { children: ReactNode }) => (
 );
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'dashboard' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'dashboard', url: navbarEnum.Dashboard },
 ];
 
 const Dashboard = () => {
   const { info, username, errorMsg, isLoading } = useDashboard();
 
-  function renderDashboardItems() {
+  const renderDashboardItems = () => {
     const itemsDashboard = getKeysFromAnyObject(info);
 
     return itemsDashboard.map((key) => (
@@ -41,7 +41,7 @@ const Dashboard = () => {
         {keyLabel[key] ?? key}: {info?.[key].toString()}
       </ItemList>
     ));
-  }
+  };
 
   return (
     <Layout>

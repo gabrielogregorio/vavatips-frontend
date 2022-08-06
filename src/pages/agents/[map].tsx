@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { agents } from '@/data/data-valorant';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import LINKS from '@/data/links.json';
@@ -11,24 +10,25 @@ import { Navbar } from '@/layout/navbar';
 import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { Api } from '@/services/api';
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const resp = await Api.get('/maps');
   const { maps } = await resp.data;
 
   return {
+    fallback: false,
     paths: maps.map((map) => ({
       params: {
         map,
       },
     })),
-    fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps = async ({ params }) => {
   const response = await Api.get(`/agents/${params.map}`);
   const agentsData = await response.data;
   return {
@@ -36,12 +36,12 @@ export async function getStaticProps({ params }) {
       agentsApi: agentsData.agents,
     },
   };
-}
+};
 
 const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
   const location = useRouter();
 
-  function renderAgent() {
+  const renderAgent = () => {
     const mapSelected = location?.query?.map;
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
@@ -55,7 +55,7 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
         </div>
       ) : null,
     );
-  }
+  };
 
   return (
     <Layout>

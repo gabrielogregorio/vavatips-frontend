@@ -1,4 +1,4 @@
-export type momentType =
+type momentType =
   | 'InicioPartida'
   | 'DuranteRush'
   | 'QualquerMomento'
@@ -6,32 +6,14 @@ export type momentType =
   | 'DuranteOPlant'
   | 'DepoisDoPlant';
 
-export type difficultType = 'Facil' | 'Medio' | 'Díficil';
-export type sideType = 'Defensores' | 'Atacantes';
-export type mapType = 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind';
-export type mapPositionType = 'Meio' | 'B' | 'A' | 'C';
-export type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
+type difficultType = 'Facil' | 'Medio' | 'Díficil';
+type sideType = 'Defensores' | 'Atacantes';
+type mapType = 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind';
+type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
 
 type TPositionMap = {
   id: string;
   name: positionMapType;
-};
-
-export type TPropsPost = {
-  id: string;
-  user: { id: string; username: string; image: string };
-  description: string;
-  title: string;
-  imgs: [{ id: string; image: string; description: string }];
-  tags: {
-    map: mapType;
-    agent: string;
-    ability: string;
-    moment: momentType;
-    difficult: difficultType;
-    side: sideType;
-    mapPosition: string;
-  };
 };
 
 type TAbility = {
@@ -87,10 +69,10 @@ export type TPostsProps = {
 };
 
 export type TContextTags = {
-  tags: string[];
   filters: string[];
   setFilters: (filter: string[]) => void;
   setTags: (tags: string[]) => void;
+  tags: string[];
 };
 
 export type actionTypesHandlePosts = 'save' | 'test';

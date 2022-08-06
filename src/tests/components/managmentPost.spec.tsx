@@ -1,8 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { CreatePostManagement } from '@/widgets/managmentPost';
 import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -10,21 +10,21 @@ import { navbarEnum } from '@/enums/navbar';
 import postBase from '@/mock/responseGetPostById.json';
 import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
+import { verifyListRender } from '@/utils/verifyListRender';
+import { expectTitlePost } from '@/utils/expectTitlePost';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '',
-      pathname: '/admin/post-edit',
-      query: { id: '6159c92b1775570b9c40612a', map: 'Ascent', agent: 'Sova' },
-      asPath: '',
-      isReady: true,
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    isReady: true,
+    pathname: '/admin/post-edit',
+    query: { agent: 'Sova', id: '6159c92b1775570b9c40612a', map: 'Ascent' },
+    route: '',
+  }),
 }));
 
-const handlers = [rest.get(URL_GET_POST_EDITABLE, async (req, res, ctx) => res(ctx.json(postBase)))];
+const handlers = [rest.get(URL_GET_POST_EDITABLE, async (_req, res, ctx) => res(ctx.json(postBase)))];
 
 const server = setupServer(...handlers);
 
@@ -40,8 +40,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />
@@ -50,21 +50,24 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expectTitlePost();
 
     const listOfImages = screen.getAllByRole('img');
+    const FIRST_POSITION = 0;
+    const SECOND_POSITION = 1;
+    const THIRD_POSITION = 2;
 
-    expect(screen.getByText(defaultListFromRender[0].title)).toBeInTheDocument();
-    expect(listOfImages[0]).toHaveAttribute(DATA_ALT, defaultListFromRender[0].alt);
-    expect(listOfImages[0]).toHaveAttribute(DATA_SRC, defaultListFromRender[0].src);
+    expect(screen.getByText(defaultListFromRender[FIRST_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[FIRST_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[FIRST_POSITION].alt);
+    expect(listOfImages[FIRST_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[FIRST_POSITION].src);
 
-    expect(screen.getByText(defaultListFromRender[1].title)).toBeInTheDocument();
-    expect(listOfImages[1]).toHaveAttribute(DATA_ALT, defaultListFromRender[1].alt);
-    expect(listOfImages[1]).toHaveAttribute(DATA_SRC, defaultListFromRender[1].src);
+    expect(screen.getByText(defaultListFromRender[SECOND_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[SECOND_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[SECOND_POSITION].alt);
+    expect(listOfImages[SECOND_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[SECOND_POSITION].src);
 
-    expect(screen.getByText(defaultListFromRender[2].title)).toBeInTheDocument();
-    expect(listOfImages[2]).toHaveAttribute(DATA_ALT, defaultListFromRender[2].alt);
-    expect(listOfImages[2]).toHaveAttribute(DATA_SRC, defaultListFromRender[2].src);
+    expect(screen.getByText(defaultListFromRender[THIRD_POSITION].title)).toBeInTheDocument();
+    expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[THIRD_POSITION].alt);
+    expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[THIRD_POSITION].src);
 
     userEvent.click(screen.getByTestId('deleteStepButton-2'));
 
@@ -78,8 +81,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />
@@ -88,41 +91,25 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
+    expectTitlePost();
 
-    let listOfImages = screen.getAllByRole('img');
-
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyListRender();
 
     userEvent.click(screen.getByTestId('btn-top-2'));
-    listOfImages = screen.getAllByRole('img');
 
-    [
-      { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
-      { title: '2 - title1_img1', alt: 'title1_img1', src: '/image_111' },
-      { title: '3 - title1_img3', alt: 'title1_img3', src: '/image_333' },
-    ].forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyListRender([
+      { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
+      { alt: 'title1_img1', src: '/image_111', title: '2 - title1_img1' },
+      { alt: 'title1_img3', src: '/image_333', title: '3 - title1_img3' },
+    ]);
 
     userEvent.click(screen.getByTestId('btn-bottom-2'));
-    listOfImages = screen.getAllByRole('img');
 
-    [
-      { title: '1 - title1_img2', alt: 'title1_img2', src: '/image_222' },
-      { title: '2 - title1_img3', alt: 'title1_img3', src: '/image_333' },
-      { title: '3 - title1_img1', alt: 'title1_img1', src: '/image_111' },
-    ].forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    verifyListRender([
+      { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
+      { alt: 'title1_img3', src: '/image_333', title: '2 - title1_img3' },
+      { alt: 'title1_img1', src: '/image_111', title: '3 - title1_img1' },
+    ]);
   });
 
   it('should edit step', async () => {
@@ -130,8 +117,8 @@ describe('<CreatePostManagement />', () => {
       <MockApp>
         <CreatePostManagement
           breadcrumbs={[
-            { url: navbarEnum.Dashboard, text: 'admin' },
-            { url: navbarEnum.Dashboard, text: 'editar' },
+            { text: 'admin', url: navbarEnum.Dashboard },
+            { text: 'editar', url: navbarEnum.Dashboard },
           ]}
           mode="edit"
         />
@@ -140,14 +127,8 @@ describe('<CreatePostManagement />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: 'Editar um post' })).toBeInTheDocument();
-    const listOfImages = screen.getAllByRole('img');
-
-    defaultListFromRender.forEach(({ title, alt, src }, index) => {
-      expect(screen.getByText(title)).toBeInTheDocument();
-      expect(listOfImages[index]).toHaveAttribute(DATA_ALT, alt);
-      expect(listOfImages[index]).toHaveAttribute(DATA_SRC, src);
-    });
+    expectTitlePost();
+    verifyListRender();
 
     userEvent.click(screen.getByText('2 - title1_img2'));
 
@@ -156,7 +137,7 @@ describe('<CreatePostManagement />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
-    await waitFor(() => expect(screen.getByText('2 - title1_img2add in final')).toBeInTheDocument());
+    await screen.findByText('2 - title1_img2add in final');
     expect(screen.getByText('3 - title1_img3')).toBeInTheDocument();
   });
 });

@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-const browserify = require('@cypress/browserify-preprocessor');
 
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -16,13 +15,16 @@ const browserify = require('@cypress/browserify-preprocessor');
 /**
  * @type {Cypress.PluginConfig}
  */
-// eslint-disable-next-line no-unused-vars
 
+const browserify = require('@cypress/browserify-preprocessor');
+const task = require('@cypress/code-coverage/task');
+const useBabel = require('@cypress/code-coverage/use-babelrc');
+const useBrowserifyIstanbul = require('@cypress/code-coverage/use-browserify-istanbul');
 const http = require('http');
 const next = require('next');
 const { startServer, stopServer } = require('../../mockApi/api');
 
-module.exports = async (on, config) => {
+module.exports = async (onCypress, config) => {
   const app = next({ dev: true });
   const handleNextRequest = app.getRequestHandler();
   await app.prepare();
@@ -38,7 +40,7 @@ module.exports = async (on, config) => {
     });
   });
 
-  on('task', {
+  onCypress('task', {
     stopServer() {
       stopServer();
       return null;
@@ -51,12 +53,10 @@ module.exports = async (on, config) => {
     },
   });
 
-  // typescript
-  on(
-    'file:preprocessor',
-    browserify({
-      typescript: require.resolve('typescript'),
-    }),
-  );
+  task(onCypress, config);
+  onCypress('file:preprocessor', useBabel);
+  onCypress('file:preprocessor', useBrowserifyIstanbul);
+  onCypress('file:preprocessor', browserify({ typescript: require.resolve('typescript') }));
+
   return config;
 };

@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { navbarEnum } from '@/enums/navbar';
@@ -17,10 +16,11 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/base/button';
 import { schemaUpdateProfile } from '@/handlers/forms';
 import { useProfile } from '@/hooks/useProfile';
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [
-  { url: navbarEnum.Dashboard, text: 'admin' },
-  { url: navbarEnum.Dashboard, text: 'perfil' },
+  { text: 'admin', url: navbarEnum.Dashboard },
+  { text: 'perfil', url: navbarEnum.Dashboard },
 ];
 
 export type registrationFormFields = {
@@ -36,8 +36,8 @@ const Profile = () => {
     reset,
     formState: { errors },
   } = useForm<registrationFormFields>({
-    resolver: yupResolver(schemaUpdateProfile),
     defaultValues: {},
+    resolver: yupResolver(schemaUpdateProfile),
   });
 
   const { isLoading, infoUser } = useProfile();
@@ -48,10 +48,10 @@ const Profile = () => {
     });
   }, [infoUser?.username, reset]);
 
-  function handleLogout() {
+  const handleLogout = () => {
     logout();
     Router.push('/login');
-  }
+  };
 
   const onSubmit = async () => {};
 

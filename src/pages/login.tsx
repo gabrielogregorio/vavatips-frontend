@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import Router from 'next/router';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import LINKS from '@/data/links.json';
 import { Title } from '@/base/title';
@@ -20,6 +19,7 @@ import { schemaLogin } from '@/handlers/forms';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useLoginAndSetToken } from '@/hooks/useLoginAndSetToken';
+import { Footer } from '@/layout/footer';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Login];
 

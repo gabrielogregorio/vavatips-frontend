@@ -8,10 +8,10 @@ export const useLoginAndSetToken = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function tryLogin({ username, password }) {
+  const tryLogin = async ({ username, password }) => {
     setIsLoading(true);
     try {
-      const { data } = await Api.post('/auth', { username, password });
+      const { data } = await Api.post('/auth', { password, username });
       login(data.token);
       setRedirect(true);
     } catch (error) {
@@ -19,12 +19,12 @@ export const useLoginAndSetToken = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return {
     errorMsg,
-    redirect,
     isLoading,
+    redirect,
     tryLogin,
   };
 };

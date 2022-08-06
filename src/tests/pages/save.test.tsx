@@ -1,20 +1,22 @@
 import { render, screen } from '@testing-library/react';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import SaveScreen from '@/pages/save';
 import { posts } from '@/mock/mockPosts.json';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { getDescription, getTitle } from '../utils/getPosts';
 
+const FIRST_POSITION = 0;
+const SECOND_POSITION = 1;
+const THIRD_POSITION = 2;
+
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/posts',
-      isReady: true,
-      pathname: '',
-      query: { map: 'oneRandomData', agent: 'oneRandomData', type: 'save', page: 1 },
-      asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
-    };
-  },
+  useRouter: () => ({
+    asPath: `/posts?map=oneRandomData&agent=oneRandomData`,
+    isReady: true,
+    pathname: '',
+    query: { agent: 'oneRandomData', map: 'oneRandomData', page: 1, type: 'save' },
+    route: '/posts',
+  }),
 }));
 
 describe('<SaveScreen />', () => {
@@ -33,12 +35,12 @@ describe('<SaveScreen />', () => {
 
     await waitByLoading();
 
-    expect(screen.getByRole('heading', { name: getTitle(0) })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: getTitle(1) })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: getTitle(2) })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(FIRST_POSITION) })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(SECOND_POSITION) })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: getTitle(THIRD_POSITION) })).toBeInTheDocument();
 
-    expect(screen.getByText(getDescription(0))).toBeInTheDocument();
-    expect(screen.getByText(getDescription(1))).toBeInTheDocument();
-    expect(screen.getByText(getDescription(2))).toBeInTheDocument();
+    expect(screen.getByText(getDescription(FIRST_POSITION))).toBeInTheDocument();
+    expect(screen.getByText(getDescription(SECOND_POSITION))).toBeInTheDocument();
+    expect(screen.getByText(getDescription(THIRD_POSITION))).toBeInTheDocument();
   });
 });

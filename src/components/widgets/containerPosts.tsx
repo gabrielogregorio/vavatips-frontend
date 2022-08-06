@@ -1,7 +1,4 @@
 import { useRouter } from 'next/router';
-import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
-import { ModalMessage } from '@/widgets/modalMessage';
-import { Footer } from '@/layout/footer';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Navbar } from '@/layout/navbar';
@@ -13,21 +10,26 @@ import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
 import { useEffect, useState } from 'react';
 import { InfiniteScroll } from '@/widgets/infiniteScroll';
+import { TPostsProps } from '@/types/posts';
+import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
+import { ModalMessage } from '@/widgets/modalMessage';
+import { Footer } from '@/layout/footer';
 
 type containerPosts = {
   breadcrumbs: { url: string; text: string }[];
   typeSelected: navbarEnum;
   mode: 'public' | 'admin';
   title: string;
-  posts: any[];
+  posts: TPostsProps[];
   showTags?: boolean;
 };
 
 const skip = 10;
+const START_POSITION = 0;
 
-function getAllTags(posts, agent, map): string[] {
+const getAllTags = (posts: TPostsProps[], agent, map): string[] => {
   const tags = new Set();
-  posts.forEach((post) => {
+  posts.forEach((post: TPostsProps) => {
     const values = Object.values(post.tags);
 
     values.forEach((value) => {
@@ -38,10 +40,10 @@ function getAllTags(posts, agent, map): string[] {
   });
 
   return [...tags] as string[];
-}
+};
 
-function applyFilters(posts, filteredActives) {
-  function existsFilterActiveInPost(tags) {
+const applyFilters = (posts, filteredActives) => {
+  const existsFilterActiveInPost = (tags) => {
     let existsFilter = 0;
 
     filteredActives.forEach((filter) => {
@@ -51,9 +53,9 @@ function applyFilters(posts, filteredActives) {
     });
 
     return existsFilter === filteredActives.length;
-  }
+  };
   return posts.filter((post) => existsFilterActiveInPost(post.tags));
-}
+};
 
 export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, showTags }: containerPosts) => {
   const { query } = useRouter();
@@ -74,9 +76,9 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
     setFinal(skip);
   }, [dataItem]);
 
-  function handleAddedMore() {
+  const handleAddedMore = () => {
     setFinal(final + skip);
-  }
+  };
 
   return (
     <>
@@ -103,7 +105,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
 
           {isFirstLoading ? (
             <InfiniteScroll length={final} LoadMore={() => handleAddedMore()} hasMore={data.length > final}>
-              <Posts posts={data.slice(0, final)} />
+              <Posts posts={data.slice(START_POSITION, final)} />
             </InfiniteScroll>
           ) : null}
         </div>

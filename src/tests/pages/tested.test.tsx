@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { posts } from '@/mock/mockPosts.json';
 import TestScreen from '@/pages/tested';
 import { waitByLoading } from '@/utils/waitByLoading';
@@ -7,15 +7,13 @@ import { getDescription, getTitle } from '../utils/getPosts';
 import { generateNumericList } from '../../core/helpers/generateArray';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/posts',
-      isReady: true,
-      pathname: '',
-      query: { map: 'randomInfo', agent: 'randomInfo', type: 'tested', page: 1 },
-      asPath: `/posts?map=randomInfo&agent=randomInfo`,
-    };
-  },
+  useRouter: () => ({
+    asPath: `/posts?map=randomInfo&agent=randomInfo`,
+    isReady: true,
+    pathname: '',
+    query: { agent: 'randomInfo', map: 'randomInfo', page: 1, type: 'tested' },
+    route: '/posts',
+  }),
 }));
 
 describe('<SaveScreen />', () => {

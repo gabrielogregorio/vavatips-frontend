@@ -3,8 +3,8 @@ import { TextArea } from '@/base/textArea';
 import { useForm } from 'react-hook-form';
 
 export default {
-  title: 'form/textarea',
   component: TextArea,
+  title: 'form/textarea',
 } as ComponentMeta<typeof TextArea>;
 
 const Template: Story<typeof TextArea> = (props) => {

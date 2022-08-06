@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '@/base/button';
 
+const NOT_CALLED = 0;
+const CALLED_FIRST = 1;
+
 describe('<Button />', () => {
   it('should render component', () => {
     render(<Button onClick={() => jest.fn()}>Conteudo Btn</Button>);
@@ -9,30 +12,31 @@ describe('<Button />', () => {
   });
 
   it('should be clicked', () => {
-    const fn = jest.fn();
-    render(<Button onClick={fn}>Conteudo Btn</Button>);
+    const fnMock = jest.fn();
+    render(<Button onClick={fnMock}>Conteudo Btn</Button>);
 
     const button = screen.getByRole('button');
-    expect(fn).toHaveBeenCalledTimes(0);
+
+    expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
 
     userEvent.click(button);
 
-    expect(fn).toHaveBeenCalledTimes(1);
+    expect(fnMock).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
   it('should not click if button is disabled', () => {
-    const fn = jest.fn();
+    const fnMock = jest.fn();
     render(
-      <Button disabled onClick={fn}>
+      <Button disabled onClick={fnMock}>
         Conteudo Btn
       </Button>,
     );
 
     const button = screen.getByRole('button', { name: 'Conteudo Btn' });
-    expect(fn).toHaveBeenCalledTimes(0);
+    expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
 
     userEvent.click(button);
 
-    expect(fn).toHaveBeenCalledTimes(0);
+    expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
   });
 });

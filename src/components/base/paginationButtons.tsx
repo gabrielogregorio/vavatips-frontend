@@ -9,18 +9,9 @@ type TPaginationButton = {
   urlBase: string;
 };
 
-export const PaginationButtons = ({
-  numberOfPage: page = 1,
-  active,
-  urlBase,
-  map,
-  agent,
-}: TPaginationButton) => (
+export const PaginationButtons = ({ numberOfPage: page = 1, active, urlBase, map, agent }: TPaginationButton) => (
   <li className="bg-transparent text-skin-secondary-regular p-3 pb-1 pt-1 transition duration-150">
-    <Link
-      passHref
-      aria-label={`Navega para a página ${page}`}
-      href={resolveQuery(urlBase, { page, map, agent })}>
+    <Link passHref aria-label={`Navega para a página ${page}`} href={resolveQuery(urlBase, { agent, map, page })}>
       <a
         href="#/"
         className={`block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white ${

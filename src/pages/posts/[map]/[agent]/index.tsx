@@ -6,7 +6,7 @@ import { Api } from '@/services/api';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const resp = await Api.get('/maps');
   const { maps } = await resp.data;
 
@@ -26,17 +26,17 @@ export async function getStaticPaths() {
     oneResponse.agents.forEach((agentName) => flatAgentsAndMaps.push({ agents: agentName, map: oneResponse.map })),
   );
   return {
+    fallback: false,
     paths: flatAgentsAndMaps.map((item) => ({
       params: {
-        map: item.map,
         agent: item.agents,
+        map: item.map,
       },
     })),
-    fallback: false,
   };
-}
+};
 
-export async function getStaticProps({ params: { map, agent } }) {
+export const getStaticProps = async ({ params: { map, agent } }) => {
   const response = await Api.get(`/posts/${map}/${agent}`);
   const posts = await response.data;
   return {
@@ -44,7 +44,7 @@ export async function getStaticProps({ params: { map, agent } }) {
       posts: posts.posts,
     },
   };
-}
+};
 
 const Posts = ({ posts }: { posts: any[] }) => (
   <Layout>

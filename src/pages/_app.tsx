@@ -19,19 +19,19 @@ const queryClient = new QueryClient({
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
-    post: null,
     active: false,
+    post: null,
   });
   const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
-    message: { msg: '', type: 'success' },
     active: false,
+    message: { msg: '', type: 'success' },
   });
   const [tags, setTags] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
 
   const valueModalMessage = useMemo(() => ({ modalMessage, setModalMessage }), [modalMessage]);
   const valueModalSuggestion = useMemo(() => ({ modalSuggestion, setModalSuggestion }), [modalSuggestion]);
-  const valueFilters = useMemo(() => ({ tags, filters, setTags, setFilters }), [tags, filters]);
+  const valueFilters = useMemo(() => ({ filters, setFilters, setTags, tags }), [tags, filters]);
 
   return (
     <>

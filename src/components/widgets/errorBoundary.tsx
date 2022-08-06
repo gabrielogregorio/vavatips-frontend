@@ -1,9 +1,8 @@
+import { AxiosError } from 'axios';
 import { Component, ReactNode } from 'react';
 import { ScreenError } from './screenError';
 
-function sendLogsToServer(error, errorInfo) {
-  return `${error} ${errorInfo}`;
-}
+const sendLogsToServer = (error: AxiosError, errorInfo: object) => `${error} ${errorInfo}`;
 
 type propsErrorBoundaryType = {
   children: ReactNode;
@@ -13,7 +12,7 @@ type stateErrorBoundaryType = {
   hasError: boolean;
 };
 
-export default class ErrorBoundary extends Component<propsErrorBoundaryType, stateErrorBoundaryType> {
+export class ErrorBoundary extends Component<propsErrorBoundaryType, stateErrorBoundaryType> {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,15 +20,15 @@ export default class ErrorBoundary extends Component<propsErrorBoundaryType, sta
     };
   }
 
-  static getDerivedStateFromError() {
+  public static getDerivedStateFromError(): { hasError: boolean } {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  public componentDidCatch(error: AxiosError, errorInfo: object): void {
     sendLogsToServer(error, errorInfo);
   }
 
-  render() {
+  public render(): ReactNode {
     const { hasError } = this.state;
     const { children } = this.props;
 

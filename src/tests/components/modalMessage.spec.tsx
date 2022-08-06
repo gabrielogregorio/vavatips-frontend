@@ -3,34 +3,34 @@ import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { useModalMessage } from '@/contexts/modalMessage';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 
 const useModalMock = (msg, type, setModalMessage) => {
   const [isFirstLoading, setIsFirstLoading] = useState(true);
+
   useEffect(() => {
     if (isFirstLoading) {
-      setModalMessage({ active: true, message: { type, msg } });
+      setModalMessage({ active: true, message: { msg, type } });
       setIsFirstLoading(false);
     }
   }, [isFirstLoading, setModalMessage, msg, type]);
 
   return { isFirstLoading };
 };
-
+const msgSuccess = 'Sugestão enviada com sucesso, muito obrigado!';
 const Setup = () => {
-  const msg = 'Sugestão enviada com sucesso, muito obrigado!';
   const type = 'success';
   const { setModalMessage } = useModalMessage();
-  useModalMock(msg, type, setModalMessage);
+  useModalMock(msgSuccess, type, setModalMessage);
 
   return <ModalMessage />;
 };
 
+const msgError = 'Erro desconhecido';
 const SetupWithError = () => {
-  const msg = 'Erro desconhecido';
   const type = 'error';
   const { setModalMessage } = useModalMessage();
-  useModalMock(msg, type, setModalMessage);
+  useModalMock(msgError, type, setModalMessage);
 
   return <ModalMessage />;
 };
@@ -43,11 +43,9 @@ describe('<ModalMessage />', () => {
       </MockApp>,
     );
 
-    expect(screen.getByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument();
+    expect(screen.getByText(msgSuccess)).toBeInTheDocument();
     userEvent.click(screen.getByRole('button'));
-    expect(
-      screen.queryByText('Sugestão enviada com sucesso, muito obrigado!'),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(msgSuccess)).not.toBeInTheDocument();
   });
 
   it('should render modal setup error', async () => {
@@ -57,8 +55,8 @@ describe('<ModalMessage />', () => {
       </MockApp>,
     );
 
-    expect(screen.getByText('Erro desconhecido')).toBeInTheDocument();
+    expect(screen.getByText(msgError)).toBeInTheDocument();
     userEvent.click(screen.getByRole('button'));
-    expect(screen.queryByText('Erro desconhecido')).not.toBeInTheDocument();
+    expect(screen.queryByText(msgError)).not.toBeInTheDocument();
   });
 });

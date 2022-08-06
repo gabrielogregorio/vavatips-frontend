@@ -6,66 +6,66 @@ import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
 import { ParsedUrlQuery } from 'querystring';
+import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 const post = {
-  user: { id: '53', username: 'Gabriel', image: 'https://docker.png' },
   description: 'my Description post',
-  title: 'my title post',
-  imgs: [{ id: '98', image: 'https://image.png', description: 'description image' }],
+  imgs: [{ description: 'description image', id: '98', image: 'https://image.png' }],
   tags: {
-    map: 'Ascent',
-    agent: 'Sova',
     ability: 'Flecha rastread1ora',
-    moment: 'post plant',
+    agent: 'Sova',
     difficult: 'médio',
-    side: 'a',
+    map: 'Ascent',
     mapPosition: 'b',
+    moment: 'post plant',
+    side: 'a',
   },
+  title: 'my title post',
+  user: { id: '53', image: 'https://docker.png', username: 'Gabriel' },
 };
 
 const waitForSuccessfully = async () =>
-  waitFor(() => expect(screen.queryByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument());
+  waitFor(() => expect(screen.getByText('Sugestão enviada com sucesso, muito obrigado!')).toBeInTheDocument());
 
 jest.mock(
   'next/link',
   () =>
-    function Link({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
+
+const defaultEmail = 'myEmail@email.com';
+const defaultDescription = 'my long description for problem';
 
 const handlers = [
   rest.post(URL_POST_SUGGESTION, async (req, res, ctx) => {
     const { idPost, email, description } = req.body as ParsedUrlQuery;
 
     const requestIsCorrectly =
-      (idPost === '12' && email === 'myEmail@email.com' && description === 'my long description for problem') ||
-      email === 'email@email.com';
+      (idPost === '12' && email === defaultEmail && description === defaultDescription) || email === 'email@email.com';
     if (requestIsCorrectly) {
       return res(
-        ctx.status(200),
+        ctx.status(SUCCESS_HTTP_CODE),
         ctx.json({
-          post_id: 'aaa',
-          email: 'vv',
           description: 'dddssd',
+          email: 'vv',
+          post_id: 'aaa',
         }),
       );
     }
-    return res(ctx.status(500), ctx.json({ error: 'Erro no Servidor' }));
+    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE), ctx.json({ error: 'Erro no Servidor' }));
   }),
 ];
 
@@ -95,6 +95,8 @@ Setup.defaultProps = {
 
 const server = setupServer(...handlers);
 
+const optionalEmail = 'Email para retorno (Opcional)';
+
 describe('<ModalOfSuggestion />', () => {
   beforeAll(() => server.listen());
 
@@ -109,9 +111,9 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
@@ -125,9 +127,9 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'email@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), 'email@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
@@ -141,16 +143,12 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'invalidEmailApi@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), 'invalidEmailApi@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'my long description for problem');
+    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
-    await waitFor(() =>
-      expect(
-        screen.queryByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores'),
-      ).toBeInTheDocument(),
-    );
+    await screen.findByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores');
   });
 
   it('should closed Modal in button closed', async () => {
@@ -180,14 +178,14 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Email para retorno (Opcional)'), 'myEmail@email.com');
+    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
+    await screen.findByText('Essa descrição está muito curta');
 
     userEvent.type(screen.getByLabelText('Descrição'), 'small');
     userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
-    await waitFor(() => expect(screen.getByText('Essa descrição está muito curta')).toBeInTheDocument());
+    await screen.findByText('Essa descrição está muito curta');
   });
 });

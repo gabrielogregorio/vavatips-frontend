@@ -15,30 +15,27 @@ type mockType = {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false,
       cacheTime: 0,
+      retry: false,
     },
   },
 });
 
-const MockApp = ({ children, localstorage }: mockType) => {
+export const MockApp = ({ children, localstorage }: mockType) => {
   const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
-    post: null,
     active: false,
+    post: null,
   });
   const [modalMessage, setModalMessage] = useState<modalMessageTypeContext>({
-    message: { msg: '', type: 'success' },
     active: false,
+    message: { msg: '', type: 'success' },
   });
   const [tags, setTags] = useState<string[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
 
   const valueModalMessage = useMemo(() => ({ modalMessage, setModalMessage }), [modalMessage]);
-  const valueModalSuggestion = useMemo(
-    () => ({ modalSuggestion, setModalSuggestion }),
-    [modalSuggestion],
-  );
-  const valueFilters = useMemo(() => ({ tags, filters, setTags, setFilters }), [tags, filters]);
+  const valueModalSuggestion = useMemo(() => ({ modalSuggestion, setModalSuggestion }), [modalSuggestion]);
+  const valueFilters = useMemo(() => ({ filters, setFilters, setTags, tags }), [tags, filters]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -54,8 +51,6 @@ const MockApp = ({ children, localstorage }: mockType) => {
     </QueryClientProvider>
   );
 };
-
-export default MockApp;
 
 MockApp.defaultProps = {
   localstorage: {},

@@ -5,29 +5,27 @@ import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import Profile from '@/pages/admin/profile';
 import { login } from '@/services/auth';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { ERROR_NOT_ACCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 const handlers = [
@@ -36,12 +34,12 @@ const handlers = [
       return res(
         ctx.json({
           id: 'idUsername',
-          username: 'usernameUsername',
           image: 'imageUsername',
+          username: 'usernameUsername',
         }),
       );
     }
-    return res(ctx.status(403));
+    return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE));
   }),
 ];
 

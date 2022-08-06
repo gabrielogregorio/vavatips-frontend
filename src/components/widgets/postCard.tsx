@@ -16,61 +16,64 @@ type TProps = {
   post: TPostsProps;
 };
 
+const FIRST_IMAGE_ID = 0;
+const POSITION_FIRST_IMAGE = 0;
+
 export const PostCard = ({ post }: TProps) => {
-  const [idImage, setIdImage] = useState<number>(0);
+  const [idImage, setIdImage] = useState<number>(FIRST_IMAGE_ID);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
   const [startedANavigation, setStartedANavigation] = useState<boolean>(false);
 
   const { setModalSuggestion } = useModalContext();
 
-  function handleAddTest() {
+  const handleAddTest = () => {
     if (postTested) {
       removePost(post.id, 'test');
     } else {
       addNewPost(post.id, 'test');
     }
     setPostTested(getPostsTested()?.includes(post.id));
-  }
+  };
 
-  function handleAddSave() {
+  const handleAddSave = () => {
     if (postSave) {
       removePost(post.id, 'save');
     } else {
       addNewPost(post.id, 'save');
     }
     setPostSave(getPostsSave()?.includes(post.id));
-  }
+  };
 
   useEffect(() => {
-    function thisPostIsIncludeInSaveOrTestedPosts() {
+    const thisPostIsIncludeInSaveOrTestedPosts = () => {
       setPostTested(getPostsTested()?.includes(post.id));
       setPostSave(getPostsSave()?.includes(post.id));
-    }
+    };
 
     thisPostIsIncludeInSaveOrTestedPosts();
   }, [post.id]);
 
-  function nextImage(type: typeType, length: number) {
+  const nextImage = (type: typeType, length: number) => {
     setStartedANavigation(true);
     if (type === 'next') {
       if (idImage < length - 1) {
         setIdImage(idImage + 1);
       } else {
-        setIdImage(0);
+        setIdImage(FIRST_IMAGE_ID);
       }
     } else if (type === 'prev') {
-      if (idImage > 0) {
+      if (idImage > FIRST_IMAGE_ID) {
         setIdImage(idImage - 1);
       } else {
         setIdImage(length - 1);
       }
     }
-  }
+  };
 
-  function handleModalAction() {
+  const handleModalAction = () => {
     setModalSuggestion({ active: true, post });
-  }
+  };
 
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">
@@ -118,7 +121,7 @@ export const PostCard = ({ post }: TProps) => {
                 const navigationHasNotStarted = !startedANavigation;
                 const isSelectedImage = idImage === index;
 
-                if (navigationHasNotStarted && index > 0) {
+                if (navigationHasNotStarted && index > POSITION_FIRST_IMAGE) {
                   return null;
                 }
 

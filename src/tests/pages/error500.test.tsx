@@ -1,6 +1,6 @@
 import { screen, render } from '@testing-library/react';
 import Error500 from '@/pages/500';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 
 describe('<Error500 />', () => {
   it('should render 500 error', async () => {

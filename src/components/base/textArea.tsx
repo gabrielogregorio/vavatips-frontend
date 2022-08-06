@@ -1,14 +1,15 @@
 import { GroupInput } from '@/base/groupInput';
 import { Label } from '@/base/label';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 
 type IPropsTextArea = {
+  disabled?: boolean;
   name: string;
   title: string;
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   status?: typeInputColors;
-  disabled?: boolean;
 };
 
 export const TextArea = ({ title, register, errors, name, status, disabled }: IPropsTextArea) => {
@@ -39,6 +40,6 @@ export const TextArea = ({ title, register, errors, name, status, disabled }: IP
 };
 
 TextArea.defaultProps = {
-  status: '',
   disabled: false,
+  status: '',
 };

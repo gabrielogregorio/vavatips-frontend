@@ -3,8 +3,8 @@ import mockPosts from '@/mock/mockAllPosts.json';
 import { PostCard } from '../components/widgets/postCard';
 
 export default {
-  title: 'widgets/PostCard',
   component: PostCard,
+  title: 'widgets/PostCard',
 } as ComponentMeta<typeof PostCard>;
 
 const Template: ComponentStory<typeof PostCard> = (args) => (
@@ -15,7 +15,9 @@ const Template: ComponentStory<typeof PostCard> = (args) => (
   </div>
 );
 
+const FIRST_POSITION = 0;
+
 export const Default = Template.bind({});
 Default.args = {
-  post: mockPosts.posts[0],
+  post: mockPosts.posts[FIRST_POSITION],
 };

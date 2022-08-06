@@ -1,12 +1,12 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Hr } from '../components/base/hr';
+import { HrComponent } from '../components/base/hr';
 
 export default {
+  component: HrComponent,
   title: 'base/Hr',
-  component: Hr,
-} as ComponentMeta<typeof Hr>;
+} as ComponentMeta<typeof HrComponent>;
 
-const Template: ComponentStory<typeof Hr> = (args) => <Hr {...args} />;
+const Template: ComponentStory<typeof HrComponent> = (args) => <HrComponent {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

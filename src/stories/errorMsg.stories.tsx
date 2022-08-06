@@ -2,8 +2,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ErrorMsg } from '../components/base/errorMsg';
 
 export default {
-  title: 'base/ErrorMsg',
   component: ErrorMsg,
+  title: 'base/ErrorMsg',
 } as ComponentMeta<typeof ErrorMsg>;
 
 const Template: ComponentStory<typeof ErrorMsg> = (args) => <ErrorMsg {...args} />;

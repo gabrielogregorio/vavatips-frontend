@@ -4,15 +4,16 @@ import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
 import {
   agents as renderAgents,
-  maps as renderMaps,
   difficult as renderDifficult,
   moment as renderMoment,
   side as renderSide,
 } from '@/data/data-valorant';
+
+import {  maps as renderMaps,
+} from '@/data/data-valorant-maps';
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
 import { formatImage } from '@/services/formatEnvironment';
-import { Footer } from '@/layout/footer';
 import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
@@ -27,13 +28,15 @@ import { modelNavbarAdmin } from '@/schemas/navbar';
 import { SubContainer } from '@/base/subContainer';
 import { Form } from '@/base/Form';
 import { GroupInputMultiple } from '@/base/groupInputMultiple';
-import { Hr } from '@/base/hr';
+import { HrComponent } from '@/base/hr';
 import Image from 'next/image';
 import { convertToSelectedRender } from '@/helpers/convertToSelectedData';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaManagementPosts } from '@/handlers/forms';
 import { useManagementPosts } from '@/hooks/useManagementPosts';
+import { Footer } from '@/layout/footer';
+import { generateNumericList } from '@/helpers/generateArray';
 
 type actionType = 'top' | 'bottom';
 
@@ -66,14 +69,15 @@ type registrationFormFields = {
   position: string;
   agent: string;
 };
-
+const FIRST_POSITION = 0;
+const SECOND_POSITION = 1;
 export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
   const { query, isReady } = useRouter();
-  const id = `${query?.id || ''}`;
+  const postId = `${query?.id || ''}`;
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [propsModal, setPropsModal] = useState<modalType>({
-    id: '',
     description: '',
+    id: '',
     image: '',
   });
 
@@ -104,65 +108,66 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
   }, [JSON.stringify(initialPost)]);
 
   useEffect(() => {
-    const isEditModeReadyAndIdIsAvailable = mode === 'edit' && isReady && id;
+    const isEditModeReadyAndIdIsAvailable = mode === 'edit' && isReady && postId;
 
     if (isEditModeReadyAndIdIsAvailable) {
-      getOnePost(id);
+      getOnePost(postId);
     }
-  }, [id, mode, isReady]);
+  }, [postId, mode, isReady]);
 
-  function deleteStep(idPost: string) {
+  const deleteStep = (idPost: string) => {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
-  }
+  };
 
-  function putPosition(idPost: string, action: actionType) {
+  const putPosition = (idPost: string, action: actionType) => {
     const positionPut = imgAdded.findIndex((item) => item.id === idPost);
     const copyListDelete = imgAdded[positionPut];
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
 
     let increment = 0;
+    const DECREASE_BY = 1;
 
-    if (action === 'bottom' && positionPut > 0) {
-      increment = -1;
+    if (action === 'bottom' && positionPut > FIRST_POSITION) {
+      increment = -DECREASE_BY;
     } else if (action === 'top' && positionPut < imgAdded.length) {
       increment = 1;
     }
 
-    copyImgAdded.splice(positionPut, 1);
-    copyImgAdded.splice(positionPut + increment, 0, copyListDelete);
+    copyImgAdded.splice(positionPut, SECOND_POSITION);
+    copyImgAdded.splice(positionPut + increment, FIRST_POSITION, copyListDelete);
     setImgAdded(copyImgAdded);
-  }
+  };
 
-  function renderAbilities() {
+  const renderAbilities = () => {
     const agente = watch('agent');
-    const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[0];
+    const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[FIRST_POSITION];
     return filterAbilities?.abilities ?? [];
-  }
+  };
 
-  function renderPositionsMap() {
+  const renderPositionsMap = () => {
     const mapa: string = watch('map');
-    const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[0];
+    const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[FIRST_POSITION];
     return filterMapPositions?.mapPosition ?? [];
-  }
+  };
 
-  function showModalWithItem(idPost: string) {
-    const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[0];
+  const showModalWithItem = (idPost: string) => {
+    const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[FIRST_POSITION];
     setPropsModal(item);
     setVisibleModal(true);
-  }
+  };
 
-  function showModal() {
-    setPropsModal({ id: '', description: '', image: '' });
+  const showModal = () => {
+    setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(true);
-  }
+  };
 
-  function closeModal() {
-    setPropsModal({ id: '', description: '', image: '' });
+  const closeModal = () => {
+    setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(false);
-  }
+  };
 
-  function renderSteps() {
-    return imgAdded.map((instruction, key) => (
+  const renderSteps = () =>
+    imgAdded.map((instruction, key) => (
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
@@ -206,33 +211,32 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <BsChevronDown className="text-3xl font-extrabold text-skin-white" />
           </Button>
         </div>
-        <Hr />
+        <HrComponent />
       </div>
     ));
-  }
 
   const saveModal = (idPost: string, description: string, image: string) => {
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
-      // eslint-disable-next-line no-loops/no-loops
-      for (let x = 0; x < copyImgAdded.length; x += 1) {
-        if (copyImgAdded[x].id === idPost) {
-          copyImgAdded[x].description = description;
-          copyImgAdded[x].image = image;
+      generateNumericList(copyImgAdded.length).forEach((_item, index) => {
+        if (copyImgAdded[index].id === idPost) {
+          copyImgAdded[index].description = description;
+          copyImgAdded[index].image = image;
         }
-      }
+      });
+
       setImgAdded(copyImgAdded);
       setVisibleModal(false);
     } else {
-      setImgAdded([...imgAdded, { description, image, id: uuid.v4().toString() }]);
+      setImgAdded([...imgAdded, { description, id: uuid.v4().toString(), image }]);
       setVisibleModal(false);
     }
   };
 
-  async function deletePost(idPost: string) {
+  const deletePost = async (idPost: string) => {
     deleteThisPost(idPost);
-  }
+  };
 
   useEffect(() => {
     if (redirect) {
@@ -242,25 +246,25 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
   const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
     const request = {
-      title,
       description,
-      user: '',
+      imgs: imgAdded,
       tags: {
-        moment,
-        difficult,
         ability,
-        side,
+        agent,
+        difficult,
         map,
         mapPosition: position,
-        agent,
+        moment,
+        side,
       },
-      imgs: imgAdded,
+      title,
+      user: '',
     };
 
     if (mode === 'create') {
       createNewPost(request);
     } else if (mode === 'edit') {
-      editOnePost(id, request);
+      editOnePost(postId, request);
     }
   };
 
@@ -290,7 +294,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
-            <Button className="text-skin-secondary-regular" onClick={() => deletePost(id)}>
+            <Button className="text-skin-secondary-regular" onClick={() => deletePost(postId)}>
               Excluir
             </Button>
           ) : null}
@@ -298,7 +302,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <Input placeholder="" name="title" type="text" label="Titulo" register={register} errors={errors} />
           <Input placeholder="" name="description" type="text" label="Descrição" register={register} errors={errors} />
 
-          <Hr />
+          <HrComponent />
 
           <GroupInputMultiple>
             <Selected
@@ -340,7 +344,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <Selected name="side" text="Lado" register={register} errors={errors} render={renderSide()} />
           </GroupInputMultiple>
 
-          <Hr />
+          <HrComponent />
 
           <p className="dark:text-skin-white text-gray-500 text-sm">
             Passo a passo da dica. Lembre-se de usar Zoom, usar marcações claras, de forma que seja bem visível.
@@ -348,7 +352,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <br /> Clique nos titulos para EDITAR os itens
           </p>
 
-          <Hr />
+          <HrComponent />
 
           {renderSteps()}
 

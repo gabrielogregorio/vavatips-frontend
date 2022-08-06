@@ -3,29 +3,27 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import Dashboard from '@/pages/admin/dashboard';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { ERROR_NOT_ACCESS_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: { map: 'Ascent32' },
-      asPath: '',
-    };
-  },
+  useRouter: () => ({
+    asPath: '',
+    pathname: '',
+    query: { map: 'Ascent32' },
+    route: '/',
+  }),
 }));
 
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 let tryNumbers = 0;
@@ -33,28 +31,28 @@ const handlers = [
   rest.get(URL_GET_DASHBOARD, async (req, res, ctx) =>
     res(
       ctx.json({
-        countAll: 134,
-        countIps: 318,
-        countAllPosts: 190,
-        countAlMaps: 15,
         countAlAgents: 30,
+        countAlMaps: 15,
+        countAll: 134,
+        countAllPosts: 190,
         countAllSuggestions: 10,
         countAllUsers: 3,
+        countIps: 318,
       }),
     ),
   ),
 
   rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
     if (tryNumbers === 1) {
-      return res(ctx.status(403), ctx.json({ msg: 'jwt expired' }));
+      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'jwt expired' }));
     }
     tryNumbers += 1;
 
     return res(
       ctx.json({
         id: '12345678',
-        username: 'codigo limpo?',
         image: 'image.png',
+        username: 'codigo limpo?',
       }),
     );
   }),

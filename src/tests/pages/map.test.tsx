@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MapScreen from '@/pages/index';
-import MockApp from '@/mock/App.Mock';
+import { MockApp } from '@/mock/App.Mock';
 import { mockMaps } from '@/mock/mock';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
@@ -9,9 +9,8 @@ import { ReactNode } from 'react';
 jest.mock(
   'next/link',
   () =>
-    function LinkComponent({ children }: { children: ReactNode }) {
-      return children;
-    },
+    ({ children }: { children: ReactNode }) =>
+      children,
 );
 
 describe('<MapScreen />', () => {

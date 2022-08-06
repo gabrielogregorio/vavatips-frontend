@@ -2,10 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 
 const breadcrumbs = [
-  { url: '/', text: 'inicio' },
-  { url: '/maps', text: 'mapas' },
-  { url: '/maps', text: 'agentes' },
-  { url: '/posts', text: 'dicas' },
+  { text: 'inicio', url: '/' },
+  { text: 'mapas', url: '/maps' },
+  { text: 'agentes', url: '/maps' },
+  { text: 'dicas', url: '/posts' },
 ];
 
 describe('<Breadcrumb />', () => {

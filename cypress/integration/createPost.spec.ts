@@ -23,14 +23,18 @@ describe('<CreatePost />', () => {
       expect(req.body.tags.mapPosition).equal('Meio');
       expect(req.body.tags.agent).equal('Killjoy');
 
-      expect(req.body.tags.agent).equal('Killjoy');
-      expect(req.body.imgs[0].description).equal('Description image 1');
-      expect(req.body.imgs[0].image).equal('/image-1234');
+      const FIRST_POSITION = 0;
+      const SECOND_POSITION = 1;
+      const SUCCESS_HTTP_CODE = 200;
 
-      expect(req.body.imgs[1].description).equal('Description image 2');
-      expect(req.body.imgs[1].image).equal('/image-1234');
+      expect(req.body.tags.agent).equal('Killjoy');
+      expect(req.body.imgs[FIRST_POSITION].description).equal('Description image 1');
+      expect(req.body.imgs[FIRST_POSITION].image).equal('/image-1234');
+
+      expect(req.body.imgs[SECOND_POSITION].description).equal('Description image 2');
+      expect(req.body.imgs[SECOND_POSITION].image).equal('/image-1234');
       req.reply({
-        statusCode: 200,
+        statusCode: SUCCESS_HTTP_CODE,
       });
     });
   });

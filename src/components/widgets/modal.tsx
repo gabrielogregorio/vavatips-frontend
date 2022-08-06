@@ -23,8 +23,8 @@ type ModalPropsBase = {
 };
 
 type registrationFormFields = {
-  id: string;
   descriptionImage: string;
+  id: string;
 };
 
 export const Modal = ({
@@ -60,9 +60,11 @@ export const Modal = ({
   const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     setActiveLoader(true);
     const formData = new FormData();
-    formData.append('image', event.target.files[0]);
+    const FIRST_POSITION = 0;
 
-    function sendImageFromApi() {
+    formData.append('image', event.target.files[FIRST_POSITION]);
+
+    const sendImageFromApi = () => {
       Api.post(`/postLoadFile`, formData)
         .then((res) => {
           const urlImg = `${res.data.filename}`;
@@ -71,7 +73,7 @@ export const Modal = ({
           return res;
         })
         .catch((error) => error);
-    }
+    };
     sendImageFromApi();
   };
 

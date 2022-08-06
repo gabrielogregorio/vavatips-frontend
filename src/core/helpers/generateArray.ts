@@ -1,1 +1,2 @@
-export const generateNumericList = (index: number) => Array.from(Array(index), (_, x) => x);
+export const generateNumericList = (index: number) =>
+  Array.from(Array(index), (_object, indexGenerated) => indexGenerated);

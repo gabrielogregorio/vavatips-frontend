@@ -1,6 +1,6 @@
 import { waitForElementToBeRemoved, screen } from '@testing-library/react';
 
-export async function waitByLoading(): Promise<any> {
+export const waitByLoading = async () => {
   let errors = '';
   try {
     await screen.findByText('Loading...');
@@ -15,4 +15,4 @@ export async function waitByLoading(): Promise<any> {
   return new Promise((resolve) => {
     resolve(errors);
   });
-}
+};

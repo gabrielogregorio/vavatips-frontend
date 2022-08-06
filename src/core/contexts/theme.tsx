@@ -4,8 +4,8 @@ import { changeTheme } from '@/services/theme';
 const initializeTheme: string = 'dark';
 
 const ContextTheme = createContext<{ theme: string; setTheme: (newTheme: string) => void }>({
-  theme: initializeTheme,
   setTheme: null,
+  theme: initializeTheme,
 });
 
 type contextThemeProviderType = {
@@ -20,7 +20,7 @@ export const ContextThemeProvider = ({ children }: contextThemeProviderType) => 
     }
   }, [theme]);
 
-  const value = useMemo(() => ({ theme, setTheme }), [theme]);
+  const value = useMemo(() => ({ setTheme, theme }), [theme]);
   return <ContextTheme.Provider value={value}>{children}</ContextTheme.Provider>;
 };
 

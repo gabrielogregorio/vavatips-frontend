@@ -7,23 +7,23 @@ export const useRegister = () => {
   const [redirect, setRedirect] = useState<boolean>(false);
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
 
-  async function tryRegister({ keyCode, username: usernameLocal, password: passwordLocal }) {
+  const tryRegister = async ({ keyCode, username: usernameLocal, password: passwordLocal }) => {
     setActiveLoader(true);
 
     try {
-      await Api.post('/user', { username: usernameLocal, password: passwordLocal, code: keyCode });
+      await Api.post('/user', { code: keyCode, password: passwordLocal, username: usernameLocal });
       setRedirect(true);
     } catch (error) {
       setErrorMsg(handleErrorRegister(error));
     } finally {
       setActiveLoader(false);
     }
-  }
+  };
 
   return {
-    tryRegister,
+    activeLoader,
     errorMsg,
     redirect,
-    activeLoader,
+    tryRegister,
   };
 };

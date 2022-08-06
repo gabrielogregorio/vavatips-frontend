@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { AiFillWarning, AiFillEye, AiTwotoneEyeInvisible } from 'react-icons/ai';
 import { MdError } from 'react-icons/md';
 import { GroupInput } from './groupInput';
@@ -7,15 +8,13 @@ import { Label } from './label';
 export type typeInputColors = 'invalid' | 'valid' | 'warning' | 'default';
 
 export const styleLiteral = {
+  default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
   invalid: 'border-red-400 text-red-400 focus:shadow-red-400 ',
   valid: 'border-success text-success focus:shadow-success',
   warning: 'border-orange-400 text-orange-400 focus:shadow-orange-400 ',
-  default: 'border-gray-400 text-gray-500 focus:border-blue-400 focus:shadow-blue-400 ',
 };
 
-export function getStylesFromInput(status) {
-  return styleLiteral[status] ?? styleLiteral.default;
-}
+export const getStylesFromInput = (status) => styleLiteral[status] ?? styleLiteral.default;
 
 type TPropsInput = {
   label: string;
@@ -24,8 +23,8 @@ type TPropsInput = {
   name: string;
   status?: typeInputColors;
   disabled?: boolean;
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   isSubmitted?: boolean;
 };
 
@@ -62,9 +61,7 @@ export const Input = ({
     setShowEyeIcon((prev) => !prev);
   };
 
-  function showIcon() {
-    return showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />;
-  }
+  const showIcon = () => (showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />);
 
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;
@@ -122,8 +119,8 @@ export const Input = ({
 };
 
 Input.defaultProps = {
-  status: '',
   disabled: false,
-  type: '',
   isSubmitted: false,
+  status: '',
+  type: '',
 };

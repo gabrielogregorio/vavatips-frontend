@@ -1,5 +1,5 @@
 import { TPostsProps } from '@/types/posts';
-import ErrorBoundary from './errorBoundary';
+import { ErrorBoundary } from './errorBoundary';
 import { PostCard } from './postCard';
 
 type IPostProps = {

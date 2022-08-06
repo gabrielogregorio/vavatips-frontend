@@ -1,11 +1,12 @@
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { GroupInput } from './groupInput';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
 type TPropsSelectedBase = {
   text: string;
-  register: any;
-  errors: any;
+  register: UseFormRegister<any>;
+  errors: FieldErrors;
   name: string;
   render: { id: string; name: string }[];
   status?: typeInputColors;
@@ -15,13 +16,12 @@ type TPropsSelectedBase = {
 export const Selected = ({ render, text, register, errors, name, status, disabled }: TPropsSelectedBase) => {
   let getStyles = getStylesFromInput(status);
 
-  function renderItems() {
-    return render.map((item) => (
+  const renderItems = () =>
+    render.map((item) => (
       <option value={item.name} key={item.id}>
         {item.name}
       </option>
     ));
-  }
 
   const errorMessages = errors?.[name]?.message ?? '';
   const hasError = !!(errors && errorMessages);
@@ -51,6 +51,6 @@ export const Selected = ({ render, text, register, errors, name, status, disable
 };
 
 Selected.defaultProps = {
-  status: '',
   disabled: false,
+  status: '',
 };

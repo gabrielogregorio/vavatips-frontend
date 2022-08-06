@@ -3,15 +3,15 @@ import { navbarEnum } from '@/enums/navbar';
 export type modelNavbarType = { url: navbarEnum; text: string };
 
 export const modelNavbarPublic: modelNavbarType[] = [
-  { url: navbarEnum.Inicio, text: 'inicio' },
-  { url: navbarEnum.Save, text: 'salvos' },
-  { url: navbarEnum.Tested, text: 'testados' },
+  { text: 'inicio', url: navbarEnum.Inicio },
+  { text: 'salvos', url: navbarEnum.Save },
+  { text: 'testados', url: navbarEnum.Tested },
 ];
 
 export const modelNavbarAdmin: modelNavbarType[] = [
-  { url: navbarEnum.Dashboard, text: 'dashboard' },
-  { url: navbarEnum.PostCreate, text: 'criar posts' },
-  { url: navbarEnum.ViewPosts, text: 'posts' },
-  { url: navbarEnum.Suggestions, text: 'sugestões' },
-  { url: navbarEnum.Profile, text: 'perfil' },
+  { text: 'dashboard', url: navbarEnum.Dashboard },
+  { text: 'criar posts', url: navbarEnum.PostCreate },
+  { text: 'posts', url: navbarEnum.ViewPosts },
+  { text: 'sugestões', url: navbarEnum.Suggestions },
+  { text: 'perfil', url: navbarEnum.Profile },
 ];

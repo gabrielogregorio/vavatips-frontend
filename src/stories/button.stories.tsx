@@ -3,8 +3,8 @@ import { action } from '@storybook/addon-actions';
 import { Button } from '../components/base/button';
 
 export default {
-  title: 'base/Button',
   component: Button,
+  title: 'base/Button',
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;

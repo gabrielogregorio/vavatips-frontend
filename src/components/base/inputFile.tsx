@@ -26,7 +26,7 @@ export const InputFile = ({ type, text, onChange, name, status }: inputFileType)
         disabled={disabled}
         type={type}
         placeholder={text}
-        onChange={(e) => onChange(e)}
+        onChange={(event) => onChange(event)}
       />
     </GroupInput>
   );
