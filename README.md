@@ -28,7 +28,7 @@ This project was developed using NextJs, Typescript and api is available at [vav
 
 Access [Valorant tips](https://valorant-tips.vercel.app/) or [storybook](https://gabrielogregorio.github.io/valorant-tips/)
 
-![](public/home.png)
+![](/home.png)
 ## Badges
 
 ![GitHub stars](https://img.shields.io/github/stars/gabrielogregorio/vavatips-frontend)

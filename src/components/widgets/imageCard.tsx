@@ -19,7 +19,7 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCard
     <Link href={href} passHref>
       <button
         type="button"
-        className="flex flex-col justify-center items-center flex-1 h-40 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
+        className="flex flex-col justify-center items-center flex-1 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md">
         <div
           data-testid="loading"
           className={`block relative w-full rounded-md overflow-hidden ${heightImage} ${
