@@ -24,7 +24,7 @@ const Save = ({ posts }: { posts: TPostsProps[] }) => {
   const [postsFiltered, setPostsFiltered] = useState<TPostsProps[]>([]);
 
   useEffect(() => {
-    setPostsFiltered(posts.filter((post) => getPostsSave().includes(post.id)));
+    setPostsFiltered(posts.filter((post) => getPostsSave()?.includes(post.id)));
   }, [posts]);
 
   return (

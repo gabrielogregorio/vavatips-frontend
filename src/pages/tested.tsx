@@ -25,7 +25,7 @@ const Tested = ({ posts }: { posts: TPostsProps[] }) => {
 
   useEffect(() => {
     const ids = getPostsTested();
-    setPostsFiltered(posts.filter((post) => ids.includes(post.id)));
+    setPostsFiltered(posts.filter((post) => ids?.includes(post.id)));
   }, [posts]);
 
   return (
