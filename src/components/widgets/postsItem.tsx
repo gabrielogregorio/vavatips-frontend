@@ -8,12 +8,18 @@ type IPostProps = {
 
 export const Posts = ({ posts }: IPostProps) => (
   <div className="flex flex-col ">
-    {posts.map((post) => (
-      <div key={post.id}>
-        <ErrorBoundary>
-          <PostCard post={post} />
-        </ErrorBoundary>
-      </div>
-    ))}
+    {posts.map((post) => {
+      if (!post) {
+        return null;
+      }
+
+      return (
+        <div key={post?.id}>
+          <ErrorBoundary>
+            <PostCard post={post} />
+          </ErrorBoundary>
+        </div>
+      );
+    })}
   </div>
 );

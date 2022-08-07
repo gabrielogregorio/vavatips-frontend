@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -7,7 +7,9 @@ import { ContextModalMessage } from '@/contexts/modalMessage';
 import { IModalContextSuggestion, modalMessageTypeContext } from '@/types/modal';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ContextThemeProvider } from '@/contexts/theme';
+import { init as SentryInit } from '@sentry/nextjs';
 import '../styles/global.css';
+import { TRACE_SAMPLE_RATE_SENTRY } from '@/constants/sentry';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +34,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const valueModalMessage = useMemo(() => ({ modalMessage, setModalMessage }), [modalMessage]);
   const valueModalSuggestion = useMemo(() => ({ modalSuggestion, setModalSuggestion }), [modalSuggestion]);
   const valueFilters = useMemo(() => ({ filters, setFilters, setTags, tags }), [tags, filters]);
+
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_SENTRY_IS_ENABLED === 'true') {
+      SentryInit({
+        dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+        tracesSampleRate: TRACE_SAMPLE_RATE_SENTRY,
+      });
+    }
+  }, []);
 
   return (
     <>
