@@ -45,14 +45,13 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
     const mapSelected = location?.query?.map;
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
-        <div key={agent.id} className="flex flex-col">
-          <ImageCard
-            href={`/posts/${mapSelected}/${agent.name}`}
-            srcImage={agent.img}
-            heightImage="h-72 w-32"
-            titleImage={agent.name}
-          />
-        </div>
+        <ImageCard
+          key={agent.id}
+          href={`/posts/${mapSelected}/${agent.name}`}
+          srcImage={agent.img}
+          heightImage="h-[18rem] w-[11.74rem]"
+          titleImage={agent.name}
+        />
       ) : null,
     );
   };
@@ -64,7 +63,7 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
 
       <SubContainer>
         <Title>Escolha um Agente</Title>
-        <div className="grid grid-cols-1 gap-6 p-10 sm:grid-cols-4 w-full">{renderAgent()}</div>
+        <div className="flex flex-wrap w-full">{renderAgent()}</div>
       </SubContainer>
       <Footer />
     </Layout>
