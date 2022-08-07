@@ -79,7 +79,7 @@ export const PostCard = ({ post }: TProps) => {
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">
       <div className="flex justify-center items-center mb-2 mt-2 w-full">
         <div className="h-11 w-11 relative">
-          {post.user.image ? (
+          {post?.user?.image ? (
             <Image
               layout="fill"
               className="rounded-full object-cover"
@@ -101,7 +101,7 @@ export const PostCard = ({ post }: TProps) => {
         </div>
 
         <p className="flex-1 dark:text-skin-white text-skin-gray-800 ml-5 text-base">
-          {post.user.username ?? 'Ademir'}
+          {post?.user?.username ?? 'Ademir'}
         </p>
 
         {isAuthenticated() === true ? (

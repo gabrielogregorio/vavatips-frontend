@@ -19,6 +19,7 @@
       "@/layout/*": ["src/components/layout/*"],
       "@/widgets/*": ["src/components/widgets/*"],
       "@/contexts/*": ["src/core/contexts/*"],
+      "@/constants/*": ["src/core/constants/*"],
       "@/data/*": ["src/core/data/*"],
       "@/helpers/*": ["src/core/helpers/*"],
       "@/hooks/*": ["src/core/hooks/*"],

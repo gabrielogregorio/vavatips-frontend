@@ -1,8 +1,19 @@
 import { AxiosError } from 'axios';
 import { Component, ReactNode } from 'react';
+import * as Sentry from '@sentry/nextjs';
+import { anyToString } from '@/helpers/converyAnyToString';
 import { ScreenError } from './screenError';
 
-const sendLogsToServer = (error: AxiosError, errorInfo: object) => `${error} ${errorInfo}`;
+const sendLogsToServer = (error: AxiosError, errorInfo: object) => {
+  if (process.env.NEXT_PUBLIC_SENTRY_IS_ENABLED === 'true') {
+    Sentry.captureException(error, {
+      extra: {
+        error: anyToString(error || ''),
+        errorInfo: anyToString(errorInfo || ''),
+      },
+    });
+  }
+};
 
 type propsErrorBoundaryType = {
   children: ReactNode;
