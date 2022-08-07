@@ -105,7 +105,7 @@ export const PostCard = ({ post }: TProps) => {
         </p>
 
         {isAuthenticated() === true ? (
-          <button type="button" className="block text-skin-secondary-regular">
+          <button type="button" className="block text-skin-secondary-regular font-bold">
             <Link href={`/admin/post-edit?id=${post.id}`}>Editar</Link>
           </button>
         ) : null}
@@ -176,13 +176,13 @@ export const PostCard = ({ post }: TProps) => {
         <p className="text-base dark:text-skin-white text-skin-gray-800">{post.description}</p>
 
         <p className="text-skin-secondary-regular text-lg bg-transparent">
-          <span className="text-base"> #{post.tags.map}</span>
-          <span className="text-base"> #{post.tags.agent}</span>
-          <span className="text-base"> #{post.tags.ability}</span>
-          <span className="text-base"> #{post.tags.moment}</span>
-          <span className="text-base"> #{post.tags.difficult}</span>
-          <span className="text-base"> #{post.tags.side}</span>
-          <span className="text-base"> #{post.tags.mapPosition}</span>
+          <span className="text-base font-bold"> #{post.tags.map}</span>
+          <span className="text-base font-bold"> #{post.tags.agent}</span>
+          <span className="text-base font-bold"> #{post.tags.ability}</span>
+          <span className="text-base font-bold"> #{post.tags.moment}</span>
+          <span className="text-base font-bold"> #{post.tags.difficult}</span>
+          <span className="text-base font-bold"> #{post.tags.side}</span>
+          <span className="text-base font-bold"> #{post.tags.mapPosition}</span>
         </p>
       </div>
 

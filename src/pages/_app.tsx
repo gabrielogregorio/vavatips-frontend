@@ -10,6 +10,7 @@ import { ContextThemeProvider } from '@/contexts/theme';
 import { init as SentryInit } from '@sentry/nextjs';
 import '../styles/global.css';
 import { TRACE_SAMPLE_RATE_SENTRY } from '@/constants/sentry';
+import Script from 'next/script';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +51,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <title>Vavatips - Dicas de gameplay</title>
         <noscript>You need to enable JavaScript to run this app.</noscript>
       </Header>
+
+      <Script src="/scripts/hotjar.js" />
 
       <meta
         name="viewport"
