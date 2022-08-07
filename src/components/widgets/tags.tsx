@@ -20,7 +20,7 @@ export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => 
       <div className="m-1 text-skin-primary-light" key={tag} onClick={() => toggleTag(tag)} role="presentation">
         <Button
           onClick={() => null}
-          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md transition duration-100 ${
+          className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md transition duration-100 font-bold ${
             filteredActives.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
           }`}>
           {tag}
