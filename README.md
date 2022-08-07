@@ -20,6 +20,16 @@
 
 <div align="center">
 
+![issues open](https://img.shields.io/github/issues/gabrielogregorio/valorant-tips.svg)
+![issues closed](https://img.shields.io/github/issues-closed/gabrielogregorio/valorant-tips.svg)
+![PR's open](https://img.shields.io/github/issues-pr/gabrielogregorio/valorant-tips.svg)
+![PR's closed](https://img.shields.io/github/issues-pr-closed/gabrielogregorio/valorant-tips.svg)
+  
+  
+</div>
+
+<div align="center">
+
 <a href="https://valorant-tips.vercel.app/" target="blank">Access blog</a>
 </div>
 
