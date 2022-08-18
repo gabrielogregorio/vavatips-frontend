@@ -11,12 +11,12 @@ type sideType = 'Defensores' | 'Atacantes';
 type mapType = 'Split' | 'Ascent' | 'Haven' | 'Breeze' | 'Icebox' | 'Fracture' | 'Bind';
 type positionMapType = 'A' | 'B' | 'C' | 'D' | 'BaseAtacante' | 'BaseDefensora' | 'Meio' | 'Outra';
 
-type TPositionMap = {
+export type TPositionMap = {
   id: string;
   name: positionMapType;
 };
 
-type TAbility = {
+export type TAbility = {
   id: string;
   name: string;
   keyboard: string;
@@ -51,21 +51,23 @@ export type IMap = {
   mapPosition: TPositionMap[];
 };
 
+export type TPostTags = {
+  map: string;
+  agent: string;
+  ability: string;
+  moment: string;
+  difficult: string;
+  side: string;
+  mapPosition: string;
+};
+
 export type TPostsProps = {
   id: string;
   user: { id: string; username: string; image?: string };
   description: string;
   title: string;
   imgs: { id: string; image: string; description: string }[];
-  tags: {
-    map: string;
-    agent: string;
-    ability: string;
-    moment: string;
-    difficult: string;
-    side: string;
-    mapPosition: string;
-  };
+  tags: TPostTags;
 };
 
 export type TContextTags = {

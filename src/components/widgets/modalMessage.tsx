@@ -2,8 +2,9 @@ import { Button } from '@/base/button';
 import { useModalMessage, initializeModalMessage } from '@/contexts/modalMessage';
 import { FaTimes } from 'react-icons/fa';
 import { AiOutlineCheckCircle, AiOutlineExclamationCircle } from 'react-icons/ai';
+import { ReactElement } from 'react';
 
-export const ModalMessage = () => {
+export const ModalMessage = (): ReactElement => {
   const { modalMessage, setModalMessage } = useModalMessage();
 
   const modalIcon = {
@@ -23,7 +24,7 @@ export const ModalMessage = () => {
         <Button
           className="bg-transparent outline-none border-none text-skin-white ml-4"
           ariaLabel="close"
-          onClick={() => setModalMessage(initializeModalMessage)}>
+          onClick={(): void => setModalMessage(initializeModalMessage)}>
           <FaTimes className="text-skin-white text-sm" />
         </Button>
       </div>

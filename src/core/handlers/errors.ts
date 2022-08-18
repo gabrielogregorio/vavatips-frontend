@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import Router from 'next/router';
 
 const defaultStatusCode = {
-  [ERROR_NOT_ACCESS_HTTP_CODE]: { action: () => Router.push('/login'), label: 'UNAUTHORIZED' },
+  [ERROR_NOT_ACCESS_HTTP_CODE]: { action: (): Promise<boolean> => Router.push('/login'), label: 'UNAUTHORIZED' },
 };
 
 type handleInputErrorsType = {

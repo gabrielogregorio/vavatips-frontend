@@ -22,7 +22,7 @@ const Template: Story<typeof Selected> = (props) => {
       status="default"
       disabled={false}
       {...props}
-      register={register}
+      register={register('Agente')}
       errors={errors}
     />
   );

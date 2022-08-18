@@ -1,5 +1,5 @@
-import { ReactNode, useState } from 'react';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { ReactElement, ReactNode, useState } from 'react';
+import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
 import { AiFillWarning, AiFillEye, AiTwotoneEyeInvisible } from 'react-icons/ai';
 import { MdError } from 'react-icons/md';
 import { GroupInput } from './groupInput';
@@ -14,7 +14,23 @@ export const styleLiteral = {
   warning: 'border-orange-400 text-orange-400 focus:shadow-orange-400 ',
 };
 
-export const getStylesFromInput = (status) => styleLiteral[status] ?? styleLiteral.default;
+export const getStylesFromInput = (status): string => styleLiteral[status] ?? styleLiteral.default;
+
+type iconsFromInputType = {
+  children: ReactNode;
+  getStyles: string;
+  onClick?: Function;
+};
+
+const IconsFromInput = ({ children, getStyles, onClick }: iconsFromInputType): ReactElement => (
+  <button type="button" onClick={(): void => onClick()} className={`cursor-pointer flex ${getStyles}  `}>
+    {children}
+  </button>
+);
+
+IconsFromInput.defaultProps = {
+  onClick: (): void => null,
+};
 
 type TPropsInput = {
   label: string;
@@ -23,25 +39,9 @@ type TPropsInput = {
   name: string;
   status?: typeInputColors;
   disabled?: boolean;
-  register: UseFormRegister<any>;
+  register: UseFormRegisterReturn;
   errors: FieldErrors;
   isSubmitted?: boolean;
-};
-
-type iconsFromInputType = {
-  children: ReactNode;
-  getStyles: string;
-  onClick?: Function;
-};
-
-const IconsFromInput = ({ children, getStyles, onClick }: iconsFromInputType) => (
-  <button type="button" onClick={() => onClick()} className={`cursor-pointer flex ${getStyles}  `}>
-    {children}
-  </button>
-);
-
-IconsFromInput.defaultProps = {
-  onClick: () => null,
 };
 
 export const Input = ({
@@ -54,14 +54,14 @@ export const Input = ({
   errors,
   placeholder,
   isSubmitted,
-}: TPropsInput) => {
+}: TPropsInput): ReactElement => {
   const [showEyeIcon, setShowEyeIcon] = useState<boolean>(false);
 
-  const togglePassword = () => {
+  const togglePassword = (): void => {
     setShowEyeIcon((prev) => !prev);
   };
 
-  const showIcon = () => (showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />);
+  const showIcon = (): ReactElement => (showEyeIcon ? <AiFillEye /> : <AiTwotoneEyeInvisible />);
 
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;
@@ -78,7 +78,7 @@ export const Input = ({
       <Label name={name} text={label} className={[getStyles]} />
       <div className="relative">
         <input
-          {...(register && register(name))}
+          {...register}
           className={`w-full px-3 py-2 pr-12 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs  ${getStyles} ${
             disabled ? 'bg-gray-50 dark:bg-gray-600' : ''
           }`}

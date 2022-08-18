@@ -7,10 +7,11 @@ import { modelNavbarPublic } from '@/schemas/navbar';
 import { navbarEnum } from '@/enums/navbar';
 import Image from 'next/image';
 import { Footer } from '@/layout/footer';
+import { ReactElement } from 'react';
 
 const breadcrumbs = [];
 
-const Error404 = () => (
+const Error404 = (): ReactElement => (
   <Layout>
     <Navbar selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
     <Breadcrumb breadcrumbs={breadcrumbs} />

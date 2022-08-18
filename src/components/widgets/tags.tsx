@@ -1,4 +1,5 @@
 import { Button } from '@/base/button';
+import { ReactElement } from 'react';
 
 type tagsType = {
   tags: string[];
@@ -6,8 +7,8 @@ type tagsType = {
   setFilteredActive: Function;
 };
 
-export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => {
-  const toggleTag = (tag) => {
+export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType): ReactElement => {
+  const toggleTag = (tag): void => {
     if (filteredActives.includes(tag)) {
       setFilteredActive(filteredActives.filter((filter) => filter !== tag));
     } else {
@@ -15,11 +16,11 @@ export const Tags = ({ tags, filteredActives, setFilteredActive }: tagsType) => 
     }
   };
 
-  const renderTags = () =>
+  const renderTags = (): ReactElement[] =>
     tags.map((tag) => (
-      <div className="m-1 text-skin-primary-light" key={tag} onClick={() => toggleTag(tag)} role="presentation">
+      <div className="m-1 text-skin-primary-light" key={tag} onClick={(): void => toggleTag(tag)} role="presentation">
         <Button
-          onClick={() => null}
+          onClick={(): void => null}
           className={`p-3 pb-1 pt-1 border border-skin-primary-light rounded-md transition duration-100 font-bold ${
             filteredActives.includes(tag) ? 'text-skin-white bg-skin-primary-light' : ''
           }`}>

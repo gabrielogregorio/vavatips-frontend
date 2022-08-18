@@ -1,4 +1,5 @@
 import { TPostsProps } from '@/types/posts';
+import { ReactElement } from 'react';
 import { ErrorBoundary } from './errorBoundary';
 import { PostCard } from './postCard';
 
@@ -6,7 +7,7 @@ type IPostProps = {
   posts: TPostsProps[];
 };
 
-export const Posts = ({ posts }: IPostProps) => (
+export const Posts = ({ posts }: IPostProps): ReactElement => (
   <div className="flex flex-col ">
     {posts.map((post) => {
       if (!post) {

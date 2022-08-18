@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Router from 'next/router';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
@@ -28,7 +28,7 @@ export type registrationFormFields = {
   password: string;
 };
 
-const Login = () => {
+const Login = (): ReactElement => {
   const {
     register,
     handleSubmit,
@@ -60,7 +60,7 @@ const Login = () => {
             name="username"
             type="text"
             label="Usuário"
-            register={register}
+            register={register('username')}
             errors={errors}
             isSubmitted={isSubmitted}
           />
@@ -70,7 +70,7 @@ const Login = () => {
             name="password"
             type="password"
             label="Senha"
-            register={register}
+            register={register('password')}
             errors={errors}
             isSubmitted={isSubmitted}
           />

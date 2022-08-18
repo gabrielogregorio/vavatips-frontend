@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ReactElement } from 'react';
 import { GroupInput } from './groupInput';
 import { getStylesFromInput } from './input';
 import { Label } from './label';
@@ -11,7 +11,7 @@ type inputFileType = {
   status?: string;
 };
 
-export const InputFile = ({ type, text, onChange, name, status }: inputFileType) => {
+export const InputFile = ({ type, text, onChange, name, status }: inputFileType): ReactElement => {
   const getStyles = getStylesFromInput(status);
 
   const disabled = status === 'disabled';
@@ -26,7 +26,7 @@ export const InputFile = ({ type, text, onChange, name, status }: inputFileType)
         disabled={disabled}
         type={type}
         placeholder={text}
-        onChange={(event) => onChange(event)}
+        onChange={(event): void => onChange(event)}
       />
     </GroupInput>
   );

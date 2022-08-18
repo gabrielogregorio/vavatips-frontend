@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Loader } from '@/base/loader';
 import { Breadcrumb } from '@/widgets/breadcrumb';
@@ -21,7 +21,7 @@ const keyLabel = {
   countIps: 'Usuários',
 };
 
-export const ItemList = ({ children }: { children: ReactNode }) => (
+export const ItemList = ({ children }: { children: ReactNode }): ReactElement => (
   <p className="dark:text-skin-white text-skin-gray-500">{children}</p>
 );
 
@@ -30,10 +30,10 @@ const breadcrumbs = [
   { text: 'dashboard', url: navbarEnum.Dashboard },
 ];
 
-const Dashboard = () => {
+const Dashboard = (): ReactElement => {
   const { info, username, errorMsg, isLoading } = useDashboard();
 
-  const renderDashboardItems = () => {
+  const renderDashboardItems = (): ReactElement[] => {
     const itemsDashboard = getKeysFromAnyObject(info);
 
     return itemsDashboard.map((key) => (

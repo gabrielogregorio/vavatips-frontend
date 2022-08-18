@@ -4,7 +4,7 @@ import * as Sentry from '@sentry/nextjs';
 import { anyToString } from '@/helpers/converyAnyToString';
 import { ScreenError } from './screenError';
 
-const sendLogsToServer = (error: AxiosError, errorInfo: object) => {
+const sendLogsToServer = (error: AxiosError, errorInfo: object): void => {
   if (process.env.NEXT_PUBLIC_SENTRY_IS_ENABLED === 'true') {
     Sentry.captureException(error, {
       extra: {
@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<propsErrorBoundaryType, stateErrorB
     const { children } = this.props;
 
     if (hasError) {
-      return <ScreenError tryRenderAgain={() => this.setState({ hasError: false })} />;
+      return <ScreenError tryRenderAgain={(): void => this.setState({ hasError: false })} />;
     }
 
     return children;

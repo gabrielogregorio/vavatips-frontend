@@ -3,10 +3,13 @@ import { Layout } from '@/layout/layout';
 import { ContainerPosts } from '@/widgets/containerPosts';
 import { navbarEnum } from '@/enums/navbar';
 import { Api } from '@/services/api';
+import { ReactElement } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { TPostsProps } from '@/types/posts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await Api.get('/maps');
   const { maps } = await resp.data;
 
@@ -36,9 +39,10 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params: { map, agent } }) => {
-  const response = await Api.get(`/posts/${map}/${agent}`);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const response = await Api.get(`/posts/${params.map}/${params.agent}`);
   const posts = await response.data;
+
   return {
     props: {
       posts: posts.posts,
@@ -46,7 +50,7 @@ export const getStaticProps = async ({ params: { map, agent } }) => {
   };
 };
 
-const Posts = ({ posts }: { posts: any[] }) => (
+const Posts = ({ posts }: { posts: TPostsProps[] }): ReactElement => (
   <Layout>
     <ContainerPosts
       posts={posts}
