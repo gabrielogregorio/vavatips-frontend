@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies and test
         run: yarn --frozen-lockfile
 
-      - name: Build App
+      - name: Build storybook
         run: yarn storybook:build
 
       - name: Deploy with gh-pages

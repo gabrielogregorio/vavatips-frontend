@@ -10,11 +10,6 @@ const Template: ComponentStory<typeof TagsFixFilters> = (args) => <TagsFixFilter
 
 export const Default = Template.bind({});
 Default.args = {
-  queryUrl: {
-    agent: 'Killjoy',
-    isReady: true,
-    map: 'Breeze',
-    page: '1',
-    type: 'tested',
-  },
+  agent: 'Killjoy',
+  map: 'Breeze',
 };
