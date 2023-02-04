@@ -8,9 +8,9 @@ import { modelNavbarAdmin, modelNavbarPublic } from '@/schemas/navbar';
 import { TagsFixFilters } from '@/widgets/tagsFixFilters';
 import { Tags } from '@/widgets/tags';
 import { Posts } from '@/widgets/postsItem';
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { InfiniteScroll } from '@/widgets/infiniteScroll';
-import { TPostsProps } from '@/types/posts';
+import { TPostsProps, TPostTags } from '@/types/posts';
 import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { Footer } from '@/layout/footer';
@@ -42,13 +42,14 @@ const getAllTags = (posts: TPostsProps[], agent, map): string[] => {
   return [...tags] as string[];
 };
 
-const applyFilters = (posts, filteredActives) => {
-  const existsFilterActiveInPost = (tags) => {
+const applyFilters = (posts: TPostsProps[], filteredActives: string[]): TPostsProps[] => {
+  const filterIncrementBy = 1;
+  const existsFilterActiveInPost = (tags: TPostTags): boolean => {
     let existsFilter = 0;
 
     filteredActives.forEach((filter) => {
       if (Object.values(tags).includes(filter)) {
-        existsFilter += 1;
+        existsFilter += filterIncrementBy;
       }
     });
 
@@ -57,7 +58,14 @@ const applyFilters = (posts, filteredActives) => {
   return posts.filter((post) => existsFilterActiveInPost(post.tags));
 };
 
-export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, showTags }: containerPosts) => {
+export const ContainerPosts = ({
+  breadcrumbs,
+  mode,
+  typeSelected,
+  title,
+  posts,
+  showTags,
+}: containerPosts): ReactElement => {
   const { query } = useRouter();
   const { agent, map } = query;
   const [filteredActives, setFilteredActive] = useState<string[]>([]);
@@ -76,7 +84,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
     setFinal(skip);
   }, [dataItem]);
 
-  const handleAddedMore = () => {
+  const handleAddedMore = (): void => {
     setFinal(final + skip);
   };
 
@@ -104,7 +112,7 @@ export const ContainerPosts = ({ breadcrumbs, mode, typeSelected, title, posts, 
           ) : null}
 
           {isFirstLoading ? (
-            <InfiniteScroll length={final} LoadMore={() => handleAddedMore()} hasMore={data.length > final}>
+            <InfiniteScroll length={final} LoadMore={(): void => handleAddedMore()} hasMore={data.length > final}>
               <Posts posts={data.slice(START_POSITION, final)} />
             </InfiniteScroll>
           ) : null}

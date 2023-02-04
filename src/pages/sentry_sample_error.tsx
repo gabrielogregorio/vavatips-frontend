@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import { ReactElement } from 'react';
 
 const boxStyles = { border: '1px solid #eaeaea', borderRadius: '10px', padding: '12px' };
-const Home = () => (
+const Home = (): ReactElement => (
   <div>
     <Head>
       <title>Sentry Onboarding</title>
@@ -39,7 +40,7 @@ const Home = () => (
           border: 'none',
           borderRadius: '12px',
         }}
-        onClick={() => {
+        onClick={(): void => {
           throw new Error('Sentry Frontend Error');
         }}>
         Throw error

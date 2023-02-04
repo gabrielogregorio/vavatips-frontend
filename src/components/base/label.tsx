@@ -1,10 +1,12 @@
+import { ReactElement } from 'react';
+
 type labelType = {
   name: string;
   text: string;
   className?: string[];
 };
 
-export const Label = ({ name, text, className }: labelType) => {
+export const Label = ({ name, text, className }: labelType): ReactElement => {
   const classString = className.join(' ');
 
   return (

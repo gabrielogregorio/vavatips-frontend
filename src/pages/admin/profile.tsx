@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
@@ -29,7 +29,7 @@ export type registrationFormFields = {
   passwordConfirmation: string;
 };
 
-const Profile = () => {
+const Profile = (): ReactElement => {
   const {
     register,
     handleSubmit,
@@ -48,12 +48,12 @@ const Profile = () => {
     });
   }, [infoUser?.username, reset]);
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     logout();
     Router.push('/login');
   };
 
-  const onSubmit = async () => {};
+  const onSubmit = (): void => {};
 
   return (
     <Layout>
@@ -72,7 +72,7 @@ const Profile = () => {
                 name="username"
                 type="text"
                 label="Trocar nome de usuário"
-                register={register}
+                register={register('username')}
                 errors={errors}
               />
               <Input
@@ -80,7 +80,7 @@ const Profile = () => {
                 name="password"
                 type="password"
                 label="Digite uma nova senha"
-                register={register}
+                register={register('password')}
                 errors={errors}
               />
               <Input
@@ -88,11 +88,11 @@ const Profile = () => {
                 name="passwordConfirmation"
                 type="password"
                 label="Confirme a nova senha"
-                register={register}
+                register={register('passwordConfirmation')}
                 errors={errors}
               />
 
-              <Button className="text-skin-primary-light border-none mt-2" onClick={() => handleLogout()}>
+              <Button className="text-skin-primary-light border-none mt-2" onClick={(): void => handleLogout()}>
                 logoff
               </Button>
 

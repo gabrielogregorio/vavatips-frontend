@@ -11,10 +11,12 @@ import { ImageCard } from '@/widgets/imageCard';
 import { SubContainer } from '@/base/subContainer';
 import { Api } from '@/services/api';
 import { Footer } from '@/layout/footer';
+import { ReactElement } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const resp = await Api.get('/maps');
   const { maps } = await resp.data;
 
@@ -28,7 +30,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const response = await Api.get(`/agents/${params.map}`);
   const agentsData = await response.data;
   return {
@@ -38,10 +40,10 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-const Agents = ({ agentsApi }: { agentsApi: string[] }) => {
+const Agents = ({ agentsApi }: { agentsApi: string[] }): ReactElement => {
   const location = useRouter();
 
-  const renderAgent = () => {
+  const renderAgent = (): ReactElement[] => {
     const mapSelected = location?.query?.map;
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (

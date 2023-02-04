@@ -2,14 +2,15 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TextArea } from '@/base/textArea';
 import { useForm } from 'react-hook-form';
+import { ReactElement } from 'react';
 
-const Setup = ({ title }: { title: string }) => {
+const Setup = ({ title }: { title: string }): ReactElement => {
   const {
     register,
     formState: { errors },
   } = useForm();
 
-  return <TextArea name="description" title={title} register={register} errors={errors} />;
+  return <TextArea name="description" title={title} register={register('description')} errors={errors} />;
 };
 
 describe('<TextArea />', () => {

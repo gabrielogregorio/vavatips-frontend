@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { navbarEnum } from '@/enums/navbar';
+import { ReactElement } from 'react';
 
 type NavbarLinkType = {
   href: string;
@@ -8,7 +9,7 @@ type NavbarLinkType = {
   textContent: string;
 };
 
-export const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType) => {
+export const NavbarLink = ({ href, selected, whoIs, textContent }: NavbarLinkType): ReactElement => {
   const isActiveClass = selected === whoIs ? 'border-b-2 border-cyan-50' : '';
 
   return (

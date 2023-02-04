@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import ReactInfiniteScroll from 'react-infinite-scroll-component';
 
 type infiniteScrollType = {
@@ -8,11 +8,11 @@ type infiniteScrollType = {
   children: ReactNode;
 };
 
-export const InfiniteScroll = ({ children, length, LoadMore, hasMore }: infiniteScrollType) => (
+export const InfiniteScroll = ({ children, length, LoadMore, hasMore }: infiniteScrollType): ReactElement => (
   <ReactInfiniteScroll
     dataLength={length}
     style={{ overflowX: 'hidden' }}
-    next={() => LoadMore()}
+    next={(): void => LoadMore()}
     hasMore={hasMore}
     loader={<h4>Carregando...</h4>}
     endMessage={

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { ReactElement, useEffect, useMemo, useState } from 'react';
 import { AppProps } from 'next/app';
 import Header from 'next/head';
 import { ContextModalSuggestion } from '@/contexts/modalSuggestion';
@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
   const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
     active: false,
     post: null,

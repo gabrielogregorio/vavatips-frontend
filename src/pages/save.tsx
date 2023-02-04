@@ -4,12 +4,13 @@ import { Layout } from '@/layout/layout';
 import { Api } from '@/services/api';
 import { TPostsProps } from '@/types/posts';
 import { ContainerPosts } from '@/widgets/containerPosts';
-import { useEffect, useState } from 'react';
+import { GetStaticProps } from 'next';
+import { ReactElement, useEffect, useState } from 'react';
 import { getPostsSave } from '../core/services/handlePosts';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Save];
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const resp = await Api.get('/posts');
   const { posts } = await resp.data;
 
@@ -20,7 +21,7 @@ export const getStaticProps = async () => {
   };
 };
 
-const Save = ({ posts }: { posts: TPostsProps[] }) => {
+const Save = ({ posts }: { posts: TPostsProps[] }): ReactElement => {
   const [postsFiltered, setPostsFiltered] = useState<TPostsProps[]>([]);
 
   useEffect(() => {

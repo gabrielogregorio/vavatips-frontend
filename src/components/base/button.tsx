@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 interface buttonTypeNormal {
   children: ReactNode;
@@ -20,7 +20,7 @@ export const Button = ({
   dataTestid,
   type,
   ariaHidden,
-}: buttonTypeNormal) => (
+}: buttonTypeNormal): ReactElement => (
   <button
     data-testid={dataTestid}
     onClick={onClick}
@@ -39,6 +39,6 @@ Button.defaultProps = {
   className: '',
   dataTestid: '',
   disabled: false,
-  onClick: () => null,
+  onClick: (): void => null,
   type: 'button',
 };

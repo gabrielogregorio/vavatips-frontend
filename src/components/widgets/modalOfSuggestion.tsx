@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useModalMessage } from '@/contexts/modalMessage';
 import { useModalContext, initializeModalSuggestion } from '@/contexts/modalSuggestion';
 import { Api } from '@/services/api';
@@ -22,7 +22,7 @@ type registrationFormFields = {
   description: string;
 };
 
-export const ModalOfSuggestion = ({ title }: ModalProps) => {
+export const ModalOfSuggestion = ({ title }: ModalProps): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
   const { modalSuggestion, setModalSuggestion } = useModalContext();
   const { setModalMessage } = useModalMessage();
@@ -37,11 +37,11 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
     resolver: yupResolver(schemaSendSuggestion),
   });
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     setModalSuggestion(initializeModalSuggestion);
   };
 
-  const onSubmit = async ({ email, description }) => {
+  const onSubmit = ({ email, description }): void => {
     const idPost = modalSuggestion.post?.id ?? '';
     setLoading(true);
 
@@ -88,7 +88,7 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
           disabled
           type="text"
           label="Dica"
-          register={register}
+          register={register('tip')}
           errors={errors}
         />
 
@@ -97,16 +97,16 @@ export const ModalOfSuggestion = ({ title }: ModalProps) => {
           name="email"
           type="email"
           label="Email para retorno (Opcional)"
-          register={register}
+          register={register('email')}
           errors={errors}
         />
 
-        <TextArea name="description" title="Descrição" register={register} errors={errors} />
+        <TextArea name="description" title="Descrição" register={register('description')} errors={errors} />
 
         <div className="flex justify-end w-full mt-4">
           <Button
             className="py-2 px-3.5 mx-1 rounded-md bg-skin-secondary-light text-gray-100 text-xs"
-            onClick={() => setModalSuggestion(initializeModalSuggestion)}>
+            onClick={(): void => setModalSuggestion(initializeModalSuggestion)}>
             Cancelar
           </Button>
           <Button type="submit" className="py-2 px-3.5 mx-1 rounded-md bg-skin-primary-light text-gray-100 text-xs">

@@ -13,7 +13,7 @@ const Template: Story<typeof TextArea> = (props) => {
     formState: { errors },
   } = useForm();
 
-  return <TextArea name="Agente" title="Agente" {...props} errors={errors} register={register} />;
+  return <TextArea name="Agente" title="Agente" {...props} errors={errors} register={register('Agente')} />;
 };
 
 export const Default: Story<typeof TextArea> = Template.bind({});

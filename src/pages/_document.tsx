@@ -1,6 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { ReactElement } from 'react';
 
-const Document = () => (
+const Document = (): ReactElement => (
   <Html lang="pt-br">
     <Head>
       <meta name="language" content="pt-BR" />

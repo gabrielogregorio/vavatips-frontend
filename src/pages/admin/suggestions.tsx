@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { Navbar } from '@/layout/navbar';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { navbarEnum } from '@/enums/navbar';
@@ -16,15 +16,15 @@ const breadcrumbs = [
   { text: 'sugestões', url: navbarEnum.Dashboard },
 ];
 
-const ThTable = ({ children }: { children: ReactNode }) => (
+const ThTable = ({ children }: { children: ReactNode }): ReactElement => (
   <th className="text-base text-skin-white text-left">{children}</th>
 );
 
-const TdTable = ({ children }: { children: ReactNode }) => (
+const TdTable = ({ children }: { children: ReactNode }): ReactElement => (
   <td className="px-5 pl-0 break-all text-base dark:text-skin-white text-skin-gray-500 text-left">{children}</td>
 );
 
-const Suggestions = () => {
+const Suggestions = (): ReactElement => {
   const { suggestions, loading, error } = useSuggestions();
 
   return (
