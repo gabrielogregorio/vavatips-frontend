@@ -21,10 +21,10 @@
     "stylelint": "stylelint '**.css'",
     "check-all": "tsc && next lint && stylelint '**.css' && jest --coverage && jest-coverage-badges && yarn cypress:headless && yarn audit --groups 'dependencies'",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook -s public",
-    "predeploy": "yarn run build-storybook",
-    "deploy-storybook": "gh-pages -d storybook-static",
-    "deploy-storybook-gh-pages": "yarn run build-storybook && yarn run deploy-storybook"
+    "storybook:build": "build-storybook -s public",
+    "predeploy:deprecated": "yarn run build-storybook",
+    "deploy-storybook:deprecated": "gh-pages -d storybook-static",
+    "deploy-storybook-gh-pages:deprecated": "yarn run build-storybook && yarn run deploy-storybook"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
