@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { resolveQuery } from '@/helpers/resolveQuery';
+import { ReactElement } from 'react';
 
 type TPaginationButton = {
   numberOfPage: number;
@@ -9,7 +10,15 @@ type TPaginationButton = {
   urlBase: string;
 };
 
-export const PaginationButtons = ({ numberOfPage: page = 1, active, urlBase, map, agent }: TPaginationButton) => (
+const DEFAULT_PAGE = 1;
+
+export const PaginationButtons = ({
+  numberOfPage: page = DEFAULT_PAGE,
+  active,
+  urlBase,
+  map,
+  agent,
+}: TPaginationButton): ReactElement => (
   <li className="bg-transparent text-skin-secondary-regular p-3 pb-1 pt-1 transition duration-150">
     <Link passHref aria-label={`Navega para a página ${page}`} href={resolveQuery(urlBase, { agent, map, page })}>
       <a
@@ -23,7 +32,7 @@ export const PaginationButtons = ({ numberOfPage: page = 1, active, urlBase, map
   </li>
 );
 
-export const PaginationDotItems = () => (
+export const PaginationDotItems = (): ReactElement => (
   <li className="bg-transparent text-skin-secondary-regular p-3 pb-1 pt-1">
     <a href="#/" type="button">
       ...

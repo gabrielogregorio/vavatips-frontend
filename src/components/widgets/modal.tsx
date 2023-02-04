@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
+import { ChangeEvent, MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import { Api } from '@/services/api';
 import { formatImage } from '@/services/formatEnvironment';
 import { Button } from '@/base/button';
@@ -34,7 +34,7 @@ export const Modal = ({
   closeModal,
   saveModal,
   title,
-}: ModalPropsBase) => {
+}: ModalPropsBase): ReactElement => {
   const [LinkImg, setLinkImg] = useState<string>('');
   const [activeLoader, setActiveLoader] = useState<boolean>(false);
   const {
@@ -57,14 +57,14 @@ export const Modal = ({
     }
   }, [idModal, descriptionModal, image, reset]);
 
-  const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const loadImage = (event: ChangeEvent<HTMLInputElement>): void => {
     setActiveLoader(true);
     const formData = new FormData();
     const FIRST_POSITION = 0;
 
     formData.append('image', event.target.files[FIRST_POSITION]);
 
-    const sendImageFromApi = () => {
+    const sendImageFromApi = (): void => {
       Api.post(`/postLoadFile`, formData)
         .then((res) => {
           const urlImg = `${res.data.filename}`;
@@ -77,20 +77,25 @@ export const Modal = ({
     sendImageFromApi();
   };
 
-  const closeModalItem = () => {
+  const closeModalItem = (): void => {
     closeModal(null);
   };
 
-  const onSubmit = async ({ descriptionImage, id }) => {
+  const onSubmit = ({ descriptionImage, id }): void => {
     saveModal(id, descriptionImage, LinkImg);
   };
 
   return (
     <ModalRef title={title} closeModal={closeModalItem}>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input name="id" label="" type="hidden" placeholder="" register={register} errors={errors} />
+        <Input name="id" label="" type="hidden" placeholder="" register={register('id')} errors={errors} />
 
-        <TextArea name="descriptionImage" title="Descrição post" register={register} errors={errors} />
+        <TextArea
+          name="descriptionImage"
+          title="Descrição post"
+          register={register('descriptionImage')}
+          errors={errors}
+        />
 
         <InputFile text="Adicionar Imagem" type="file" name="image" onChange={loadImage} />
 
@@ -111,7 +116,7 @@ export const Modal = ({
         <div className="flex justify-end w-full">
           <Button
             className="p-1 px-2 mx-1 rounded-md bg-skin-secondary-light text-skin-white"
-            onClick={() => closeModalItem()}>
+            onClick={(): void => closeModalItem()}>
             Cancelar
           </Button>
           <Button className="p-1 px-2 mx-1 rounded-md bg-skin-primary-light text-skin-white" type="submit">

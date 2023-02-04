@@ -1,11 +1,12 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { ReactElement } from 'react';
+import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
 import { GroupInput } from './groupInput';
 import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
 type TPropsSelectedBase = {
   text: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegisterReturn;
   errors: FieldErrors;
   name: string;
   render: { id: string; name: string }[];
@@ -13,10 +14,18 @@ type TPropsSelectedBase = {
   disabled?: boolean;
 };
 
-export const Selected = ({ render, text, register, errors, name, status, disabled }: TPropsSelectedBase) => {
+export const Selected = ({
+  render,
+  text,
+  register,
+  errors,
+  name,
+  status,
+  disabled,
+}: TPropsSelectedBase): ReactElement => {
   let getStyles = getStylesFromInput(status);
 
-  const renderItems = () =>
+  const renderItems = (): ReactElement[] =>
     render.map((item) => (
       <option value={item.name} key={item.id}>
         {item.name}
@@ -32,7 +41,7 @@ export const Selected = ({ render, text, register, errors, name, status, disable
     <GroupInput>
       <Label name={name} text={text} className={[getStyles]} />
       <select
-        {...(register && register(name))}
+        {...register}
         className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 dark:bg-skin-gray-900 ${getStyles} ${
           disabled ? 'bg-gray-50' : ''
         }`}

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactElement, ReactNode, useEffect } from 'react';
 import { useTheme } from '@/contexts/theme';
 import { getTheme } from '@/services/theme';
 
@@ -6,7 +6,7 @@ type layoutType = {
   children: ReactNode;
 };
 
-export const Layout = ({ children }: layoutType) => {
+export const Layout = ({ children }: layoutType): ReactElement => {
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {

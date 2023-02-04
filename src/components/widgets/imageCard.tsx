@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 type imageCardType = {
   href: string;
@@ -8,10 +8,10 @@ type imageCardType = {
   titleImage: string;
   heightImage: string;
 };
-export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType) => {
+export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType): ReactElement => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleWithIsLoadedImage = () => {
+  const handleWithIsLoadedImage = (): void => {
     setIsLoaded(true);
   };
 
@@ -32,7 +32,7 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCard
             data-src={srcImage}
             alt={titleImage}
             priority
-            onLoadingComplete={() => handleWithIsLoadedImage()}
+            onLoadingComplete={(): void => handleWithIsLoadedImage()}
           />
         </div>
         <p className="dark:text-skin-white text-skin-gray-800" style={{ opacity: 0.8 }}>

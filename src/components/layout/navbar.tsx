@@ -6,16 +6,17 @@ import { useTheme } from '@/contexts/theme';
 import { modelNavbarType } from '@/schemas/navbar';
 import { navbarEnum } from '@/enums/navbar';
 import { changeTheme } from '@/services/theme';
+import { ReactElement } from 'react';
 
 type NavbarPropsNavbarBasicType = {
   selected: navbarEnum;
   modelNavbar: modelNavbarType[];
 };
 
-export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) => {
+export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType): ReactElement => {
   const { theme, setTheme } = useTheme();
 
-  const handleNavbar = () => {
+  const handleNavbar = (): void => {
     if (theme === 'dark') {
       changeTheme('light');
       setTheme('light');
@@ -25,7 +26,7 @@ export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) =>
     }
   };
 
-  const renderMenuItems = () =>
+  const renderMenuItems = (): ReactElement[] =>
     modelNavbar.map((model) => (
       <div key={model.text} className="mb-4">
         <NavbarLink href={model.url} selected={selected} whoIs={model.url} textContent={model.text} />
@@ -43,7 +44,7 @@ export const Navbar = ({ selected, modelNavbar }: NavbarPropsNavbarBasicType) =>
       {renderMenuItems()}
 
       <div className="border-b-8 border-transparent">
-        <Button onClick={() => handleNavbar()} className=" ml-5 text-xl h-full" ariaLabel="Trocar tema">
+        <Button onClick={(): void => handleNavbar()} className=" ml-5 text-xl h-full" ariaLabel="Trocar tema">
           {theme === 'dark' ? <MdOutlineLightMode className="w-10 h-10 p-2" /> : null}
           {theme !== 'dark' ? <MdOutlineNightlight className="w-10 h-10 p-2" /> : null}
         </Button>

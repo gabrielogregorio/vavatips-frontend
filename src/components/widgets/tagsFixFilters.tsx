@@ -1,9 +1,11 @@
+import { ReactElement } from 'react';
+
 type tagFixFiltersType = {
   agent: string;
   map: string;
 };
 
-export const TagsFixFilters = ({ agent, map }: tagFixFiltersType) => (
+export const TagsFixFilters = ({ agent, map }: tagFixFiltersType): ReactElement => (
   <div className="flex justify-center">
     <div>
       {agent ? (

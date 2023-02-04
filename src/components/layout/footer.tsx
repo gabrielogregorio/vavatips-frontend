@@ -1,6 +1,7 @@
+import { ReactElement } from 'react';
 import { BiLinkExternal } from 'react-icons/bi';
 
-export const Footer = () => (
+export const Footer = (): ReactElement => (
   <>
     <div className="flex-1" />
     <div className="w-full dark:bg-skin-gray-900 bg-skin-secondary-light flex justify-center">

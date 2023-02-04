@@ -1,9 +1,11 @@
+import { ReactElement } from 'react';
+
 type loaderProps = {
   active: boolean;
 };
 
-export const Loader = ({ active }: loaderProps) => {
-  const renderActive = () =>
+export const Loader = ({ active }: loaderProps): ReactElement => {
+  const renderActive = (): ReactElement =>
     active ? (
       <div className="flex items-center justify-center w-full">
         <div

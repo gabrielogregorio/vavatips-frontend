@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useModalContext } from '@/contexts/modalSuggestion';
 import { formatImage } from '@/services/formatEnvironment';
@@ -18,8 +18,9 @@ type TProps = {
 
 const FIRST_IMAGE_ID = 0;
 const POSITION_FIRST_IMAGE = 0;
+const NORMALIZE_COUNTER_STARTING_IN_ONE = 1;
 
-export const PostCard = ({ post }: TProps) => {
+export const PostCard = ({ post }: TProps): ReactElement => {
   const [idImage, setIdImage] = useState<number>(FIRST_IMAGE_ID);
   const [postTested, setPostTested] = useState<boolean>(false);
   const [postSave, setPostSave] = useState<boolean>(false);
@@ -27,7 +28,7 @@ export const PostCard = ({ post }: TProps) => {
 
   const { setModalSuggestion } = useModalContext();
 
-  const handleAddTest = () => {
+  const handleAddTest = (): void => {
     if (postTested) {
       removePost(post.id, 'test');
     } else {
@@ -36,7 +37,7 @@ export const PostCard = ({ post }: TProps) => {
     setPostTested(getPostsTested()?.includes(post.id));
   };
 
-  const handleAddSave = () => {
+  const handleAddSave = (): void => {
     if (postSave) {
       removePost(post.id, 'save');
     } else {
@@ -46,7 +47,7 @@ export const PostCard = ({ post }: TProps) => {
   };
 
   useEffect(() => {
-    const thisPostIsIncludeInSaveOrTestedPosts = () => {
+    const thisPostIsIncludeInSaveOrTestedPosts = (): void => {
       setPostTested(getPostsTested()?.includes(post.id));
       setPostSave(getPostsSave()?.includes(post.id));
     };
@@ -54,24 +55,26 @@ export const PostCard = ({ post }: TProps) => {
     thisPostIsIncludeInSaveOrTestedPosts();
   }, [post.id]);
 
-  const nextImage = (type: typeType, length: number) => {
+  const nextImage = (type: typeType, length: number): void => {
     setStartedANavigation(true);
+    const existsMore = 1;
+    const incrementStepBy = 1;
     if (type === 'next') {
-      if (idImage < length - 1) {
-        setIdImage(idImage + 1);
+      if (idImage < length - existsMore) {
+        setIdImage(idImage + incrementStepBy);
       } else {
         setIdImage(FIRST_IMAGE_ID);
       }
     } else if (type === 'prev') {
       if (idImage > FIRST_IMAGE_ID) {
-        setIdImage(idImage - 1);
+        setIdImage(idImage - incrementStepBy);
       } else {
-        setIdImage(length - 1);
+        setIdImage(length - incrementStepBy);
       }
     }
   };
 
-  const handleModalAction = () => {
+  const handleModalAction = (): void => {
     setModalSuggestion({ active: true, post });
   };
 
@@ -149,7 +152,7 @@ export const PostCard = ({ post }: TProps) => {
               ariaLabel="Item anterior"
               dataTestid="prev-btn"
               className="text-skin-white border-none bg-transparent"
-              onClick={() => nextImage('prev', post.imgs.length)}>
+              onClick={(): void => nextImage('prev', post.imgs.length)}>
               <MdArrowBackIosNew className="text-4xl font-bold" />
             </Button>
           </div>
@@ -159,14 +162,14 @@ export const PostCard = ({ post }: TProps) => {
               ariaLabel="Proximo item"
               dataTestid="next-btn"
               className="text-skin-white border-none bg-transparent"
-              onClick={() => nextImage('next', post.imgs.length)}>
+              onClick={(): void => nextImage('next', post.imgs.length)}>
               <MdArrowForwardIos className="text-4xl font-bold" />
             </Button>
           </div>
 
           <div className="absolute block bottom-0 left-0 w-full p-2.5 rounded-md rounded-t-none  bg-skin-black">
             <p className="text-skin-white text-base" aria-live="polite">
-              {idImage + 1} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
+              {idImage + NORMALIZE_COUNTER_STARTING_IN_ONE} de {post.imgs.length} : {post.imgs?.[idImage]?.description}
             </p>
           </div>
         </div>
@@ -187,9 +190,9 @@ export const PostCard = ({ post }: TProps) => {
       </div>
 
       <div className="w-full flex justify-around m-1">
-        <PostButton ariaLabel="Salvar" selected={postSave} onClick={() => handleAddSave()} variant="like" />
-        <PostButton ariaLabel="Testado" selected={postTested} onClick={() => handleAddTest()} variant="save" />
-        <PostButton ariaLabel="Sugerir" selected={false} onClick={() => handleModalAction()} variant="report" />
+        <PostButton ariaLabel="Salvar" selected={postSave} onClick={(): void => handleAddSave()} variant="like" />
+        <PostButton ariaLabel="Testado" selected={postTested} onClick={(): void => handleAddTest()} variant="save" />
+        <PostButton ariaLabel="Sugerir" selected={false} onClick={(): void => handleModalAction()} variant="report" />
       </div>
     </div>
   );

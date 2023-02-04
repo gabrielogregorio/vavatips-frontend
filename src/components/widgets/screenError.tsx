@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import { ReactElement } from 'react';
 
 type screenErrorType = {
   tryRenderAgain: Function;
 };
 
-export const ScreenError = ({ tryRenderAgain }: screenErrorType) => (
+export const ScreenError = ({ tryRenderAgain }: screenErrorType): ReactElement => (
   <div className="flex items-center justify-center flex-col p-16 border-2 dark:border-gray-700">
     <h2 className="text-xl  dark:text-white">Ooops, aconteceu um problema inesperado</h2>
 
@@ -20,7 +21,7 @@ export const ScreenError = ({ tryRenderAgain }: screenErrorType) => (
 
     <button
       type="button"
-      onClick={() => tryRenderAgain()}
+      onClick={(): void => tryRenderAgain()}
       className="focus:outline-none bg-red-400 text-white px-3.5 py-2 rounded-sm hover:scale-110 transition duration-200">
       Tentar novamente
     </button>

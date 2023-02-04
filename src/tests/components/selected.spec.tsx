@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Selected } from '@/base/selected';
 import { useForm } from 'react-hook-form';
+import { ReactElement } from 'react';
 
 const dataComponent = [
   {
@@ -18,13 +19,21 @@ const dataComponent = [
   },
 ];
 
-const Setup = () => {
+const Setup = (): ReactElement => {
   const {
     register,
     formState: { errors },
   } = useForm();
 
-  return <Selected name="Dificuldade" text="Dificuldade" register={register} errors={errors} render={dataComponent} />;
+  return (
+    <Selected
+      name="Dificuldade"
+      text="Dificuldade"
+      register={register('Dificuldade')}
+      errors={errors}
+      render={dataComponent}
+    />
+  );
 };
 
 describe('<Selected />', () => {

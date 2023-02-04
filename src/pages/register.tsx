@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import Router from 'next/router';
 import { Input } from '@/base/input';
 import { Loader } from '@/base/loader';
@@ -26,9 +26,11 @@ const breadcrumbs = [LINKS.inicio, LINKS.Login];
 export type registrationFormFields = {
   username: string;
   password: string;
+  keyCode: string;
+  passwordConfirmation: string;
 };
 
-const Register = () => {
+const Register = (): ReactElement => {
   const {
     register,
     handleSubmit,
@@ -58,7 +60,7 @@ const Register = () => {
           <Input
             placeholder="Digite seu código de acesso"
             name="keyCode"
-            register={register}
+            register={register('keyCode')}
             type="password"
             label="Código"
             errors={errors}
@@ -69,7 +71,7 @@ const Register = () => {
             name="username"
             type="text"
             label="Usuário"
-            register={register}
+            register={register('username')}
             errors={errors}
           />
 
@@ -78,7 +80,7 @@ const Register = () => {
             name="password"
             type="password"
             label="Senha"
-            register={register}
+            register={register('password')}
             errors={errors}
           />
 
@@ -87,7 +89,7 @@ const Register = () => {
             name="passwordConfirmation"
             type="password"
             label="Confirme uma senha"
-            register={register}
+            register={register('passwordConfirmation')}
             errors={errors}
           />
 

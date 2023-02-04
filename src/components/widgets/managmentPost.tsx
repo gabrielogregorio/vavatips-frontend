@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { ReactElement, useEffect, useState } from 'react';
 import * as uuid from 'uuid';
 import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
@@ -9,8 +10,7 @@ import {
   side as renderSide,
 } from '@/data/data-valorant';
 
-import {  maps as renderMaps,
-} from '@/data/data-valorant-maps';
+import { maps as renderMaps } from '@/data/data-valorant-maps';
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
 import { formatImage } from '@/services/formatEnvironment';
@@ -18,7 +18,7 @@ import { Selected } from '@/base/selected';
 import { Breadcrumb } from '@/widgets/breadcrumb';
 import { Title } from '@/base/title';
 import { Button } from '@/base/button';
-import { IAgent, IMap } from '@/types/posts';
+import { IAgent, IMap, TAbility, TPositionMap } from '@/types/posts';
 import { FaTimes } from 'react-icons/fa';
 import { BsChevronUp, BsChevronDown } from 'react-icons/bs';
 import { navbarEnum } from '@/enums/navbar';
@@ -71,7 +71,8 @@ type registrationFormFields = {
 };
 const FIRST_POSITION = 0;
 const SECOND_POSITION = 1;
-export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType) => {
+const NORMALIZE_COUNTER_STARTING_IN_ONE = 1;
+export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType): ReactElement => {
   const { query, isReady } = useRouter();
   const postId = `${query?.id || ''}`;
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
@@ -115,22 +116,23 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [postId, mode, isReady]);
 
-  const deleteStep = (idPost: string) => {
+  const deleteStep = (idPost: string): void => {
     setImgAdded(imgAdded.filter((item) => item.id !== idPost));
   };
 
-  const putPosition = (idPost: string, action: actionType) => {
+  const putPosition = (idPost: string, action: actionType): void => {
     const positionPut = imgAdded.findIndex((item) => item.id === idPost);
     const copyListDelete = imgAdded[positionPut];
     const copyImgAdded = JSON.parse(JSON.stringify(imgAdded));
 
     let increment = 0;
     const DECREASE_BY = 1;
+    const INITIAL_VALUE = 1;
 
     if (action === 'bottom' && positionPut > FIRST_POSITION) {
       increment = -DECREASE_BY;
     } else if (action === 'top' && positionPut < imgAdded.length) {
-      increment = 1;
+      increment = INITIAL_VALUE;
     }
 
     copyImgAdded.splice(positionPut, SECOND_POSITION);
@@ -138,48 +140,48 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     setImgAdded(copyImgAdded);
   };
 
-  const renderAbilities = () => {
+  const renderAbilities = (): TAbility[] => {
     const agente = watch('agent');
     const filterAbilities: IAgent = renderAgents().filter((agent) => agent.name === agente)?.[FIRST_POSITION];
     return filterAbilities?.abilities ?? [];
   };
 
-  const renderPositionsMap = () => {
+  const renderPositionsMap = (): TPositionMap[] => {
     const mapa: string = watch('map');
     const filterMapPositions: IMap = renderMaps().filter((map) => map.name === mapa)?.[FIRST_POSITION];
     return filterMapPositions?.mapPosition ?? [];
   };
 
-  const showModalWithItem = (idPost: string) => {
+  const showModalWithItem = (idPost: string): void => {
     const item = imgAdded.filter((itemLocal) => itemLocal.id === idPost)[FIRST_POSITION];
     setPropsModal(item);
     setVisibleModal(true);
   };
 
-  const showModal = () => {
+  const showModal = (): void => {
     setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setPropsModal({ description: '', id: '', image: '' });
     setVisibleModal(false);
   };
 
-  const renderSteps = () =>
+  const renderSteps = (): ReactElement[] =>
     imgAdded.map((instruction, key) => (
       <div key={`${instruction.id} ${instruction.image}`} className="w-full">
         <div className="flex">
           <p
             className="flex-1 text-sm text-gray-600 dark:text-gray-200"
-            onClick={() => showModalWithItem(instruction.id)}
+            onClick={(): void => showModalWithItem(instruction.id)}
             role="presentation">
-            {key + 1} - {instruction.description}
+            {key + NORMALIZE_COUNTER_STARTING_IN_ONE} - {instruction.description}
           </p>
           <Button
             className="text-base ml-2 text-red-400"
-            onClick={() => deleteStep(instruction.id)}
-            dataTestid={`deleteStepButton-${key + 1}`}>
+            onClick={(): void => deleteStep(instruction.id)}
+            dataTestid={`deleteStepButton-${key + NORMALIZE_COUNTER_STARTING_IN_ONE}`}>
             <FaTimes />
           </Button>
         </div>
@@ -200,14 +202,14 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <br />
           <Button
             className="top-0 left-2/4 absolute z-btnPost"
-            onClick={() => putPosition(instruction.id, 'bottom')}
-            dataTestid={`btn-top-${key + 1}`}>
+            onClick={(): void => putPosition(instruction.id, 'bottom')}
+            dataTestid={`btn-top-${key + NORMALIZE_COUNTER_STARTING_IN_ONE}`}>
             <BsChevronUp className="text-3xl font-extrabold text-skin-white " />
           </Button>
           <Button
             className="bottom-5 left-2/4 absolute z-btnPost"
-            onClick={() => putPosition(instruction.id, 'top')}
-            dataTestid={`btn-bottom-${key + 1}`}>
+            onClick={(): void => putPosition(instruction.id, 'top')}
+            dataTestid={`btn-bottom-${key + NORMALIZE_COUNTER_STARTING_IN_ONE}`}>
             <BsChevronDown className="text-3xl font-extrabold text-skin-white" />
           </Button>
         </div>
@@ -215,7 +217,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
       </div>
     ));
 
-  const saveModal = (idPost: string, description: string, image: string) => {
+  const saveModal = (idPost: string, description: string, image: string): void => {
     if (idPost) {
       const copyImgAdded: imgType[] = JSON.parse(JSON.stringify(imgAdded));
 
@@ -234,7 +236,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   };
 
-  const deletePost = async (idPost: string) => {
+  const deletePost = (idPost: string): void => {
     deleteThisPost(idPost);
   };
 
@@ -244,7 +246,17 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
     }
   }, [redirect]);
 
-  const onSubmit = async ({ title, description, agent, map, ability, difficult, position, moment, side }) => {
+  const onSubmit = async ({
+    title,
+    description,
+    agent,
+    map,
+    ability,
+    difficult,
+    position,
+    moment,
+    side,
+  }): Promise<void> => {
     const request = {
       description,
       imgs: imgAdded,
@@ -285,7 +297,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             id={propsModal.id}
             description={propsModal.description}
             image={propsModal.image}
-            closeModal={() => closeModal()}
+            closeModal={(): void => closeModal()}
             saveModal={saveModal}
           />
         ) : null}
@@ -294,13 +306,20 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <Title>{mode === 'create' ? 'Criar um post' : 'Editar um post'}</Title>
 
           {mode === 'edit' ? (
-            <Button className="text-skin-secondary-regular" onClick={() => deletePost(postId)}>
+            <Button className="text-skin-secondary-regular" onClick={(): void => deletePost(postId)}>
               Excluir
             </Button>
           ) : null}
 
-          <Input placeholder="" name="title" type="text" label="Titulo" register={register} errors={errors} />
-          <Input placeholder="" name="description" type="text" label="Descrição" register={register} errors={errors} />
+          <Input placeholder="" name="title" type="text" label="Titulo" register={register('title')} errors={errors} />
+          <Input
+            placeholder=""
+            name="description"
+            type="text"
+            label="Descrição"
+            register={register('description')}
+            errors={errors}
+          />
 
           <HrComponent />
 
@@ -308,40 +327,52 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
             <Selected
               name="agent"
               text="Agente"
-              register={register}
+              register={register('agent')}
               errors={errors}
               render={convertToSelectedRender(renderAgents())}
             />
             <Selected
               name="map"
               text="Mapa"
-              register={register}
+              register={register('map')}
               errors={errors}
               render={convertToSelectedRender(renderMaps())}
             />
-            <Selected name="ability" text="Habilidade" register={register} errors={errors} render={renderAbilities()} />
+            <Selected
+              name="ability"
+              text="Habilidade"
+              register={register('ability')}
+              errors={errors}
+              render={renderAbilities()}
+            />
           </GroupInputMultiple>
 
           <GroupInputMultiple>
             <Selected
               name="position"
               text="Posição"
-              register={register}
+              register={register('position')}
               errors={errors}
               render={renderPositionsMap()}
             />
-            <Selected name="moment" text="Momento" register={register} errors={errors} render={renderMoment()} />
+            <Selected
+              name="moment"
+              text="Momento"
+              register={register('moment')}
+              errors={errors}
+              render={renderMoment()}
+            />
             <Selected
               name="difficult"
               text="Dificuldade"
-              register={register}
+              register={register('difficult')}
               errors={errors}
               render={renderDifficult()}
             />
           </GroupInputMultiple>
 
           <GroupInputMultiple>
-            <Selected name="side" text="Lado" register={register} errors={errors} render={renderSide()} />
+            <Selected name="side" text="Lado" register={register('side')} errors={errors} render={renderSide()} />
           </GroupInputMultiple>
 
           <HrComponent />
@@ -358,7 +389,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
 
           <div className="mt-5 w-full">
             <GroupInput>
-              <Button className="border-red-400 text-red-400 px-3.5 py-2 text-sm" onClick={() => showModal()}>
+              <Button className="border-red-400 text-red-400 px-3.5 py-2 text-sm" onClick={(): void => showModal()}>
                 Novo Passo
               </Button>
             </GroupInput>

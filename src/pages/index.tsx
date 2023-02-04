@@ -10,10 +10,12 @@ import { SubContainer } from '@/base/subContainer';
 import { modelNavbarPublic } from '@/schemas/navbar';
 import { Api } from '@/services/api';
 import { Footer } from '@/layout/footer';
+import { ReactElement } from 'react';
+import { GetStaticProps } from 'next';
 
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const resp = await Api.get('/maps');
   const mapsApi = await resp.data;
 
@@ -24,8 +26,8 @@ export const getStaticProps = async () => {
   };
 };
 
-const Index = ({ mapsApi }: { mapsApi: string[] }) => {
-  const renderMap = () =>
+const Index = ({ mapsApi }: { mapsApi: string[] }): ReactElement => {
+  const renderMap = (): ReactElement[] =>
     maps().map((map) =>
       mapsApi.includes(map.name) ? (
         <div key={map.id} className="flex flex-col">

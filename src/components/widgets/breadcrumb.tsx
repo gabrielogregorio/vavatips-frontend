@@ -1,12 +1,15 @@
 import Link from 'next/link';
+import { ReactElement } from 'react';
 
 type propsType = {
   breadcrumbs: { url: string; text: string }[];
 };
 
-export const Breadcrumb = ({ breadcrumbs }: propsType) => {
-  const renderBreadCrumb = () => {
-    const lastItem = breadcrumbs.length - 1;
+const LAST_ITEM = -1;
+
+export const Breadcrumb = ({ breadcrumbs }: propsType): ReactElement => {
+  const renderBreadCrumb = (): ReactElement[] => {
+    const lastItem = breadcrumbs.length - LAST_ITEM;
 
     return breadcrumbs.map((breadcrumb, index) => (
       <div key={`${breadcrumb.text}`} className="p-1 pb-0 pt-0 flex items-center ">

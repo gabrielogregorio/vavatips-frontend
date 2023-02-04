@@ -2,8 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Input } from '@/base/input';
 import { useForm } from 'react-hook-form';
+import { ReactElement } from 'react';
 
-const Setup = () => {
+const Setup = (): ReactElement => {
   const {
     register,
     formState: { errors },
@@ -16,7 +17,7 @@ const Setup = () => {
       label="label from input"
       type="text"
       disabled={false}
-      register={register}
+      register={register('description')}
       errors={errors}
     />
   );
