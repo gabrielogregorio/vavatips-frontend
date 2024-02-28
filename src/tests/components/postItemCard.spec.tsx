@@ -1,11 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
-import mockPosts from '@/mock/mockPosts.json';
 import { MockApp } from '@/mock/App.Mock';
-import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { Posts } from '@/widgets/postsItem';
-import { ERROR_IN_SERVER_HTTP_CODE } from '@/utils/statusCode';
 
 jest.mock('next/router', () => ({
   useRouter: () => ({
@@ -15,8 +10,6 @@ jest.mock('next/router', () => ({
     route: '',
   }),
 }));
-
-let count = 0;
 
 const posts = [
   {
@@ -53,31 +46,7 @@ const posts = [
   },
 ];
 
-const handlers = [
-  rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => {
-    if (count === 2) {
-      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
-    }
-    count += 1;
-    const query = req.url.searchParams;
-    query.append('agent', 'Sova');
-    query.append('map', 'Ascent');
-    query.append('page', '1');
-    query.append('filters', '');
-
-    return res(ctx.json(mockPosts));
-  }),
-];
-
-const server = setupServer(...handlers);
-
 describe('<PostCard />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should test normal mode', async () => {
     render(
       <MockApp>

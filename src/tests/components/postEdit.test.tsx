@@ -1,17 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { MockApp } from '@/mock/App.Mock';
 import EditPost from '@/pages/admin/post-edit';
-import { URL_DELETE_POST_BY_ID, URL_GET_POST_BY_ID, URL_PUT_EDIT_POST_BY_ID } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
-import { ParsedUrlQuery } from 'querystring';
 import postBase from '@/mock/responseGetPostById.json';
 import { verifyListRender } from '@/utils/verifyListRender';
 import { expectTitlePost } from '@/utils/expectTitlePost';
 import { ERROR_IN_SERVER_HTTP_CODE, ERROR_NOT_FOUND_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import { Api } from '@/services/api';
+import { CreateAxiosErrorMock, createResponseMock } from '@/mock/createResponseMock';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -31,50 +29,47 @@ jest.mock('next/router', () => ({
   }),
 }));
 
-const handlers = [
-  rest.get(URL_GET_POST_BY_ID, async (req, res, ctx) => {
-    if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
-      return res(ctx.json(postBase));
-    }
-    return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
-  }),
+const spyGet = jest.spyOn(Api, 'get');
 
-  rest.put(URL_PUT_EDIT_POST_BY_ID, async (req, res, ctx) => {
-    const { title, description, tags, imgs } = req.body as ParsedUrlQuery;
-    const postIsValid =
-      title === `${postBase.title} concatenate new title` &&
-      description === postBase.description &&
-      `${tags}` === `${postBase.tags}` &&
-      `${imgs}` === `${postBase.imgs}`;
+spyGet.mockImplementation((url) => {
+  if (url.includes('/617d44c81bc4243f9b2d5a67')) {
+    return Promise.resolve(createResponseMock(postBase, 200));
+  }
 
-    if (req.params.postId !== '617d44c81bc4243f9b2d5a67') {
-      return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
-    }
 
-    if (postIsValid) {
-      return res(ctx.status(SUCCESS_HTTP_CODE));
-    }
+  return Promise.reject(new CreateAxiosErrorMock({ response: { data: '', status: ERROR_NOT_FOUND_HTTP_CODE } }));
+});
 
-    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
-  }),
+const spyPut = jest.spyOn(Api, 'put');
+spyPut.mockImplementation((url, payload) => {
+  const { title, description, tags, imgs } = payload;
+  const postIsValid =
+    title === `${postBase.title} concatenate new title` &&
+    description === postBase.description &&
+    `${tags}` === `${postBase.tags}` &&
+    `${imgs}` === `${postBase.imgs}`;
 
-  rest.delete(URL_DELETE_POST_BY_ID, async (req, res, ctx) => {
-    if (req.params.postId === '617d44c81bc4243f9b2d5a67') {
-      return res(ctx.status(SUCCESS_HTTP_CODE));
-    }
-    return res(ctx.status(ERROR_NOT_FOUND_HTTP_CODE));
-  }),
-];
+  if (url.includes('617d44c81bc4243f9b2d5a67') === false) {
+    return Promise.reject(new CreateAxiosErrorMock({ response: { data: '', status: ERROR_NOT_FOUND_HTTP_CODE } }));
+  }
 
-const server = setupServer(...handlers);
+  if (postIsValid) {
+    return Promise.resolve(createResponseMock({}, SUCCESS_HTTP_CODE));
+  }
+
+  return Promise.reject(new CreateAxiosErrorMock({ response: { data: '', status: ERROR_IN_SERVER_HTTP_CODE } }));
+});
+
+const spyDelete = jest.spyOn(Api, 'delete');
+spyDelete.mockImplementation((url) => {
+  if (url.includes('617d44c81bc4243f9b2d5a67') === false) {
+    return Promise.resolve(createResponseMock({}, SUCCESS_HTTP_CODE));
+  }
+
+  return Promise.reject(new CreateAxiosErrorMock({ response: { data: '', status: ERROR_NOT_FOUND_HTTP_CODE } }));
+});
 
 describe('<EditPost />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render edit post screen and update post', async () => {
     render(
       <MockApp>
@@ -94,12 +89,12 @@ describe('<EditPost />', () => {
     expect(inputTitle.value).toEqual('title managment post');
     expect(inputDescription.value).toEqual('description1');
 
-    userEvent.type(inputTitle, ' concatenate new title');
+    await userEvent.type(inputTitle, ' concatenate new title');
 
     verifyListRender();
   });
 
-  it('should render edit post screen and update post', async () => {
+  it('3should render edit post screen and update post', async () => {
     render(
       <MockApp>
         <EditPost />
@@ -118,11 +113,11 @@ describe('<EditPost />', () => {
     expect(inputTitle.value).toEqual('title managment post');
     expect(inputDescription.value).toEqual('description1');
 
-    userEvent.type(inputTitle, ' concatenate new title');
+    await userEvent.type(inputTitle, ' concatenate new title');
 
     verifyListRender();
 
-    userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Publicar Dica' }));
 
     await waitByLoading();
 
@@ -140,7 +135,7 @@ describe('<EditPost />', () => {
     await waitByLoading();
 
     expectTitlePost();
-    userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Excluir' }));
 
     expect(Router.push).toHaveBeenCalledWith('/admin/view-posts');
 

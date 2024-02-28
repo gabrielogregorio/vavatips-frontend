@@ -12,7 +12,7 @@ export const ScreenError = ({ tryRenderAgain }: screenErrorType): ReactElement =
     <p className="mt-4 dark:text-white">Isso será reportado aos desenvolvedores, foi mal pela situação</p>
 
     <div className="relative w-full h-64">
-      <Image layout="fill" src="/images/assets/problem.svg" />
+      <Image width={500} height={500} alt="" src="/images/assets/problem.svg" />
     </div>
 
     <div className="text-xs text-white mb-2">

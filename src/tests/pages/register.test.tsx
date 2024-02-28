@@ -1,12 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { MockApp } from '@/mock/App.Mock';
-import { URL_POST_CREATE_NEW_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
-import { ParsedUrlQuery } from 'querystring';
 import { ReactNode } from 'react';
 import Register from '@/pages/register';
 import {
@@ -16,6 +12,8 @@ import {
   ERROR_NOT_ACCESS_HTTP_CODE,
   SUCCESS_HTTP_CODE,
 } from '@/utils/statusCode';
+import { Api } from '@/services/api';
+import { CreateAxiosErrorMock, createResponseMock } from '@/mock/createResponseMock';
 
 const mock = {
   passwordToCreated: 'passwordConfirm',
@@ -39,61 +37,71 @@ jest.mock(
 
 const confirmYourPassword = 'Confirme uma senha';
 
-const handlers = [
-  rest.post(URL_POST_CREATE_NEW_USER, async (req, res, ctx) => {
-    const validCode = 'codeCadasterValid';
-    const { username, password, code } = req.body as ParsedUrlQuery;
-    const codIsInvalid = code !== validCode;
-    const forceError500 = username === 'forceError500';
-    const userExists = username === 'userIfExists';
+const spyOn = jest.spyOn(Api, 'post');
 
-    if (forceError500) {
-      return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
-    }
+spyOn.mockImplementation((url, payload) => {
+  const validCode = 'codeCadasterValid';
+  const { username, password, code } = payload;
+  const codIsInvalid = code !== validCode;
+  const forceError500 = username === 'forceError500';
+  const userExists = username === 'userIfExists';
 
-    if (userExists) {
-      return res(ctx.status(ERROR_CONFLICT_HTTP_CODE), ctx.json({ error: 'Username já está cadastrado!' }));
-    }
+  if (forceError500) {
+    return Promise.reject(new CreateAxiosErrorMock({ response: { status: ERROR_IN_SERVER_HTTP_CODE, data: '' } }));
+  }
 
-    if (codIsInvalid) {
-      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'invalid code' }));
-    }
+  if (userExists) {
+    return Promise.reject(
+      new CreateAxiosErrorMock({
+        response: { status: ERROR_CONFLICT_HTTP_CODE, data: { error: 'Username já está cadastrado!' } },
+      }),
+    );
+  }
 
-    if (
-      username === undefined ||
-      username === null ||
-      username === '' ||
-      password === undefined ||
-      password === null ||
-      password === ''
-    ) {
-      return res(ctx.status(BAD_REQUEST_HTTP_CODE));
-    }
+  if (codIsInvalid) {
+    return Promise.reject(
+      new CreateAxiosErrorMock({
+        response: { status: ERROR_NOT_ACCESS_HTTP_CODE, data: { msg: 'invalid code' } },
+      }),
+    );
+  }
 
-    if (username === 'usernameTest' && password === 'passwordConfirm' && code === 'codeCadasterValid') {
-      return res(
-        ctx.status(SUCCESS_HTTP_CODE),
-        ctx.json({
+  if (
+    username === undefined ||
+    username === null ||
+    username === '' ||
+    password === undefined ||
+    password === null ||
+    password === ''
+  ) {
+    return Promise.reject(
+      new CreateAxiosErrorMock({
+        response: { status: BAD_REQUEST_HTTP_CODE, data: {} },
+      }),
+    );
+  }
+
+  if (username === 'usernameTest' && password === 'passwordConfirm' && code === 'codeCadasterValid') {
+    return Promise.resolve(
+      createResponseMock(
+        {
           id: '1234567890',
           image: '',
           username,
-        }),
-      );
-    }
+        },
+        SUCCESS_HTTP_CODE,
+      ),
+    );
+  }
 
-    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE));
-  }),
-];
-
-const server = setupServer(...handlers);
+  return Promise.reject(
+    new CreateAxiosErrorMock({
+      response: { status: ERROR_IN_SERVER_HTTP_CODE, data: {} },
+    }),
+  );
+});
 
 describe('<Register />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render cadaster screen and cadaster', async () => {
     render(
       <MockApp>
@@ -104,10 +112,10 @@ describe('<Register />', () => {
     const NON_CALLED = 0;
     expect(Router.push).toHaveBeenCalledTimes(NON_CALLED);
 
-    userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
-    userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
-    userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
+    await userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
+    await userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
     const inputCod: HTMLInputElement = screen.getByLabelText('Código');
     const inputUser: HTMLInputElement = screen.getByLabelText('Usuário');
@@ -119,7 +127,7 @@ describe('<Register />', () => {
     expect(inputPassword.value).toEqual('passwordConfirm');
     expect(inputConfirmPassword.value).toEqual('passwordConfirm');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await waitByLoading();
 
@@ -136,12 +144,12 @@ describe('<Register />', () => {
 
     expect(Router.push).toHaveBeenCalledWith('');
 
-    userEvent.type(screen.getByLabelText('Código'), 'userIfExists');
-    userEvent.type(screen.getByLabelText('Usuário'), 'userIfExists');
-    userEvent.type(screen.getByLabelText('Senha'), 'userIfExists');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'userIfExists');
+    await userEvent.type(screen.getByLabelText('Código'), 'userIfExists');
+    await userEvent.type(screen.getByLabelText('Usuário'), 'userIfExists');
+    await userEvent.type(screen.getByLabelText('Senha'), 'userIfExists');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'userIfExists');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await waitByLoading();
     expect(screen.getByText('Esse e-mail já está cadastrado')).toBeDefined();
@@ -156,12 +164,12 @@ describe('<Register />', () => {
 
     expect(Router.push).toHaveBeenCalledWith('');
 
-    userEvent.type(screen.getByLabelText('Código'), 'forceError500');
-    userEvent.type(screen.getByLabelText('Usuário'), 'forceError500');
-    userEvent.type(screen.getByLabelText('Senha'), 'forceError500');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'forceError500');
+    await userEvent.type(screen.getByLabelText('Código'), 'forceError500');
+    await userEvent.type(screen.getByLabelText('Usuário'), 'forceError500');
+    await userEvent.type(screen.getByLabelText('Senha'), 'forceError500');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'forceError500');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await waitByLoading();
     expect(screen.getByText(/Erro ao cadastrar usuário/i)).toBeDefined();
@@ -174,12 +182,12 @@ describe('<Register />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Código'), 'codeCadasterInvalidValid');
-    userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
-    userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText('Código'), 'codeCadasterInvalidValid');
+    await userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
+    await userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirm');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await waitByLoading();
 
@@ -193,12 +201,12 @@ describe('<Register />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
-    userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
-    userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
+    await userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
+    await userEvent.type(screen.getByLabelText('Usuário'), mock.usernameToCreated);
+    await userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await screen.findByText(/Senhas não combinam/i);
   });
@@ -210,12 +218,12 @@ describe('<Register />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
+    await userEvent.type(screen.getByLabelText('Código'), 'codeCadasterValid');
 
-    userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
-    userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
+    await userEvent.type(screen.getByLabelText('Senha'), 'passwordConfirm');
+    await userEvent.type(screen.getByLabelText(confirmYourPassword), 'passwordConfirmDeferent');
 
-    userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cadastrar' }));
 
     await screen.findByText(/Digite um usuário!/i);
   });

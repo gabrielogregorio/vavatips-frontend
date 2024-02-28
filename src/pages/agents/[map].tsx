@@ -48,6 +48,8 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }): ReactElement => {
     return agents().map((agent) =>
       agentsApi.includes(agent.name) ? (
         <ImageCard
+          width={587}
+          height={900}
           key={agent.id}
           href={`/posts/${mapSelected}/${agent.name}`}
           srcImage={agent.img}

@@ -1,11 +1,10 @@
 import { screen, render } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import Suggestions from '@/pages/admin/suggestions';
 import { MockApp } from '@/mock/App.Mock';
-import { URL_GET_ALL_SUGGESTIONS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
+import { Api } from '@/services/api';
+import { createResponseMock } from '@/mock/createResponseMock';
 
 jest.mock('next/router', () => ({
   useRouter: () => ({
@@ -23,45 +22,40 @@ jest.mock(
       children,
 );
 
-const handlers = [
-  rest.get(URL_GET_ALL_SUGGESTIONS, async (req, res, ctx) =>
-    res(
-      ctx.json([
-        {
-          description: 'description 111',
-          email: 'email@email.com111',
-          id: '111',
-        },
-        {
-          description: 'description 222',
-          email: 'email@email.com222',
-          id: '222',
-        },
-        {
-          description: 'description 333',
-          email: 'email@email.com333',
-          id: '333',
-        },
-        {
-          description: 'description 444',
-          email: 'email@email.com444',
-          id: '444',
-        },
-      ]),
-    ),
-  ),
-];
-
-const server = setupServer(...handlers);
+const spyOn = jest.spyOn(Api, 'get');
 
 describe('<Suggestions />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
+  beforeEach(() => {});
 
   it('should render suggestion screen', async () => {
+    spyOn.mockImplementation(() =>
+      createResponseMock(
+        [
+          {
+            description: 'description 111',
+            email: 'email@email.com111',
+            id: '111',
+          },
+          {
+            description: 'description 222',
+            email: 'email@email.com222',
+            id: '222',
+          },
+          {
+            description: 'description 333',
+            email: 'email@email.com333',
+            id: '333',
+          },
+          {
+            description: 'description 444',
+            email: 'email@email.com444',
+            id: '444',
+          },
+        ],
+        200,
+      ),
+    );
+
     render(
       <MockApp>
         <Suggestions />

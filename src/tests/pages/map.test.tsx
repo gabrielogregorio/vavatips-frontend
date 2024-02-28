@@ -31,6 +31,6 @@ describe('<MapScreen />', () => {
     expect(screen.getByRole('img', { name: 'Ascent' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Icebox' })).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Split/i));
+    await userEvent.click(screen.getByText(/Split/i));
   });
 });

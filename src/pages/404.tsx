@@ -20,7 +20,7 @@ const Error404 = (): ReactElement => (
       <Title>Oooops, acho que essa página não existe!</Title>
 
       <div className="relative w-full h-72">
-        <Image layout="fill" src="/images/assets/404.svg" />
+        <Image width={500} height={500} src="/images/assets/404.svg" alt="" aria-hidden />
       </div>
     </SubContainer>
 

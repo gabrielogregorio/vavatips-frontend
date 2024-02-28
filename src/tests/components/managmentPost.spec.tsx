@@ -1,10 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import userEvent from '@testing-library/user-event';
 import { MockApp } from '@/mock/App.Mock';
 import { CreatePostManagement } from '@/widgets/managmentPost';
-import { URL_GET_POST_EDITABLE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { navbarEnum } from '@/enums/navbar';
 import postBase from '@/mock/responseGetPostById.json';
@@ -12,6 +9,8 @@ import { DATA_ALT, DATA_SRC } from '@/helpers/variables';
 import defaultListFromRender from '@/mock/defaultListFromRender.json';
 import { verifyListRender } from '@/utils/verifyListRender';
 import { expectTitlePost } from '@/utils/expectTitlePost';
+import { Api } from '@/services/api';
+import { createResponseMock } from '@/mock/createResponseMock';
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -24,17 +23,11 @@ jest.mock('next/router', () => ({
   }),
 }));
 
-const handlers = [rest.get(URL_GET_POST_EDITABLE, async (_req, res, ctx) => res(ctx.json(postBase)))];
+const spyOn = jest.spyOn(Api, 'get');
 
-const server = setupServer(...handlers);
+spyOn.mockImplementation(() => createResponseMock(postBase, 200));
 
 describe('<CreatePostManagement />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should delete step', async () => {
     render(
       <MockApp>
@@ -69,7 +62,7 @@ describe('<CreatePostManagement />', () => {
     expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_ALT, defaultListFromRender[THIRD_POSITION].alt);
     expect(listOfImages[THIRD_POSITION]).toHaveAttribute(DATA_SRC, defaultListFromRender[THIRD_POSITION].src);
 
-    userEvent.click(screen.getByTestId('deleteStepButton-2'));
+    await userEvent.click(screen.getByTestId('deleteStepButton-2'));
 
     await waitByLoading();
 
@@ -95,7 +88,7 @@ describe('<CreatePostManagement />', () => {
 
     verifyListRender();
 
-    userEvent.click(screen.getByTestId('btn-top-2'));
+    await userEvent.click(screen.getByTestId('btn-top-2'));
 
     verifyListRender([
       { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
@@ -103,7 +96,7 @@ describe('<CreatePostManagement />', () => {
       { alt: 'title1_img3', src: '/image_333', title: '3 - title1_img3' },
     ]);
 
-    userEvent.click(screen.getByTestId('btn-bottom-2'));
+    await userEvent.click(screen.getByTestId('btn-bottom-2'));
 
     verifyListRender([
       { alt: 'title1_img2', src: '/image_222', title: '1 - title1_img2' },
@@ -130,11 +123,11 @@ describe('<CreatePostManagement />', () => {
     expectTitlePost();
     verifyListRender();
 
-    userEvent.click(screen.getByText('2 - title1_img2'));
+    await userEvent.click(screen.getByText('2 - title1_img2'));
 
-    userEvent.type(screen.getByLabelText(/Descrição post/i), 'add in final');
+    await userEvent.type(screen.getByLabelText(/Descrição post/i), 'add in final');
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByText('1 - title1_img1')).toBeInTheDocument();
     await screen.findByText('2 - title1_img2add in final');

@@ -1,15 +1,12 @@
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { ModalMessage } from '@/widgets/modalMessage';
 import { ModalOfSuggestion } from '@/widgets/modalOfSuggestion';
 import { useModalContext } from '@/contexts/modalSuggestion';
 import { MockApp } from '@/mock/App.Mock';
-import { URL_POST_SUGGESTION } from '@/mock/ROUTES_API';
-import { ParsedUrlQuery } from 'querystring';
-import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import { Api } from '@/services/api';
+import { CreateAxiosErrorMock, createResponseMock } from '@/mock/createResponseMock';
 
 jest.mock('next/router', () => ({
   useRouter: () => ({
@@ -49,26 +46,22 @@ jest.mock(
 const defaultEmail = 'myEmail@email.com';
 const defaultDescription = 'my long description for problem';
 
-const handlers = [
-  rest.post(URL_POST_SUGGESTION, async (req, res, ctx) => {
-    const { idPost, email, description } = req.body as ParsedUrlQuery;
+const spy = jest.spyOn(Api, 'post');
+spy.mockImplementation(() =>
+  //  const { idPost, email, description } = payload;
 
-    const requestIsCorrectly =
-      (idPost === '12' && email === defaultEmail && description === defaultDescription) || email === 'email@email.com';
-    if (requestIsCorrectly) {
-      return res(
-        ctx.status(SUCCESS_HTTP_CODE),
-        ctx.json({
-          description: 'dddssd',
-          email: 'vv',
-          post_id: 'aaa',
-        }),
-      );
-    }
-    return res(ctx.status(ERROR_IN_SERVER_HTTP_CODE), ctx.json({ error: 'Erro no Servidor' }));
-  }),
-];
-
+  // const requestIsCorrectly =
+  //   (idPost === '12' && email === defaultEmail && description === defaultDescription) || email === 'email@email.com';
+  // if (requestIsCorrectly) {
+  createResponseMock(
+    {
+      description: 'dddssd',
+      email: 'vv',
+      post_id: 'aaa',
+    },
+    200,
+  ),
+);
 const Setup = ({ notId }: { notId?: boolean }) => {
   const { setModalSuggestion } = useModalContext();
   const [isFirstLoading, setIsFirstLoading] = useState(true);
@@ -93,17 +86,9 @@ Setup.defaultProps = {
   notId: false,
 };
 
-const server = setupServer(...handlers);
-
 const optionalEmail = 'Email para retorno (Opcional)';
 
 describe('<ModalOfSuggestion />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render modal suggestion and send suggestion', async () => {
     render(
       <MockApp>
@@ -111,11 +96,11 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
+    await userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
 
-    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
+    await userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await waitForSuccessfully();
   });
@@ -127,27 +112,31 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText(optionalEmail), 'email@email.com');
+    await userEvent.type(screen.getByLabelText(optionalEmail), 'email@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
+    await userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await waitForSuccessfully();
   });
 
   it('should render modal suggestion and error to send suggestion', async () => {
+    spy.mockImplementation(() =>
+      Promise.reject(new CreateAxiosErrorMock({ message: 'Error', code: '500', response: { status: 500, data: '' } })),
+    );
+
     render(
       <MockApp>
         <Setup />
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText(optionalEmail), 'invalidEmailApi@email.com');
+    await userEvent.type(screen.getByLabelText(optionalEmail), 'invalidEmailApi@email.com');
 
-    userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
+    await userEvent.type(screen.getByLabelText('Descrição'), defaultDescription);
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
     await screen.findByText('Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores');
   });
 
@@ -158,7 +147,7 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.click(screen.getByTestId('closeModal'));
+    await userEvent.click(screen.getByTestId('closeModal'));
   });
 
   it('should closed Modal in button cancel', async () => {
@@ -168,7 +157,7 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
   });
 
   it('should render modal suggestion and send suggestion', async () => {
@@ -178,13 +167,13 @@ describe('<ModalOfSuggestion />', () => {
       </MockApp>,
     );
 
-    userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.type(screen.getByLabelText(optionalEmail), defaultEmail);
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await screen.findByText('Essa descrição está muito curta');
 
-    userEvent.type(screen.getByLabelText('Descrição'), 'small');
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await userEvent.type(screen.getByLabelText('Descrição'), 'small');
+    await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await screen.findByText('Essa descrição está muito curta');
   });

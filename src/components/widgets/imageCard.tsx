@@ -7,8 +7,10 @@ type imageCardType = {
   srcImage: string;
   titleImage: string;
   heightImage: string;
+  width: number;
+  height: number;
 };
-export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCardType): ReactElement => {
+export const ImageCard = ({ href, srcImage, titleImage, heightImage, height, width }: imageCardType): ReactElement => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleWithIsLoadedImage = (): void => {
@@ -26,7 +28,8 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage }: imageCard
             isLoaded ? '' : 'wait-load-pulse'
           }`}>
           <Image
-            layout="fill"
+            height={height}
+            width={width}
             className="flex-1 object-cover"
             src={srcImage}
             data-src={srcImage}

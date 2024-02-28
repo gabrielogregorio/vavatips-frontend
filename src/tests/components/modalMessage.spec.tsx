@@ -44,7 +44,7 @@ describe('<ModalMessage />', () => {
     );
 
     expect(screen.getByText(msgSuccess)).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(screen.queryByText(msgSuccess)).not.toBeInTheDocument();
   });
 
@@ -56,7 +56,7 @@ describe('<ModalMessage />', () => {
     );
 
     expect(screen.getByText(msgError)).toBeInTheDocument();
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(screen.queryByText(msgError)).not.toBeInTheDocument();
   });
 });

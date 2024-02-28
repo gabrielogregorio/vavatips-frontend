@@ -1,12 +1,12 @@
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import { Modal } from '@/widgets/modal';
-import { URL_POST_UPLOAD_FILE } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
-import { SUCCESS_HTTP_CODE } from '@/utils/statusCode';
+import { Api } from '@/services/api';
+import { createResponseMock } from '@/mock/createResponseMock';
+
+const spyApi = jest.spyOn(Api, 'post');
 
 const descriptionPost = 'Descrição post';
 const textDescriptionPost = 'how test description';
@@ -31,20 +31,14 @@ jest.mock(
       children,
 );
 
-const handlers = [
-  rest.post(URL_POST_UPLOAD_FILE, async (req, res, ctx) =>
-    res(ctx.status(SUCCESS_HTTP_CODE), ctx.json({ filename: linkCloud })),
-  ),
-];
-
-const server = setupServer(...handlers);
-
 describe('<Modal />', () => {
-  beforeAll(() => server.listen());
+  beforeEach(() => {
+    spyApi.mockImplementation(() => {
+      const response = createResponseMock({ filename: linkCloud }, 200);
 
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
+      return Promise.resolve(response);
+    });
+  });
 
   it('should render agent screen and write description', async () => {
     const closeModal = jest.fn();
@@ -61,7 +55,7 @@ describe('<Modal />', () => {
       />,
     );
 
-    userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
+    await userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
     const textArea: HTMLInputElement = screen.getByLabelText(descriptionPost);
     expect(textArea.value).toEqual(textDescriptionPost);
   });
@@ -82,11 +76,11 @@ describe('<Modal />', () => {
     );
 
     expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
-    userEvent.click(screen.getByTestId('closeModal'));
+    await await userEvent.click(screen.getByTestId('closeModal'));
     expect(closeModal).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
-  it('should test close Modal', async () => {
+  it('should test close Modal and cancel', async () => {
     const closeModal = jest.fn();
     const saveModal = jest.fn();
 
@@ -102,13 +96,14 @@ describe('<Modal />', () => {
     );
 
     expect(closeModal).toHaveBeenCalledTimes(NOT_CALLED);
-    userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
+    await await userEvent.click(screen.getByRole('button', { name: 'Cancelar' }));
     expect(closeModal).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
   it('should render agent screen, write description, add upload and save', async () => {
     const closeModal = jest.fn();
     const saveModal = jest.fn();
+    expect(spyApi).toHaveBeenCalledTimes(0);
 
     render(
       <Modal
@@ -120,21 +115,26 @@ describe('<Modal />', () => {
         saveModal={saveModal}
       />,
     );
-    userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
+    await userEvent.type(screen.getByLabelText(descriptionPost), textDescriptionPost);
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
 
     const file = new File(['hello'], 'hello.png', { type: 'image/png' });
     const inputFIle: HTMLInputElement = screen.getByLabelText('Adicionar Imagem');
 
-    userEvent.upload(inputFIle, file);
+    await userEvent.upload(inputFIle, file);
     await waitByLoading();
 
     const FIRST_POSITION = 0;
     expect(inputFIle.files[FIRST_POSITION]).toStrictEqual(file);
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    const formData = new FormData();
+    formData.append('image', inputFIle.files[FIRST_POSITION]);
+
+    await await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     expect(screen.getByRole('img')).toHaveAttribute('data-src', linkCloud);
+
+    expect(spyApi).toHaveBeenCalledWith('/postLoadFile', formData);
 
     await waitFor(() => expect(saveModal).toHaveBeenCalledWith('123', textDescriptionPost, linkCloud));
   });
@@ -158,9 +158,9 @@ describe('<Modal />', () => {
     expect(screen.getByRole('img')).toHaveAttribute('data-src', 'https://uploads/file1');
     expect(inputDescription.value).toEqual('myDescription');
 
-    userEvent.type(screen.getByLabelText(descriptionPost), ' how contatenate description');
+    await userEvent.type(screen.getByLabelText(descriptionPost), ' how contatenate description');
 
-    userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
+    await await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
 
     await waitFor(() =>
       expect(saveModal).toHaveBeenCalledWith(

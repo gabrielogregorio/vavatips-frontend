@@ -1,13 +1,13 @@
 import { screen, render } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import Router from 'next/router';
 import Dashboard from '@/pages/admin/dashboard';
 import { MockApp } from '@/mock/App.Mock';
-import { URL_GET_DASHBOARD, URL_GET_YOUR_USER } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { ReactNode } from 'react';
-import { ERROR_NOT_ACCESS_HTTP_CODE } from '@/utils/statusCode';
+import { Api } from '@/services/api';
+import { CreateAxiosErrorMock, createResponseMock } from '@/mock/createResponseMock';
+
+const spyOn = jest.spyOn(Api, 'get');
 
 jest.mock('next/router', () => ({
   push: jest.fn(),
@@ -26,48 +26,37 @@ jest.mock(
       children,
 );
 
-let tryNumbers = 0;
-const handlers = [
-  rest.get(URL_GET_DASHBOARD, async (req, res, ctx) =>
-    res(
-      ctx.json({
-        countAlAgents: 30,
-        countAlMaps: 15,
-        countAll: 134,
-        countAllPosts: 190,
-        countAllSuggestions: 10,
-        countAllUsers: 3,
-        countIps: 318,
-      }),
-    ),
-  ),
-
-  rest.get(URL_GET_YOUR_USER, async (req, res, ctx) => {
-    if (tryNumbers === 1) {
-      return res(ctx.status(ERROR_NOT_ACCESS_HTTP_CODE), ctx.json({ msg: 'jwt expired' }));
-    }
-    tryNumbers += 1;
-
-    return res(
-      ctx.json({
-        id: '12345678',
-        image: 'image.png',
-        username: 'codigo limpo?',
-      }),
-    );
-  }),
-];
-
-const server = setupServer(...handlers);
-
 describe('<Dashboard />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render dashboard', async () => {
+    spyOn.mockImplementation((config) => {
+      if (config === '/dashboard') {
+        return createResponseMock(
+          {
+            countAlAgents: 30,
+            countAlMaps: 15,
+            countAll: 134,
+            countAllPosts: 190,
+            countAllSuggestions: 10,
+            countAllUsers: 3,
+            countIps: 318,
+          },
+          200,
+        );
+      }
+
+      if (config === '/user') {
+        return createResponseMock(
+          {
+            id: '12345678',
+            image: 'image.png',
+            username: 'codigo limpo?',
+          },
+          200,
+        );
+      }
+
+      throw new Error('unknown');
+    });
     render(
       <MockApp>
         <Dashboard />
@@ -87,6 +76,15 @@ describe('<Dashboard />', () => {
   });
 
   it('should force error jwt', async () => {
+    spyOn.mockImplementation(() => {
+      throw new CreateAxiosErrorMock({
+        response: {
+          data: { msg: 'jwt expired' },
+          status: 403,
+        },
+      });
+    });
+
     render(
       <MockApp>
         <Dashboard />

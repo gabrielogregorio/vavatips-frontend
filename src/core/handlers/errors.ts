@@ -13,6 +13,7 @@ type handleInputErrorsType = {
 
 const ERROR_ON_GET_STATUS = 0;
 const handleInputErrors = (error: AxiosError): handleInputErrorsType => {
+  
   const statusCode = error?.response?.status ?? ERROR_ON_GET_STATUS;
 
   return {

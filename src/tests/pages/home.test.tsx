@@ -61,7 +61,7 @@ describe('<HomeScreen />', () => {
     const buttonNext = screen.getAllByLabelText('Proximo item')[FIRST_POSITION];
 
     expect(screen.getByAltText(posts[FIRST_POSITION].imgs[FIRST_POSITION].description)).toBeInTheDocument();
-    userEvent.click(buttonNext);
+    await userEvent.click(buttonNext);
 
     await waitFor(
       () => {
@@ -70,7 +70,7 @@ describe('<HomeScreen />', () => {
       { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
-    userEvent.click(buttonPrev);
+    await userEvent.click(buttonPrev);
 
     await waitFor(
       () => {
@@ -79,8 +79,8 @@ describe('<HomeScreen />', () => {
       { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
-    userEvent.click(buttonNext);
-    userEvent.click(buttonNext);
+    await userEvent.click(buttonNext);
+    await userEvent.click(buttonNext);
 
     await waitFor(
       () => {
@@ -89,7 +89,7 @@ describe('<HomeScreen />', () => {
       { timeout: TIME_TO_EXPECT_REQUEST_IN_MS },
     );
 
-    userEvent.click(buttonNext);
+    await userEvent.click(buttonNext);
 
     await waitFor(
       () => {

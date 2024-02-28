@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ReactElement, useEffect, useState } from 'react';
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import Router, { useRouter } from 'next/router';
 import { Navbar } from '@/layout/navbar';
 import {
@@ -9,7 +9,6 @@ import {
   moment as renderMoment,
   side as renderSide,
 } from '@/data/data-valorant';
-
 import { maps as renderMaps } from '@/data/data-valorant-maps';
 import { Input } from '@/base/input';
 import { Modal } from '@/widgets/modal';
@@ -190,7 +189,8 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
           <div className="relative h-72 w-full ">
             {formatImage(instruction.image) !== '' ? (
               <Image
-                layout="fill"
+                width={50}
+                height={50}
                 className="object-cover"
                 data-src={formatImage(instruction.image)}
                 src={formatImage(instruction.image)}
@@ -231,7 +231,7 @@ export const CreatePostManagement = ({ breadcrumbs, mode }: ModelManagementType)
       setImgAdded(copyImgAdded);
       setVisibleModal(false);
     } else {
-      setImgAdded([...imgAdded, { description, id: uuid.v4().toString(), image }]);
+      setImgAdded([...imgAdded, { description, id: uuid().toString(), image }]);
       setVisibleModal(false);
     }
   };

@@ -1,12 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { rest } from 'msw';
-import { setupServer } from 'msw/node';
 import mockPosts from '@/mock/mockPosts.json';
 import { MockApp } from '@/mock/App.Mock';
 import ViewPosts from '@/pages/admin/view-posts';
-import { URL_GET_ALL_POSTS } from '@/mock/ROUTES_API';
 import { waitByLoading } from '@/utils/waitByLoading';
 import { generateNumericList } from '@/helpers/generateArray';
+import { Api } from '@/services/api';
+import { createResponseMock } from '@/mock/createResponseMock';
 import { getDescription, getTitle } from '../utils/getPosts';
 
 const postsLength = mockPosts.posts.length;
@@ -21,19 +20,15 @@ jest.mock('next/router', () => ({
   }),
 }));
 
-const handlers = [rest.get(URL_GET_ALL_POSTS, async (req, res, ctx) => res(ctx.json(mockPosts)))];
 const FIRST_POSITION = 0;
-const server = setupServer(...handlers);
 const QUANTITY_POSTS = 9;
 
+const spyOn = jest.spyOn(Api, 'get');
+
 describe('<HomeScreen />', () => {
-  beforeAll(() => server.listen());
-
-  afterEach(() => server.resetHandlers());
-
-  afterAll(() => server.close());
-
   it('should render home screen', async () => {
+    spyOn.mockImplementation(() => createResponseMock(mockPosts, 200));
+
     render(
       <MockApp>
         <ViewPosts />

@@ -31,7 +31,14 @@ const Index = ({ mapsApi }: { mapsApi: string[] }): ReactElement => {
     maps().map((map) =>
       mapsApi.includes(map.name) ? (
         <div key={map.id} className="flex flex-col">
-          <ImageCard heightImage="h-64 sm:h-40" href={`/agents/${map.name}`} srcImage={map.img} titleImage={map.name} />
+          <ImageCard
+            width={1200}
+            height={707}
+            heightImage="h-64 sm:h-40"
+            href={`/agents/${map.name}`}
+            srcImage={map.img}
+            titleImage={map.name}
+          />
         </div>
       ) : null,
     );

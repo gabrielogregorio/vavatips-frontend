@@ -42,6 +42,6 @@ describe('<AgentScreen />', () => {
     expect(screen.getByRole('img', { name: 'Raze' })).toBeInTheDocument();
     expect(screen.getByRole('img', { name: 'Yoru' })).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(/Yoru/i));
+    await userEvent.click(screen.getByText(/Yoru/i));
   });
 });

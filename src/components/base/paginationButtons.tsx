@@ -20,14 +20,13 @@ export const PaginationButtons = ({
   agent,
 }: TPaginationButton): ReactElement => (
   <li className="bg-transparent text-skin-secondary-regular p-3 pb-1 pt-1 transition duration-150">
-    <Link passHref aria-label={`Navega para a página ${page}`} href={resolveQuery(urlBase, { agent, map, page })}>
-      <a
-        href="#/"
-        className={`block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white ${
-          active ? 'bg-skin-secondary-light text-skin-white' : ''
-        }`}>
-        {page}
-      </a>
+    <Link
+      aria-label={`Navega para a página ${page}`}
+      href={resolveQuery(urlBase, { agent, map, page })}
+      className={`block p-2 bg-transparent hover:bg-skin-secondary-light hover:text-skin-white ${
+        active ? 'bg-skin-secondary-light text-skin-white' : ''
+      }`}>
+      {page}
     </Link>
   </li>
 );

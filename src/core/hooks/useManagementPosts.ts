@@ -1,6 +1,6 @@
 import { Api } from '@/services/api';
 import { useState } from 'react';
-import * as uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 type imgType = {
   description: string;
@@ -18,11 +18,12 @@ export const useManagementPosts = () => {
     setIsLoading(true);
     try {
       const { data } = await Api.get(`/post/${postId}`);
+
       const { title, description, tags, imgs } = data;
 
       const newImages = imgs.map((item) => ({
         ...item,
-        id: uuid.v4().toString(),
+        id: uuid().toString(),
       }));
 
       const formToReset = {

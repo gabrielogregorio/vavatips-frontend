@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "jest": true
   },
@@ -20,10 +20,7 @@
   },
 
   "overrides": [
-    {
-      "extends": ["plugin:testing-library/react"],
-      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"]
-    },
+
     {
       "files": ["./cypress/**"],
       "rules": {
@@ -33,15 +30,14 @@
     {
       "files": [".eslintrc.js"],
       "rules": {
-        "@typescript-eslint/no-magic-numbers": "off",
-        "sort-keys": "off"
+        "@typescript-eslint/no-magic-numbers": "off"
       }
     },
     {
-      "extends": ["plugin:jest/recommended"],
-      "files": ["test/**"],
+      "files": ["test/**", "**/**/*.spec.tsx", "**/**/*.test.tsx"],
+      "extends": ["plugin:jest/recommended", "plugin:testing-library/react"],
       "plugins": ["jest"],
-      "rules": { "jest/prefer-expect-assertions": "off" }
+      "rules": { "jest/prefer-expect-assertions": "off", "@typescript-eslint/no-magic-numbers": "off" }
     }
   ],
   "parser": "@typescript-eslint/parser",
@@ -62,10 +58,8 @@
   "root": true,
 
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/no-dynamic-delete": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-implicit-any-catch": "error",
     "@typescript-eslint/no-invalid-this": "error",
     "@typescript-eslint/no-magic-numbers": "error",
     "@typescript-eslint/no-redeclare": "error",
@@ -98,8 +92,6 @@
     ],
     "react/jsx-filename-extension": [0],
     "react/jsx-props-no-spreading": "off",
-    "react/react-in-jsx-scope": "off",
-
-    "sort-keys": ["error", "asc", { "caseSensitive": true, "minKeys": 2, "natural": false }]
+    "react/react-in-jsx-scope": "off"
   }
 }

@@ -84,7 +84,8 @@ export const PostCard = ({ post }: TProps): ReactElement => {
         <div className="h-11 w-11 relative">
           {post?.user?.image ? (
             <Image
-              layout="fill"
+              width={44}
+              height={44}
               className="rounded-full object-cover"
               data-src={formatImage(post.user.image)}
               src={formatImage(post.user.image)}
@@ -93,7 +94,8 @@ export const PostCard = ({ post }: TProps): ReactElement => {
             />
           ) : (
             <Image
-              layout="fill"
+              width={44}
+              height={44}
               className="rounded-full object-cover"
               data-src="/images/users/profile.webp"
               src="/images/users/profile.webp"
@@ -131,7 +133,8 @@ export const PostCard = ({ post }: TProps): ReactElement => {
                 return (
                   <div className={`h-full min-w-full relative ${isSelectedImage ? 'block' : 'hidden'}`} key={image.id}>
                     <Image
-                      layout="fill"
+                      width={583}
+                      height={479}
                       className="object-cover rounded-md"
                       placeholder="blur"
                       priority

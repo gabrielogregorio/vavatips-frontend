@@ -11,7 +11,7 @@ describe('<Button />', () => {
     expect(screen.getByRole('button', { name: 'Conteudo Btn' })).toBeInTheDocument();
   });
 
-  it('should be clicked', () => {
+  it('should be clicked', async () => {
     const fnMock = jest.fn();
     render(<Button onClick={fnMock}>Conteudo Btn</Button>);
 
@@ -19,12 +19,12 @@ describe('<Button />', () => {
 
     expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
 
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(fnMock).toHaveBeenCalledTimes(CALLED_FIRST);
   });
 
-  it('should not click if button is disabled', () => {
+  it('should not click if button is disabled', async () => {
     const fnMock = jest.fn();
     render(
       <Button disabled onClick={fnMock}>
@@ -35,7 +35,7 @@ describe('<Button />', () => {
     const button = screen.getByRole('button', { name: 'Conteudo Btn' });
     expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
 
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(fnMock).toHaveBeenCalledTimes(NOT_CALLED);
   });

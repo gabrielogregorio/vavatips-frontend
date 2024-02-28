@@ -17,10 +17,8 @@ export const Breadcrumb = ({ breadcrumbs }: propsType): ReactElement => {
           <p className="text-skin-white p-0">{breadcrumb.text}</p>
         ) : (
           <>
-            <Link href={breadcrumb.url} passHref>
-              <a href="#/" className="text-skin-white" style={{ opacity: 0.9 }}>
-                {breadcrumb.text}
-              </a>
+            <Link href={breadcrumb.url} className="text-skin-white" style={{ opacity: 0.9 }}>
+              {breadcrumb.text}
             </Link>
             <span className={`pl-1 ${'text-skin-white'}`} style={{ opacity: 0.9 }}>
               &gt;

@@ -96,10 +96,8 @@ const Register = (): ReactElement => {
           <GroupInput>
             <p className="flex flex-col  py-1 ml-1">
               <span className="text-xs text-gray-500 dark:text-white text-center">Já tem cadastro?</span>
-              <Link href="/login">
-                <a className="text-xs text-center text-secondary" href="#/">
-                  Fazer Login
-                </a>
+              <Link href="/login" className="text-xs text-center text-secondary">
+                Fazer Login
               </Link>
             </p>
           </GroupInput>

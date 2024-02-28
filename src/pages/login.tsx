@@ -78,10 +78,8 @@ const Login = (): ReactElement => {
           <GroupInput>
             <p className=" flex flex-col   py-1">
               <span className="text-xs text-gray-500 dark:text-white text-center">Recebeu um código de cadastro?</span>
-              <Link href="/register" passHref>
-                <a className="text-xs text-center text-secondary ml-1" href="#/">
-                  Fazer cadastro
-                </a>
+              <Link href="/register" className="text-xs text-center text-secondary ml-1">
+                Fazer cadastro
               </Link>
             </p>
           </GroupInput>

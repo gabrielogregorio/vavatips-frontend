@@ -53,15 +53,15 @@ export const ModalOfSuggestion = ({ title }: ModalProps): ReactElement => {
           message: { msg: 'Sugestão enviada com sucesso, muito obrigado!', type: 'success' },
         }),
       )
-      .catch(() =>
+      .catch(() => {
         setModalMessage({
           active: true,
           message: {
             msg: 'Erro ao enviar a Sugestão. Você poderia reportar o problema aos desenvolvedores',
             type: 'error',
           },
-        }),
-      )
+        });
+      })
       .finally(() => {
         setModalSuggestion(initializeModalSuggestion);
         setLoading(false);

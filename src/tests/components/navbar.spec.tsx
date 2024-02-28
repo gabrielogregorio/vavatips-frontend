@@ -18,7 +18,7 @@ describe('<Navbar />', () => {
     expect(screen.getByRole('link', { name: 'perfil' })).toBeInTheDocument();
   });
 
-  it('should test change themes', () => {
+  it('should test change themes', async () => {
     render(
       <MockApp
         localstorage={{
@@ -30,10 +30,10 @@ describe('<Navbar />', () => {
 
     expect(localStorage.getItem('theme')).toEqual('dark');
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(localStorage.getItem('theme')).toEqual('light');
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(localStorage.getItem('theme')).toEqual('dark');
   });
 });
