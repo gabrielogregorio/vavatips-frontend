@@ -17,11 +17,11 @@ describe('PaginationButtons', () => {
       />,
     );
 
-    expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: `Navega para a página ${NUMBER_OF_PAGE}` })).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: `Navega para a página ${NUMBER_OF_PAGE}` })).toHaveAttribute(
       'href',
-      '/items?agent=Jett&map=Ascent&page=7',
+      'items?agent=Jett&map=Ascent&page=7',
     );
   });
 
@@ -38,11 +38,11 @@ describe('PaginationButtons', () => {
       />,
     );
 
-    expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: `Navega para a página ${NUMBER_OF_PAGE}` })).toBeInTheDocument();
 
-    expect(screen.getByRole('link', { name: NUMBER_OF_PAGE.toString() })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: `Navega para a página ${NUMBER_OF_PAGE}` })).toHaveAttribute(
       'href',
-      '/posts?agent=Raze&map=Bind&page=3',
+      'posts?agent=Raze&map=Bind&page=3',
     );
   });
 

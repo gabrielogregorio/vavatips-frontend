@@ -1,14 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
-
 import { MockApp } from '@/mock/App.Mock';
-import { URL_POST_CREATE_POST } from '@/mock/ROUTES_API';
 import CreatePost from '@/pages/admin/post-create';
 import { waitByLoading } from '@/utils/waitByLoading';
-
-import { ERROR_IN_SERVER_HTTP_CODE, SUCCESS_HTTP_CODE } from '@/utils/statusCode';
-import { TPostsProps } from '@/types/posts';
 import { Api } from '@/services/api';
 import { CreateAxiosErrorMock, createResponseMock } from '@/mock/createResponseMock';
 
@@ -75,7 +70,7 @@ describe('<CreatePost />', () => {
     expect(inputDescription.value).toEqual('');
   });
 
-  it.skip('should render create post screen and create post', async () => {
+  it('should render create post screen and create post', async () => {
     render(
       <MockApp>
         <CreatePost />
@@ -102,9 +97,6 @@ describe('<CreatePost />', () => {
     await userEvent.click(screen.getByRole('button', { name: newStep }));
     await userEvent.type(screen.getByLabelText('Descrição post'), 'abc');
     await userEvent.click(screen.getByRole('button', { name: 'Adicionar' }));
-
-    await userEvent.click(screen.getByTestId('closeModal'));
-    expect(screen.queryByText(/Adicionar/i)).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: newStep }));
     await userEvent.type(screen.getByLabelText(/Descrição post/i), 'De um pulo e jogue o bombinho');

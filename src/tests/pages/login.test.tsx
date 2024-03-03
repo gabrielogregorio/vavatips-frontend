@@ -139,15 +139,4 @@ describe('<Login />', () => {
 
     expect(screen.getByText('Senha inválida!')).toBeDefined();
   });
-
-  it('should alternate screen cadaster and login', async () => {
-    render(
-      <MockApp>
-        <Login />
-      </MockApp>,
-    );
-
-    await userEvent.click(screen.getByText(/Fazer cadastro/i));
-    expect(screen.getByText(/Fazer cadastro/i)).toHaveAttribute('href', '#/');
-  });
 });

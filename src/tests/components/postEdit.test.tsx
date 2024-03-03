@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Router from 'next/router';
 import { MockApp } from '@/mock/App.Mock';
@@ -35,7 +35,6 @@ spyGet.mockImplementation((url) => {
   if (url.includes('/617d44c81bc4243f9b2d5a67')) {
     return Promise.resolve(createResponseMock(postBase, 200));
   }
-
 
   return Promise.reject(new CreateAxiosErrorMock({ response: { data: '', status: ERROR_NOT_FOUND_HTTP_CODE } }));
 });
@@ -86,7 +85,8 @@ describe('<EditPost />', () => {
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
 
-    expect(inputTitle.value).toEqual('title managment post');
+    await waitFor(() => expect(inputTitle.value).toEqual('title managment post'));
+
     expect(inputDescription.value).toEqual('description1');
 
     await userEvent.type(inputTitle, ' concatenate new title');
@@ -110,7 +110,7 @@ describe('<EditPost />', () => {
     const inputTitle: HTMLInputElement = screen.getByLabelText('Titulo');
     const inputDescription: HTMLInputElement = screen.getByLabelText('Descrição');
 
-    expect(inputTitle.value).toEqual('title managment post');
+    await waitFor(() => expect(inputTitle.value).toEqual('title managment post'));
     expect(inputDescription.value).toEqual('description1');
 
     await userEvent.type(inputTitle, ' concatenate new title');

@@ -18,7 +18,6 @@ export const useManagementPosts = () => {
     setIsLoading(true);
     try {
       const { data } = await Api.get(`/post/${postId}`);
-
       const { title, description, tags, imgs } = data;
 
       const newImages = imgs.map((item) => ({
