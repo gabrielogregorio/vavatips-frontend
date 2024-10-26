@@ -10,11 +10,11 @@ import { TPostsProps } from '@/types/posts';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents, LINKS.Posts];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const resp = await Api.get('/maps');
+  const resp = await Api.get('/posts/maps');
   const { maps } = await resp.data;
 
   const mapAndAgent = maps.map(async (map) =>
-    Api.get(`/agents/${map}`)
+    Api.get(`/posts/agents/${map}`)
       .then((res) => res.data)
       .then((data) => ({
         agents: data.agents,

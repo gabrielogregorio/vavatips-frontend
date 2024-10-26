@@ -15,6 +15,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Poppins, sans-serif;
+  -webkit-tap-highlight-color: transparent; /*Remove blue effect on click in mobile */
   font-size: 1rem;
   font-weight: 400;
 }
@@ -28,17 +29,10 @@ a {
   -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 }
 
-body {
-  overflow-y: scroll;
+/* remove x in search icon */
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
 }
-
-html,
-body {
-  min-height: 100vh;
-}
-
-#root {
-  height: 100%;
-  min-height: 100vh;
-}
-

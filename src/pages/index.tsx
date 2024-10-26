@@ -16,7 +16,7 @@ import { GetStaticProps } from 'next';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps];
 
 export const getStaticProps: GetStaticProps = async () => {
-  const resp = await Api.get('/maps');
+  const resp = await Api.get('/posts/maps');
   const mapsApi = await resp.data;
 
   return {
@@ -34,7 +34,7 @@ const Index = ({ mapsApi }: { mapsApi: string[] }): ReactElement => {
           <ImageCard
             width={1200}
             height={707}
-            heightImage="h-64 sm:h-40"
+            className="h-64 sm:h-[160px]"
             href={`/agents/${map.name}`}
             srcImage={map.img}
             titleImage={map.name}

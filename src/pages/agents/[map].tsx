@@ -17,7 +17,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 const breadcrumbs = [LINKS.inicio, LINKS.Maps, LINKS.Agents];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const resp = await Api.get('/maps');
+  const resp = await Api.get('/posts/maps');
   const { maps } = await resp.data;
 
   return {
@@ -31,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const response = await Api.get(`/agents/${params.map}`);
+  const response = await Api.get(`/posts/agents/${params.map}`);
   const agentsData = await response.data;
   return {
     props: {
@@ -53,7 +53,7 @@ const Agents = ({ agentsApi }: { agentsApi: string[] }): ReactElement => {
           key={agent.id}
           href={`/posts/${mapSelected}/${agent.name}`}
           srcImage={agent.img}
-          heightImage="h-[18rem] w-[11.74rem]"
+          className="h-[18rem] w-[11.74rem]"
           titleImage={agent.name}
         />
       ) : null,
