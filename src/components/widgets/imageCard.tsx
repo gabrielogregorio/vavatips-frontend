@@ -6,11 +6,11 @@ type imageCardType = {
   href: string;
   srcImage: string;
   titleImage: string;
-  heightImage: string;
+  className: string;
   width: number;
   height: number;
 };
-export const ImageCard = ({ href, srcImage, titleImage, heightImage, height, width }: imageCardType): ReactElement => {
+export const ImageCard = ({ href, srcImage, titleImage, className, height, width }: imageCardType): ReactElement => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleWithIsLoadedImage = (): void => {
@@ -24,13 +24,11 @@ export const ImageCard = ({ href, srcImage, titleImage, heightImage, height, wid
         className="flex flex-col justify-center items-center flex-1 opacity-90 hover:scale-110 hover:opacity-100 transition duration-150 rounded-md m-2">
         <div
           data-testid="loading"
-          className={`block relative w-full rounded-md overflow-hidden ${heightImage} ${
-            isLoaded ? '' : 'wait-load-pulse'
-          }`}>
+          className={`block relative w-full rounded-md overflow-hidden ${isLoaded ? '' : 'wait-load-pulse'}`}>
           <Image
             height={height}
             width={width}
-            className="flex-1 object-cover"
+            className={`flex-1 object-cover ${className} `}
             src={srcImage}
             data-src={srcImage}
             alt={titleImage}

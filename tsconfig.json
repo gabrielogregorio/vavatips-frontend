@@ -23,6 +23,7 @@
       "@/constants/*": ["src/core/constants/*"],
       "@/data/*": ["src/core/data/*"],
       "@/helpers/*": ["src/core/helpers/*"],
+      "@/wrappers/*": ["src/core/wrappers/*"],
       "@/hooks/*": ["src/core/hooks/*"],
       "@/services/*": ["src/core/services/*"],
       "@/handlers/*": ["src/core/handlers/*"],

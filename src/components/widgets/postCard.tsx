@@ -81,33 +81,29 @@ export const PostCard = ({ post }: TProps): ReactElement => {
   return (
     <div className="p-2 pl-0 pr-0 w-full h-full border-t border-gray-200 dark:border-gray-600">
       <div className="flex justify-center items-center mb-2 mt-2 w-full">
-        <div className="h-11 w-11 relative">
+        <div className="relative">
           {post?.user?.image ? (
             <Image
               width={44}
               height={44}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover h-11 w-11"
               data-src={formatImage(post.user.image)}
               src={formatImage(post.user.image)}
               alt="Foto de perfil do Autor da postagem"
-              priority
             />
           ) : (
             <Image
               width={44}
               height={44}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover h-11 w-11"
               data-src="/images/users/profile.webp"
               src="/images/users/profile.webp"
               alt="Foto de perfil do Autor da postagem"
-              priority
             />
           )}
         </div>
 
-        <p className="flex-1 dark:text-skin-white text-skin-gray-800 ml-5 text-base">
-          {post?.user?.username ?? 'Ademir'}
-        </p>
+        <p className="flex-1 dark:text-skin-white text-skin-gray-800 ml-5 text-base">{post?.user?.username}</p>
 
         {isAuthenticated() === true ? (
           <button type="button" className="block text-skin-secondary-regular font-bold">
@@ -135,7 +131,7 @@ export const PostCard = ({ post }: TProps): ReactElement => {
                     <Image
                       width={583}
                       height={479}
-                      className="object-cover rounded-md"
+                      className="object-cover rounded-md h-[500px] w-full"
                       placeholder="blur"
                       priority
                       blurDataURL="/images/assets/loader.webp"
@@ -193,8 +189,8 @@ export const PostCard = ({ post }: TProps): ReactElement => {
       </div>
 
       <div className="w-full flex justify-around m-1">
-        <PostButton ariaLabel="Salvar" selected={postSave} onClick={(): void => handleAddSave()} variant="like" />
-        <PostButton ariaLabel="Testado" selected={postTested} onClick={(): void => handleAddTest()} variant="save" />
+        <PostButton ariaLabel="Salvar" selected={postSave} onClick={(): void => handleAddSave()} variant="save" />
+        <PostButton ariaLabel="Testado" selected={postTested} onClick={(): void => handleAddTest()} variant="tested" />
         <PostButton ariaLabel="Sugerir" selected={false} onClick={(): void => handleModalAction()} variant="report" />
       </div>
     </div>

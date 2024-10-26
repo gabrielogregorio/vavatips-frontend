@@ -17,7 +17,7 @@ export const InputFile = ({ type, text, onChange, name, status }: inputFileType)
   const disabled = status === 'disabled';
   return (
     <GroupInput>
-      <Label name={name} text={text} className={[getStyles]} />
+      <Label name={name} text={text} className={getStyles} />
       <input
         className={` resize-none w-full px-3 py-2 focus:shadow-sm top-0 left-0 border bg-transparent outline-none rounded-md text-xs dark:text-gray-100 ${getStyles} ${
           disabled ? 'bg-gray-50' : ''

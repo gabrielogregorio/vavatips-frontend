@@ -17,7 +17,7 @@ const savePosts = (action: actionTypesHandlePosts, updatePosts: string[]) => {
   localStorage.setItem(action === 'save' ? SAVE_POSTS : TESTED_POSTS, JSON.stringify(updatePosts));
 };
 
-const getStatePosts = (action) => {
+const getStatePosts = (action: 'test' | 'save') => {
   const posts = action === 'save' ? getPostsSave() : getPostsTested();
   return verifyValidArray(posts);
 };

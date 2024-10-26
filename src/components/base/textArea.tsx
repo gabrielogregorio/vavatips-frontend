@@ -21,7 +21,7 @@ export const TextArea = ({ title, register, errors, name, status, disabled }: IP
   getStyles = hasError ? styleLiteral.invalid : getStyles;
   return (
     <GroupInput>
-      <Label name={name} text={title} aria-label="Escolha uma descrição" className={[getStyles]} />
+      <Label name={name} text={title} aria-label="Escolha uma descrição" className={getStyles} />
 
       <textarea
         {...register}

@@ -6,7 +6,7 @@ import { ReactElement } from 'react';
 const darkButton = 'dark:text-skin-white text-skin-gray-500';
 
 const typeIconModel = {
-  like: {
+  tested: {
     color: darkButton,
     colorSelected: 'text-skin-secondary-regular',
     default: AiOutlineHeart,
@@ -32,7 +32,7 @@ const typeIconModel = {
 type selectedLikeButton = {
   selected: boolean;
   onClick: () => void;
-  variant: 'like' | 'save' | 'report';
+  variant: 'tested' | 'save' | 'report';
   ariaLabel: string;
 };
 
