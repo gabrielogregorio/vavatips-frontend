@@ -42,11 +42,11 @@ export const ModalOfSuggestion = ({ title }: ModalProps): ReactElement => {
   };
 
   const onSubmit = ({ email, description }): void => {
-    const idPost = modalSuggestion.post?.id ?? '';
+    const postId = modalSuggestion.post?.id ?? '';
     setLoading(true);
 
     // eslint-disable-next-line promise/catch-or-return
-    Api.post('/suggestion', { description, email, idPost })
+    Api.post('/suggestions', { description, email, postId })
       .then(() =>
         setModalMessage({
           active: true,
