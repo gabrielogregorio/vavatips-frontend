@@ -3,9 +3,10 @@ import { Component, ReactNode } from 'react';
 import * as Sentry from '@sentry/nextjs';
 import { anyToString } from '@/helpers/converyAnyToString';
 import { ScreenError } from './screenError';
+import { NEXT_PUBLIC_SENTRY_IS_ENABLED } from '@/constants/envs';
 
 const sendLogsToServer = (error: AxiosError, errorInfo: object): void => {
-  if (process.env.NEXT_PUBLIC_SENTRY_IS_ENABLED === 'true') {
+  if (NEXT_PUBLIC_SENTRY_IS_ENABLED) {
     Sentry.captureException(error, {
       extra: {
         error: anyToString(error || ''),

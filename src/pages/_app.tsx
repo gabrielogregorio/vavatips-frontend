@@ -11,6 +11,7 @@ import { init as SentryInit } from '@sentry/nextjs';
 import '../styles/global.css';
 import { TRACE_SAMPLE_RATE_SENTRY } from '@/constants/sentry';
 import Script from 'next/script';
+import { NEXT_PUBLIC_SENTRY_DSN, NEXT_PUBLIC_SENTRY_IS_ENABLED } from '@/constants/envs';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,9 +38,9 @@ const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
   const valueFilters = useMemo(() => ({ filters, setFilters, setTags, tags }), [tags, filters]);
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_SENTRY_IS_ENABLED === 'true') {
+    if (NEXT_PUBLIC_SENTRY_IS_ENABLED) {
       SentryInit({
-        dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+        dsn: NEXT_PUBLIC_SENTRY_DSN,
         tracesSampleRate: TRACE_SAMPLE_RATE_SENTRY,
       });
     }

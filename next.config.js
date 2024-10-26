@@ -1,5 +1,5 @@
 const { withSentryConfig } = require('@sentry/nextjs');
-const withPWA = require('next-pwa');
+// const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
 const authToken = process.env.SENTRY_TOKEN;
@@ -19,4 +19,5 @@ const nextConfig = {
   },
 };
 
-module.exports = withPWA(withSentryConfig(nextConfig, sentryWebpackPluginOptions));
+// module.exports = withPWA(withSentryConfig(nextConfig, sentryWebpackPluginOptions));
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions)
