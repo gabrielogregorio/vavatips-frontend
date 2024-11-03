@@ -10,8 +10,18 @@ const axiosConfig = axios.create({
 axiosConfig.interceptors.request.use(async (config) => {
   const token = getToken();
 
+  // @ts-ignore
+  // eslint-disable-next-line no-param-reassign
+  config.headers['accept-language'] = 'en'; // TODO: add dynamic language
+
   if (token) {
-    return { ...config, headers: { ...config.headers, Authorization: `Bearer ${token}` } };
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        Authorization: `Bearer ${token}`,
+      },
+    };
   }
   return config;
 });

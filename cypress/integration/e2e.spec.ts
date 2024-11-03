@@ -3,7 +3,7 @@ describe('<E2e />', () => {
     cy.task('stopServer');
     cy.task('startServer');
 
-    cy.intercept('/suggestion', (req) => {
+    cy.intercept('/suggestions', (req) => {
       if (
         req.body.description === 'my description' &&
         req.body.email === 'myEmail@gmail.com' &&
