@@ -26,36 +26,41 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const Index = ({ mapsApi }: { mapsApi: string[] }): ReactElement => {
-  const renderMap = (): ReactElement[] =>
-    maps().map((map) =>
-      mapsApi.includes(map.name) ? (
-        <div key={map.id} className="flex flex-col">
-          <ImageCard
-            width={1200}
-            height={707}
-            className="h-64 sm:h-[160px]"
-            href={`/agents/${map.name}`}
-            srcImage={map.img}
-            titleImage={map.name}
-          />
-        </div>
-      ) : null,
-    );
+const renderMap = (mapsApi: string[]): ReactElement[] | ReactElement => {
+  const allMapsFiltered = maps().filter((map) => mapsApi.includes(map.name));
 
-  return (
-    <Layout>
-      <Navbar selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
-      <Breadcrumb breadcrumbs={breadcrumbs} />
+  if (!allMapsFiltered.length) {
+    return <div>nenhum mapa disponível</div>;
+  }
 
-      <SubContainer>
-        <Title>Escolha um mapa ai parça </Title>
-
-        <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-3 w-full">{renderMap()}</div>
-      </SubContainer>
-
-      <Footer />
-    </Layout>
+  return allMapsFiltered.map((map) =>
+    mapsApi.includes(map.name) ? (
+      <div key={map.id} className="flex flex-col">
+        <ImageCard
+          width={1200}
+          height={707}
+          className="h-64 sm:h-[160px]"
+          href={`/agents/${map.name}`}
+          srcImage={map.img}
+          titleImage={map.name}
+        />
+      </div>
+    ) : null,
   );
 };
+
+const Index = ({ mapsApi }: { mapsApi: string[] }): ReactElement => (
+  <Layout>
+    <Navbar selected={navbarEnum.Inicio} modelNavbar={modelNavbarPublic} />
+    <Breadcrumb breadcrumbs={breadcrumbs} />
+
+    <SubContainer>
+      <Title>Escolha um mapa ai parça </Title>
+
+      <div className="grid grid-cols-1 gap-6 pl-1 pr-1 mb-2 sm:grid-cols-3 w-full">{renderMap(mapsApi)}</div>
+    </SubContainer>
+
+    <Footer />
+  </Layout>
+);
 export default Index;

@@ -9,51 +9,38 @@ const defaultStatusCode = {
 
 type handleInputErrorsType = {
   statusCode: number;
+  error: string;
+  message: string;
 };
 
 const ERROR_ON_GET_STATUS = 0;
-const handleInputErrors = (error: AxiosError): handleInputErrorsType => {
-  
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleInputErrors = (error: AxiosError<any>): handleInputErrorsType => {
   const statusCode = error?.response?.status ?? ERROR_ON_GET_STATUS;
 
   return {
     statusCode,
+    error: error.response.data.error || '',
+    message: error.response.data.message || '',
   };
 };
 
 export const handleDashboard = (error: AxiosError): string => {
-  const { statusCode } = handleInputErrors(error);
+  const { message } = handleInputErrors(error);
 
-  const resultByStatusCode = defaultStatusCode[statusCode];
-
-  if (resultByStatusCode) {
-    resultByStatusCode.action();
-  }
-
-  return 'Erro ao obter dados do dashboard';
+  return message;
 };
 
 export const handleErrorLogin = (error: AxiosError): string => {
-  const { statusCode } = handleInputErrors(error);
+  const { message } = handleInputErrors(error);
 
-  const literalHandler = {
-    [ERROR_NOT_ACCESS_HTTP_CODE]: 'Senha inválida!',
-    [ERROR_NOT_FOUND_HTTP_CODE]: 'Usuário não cadastrado!',
-    default: 'Erro Desconhecido',
-  };
-
-  return literalHandler[statusCode] ?? literalHandler.default;
+  return message;
 };
 
 export const handleErrorRegister = (error: AxiosError): string => {
-  const { statusCode } = handleInputErrors(error);
+  const { message } = handleInputErrors(error);
 
-  const literalHandler = {
-    [ERROR_CONFLICT_HTTP_CODE]: 'Esse e-mail já está cadastrado',
-    default: 'Erro ao cadastrar usuário',
-  };
-
-  return literalHandler[statusCode] ?? literalHandler.default;
+  return message;
 };
 
 export const handleErrorViewAdminPosts = (error: AxiosError): string => {

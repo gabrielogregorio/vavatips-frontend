@@ -12,7 +12,7 @@ export const useDashboard = () => {
     const getInfoUserLogged = async () => {
       setIsLoading(true);
       try {
-        const [dashboard, user] = await Promise.all([Api.get(`/dashboard`), Api.get(`/user`)]);
+        const [dashboard, user] = await Promise.all([Api.get(`/dashboards`), Api.get(`/users/me`)]);
         setInfo(dashboard.data);
         setUsername(user.data.username);
       } catch (error) {

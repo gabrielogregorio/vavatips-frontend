@@ -2,7 +2,7 @@ import { GroupInput } from '@/base/groupInput';
 import { Label } from '@/base/label';
 import { ReactElement } from 'react';
 import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
-import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
+import { styleLiteral, typeInputColors, inputStylesFromInput } from './input';
 
 type IPropsTextArea = {
   disabled?: boolean;
@@ -14,7 +14,7 @@ type IPropsTextArea = {
 };
 
 export const TextArea = ({ title, register, errors, name, status, disabled }: IPropsTextArea): ReactElement => {
-  let getStyles = disabled ? styleLiteral.default : getStylesFromInput(status);
+  let getStyles = disabled ? styleLiteral.default : inputStylesFromInput(status);
   const errorMessages = errors?.[name]?.message ?? '';
   const hasError = !!(errors && errorMessages);
 

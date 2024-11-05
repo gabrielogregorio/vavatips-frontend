@@ -33,8 +33,12 @@ const breadcrumbs = [
 const Dashboard = (): ReactElement => {
   const { info, username, errorMsg, isLoading } = useDashboard();
 
-  const renderDashboardItems = (): ReactElement[] => {
+  const renderDashboardItems = (): ReactElement[] | ReactElement => {
     const itemsDashboard = getKeysFromAnyObject(info);
+
+    if (!itemsDashboard.length) {
+      return <div>Nada aqui</div>;
+    }
 
     return itemsDashboard.map((key) => (
       <ItemList key={key}>

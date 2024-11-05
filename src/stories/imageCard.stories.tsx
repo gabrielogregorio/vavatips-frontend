@@ -10,7 +10,7 @@ const Template: ComponentStory<typeof ImageCard> = (args) => <ImageCard {...args
 
 export const Default = Template.bind({});
 Default.args = {
-  heightImage: 'h-64"',
+  className: 'h-64"',
   href: '/posts',
   srcImage: '/images/maps/Ascent.webp',
   titleImage: 'Image Title',

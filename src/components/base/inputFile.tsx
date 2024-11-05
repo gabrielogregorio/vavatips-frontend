@@ -1,6 +1,6 @@
 import { ChangeEvent, ReactElement } from 'react';
 import { GroupInput } from './groupInput';
-import { getStylesFromInput } from './input';
+import { inputStylesFromInput } from './input';
 import { Label } from './label';
 
 type inputFileType = {
@@ -12,7 +12,7 @@ type inputFileType = {
 };
 
 export const InputFile = ({ type, text, onChange, name, status }: inputFileType): ReactElement => {
-  const getStyles = getStylesFromInput(status);
+  const getStyles = inputStylesFromInput(status);
 
   const disabled = status === 'disabled';
   return (
