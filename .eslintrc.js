@@ -18,7 +18,6 @@ module.exports = {
   "globals": {
     "cy": true
   },
-
   "overrides": [
 
     {
@@ -58,6 +57,7 @@ module.exports = {
   "root": true,
 
   "rules": {
+    "curly": ["error", "all"],
     "@typescript-eslint/no-dynamic-delete": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-invalid-this": "error",
@@ -93,5 +93,5 @@ module.exports = {
     "react/jsx-filename-extension": [0],
     "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off"
-  }
+  },
 }
