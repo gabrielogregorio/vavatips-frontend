@@ -19,8 +19,15 @@ const Error404 = (): ReactElement => (
     <SubContainer>
       <Title>Oooops, acho que essa página não existe!</Title>
 
-      <div className="relative w-full h-72">
-        <Image width={500} height={500} src="/images/assets/404.svg" alt="" aria-hidden />
+      <div className="relative w-full flex justify-center py-8">
+        <Image
+          width={500}
+          height={500}
+          src="/images/assets/404.svg"
+          className="w-full max-w-[300px]"
+          alt=""
+          aria-hidden
+        />
       </div>
     </SubContainer>
 

@@ -17,7 +17,7 @@ export const useManagementPosts = () => {
   const getOnePost = async (postId: string) => {
     setIsLoading(true);
     try {
-      const { data } = await Api.get(`/post/${postId}`);
+      const { data } = await Api.get(`/posts/${postId}`);
       const { title, description, tags, imgs } = data;
 
       const newImages = imgs.map((item) => ({
@@ -50,7 +50,7 @@ export const useManagementPosts = () => {
     setIsLoading(true);
 
     try {
-      await Api.delete(`/post/${idPost}`);
+      await Api.delete(`/posts/${idPost}`);
     } catch (error) {
       //
     } finally {
@@ -72,7 +72,7 @@ export const useManagementPosts = () => {
 
   const editOnePost = async (postId, request) => {
     try {
-      await Api.put(`/post/${postId}`, { ...request });
+      await Api.put(`/posts/${postId}`, { ...request });
       setRedirect(true);
     } catch (error) {
       //

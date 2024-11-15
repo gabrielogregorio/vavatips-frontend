@@ -65,7 +65,7 @@ export const Modal = ({
     formData.append('image', event.target.files[FIRST_POSITION]);
 
     const sendImageFromApi = (): void => {
-      Api.post(`/postLoadFile`, formData)
+      Api.post('/upload', formData)
         .then((res) => {
           const urlImg = `${res.data.filename}`;
           setLinkImg(urlImg);

@@ -134,7 +134,7 @@ describe('<Modal />', () => {
 
     expect(screen.getByRole('img')).toHaveAttribute('data-src', linkCloud);
 
-    expect(spyApi).toHaveBeenCalledWith('/postLoadFile', formData);
+    expect(spyApi).toHaveBeenCalledWith('/upload', formData);
 
     await waitFor(() => expect(saveModal).toHaveBeenCalledWith('123', textDescriptionPost, linkCloud));
   });

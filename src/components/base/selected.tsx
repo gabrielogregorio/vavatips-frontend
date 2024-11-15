@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form';
 import { GroupInput } from './groupInput';
-import { getStylesFromInput, styleLiteral, typeInputColors } from './input';
+import { inputStylesFromInput, styleLiteral, typeInputColors } from './input';
 import { Label } from './label';
 
 type TPropsSelectedBase = {
@@ -23,7 +23,7 @@ export const Selected = ({
   status,
   disabled,
 }: TPropsSelectedBase): ReactElement => {
-  let getStyles = getStylesFromInput(status);
+  let getStyles = inputStylesFromInput(status);
 
   const renderItems = (): ReactElement[] =>
     render.map((item) => (

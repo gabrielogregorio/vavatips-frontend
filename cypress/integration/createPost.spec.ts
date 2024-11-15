@@ -1,6 +1,6 @@
 describe('<CreatePost />', () => {
   beforeEach(() => {
-    cy.intercept('/postLoadFile', (req) => {
+    cy.intercept('/upload', (req) => {
       req.reply({
         body: { filename: '/image-1234' },
       });

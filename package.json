@@ -20,7 +20,7 @@
     "deprecated:e2e:headless": "next build && start-server-and-test start http://localhost:3000 cypress:headless",
     "type-check": "tsc",
     "lint": "next lint",
-    "prepare": "husky install",
+    "prepare": "husky",
     "stylelint": "stylelint '**.css'",
     "check-all": "tsc && next lint && stylelint '**.css' && jest --coverage && jest-coverage-badges && yarn cypress:headless && yarn audit --groups 'dependencies'",
     "storybook": "start-storybook -p 6006 -s ./public",
