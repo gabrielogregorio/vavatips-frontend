@@ -7,6 +7,7 @@ const axiosConfig = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_HOST,
 });
 
+// @ts-ignore
 axiosConfig.interceptors.request.use(async (config) => {
   const token = getToken();
 
@@ -19,7 +20,7 @@ axiosConfig.interceptors.request.use(async (config) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     };
   }
