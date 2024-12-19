@@ -13,13 +13,14 @@ interface buttonTypeNormal {
 
 export const Button = ({
   children,
-  ariaLabel,
-  className,
-  disabled,
-  onClick,
-  dataTestid,
-  type,
-  ariaHidden,
+
+  ariaHidden = false,
+  ariaLabel = '',
+  className = '',
+  dataTestid = '',
+  disabled = false,
+  onClick = (): void => null,
+  type = 'button',
 }: buttonTypeNormal): ReactElement => (
   <button
     data-testid={dataTestid}
@@ -32,13 +33,3 @@ export const Button = ({
     {children}
   </button>
 );
-
-Button.defaultProps = {
-  ariaHidden: false,
-  ariaLabel: '',
-  className: '',
-  dataTestid: '',
-  disabled: false,
-  onClick: (): void => null,
-  type: 'button',
-};

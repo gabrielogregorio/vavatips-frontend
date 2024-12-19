@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
   },
 });
 
-export const MockApp = ({ children, localstorage }: mockType) => {
+export const MockApp = ({ children, localstorage = {} }: mockType) => {
   const [modalSuggestion, setModalSuggestion] = useState<IModalContextSuggestion>({
     active: false,
     post: null,
@@ -50,8 +50,4 @@ export const MockApp = ({ children, localstorage }: mockType) => {
       </ContextThemeProvider>
     </QueryClientProvider>
   );
-};
-
-MockApp.defaultProps = {
-  localstorage: {},
 };

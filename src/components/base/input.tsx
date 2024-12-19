@@ -23,15 +23,11 @@ type iconsFromInputType = {
   onClick?: Function;
 };
 
-const IconsFromInput = ({ children, inputStyles, onClick }: iconsFromInputType): ReactElement => (
+const IconsFromInput = ({ children, inputStyles, onClick = (): void => null }: iconsFromInputType): ReactElement => (
   <button type="button" onClick={(): void => onClick()} className={tailwindMerge('cursor-pointer flex', inputStyles)}>
     {children}
   </button>
 );
-
-IconsFromInput.defaultProps = {
-  onClick: (): void => null,
-};
 
 type TPropsInput = {
   label: string;
@@ -68,15 +64,15 @@ const getInputStyles = ({
 };
 
 export const Input = ({
-  type,
   label,
   name,
-  status,
-  disabled,
   register,
   errors,
   placeholder,
-  isSubmitted,
+  disabled = false,
+  isSubmitted = false,
+  status = undefined,
+  type = 'text',
 }: TPropsInput): ReactElement => {
   const [showEyeIcon, setShowEyeIcon] = useState<boolean>(false);
 
@@ -89,7 +85,7 @@ export const Input = ({
   const displayEyeIcon = type === 'password';
   const displayTextIfForPassword = displayEyeIcon && showEyeIcon ? 'text' : type;
 
-  const errorMessages = errors?.[name]?.message || '';
+  const errorMessages = errors?.[name]?.message.toString() || '';
   const hasError = Boolean(errors || errorMessages);
 
   const inputStyles = getInputStyles({ disabled, hasError, isSubmitted, status });
@@ -104,6 +100,7 @@ export const Input = ({
             disabled ? 'bg-gray-50 dark:bg-gray-600' : ''
           }`}
           id={name}
+          autoComplete="new-password"
           disabled={disabled}
           type={displayTextIfForPassword}
           placeholder={placeholder}
@@ -137,11 +134,4 @@ export const Input = ({
       ) : null}
     </GroupInput>
   );
-};
-
-Input.defaultProps = {
-  disabled: false,
-  isSubmitted: false,
-  status: '',
-  type: '',
 };

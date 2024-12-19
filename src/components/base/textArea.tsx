@@ -13,9 +13,16 @@ type IPropsTextArea = {
   status?: typeInputColors;
 };
 
-export const TextArea = ({ title, register, errors, name, status, disabled }: IPropsTextArea): ReactElement => {
+export const TextArea = ({
+  title,
+  register,
+  errors,
+  name,
+  disabled = false,
+  status = undefined,
+}: IPropsTextArea): ReactElement => {
   let getStyles = disabled ? styleLiteral.default : inputStylesFromInput(status);
-  const errorMessages = errors?.[name]?.message ?? '';
+  const errorMessages = errors?.[name]?.message.toString() ?? '';
   const hasError = !!(errors && errorMessages);
 
   getStyles = hasError ? styleLiteral.invalid : getStyles;
@@ -38,9 +45,4 @@ export const TextArea = ({ title, register, errors, name, status, disabled }: IP
       ) : null}
     </GroupInput>
   );
-};
-
-TextArea.defaultProps = {
-  disabled: false,
-  status: '',
 };

@@ -36,7 +36,7 @@ const Suggestions = (): ReactElement => {
       <ErrorMsg msg={error} />
 
       <SubContainer>
-        <table className="w-full max-w-maxWidthDefault">
+        <table className="w-full max-w-maxWidthDefault table-auto">
           <thead className="border-b">
             <tr className="border-b">
               <ThTable>Post</ThTable>

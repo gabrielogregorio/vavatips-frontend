@@ -11,7 +11,7 @@ type inputFileType = {
   status?: string;
 };
 
-export const InputFile = ({ type, text, onChange, name, status }: inputFileType): ReactElement => {
+export const InputFile = ({ type, text, onChange, name, status = '' }: inputFileType): ReactElement => {
   const getStyles = inputStylesFromInput(status);
 
   const disabled = status === 'disabled';
@@ -30,8 +30,4 @@ export const InputFile = ({ type, text, onChange, name, status }: inputFileType)
       />
     </GroupInput>
   );
-};
-
-InputFile.defaultProps = {
-  status: '',
 };

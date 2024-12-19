@@ -64,7 +64,7 @@ export const ContainerPosts = ({
   typeSelected,
   title,
   posts,
-  showTags,
+  showTags = true,
 }: containerPosts): ReactElement => {
   const { query } = useRouter();
   const { agent, map } = query;
@@ -122,8 +122,4 @@ export const ContainerPosts = ({
       <Footer />
     </>
   );
-};
-
-ContainerPosts.defaultProps = {
-  showTags: true,
 };

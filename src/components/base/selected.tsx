@@ -20,8 +20,8 @@ export const Selected = ({
   register,
   errors,
   name,
-  status,
-  disabled,
+  disabled = false,
+  status = undefined,
 }: TPropsSelectedBase): ReactElement => {
   let getStyles = inputStylesFromInput(status);
 
@@ -32,7 +32,7 @@ export const Selected = ({
       </option>
     ));
 
-  const errorMessages = errors?.[name]?.message ?? '';
+  const errorMessages = errors?.[name]?.message.toString() ?? '';
   const hasError = !!(errors && errorMessages);
 
   getStyles = hasError ? styleLiteral.invalid : getStyles;
@@ -57,9 +57,4 @@ export const Selected = ({
       ) : null}
     </GroupInput>
   );
-};
-
-Selected.defaultProps = {
-  disabled: false,
-  status: '',
 };

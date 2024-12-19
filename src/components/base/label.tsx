@@ -6,12 +6,8 @@ type labelType = {
   className?: string;
 };
 
-export const Label = ({ name, text, className }: labelType): ReactElement => (
+export const Label = ({ name, text, className = undefined }: labelType): ReactElement => (
   <label className={`text-xs uppercase mb-1 ${className} `} htmlFor={name}>
     {text}
   </label>
 );
-
-Label.defaultProps = {
-  className: [],
-};
