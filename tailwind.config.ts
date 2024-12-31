@@ -8,11 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        md: "0px 2px 6px 0px rgba(0, 0, 0, 0.1);",
+      },
       spacing: {
         xxs: "2px",
         xs: "4px",
         sm: "6px",
-        md: "8 px",
+        md: "8px",
         lg: "12px",
         xl: "16px",
 
@@ -27,11 +30,12 @@ export default {
       },
 
       screens: {
-        mobile: "412px",
+        mobile: "640px",
+        tabled: "1024px",
         desktop: "1366px",
       },
       width: {
-        "content-desktop": "840px",
+        "content-desktop": "890px",
       },
 
       borderRadius: {
@@ -55,7 +59,7 @@ export default {
         },
 
         root: {
-          bg: "#F4F7FC",
+          bg: "#F7F7FA",
         },
         content: {
           fg: {
@@ -85,8 +89,8 @@ export default {
             soft: "#FCD2D2",
           },
           success: {
-            soft: "#D1E7DD",
             hard: "#125134",
+            soft: "#D1E7DD",
           },
         },
         overlay: {
@@ -94,7 +98,7 @@ export default {
           "bg-blur": "rgba(26,26,26,0.5)",
         },
         border: {
-          DEFAULT: "#A8A8A8",
+          DEFAULT: "#BABABA",
           soft: "#E8E8E8",
         },
         neutral: {

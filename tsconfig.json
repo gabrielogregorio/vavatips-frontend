@@ -1,41 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
-    "typeRoots": ["node_modules/@types", "node_modules/@testing-library"],
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/base/*": ["src/components/base/*"],
-      "@/layout/*": ["src/components/layout/*"],
-      "@/widgets/*": ["src/components/widgets/*"],
-      "@/contexts/*": ["src/core/contexts/*"],
-      "@/constants/*": ["src/core/constants/*"],
-      "@/data/*": ["src/core/data/*"],
-      "@/helpers/*": ["src/core/helpers/*"],
-      "@/wrappers/*": ["src/core/wrappers/*"],
-      "@/hooks/*": ["src/core/hooks/*"],
-      "@/services/*": ["src/core/services/*"],
-      "@/handlers/*": ["src/core/handlers/*"],
-      "@/schemas/*": ["src/core/schemas/*"],
-      "@/mock/*": ["src/tests/mock/*"],
-      "@/utils/*": ["src/tests/utils/*"],
-      "@/pages/*": ["src/pages/*"],
-      "@/types/*": ["src/core/types/*"],
-      "@/enums/*": ["src/core/enums/*"]
-    },
-    "incremental": true
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["next-env.d.ts", "./src/**/*.ts", "./src/**/*.tsx"],
-  "exclude": ["node_modules", "./src/**/*stories.ts", "./src/**/*stories.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
