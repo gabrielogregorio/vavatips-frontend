@@ -1,6 +1,5 @@
 import { Text, TextVariantEnum } from '.';
 import { render, screen } from '../../../utils/test-utils/test-utils';
-import '@testing-library/jest-dom';
 
 describe('Text', () => {
   it('should render default variant', () => {
