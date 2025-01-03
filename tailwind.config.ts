@@ -44,6 +44,7 @@ export default {
     },
     width: {
       'content-desktop': '890px',
+      full: '100%',
     },
     borderWidth: {
       DEFAULT: '1px',
