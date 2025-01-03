@@ -29,6 +29,7 @@ export const Primary: Story = {
     onClick: action('onClick'),
     variant: ButtonVariantEnum.Primary,
     children: 'Enviar Post',
+    className: '',
   },
 };
 
@@ -46,6 +47,7 @@ export const Secondary: Story = {
     onClick: action('onClick'),
     variant: ButtonVariantEnum.Secondary,
     children: 'Enviar Post',
+    className: '',
   },
 };
 
@@ -63,5 +65,6 @@ export const Text: Story = {
     onClick: action('onClick'),
     variant: ButtonVariantEnum.Text,
     children: 'Enviar Post',
+    className: '',
   },
 };
