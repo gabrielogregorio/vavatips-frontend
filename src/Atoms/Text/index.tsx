@@ -28,54 +28,54 @@ type TextProps = {
   children?: ReactNode;
 };
 
-const variants: { [key in TextVariantEnum]: { as: TextAsEnum; classNames: string } } = {
+const variantsStyles: { [key in TextVariantEnum]: { as: TextAsEnum; className: string } } = {
   [TextVariantEnum['4xl']]: {
     as: TextAsEnum.span,
-    classNames: 'font-poppins font-bold text-[36px] leading-[36px] tracking-[0%]',
+    className: 'font-poppins font-bold text-[36px] leading-[36px] tracking-[0%]',
   },
 
   [TextVariantEnum.h1]: {
     as: TextAsEnum.h1,
-    classNames: 'font-poppins font-medium text-[24px] leading-[36px] tracking-[0%]',
+    className: 'font-poppins font-medium text-[24px] leading-[36px] tracking-[0%]',
   },
 
   [TextVariantEnum.h2]: {
     as: TextAsEnum.h2,
-    classNames: 'font-poppins font-normal text-[20px] leading-[24px] tracking-[0%]',
+    className: 'font-poppins font-normal text-[20px] leading-[24px] tracking-[0%]',
   },
 
   [TextVariantEnum.h2Highlight]: {
     as: TextAsEnum.h2,
-    classNames: 'font-poppins font-semibold text-[20px] leading-[24px] tracking-[0%]',
+    className: 'font-poppins font-semibold text-[20px] leading-[24px] tracking-[0%]',
   },
 
   [TextVariantEnum.text]: {
     as: TextAsEnum.p,
-    classNames: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%]',
+    className: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%]',
   },
 
   [TextVariantEnum.textUnderline]: {
     as: TextAsEnum.p,
-    classNames: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%] underline',
+    className: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%] underline',
   },
 
   [TextVariantEnum.textBold]: {
     as: TextAsEnum.p,
-    classNames: 'font-poppins font-semibold text-[16px] leading-[24px] tracking-[0%]',
+    className: 'font-poppins font-semibold text-[16px] leading-[24px] tracking-[0%]',
   },
 
   [TextVariantEnum.button]: {
     as: TextAsEnum.span,
-    classNames: 'font-poppins font-medium text-[16px] leading-[24px] tracking-[0%]',
+    className: 'font-poppins font-medium text-[16px] leading-[24px] tracking-[0%]',
   },
 
   [TextVariantEnum.link]: {
     as: TextAsEnum.span,
-    classNames: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%] underline',
+    className: 'font-poppins font-normal text-[16px] leading-[24px] tracking-[0%] underline',
   },
   [TextVariantEnum.subtext]: {
     as: TextAsEnum.span,
-    classNames: 'font-poppins font-normal text-[12px] leading-[18px] tracking-[0%]',
+    className: 'font-poppins font-normal text-[12px] leading-[18px] tracking-[0%]',
   },
 };
 
@@ -85,10 +85,10 @@ export const Text = ({
   className = '',
   children = undefined,
 }: TextProps) => {
-  const currentVariant = variants[variant] || variants['text'];
+  const currentVariant = variantsStyles[variant] || variantsStyles['text'];
 
   const Tag = asTag || currentVariant.as;
-  const classes = currentVariant.classNames;
+  const classes = currentVariant.className;
 
   return <Tag className={mergeClasses(classes, className)}>{children}</Tag>;
 };
