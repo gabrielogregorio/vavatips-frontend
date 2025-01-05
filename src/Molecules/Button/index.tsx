@@ -12,6 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariantEnum;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  onClick?: () => void;
 }
 
 const variantStyles: { [key in ButtonVariantEnum]: string } = {
@@ -28,6 +29,7 @@ export const Button = ({
   children,
   variant = ButtonVariantEnum.Primary,
   leftIcon,
+  onClick,
   rightIcon,
   type = 'button',
   ...rest
@@ -35,6 +37,7 @@ export const Button = ({
   return (
     <button
       type={type}
+      onClick={() => onClick?.()}
       className={mergeClasses(
         'touch-manipulation disable-pointer-events-for-children justify-between flex items-center select-none cursor-pointer disabled:cursor-not-allowed',
         variantStyles[variant],
@@ -42,7 +45,7 @@ export const Button = ({
       )}
       {...rest}>
       {leftIcon ? leftIcon : undefined}
-      <Text variant={TextVariantEnum.button}>{children}</Text>
+      {children ? <Text variant={TextVariantEnum.button}>{children}</Text> : undefined}
       {rightIcon ? rightIcon : undefined}
     </button>
   );
