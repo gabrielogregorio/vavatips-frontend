@@ -20,6 +20,7 @@ export default {
     },
 
     spacing: {
+      '0': '0px',
       xxs: '2px',
       xs: '4px',
       sm: '6px',
@@ -44,6 +45,7 @@ export default {
     },
     width: {
       'content-desktop': '890px',
+      'size-w-content-modal': '650px',
       full: '100%',
     },
     borderWidth: {
@@ -51,6 +53,7 @@ export default {
     },
 
     colors: {
+      transparent: 'transparent',
       primary: {
         DEFAULT: '#D85F5F',
         hard: '#E03F3F',
@@ -113,6 +116,20 @@ export default {
         650: '#2C2C2C',
         500: '#6C6C6C',
         100: '#EFEFEF',
+      },
+    },
+    animation: {
+      pulseIn300: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      spin: 'spin 1s linear infinite',
+    },
+    keyframes: {
+      pulse: {
+        '0%, 100%': { opacity: '1' },
+        '50%': { opacity: '0.3' },
+      },
+
+      spin: {
+        to: { transform: 'rotate(360deg)' },
       },
     },
   },
