@@ -53,9 +53,8 @@ export class HttpClient {
         ) => InternalAxiosRequestConfig<any> | Promise<InternalAxiosRequestConfig<any>>)
       | null
       | undefined,
-    onRejected?: (error: any) => any,
   ): Promise<void> {
-    this.client.interceptors.request.use(onFulfilled, onRejected);
+    this.client.interceptors.request.use(onFulfilled);
   }
 
   public cancelAllRequests(): void {
