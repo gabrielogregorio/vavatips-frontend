@@ -13,10 +13,5 @@
   "less.validate": false,
   "scss.validate": false,
 
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "ngClass",
-    ".*Styles.*" // to autocomplete in files with ends styles
-  ]
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Styles.*"]
 }
