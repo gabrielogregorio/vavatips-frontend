@@ -4,6 +4,7 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {},
+
     fontFamily: {
       poppins: ['"Poppins"', 'sans-serif'],
     },
@@ -36,6 +37,10 @@ export default {
 
       '6xl': '36px',
       '7xl': '48px',
+
+      'content-desktop': '890px', // added figma
+      'size-w-content-modal': '650px',
+      full: '100%',
     },
 
     screens: {
@@ -121,11 +126,17 @@ export default {
     animation: {
       pulseIn300: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       spin: 'spin 1s linear infinite',
+      fadeIn300: 'fadeIn300 .3s  ease-in-out forwards',
     },
     keyframes: {
       pulse: {
         '0%, 100%': { opacity: '1' },
         '50%': { opacity: '0.3' },
+      },
+
+      fadeIn300: {
+        '0%': { opacity: '0' },
+        '100%': { opacity: '1' },
       },
 
       spin: {
