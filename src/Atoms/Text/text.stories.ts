@@ -18,8 +18,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Max: Story = {
   args: {
+    children: 'POSTS',
+    variant: TextVariantEnum['9xl'],
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: Object.values(TextVariantEnum),
+    },
+    as: {
+      control: 'select',
+      options: Object.values(TextAsEnum),
+    },
+  },
+};
+
+export const Logo: Story = {
+  args: {
     children: 'Dicas de Valorant',
-    variant: TextVariantEnum['4xl'],
+    variant: TextVariantEnum['6xl'],
   },
   argTypes: {
     variant: {

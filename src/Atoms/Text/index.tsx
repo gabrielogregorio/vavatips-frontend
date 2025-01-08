@@ -9,7 +9,8 @@ export enum TextAsEnum {
 }
 
 export enum TextVariantEnum {
-  '4xl' = '4xl',
+  '9xl' = '9xl',
+  '6xl' = '6xl',
   'h1' = 'h1',
   'h2' = 'h2',
   'h2Highlight' = 'h2Highlight',
@@ -29,7 +30,12 @@ type TextProps = {
 };
 
 const variantsStyles: { [key in TextVariantEnum]: { as: TextAsEnum; className: string } } = {
-  [TextVariantEnum['4xl']]: {
+  [TextVariantEnum['9xl']]: {
+    as: TextAsEnum.span,
+    className: 'font-poppins font-bold text-[56px] leading-[84px] tracking-[0%]',
+  },
+
+  [TextVariantEnum['6xl']]: {
     as: TextAsEnum.span,
     className: 'font-poppins font-bold text-[36px] leading-[36px] tracking-[0%]',
   },

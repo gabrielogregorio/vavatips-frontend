@@ -1,5 +1,5 @@
 import { Text, TextVariantEnum } from '.';
-import { render, screen } from '../../../utils/test-utils/test-utils';
+import { render, screen } from '../../libs/test-utils/test-utils';
 
 describe('Text', () => {
   it('should render default variant', () => {
@@ -12,8 +12,8 @@ describe('Text', () => {
     expect(textComponent).toHaveClass('text-[16px]');
   });
 
-  it('should render 4xl variant', () => {
-    render(<Text variant={TextVariantEnum['4xl']}>Example</Text>);
+  it('should render 6xl variant', () => {
+    render(<Text variant={TextVariantEnum['6xl']}>Example</Text>);
 
     const textComponent = screen.getByText('Example');
 
@@ -21,6 +21,18 @@ describe('Text', () => {
     expect(textComponent.tagName).toBe('SPAN');
     expect(textComponent).toHaveClass('text-[36px]');
   });
+
+
+  it('should render 9xl variant', () => {
+    render(<Text variant={TextVariantEnum['9xl']}>Example</Text>);
+
+    const textComponent = screen.getByText('Example');
+
+    expect(textComponent).toBeInTheDocument();
+    expect(textComponent.tagName).toBe('SPAN');
+    expect(textComponent).toHaveClass('text-[56px]');
+  });
+
 
   it('should render button variant', () => {
     render(<Text variant={TextVariantEnum.button}>Example</Text>);
