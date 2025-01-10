@@ -57,6 +57,9 @@ export default {
       DEFAULT: '1px',
     },
 
+    backgroundImage: {
+      loadImage: ' url(/images/choiceImage.png);',
+    },
     colors: {
       transparent: 'transparent',
       primary: {
