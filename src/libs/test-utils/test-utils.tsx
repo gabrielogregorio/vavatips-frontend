@@ -30,8 +30,9 @@ const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>
   render(ui, { wrapper: AllTheProviders, queries: allQueries, ...options });
 
 const click = async (element: Element, options?: DirectOptions) => userEvent.click(element, options);
+const clear = async (element: Element) => userEvent.clear(element);
 const type = async (element: Element, text: string, options?: DirectOptions & Parameters<UserEventApi['type']>[2]) =>
   userEvent.type(element, text, options);
 
 // export * from '@testing-library/react';
-export { customScreen as screen, customWithin as within, customRender as render, click, type };
+export { customScreen as screen, customWithin as within, customRender as render, click, type, clear };
