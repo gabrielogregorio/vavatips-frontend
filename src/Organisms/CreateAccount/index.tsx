@@ -8,6 +8,7 @@ import { ErrorMessage } from '../../Molecules/ErrorMessage';
 import { SuccessMessage } from '../../Molecules/Success';
 import { useHandleRouter } from '../../libs/useHandleRouter';
 import { RouteScreensEnum } from '../../@types/routeScreenEnum';
+import { formatI18n } from '../../libs/i18n';
 
 export default function CreateAccount() {
   const { control, onSubmit, isLoading, errorMessage, success } = useCreateAccountFormController();
@@ -25,18 +26,18 @@ export default function CreateAccount() {
           control={control}
           id="name"
           name="name"
-          label="Nome"
-          placeholder="Seu nome"
-          helpText="Digite o nome que você quer que apareça nos seus posts"
+          label={formatI18n('label.name')}
+          placeholder={formatI18n('placeholder.yourName')}
+          helpText={formatI18n('helpText.typeYourName')}
         />
 
         <TextFieldForm<CreateAccountFormInterface>
           control={control}
           id="username"
           name="username"
-          label="USUÁRIO"
-          placeholder="Seu usuário"
-          helpText="Digite o usuário  para fazer login no site, isso DEVE SER SEGREDO"
+          label={formatI18n('label.username')}
+          placeholder={formatI18n('placeholder.yourUser')}
+          helpText={formatI18n('helpText.typeYourUsername')}
         />
 
         <TextFieldForm<CreateAccountFormInterface>
