@@ -5,10 +5,14 @@ const config: StorybookConfig = {
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-essentials',
+    '@storybook/addon-links',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-styling-webpack',
-    '@storybook/addon-themes'
+    '@storybook/addon-themes',
+    {
+      name: '@storybook/addon-styling',
+    },
   ],
   framework: {
     name: '@storybook/nextjs',
