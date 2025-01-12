@@ -21,7 +21,7 @@ export const useCreateAccountFormController = () => {
   });
 
   const { errorMessage, isLoading, setErrorMessage, setIsLoading, setSuccess, success } = useHandleState();
-
+  // TODO: RETURNS JWT
   const onSubmit = async (formData: CreateAccountFormInterface) => {
     if (!formData) {
       return;
