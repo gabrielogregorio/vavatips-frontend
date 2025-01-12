@@ -1,5 +1,5 @@
 import { Separator } from '.';
-import { render, screen } from '../../../utils/test-utils/test-utils';
+import { render, screen } from '../../libs/test-utils/test-utils';
 
 describe('Separator', () => {
   it('should render a default variant', async () => {

@@ -1,6 +1,6 @@
 import { HelpText, HelpTextVariantEnum } from '.';
-import { a11yValidations } from '../../../utils/test-utils/a11y';
-import { render, screen } from '../../../utils/test-utils/test-utils';
+import { a11yValidations } from '../../libs/test-utils/a11y';
+import { render, screen } from '../../libs/test-utils/test-utils';
 
 describe('HelpText', () => {
   it('should render a default variant', async () => {

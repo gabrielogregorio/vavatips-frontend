@@ -1,6 +1,6 @@
 import { Optional, OptionalVariantEnum } from '.';
-import { a11yValidations } from '../../../utils/test-utils/a11y';
-import { render, screen } from '../../../utils/test-utils/test-utils';
+import { a11yValidations } from '../../libs/test-utils/a11y';
+import { render, screen } from '../../libs/test-utils/test-utils';
 
 describe('Optional', () => {
   it('should render a default variant', async () => {

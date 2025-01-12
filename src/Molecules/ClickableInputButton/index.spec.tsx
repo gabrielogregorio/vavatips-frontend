@@ -1,6 +1,6 @@
 import { ClickableInputButton } from '.';
-import { a11yValidations } from '../../../utils/test-utils/a11y';
-import { click, render, screen } from '../../../utils/test-utils/test-utils';
+import { a11yValidations } from '../../libs/test-utils/a11y';
+import { click, render, screen } from '../../libs/test-utils/test-utils';
 
 describe('ClickableInputButton', () => {
   it('should render a default variant', async () => {

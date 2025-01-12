@@ -1,5 +1,5 @@
 import { Button, ButtonVariantEnum } from '.';
-import { render, screen, click } from '../../../utils/test-utils/test-utils';
+import { render, screen, click } from '../../libs/test-utils/test-utils';
 
 describe('Button', () => {
   it('should render a primary variant and click', async () => {
