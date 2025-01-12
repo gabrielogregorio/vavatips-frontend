@@ -22,26 +22,27 @@ const styleVarianteStyles = [
   'bg-accent-pacific-blue',
 ];
 
-type DashboardItems = { key: string; value: number }[];
+type DashboardItem = { key: string; value: number };
+type DashboardItems = DashboardItem[];
 
 export const Dashboard = () => {
   const { setErrorMessage, setIsLoading, isLoading, errorMessage } = useHandleState({ startLoading: true });
-  const [dataOut, setOutData] = useState<DashboardItems>([]);
+  const [data, setData] = useState<DashboardItems>([]);
 
   const fetchDashboard = useCallback(async () => {
     setErrorMessage('');
     setIsLoading(true);
-    const { error, data } = await plainPromise(() => ApiService.get<DashboardItems>('/dashboards'));
+    const result = await plainPromise(() => ApiService.get<DashboardItems>('/dashboards'));
 
-    if (error || !data?.data) {
-      const errorMessage = error instanceof ApiError ? error.message : 'Erro desconhecido ao tentar criar conta';
+    if (result.error || !result.data?.data) {
+      const errorMessage = result.error instanceof ApiError ? result.error.message : formatI18n('message.anyError');
 
       setErrorMessage(errorMessage);
       setIsLoading(false);
       return;
     }
 
-    setOutData(data.data);
+    setData(result.data.data);
 
     setIsLoading(false);
   }, [setErrorMessage, setIsLoading]);
@@ -69,22 +70,22 @@ export const Dashboard = () => {
       <div className="flex gap-3xl flex-col justify-center items-center">
         <ErrorMessage text={errorMessage} />
         <Button onClick={() => fetchDashboard()} className="w-full">
-          Tentar Novamente
+          {formatI18n('button.tryAgain')}
         </Button>
       </div>
     );
   }
 
-  if (dataOut.length === 0) {
+  if (data.length === 0) {
     return <NotFound />;
   }
 
   return (
     <div className="flex flex-wrap gap-3xl justify-center">
-      {dataOut.map((item, index) => {
+      {data.map((item, index) => {
         return (
           <CardDash
-            className={styleVarianteStyles[index]}
+            className={styleVarianteStyles[index] || styleVarianteStyles[0]}
             title={formatI18n(`label.dashboard.${item.key}`)}
             key={item.key}
             value={formatNumbers(item.value)}

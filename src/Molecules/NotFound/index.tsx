@@ -9,7 +9,7 @@ interface Props {
 
 export const NotFound = ({ className = '' }: Props) => {
   return (
-    <div className={mergeClasses(`flex gap-3xl items-center`, className)}>
+    <div className={mergeClasses(`flex gap-3xl items-center`, className)} data-testid="not-found">
       <Image
         src={'/images/kj-in-notebook-kingdom.png'}
         width={100}

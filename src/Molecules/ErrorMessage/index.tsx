@@ -12,7 +12,7 @@ export const ErrorMessage = ({ text = undefined, className = '' }: Props) => {
     <div
       role="alert"
       className={mergeClasses(
-        'text-feedback-error-hard py-lg px-xl rounded-sm flex gap-md bg-feedback-error-soft w-full',
+        'text-feedback-error-hard py-lg px-xl rounded-sm flex gap-md bg-feedback-error-soft w-full animate-fadeIn300',
         className,
       )}>
       <Icons.AlertOutline />

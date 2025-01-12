@@ -62,6 +62,8 @@ i18next.init({
   resources,
 });
 
-export const formatI18n = (key: keyof typeof resources.pt.translation): string => {
+export type formatI18nMap = keyof typeof resources.pt.translation;
+
+export const formatI18n = (key: formatI18nMap): string => {
   return i18next.t(key);
 };

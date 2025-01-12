@@ -16,12 +16,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: { [key in ButtonVariantEnum]: string } = {
-  [ButtonVariantEnum.Primary]:
-    'bg-primary px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg-contrast disabled:text-content-fg-disabled disabled:bg-content-bg-disabled enabled:active:scale-95 active:bg-primary-hard hover:bg-primary-hard transition-all duration-150',
-  [ButtonVariantEnum.Secondary]:
-    'bg-secondary px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg-contrast disabled:text-content-fg-disabled disabled:bg-content-bg-disabled enabled:active:scale-95 active:bg-secondary-hard hover:bg-secondary-hard transition-all duration-150',
-  [ButtonVariantEnum.Text]:
-    'px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg disabled:text-content-fg-disabled enabled:active:scale-95 transition-all duration-150',
+  [ButtonVariantEnum.Primary]: 'bg-primary px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg-contrast disabled:text-content-fg-disabled disabled:bg-content-bg-disabled enabled:active:scale-95 active:bg-primary-hard hover:bg-primary-hard transition-all duration-150',
+  [ButtonVariantEnum.Secondary]: 'bg-secondary px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg-contrast disabled:text-content-fg-disabled disabled:bg-content-bg-disabled enabled:active:scale-95 active:bg-secondary-hard hover:bg-secondary-hard transition-all duration-150',
+  [ButtonVariantEnum.Text]: 'px-lg py-sm gap-xs rounded-sm min-h-6xl text-content-fg disabled:text-content-fg-disabled enabled:active:scale-95 transition-all duration-150',
 };
 
 export const Button = ({
@@ -29,6 +26,7 @@ export const Button = ({
   children,
   variant = ButtonVariantEnum.Primary,
   leftIcon,
+  disabled,
   onClick,
   rightIcon,
   type = 'button',
@@ -37,9 +35,10 @@ export const Button = ({
   return (
     <button
       type={type}
-      onClick={() => onClick?.()}
+      onClick={onClick}
+      disabled={disabled}
       className={mergeClasses(
-        'touch-manipulation disable-pointer-events-for-children justify-between flex items-center select-none cursor-pointer disabled:cursor-not-allowed',
+        'touch-manipulation disable-pointer-events-for-children flex items-center justify-center select-none cursor-pointer disabled:cursor-not-allowed',
         variantStyles[variant],
         className,
       )}
